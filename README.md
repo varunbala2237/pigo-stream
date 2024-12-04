@@ -1,3 +1,16 @@
+# You Need to Create Node.js/Express.js Web Service for Database Interactions
+For this project, I am using Firebase for database and authentication
+
+# Full Project Pack
+-> React app deployed in Firebase
+-> Node.js/Express.js deployed in Render
+
+# API's Used
+Im currently using using TMDB API for both Movies and TV Shows Metadata
+Visit (https://www.themoviedb.org/) for more details
+
+Here is complete overview of creating a React Project ⬇️
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
