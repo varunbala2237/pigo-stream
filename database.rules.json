@@ -1,0 +1,11 @@
+{
+  "rules": {
+    "users": {
+      "$userUID": {
+        "searchHistory": {
+          ".indexOn": ["timestamp"]
+        }
+      }
+    }
+  }
+}

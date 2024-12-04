@@ -1,0 +1,9 @@
+{
+  "projects": {
+    "prod": "pigostream-site",
+    "default": "pigostream-site"
+  },
+  "targets": {},
+  "etags": {},
+  "dataconnectEmulatorConfig": {}
+}

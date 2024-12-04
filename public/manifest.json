@@ -1,0 +1,30 @@
+{
+  "short_name": "PigoStream",
+  "name": "PigoStream - Movies & TV Shows",
+  "description": "Enjoy free streaming of movies and TV shows seamlessly with PigoStream.",
+  "icons": [
+    {
+      "src": "favicon.ico",
+      "sizes": "64x64 32x32 24x24 16x16",
+      "type": "image/x-icon"
+    },
+    {
+      "src": "logo192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "logo512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": "/index.html",
+  "display": "standalone",
+  "theme_color": "#000000",
+  "background_color": "#ffffff",
+  "scope": "/",
+  "categories": ["entertainment", "movies", "tv", "media"],
+  "lang": "en",
+  "dir": "ltr"
+}
