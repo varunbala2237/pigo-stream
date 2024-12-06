@@ -21,7 +21,7 @@
   ],
   "start_url": "/index.html",
   "display": "standalone",
-  "theme_color": "#000000",
+  "theme_color": "#121229",
   "background_color": "#000000",
   "scope": "/",
   "categories": ["entertainment", "movies", "tv", "media"],
