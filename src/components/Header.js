@@ -47,7 +47,7 @@ function Header() {
             width="40"
             height="40"
           />
-          <h4 className="mb-0"><b>Pigo</b>Stream</h4>
+          <h3 className="mb-0"><b>Pigo</b>Stream</h3>
         </a>
         <button
           className="navbar-toggler"
