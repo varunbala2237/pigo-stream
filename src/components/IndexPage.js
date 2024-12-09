@@ -41,12 +41,12 @@ const IndexPage = () => {
       <div
         className="background-image"
         style={{
+          background: shouldHideBackground ? 'transparent' : undefined,
           backgroundImage: shouldHideBackground
             ? 'none' // Hide background when search is active or query exists
             : backgroundImage
             ? `linear-gradient(to bottom, rgba(0, 0, 0, 0), rgb(0, 0, 0)), url(${backgroundImage})`
             : 'none',
-          backgroundColor: shouldHideBackground ? 'rgba(0, 0, 0, 0.5)' : 'transparent', // Semi-transparent background when hidden
         }}
       ></div>
       <HomePage title={title}
