@@ -190,9 +190,9 @@ function MovieGrid({ id, type }) {
             </div>
             <div className="d-flex flex-column mt-2">
               <div className="d-flex justify-content-between mb-2">
-                <div className="text-start">
-                  <i className="bi bi-star-fill text-warning me-2"></i>
-                  <span id="Rating" className="text-white">{averageVote}</span>
+                <div className="text-start bd-callout-dark p-1 rounded">
+                  <i className="bi bi-star-fill text-warning"></i>
+                  <span id="Rating" className="text-white"> {averageVote} </span>
                 </div>
               </div>
               <p>{overview}<br/><br/>

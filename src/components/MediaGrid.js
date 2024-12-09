@@ -3,9 +3,9 @@ import { useLocation } from 'react-router-dom';
 import Card from './Card';
 import useFetchMedia from '../hooks/useFetchMedia';
 
-function MediaGrid({ filter }) {
-  const { data: popularMovies, loading: loadingPopularMovies, error: errorPopularMovies } = useFetchMedia('popular', 'movie');
-  const { data: popularTv, loading: loadingPopularTv, error: errorPopularTv } = useFetchMedia('popular', 'tv');
+function MediaGrid() {
+  const { data: popularMovies, loading: loadingPopularMovies, error: errorPopularMovies } = useFetchMedia('trending', 'movie');
+  const { data: popularTv, loading: loadingPopularTv, error: errorPopularTv } = useFetchMedia('trending', 'tv');
   const location = useLocation();
   
   // Scroll references for movies and TV shows
@@ -32,21 +32,32 @@ function MediaGrid({ filter }) {
 
   return (
     <div className="container mt-4 text-white">
-      {/* Popular Movies Section */}
-      {(filter === 'all' || filter === 'movie') && (
+      {/* Trending Movies Section */}
+      {(
         <>
           <div className="d-flex align-items-center my-2">
-            <i className="bi bi-film me-2"></i>
-            <h5 className="mb-0">Popular Movies</h5>
+            <i className="bi bi-fire me-2"></i>
+            <h5 className="mb-0">Trending Movies</h5>
           </div>
           <div className="position-relative">
-            <button
-              className="btn btn-dark custom-bg rounded-pill py-2 position-absolute start-0 translate-middle-y d-none d-md-block"
-              onClick={() => scrollMovies('left')}
-              style={{ zIndex: 1, top: '50%', transform: 'translateY(-50%)' }}
-            >
-              <i className="bi bi-chevron-left"></i>
-            </button>
+            {popularMovies.length > 2 && (
+              <>
+                <button
+                  className="btn btn-dark custom-bg rounded-pill py-2 position-absolute start-0 translate-middle-y d-none d-md-block"
+                  onClick={() => scrollMovies('left')}
+                  style={{ zIndex: 1, top: '50%', transform: 'translateY(-50%)' }}
+                >
+                  <i className="bi bi-chevron-left"></i>
+                </button>
+                <button
+                  className="btn btn-dark custom-bg rounded-pill py-2 position-absolute end-0 translate-middle-y d-none d-md-block"
+                  onClick={() => scrollMovies('right')}
+                  style={{ zIndex: 1, top: '50%', transform: 'translateY(-50%)' }}
+                >
+                  <i className="bi bi-chevron-right"></i>
+                </button>
+            </>
+            )}
             <div ref={moviesRef} className="d-flex overflow-auto" style={{ scrollSnapType: 'x mandatory', gap: '1rem' }}>
               {loadingPopularMovies && (
                 <div className="col mt-5 mb-5 d-flex justify-content-center">
@@ -73,32 +84,36 @@ function MediaGrid({ filter }) {
                 )
               )}
             </div>
-            <button
-              className="btn btn-dark custom-bg rounded-pill py-2 position-absolute end-0 translate-middle-y d-none d-md-block"
-              onClick={() => scrollMovies('right')}
-              style={{ zIndex: 1, top: '50%', transform: 'translateY(-50%)' }}
-            >
-              <i className="bi bi-chevron-right"></i>
-            </button>
           </div>
         </>
       )}
 
-      {/* Popular TV Shows Section */}
-      {(filter === 'all' || filter === 'tv') && (
+      {/* Trending TV Shows Section */}
+      {(
         <>
           <div className="d-flex align-items-center my-2">
-            <i className="bi bi-tv me-2"></i>
-            <h5 className="mb-0">Popular TV Shows</h5>
+            <i className="bi bi-fire me-2"></i>
+            <h5 className="mb-0">Trending TV Shows</h5>
           </div>
           <div className="position-relative">
-            <button
-              className="btn btn-dark custom-bg rounded-pill py-2 position-absolute start-0 translate-middle-y d-none d-md-block"
-              onClick={() => scrollTvShows('left')}
-              style={{ zIndex: 1, top: '50%', transform: 'translateY(-50%)' }}
-            >
-              <i className="bi bi-chevron-left"></i>
-            </button>
+            {popularTv.length > 2 && (
+              <>
+                <button
+                  className="btn btn-dark custom-bg rounded-pill py-2 position-absolute start-0 translate-middle-y d-none d-md-block"
+                  onClick={() => scrollTvShows('left')}
+                  style={{ zIndex: 1, top: '50%', transform: 'translateY(-50%)' }}
+                >
+                  <i className="bi bi-chevron-left"></i>
+                </button>
+                <button
+                  className="btn btn-dark custom-bg rounded-pill py-2 position-absolute end-0 translate-middle-y d-none d-md-block"
+                  onClick={() => scrollTvShows('right')}
+                  style={{ zIndex: 1, top: '50%', transform: 'translateY(-50%)' }}
+                >
+                  <i className="bi bi-chevron-right"></i>
+                </button>
+            </>
+            )}
             <div ref={tvRef} className="d-flex overflow-auto" style={{ scrollSnapType: 'x mandatory', gap: '1rem' }}>
               {loadingPopularTv && (
                 <div className="col mt-5 mb-5 d-flex justify-content-center">
@@ -125,13 +140,6 @@ function MediaGrid({ filter }) {
                 )
               )}
             </div>
-            <button
-              className="btn btn-dark custom-bg rounded-pill py-2 position-absolute end-0 translate-middle-y d-none d-md-block"
-              onClick={() => scrollTvShows('right')}
-              style={{ zIndex: 1, top: '50%', transform: 'translateY(-50%)' }}
-            >
-              <i className="bi bi-chevron-right"></i>
-            </button>
           </div>
         </>
       )}

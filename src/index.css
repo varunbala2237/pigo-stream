@@ -129,3 +129,28 @@ code {
   font-weight: 100;
   font-style: italic;
 }
+
+/* Recommendation item*/
+.index-page {
+  position: relative;
+  min-height: 100vh;
+  overflow: hidden;
+}
+
+.background-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 70vh;
+  background-size: cover;
+  background-position: center;
+  z-index: -1;
+}
+
+.index-page .homepage {
+  position: relative;
+  z-index: 1;
+  background: transparent;
+  padding-top: 50px;
+}

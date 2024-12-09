@@ -33,7 +33,7 @@ function CastCard({ actor }) {
           fontSize: '14px', // Adjust text size as needed
         }}>
           <p className="mb-0">{actor.name}</p>
-          <p className="text-white mb-0">{actor.character || 'Unknown'}</p>        
+          <p className="text-secondary mb-0">{actor.character || 'Unknown'}</p>        
         </div>
       </a>
     </div>

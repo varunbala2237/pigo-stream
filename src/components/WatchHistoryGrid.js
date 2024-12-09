@@ -139,13 +139,24 @@ function WatchHistoryGrid({ userUID }) {
                         <h5 className="mb-0">Movies</h5>
                     </div>
                     <div className="position-relative">
-                        <button
-                            className="btn btn-dark custom-bg rounded-pill py-2 position-absolute start-0 translate-middle-y d-none d-md-block"
-                            onClick={() => scrollMovies('left')}
-                            style={{ zIndex: 1, top: '50%', transform: 'translateY(-50%)' }}
-                        >
-                            <i className="bi bi-chevron-left"></i>
-                        </button>
+                        {movieHistory.length > 2 && (
+                            <>
+                                <button
+                                    className="btn btn-dark custom-bg rounded-pill py-2 position-absolute start-0 translate-middle-y d-none d-md-block"
+                                    onClick={() => scrollMovies('left')}
+                                    style={{ zIndex: 1, top: '50%', transform: 'translateY(-50%)' }}
+                                >
+                                    <i className="bi bi-chevron-left"></i>
+                                </button>
+                                <button
+                                    className="btn btn-dark custom-bg rounded-pill py-2 position-absolute end-0 translate-middle-y d-none d-md-block"
+                                    onClick={() => scrollMovies('right')}
+                                    style={{ zIndex: 1, top: '50%', transform: 'translateY(-50%)' }}
+                                >
+                                    <i className="bi bi-chevron-right"></i>
+                                </button>
+                            </>
+                        )}
                         <div ref={moviesRef} className="d-flex overflow-auto" style={{ scrollSnapType: 'x mandatory', gap: '1rem' }}>
                             {movieHistory.length > 0 ? (
                                 movieHistory.map((movie) => (
@@ -164,13 +175,6 @@ function WatchHistoryGrid({ userUID }) {
                                 </div>
                             )}
                         </div>
-                        <button
-                            className="btn btn-dark custom-bg rounded-pill py-2 position-absolute end-0 translate-middle-y d-none d-md-block"
-                            onClick={() => scrollMovies('right')}
-                            style={{ zIndex: 1, top: '50%', transform: 'translateY(-50%)' }}
-                        >
-                            <i className="bi bi-chevron-right"></i>
-                        </button>
                     </div>
                     {movieHistory.length === movieLimit && (
                         <div className="text-end mb-3">
@@ -197,13 +201,24 @@ function WatchHistoryGrid({ userUID }) {
                         <h5 className="mb-0">TV Shows</h5>
                     </div>
                     <div className="position-relative">
-                        <button
-                            className="btn btn-dark custom-bg rounded-pill py-2 position-absolute start-0 translate-middle-y d-none d-md-block"
-                            onClick={() => scrollTvShows('left')}
-                            style={{ zIndex: 1, top: '50%', transform: 'translateY(-50%)' }}
-                        >
-                            <i className="bi bi-chevron-left"></i>
-                        </button>
+                        {tvHistory.length > 2 && (
+                            <>
+                                <button
+                                    className="btn btn-dark custom-bg rounded-pill py-2 position-absolute start-0 translate-middle-y d-none d-md-block"
+                                    onClick={() => scrollTvShows('left')}
+                                    style={{ zIndex: 1, top: '50%', transform: 'translateY(-50%)' }}
+                                >
+                                    <i className="bi bi-chevron-left"></i>
+                                </button>
+                                <button
+                                    className="btn btn-dark custom-bg rounded-pill py-2 position-absolute end-0 translate-middle-y d-none d-md-block"
+                                    onClick={() => scrollTvShows('right')}
+                                    style={{ zIndex: 1, top: '50%', transform: 'translateY(-50%)' }}
+                                >
+                                    <i className="bi bi-chevron-right"></i>
+                                </button>
+                            </>
+                        )}
                         <div ref={tvRef} className="d-flex overflow-auto" style={{ scrollSnapType: 'x mandatory', gap: '1rem' }}>
                             {tvHistory.length > 0 ? (
                                 tvHistory.map((show) => (
@@ -222,13 +237,6 @@ function WatchHistoryGrid({ userUID }) {
                                 </div>
                             )}
                         </div>
-                        <button
-                            className="btn btn-dark custom-bg rounded-pill py-2 position-absolute end-0 translate-middle-y d-none d-md-block"
-                            onClick={() => scrollTvShows('right')}
-                            style={{ zIndex: 1, top: '50%', transform: 'translateY(-50%)' }}
-                        >
-                            <i className="bi bi-chevron-right"></i>
-                        </button>
                     </div>
                     {tvHistory.length === tvLimit && (
                         <div className="text-end mb-3">

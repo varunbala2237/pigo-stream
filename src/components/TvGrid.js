@@ -134,6 +134,7 @@ function TvGrid({ id, type }) {
   }
 
   const { name, first_air_date, overview, genres, vote_average } = mediaInfo;
+  const averageVote = vote_average ? vote_average.toFixed(1) : '0.0';
 
   return (
     <div className="row justify-content-center position-relative">
@@ -356,9 +357,10 @@ function TvGrid({ id, type }) {
             </div>
             <div className="d-flex flex-column mt-2">
               <div className="d-flex justify-content-between mb-2">
-                <div className="text-start">
-                <i className="bi bi-star-fill text-warning me-2"></i><span id="Rating" className="text-white">{vote_average?.toFixed(1) || '0.0'}</span>
-              </div>
+                <div className="text-start bd-callout-dark p-1 rounded">
+                  <i className="bi bi-star-fill text-warning"></i>
+                  <span id="Rating" className="text-white"> {averageVote} </span>
+                </div>
             </div>
             <p>{overview}<br/><br/>
             <b>Release Date:</b>&nbsp;{first_air_date}<br/>
