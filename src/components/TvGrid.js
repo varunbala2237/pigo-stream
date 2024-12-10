@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import Header from './Header';
+import Footer from './Footer';
 import CastCard from './CastCard';
 import useFetchMediaInfo from '../hooks/useFetchMediaInfo';
 import useFetchSeason from '../hooks/useFetchSeason';
@@ -8,7 +10,7 @@ import useCheckMyList from '../hooks/useCheckMyList';
 import Player from './Player';
 import Alert from '../Alert'
 
-function TvGrid({ id, type }) {
+function TvGrid({ id, type, setBackgroundImage }) {
   const [mediaURL, setMediaURL] = useState('');
   const [cast, setCast] = useState([]);
   const [director, setDirector] = useState('');
@@ -44,8 +46,11 @@ function TvGrid({ id, type }) {
         const defaultSeasonNumber = mediaInfo.seasons[0]?.season_number || 1;
         setSelectedSeason(defaultSeasonNumber);
       }
+      
+      // Setup the backgroundImage
+      setBackgroundImage(`https://image.tmdb.org/t/p/original${mediaInfo.backdrop_path}`);
     }
-  }, [mediaInfo]);
+  }, [mediaInfo, setBackgroundImage]);
 
   useEffect(() => {
     if (seasonData) {
@@ -137,16 +142,11 @@ function TvGrid({ id, type }) {
   const averageVote = vote_average ? vote_average.toFixed(1) : '0.0';
 
   return (
+  <>
+    <div className="container-fluid d-flex flex-column justify-content-center align-items-center poppins-medium">
+      <Header/>
+    <div className="flex-row text-white custom-w-size-100">
     <div className="row justify-content-center position-relative">
-      {/* Blurry Background */}
-      {mediaInfo.backdrop_path && (
-      <div
-        className="bg-blur"
-        style={{
-        backgroundImage: `url(https://image.tmdb.org/t/p/original${mediaInfo.backdrop_path})`,
-        }}
-      ></div>
-      )}
       <div className="col-lg-8 col-md-10 col-sm-12">
         <div className="container bg-transparent m-0">
           <div className="d-flex justify-content-between align-items-center mt-2">
@@ -405,6 +405,10 @@ function TvGrid({ id, type }) {
       </div>
       {alertMessage && <Alert message={alertMessage} onClose={handleAlertDismiss} type={alertType} />}
     </div>
+    </div>
+      <Footer />
+    </div>
+  </>
   );
 }
 

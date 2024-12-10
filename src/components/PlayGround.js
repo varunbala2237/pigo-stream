@@ -1,9 +1,7 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
-import Header from './Header';
 import MovieGrid from './MovieGrid'
 import TvGrid from './TvGrid'
-import Footer from './Footer';
 
 function PlayGround() {
     const location = useLocation();
@@ -11,23 +9,46 @@ function PlayGround() {
     const id = queryParams.get('id');
     const type = queryParams.get('type');
 
+    // Setup backgroundImage
+    const [backgroundImage, setBackgroundImage] = useState('');
+
     useEffect(() => {
       // Initial scroll to top
       window.scrollTo({ top: 0 });
     }, []);
 
     return (
-        <div className="container-fluid d-flex flex-column justify-content-center align-items-center poppins-medium">
-          <Header/>
-          <div className="flex-row text-white custom-w-size-100">
+          <>
             {type === 'movie' ? (
-              <MovieGrid id={id} type={type} />
+              <>
+              <div className="index-page">
+                <div
+                  className="background-image"
+                  style={{
+                          backgroundImage: backgroundImage
+                          ? `linear-gradient(to bottom, rgba(0, 0, 0, 0), rgb(0, 0, 0)), url(${backgroundImage})`
+                          : 'none',
+                        }}
+                ></div>
+                <MovieGrid id={id} type={type} setBackgroundImage={setBackgroundImage} />
+              </div>
+              </>
             ) : (
-              <TvGrid id={id} type={type} />
+              <>
+              <div className="index-page">
+                <div
+                  className="background-image"
+                  style={{
+                          backgroundImage: backgroundImage
+                          ? `linear-gradient(to bottom, rgba(0, 0, 0, 0), rgb(0, 0, 0)), url(${backgroundImage})`
+                          : 'none',
+                        }}
+                ></div>
+                <TvGrid id={id} type={type} setBackgroundImage={setBackgroundImage} />
+              </div>
+              </>
             )}
-          </div>
-          <Footer/>
-        </div>
+        </>
       );
 }
 
