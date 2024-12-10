@@ -12,7 +12,7 @@ function CastCard({ actor }) {
     : 'https://cdn-icons-png.flaticon.com/512/149/149071.png';
 
   return (
-    <div key={actor.cast_id} className="col-lg-3 col-md-3-5 col-6 text-center mb-2"> {/* Center text alignment */}
+    <div key={actor.cast_id} className="col-lg-2 col-md-3 col-4 text-center mb-2"> {/* Center text alignment */}
       <a href="#cast" onClick={() => searchActor(actor.name)} className="text-decoration-none">
         {/* Image Container */}
         <div className="d-flex justify-content-center mb-2">
@@ -21,8 +21,8 @@ function CastCard({ actor }) {
             alt=''
             className="rounded-circle" // Make the image circular
             style={{ 
-              height: '150px', // Adjust the size as needed
-              width: '150px', 
+              height: '90px', // Adjust the size as needed
+              width: '90px', 
               objectFit: 'cover',
             }}
           />

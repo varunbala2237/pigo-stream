@@ -83,13 +83,6 @@ function MyListGrid({ userUID }) {
 
     return (
         <div className="container text-white">
-            <div className="d-flex m-4 justify-content-center align-items-center">
-                <div className="d-flex px-4 py-2 custom-bg-primary rounded-pill align-items-center">
-                  <i className="bi bi-bookmark me-2"></i>
-                  <h4 className="mb-0">My List</h4>
-                </div>
-            </div>
-
             {loading && (
                 <div className="col mt-5 mb-5 d-flex justify-content-center">
                     <div className="spinner-border text-light spinner-size-1" role="status">
@@ -106,7 +99,7 @@ function MyListGrid({ userUID }) {
                 <>
                     {/* Movies */}
                     <div className="d-flex align-items-center my-2">
-                        <i className="bi bi-film me-2"></i>
+                        <i className="bi bi-bookmark me-2"></i>
                         <h5 className="mb-0">Movies</h5>
                     </div>
                     <div className="position-relative">
@@ -168,7 +161,7 @@ function MyListGrid({ userUID }) {
 
                     {/* TV Shows */}
                     <div className="d-flex align-items-center my-2">
-                        <i className="bi bi-tv me-2"></i>
+                        <i className="bi bi-bookmark me-2"></i>
                         <h5 className="mb-0">TV Shows</h5>
                     </div>
                     <div className="position-relative">
