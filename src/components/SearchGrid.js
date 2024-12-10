@@ -58,7 +58,7 @@ function SearchGrid({ searchQuery }) {
                 <h5 className="mb-0">Movies</h5>
               </div>
               <div className="position-relative">
-                {movies.length > 2 && (
+                {movies.length > 3 && (
                   <>
                     <button
                       className="btn btn-dark custom-bg rounded-pill py-2 position-absolute start-0 translate-middle-y d-none d-md-block"
@@ -99,7 +99,7 @@ function SearchGrid({ searchQuery }) {
                 <h5 className="mb-0">TV Shows</h5>
               </div>
               <div className="position-relative">
-                {shows.length > 2 && (
+                {shows.length > 3 && (
                   <>
                     <button
                       className="btn btn-dark custom-bg rounded-pill py-2 position-absolute start-0 translate-middle-y d-none d-md-block"

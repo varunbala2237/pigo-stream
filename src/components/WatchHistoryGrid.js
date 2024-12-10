@@ -139,7 +139,7 @@ function WatchHistoryGrid({ userUID }) {
                         <h5 className="mb-0">Movies</h5>
                     </div>
                     <div className="position-relative">
-                        {movieHistory.length > 2 && (
+                        {movieHistory.length > 3 && (
                             <>
                                 <button
                                     className="btn btn-dark custom-bg rounded-pill py-2 position-absolute start-0 translate-middle-y d-none d-md-block"
@@ -201,7 +201,7 @@ function WatchHistoryGrid({ userUID }) {
                         <h5 className="mb-0">TV Shows</h5>
                     </div>
                     <div className="position-relative">
-                        {tvHistory.length > 2 && (
+                        {tvHistory.length > 3 && (
                             <>
                                 <button
                                     className="btn btn-dark custom-bg rounded-pill py-2 position-absolute start-0 translate-middle-y d-none d-md-block"

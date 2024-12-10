@@ -40,7 +40,7 @@ function MediaGrid() {
             <h5 className="mb-0">Trending Movies</h5>
           </div>
           <div className="position-relative">
-            {popularMovies.length > 2 && (
+            {popularMovies.length > 3 && (
               <>
                 <button
                   className="btn btn-dark custom-bg rounded-pill py-2 position-absolute start-0 translate-middle-y d-none d-md-block"
@@ -96,7 +96,7 @@ function MediaGrid() {
             <h5 className="mb-0">Trending TV Shows</h5>
           </div>
           <div className="position-relative">
-            {popularTv.length > 2 && (
+            {popularTv.length > 3 && (
               <>
                 <button
                   className="btn btn-dark custom-bg rounded-pill py-2 position-absolute start-0 translate-middle-y d-none d-md-block"

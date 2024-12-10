@@ -110,7 +110,7 @@ function MyListGrid({ userUID }) {
                         <h5 className="mb-0">Movies</h5>
                     </div>
                     <div className="position-relative">
-                        {movieList.length > 2 && (
+                        {movieList.length > 3 && (
                             <>
                                 <button
                                     className="btn btn-dark custom-bg rounded-pill py-2 position-absolute start-0 translate-middle-y d-none d-md-block"
@@ -172,7 +172,7 @@ function MyListGrid({ userUID }) {
                         <h5 className="mb-0">TV Shows</h5>
                     </div>
                     <div className="position-relative">
-                        {tvList.length > 2 && (
+                        {tvList.length > 3 && (
                             <>
                                 <button
                                     className="btn btn-dark custom-bg rounded-pill py-2 position-absolute start-0 translate-middle-y d-none d-md-block"
