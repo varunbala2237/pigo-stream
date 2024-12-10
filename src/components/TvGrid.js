@@ -5,18 +5,13 @@ import CastCard from './CastCard';
 import useFetchMediaInfo from '../hooks/useFetchMediaInfo';
 import useFetchSeason from '../hooks/useFetchSeason';
 import useFetchStream from '../hooks/useFetchStream';
-import useSaveMyList from '../hooks/useSaveMyList';
-import useCheckMyList from '../hooks/useCheckMyList';
 import Player from './Player';
-import Alert from '../Alert'
 
 function TvGrid({ id, type, setBackgroundImage }) {
   const [mediaURL, setMediaURL] = useState('');
   const [cast, setCast] = useState([]);
   const [director, setDirector] = useState('');
   const [productionCompanies, setProductionCompanies] = useState([]);
-  const [alertMessage, setAlertMessage] = useState('');
-  const [alertType, setAlertType] = useState('');
 
   const [seasons, setSeasons] = useState([]);
   const [episodes, setEpisodes] = useState([]);
@@ -29,8 +24,6 @@ function TvGrid({ id, type, setBackgroundImage }) {
   const { data: mediaInfo, loadingInfo, errorInfo } = useFetchMediaInfo(id, type);
   const { seasonData, loading: loadingSeasonData, error: errorSeasonData } = useFetchSeason(id, selectedSeason);
   const { servers, loading: loadingLink, error: errorLink } = useFetchStream(id, type, selectedSeason, selectedEpisode);
-  const { addToList } = useSaveMyList();
-  const { isInList, refetch } = useCheckMyList(id);
 
   useEffect(() => {
     if (mediaInfo) {
@@ -80,28 +73,6 @@ function TvGrid({ id, type, setBackgroundImage }) {
     setSelectedEpisode(episodeNumber);
   };
 
-  const handleAddToList = async () => {
-    try {
-      if (isInList) {
-        setAlertMessage("Already exists in My List.");
-        setAlertType("primary");
-        setTimeout(() => setAlertMessage(''), 5000);
-      } else {
-        await addToList(id, type);
-        refetch();
-        setAlertMessage("Successfully added to My List.");
-        setAlertType("success");
-        setTimeout(() => setAlertMessage(''), 5000);
-      }
-    } catch (error) {
-      console.error(error.message);
-    }
-  };
-
-  const handleAlertDismiss = () => {
-    setAlertMessage('');
-  };
-
   const handleServerChange = (serverName) => {
     setSelectedServerName(serverName);
   };
@@ -148,23 +119,9 @@ function TvGrid({ id, type, setBackgroundImage }) {
     <div className="flex-row text-white custom-w-size-100">
     <div className="row justify-content-center position-relative">
       <div className="col-lg-8 col-md-10 col-sm-12">
-        <div className="container bg-transparent m-0">
-          <div className="d-flex justify-content-between align-items-center mt-2">
-            <div className="text-start">
-              <h5>{name}</h5>
-            </div>
-            <div className="text-end">
-              <button 
-                className="btn btn-transparent border-0 py-1 px-2 text-white"
-                onClick={handleAddToList}
-                title="Add to My List"
-              >
-                <i className={`bi-bookmark${isInList ? '-fill' : ''}`}></i>
-              </button>
-            </div>
-          </div>
-          <div className="my-2">
-            <Player mediaURL={mediaURL} id={id} type={type}/>
+        <div className="container bg-transparent">
+          <div className="my-4 py-4">
+            <Player mediaURL={mediaURL} title={name} averageVote={averageVote} id={id} type={type}/>
           </div>
           <div className="d-flex justify-content-between">
             <div className="d-flex text-start">
@@ -356,12 +313,6 @@ function TvGrid({ id, type, setBackgroundImage }) {
               </div>
             </div>
             <div className="d-flex flex-column mt-2">
-              <div className="d-flex justify-content-between mb-2">
-                <div className="text-start bd-callout-dark p-1 rounded">
-                  <i className="bi bi-star-fill text-warning"></i>
-                  <span id="Rating" className="text-white"> {averageVote} </span>
-                </div>
-            </div>
             <p>{overview}<br/><br/>
             <b>Release Date:</b>&nbsp;{first_air_date}<br/>
             <b>Genre:</b>&nbsp;{genres?.map(genre => genre.name).join(', ')}<br/>
@@ -403,7 +354,6 @@ function TvGrid({ id, type, setBackgroundImage }) {
           </div>
         </div>
       </div>
-      {alertMessage && <Alert message={alertMessage} onClose={handleAlertDismiss} type={alertType} />}
     </div>
     </div>
       <Footer />

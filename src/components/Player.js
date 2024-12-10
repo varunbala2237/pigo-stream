@@ -1,9 +1,14 @@
 import { React, useState, useEffect } from 'react';
 import useSaveWatchHistory from '../hooks/useSaveWatchHistory';
 import useFetchTrailer from '../hooks/useFetchTrailer';
+import useSaveMyList from '../hooks/useSaveMyList';
+import useCheckMyList from '../hooks/useCheckMyList';
 import { useNavigate } from 'react-router-dom'; // for navigation to PigoStore
+import Alert from '../Alert';
 
-function Player({ mediaURL, id, type }) {
+function Player({ mediaURL, averageVote, title, id, type }) {
+  const [alertMessage, setAlertMessage] = useState('');
+  const [alertType, setAlertType] = useState('');
   const [inHistory, setInHistory] = useState(false);
   const { trailerLink, loading, error } = useFetchTrailer(id, type);
   const [showNote, setShowNote] = useState(false);
@@ -34,6 +39,31 @@ function Player({ mediaURL, id, type }) {
   // Detect the platform once and use it for conditional rendering
   const platform = detectPlatform();
 
+  const handleAddToList = async () => {
+    try {
+      if (isInList) {
+        setAlertMessage("Already exists in My List.");
+        setAlertType("primary");
+        setTimeout(() => setAlertMessage(''), 5000);
+      } else {
+        await addToList(id, type);
+        refetch();
+        setAlertMessage("Successfully added to My List.");
+        setAlertType("success");
+        setTimeout(() => setAlertMessage(''), 5000);
+      }
+    } catch (error) {
+      console.error(error.message);
+    }
+  };
+
+  const handleAlertDismiss = () => {
+    setAlertMessage('');
+  };
+
+  // To Manage MyList
+  const { addToList } = useSaveMyList();
+  const { isInList, refetch } = useCheckMyList(id);
   // Watch History
   const { addToHistory } = useSaveWatchHistory();
 
@@ -100,47 +130,69 @@ function Player({ mediaURL, id, type }) {
   };
 
   return (
-    <>
-      {trailerLink ? (
-        <div className="trailer-container">
-          <iframe
-            className="trailer-iframe custom-theme-radius-low"
-            src={trailerLink}
-            title="YouTube trailer"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowFullScreen
-          ></iframe>
+    <div className="d-flex flex-column align-items-center">
+      <div className="d-flex flex-row p-4 custom-theme-radius custom-bg">
+
+        <div className="d-flex flex-column align-items-center justify-content-center custom-theme-radius-low py-2">
+          <h4 className="text-wrap mx-4">{title}</h4>
+            <div className="align-items-start justify-content-start w-100">
+              <div className="ms-4 rounded">
+                <i className="bi bi-star-fill text-warning"></i>
+                <span id="Rating" className="text-white"> {averageVote} </span>
+              </div>
+            </div>
         </div>
-      ) : (
-        <p className="text-center text-white mt-5 mb-5">No trailer found.</p>
+
+        <div className="d-flex flex-column align-items-top justify-content-center">
+        {/* Watch Trailer Button */}
+        <button
+          className={`btn btn-block mb-3 justify-content-center border-0 nowrap rounded-pill ${trailerLink ? 'btn-light' : 'btn-secondary'}`}
+          onClick={() => trailerLink && window.open(trailerLink, '_blank')}
+          disabled={!trailerLink}
+        >
+          <i className="bi bi-youtube text-danger me-2"></i>
+          {trailerLink ? 'Watch Trailer' : 'No Trailer Available'}
+        </button>
+
+        {/* Add to MyList Button */}
+        <button
+          className={`btn btn-block mb-3 justify-content-center border-0 text-white nowrap rounded-pill btn-light ${isInList ? 'bg-primary' : 'bg-black'}`}
+          onClick={handleAddToList}
+          title="Add to My List"
+        >
+          <i className={`bi-bookmark${isInList ? '-fill' : ''} me-2`}></i>
+          { isInList ? 'Added' : 'Add' }
+        </button>
+
+        {/* Play in PigoPlayer Button */}
+        {(platform === 'windows' || platform === 'android') && (
+          <button
+            className="btn btn-block justify-content-center border-0 text-white nowrap rounded-pill btn-light bg-black"
+            onClick={() => openPlayer(mediaURL)}
+          >
+            <i className="bi bi-play-circle-fill text-primary me-2"></i>
+            Play
+          </button>
+        )}
+        </div>
+
+      </div>
+
+      {/* Note for App Download */}
+      {showNote && (
+        <div className="bd-callout-dark custom-theme-radius text-white mt-3">
+          <i className="bi bi-exclamation-circle me-2"></i>
+          {platform === 'windows' || platform === 'android' ? (
+            <>Note: Don't have the app? <span className="link text-primary ms-2" onClick={redirectToStore}>
+              <i className="bi bi-bag-check-fill me-2"></i>Get it now
+            </span></>
+          ) : (
+            <>Note: Unsupported platform.</>
+          )}
+        </div>
       )}
-      <div className="mt-4">
-        {(platform === 'windows' || platform === 'android') && ( // Show button only for supported platforms
-          <>
-            {/* Default */}
-            <button
-              className="btn btn-light rounded-pill"
-              onClick={() => openPlayer(mediaURL)}
-            >
-              Play in <i className="bi bi-play-circle-fill text-primary"></i> <b>Pigo</b>Player
-            </button>
-          </>
-        )}
-      </div>
-      <div className="mt-2">
-        {showNote && (
-          <div className={platform === 'windows' || platform === 'android' ? 'bd-callout-dark text-white' : 'bd-callout-dark text-danger'}>
-            <i className="bi bi-exclamation-circle me-2"></i>
-            {platform === 'windows' || platform === 'android' ? (
-              <>Note: Don't have the app?<span className="link text-primary ms-2" onClick={redirectToStore}>
-              <i className="bi bi-bag-check-fill me-2"></i>Get it now</span></>
-            ) : (
-              <>Note: Unsupported platform.</>
-            )}
-          </div>
-        )}
-      </div>
-    </>
+      {alertMessage && <Alert message={alertMessage} onClose={handleAlertDismiss} type={alertType} />}
+    </div>
   );
 }
 

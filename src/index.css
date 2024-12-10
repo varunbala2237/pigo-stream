@@ -154,3 +154,9 @@ code {
   background: transparent;
   padding-top: 50px;
 }
+
+.nowrap {
+  white-space: nowrap;
+}
+
+/* End of main parts */
