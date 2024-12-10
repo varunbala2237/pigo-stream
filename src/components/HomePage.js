@@ -51,6 +51,9 @@ function HomePage({ title,
 
   const handleSearchBar = () => {
     setShowSearchBar(prevState => !prevState);
+
+    // Scroll to Top
+    window.scrollTo({ top: 0 });
   };
 
   const handlePlayMedia = async () => {
