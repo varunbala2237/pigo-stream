@@ -30,6 +30,7 @@ function Player({ mediaURL, averageVote, director, genres, mediaInfo, id, type, 
   };
 
   const platform = detectPlatform();
+  const appVersion = "0.1.0"; // Dummy
 
   useEffect(() => {
     setImageUrl(
@@ -79,7 +80,7 @@ function Player({ mediaURL, averageVote, director, genres, mediaInfo, id, type, 
 
       let appURL;
       if (platform === 'windows' || platform === 'android') {
-        appURL = `pigoplayer://open?url=${encodeURIComponent(serverLink)}`;
+        appURL = `pigoplayer://open?url=${encodeURIComponent(serverLink)}&version=${appVersion}`;
       } else {
         return;
       }
