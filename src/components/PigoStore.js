@@ -123,13 +123,6 @@ const Pigostore = () => {
             </div>
           </div>
         </div>
-
-        {/* Divider for footer */}
-        <hr className="divider text-secondary m-0" />
-        
-        <div className="section text-center p-2">
-          <small className="text-secondary">Powered by <b>Pigo</b>Store</small>
-        </div>
       </div>
     </div>
   );

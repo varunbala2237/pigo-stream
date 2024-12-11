@@ -100,11 +100,41 @@ function Player({ mediaURL, averageVote, director, genres, mediaInfo, id, type, 
         <div className="d-flex flex-row align-items-start custom-theme-radius-low w-100 mb-3 mb-md-0">
           <div className="section border-0">
             <img
-              className="position-relative custom-theme-radius bg-dark"
+              className="position-relative custom-theme-radius bg-dark mb-3"
               src={imageUrl}
               alt=""
               style={{ height: '250px', objectFit: 'cover', width: '150px' }}
             />
+            <div className="d-flex flex-column align-items-stretch justify-content-center">
+              <button
+                className={`btn btn-block mb-3 justify-content-center border-0 nowrap rounded-pill ${
+                  trailerLink ? 'btn-light' : 'btn-secondary'
+                }`}
+                onClick={() => trailerLink && window.open(trailerLink, '_blank')}
+                disabled={!trailerLink}
+              >
+                <i className="bi bi-youtube text-danger me-2"></i>
+                {trailerLink ? 'Watch Trailer' : 'No Trailer Available'}
+              </button>
+              <button
+                className={`btn btn-block mb-3 justify-content-center border-0 text-white nowrap rounded-pill btn-light ${
+                isInList ? 'bg-primary' : 'bg-black'
+                }`}
+                onClick={handleAddToList}
+              >
+                <i className={`bi-bookmark${isInList ? '-fill' : ''} me-2`}></i>
+                {isInList ? 'Added' : 'Add'}
+              </button>
+              {(platform === 'windows' || platform === 'android') && (
+                <button
+                  className="btn btn-block justify-content-center border-0 text-white nowrap rounded-pill btn-light bg-black"
+                  onClick={() => openPlayer(mediaURL)}
+                >
+                  <i className="bi bi-play-circle-fill text-primary me-2"></i>
+                  Play
+                </button>
+              )}
+            </div>
           </div>
           <div className="section ms-3">
             <h4 className="text-wrap">{mediaInfo.title ? mediaInfo.title : mediaInfo.name}</h4>
@@ -118,47 +148,17 @@ function Player({ mediaURL, averageVote, director, genres, mediaInfo, id, type, 
             </div>
             <div className="d-flex flex-column mt-2">
               <small>
-                {mediaInfo.overview}<br/>
                 <b className="me-2">Release Date: </b>{mediaInfo.release_date ? mediaInfo.release_date : mediaInfo.first_air_date}<br/>
                 <b className="me-2">Director: </b>{director}<br/>
                 <b className="me-2">Genres: </b>{genres?.map((genre, index) => (
-                  <span key={index} className="bg-dark rounded-pill px-2 m-1">
+                  <span key={index} className="custom-bg rounded-pill px-2 m-1">
                     {genre.name}
                   </span>
                 ))}<br/>
+                <div className="mt-2">{mediaInfo.overview}</div><br/>
               </small>
             </div>
           </div>
-        </div>
-        <div className="d-flex flex-column align-items-stretch justify-content-center">
-          <button
-            className={`btn btn-block mb-3 justify-content-center border-0 nowrap rounded-pill ${
-              trailerLink ? 'btn-light' : 'btn-secondary'
-            }`}
-            onClick={() => trailerLink && window.open(trailerLink, '_blank')}
-            disabled={!trailerLink}
-          >
-            <i className="bi bi-youtube text-danger me-2"></i>
-            {trailerLink ? 'Watch Trailer' : 'No Trailer Available'}
-          </button>
-          <button
-            className={`btn btn-block mb-3 justify-content-center border-0 text-white nowrap rounded-pill btn-light ${
-              isInList ? 'bg-primary' : 'bg-black'
-            }`}
-            onClick={handleAddToList}
-          >
-            <i className={`bi-bookmark${isInList ? '-fill' : ''} me-2`}></i>
-            {isInList ? 'Added' : 'Add'}
-          </button>
-          {(platform === 'windows' || platform === 'android') && (
-            <button
-              className="btn btn-block justify-content-center border-0 text-white nowrap rounded-pill btn-light bg-black"
-              onClick={() => openPlayer(mediaURL)}
-            >
-              <i className="bi bi-play-circle-fill text-primary me-2"></i>
-              Play
-            </button>
-          )}
         </div>
       </div>
       {showNote && (
