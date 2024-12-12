@@ -17,9 +17,9 @@ Visit https://www.themoviedb.org/ for more details.
 
 # Databases Used
 
--> Firebase Databases(Real-Time, Firestore)
+-> Firebase Database(Real-Time, Firestore)
 
--> Render PostgreSQL
+-> Render PostgreSQL Database
 
 Here is complete overview of creating a React Project ⬇️
 
