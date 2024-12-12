@@ -7,11 +7,19 @@ For this project, I am using Firebase for database and authentication.
 # Full Project Pack
 -> React app deployed in [Firebase](https://firebase.google.com/).
 
--> Node.js/Express.js deployed in [Render](https://dashboard.render.com/).
+-> Node.js/Express.js main server 1 deployed in [Render](https://dashboard.render.com/).
+
+-> Node.js/Express.js recommendations server 2 deployed in [Render](https://dashboard.render.com/).
 
 # API's Used
 Im currently using using TMDB API for both Movies and TV Shows Metadata.
 Visit https://www.themoviedb.org/ for more details.
+
+# Databases Used
+
+-> Firebase Databases(Real-Time, Firestore)
+
+-> Render PostgreSQL
 
 Here is complete overview of creating a React Project ⬇️
 
