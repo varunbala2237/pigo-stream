@@ -1,6 +1,7 @@
 import { React, useState, useEffect } from 'react';
 import useSaveWatchHistory from '../hooks/useSaveWatchHistory';
 import useFetchTrailer from '../hooks/useFetchTrailer';
+import useAppVersion from '../hooks/useAppVersion';
 import { useNavigate } from 'react-router-dom';
 
 function Player({ mediaURL, averageVote, director, genres, mediaInfo, id, type, isInList, handleAddToList }) {
@@ -30,7 +31,7 @@ function Player({ mediaURL, averageVote, director, genres, mediaInfo, id, type, 
   };
 
   const platform = detectPlatform();
-  const appVersion = "0.1.0"; // Dummy
+  const { version: appVersion } = useAppVersion(platform);
 
   useEffect(() => {
     setImageUrl(
