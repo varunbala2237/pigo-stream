@@ -1,4 +1,4 @@
-import { React, useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import useSaveWatchHistory from '../hooks/useSaveWatchHistory';
 import useFetchTrailer from '../hooks/useFetchTrailer';
 import useAppVersion from '../hooks/useAppVersion';
@@ -186,11 +186,15 @@ function Player({ mediaURL, averageVote, director, genres, mediaInfo, id, type, 
               <small>
                 <b className="me-2">Release Date: </b>{mediaInfo.release_date ? mediaInfo.release_date : mediaInfo.first_air_date}<br/>
                 <b className="me-2">Director: </b>{director}<br/>
-                <b className="me-2">Genres: </b>{genres?.map((genre, index) => (
-                  <span key={index} className="custom-bg rounded-pill px-2 m-1">
-                    {genre.name}
-                  </span>
-                ))}<br/>
+                <b className="me-2">Genres: </b>
+                  <span className="text-white">
+                    {genres?.map((genre, index) => (
+                      <React.Fragment key={index}>
+                        {genre.name}
+                        {index < genres.length - 1 && ", "}
+                      </React.Fragment>
+                    ))}
+                  </span><br />
                 <div className="text-wrap text-break mt-2">{mediaInfo.overview}</div><br/>
               </small>
             </div>
