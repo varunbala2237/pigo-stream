@@ -102,24 +102,37 @@ function Player({ mediaURL, averageVote, director, genres, mediaInfo, id, type, 
         <div className="d-flex flex-row align-items-start custom-theme-radius-low w-100 mb-3 mb-md-0">
           <div className="section border-0">
             <img
-              className="position-relative custom-theme-radius bg-dark mb-3"
+              className="img-fluid position-relative custom-theme-radius-low bg-dark mb-3 w-100"
               src={imageUrl}
               alt=""
-              style={{ height: '250px', objectFit: 'cover', width: '150px' }}
+              style={{ height: 'auto', objectFit: 'cover', width: '100%' }}
             />
             <div className="d-flex flex-column align-items-stretch justify-content-center">
+              {/* Larger button for larger screen */}
               <button
-                className={`btn btn-block mb-3 justify-content-center border-0 nowrap rounded-pill ${
+                className={`btn d-none d-md-block mb-3 justify-content-center border-0 nowrap rounded-pill ${
                   trailerLink ? 'btn-light' : 'btn-secondary'
                 }`}
                 onClick={() => trailerLink && window.open(trailerLink, '_blank')}
                 disabled={!trailerLink}
               >
                 <i className="bi bi-youtube text-danger me-2"></i>
-                {trailerLink ? 'Watch Trailer' : 'No Trailer Available'}
+                  {"Trailer"}
               </button>
+              {/* Smaller button for smaller screen */}
               <button
-                className={`btn btn-block mb-3 justify-content-center border-0 text-white nowrap rounded-pill btn-light ${
+                className={`btn d-block d-md-none btn-sm mb-3 justify-content-center border-0 nowrap rounded-pill ${
+                  trailerLink ? 'btn-light' : 'btn-secondary'
+                }`}
+                onClick={() => trailerLink && window.open(trailerLink, '_blank')}
+                disabled={!trailerLink}
+              >
+                <i className="bi bi-youtube text-danger me-2"></i>
+                  {"Trailer"}
+              </button>
+              {/* Larger button for larger screen */}
+              <button
+                className={`btn d-none d-md-block mb-3 justify-content-center border-0 text-white nowrap rounded-pill btn-light ${
                 isInList ? 'bg-primary' : 'bg-black'
                 }`}
                 onClick={handleAddToList}
@@ -127,9 +140,30 @@ function Player({ mediaURL, averageVote, director, genres, mediaInfo, id, type, 
                 <i className={`bi-bookmark${isInList ? '-fill' : ''} me-2`}></i>
                 {isInList ? 'Added' : 'Add'}
               </button>
+              {/* Smaller button for smaller screen */}
+              <button
+                className={`btn d-block d-md-none btn-sm mb-3 justify-content-center border-0 text-white nowrap rounded-pill btn-light ${
+                isInList ? 'bg-primary' : 'bg-black'
+                }`}
+                onClick={handleAddToList}
+              >
+                <i className={`bi-bookmark${isInList ? '-fill' : ''} me-2`}></i>
+                {isInList ? 'Added' : 'Add'}
+              </button>
+              {/* Larger button for larger screen */}
               {(platform === 'windows' || platform === 'android') && (
                 <button
-                  className="btn btn-block justify-content-center border-0 text-white nowrap rounded-pill btn-light bg-black"
+                  className="btn d-none d-md-block justify-content-center border-0 text-white nowrap rounded-pill btn-light bg-black"
+                  onClick={() => openPlayer(mediaURL)}
+                >
+                  <i className="bi bi-play-circle-fill text-primary me-2"></i>
+                  Play
+                </button>
+              )}
+              {/* Smaller button for smaller screen */}
+              {(platform === 'windows' || platform === 'android') && (
+                <button
+                  className="btn d-block d-md-none btn-sm justify-content-center border-0 text-white nowrap rounded-pill btn-light bg-black"
                   onClick={() => openPlayer(mediaURL)}
                 >
                   <i className="bi bi-play-circle-fill text-primary me-2"></i>
@@ -148,7 +182,7 @@ function Player({ mediaURL, averageVote, director, genres, mediaInfo, id, type, 
                 </span>
               </div>
             </div>
-            <div className="d-flex flex-column mt-2">
+            <div className="d-flex flex-column flex-wrap mt-2">
               <small>
                 <b className="me-2">Release Date: </b>{mediaInfo.release_date ? mediaInfo.release_date : mediaInfo.first_air_date}<br/>
                 <b className="me-2">Director: </b>{director}<br/>
@@ -157,7 +191,7 @@ function Player({ mediaURL, averageVote, director, genres, mediaInfo, id, type, 
                     {genre.name}
                   </span>
                 ))}<br/>
-                <div className="mt-2">{mediaInfo.overview}</div><br/>
+                <div className="text-wrap text-break mt-2">{mediaInfo.overview}</div><br/>
               </small>
             </div>
           </div>
