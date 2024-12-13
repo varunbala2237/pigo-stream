@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom'; // Import useNavigate
+import useAppVersion from '../hooks/useAppVersion';
 import useDownloadApp from '../hooks/useDownloadApp';
 
 const Pigostore = () => {
@@ -33,6 +34,9 @@ const Pigostore = () => {
     setCurrentPlatform(platform); // Set current platform based on detection
   }, []);
 
+
+  // Fetch the appVersion
+  const { version: appVersion } = useAppVersion(currentPlatform);
   // Fetch download link based on the detected platform
   const { downloadLink, loading, error } = useDownloadApp(currentPlatform);
 
@@ -57,7 +61,10 @@ const Pigostore = () => {
       <div className="container bg-transparent p-0 mx-4 custom-theme-radius" style={{ maxWidth: '600px' }}>
         <div className="section p-4">
           <div className="d-flex justify-content-between align-items-center">
-            <h1 className="text-white">PigoPlayer</h1>
+            <div className="d-flex align-items-center">
+              <h3 className="text-white me-2">PigoPlayer</h3>
+              <span className="text-secondary">v{appVersion}</span>
+            </div>
             {/* Back button with navigation */}
             <button 
               type="button" 
@@ -68,7 +75,7 @@ const Pigostore = () => {
               Back
             </button>
           </div>
-          <p className="text-secondary">Install PigoPlayer for seamless streaming and access content without redirects.</p>
+          <p className="text-white">Install PigoPlayer for seamless streaming and access content without redirects.</p>
           {loading && 
             <div className="col d-flex justify-content-start">
               <div className="spinner-border text-light spinner-size-1" role="status">
