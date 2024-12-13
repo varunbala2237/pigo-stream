@@ -151,25 +151,21 @@ function Player({ mediaURL, averageVote, director, genres, mediaInfo, id, type, 
                 {isInList ? 'Added' : 'Add'}
               </button>
               {/* Larger button for larger screen */}
-              {(platform === 'windows' || platform === 'android') && (
-                <button
-                  className="btn d-none d-md-block justify-content-center border-0 text-white nowrap rounded-pill btn-light bg-black"
-                  onClick={() => openPlayer(mediaURL)}
-                >
-                  <i className="bi bi-play-circle-fill text-primary me-2"></i>
-                  Play
-                </button>
-              )}
+              <button
+                className="btn d-none d-md-block justify-content-center border-0 text-white nowrap rounded-pill btn-light bg-black"
+                onClick={() => openPlayer(mediaURL)}
+              >
+                <i className="bi bi-play-circle-fill text-primary me-2"></i>
+                Play
+              </button>
               {/* Smaller button for smaller screen */}
-              {(platform === 'windows' || platform === 'android') && (
-                <button
-                  className="btn d-block d-md-none btn-sm justify-content-center border-0 text-white nowrap rounded-pill btn-light bg-black"
-                  onClick={() => openPlayer(mediaURL)}
-                >
-                  <i className="bi bi-play-circle-fill text-primary me-2"></i>
-                  Play
-                </button>
-              )}
+              <button
+                className="btn d-block d-md-none btn-sm justify-content-center border-0 text-white nowrap rounded-pill btn-light bg-black"
+                onClick={() => openPlayer(mediaURL)}
+              >
+                <i className="bi bi-play-circle-fill text-primary me-2"></i>
+                Play
+              </button>
             </div>
           </div>
           <div className="section ms-3">
