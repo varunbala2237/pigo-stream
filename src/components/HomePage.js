@@ -195,7 +195,7 @@ function HomePage({ title,
       {!showSearchBar && triggerSearch.trim() === '' && title && (
         <div className="d-flex justify-content-end" style={{ width: '90%' }}>
           <div className="d-flex flex-column align-items-center justify-content-center text-white p-4 rounded" style={{ width: '300px', height: '300px', backgroundColor: 'transparent', border: 'none', textAlign: 'center' }}>
-            <h4 className="text-wrap"><b>{title}</b></h4>
+            <h4 className="text-wrap">{title}</h4>
             <div className="bd-callout-dark p-1 rounded">
               <i className="bi bi-star-fill text-warning"></i>
               <span id="Rating" className="text-white"> {rating} | {year}</span>
