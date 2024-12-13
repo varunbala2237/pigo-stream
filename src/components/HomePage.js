@@ -192,7 +192,7 @@ function HomePage({ title,
         <Header />
       )}
 
-      {!showSearchBar && triggerSearch.trim() === '' && (
+      {!showSearchBar && triggerSearch.trim() === '' && title && (
         <div className="d-flex justify-content-end" style={{ width: '90%' }}>
           <div className="d-flex flex-column align-items-center justify-content-center text-white p-4 rounded" style={{ width: '300px', height: '300px', backgroundColor: 'transparent', border: 'none', textAlign: 'center' }}>
             <h4 className="text-wrap"><b>{title}</b></h4>

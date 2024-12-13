@@ -1,6 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import Header from './Header';
-import Footer from './Footer';
 import CastCard from './CastCard';
 import useFetchMediaInfo from '../hooks/useFetchMediaInfo';
 import useFetchSeason from '../hooks/useFetchSeason';
@@ -141,8 +139,6 @@ function TvGrid({ id, type, setBackgroundImage }) {
 
   return (
   <>
-    <div className="container-fluid d-flex flex-column justify-content-center align-items-center poppins-medium">
-      <Header/>
     <div className="flex-row text-white custom-w-size-100">
     <div className="row justify-content-center position-relative">
       <div className="col-lg-8 col-md-10 col-sm-12">
@@ -389,9 +385,7 @@ function TvGrid({ id, type, setBackgroundImage }) {
       </div>
     </div>
     </div>
-      <Footer />
       {alertMessage && <Alert message={alertMessage} onClose={handleAlertDismiss} type={alertType} />}
-    </div>
   </>
   );
 }

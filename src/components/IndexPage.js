@@ -25,7 +25,7 @@ const IndexPage = () => {
   // Extract details for movie or TV show from either recommendation or popular movie
   const mediaDetails = recommendedMedia || (popularMovies.length > 0 ? popularMovies[0] : {});
   const mediaId = mediaDetails.id || selectedItemId;
-  const title = mediaDetails.title || mediaDetails.name || 'No Title';
+  const title = mediaDetails.title || mediaDetails.name || null;
   const mediaType = mediaDetails.type || (mediaDetails.title ? 'movie' : 'tv');
   const rating = mediaDetails.vote_average ? mediaDetails.vote_average.toFixed(1) : '0.0';
   const year = mediaDetails.release_date
