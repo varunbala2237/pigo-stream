@@ -50,9 +50,9 @@ function WatchHistoryPage() {
     };
 
     return (
-        <div className="container-fluid d-flex flex-column justify-content-center align-items-center poppins-medium">
+        <div className="container-fluid d-flex flex-column justify-content-center align-items-center poppins-medium p-0">
             <Header/>
-            <div className="flex-row text-white custom-w-size-100">
+            <div className="flex-row text-white w-100">
                 {userUID ? <WatchHistoryGrid userUID={userUID} /> : null}
             </div>
             <Footer />

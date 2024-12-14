@@ -35,7 +35,7 @@ function MediaGrid() {
       {/* Trending Movies Section */}
       {(
         <>
-          <div className="d-flex align-items-center my-2">
+          <div className="d-flex align-items-center m-2 px-1">
             <i className="bi bi-fire me-2"></i>
             <h5 className="mb-0">Trending Movies</h5>
           </div>
@@ -91,7 +91,7 @@ function MediaGrid() {
       {/* Trending TV Shows Section */}
       {(
         <>
-          <div className="d-flex align-items-center my-2">
+          <div className="d-flex align-items-center m-2 px-1">
             <i className="bi bi-fire me-2"></i>
             <h5 className="mb-0">Trending TV Shows</h5>
           </div>

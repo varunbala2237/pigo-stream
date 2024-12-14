@@ -53,7 +53,7 @@ function SearchGrid({ searchQuery }) {
           {/* Movies Results */}
           {(
             <>
-              <div className="d-flex align-items-center my-2">
+              <div className="d-flex align-items-center m-2 px-1">
                 <i className="bi bi-search me-2"></i>
                 <h5 className="mb-0">Movies</h5>
               </div>
@@ -94,7 +94,7 @@ function SearchGrid({ searchQuery }) {
           {/* TV Shows Results */}
           {(
             <>
-              <div className="d-flex align-items-center my-2">
+              <div className="d-flex align-items-center m-2 px-1">
                 <i className="bi bi-search me-2"></i>
                 <h5 className="mb-0">TV Shows</h5>
               </div>

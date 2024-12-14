@@ -37,7 +37,7 @@ function Header() {
   };
 
   return (
-    <nav className="navbar navbar-expand-lg navbar-dark custom-w-size-100 custom-theme-radius">
+    <nav className="navbar navbar-expand-lg navbar-dark w-100 custom-theme-radius">
       <div className="container-fluid">
         <a className="navbar-brand d-flex align-items-center" href="/">
           <img

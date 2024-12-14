@@ -98,7 +98,7 @@ function MyListGrid({ userUID }) {
             {!loading && !error && (
                 <>
                     {/* Movies */}
-                    <div className="d-flex align-items-center my-2">
+                    <div className="d-flex align-items-center m-2 px-1">
                         <i className="bi bi-bookmark me-2"></i>
                         <h5 className="mb-0">Movies</h5>
                     </div>
@@ -160,7 +160,7 @@ function MyListGrid({ userUID }) {
                     )}
 
                     {/* TV Shows */}
-                    <div className="d-flex align-items-center my-2">
+                    <div className="d-flex align-items-center m-2 px-1">
                         <i className="bi bi-bookmark me-2"></i>
                         <h5 className="mb-0">TV Shows</h5>
                     </div>
