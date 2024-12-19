@@ -14,11 +14,17 @@ const IndexPage = () => {
   const [triggerSearch, setTriggerSearch] = useState('');
 
   useEffect(() => {
-    if (!loadingRecommendedMedia && recommendedMedia?.backdrop_path) {
-      setBackgroundImage(`https://image.tmdb.org/t/p/original${recommendedMedia.backdrop_path}`);
+    const getImagePath = (media) => {
+      return media.backdrop_path || media.poster_path
+        ? `https://image.tmdb.org/t/p/original${media.backdrop_path || media.poster_path}`
+        : null;
+    };
+
+    if (!loadingRecommendedMedia && recommendedMedia) {
+      setBackgroundImage(getImagePath(recommendedMedia));
     } else if (!loadingPopularMovies && popularMovies.length > 0) {
       const latestMovie = popularMovies[0];
-      setBackgroundImage(`https://image.tmdb.org/t/p/original${latestMovie.backdrop_path}`);
+      setBackgroundImage(getImagePath(latestMovie));
     }
   }, [recommendedMedia, popularMovies, loadingRecommendedMedia, loadingPopularMovies]);
 
