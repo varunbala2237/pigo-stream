@@ -183,20 +183,18 @@ function HomePage({
     <div className="container-fluid d-flex flex-column justify-content-center align-items-center poppins-medium p-0">
       <div className="min-vh-100 w-100">
         {showSearchBar ? (
-          <div className="d-flex justify-content-center align-items-center">
-            <SearchBar
-              searchQuery={searchQuery}
-              handleSearchInputChange={handleSearchInputChange}
-              handleSelectSearch={handleSelectSearch}
-              searchHistory={searchHistory}
-              isDropdownOpen={isDropdownOpen}
-              handleRemoveSearchHistory={handleRemoveSearchHistory}
-              handleSearchSubmit={handleSearchSubmit}
-              handleFocus={handleFocus}
-              inputRef={inputRef}
-              dropdownRef={dropdownRef}
-            />
-          </div>
+          <SearchBar
+            searchQuery={searchQuery}
+            handleSearchInputChange={handleSearchInputChange}
+            handleSelectSearch={handleSelectSearch}
+            searchHistory={searchHistory}
+            isDropdownOpen={isDropdownOpen}
+            handleRemoveSearchHistory={handleRemoveSearchHistory}
+            handleSearchSubmit={handleSearchSubmit}
+            handleFocus={handleFocus}
+            inputRef={inputRef}
+            dropdownRef={dropdownRef}
+          />
         ) : (
           <Header />
         )}

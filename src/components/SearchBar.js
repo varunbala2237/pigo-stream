@@ -13,10 +13,9 @@ function SearchBar({
   dropdownRef,
 }) {
     return (
-        <div className="container-fluid m-3">
-            <div className="flex-row text-white">
-              <div className="d-flex justify-content-end position-relative">
-                <div ref={inputRef} className="input-group custom-input-group custom-border">
+        <div className="container-fluid px-3 my-3">
+          <div className="d-flex position-relative justify-content-center align-items-center">
+            <div ref={inputRef} className="input-group custom-input-group custom-border">
                   <input
                     id="prompt"
                     type="text"
@@ -72,9 +71,8 @@ function SearchBar({
                       <i className="bi bi-x-lg"></i>
                     </button>
                   )}
-                </div>
-              </div>
             </div>
+          </div>
         </div>
     );
 }
