@@ -159,4 +159,22 @@ code {
   white-space: nowrap;
 }
 
+/* Custom colors */
+.theme-color {
+  color: #51a6f5;
+}
+
+/* Custom heights and widths */
+.vh-30 {
+  min-height: 30vh;
+}
+
+.vh-70 {
+  min-height: 70vh;
+}
+
+.w-50 {
+  width: 50%;
+}
+
 /* End of main parts */

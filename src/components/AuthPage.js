@@ -31,14 +31,22 @@ function AuthPage() {
     useCreateUser();
 
     useEffect(() => {
+        const timeoutId = setTimeout(() => {
+            setIsLoading(false);
+        }, 10000); // Set a timeout of 10 seconds
+
         const unsubscribe = auth.onAuthStateChanged((user) => {
+            clearTimeout(timeoutId); // Clear the timeout if confirmation is received
             setIsLoading(false);
             if (user) {
                 navigate('/index');
             }
         });
 
-        return () => unsubscribe(); // Clean up the observer
+        return () => {
+            clearTimeout(timeoutId); // Clean up the timeout
+            unsubscribe(); // Clean up the observer
+        };
     }, [navigate]);
 
     const navigateToIndex = () => {
@@ -101,7 +109,7 @@ function AuthPage() {
     return (
         <div className="container-fluid vh-100 d-flex justify-content-center align-items-center poppins-medium">
             {isLoading ? (
-                <div className="spinner-border text-primary spinner-size-3" role="status">
+                <div className="spinner-border theme-color spinner-size-3" role="status">
                     <span className="visually-hidden">Loading...</span>
                 </div>
             ) : (

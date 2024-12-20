@@ -49,21 +49,23 @@ const IndexPage = () => {
         style={{
           background: shouldHideBackground ? 'transparent' : undefined,
           backgroundImage: shouldHideBackground
-            ? 'none' // Hide background when search is active or query exists
-            : backgroundImage
-            ? `linear-gradient(to bottom, rgba(0, 0, 0, 0), rgb(0, 0, 0)), url(${backgroundImage})`
-            : 'none',
+          ? 'none' // Hide background when search is active or query exists
+          : backgroundImage
+          ? `linear-gradient(to bottom, rgba(0, 0, 0, 0), rgb(0, 0, 0)), url(${backgroundImage})`
+          : 'none',
         }}
       ></div>
-      <HomePage title={title}
-                mediaId={mediaId} 
-                mediaType={mediaType} 
-                rating={rating} 
-                year={year}
-                showSearchBar={showSearchBar}
-                setShowSearchBar={setShowSearchBar}
-                triggerSearch={triggerSearch}
-                setTriggerSearch={setTriggerSearch} />
+      <HomePage
+        title={title}
+        mediaId={mediaId}
+        mediaType={mediaType}
+        rating={rating}
+        year={year}
+        showSearchBar={showSearchBar}
+        setShowSearchBar={setShowSearchBar}
+        triggerSearch={triggerSearch}
+        setTriggerSearch={setTriggerSearch}
+      />
     </div>
   );
 };

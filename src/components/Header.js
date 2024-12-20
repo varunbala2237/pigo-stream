@@ -125,23 +125,23 @@ function Header() {
 
       {/* Modal for mobile navbar items */}
       <div className="modal fade" id="navItemsModal" tabIndex="-1" aria-labelledby="navItemsModalLabel" aria-hidden="true">
-        <div className="modal-dialog border-0 my-0">
-          <div className="modal-content bd-callout-dark custom-theme-radius-bottom text-white p-0 border-0">
-            <div className="modal-body text-center p-0 m-0">
+        <div className="modal-dialog modal-dialog-centered mx-auto border-0 m-0 w-50">
+          <div className="modal-content bd-callout-dark custom-theme-radius text-white p-0 border-0">
+            <div className="modal-body text-center p-0">
               <ul className="navbar-nav">
-                <li className="nav-item">
+                <li className="nav-item m-1">
                   <a className={getNavLinkClass("/index")} href="/index">
                     <i className="bi bi-house me-2"></i> Home
                   </a>
                 </li>
                 <li><hr className="text-secondary m-0" /></li>
-                <li className="nav-item">
+                <li className="nav-item m-1">
                   <a className={getNavLinkClass("/my-list")} href="/my-list">
                     <i className="bi bi-bookmark me-2"></i> My List
                   </a>
                 </li>
                 <li><hr className="text-secondary m-0" /></li>
-                <li className="nav-item">
+                <li className="nav-item m-1">
                   <a className={getNavLinkClass("/watch-history")} href="/watch-history">
                     <i className="bi bi-clock me-2"></i> Watch History
                   </a>
@@ -154,7 +154,7 @@ function Header() {
 
       {/* Account Details Modal */}
       <div className="modal fade" id="accountModal" tabIndex="-1" aria-labelledby="accountModalLabel" aria-hidden="true">
-        <div className="modal-dialog border-0 my-0">
+        <div className="modal-dialog mx-auto border-0 m-0">
           <div className="modal-content custom-theme-radius-bottom bd-callout-dark text-white p-0 border-0">
             <div className="modal-body text-center">
               <img

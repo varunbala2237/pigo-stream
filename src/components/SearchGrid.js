@@ -37,15 +37,18 @@ function SearchGrid({ searchQuery }) {
   return (
     <div className="container mt-4" id="searchResults">
       {isLoading && (
-        <div className="col mt-5 mb-5 d-flex justify-content-center">
+        <div className="col d-flex vh-70 justify-content-center align-items-center">
           <div className="spinner-border text-light spinner-size-1" role="status">
             <span className="visually-hidden">Loading...</span>
           </div>
         </div>
       )}
       {isError && (
-        <div className="col mt-5 mb-5">
-          <p className="text-white text-center">Oops! Something went wrong.</p>
+        <div className="col d-flex vh-70 justify-content-center align-items-center">
+          <div className="d-flex align-items-center">
+            <i className="bi bi-wifi-off me-2"></i>
+            <span>500 - Internal Server Error</span>
+          </div>
         </div>
       )}
       {!isLoading && !isError && (
@@ -82,8 +85,11 @@ function SearchGrid({ searchQuery }) {
                       <Card key={index} media={movie} type={'movie'} path={location.pathname} />
                     ))
                   ) : (
-                    <div className="col mt-5 mb-5">
-                      <p className="text-white text-center">No movies found.</p>
+                    <div className="col d-flex vh-30 justify-content-center align-items-center">
+                      <div className="d-flex align-items-center">
+                        <i className="bi bi-database-slash me-2"></i>
+                        <span>404 - Not Found</span>
+                      </div>
                     </div>
                   )}
                 </div>
@@ -123,8 +129,11 @@ function SearchGrid({ searchQuery }) {
                       <Card key={index} media={show} type={'tv'} path={location.pathname} />
                     ))
                   ) : (
-                    <div className="col mt-5 mb-5">
-                      <p className="text-white text-center">No TV shows found.</p>
+                    <div className="col d-flex vh-30 justify-content-center align-items-center">
+                      <div className="d-flex align-items-center">
+                        <i className="bi bi-database-slash me-2"></i>
+                        <span>404 - Not Found</span>
+                      </div>
                     </div>
                   )}
                 </div>

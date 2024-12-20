@@ -101,7 +101,7 @@ function Card({ media, type, path, onRemove, handleAlert }) {
 
           {/* Confirmation Modal */}
           <div className={`modal fade ${modalVisible ? 'show' : ''} d-block`} tabIndex="-1" aria-labelledby="confirmDeleteModalLabel" aria-hidden="true" style={{ zIndex: 1050 }}>
-            <div className="modal-dialog border-0 my-0">
+            <div className="modal-dialog border-0 m-0">
               <div className="modal-content bd-callout-dark custom-theme-radius-bottom text-white p-0 border-0">
                 <div className="modal-header border-0">
                   Are you sure you want to remove this item?

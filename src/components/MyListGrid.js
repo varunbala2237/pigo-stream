@@ -84,15 +84,18 @@ function MyListGrid({ userUID }) {
     return (
         <div className="container text-white">
             {loading && (
-                <div className="col mt-5 mb-5 d-flex justify-content-center">
-                    <div className="spinner-border text-light spinner-size-1" role="status">
-                        <span className="visually-hidden">Loading...</span>
-                    </div>
+                <div className="col d-flex vh-70 justify-content-center align-items-center">
+                  <div className="spinner-border text-light spinner-size-1" role="status">
+                    <span className="visually-hidden">Loading...</span>
+                  </div>
                 </div>
             )}
             {error && (
-                <div className="col mt-5 mb-5">
-                    <p className="text-white text-center">Oops! Something went wrong.</p>
+                <div className="col d-flex vh-70 justify-content-center align-items-center">
+                    <div className="d-flex align-items-center">
+                        <i className="bi bi-wifi-off me-2"></i>
+                        <span>500 - Internal Server Error</span>
+                    </div>
                 </div>
             )}
             {!loading && !error && (
@@ -134,8 +137,11 @@ function MyListGrid({ userUID }) {
                                     />
                                 ))
                             ) : (
-                                <div className="col mt-5 mb-5">
-                                    <p className="text-white text-center mb-0">No movies found.</p>
+                                <div className="col d-flex vh-30 justify-content-center align-items-center">
+                                    <div className="d-flex align-items-center">
+                                        <i className="bi bi-database-slash me-2"></i>
+                                        <span>404 - Not Found</span>
+                                    </div>
                                 </div>
                             )}
                         </div>
@@ -196,8 +202,11 @@ function MyListGrid({ userUID }) {
                                     />
                                 ))
                             ) : (
-                                <div className="col mt-5 mb-5">
-                                    <p className="text-white text-center mb-0">No TV shows found.</p>
+                                <div className="col d-flex vh-30 justify-content-center align-items-center">
+                                    <div className="d-flex align-items-center">
+                                        <i className="bi bi-database-slash me-2"></i>
+                                        <span>404 - Not Found</span>
+                                    </div>
                                 </div>
                             )}
                         </div>

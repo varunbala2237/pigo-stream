@@ -147,14 +147,21 @@ function MovieGrid({ id, type, setBackgroundImage }) {
                 <ul className="dropdown-menu overflow-auto custom-dropdown bd-callout-dark p-0 custom-theme-radius">
                   {loadingLink ? (
                     <li className="dropdown-item text-white bg-transparent">
-                      <div className="col d-flex justify-content-center">
+                      <div className="col d-flex justify-content-center align-items-center">
                         <div className="spinner-border text-light spinner-size-1" role="status">
                           <span className="visually-hidden">Loading...</span>
                         </div>
                       </div>
                     </li>
                   ) : errorLink ? (
-                    <li className="dropdown-item text-white bg-transparent">Oops! Something went wrong.</li>
+                    <li className="dropdown-item text-white bg-transparent">
+                      <div className="col d-flex justify-content-center align-items-center">
+                        <div className="d-flex align-items-center">
+                          <i className="bi bi-wifi-off me-2"></i>
+                          <span>500 - Internal Server Error</span>
+                        </div>
+                      </div>
+                    </li>
                   ) : servers.length > 0 ? (
                     servers.map((server, index) => (
                       <React.Fragment key={server.server_name}>
@@ -163,14 +170,21 @@ function MovieGrid({ id, type, setBackgroundImage }) {
                             className="dropdown-item text-white bg-transparent text-wrap text-truncate"
                             onClick={() => handleServerChange(server.server_name)}
                           >
-                            {server.server_name}
+                            <span className="m-1">{server.server_name}</span>
                           </button>
                         </li>
                         {index < servers.length - 1 && <li><hr className="dropdown-divider bg-secondary m-0" /></li>}
                       </React.Fragment>
                     ))
                   ) : (
-                    <li className="dropdown-item text-white bg-transparent">No servers available.</li>
+                    <li className="dropdown-item text-white bg-transparent">
+                      <div className="col d-flex justify-content-center align-items-center">
+                        <div className="d-flex align-items-center">
+                          <i className="bi bi-database-slash me-2"></i>
+                          <span>404 - Not Found</span>
+                        </div>
+                      </div>
+                    </li>
                   )}
                 </ul>
               </div>
@@ -183,7 +197,12 @@ function MovieGrid({ id, type, setBackgroundImage }) {
                 </div>
                 <div className="row justify-content-center">
                   {cast.length === 0 ? (
-                    <p className="text-center text-white mb-5">No cast found.</p>
+                    <div className="col d-flex vh-30 justify-content-center align-items-center">
+                      <div className="d-flex align-items-center">
+                        <i className="bi bi-database-slash me-2"></i>
+                        <span>404 - Not Found</span>
+                      </div>
+                    </div>
                   ) : (
                     cast.slice(0, sliceIndex).map(actor => (
                       <CastCard key={actor.cast_id} actor={actor} />

@@ -10,15 +10,17 @@ import useFetchSearchHistory from '../hooks/useFetchSearchHistory';
 import useRemoveSearchHistory from '../hooks/useRemoveSearchHistory';
 import Alert from '../Alert';
 
-function HomePage({ title,
-                    mediaId, 
-                    mediaType, 
-                    rating, year, 
-                    showSearchBar, 
-                    setShowSearchBar, 
-                    triggerSearch, 
-                    setTriggerSearch,
-                  }) {
+function HomePage({
+  title,
+  mediaId,
+  mediaType,
+  rating,
+  year,
+  showSearchBar,
+  setShowSearchBar,
+  triggerSearch,
+  setTriggerSearch,
+}) {
   const navigate = useNavigate();
 
   const [searchQuery, setSearchQuery] = useState('');
@@ -50,7 +52,7 @@ function HomePage({ title,
   };
 
   const handleSearchBar = () => {
-    setShowSearchBar(prevState => !prevState);
+    setShowSearchBar((prevState) => !prevState);
 
     // Scroll to Top
     window.scrollTo({ top: 0 });
@@ -96,7 +98,11 @@ function HomePage({ title,
 
   useEffect(() => {
     const handleClickOutside = (event) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target) && !inputRef.current.contains(event.target)) {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target) &&
+        !inputRef.current.contains(event.target)
+      ) {
         setIsDropdownOpen(false);
       }
     };
@@ -154,7 +160,7 @@ function HomePage({ title,
   const handleSearchSubmit = () => {
     if (searchQuery.trim() !== '') {
       setTriggerSearch(searchQuery);
-      
+
       // Check if the last entry in search history matches the current query
       const lastSearch = searchHistory.length > 0 ? searchHistory[searchHistory.length - 1].query : null;
 
@@ -175,51 +181,63 @@ function HomePage({ title,
 
   return (
     <div className="container-fluid d-flex flex-column justify-content-center align-items-center poppins-medium p-0">
-      {showSearchBar ? (
-        <SearchBar
-          searchQuery={searchQuery}
-          handleSearchInputChange={handleSearchInputChange}
-          handleSelectSearch={handleSelectSearch}
-          searchHistory={searchHistory}
-          isDropdownOpen={isDropdownOpen}
-          handleRemoveSearchHistory={handleRemoveSearchHistory}
-          handleSearchSubmit={handleSearchSubmit}
-          handleFocus={handleFocus}
-          inputRef={inputRef}
-          dropdownRef={dropdownRef}
-        />
-      ) : (
-        <Header />
-      )}
-
-      {!showSearchBar && triggerSearch.trim() === '' && title && (
-        <div className="d-flex justify-content-end" style={{ width: '90%' }}>
-          <div className="d-flex flex-column align-items-center justify-content-center text-white p-4 rounded" style={{ width: '300px', height: '300px', backgroundColor: 'transparent', border: 'none', textAlign: 'center' }}>
-            <h4 className="text-wrap">{title}</h4>
-            <div className="bd-callout-dark p-1 rounded">
-              <i className="bi bi-star-fill text-warning"></i>
-              <span id="Rating" className="text-white"> {rating} | {year}</span>
-            </div>
-            <button className="btn btn-light rounded-pill mt-3" onClick={handlePlayMedia}>Watch</button>
-          </div>
-        </div>
-      )}
-
-      <div className="flex-row text-white w-100">
-        {triggerSearch.trim() === '' ? (
-          <MediaGrid />
+      <div className="min-vh-100 w-100">
+        {showSearchBar ? (
+          <SearchBar
+            searchQuery={searchQuery}
+            handleSearchInputChange={handleSearchInputChange}
+            handleSelectSearch={handleSelectSearch}
+            searchHistory={searchHistory}
+            isDropdownOpen={isDropdownOpen}
+            handleRemoveSearchHistory={handleRemoveSearchHistory}
+            handleSearchSubmit={handleSearchSubmit}
+            handleFocus={handleFocus}
+            inputRef={inputRef}
+            dropdownRef={dropdownRef}
+          />
         ) : (
-          <SearchGrid searchQuery={triggerSearch} />
+          <Header />
         )}
+
+        {!showSearchBar && triggerSearch.trim() === '' && title && (
+          <div className="d-flex justify-content-end" style={{ width: '90%' }}>
+            <div
+              className="d-flex flex-column align-items-center justify-content-center text-white p-4 rounded"
+              style={{
+                width: '300px',
+                height: '300px',
+                backgroundColor: 'transparent',
+                border: 'none',
+                textAlign: 'center',
+              }}
+            >
+              <h4 className="text-wrap">{title}</h4>
+              <div className="bd-callout-dark p-1 rounded">
+                <i className="bi bi-star-fill text-warning"></i>
+                <span id="Rating" className="text-white">
+                  {' '}
+                  {rating} | {year}
+                </span>
+              </div>
+              <button className="btn btn-light rounded-pill mt-3" onClick={handlePlayMedia}>
+                Watch
+              </button>
+            </div>
+          </div>
+        )}
+
+        <div className="flex-row text-white w-100">
+          {triggerSearch.trim() === '' ? <MediaGrid /> : <SearchGrid searchQuery={triggerSearch} />}
+        </div>
+
+        <Footer />
+
+        <button className="bd-callout-primary" style={fabStyle} onClick={handleSearchBar}>
+          {showSearchBar ? <i className="bi bi-x-lg"></i> : <i className="bi bi-search"></i>}
+        </button>
+
+        {welcomeMessage && <Alert message={welcomeMessage} onClose={handleAlertDismiss} type="success" />}
       </div>
-
-      <Footer />
-
-      <button className="bd-callout-primary" style={fabStyle} onClick={handleSearchBar}>
-        {showSearchBar ? <i className="bi bi-x-lg"></i> : <i className="bi bi-search"></i>}
-      </button>
-
-      {welcomeMessage && (<Alert message={welcomeMessage} onClose={handleAlertDismiss} type="success" />)}
     </div>
   );
 }
