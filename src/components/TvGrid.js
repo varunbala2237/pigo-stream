@@ -154,7 +154,7 @@ function TvGrid({ id, type, setBackgroundImage }) {
                   handleAddToList={handleAddToList} />
           <div className="d-flex justify-content-between mt-2">
             <div className="d-flex text-start">
-              <div className="dropdown me-2">
+              <div className="dropdown dropup me-2">
                   <button
                     className="btn btn-dark custom-bg btn-md rounded-pill d-none d-md-inline-block"
                     id="seasonDropdown"
@@ -207,7 +207,7 @@ function TvGrid({ id, type, setBackgroundImage }) {
                     )}
                   </ul>
               </div>
-              <div className="dropdown">
+              <div className="dropdown dropup">
                   <button
                     className="btn btn-dark custom-bg btn-md rounded-pill d-none d-md-inline-block"
                     id="episodeDropdown"
@@ -288,7 +288,7 @@ function TvGrid({ id, type, setBackgroundImage }) {
                 </div>
               </div>
               <div className="d-flex justify-content-end">
-                <div className="dropdown">
+                <div className="dropdown dropup">
                   {/* Button for medium and large screens */}
                   <button
                     className="btn btn-dark custom-bg btn-md rounded-pill d-none d-md-inline-block"
@@ -342,13 +342,12 @@ function TvGrid({ id, type, setBackgroundImage }) {
               </div>
             </div>
             <div className="d-flex flex-column align-items-start custom-bg custom-theme-radius mt-2 w-100">
-              <div className="d-flex flex-row m-2 p-2">
-                <i className="bi bi-person-fill me-1"></i>
-                Cast
-              </div>
-
-              <div className="container my-2 text-white">
-                <div className="row m-2">
+              <div className="container py-2 text-white">
+                <div className="d-flex flex-row">
+                  <i className="bi bi-person-fill me-1"></i>
+                  Cast
+                </div>
+                <div className="row justify-content-center">
                   {cast.length === 0 ? (
                     <p className="text-center text-white mb-5">No cast found.</p>
                   ) : (
@@ -357,9 +356,8 @@ function TvGrid({ id, type, setBackgroundImage }) {
                     ))
                   )}
                 </div>
-
                 {cast.length > sliceIndex && (
-                  <div className="text-end m-2 p-2">
+                  <div className="text-end">
                     {/* Button for medium and large screens */}
                     <button
                       className="btn btn-light text-black rounded-pill btn-md d-none d-md-inline-block"

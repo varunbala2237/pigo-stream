@@ -97,8 +97,8 @@ function Player({ mediaURL, averageVote, director, genres, mediaInfo, id, type, 
   };
 
   return (
-    <div className="d-flex flex-column custom-bg custom-theme-radius w-100 p-4">
-      <div className="d-flex flex-column flex-md-row align-items-start justify-content-between w-100">
+    <div className="d-flex flex-column custom-bg custom-theme-radius w-100 p-2">
+      <div className="d-flex flex-column flex-md-row align-items-start justify-content-between w-100 m-1">
         <div className="d-flex flex-row align-items-start custom-theme-radius-low w-100 mb-3 mb-md-0">
           <div className="section border-0">
             <img
@@ -179,10 +179,10 @@ function Player({ mediaURL, averageVote, director, genres, mediaInfo, id, type, 
               </div>
             </div>
             <div className="d-flex flex-column flex-wrap mt-2">
-              <small>
-                <b className="me-2">Release Date: </b>{mediaInfo.release_date ? mediaInfo.release_date : mediaInfo.first_air_date}<br/>
-                <b className="me-2">Director: </b>{director}<br/>
-                <b className="me-2">Genres: </b>
+              <small className="me-2">
+                <b>Release Date: </b>{mediaInfo.release_date ? mediaInfo.release_date : mediaInfo.first_air_date}<br/>
+                <b>Director: </b>{director}<br/>
+                <b>Genres: </b>
                   <span className="text-white">
                     {genres?.map((genre, index) => (
                       <React.Fragment key={index}>

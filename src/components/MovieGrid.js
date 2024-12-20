@@ -123,7 +123,7 @@ function MovieGrid({ id, type, setBackgroundImage }) {
                     isInList={isInList}
                     handleAddToList={handleAddToList} />
             <div className="d-flex justify-content-end mt-2">
-              <div className="dropdown">
+              <div className="dropdown dropup">
                 {/* Button for medium and large screens */}
                 <button
                   className="btn btn-dark custom-bg btn-md rounded-pill d-none d-md-inline-block"
@@ -176,13 +176,12 @@ function MovieGrid({ id, type, setBackgroundImage }) {
               </div>
             </div>
             <div className="d-flex flex-column align-items-start custom-bg custom-theme-radius mt-2 w-100">
-              <div className="d-flex flex-row m-2 p-2">
-                <i className="bi bi-person-fill me-1"></i>
-                Cast
-              </div>
-            
-              <div className="container text-white">
-                <div className="row m-2">
+              <div className="container py-2 text-white">
+                <div className="d-flex flex-row">
+                  <i className="bi bi-person-fill me-1"></i>
+                  Cast
+                </div>
+                <div className="row justify-content-center">
                   {cast.length === 0 ? (
                     <p className="text-center text-white mb-5">No cast found.</p>
                   ) : (
@@ -192,7 +191,7 @@ function MovieGrid({ id, type, setBackgroundImage }) {
                   )}
                 </div>
                 {cast.length > sliceIndex && (
-                  <div className="text-end m-2 p-2">
+                  <div className="text-end">
                     {/* Button for medium and large screens */}
                     <button
                       className="btn btn-light text-black rounded-pill btn-md d-none d-md-inline-block"
