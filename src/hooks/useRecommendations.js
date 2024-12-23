@@ -4,8 +4,6 @@ import useFetchWatchHistory from './useFetchWatchHistory';
 
 // Server 1 Base URL
 const BASE_URL = process.env.REACT_APP_SERVER_URL;
-// Server 2 Base URL
-const SERVER2_URL = process.env.REACT_APP_SERVER2_URL;
 
 // Helper function for fetch with retry and timeout
 const fetchWithRetry = async (url, options = {}, retries = 5, delay = 1000) => {
@@ -54,7 +52,7 @@ const useRecommendations = () => {
         return;
       }
 
-      const url2 = `${SERVER2_URL}/user_recommendations?user_id=${userUID}`;
+      const url2 = `${BASE_URL}/recommender/user_recommendations?user_id=${userUID}`;
 
       try {
         const recommendations = await fetchWithRetry(url2);

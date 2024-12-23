@@ -4,9 +4,6 @@ import { auth } from '../firebase/firebase-auth'; // Import the auth object
 // Base URL of server
 const BASE_URL = process.env.REACT_APP_SERVER_URL;
 
-// Base URL of server 2
-const SERVER2_URL = process.env.REACT_APP_SERVER2_URL
-
 // Helper function for sending watch history to the server
 const saveWatchHistory = async (userUID, id, type) => {
   const response = await fetch(`${BASE_URL}/users/save-watch-history`, {
@@ -22,7 +19,7 @@ const saveWatchHistory = async (userUID, id, type) => {
 
 // Helper function for sending data to the second server
 const sendWatchDataToNewServer = async (userUID, id) => {
-  const response = await fetch(`${SERVER2_URL}/insert`, {
+  const response = await fetch(`${BASE_URL}/recommender/insert`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ user_id: userUID, item_id: id, watched: true }),
