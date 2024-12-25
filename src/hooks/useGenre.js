@@ -98,9 +98,6 @@ const useGenre = () => {
       }
     }
 
-    console.log("movie genre id", selectedMovieGenreId);
-    console.log("tv genre id", selectedTVGenreId);
-
     try {
       setLoading(true);
       // Send separate requests for movie and TV show recommendations
