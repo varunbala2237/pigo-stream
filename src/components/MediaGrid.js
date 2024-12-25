@@ -32,14 +32,13 @@ function MediaGrid() {
 
   return (
     <div className="container mt-4 text-white">
+      <div className="d-flex align-items-center dynamic-ts m-2 px-1">
+        <i className="bi bi-fire theme-color me-1"></i>
+        <b className="mb-0">Trending</b>
+      </div>
       {/* Trending Movies Section */}
       {(
-        <>
-          <div className="d-flex align-items-center m-2 px-1">
-            <i className="bi bi-fire me-2"></i>
-            <h5 className="mb-0">Trending Movies</h5>
-          </div>
-          <div className="position-relative">
+          <div className="position-relative my-2">
             {popularMovies.length > 3 && (
               <>
                 <button
@@ -60,17 +59,17 @@ function MediaGrid() {
             )}
             <div ref={moviesRef} className="d-flex overflow-auto" style={{ scrollSnapType: 'x mandatory', gap: '1rem' }}>
               {loadingPopularMovies && (
-                <div className="col d-flex vh-30 justify-content-center align-items-center">
+                <div className="col d-flex vh-35 justify-content-center align-items-center">
                   <div className="spinner-border text-light spinner-size-1" role="status">
                     <span className="visually-hidden">Loading...</span>
                   </div>
                 </div>
               )}
               {errorPopularMovies && (
-                <div className="col d-flex vh-30 justify-content-center align-items-center">
-                    <div className="d-flex align-items-center">
-                        <i className="bi bi-wifi-off me-2"></i>
-                        <span>500 - Internal Server Error</span>
+                <div className="col d-flex vh-35 justify-content-center align-items-center">
+                    <div className="d-flex align-items-center dynamic-fs">
+                        <i className="bi bi-wifi-off me-1"></i>
+                        <span className="mb-0">Something went wrong.</span>
                     </div>
                 </div>
               )}
@@ -81,27 +80,21 @@ function MediaGrid() {
               ) : (
                 !loadingPopularMovies &&
                 !errorPopularMovies && (
-                  <div className="col d-flex vh-30 justify-content-center align-items-center">
-                    <div className="d-flex align-items-center">
-                      <i className="bi bi-database-slash me-2"></i>
-                      <span>404 - Not Found</span>
+                  <div className="col d-flex vh-35 justify-content-center align-items-center">
+                    <div className="d-flex align-items-center dynamic-fs">
+                      <i className="bi bi-database-slash me-1"></i>
+                      <span className="mb-0">No movies found.</span>
                     </div>
                   </div>
                 )
               )}
             </div>
           </div>
-        </>
       )}
 
       {/* Trending TV Shows Section */}
       {(
-        <>
-          <div className="d-flex align-items-center m-2 px-1">
-            <i className="bi bi-fire me-2"></i>
-            <h5 className="mb-0">Trending TV Shows</h5>
-          </div>
-          <div className="position-relative">
+          <div className="position-relative my-2">
             {popularTv.length > 3 && (
               <>
                 <button
@@ -122,17 +115,17 @@ function MediaGrid() {
             )}
             <div ref={tvRef} className="d-flex overflow-auto" style={{ scrollSnapType: 'x mandatory', gap: '1rem' }}>
             {loadingPopularTv && (
-                <div className="col d-flex vh-30 justify-content-center align-items-center">
+                <div className="col d-flex vh-35 justify-content-center align-items-center">
                   <div className="spinner-border text-light spinner-size-1" role="status">
                     <span className="visually-hidden">Loading...</span>
                   </div>
                 </div>
               )}
               {errorPopularTv && (
-                <div className="col d-flex vh-30 justify-content-center align-items-center">
-                    <div className="d-flex align-items-center">
-                        <i className="bi bi-wifi-off me-2"></i>
-                        <span>500 - Internal Server Error</span>
+                <div className="col d-flex vh-35 justify-content-center align-items-center">
+                    <div className="d-flex align-items-center dynamic-fs">
+                        <i className="bi bi-wifi-off me-1"></i>
+                        <span className="mb-0">Something went wrong.</span>
                     </div>
                 </div>
               )}
@@ -143,17 +136,16 @@ function MediaGrid() {
               ) : (
                 !loadingPopularTv &&
                 !errorPopularTv && (
-                  <div className="col d-flex vh-30 justify-content-center align-items-center">
-                    <div className="d-flex align-items-center">
-                      <i className="bi bi-database-slash me-2"></i>
-                      <span>404 - Not Found</span>
+                  <div className="col d-flex vh-35 justify-content-center align-items-center">
+                    <div className="d-flex align-items-center dynamic-fs">
+                      <i className="bi bi-database-slash me-1"></i>
+                      <span className="mb-0">No tv shows found.</span>
                     </div>
                   </div>
                 )
               )}
             </div>
           </div>
-        </>
       )}
     </div>
   );

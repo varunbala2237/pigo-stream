@@ -14,6 +14,7 @@ function HomePage({
   title,
   mediaId,
   mediaType,
+  mediaDesc,
   rating,
   year,
   showSearchBar,
@@ -181,7 +182,7 @@ function HomePage({
 
   return (
     <div className="container-fluid d-flex flex-column justify-content-center align-items-center poppins-medium p-0">
-      <div className="min-vh-100 w-100">
+      <div className="w-100">
         {showSearchBar ? (
           <SearchBar
             searchQuery={searchQuery}
@@ -200,28 +201,43 @@ function HomePage({
         )}
 
         {!showSearchBar && triggerSearch.trim() === '' && title && (
-          <div className="d-flex justify-content-end" style={{ width: '90%' }}>
+          <div 
+            className="container justify-content-center align-items-end"
+            style={{
+                textAlign: 'start',
+              }}
+          >
             <div
-              className="d-flex flex-column align-items-center justify-content-center text-white p-4 rounded"
+              className="d-flex flex-column text-white bd-callout-dark custom-theme-radius"
               style={{
-                width: '300px',
-                height: '300px',
-                backgroundColor: 'transparent',
-                border: 'none',
-                textAlign: 'center',
+                padding: '5%',
               }}
             >
-              <h4 className="text-wrap">{title}</h4>
-              <div className="bd-callout-dark p-1 rounded">
-                <i className="bi bi-star-fill text-warning"></i>
-                <span id="Rating" className="text-white">
-                  {' '}
-                  {rating} | {year}
-                </span>
-              </div>
-              <button className="btn btn-light rounded-pill mt-3" onClick={handlePlayMedia}>
-                Watch
-              </button>
+              <b className="text-wrap dynamic-ts">{title}</b>
+              <div className="dynamic-fs text-white">
+                <div className="dynamic-fs my-2">
+                  <span className="me-2">              
+                    {mediaType === 'movie' ? (
+                      <i className="bi bi-film"></i>
+                        ) : (
+                      <i className="bi bi-tv"></i>
+                    )}
+                  </span>
+                  <span className="me-2">{year}</span>
+                  <i className="bi bi-star-fill"></i>
+                  <span id="Rating">
+                    {' '}
+                    {rating}
+                  </span>
+                </div>
+                <div className="text-wrap">{mediaDesc}</div>
+                <button className="btn btn-md d-none d-md-inline-block bd-callout-white rounded-pill my-2" onClick={handlePlayMedia}>
+                  <span className="text-white">Watch</span>
+                </button>
+                <button className="btn btn-sm d-md-none bd-callout-white rounded-pill my-2" onClick={handlePlayMedia}>
+                  <span className="text-white">Watch</span>
+                </button>
+                </div>
             </div>
           </div>
         )}
@@ -232,7 +248,7 @@ function HomePage({
 
         <Footer />
 
-        <button className="bd-callout-primary" style={fabStyle} onClick={handleSearchBar}>
+        <button className="bd-callout-dark" style={fabStyle} onClick={handleSearchBar}>
           {showSearchBar ? <i className="bi bi-x-lg"></i> : <i className="bi bi-search"></i>}
         </button>
 

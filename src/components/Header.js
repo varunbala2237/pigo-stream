@@ -37,7 +37,7 @@ function Header() {
   };
 
   return (
-    <nav className="navbar navbar-expand-lg navbar-dark w-100 custom-theme-radius">
+    <nav className="navbar navbar-expand-lg navbar-dark w-100 custom-theme-radius poppins-medium">
       <div className="container-fluid">
         <a className="navbar-brand d-flex align-items-center" href="/">
           <img
@@ -47,7 +47,7 @@ function Header() {
             width="40"
             height="40"
           />
-          <h3 className="mb-0"><b>Pigo</b>Stream</h3>
+          <span className="mb-0 dynamic-hs"><b>Pigo</b>Stream</span>
         </a>
         <button
           className="navbar-toggler"
@@ -83,22 +83,22 @@ function Header() {
           <ul className="navbar-nav me-auto mb-2 mb-lg-0 text-center">
             <li className="nav-item">
               <a className={getNavLinkClass("/index")} href="/index">
-                <i className="bi bi-house me-2"></i>
+                <i className="bi bi-house me-1"></i>
                 Home
               </a>
             </li>
             <li><hr className="text-secondary" /></li>
             <li className="nav-item">
               <a className={getNavLinkClass("/my-list")} href="/my-list">
-                <i className="bi bi-bookmark me-2"></i>
-                My List
+                <i className="bi bi-plus-lg me-1"></i>
+                Watchlist
               </a>
             </li>
             <li><hr className="text-secondary" /></li>
             <li className="nav-item">
               <a className={getNavLinkClass("/watch-history")} href="/watch-history">
-                <i className="bi bi-clock me-2"></i>
-                Watch History
+                <i className="bi bi-clock me-1"></i>
+                History
               </a>
             </li>
           </ul>
@@ -125,25 +125,25 @@ function Header() {
 
       {/* Modal for mobile navbar items */}
       <div className="modal fade" id="navItemsModal" tabIndex="-1" aria-labelledby="navItemsModalLabel" aria-hidden="true">
-        <div className="modal-dialog modal-dialog-centered mx-auto border-0 m-0 w-50">
-          <div className="modal-content bd-callout-dark custom-theme-radius text-white p-0 border-0">
+        <div className="modal-dialog modal-dialog-centered mx-auto border-0 m-0 modal-pad">
+          <div className="modal-content dynamic-fs bd-callout-dark custom-theme-radius text-white p-0 border-0">
             <div className="modal-body text-center p-0">
               <ul className="navbar-nav">
                 <li className="nav-item m-1">
                   <a className={getNavLinkClass("/index")} href="/index">
-                    <i className="bi bi-house me-2"></i> Home
+                    <i className="bi bi-house me-1"></i> Home
                   </a>
                 </li>
                 <li><hr className="text-secondary m-0" /></li>
                 <li className="nav-item m-1">
                   <a className={getNavLinkClass("/my-list")} href="/my-list">
-                    <i className="bi bi-bookmark me-2"></i> My List
+                    <i className="bi bi-plus-lg me-1"></i> Watchlist
                   </a>
                 </li>
                 <li><hr className="text-secondary m-0" /></li>
                 <li className="nav-item m-1">
                   <a className={getNavLinkClass("/watch-history")} href="/watch-history">
-                    <i className="bi bi-clock me-2"></i> Watch History
+                    <i className="bi bi-clock me-1"></i> History
                   </a>
                 </li>
               </ul>
@@ -154,35 +154,44 @@ function Header() {
 
       {/* Account Details Modal */}
       <div className="modal fade" id="accountModal" tabIndex="-1" aria-labelledby="accountModalLabel" aria-hidden="true">
-        <div className="modal-dialog mx-auto border-0 m-0">
-          <div className="modal-content custom-theme-radius-bottom bd-callout-dark text-white p-0 border-0">
+        <div className="modal-dialog modal-dialog-centered mx-auto border-0 m-0 modal-pad">
+          <div className="modal-content dynamic-fs custom-theme-radius bd-callout-dark text-white border-0">
             <div className="modal-body text-center">
               <img
                 src={userPhotoURL}
                 alt="User"
                 className="rounded-circle mb-2"
-                style={{ width: '80px', height: '80px' }}
+                style={{ width: '70px', height: '70px' }}
               />
-              <div>{userName}</div>
-              <div className="text-secondary">{userEmail}</div>
-              <div className="small">
+              <div className="dynamic-ts">{userName}</div>
+              <div className="dynamic-fs">{userEmail}<i className="bi bi-patch-check-fill text-primary ms-1"></i></div>
+              <div className="dynamic-ss text-secondary">
                 <i>
-                  Your personal data is secure, and we do not have access to your
-                  <span className="text-primary"> Google Account</span>
+                  We prioritize the security and confidentiality of your personal data above all else. Please be assured that we do not access, store, or retrieve any information from your Google Account or its associated services, ensuring your privacy remains fully intact.
                 </i>
               </div>
             </div>
-            <div className="modal-footer border-0">
-              <div className="d-flex justify-content-end">
+            <div className="modal-footer p-0" style={{ borderTop: '1px solid #343a40' }}>
+              <div className="d-flex justify-content-center w-100">
                 <button
                   type="button"
-                  className="btn bg-danger rounded-pill text-white"
+                  className="btn border-0 btn-md d-none d-md-inline-block dynamic-fs w-100 m-1"
                   data-bs-dismiss="modal"
                   aria-label="Close"
                   onClick={signOutWithAccount}
                 >
-                  <i className="bi bi-box-arrow-left me-2"></i>
-                  Sign out
+                  <i className="bi bi-box-arrow-left me-1 text-danger"></i>
+                  <span className="text-danger">Sign out</span>
+                </button>
+                <button
+                  type="button"
+                  className="btn border-0 btn-sm d-md-none dynamic-fs w-100 m-1"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
+                  onClick={signOutWithAccount}
+                >
+                  <i className="bi bi-box-arrow-left me-1 text-danger"></i>
+                  <span className="text-danger">Sign out</span>
                 </button>
               </div>
             </div>

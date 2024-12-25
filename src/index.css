@@ -165,12 +165,16 @@ code {
 }
 
 /* Custom heights and widths */
-.vh-30 {
-  min-height: 30vh;
+.vh-35 {
+  min-height: 35vh;
 }
 
 .vh-70 {
   min-height: 70vh;
+}
+
+.vh-100 {
+  min-height: 100vh;
 }
 
 .w-50 {

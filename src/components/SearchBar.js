@@ -19,7 +19,7 @@ function SearchBar({
                   <input
                     id="prompt"
                     type="text"
-                    className="form-control custom-bg-primary text-white custom-textarea custom-border-l border-0"
+                    className="form-control custom-bg text-white custom-textarea custom-border-l border-0"
                     placeholder="Search..."
                     value={searchQuery}
                     onChange={handleSearchInputChange}
@@ -62,12 +62,12 @@ function SearchBar({
                     </ul>
                   )}
 
-                  <button className="btn btn-dark custom-bg-primary m-0 border-0 custom-border-r" onClick={handleSearchSubmit}>
+                  <button className="btn btn-dark custom-bg m-0 border-0 custom-border-r" onClick={handleSearchSubmit}>
                     <i className="bi bi-search"></i>
                   </button>
 
                   {searchQuery && (
-                    <button className="btn btn-dark custom-bg-primary m-0 border-0 custom-border-r" type="button" onClick={() => handleSearchInputChange({ target: { value: '' } })}>
+                    <button className="btn btn-dark custom-bg m-0 border-0 custom-border-r" type="button" onClick={() => handleSearchInputChange({ target: { value: '' } })}>
                       <i className="bi bi-x-lg"></i>
                     </button>
                   )}

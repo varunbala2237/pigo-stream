@@ -32,8 +32,8 @@ function CastCard({ actor }) {
           color: '#fff', // Text color
           fontSize: '14px', // Adjust text size as needed
         }}>
-          <small className="mb-0">{actor.name}</small><br/>
-          <small className="text-secondary mb-0">{actor.character || 'Unknown'}</small>        
+          <p className="dynamic-fs mb-0">{actor.name}</p>
+          <p className="dynamic-fs text-secondary mb-0">{actor.character || 'Unknown'}</p>        
         </div>
       </a>
     </div>

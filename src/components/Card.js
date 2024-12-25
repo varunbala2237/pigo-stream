@@ -72,24 +72,34 @@ function Card({ media, type, path, onRemove, handleAlert }) {
   const rating = media.vote_average ? media.vote_average.toFixed(1) : '0.0';
 
   return (
-    <div className="col-xl-1-5 col-lg-2-5 col-md-3-5 col-5 mb-3">
+    <div className="custom-card-container">
       <div
-        className="card custom-card border-0 h-100 position-relative custom-theme-radius"
+        className="card bg-transparent border-0 position-relative custom-theme-radius"
         onClick={handlePlayMedia}
         onContextMenu={handleRightClick}
         onMouseDown={(e) => e.button === 0 && setTimeout(() => handleLongClick(e), 2500)}
         style={{ cursor: isRemove ? 'default' : 'pointer', overflow: 'hidden' }}
       >
         <img
+          className="custom-card-img"
           src={imageUrl}
-          className="card-img-top position-relative bg-dark"
-          alt=''
-          style={{ height: '250px', objectFit: 'cover' }}
+          alt='empty'
         />
         {/* Rating Container */}
-        <div className="position-absolute top-0 start-0 m-2 bd-callout-dark p-1 rounded">
-          <i className="bi bi-star-fill text-warning"></i>
-          <span id="Rating" className="text-white"> {rating} </span>
+        <div className="bd-callout-black dynamic-size dynamic-fs px-1">
+          <div className="d-flex justify-content-between align-items-center">
+            <div className="text-start">
+              <i className="bi bi-star-fill text-warning"></i>
+              <span id="Rating" className="text-white"> {rating} </span>
+            </div>
+            <div className="text-end">
+              {type === 'movie' ? (
+                <i className="bi bi-film text-white"></i>
+              ) : (
+                <i className="bi bi-tv text-white"></i>
+              )}
+            </div>
+          </div>
         </div>
       </div>
 
@@ -101,26 +111,49 @@ function Card({ media, type, path, onRemove, handleAlert }) {
 
           {/* Confirmation Modal */}
           <div className={`modal fade ${modalVisible ? 'show' : ''} d-block`} tabIndex="-1" aria-labelledby="confirmDeleteModalLabel" aria-hidden="true" style={{ zIndex: 1050 }}>
-            <div className="modal-dialog border-0 m-0">
-              <div className="modal-content bd-callout-dark custom-theme-radius-bottom text-white p-0 border-0">
-                <div className="modal-header border-0">
-                  Are you sure you want to remove this item?
+            <div className="modal-dialog modal-dialog-centered mx-auto border-0 m-0 modal-pad">
+              <div className="modal-content dynamic-fs bd-callout-dark custom-theme-radius text-white border-0">
+                <div className="modal-header justify-content-center text-center border-0">
+                  <span className="dynamic-fs">
+                    Are you sure you want to remove <strong>"{media.title || media.name || 'this item'}"</strong> from {path === '/watch-history' ? 'History' : 'Watchlist'}?
+                  </span>
                 </div>
-                <div className="modal-footer border-0">
-                  <button
-                    type="button"
-                    className="btn btn-light rounded-pill text-dark" 
-                    onClick={() => { setModalVisible(false); setTimeout(() => setShowModal(false), 300); }}
-                  >
-                    <i className="bi bi-x-lg me-2"></i>
-                    Cancel
-                  </button>
-                  <button type="button" className="btn bg-danger rounded-pill text-white"
-                    onClick={handleRemove}
-                  >
-                    <i className="bi bi-trash me-2"></i>
-                    Remove
-                  </button>
+                <div className="modal-footer d-flex p-0" style={{ borderTop: '1px solid #343a40' }}>
+                  <div className="d-flex justify-content-between w-100">
+                    <div className="text-start w-50" style={{ borderRight: '.5px solid #343a40' }}>
+                      <button
+                        type="button"
+                        className="btn border-0 btn-md d-none d-md-inline-block dynamic-fs w-100 m-1" 
+                        onClick={() => { setModalVisible(false); setTimeout(() => setShowModal(false), 300); }}
+                      >
+                        <i className="bi bi-x-lg me-1 text-secondary"></i>
+                        <span className="text-secondary">Cancel</span>
+                      </button>
+                      <button
+                        type="button"
+                        className="btn border-0 btn-sm d-md-none dynamic-fs w-100 m-1" 
+                        onClick={() => { setModalVisible(false); setTimeout(() => setShowModal(false), 300); }}
+                      >
+                        <i className="bi bi-x-lg me-1 text-secondary"></i>
+                        <span className="text-secondary">Cancel</span>
+                      </button>
+                    </div>          
+
+                    <div className="text-end w-50" style={{ borderLeft: '.5px solid #343a40' }}>
+                      <button type="button" className="btn border-0 btn-md d-none d-md-inline-block dynamic-fs w-100 m-1"
+                        onClick={handleRemove}
+                      >
+                        <i className="bi bi-trash me-1 text-danger"></i>
+                        <span className="text-danger">Remove</span>
+                      </button>
+                      <button type="button" className="btn border-0 btn-sm d-md-none dynamic-fs w-100 m-1"
+                        onClick={handleRemove}
+                      >
+                        <i className="bi bi-trash me-1 text-danger"></i>
+                        <span className="text-danger">Remove</span>
+                      </button>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>

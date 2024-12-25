@@ -107,24 +107,28 @@ function AuthPage() {
     };
 
     return (
-        <div className="container-fluid vh-100 d-flex justify-content-center align-items-center poppins-medium">
+        <div className="d-flex flex-column vh-100 w-100 poppins-medium">
             {isLoading ? (
-                <div className="spinner-border theme-color spinner-size-3" role="status">
-                    <span className="visually-hidden">Loading...</span>
+                <div className="d-flex justify-content-center align-items-center vh-100">
+                    <div className="spinner-border theme-color spinner-size-3" role="status">
+                        <span className="visually-hidden">Loading...</span>
+                    </div>
                 </div>
             ) : (
-                <div className="card text-white bg-transparent border-0 p-4 custom-theme-radius">
-                    <div className="card-header d-flex justify-content-center align-items-center">
+                <>
+                <div className="container vh-100 d-flex bg-transparent border-0 justify-content-center align-items-center">
+                  <div className="card bg-transparent border-0 p-4 w-100 form-pad">
+                    <div className="card-header d-flex justify-content-center align-items-center text-white">
                       <img className="mb-2" src="favicon.ico" alt="PigoStream" width="40" height="40" /> 
                       <h2 className="text-center">{isSignIn ? 'Sign in' : 'Sign up'}</h2>
                     </div>
-                    <form onSubmit={isSignIn ? signInWithCredentials : signUpWithCredentials}>
+                    <form onSubmit={isSignIn ? signInWithCredentials : signUpWithCredentials} className="text-white">
                         {!isSignIn && (
                             <div className="mb-3">
                                 <label htmlFor="userName" className="form-label">Username</label>
                                 <input
                                     type="text"
-                                    className="form-control custom-bg-primary custom-border custom-textarea text-white"
+                                    className="form-control custom-bg custom-border custom-textarea text-white"
                                     id="userName"
                                     placeholder="Enter username"
                                     required={!isSignIn}
@@ -135,7 +139,7 @@ function AuthPage() {
                             <label htmlFor="userEmail" className="form-label">E-mail address</label>
                             <input
                                 type="text"
-                                className="form-control custom-bg-primary custom-border custom-textarea text-white"
+                                className="form-control custom-bg custom-border custom-textarea text-white"
                                 id="userEmail"
                                 placeholder="Enter e-mail address"
                                 required
@@ -147,12 +151,12 @@ function AuthPage() {
                                 <input
                                     id="passwordInput"
                                     type="password"
-                                    className="form-control custom-bg-primary text-white custom-textarea custom-border-l border-0"
+                                    className="form-control custom-bg text-white custom-textarea custom-border-l border-0"
                                     placeholder="Enter password"
                                     required
                                 />
                                 <button
-                                    className="btn btn-dark custom-bg-primary m-0 border-0 custom-border-r"
+                                    className="btn btn-dark custom-bg m-0 border-0 custom-border-r"
                                     type="button"
                                     onClick={togglePasswordVisibility}
                                 >
@@ -161,16 +165,16 @@ function AuthPage() {
                             </div>
                         </div>
                         <div className="d-grid gap-2">
-                            <button type="submit" className="btn btn-success custom-theme-btn rounded-pill">
+                            <button type="submit" className="btn btn-success custom-theme-btn custom-theme-radius">
                                 {isSignIn ? 'Sign in' : 'Sign up'}
                             </button>
                             <p className="text-white mb-2 text-center">or</p>
-                            <button className="btn btn-primary rounded-pill" onClick={signInWithGoogle}>
+                            <button className="btn btn-primary custom-theme-radius" onClick={signInWithGoogle}>
                                 Sign in with <i className="bi bi-google"></i>oogle
                             </button>
                         </div>
                     </form>
-                    <div className="mt-3 text-center">
+                    <div className="mt-3 text-center text-white">
                         {isSignIn ? (
                             <p>
                                 Don't have an account?
@@ -187,8 +191,10 @@ function AuthPage() {
                             </p>
                         )}
                     </div>
-                    <Footer/>
+                  </div>
                 </div>
+                <Footer/>
+                </>
             )}
             {alertMessage && <Alert message={alertMessage} onClose={handleAlertDismiss} />}
         </div>

@@ -35,7 +35,7 @@ function SearchGrid({ searchQuery }) {
   };
 
   return (
-    <div className="container mt-4" id="searchResults">
+    <div className="container mt-4 text-white" id="searchResults">
       {isLoading && (
         <div className="col d-flex vh-70 justify-content-center align-items-center">
           <div className="spinner-border text-light spinner-size-1" role="status">
@@ -45,22 +45,22 @@ function SearchGrid({ searchQuery }) {
       )}
       {isError && (
         <div className="col d-flex vh-70 justify-content-center align-items-center">
-          <div className="d-flex align-items-center">
-            <i className="bi bi-wifi-off me-2"></i>
-            <span>500 - Internal Server Error</span>
+          <div className="d-flex align-items-center dynamic-fs">
+            <i className="bi bi-wifi-off me-1"></i>
+            <span className="mb-0">Something went wrong.</span>
           </div>
         </div>
       )}
       {!isLoading && !isError && (
         <>
+          <div className="d-flex align-items-center dynamic-ts m-2 px-1">
+            <i className="bi bi-search theme-color me-1"></i>
+            <b className="mb-0">Search</b>
+          </div>
           {/* Movies Results */}
           {(
             <>
-              <div className="d-flex align-items-center m-2 px-1">
-                <i className="bi bi-search me-2"></i>
-                <h5 className="mb-0">Movies</h5>
-              </div>
-              <div className="position-relative">
+              <div className="position-relative my-2">
                 {movies.length > 3 && (
                   <>
                     <button
@@ -85,10 +85,10 @@ function SearchGrid({ searchQuery }) {
                       <Card key={index} media={movie} type={'movie'} path={location.pathname} />
                     ))
                   ) : (
-                    <div className="col d-flex vh-30 justify-content-center align-items-center">
+                    <div className="col d-flex vh-35 justify-content-center align-items-center">
                       <div className="d-flex align-items-center">
-                        <i className="bi bi-database-slash me-2"></i>
-                        <span>404 - Not Found</span>
+                        <i className="bi bi-search me-1"></i>
+                        <span className="dynamic-fs">No movies found.</span>
                       </div>
                     </div>
                   )}
@@ -100,11 +100,7 @@ function SearchGrid({ searchQuery }) {
           {/* TV Shows Results */}
           {(
             <>
-              <div className="d-flex align-items-center m-2 px-1">
-                <i className="bi bi-search me-2"></i>
-                <h5 className="mb-0">TV Shows</h5>
-              </div>
-              <div className="position-relative">
+              <div className="position-relative my-2">
                 {shows.length > 3 && (
                   <>
                     <button
@@ -129,10 +125,10 @@ function SearchGrid({ searchQuery }) {
                       <Card key={index} media={show} type={'tv'} path={location.pathname} />
                     ))
                   ) : (
-                    <div className="col d-flex vh-30 justify-content-center align-items-center">
+                    <div className="col d-flex vh-35 justify-content-center align-items-center">
                       <div className="d-flex align-items-center">
-                        <i className="bi bi-database-slash me-2"></i>
-                        <span>404 - Not Found</span>
+                        <i className="bi bi-search me-1"></i>
+                        <span className="dynamic-fs">No tv shows found.</span>
                       </div>
                     </div>
                   )}

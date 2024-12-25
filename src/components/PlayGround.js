@@ -23,8 +23,8 @@ function PlayGround() {
 
   return (
     <div className="index-page">
+      <Header />
       <div className="container-fluid d-flex flex-column justify-content-center align-items-center poppins-medium">
-        <Header />
         <div
           className="background-image"
           style={{
@@ -34,8 +34,8 @@ function PlayGround() {
           }}
         ></div>
         <GridComponent id={id} type={type} setBackgroundImage={setBackgroundImage} />
-        <Footer />
       </div>
+      <Footer />
     </div>
   );
 }
