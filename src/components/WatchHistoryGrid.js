@@ -105,7 +105,7 @@ function WatchHistoryGrid({ userUID }) {
                 <div className="text-end">
                     <button
                         type="button"
-                        className="btn btn-md d-none d-md-inline-block bd-callout-dark rounded-pill text-danger"
+                        className="btn btn-md d-none d-md-inline-block bd-callout-dark rounded-pill text-danger border-0"
                         onClick={handleClearHistory}
                         disabled={isClearButtonDisabled}
                     >
@@ -114,7 +114,7 @@ function WatchHistoryGrid({ userUID }) {
                     </button>
                     <button
                         type="button"
-                        className="btn btn-sm d-md-none bd-callout-dark rounded-pill text-danger"
+                        className="btn btn-sm d-md-none bd-callout-dark rounded-pill text-danger border-0"
                         onClick={handleClearHistory}
                         disabled={isClearButtonDisabled}
                     >

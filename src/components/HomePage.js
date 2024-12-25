@@ -231,10 +231,10 @@ function HomePage({
                   </span>
                 </div>
                 <div className="text-wrap">{mediaDesc}</div>
-                <button className="btn btn-md d-none d-md-inline-block bd-callout-white rounded-pill my-2" onClick={handlePlayMedia}>
+                <button className="btn btn-md d-none d-md-inline-block bd-callout-white rounded-pill border-0 my-2" onClick={handlePlayMedia}>
                   <span className="text-white">Watch</span>
                 </button>
-                <button className="btn btn-sm d-md-none bd-callout-white rounded-pill my-2" onClick={handlePlayMedia}>
+                <button className="btn btn-sm d-md-none bd-callout-white rounded-pill border-0 my-2" onClick={handlePlayMedia}>
                   <span className="text-white">Watch</span>
                 </button>
                 </div>
