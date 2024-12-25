@@ -4,6 +4,7 @@ import Header from './Header';
 import SearchBar from './SearchBar';
 import SearchGrid from './SearchGrid';
 import MediaGrid from './MediaGrid';
+import GenreGrid from './GenreGrid';
 import Footer from './Footer';
 import useSaveSearchHistory from '../hooks/useSaveSearchHistory';
 import useFetchSearchHistory from '../hooks/useFetchSearchHistory';
@@ -243,7 +244,7 @@ function HomePage({
         )}
 
         <div className="flex-row text-white w-100">
-          {triggerSearch.trim() === '' ? <MediaGrid /> : <SearchGrid searchQuery={triggerSearch} />}
+          {triggerSearch.trim() === '' ? <><MediaGrid /><GenreGrid /></> : <><SearchGrid searchQuery={triggerSearch} /><GenreGrid /></>}
         </div>
 
         <Footer />

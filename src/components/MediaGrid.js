@@ -59,14 +59,14 @@ function MediaGrid() {
             )}
             <div ref={moviesRef} className="d-flex overflow-auto" style={{ scrollSnapType: 'x mandatory', gap: '1rem' }}>
               {loadingPopularMovies && (
-                <div className="col d-flex vh-35 justify-content-center align-items-center">
+                <div className="col d-flex vh-25 justify-content-center align-items-center">
                   <div className="spinner-border text-light spinner-size-1" role="status">
                     <span className="visually-hidden">Loading...</span>
                   </div>
                 </div>
               )}
               {errorPopularMovies && (
-                <div className="col d-flex vh-35 justify-content-center align-items-center">
+                <div className="col d-flex vh-25 justify-content-center align-items-center">
                     <div className="d-flex align-items-center dynamic-fs">
                         <i className="bi bi-wifi-off me-1"></i>
                         <span className="mb-0">Something went wrong.</span>
@@ -80,7 +80,7 @@ function MediaGrid() {
               ) : (
                 !loadingPopularMovies &&
                 !errorPopularMovies && (
-                  <div className="col d-flex vh-35 justify-content-center align-items-center">
+                  <div className="col d-flex vh-25 justify-content-center align-items-center">
                     <div className="d-flex align-items-center dynamic-fs">
                       <i className="bi bi-database-slash me-1"></i>
                       <span className="mb-0">No movies found.</span>
@@ -115,14 +115,14 @@ function MediaGrid() {
             )}
             <div ref={tvRef} className="d-flex overflow-auto" style={{ scrollSnapType: 'x mandatory', gap: '1rem' }}>
             {loadingPopularTv && (
-                <div className="col d-flex vh-35 justify-content-center align-items-center">
+                <div className="col d-flex vh-25 justify-content-center align-items-center">
                   <div className="spinner-border text-light spinner-size-1" role="status">
                     <span className="visually-hidden">Loading...</span>
                   </div>
                 </div>
               )}
               {errorPopularTv && (
-                <div className="col d-flex vh-35 justify-content-center align-items-center">
+                <div className="col d-flex vh-25 justify-content-center align-items-center">
                     <div className="d-flex align-items-center dynamic-fs">
                         <i className="bi bi-wifi-off me-1"></i>
                         <span className="mb-0">Something went wrong.</span>
@@ -136,7 +136,7 @@ function MediaGrid() {
               ) : (
                 !loadingPopularTv &&
                 !errorPopularTv && (
-                  <div className="col d-flex vh-35 justify-content-center align-items-center">
+                  <div className="col d-flex vh-25 justify-content-center align-items-center">
                     <div className="d-flex align-items-center dynamic-fs">
                       <i className="bi bi-database-slash me-1"></i>
                       <span className="mb-0">No tv shows found.</span>

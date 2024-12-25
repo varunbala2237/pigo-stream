@@ -37,14 +37,14 @@ function SearchGrid({ searchQuery }) {
   return (
     <div className="container mt-4 text-white" id="searchResults">
       {isLoading && (
-        <div className="col d-flex vh-70 justify-content-center align-items-center">
+        <div className="col d-flex vh-35 justify-content-center align-items-center">
           <div className="spinner-border text-light spinner-size-1" role="status">
             <span className="visually-hidden">Loading...</span>
           </div>
         </div>
       )}
       {isError && (
-        <div className="col d-flex vh-70 justify-content-center align-items-center">
+        <div className="col d-flex vh-35 justify-content-center align-items-center">
           <div className="d-flex align-items-center dynamic-fs">
             <i className="bi bi-wifi-off me-1"></i>
             <span className="mb-0">Something went wrong.</span>
@@ -85,7 +85,7 @@ function SearchGrid({ searchQuery }) {
                       <Card key={index} media={movie} type={'movie'} path={location.pathname} />
                     ))
                   ) : (
-                    <div className="col d-flex vh-35 justify-content-center align-items-center">
+                    <div className="col d-flex vh-25 justify-content-center align-items-center">
                       <div className="d-flex align-items-center">
                         <i className="bi bi-search me-1"></i>
                         <span className="dynamic-fs">No movies found.</span>
@@ -125,7 +125,7 @@ function SearchGrid({ searchQuery }) {
                       <Card key={index} media={show} type={'tv'} path={location.pathname} />
                     ))
                   ) : (
-                    <div className="col d-flex vh-35 justify-content-center align-items-center">
+                    <div className="col d-flex vh-25 justify-content-center align-items-center">
                       <div className="d-flex align-items-center">
                         <i className="bi bi-search me-1"></i>
                         <span className="dynamic-fs">No tv shows found.</span>

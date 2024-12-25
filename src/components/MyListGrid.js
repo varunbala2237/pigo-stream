@@ -84,14 +84,14 @@ function MyListGrid({ userUID }) {
     return (
         <div className="container mt-4 text-white">
             {loading && (
-                <div className="col d-flex vh-70 justify-content-center align-items-center">
+                <div className="col d-flex vh-35 justify-content-center align-items-center">
                   <div className="spinner-border text-light spinner-size-1" role="status">
                     <span className="visually-hidden">Loading...</span>
                   </div>
                 </div>
             )}
             {error && (
-                <div className="col d-flex vh-70 justify-content-center align-items-center">
+                <div className="col d-flex vh-35 justify-content-center align-items-center">
                     <div className="d-flex align-items-center dynamic-fs">
                         <i className="bi bi-wifi-off me-1"></i>
                         <span className="mb-0">Something went wrong.</span>
@@ -136,7 +136,7 @@ function MyListGrid({ userUID }) {
                                     />
                                 ))
                             ) : (
-                                <div className="col d-flex vh-35 justify-content-center align-items-center">
+                                <div className="col d-flex vh-25 justify-content-center align-items-center">
                                     <div className="d-flex align-items-center dynamic-fs">
                                         <i className="bi bi-plus-lg me-1"></i>
                                         <span className="mb-0">No movies found.</span>
@@ -197,7 +197,7 @@ function MyListGrid({ userUID }) {
                                     />
                                 ))
                             ) : (
-                                <div className="col d-flex vh-35 justify-content-center align-items-center">
+                                <div className="col d-flex vh-25 justify-content-center align-items-center">
                                     <div className="d-flex align-items-center dynamic-fs">
                                         <i className="bi bi-plus-lg me-1"></i>
                                         <span className="mb-0">No tv shows found.</span>

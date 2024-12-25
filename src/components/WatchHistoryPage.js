@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Header from './Header';
 import WatchHistoryGrid from './WatchHistoryGrid';
+import GenreGrid from './GenreGrid';
 import Footer from './Footer';
 import { auth } from '../firebase/firebase-auth'; // Import the auth object
 
@@ -54,7 +55,7 @@ function WatchHistoryPage() {
           <div className="w-100">
             <Header/>
             <div className="flex-row text-white w-100">
-                {userUID ? <WatchHistoryGrid userUID={userUID} /> : null}
+                {userUID ? <><WatchHistoryGrid userUID={userUID} /><GenreGrid /></> : null}
             </div>
             <Footer />
           </div>
