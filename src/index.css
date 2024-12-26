@@ -173,6 +173,10 @@ code {
   min-height: 35vh;
 }
 
+.vh-50 {
+  min-height: 50vh;
+}
+
 .vh-70 {
   min-height: 70vh;
 }

@@ -125,14 +125,14 @@ function WatchHistoryGrid({ userUID }) {
             </div>
 
             {fetchLoading && (
-                <div className="col d-flex vh-35 justify-content-center align-items-center">
+                <div className="col d-flex vh-50 justify-content-center align-items-center">
                   <div className="spinner-border text-light spinner-size-1" role="status">
                     <span className="visually-hidden">Loading...</span>
                   </div>
                 </div>
             )}
             {fetchError && (
-                <div className="col d-flex vh-35 justify-content-center align-items-center">
+                <div className="col d-flex vh-50 justify-content-center align-items-center">
                     <div className="d-flex align-items-center dynamic-fs">
                         <i className="bi bi-wifi-off me-1"></i>
                         <span className="mb-0">Something went wrong.</span>
@@ -143,7 +143,7 @@ function WatchHistoryGrid({ userUID }) {
                 <>
                     <div className="d-flex align-items-center dynamic-ts m-2 px-1">
                         <i className="bi bi-clock theme-color me-1"></i>
-                        <b className="mb-0">History</b>
+                        <b className="mb-0">Watch History</b>
                     </div>
                     {/* Movies */}
                     <div className="position-relative my-2">

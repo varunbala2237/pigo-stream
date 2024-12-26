@@ -16,7 +16,7 @@ function App() {
             <Route path="/index" element={<IndexPage/>} />
             <Route path="/play" element={<PlayGround/>} />
             <Route path="/watch-history" element={<WatchHistoryPage/>} />
-            <Route path="/my-list" element={<MyListPage/>} />
+            <Route path="/watch-list" element={<MyListPage/>} />
             <Route path="/pigostore" element={<PigoStore />} />
         </Routes>
     </BrowserRouter>

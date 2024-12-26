@@ -84,14 +84,14 @@ function MyListGrid({ userUID }) {
     return (
         <div className="container mt-4 text-white">
             {loading && (
-                <div className="col d-flex vh-35 justify-content-center align-items-center">
+                <div className="col d-flex vh-50 justify-content-center align-items-center">
                   <div className="spinner-border text-light spinner-size-1" role="status">
                     <span className="visually-hidden">Loading...</span>
                   </div>
                 </div>
             )}
             {error && (
-                <div className="col d-flex vh-35 justify-content-center align-items-center">
+                <div className="col d-flex vh-50 justify-content-center align-items-center">
                     <div className="d-flex align-items-center dynamic-fs">
                         <i className="bi bi-wifi-off me-1"></i>
                         <span className="mb-0">Something went wrong.</span>
@@ -102,7 +102,7 @@ function MyListGrid({ userUID }) {
                 <>
                     <div className="d-flex align-items-center dynamic-ts m-2 px-1">
                         <i className="bi bi-plus-lg theme-color me-1"></i>
-                        <b className="mb-0">Watchlist</b>
+                        <b className="mb-0">Watch List</b>
                     </div>
                     <div className="position-relative my-2">
                         {movieList.length > 3 && (

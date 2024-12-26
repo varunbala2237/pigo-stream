@@ -89,16 +89,16 @@ function Header() {
             </li>
             <li><hr className="text-secondary" /></li>
             <li className="nav-item">
-              <a className={getNavLinkClass("/my-list")} href="/my-list">
+              <a className={getNavLinkClass("/watch-list")} href="/watch-list">
                 <i className="bi bi-plus-lg me-1"></i>
-                Watchlist
+                Watch List
               </a>
             </li>
             <li><hr className="text-secondary" /></li>
             <li className="nav-item">
               <a className={getNavLinkClass("/watch-history")} href="/watch-history">
                 <i className="bi bi-clock me-1"></i>
-                History
+                Watch History
               </a>
             </li>
           </ul>
@@ -136,14 +136,14 @@ function Header() {
                 </li>
                 <li><hr className="text-secondary m-0" /></li>
                 <li className="nav-item m-1">
-                  <a className={getNavLinkClass("/my-list")} href="/my-list">
-                    <i className="bi bi-plus-lg me-1"></i> Watchlist
+                  <a className={getNavLinkClass("/watch-list")} href="/watch-list">
+                    <i className="bi bi-plus-lg me-1"></i> Watch List
                   </a>
                 </li>
                 <li><hr className="text-secondary m-0" /></li>
                 <li className="nav-item m-1">
                   <a className={getNavLinkClass("/watch-history")} href="/watch-history">
-                    <i className="bi bi-clock me-1"></i> History
+                    <i className="bi bi-clock me-1"></i> Watch History
                   </a>
                 </li>
               </ul>
