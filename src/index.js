@@ -5,15 +5,9 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 
 setInterval(() => {
+  // Clear the console
   console.clear();
-
-  const devtools = /./;
-  devtools.toString = function() {
-    debugger;
-  };
-
-  console.log(devtools);
-}, 1000);
+}, 500);
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
