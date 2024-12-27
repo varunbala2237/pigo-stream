@@ -135,7 +135,7 @@ function MovieGrid({ id, type, setBackgroundImage }) {
                   aria-expanded="false"
                 >
                   <i className="bi bi-chevron-down me-1"></i>
-                  {selectedServerName ? selectedServerName : 'vidsrc.xyz'}
+                  {selectedServerName ? selectedServerName : 'vidsrc.cc v3'}
                 </button>
                 {/* Button for small screens */}
                 <button
@@ -145,7 +145,7 @@ function MovieGrid({ id, type, setBackgroundImage }) {
                   aria-expanded="false"
                 >
                   <i className="bi bi-chevron-down me-1"></i>
-                  {selectedServerName ? selectedServerName : 'vidsrc.xyz'}
+                  {selectedServerName ? selectedServerName : 'vidsrc.cc v3'}
                 </button>
                 <ul className="dropdown-menu overflow-auto custom-dropdown bd-callout-dark p-0 custom-theme-radius">
                   {loadingLink ? (
