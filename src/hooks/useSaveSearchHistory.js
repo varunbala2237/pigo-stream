@@ -31,13 +31,12 @@ const useSaveSearchHistory = () => {
         });
         
         if (!response.ok) {
-          throw new Error('Failed to save search history');
+          throw new Error('Unable to fetch data. Please try again later.');
         }
 
-        const data = await response.json();
-        console.log(data.message);
+        await response.json();
       } catch (error) {
-        console.error('Error saving search:', error.message);
+        throw new Error('Failed to fetch data. Please check your connection or contact support.');
       }
     }
   };

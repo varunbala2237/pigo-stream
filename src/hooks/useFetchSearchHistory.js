@@ -7,6 +7,7 @@ const BASE_URL = process.env.REACT_APP_SERVER_URL;
 const useFetchSearchHistory = () => {
   const [searchHistory, setSearchHistory] = useState([]);
   const [userUID, setUserUID] = useState(null); // State to store userUID
+  const [error, setError] = useState(null); // State to capture error messages
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
@@ -31,13 +32,13 @@ const useFetchSearchHistory = () => {
         });
 
         if (!response.ok) {
-          throw new Error('Failed to fetch search history');
+          throw new Error('Unable to fetch data. Please try again later.');
         }
 
         const data = await response.json();
         setSearchHistory(data); // Directly set data if it's an array of objects
-      } catch (error) {
-        console.error('Error fetching search history:', error.message);
+      } catch (err) {
+        setError(err.message);
       }
     }
   }, [userUID]);
@@ -47,7 +48,7 @@ const useFetchSearchHistory = () => {
     fetchSearchHistory();
   }, [userUID, fetchSearchHistory]);
 
-  return { searchHistory, refetch: fetchSearchHistory };
+  return { searchHistory, error, refetch: fetchSearchHistory };
 };
 
 export default useFetchSearchHistory;

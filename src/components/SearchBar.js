@@ -19,7 +19,7 @@ function SearchBar({
                   <input
                     id="prompt"
                     type="text"
-                    className="form-control custom-bg text-white custom-textarea custom-border-l border-0"
+                    className="form-control custom-bg text-white dynamic-fs custom-textarea custom-border-l border-0"
                     placeholder="Search..."
                     value={searchQuery}
                     onChange={handleSearchInputChange}
@@ -34,14 +34,14 @@ function SearchBar({
                       style={{ top: '100%', left: 0, right: 0, maxWidth: '100vw', zIndex: 1000 }}
                     >
                       {searchHistory.length === 0 ? (
-                        <li className="dropdown-item text-white bg-transparent text-nowrap text-truncate">No search history.</li>
+                        <li className="dropdown-item text-white bg-transparent text-nowrap text-truncate dynamic-fs">No search history.</li>
                       ) : (
                         [...searchHistory].reverse().map(({ id, query }, index) => (
                           <React.Fragment key={id}>
                             <div className="d-flex justify-content-between align-items-center">
                               <i className="bi bi-clock text-white ms-3"></i>
                               <li
-                                className="dropdown-item d-flex justify-content-between align-items-center text-white bg-transparent"
+                                className="dropdown-item d-flex justify-content-between align-items-center text-white bg-transparent dynamic-fs"
                                 onClick={() => handleSelectSearch(query)}
                                 style={{
                                   whiteSpace: 'nowrap',

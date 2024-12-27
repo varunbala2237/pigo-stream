@@ -106,7 +106,7 @@ const useGenre = () => {
         fetch(`${BASE_URL}/recommend-genre?genre=${selectedTVGenreId}&type=tv`),
       ]);
 
-      if (!movieResponse.ok || !tvResponse.ok) throw new Error('Failed to fetch genre recommendations');
+      if (!movieResponse.ok || !tvResponse.ok) throw new Error('Unable to fetch data. Please try again later.');
       
       const movieData = await movieResponse.json();
       const tvData = await tvResponse.json();

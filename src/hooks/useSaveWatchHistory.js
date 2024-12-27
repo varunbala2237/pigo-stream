@@ -6,27 +6,33 @@ const BASE_URL = process.env.REACT_APP_SERVER_URL;
 
 // Helper function for sending watch history to the server
 const saveWatchHistory = async (userUID, id, type) => {
-  const response = await fetch(`${BASE_URL}/users/save-watch-history`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ userUID, id, type }),
-  });
-  if (!response.ok) {
-    const errorText = await response.text();
-    throw new Error(`Failed to save history: ${errorText}`);
+  try {
+    const response = await fetch(`${BASE_URL}/users/save-watch-history`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ userUID, id, type }),
+    });
+    if (!response.ok) {
+      throw new Error(`Unable to fetch data. Please try again later.`);
+    }
+  } catch (err) {
+    throw new Error('Failed to fetch data. Please check your connection or contact support.');
   }
 };
 
 // Helper function for sending data to the second server
 const sendWatchDataToNewServer = async (userUID, id) => {
-  const response = await fetch(`${BASE_URL}/recommender/insert`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ user_id: userUID, item_id: id, watched: true }),
-  });
-  if (!response.ok) {
-    const errorText = await response.text();
-    throw new Error(`Failed to save history on the second server: ${errorText}`);
+  try {
+    const response = await fetch(`${BASE_URL}/recommender/insert`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ user_id: userUID, item_id: id, watched: true }),
+    });
+    if (!response.ok) {
+      throw new Error(`Unable to fetch data. Please try again later.`);
+    }
+  } catch (err) {
+    throw new Error('Failed to fetch data. Please check your connection or contact support.');
   }
 };
 

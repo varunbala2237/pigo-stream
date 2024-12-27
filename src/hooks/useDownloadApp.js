@@ -18,11 +18,10 @@ const useDownloadApp = (platform) => {
         const response = await fetch(`${BASE_URL}/download-app?platform=${platform}`);
         
         if (!response.ok) {
-          const data = await response.json(); // Capture error response for more context
-          throw new Error(data.error || 'Failed to fetch download link');
+          throw new Error('Unable to fetch data. Please try again later.');
         }
 
-        const data = await response.json(); // Move this below the check for response.ok
+        const data = await response.json();
         setDownloadLink(data.url);
       } catch (err) {
         setError(err.message);

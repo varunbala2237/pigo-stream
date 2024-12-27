@@ -15,10 +15,14 @@ const useCreateUser = () => {
           },
           body: JSON.stringify({ userUID }),
         });
-        const data = await response.json();
-        console.log(data.message);
-      } catch (error) {
-        console.error('Error initializing user collections:', error.message);
+
+        if (!response.ok) {
+          throw new Error('Unable to fetch data. Please try again later.');
+        }
+
+        await response.json();
+      } catch (err) {
+        throw new Error('Failed to fetch data. Please check your connection or contact support.');
       }
     };
 

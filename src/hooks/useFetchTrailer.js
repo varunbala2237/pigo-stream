@@ -13,6 +13,9 @@ const useFetchTrailer = (id, type) => {
       try {
         setLoading(true);
         const response = await fetch(url);
+        if (!response.ok) {
+          throw new Error('Unable to fetch data. Please try again later.');
+        }
         const data = await response.json();
         setTrailerLink(data.youtubeTrailer || null);
       } catch (err) {

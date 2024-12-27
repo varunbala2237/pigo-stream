@@ -6,14 +6,17 @@ const BASE_URL = process.env.REACT_APP_SERVER_URL;
 
 // Helper function for deleting watch history from the server
 const removeWatchHistory = async (userUID, id, type) => {
-  const response = await fetch(`${BASE_URL}/users/remove-watch-history`, {
-    method: 'DELETE',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ userUID, id, type }),
-  });
-  if (!response.ok) {
-    const errorText = await response.text();
-    throw new Error(`Failed to remove history: ${errorText}`);
+  try {
+    const response = await fetch(`${BASE_URL}/users/remove-watch-history`, {
+      method: 'DELETE',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ userUID, id, type }),
+    });
+    if (!response.ok) {
+      throw new Error(`Unable to fetch data. Please try again later.`);
+    }
+  } catch (err) {
+    throw new Error(`Failed to fetch data. Please check your connection or contact support.`);
   }
 };
 

@@ -8,13 +8,13 @@ const fetchWithRetry = async (url, options = {}, retries = 5, delay = 1000) => {
   for (let i = 0; i < retries; i++) {
     try {
       const response = await fetch(url, options);
-      if (!response.ok) throw new Error('Network response was not ok');
+      if (!response.ok) throw new Error('Unable to fetch data. Please try again later.');
       return await response.json();
     } catch (err) {
       if (i < retries - 1) {
         await new Promise((resolve) => setTimeout(resolve, delay));
       } else {
-        throw err;
+        throw new Error('Failed to fetch data. Please check your connection or contact support.');
       }
     }
   }

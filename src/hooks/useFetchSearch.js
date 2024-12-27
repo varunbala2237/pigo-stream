@@ -10,16 +10,16 @@ const fetchWithRetry = async (url, options = {}, retries = 5, delay = 1000, time
       const response = await Promise.race([
         fetch(url, options),
         new Promise((_, reject) => 
-          setTimeout(() => reject(new Error('Request timed out')), timeout)
+          setTimeout(() => reject(new Error('Request timed out.')), timeout)
         )
       ]);
-      if (!response.ok) throw new Error('Network response was not ok');
+      if (!response.ok) throw new Error('Unable to fetch data. Please try again later.');
       return await response.json();
     } catch (err) {
       if (i < retries - 1) {
         await new Promise((resolve) => setTimeout(resolve, delay));
       } else {
-        throw err;
+        throw new Error('Failed to fetch data. Please check your connection or contact support.');
       }
     }
   }
