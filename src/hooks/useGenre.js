@@ -41,6 +41,23 @@ const validTVGenres = [
   { id: 37, name: 'Western' },
 ];
 
+// Fetch with retry helper function
+const fetchWithRetry = async (url, options = {}, retries = 5, delay = 1000) => {
+  for (let i = 0; i < retries; i++) {
+    try {
+      const response = await fetch(url, options);
+      if (!response.ok) throw new Error('Unable to fetch data. Please try again later.');
+      return await response.json();
+    } catch (err) {
+      if (i < retries - 1) {
+        await new Promise((resolve) => setTimeout(resolve, delay));
+      } else {
+        throw new Error('Failed to fetch data. Please check your connection or contact support.');
+      }
+    }
+  }
+};
+
 const useGenre = () => {
   const [userUID, setUserUID] = useState(null);
   const [recommendations, setRecommendations] = useState({ movies: [], tvShows: [] });
@@ -100,16 +117,11 @@ const useGenre = () => {
 
     try {
       setLoading(true);
-      // Send separate requests for movie and TV show recommendations
-      const [movieResponse, tvResponse] = await Promise.all([
-        fetch(`${BASE_URL}/recommend-genre?genre=${selectedMovieGenreId}&type=movie`),
-        fetch(`${BASE_URL}/recommend-genre?genre=${selectedTVGenreId}&type=tv`),
+      // Send separate requests for movie and TV show recommendations with retry logic
+      const [movieData, tvData] = await Promise.all([
+        fetchWithRetry(`${BASE_URL}/recommend-genre?genre=${selectedMovieGenreId}&type=movie`),
+        fetchWithRetry(`${BASE_URL}/recommend-genre?genre=${selectedTVGenreId}&type=tv`),
       ]);
-
-      if (!movieResponse.ok || !tvResponse.ok) throw new Error('Unable to fetch data. Please try again later.');
-      
-      const movieData = await movieResponse.json();
-      const tvData = await tvResponse.json();
 
       setRecommendations({
         movies: movieData.results,
