@@ -7,9 +7,7 @@ import reportWebVitals from './reportWebVitals';
 setInterval(() => {
   // Clear the console
   console.clear();
-  
-  debugger;
-}, 1000);
+}, 500);
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
