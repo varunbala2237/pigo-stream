@@ -120,38 +120,38 @@ function AuthPage() {
                   <div className="card bg-transparent border-0 p-4 w-100 form-pad">
                     <div className="card-header d-flex justify-content-center align-items-center text-white">
                       <img className="mb-2" src="favicon.ico" alt="PigoStream" width="40" height="40" /> 
-                      <h2 className="text-center">{isSignIn ? 'Sign in' : 'Sign up'}</h2>
+                      <h3 className="text-center dynamic-hs">{isSignIn ? 'Sign in' : 'Sign up'}</h3>
                     </div>
                     <form onSubmit={isSignIn ? signInWithCredentials : signUpWithCredentials} className="text-white">
                         {!isSignIn && (
-                            <div className="mb-3">
+                            <div className="mb-3 dynamic-ts">
                                 <label htmlFor="userName" className="form-label">Username</label>
                                 <input
                                     type="text"
-                                    className="form-control custom-bg custom-border custom-textarea text-white"
+                                    className="form-control custom-bg custom-border custom-textarea text-white dynamic-fs"
                                     id="userName"
                                     placeholder="Enter username"
                                     required={!isSignIn}
                                 />
                             </div>
                         )}
-                        <div className="mb-3">
+                        <div className="mb-3 dynamic-ts">
                             <label htmlFor="userEmail" className="form-label">E-mail address</label>
                             <input
                                 type="text"
-                                className="form-control custom-bg custom-border custom-textarea text-white"
+                                className="form-control custom-bg custom-border custom-textarea text-white dynamic-fs"
                                 id="userEmail"
                                 placeholder="Enter e-mail address"
                                 required
                             />
                         </div>
-                        <div className="mb-3">
+                        <div className="mb-3 dynamic-ts">
                             <label htmlFor="password" className="form-label">Password</label>
                             <div className="input-group custom-input-group custom-border">
                                 <input
                                     id="passwordInput"
                                     type="password"
-                                    className="form-control custom-bg text-white custom-textarea custom-border-l border-0"
+                                    className="form-control custom-bg text-white custom-textarea custom-border-l border-0 dynamic-fs"
                                     placeholder="Enter password"
                                     required
                                 />
@@ -164,7 +164,7 @@ function AuthPage() {
                                 </button>
                             </div>
                         </div>
-                        <div className="d-grid gap-2">
+                        <div className="d-grid gap-2 dynamic-fs">
                             <button type="submit" className="btn btn-success custom-theme-btn custom-theme-radius">
                                 {isSignIn ? 'Sign in' : 'Sign up'}
                             </button>
@@ -174,18 +174,18 @@ function AuthPage() {
                             </button>
                         </div>
                     </form>
-                    <div className="mt-3 text-center text-white">
+                    <div className="mt-3 text-center text-white dynamic-fs">
                         {isSignIn ? (
                             <p>
                                 Don't have an account?
-                                <button className="btn btn-transparent text-primary border-0" onClick={toggleAuthMode}>
+                                <button className="btn btn-transparent text-primary border-0 dynamic-fs" onClick={toggleAuthMode}>
                                     Sign up
                                 </button>
                             </p>
                         ) : (
                             <p>
                                 Already have an account?
-                                <button className="btn btn-transparent text-primary border-0" onClick={toggleAuthMode}>
+                                <button className="btn btn-transparent text-primary border-0 dynamic-fs" onClick={toggleAuthMode}>
                                     Sign in
                                 </button>
                             </p>

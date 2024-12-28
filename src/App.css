@@ -230,31 +230,32 @@
   opacity: 1;
 }
 
+.dynamic-hs {
+  font-size: 1.6rem;
+}
+.dynamic-ts {
+  font-size: 1.2rem;
+}
+.dynamic-fs {
+  font-size: 1rem;
+}
+.dynamic-ss {
+  font-size: 0.9rem;
+}
+
 /* For phones with a maximum width of 767px */
 @media (max-width: 767px) {
   .form-pad {
     max-width: 80%;
   }
   .modal-pad {
-    max-width: 60%;
+    max-width: 65%;
   }
   .custom-card-img {
     width: 100px; /* Maintain 2:3 ratio */
   }
   .custom-card-container {
     height: 180px;
-  }
-  .dynamic-hs {
-    font-size: 1.2rem;
-  }
-  .dynamic-ts {
-    font-size: 1rem;
-  }
-  .dynamic-fs {
-    font-size: .8rem;
-  }
-  .dynamic-ss {
-    font-size: 0.7rem;
   }
 }
 
@@ -264,25 +265,13 @@
     max-width: 65%;
   }
   .modal-pad {
-    max-width: 45%;
+    max-width: 50%;
   }
   .custom-card-img {
     width: 150px;
   }
   .custom-card-container {
     height: 255px;
-  }
-  .dynamic-hs {
-    font-size: 1.4rem;
-  }
-  .dynamic-ts {
-    font-size: 1.2rem;
-  }
-  .dynamic-fs {
-    font-size: .9rem;
-  }
-  .dynamic-ss {
-    font-size: 0.8rem;
   }
 }
 
@@ -292,24 +281,12 @@
     max-width: 30%;
   }
   .modal-pad {
-    max-width: 20%;
+    max-width: 25%;
   }
   .custom-card-img {
     width: 200px;
   }
   .custom-card-container {
     height: 330px;
-  }
-  .dynamic-hs {
-    font-size: 1.6rem;
-  }
-  .dynamic-ts {
-    font-size: 1.4rem;
-  }
-  .dynamic-fs {
-    font-size: 1rem;
-  }
-  .dynamic-ss {
-    font-size: 0.9rem;
   }
 }
