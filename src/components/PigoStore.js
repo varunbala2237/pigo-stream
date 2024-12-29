@@ -62,20 +62,20 @@ const Pigostore = () => {
         <div className="section p-4">
           <div className="d-flex justify-content-between align-items-center">
             <div className="d-flex align-items-center">
-              <h3 className="text-white me-2">PigoPlayer</h3>
+              <p className="text-white me-2 dynamic-hs">PigoPlayer</p>
               <span className="text-secondary">v{appVersion}</span>
             </div>
             {/* Back button with navigation */}
             <button 
               type="button" 
-              className="btn btn-dark custom-bg text-white rounded-pill"
+              className="btn btn-dark custom-bg text-white rounded-pill dynamic-fs"
               onClick={() => navigate(-1)} // Navigate to the previous page
             >
               <i className="bi bi-chevron-left me-2"></i> 
               Back
             </button>
           </div>
-          <p className="text-white">Install PigoPlayer for seamless streaming and access content without redirects.</p>
+          <p className="text-white dynamic-fs">Install PigoPlayer for seamless streaming and access content without redirects.</p>
           {loading && 
             <div className="col d-flex justify-content-start">
               <div className="spinner-border text-light spinner-size-1" role="status">
@@ -87,14 +87,14 @@ const Pigostore = () => {
           {!loading && !error ? ( // Check if not loading and no error
             downloadLink ? (
               <button
-                className="btn btn-primary rounded-pill"
+                className="btn btn-primary rounded-pill dynamic-fs"
                 onClick={handleDownload}
               >
                 <i className="bi bi-file-earmark-zip me-2"></i>
                 Download
               </button>
             ) : (
-              <p className="text-danger">Currently not available.</p>
+              <p className="text-danger dynamic-fs">Currently not available.</p>
             )
           ) : null} 
         </div>
@@ -104,7 +104,7 @@ const Pigostore = () => {
           <div className="row">
             {/* Devices Section */}
             <div className="col-md-6">
-              <h5 className="text-white">Detected Device</h5>
+              <p className="text-white dynamic-ts">Detected Device</p>
               <ul className="list-unstyled">
                 {supportedDevices.map((device, index) => (
                   <li key={index} className={`d-flex align-items-center ${device.platform === currentPlatform ? 'text-success' : 'text-secondary'}`}>
@@ -113,7 +113,7 @@ const Pigostore = () => {
                     ) : (
                       <i className="bi bi-circle me-2" style={{ opacity: 0.5 }}></i> // Show disabled circle for other platforms
                     )}
-                    <span style={{ opacity: device.platform === currentPlatform ? 1 : 0.5 }}>{device.name}</span>
+                    <span className="dynamic-fs" style={{ opacity: device.platform === currentPlatform ? 1 : 0.5 }}>{device.name}</span>
                   </li>
                 ))}
               </ul>
@@ -121,8 +121,8 @@ const Pigostore = () => {
 
             {/* Instructions Section */}
             <div className="col-md-6">
-              <h5 className="text-white">Instructions</h5>
-              <ul className="text-white">
+              <p className="text-white dynamic-ts">Instructions</p>
+              <ul className="text-white dynamic-fs">
                 <li>Click "Download" to get the .zip file.</li>
                 <li>Extract the file and run the installer.</li>
                 <li>If needed, disable antivirus or ignore warnings.</li>

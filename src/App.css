@@ -230,19 +230,6 @@
   opacity: 1;
 }
 
-.dynamic-hs {
-  font-size: 1.6rem;
-}
-.dynamic-ts {
-  font-size: 1.2rem;
-}
-.dynamic-fs {
-  font-size: 1rem;
-}
-.dynamic-ss {
-  font-size: 0.9rem;
-}
-
 /* For phones with a maximum width of 767px */
 @media (max-width: 767px) {
   .form-pad {
@@ -256,6 +243,18 @@
   }
   .custom-card-container {
     height: 180px;
+  }
+  .dynamic-hs {
+    font-size: 1.2rem;
+  }
+  .dynamic-ts {
+    font-size: 1rem;
+  }
+  .dynamic-fs {
+    font-size: 0.9rem;
+  }
+  .dynamic-ss {
+    font-size: 0.8rem;
   }
 }
 
@@ -273,6 +272,18 @@
   .custom-card-container {
     height: 255px;
   }
+  .dynamic-hs {
+    font-size: 1.5rem;
+  }
+  .dynamic-ts {
+    font-size: 1.3rem;
+  }
+  .dynamic-fs {
+    font-size: 1.1rem;
+  }
+  .dynamic-ss {
+    font-size: 1rem;
+  }
 }
 
 /* For laptops and desktops with a width of 1200px and above */
@@ -288,5 +299,17 @@
   }
   .custom-card-container {
     height: 330px;
+  }
+  .dynamic-hs {
+    font-size: 1.6rem;
+  }
+  .dynamic-ts {
+    font-size: 1.2rem;
+  }
+  .dynamic-fs {
+    font-size: 1rem;
+  }
+  .dynamic-ss {
+    font-size: 0.9rem;
   }
 }
