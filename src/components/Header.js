@@ -89,9 +89,9 @@ function Header() {
             </li>
             <li><hr className="text-secondary" /></li>
             <li className="nav-item">
-              <a className={getNavLinkClass("/watch-list")} href="/watch-list">
-                <i className="bi bi-plus-lg me-1"></i>
-                Watch List
+              <a className={getNavLinkClass("/my-list")} href="/my-list">
+                <i className="bi bi-bookmark me-1"></i>
+                My List
               </a>
             </li>
             <li><hr className="text-secondary" /></li>
@@ -136,8 +136,8 @@ function Header() {
                 </li>
                 <li><hr className="text-secondary m-0" /></li>
                 <li className="nav-item m-1">
-                  <a className={getNavLinkClass("/watch-list")} href="/watch-list">
-                    <i className="bi bi-plus-lg me-1"></i> Watch List
+                  <a className={getNavLinkClass("/my-list")} href="/my-list">
+                    <i className="bi bi-bookmark me-1"></i> My List
                   </a>
                 </li>
                 <li><hr className="text-secondary m-0" /></li>

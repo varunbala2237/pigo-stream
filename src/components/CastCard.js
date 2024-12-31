@@ -18,20 +18,15 @@ function CastCard({ actor }) {
         <div className="d-flex justify-content-center mb-2">
           <img 
             src={imageUrl}
-            alt=''
-            className="rounded-circle" // Make the image circular
+            alt='empty'
+            className="custom-cast-card-img rounded-circle"
             style={{ 
-              height: '70px', // Adjust the size as needed
-              width: '70px', 
               objectFit: 'cover',
             }}
           />
         </div>
         {/* Name and Character Section */}
-        <div style={{ 
-          color: '#fff', // Text color
-          fontSize: '14px', // Adjust text size as needed
-        }}>
+        <div className="text-white">
           <p className="dynamic-fs mb-0">{actor.name}</p>
           <p className="dynamic-fs text-secondary mb-0">{actor.character || 'Unknown'}</p>        
         </div>

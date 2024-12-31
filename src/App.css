@@ -241,6 +241,10 @@
   .custom-card-img {
     width: 100px; /* Maintain 2:3 ratio */
   }
+  .custom-cast-card-img {
+    height: 70px;
+    width: 70px;
+  }
   .custom-card-container {
     height: 180px;
   }
@@ -269,6 +273,10 @@
   .custom-card-img {
     width: 150px;
   }
+  .custom-cast-card-img {
+    height: 80px;
+    width: 80px;
+  }
   .custom-card-container {
     height: 255px;
   }
@@ -296,6 +304,10 @@
   }
   .custom-card-img {
     width: 200px;
+  }
+  .custom-cast-card-img {
+    height: 90px;
+    width: 90px;
   }
   .custom-card-container {
     height: 330px;

@@ -101,8 +101,8 @@ function MyListGrid({ userUID }) {
             {!loading && !error && (
                 <>
                     <div className="d-flex align-items-center dynamic-ts m-2 px-1">
-                        <i className="bi bi-plus-lg theme-color me-1"></i>
-                        <b className="mb-0">Watch List</b>
+                        <i className="bi bi-bookmark theme-color me-1"></i>
+                        <b className="mb-0">My List</b>
                     </div>
                     <div className="position-relative my-2">
                         {movieList.length > 3 && (
@@ -138,7 +138,7 @@ function MyListGrid({ userUID }) {
                             ) : (
                                 <div className="col d-flex vh-25 justify-content-center align-items-center">
                                     <div className="d-flex align-items-center dynamic-fs">
-                                        <i className="bi bi-plus-lg me-1"></i>
+                                        <i className="bi bi-bookmark me-1"></i>
                                         <span className="mb-0">No movies found.</span>
                                     </div>
                                 </div>
@@ -199,7 +199,7 @@ function MyListGrid({ userUID }) {
                             ) : (
                                 <div className="col d-flex vh-25 justify-content-center align-items-center">
                                     <div className="d-flex align-items-center dynamic-fs">
-                                        <i className="bi bi-plus-lg me-1"></i>
+                                        <i className="bi bi-bookmark me-1"></i>
                                         <span className="mb-0">No tv shows found.</span>
                                     </div>
                                 </div>

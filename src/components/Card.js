@@ -115,7 +115,7 @@ function Card({ media, type, path, onRemove, handleAlert }) {
               <div className="modal-content dynamic-fs bd-callout-dark custom-theme-radius text-white border-0">
                 <div className="modal-header justify-content-center text-center border-0">
                   <span className="dynamic-fs">
-                    Are you sure you want to remove <strong>"{media.title || media.name || 'this item'}"</strong> from {path === '/watch-history' ? 'History' : 'Watchlist'}?
+                    Are you sure you want to remove <strong>"{media.title || media.name || 'this item'}"</strong> from {path === '/watch-history' ? 'Watch History' : 'My List'}?
                   </span>
                 </div>
                 <div className="modal-footer d-flex p-0" style={{ borderTop: '1px solid #343a40' }}>

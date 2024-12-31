@@ -131,14 +131,14 @@ function Player({ mediaURL, averageVote, director, genres, mediaInfo, id, type, 
                   className={`btn px-2 py-1 d-none d-md-block border-0 text-white rounded-circle btn-light bg-black`}
                   onClick={handleAddToList}
                 >
-                  <i className={`bi-${isInList ? 'check-lg' : 'plus-lg'}`}></i>
+                  <i className={`bi-${isInList ? 'bookmark-fill' : 'bookmark'}`}></i>
                 </button>
                 {/* Smaller button for smaller screen */}
                 <button
                   className={`btn d-block d-md-none btn-sm border-0 text-white rounded-circle btn-light bg-black`}
                   onClick={handleAddToList}
                 >
-                  <i className={`bi-${isInList ? 'check-lg' : 'plus-lg'}`}></i>
+                  <i className={`bi-${isInList ? 'bookmark-fill' : 'bookmark'}`}></i>
                 </button>
                 </div>
 
@@ -232,13 +232,13 @@ function Player({ mediaURL, averageVote, director, genres, mediaInfo, id, type, 
       </div>
       {showNote && (
         <div className="bd-callout-dark custom-theme-radius dynamic-fs text-white mt-3" style={{padding: '1rem'}}>
-          <i className="bi bi-exclamation-circle me-2"></i>
+          <i className="bi bi-exclamation-circle me-1"></i>
           {platform === 'windows' || platform === 'android' ? (
-            <>Note: Don't have the app? <span className="link text-primary ms-2" onClick={redirectToStore}>
-              <i className="bi bi-bag-check-fill me-2"></i>Get it now
+            <>Note: Don't have the app? <span className="link text-primary" onClick={redirectToStore}>
+              <i className="bi bi-bag-check-fill me-1"></i>Get it now
             </span></>
           ) : (
-            <>Note: Unsupported platform.</>
+            <>Note: <span className="link text-danger">Unsupported platform.</span></>
           )}
         </div>
       )}
