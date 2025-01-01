@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
 function Player({ mediaURL, averageVote, director, genres, mediaInfo, id, type, isInList, handleAddToList }) {
   const [imageUrl, setImageUrl] = useState('');
   const [inHistory, setInHistory] = useState(false);
-  const { trailerLink, loading, error } = useFetchTrailer(id, type);
+  const { trailerLink, loading } = useFetchTrailer(id, type);
   const [showNote, setShowNote] = useState(false);
   const navigate = useNavigate();
 
@@ -57,17 +57,6 @@ function Player({ mediaURL, averageVote, director, genres, mediaInfo, id, type, 
       <div className="col vh-35 d-flex justify-content-center align-items-center">
         <div className="spinner-border text-light spinner-size-1" role="status">
           <span className="visually-hidden">Loading...</span>
-        </div>
-      </div>
-    );
-  }
-
-  if (error) {
-    return (
-      <div className="col vh-70 d-flex justify-content-center align-items-center">
-        <div className="d-flex text-white align-items-center dynamic-fs">
-          <i className="bi bi-wifi-off me-1"></i>
-          <span className="mb-0">Something went wrong.</span>
         </div>
       </div>
     );
