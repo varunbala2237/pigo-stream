@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import useRemoveWatchHistory from '../hooks/useRemoveWatchHistory';
 import useRemoveFromMyList from '../hooks/useRemoveMyList';
 
-function Card({ media, type, path, onRemove, handleAlert }) {
+function Card({ media, type, path, onRemove, handleAlert, isDeletable=true }) {
   const [imageUrl, setImageUrl] = useState('');
   const [showModal, setShowModal] = useState(false);
   const [isRemove, setIsRemove] = useState(false);
@@ -49,6 +49,7 @@ function Card({ media, type, path, onRemove, handleAlert }) {
   };
 
   const handleLongClick = (event) => {
+    if (!isDeletable) return;
     event.preventDefault();
     if (path === '/watch-history' || path === '/my-list') {
       setShowModal(true);
@@ -59,6 +60,7 @@ function Card({ media, type, path, onRemove, handleAlert }) {
   };
 
   const handleRightClick = (event) => {
+    if (!isDeletable) return;
     event.preventDefault();
     if (path === '/watch-history' || path === '/my-list') {
       setShowModal(true);

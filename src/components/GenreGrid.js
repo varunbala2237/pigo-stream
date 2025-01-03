@@ -74,7 +74,7 @@ function GenreGrid() {
             )}
             {!loading && !error && recommendations.movies.length > 0 ? (
               recommendations.movies.map((movie) => (
-                <Card key={movie.id} media={movie} type={'movie'} path={location.pathname} />
+                <Card key={movie.id} media={movie} type={'movie'} path={location.pathname} isDeletable={false} />
               ))
             ) : (
               !loading &&
@@ -130,7 +130,7 @@ function GenreGrid() {
             )}
             {!loading && !error && recommendations.tvShows.length > 0 ? (
               recommendations.tvShows.map((show) => (
-                <Card key={show.id} media={show} type={'tv'} path={location.pathname} />
+                <Card key={show.id} media={show} type={'tv'} path={location.pathname} isDeletable={false} />
               ))
             ) : (
               !loading &&
