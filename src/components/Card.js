@@ -49,8 +49,8 @@ function Card({ media, type, path, onRemove, handleAlert, isDeletable=true }) {
   };
 
   const handleLongClick = (event) => {
-    if (!isDeletable) return;
     event.preventDefault();
+    if (!isDeletable) return;
     if (path === '/watch-history' || path === '/my-list') {
       setShowModal(true);
       setTimeout(() => {
@@ -60,8 +60,8 @@ function Card({ media, type, path, onRemove, handleAlert, isDeletable=true }) {
   };
 
   const handleRightClick = (event) => {
-    if (!isDeletable) return;
     event.preventDefault();
+    if (!isDeletable) return;
     if (path === '/watch-history' || path === '/my-list') {
       setShowModal(true);
       setTimeout(() => {
