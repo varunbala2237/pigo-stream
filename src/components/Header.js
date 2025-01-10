@@ -167,7 +167,7 @@ function Header() {
               <div className="text-wrap text-truncate dynamic-fs">{userEmail}<i className="bi bi-patch-check-fill text-primary ms-1"></i></div>
               <div className="dynamic-ss text-secondary">
                 <i>
-                  We prioritize the security and confidentiality of your data, ensuring that we do not access, store, or retrieve any information from your Google Account or its services, ensuring your privacy remains fully intact.
+                  We prioritize your privacy by ensuring no information from your Google Account or services is accessed, stored, or retrieved.
                 </i>
               </div>
             </div>
