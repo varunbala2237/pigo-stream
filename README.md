@@ -17,7 +17,7 @@ Visit https://www.themoviedb.org/ for more details.
 
 -> Firebase Database(Real-Time, Firestore)
 
--> Supabase PostgreSQL Database
+-> Supabase PostgreSQL Database(Session Pool)
 
 Here is complete overview of creating a React Project ⬇️
 
