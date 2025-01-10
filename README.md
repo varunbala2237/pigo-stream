@@ -2,7 +2,7 @@
 https://pigostream-site.web.app/
 
 # You Need to Create Node.js/Express.js Web Service for Database Interactions
-For this project, I am using Firebase for database and authentication.
+For this project, Im using Firebase for database and authentication.
 
 # Full Project Pack
 -> React app deployed in [Firebase](https://firebase.google.com/).
@@ -17,7 +17,7 @@ Visit https://www.themoviedb.org/ for more details.
 
 -> Firebase Database(Real-Time, Firestore)
 
--> Render PostgreSQL Database
+-> Supabase PostgreSQL Database(Session Pool)
 
 Here is complete overview of creating a React Project ⬇️
 
