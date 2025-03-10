@@ -24,57 +24,57 @@
 }
 
 .bd-callout-white {
-  background-color: rgba(120, 120, 120, 0.5);
+  background-color: rgba(120, 120, 120, 0.8);
   position: relative;
-  backdrop-filter: blur(5px);
+  backdrop-filter: blur(4px);
 }
 
 .bd-callout-black {
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.8);
   position: relative;
-  backdrop-filter: blur(5px);
+  backdrop-filter: blur(4px);
 }
 
 .bd-callout-dark {
-  background-color: rgba(33, 37, 41, 0.5);
+  background-color: rgba(33, 37, 41, 0.8);
   position: relative;
-  backdrop-filter: blur(5px);
+  backdrop-filter: blur(4px);
 }
 
 .bd-callout-danger {
-  background-color: rgba(220, 53, 69, 0.5);
+  background-color: rgba(220, 53, 69, 0.8);
   position: relative;
-  backdrop-filter: blur(5px);
+  backdrop-filter: blur(4px);
 }
 
 .bd-callout-primary {
-  background-color: rgba(0, 123, 255, 0.5);
+  background-color: rgba(0, 123, 255, 0.8);
   position: relative;
-  backdrop-filter: blur(5px);
+  backdrop-filter: blur(4px);
 }
 
 .bd-callout-success {
-  background-color: rgba(40, 167, 69, 0.5);
+  background-color: rgba(40, 167, 69, 0.8);
   position: relative;
-  backdrop-filter: blur(5px);
+  backdrop-filter: blur(4px);
 }
 
 .bd-callout-warning {
-  background-color: rgba(74, 58, 4, 0.5);
+  background-color: rgba(74, 58, 4, 0.8);
   position: relative;
-  backdrop-filter: blur(5px);
+  backdrop-filter: blur(4px);
 }
 
 .custom-bg {
   background-color: rgba(33, 37, 41, 0.5);
   border: none;
-  backdrop-filter: blur(5px);
+  backdrop-filter: blur(4px);
 }
 
 .custom-bg:enabled {
   background-color: rgba(33, 37, 41, 0.5);
   border: none;
-  backdrop-filter: blur(5px);
+  backdrop-filter: blur(4px);
 }
 
 .custom-border {
@@ -334,4 +334,51 @@
   .dynamic-ss {
     font-size: 0.9rem;
   }
+}
+
+/* Zoom-In Animation */
+@keyframes zoomIn {
+  from {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* Zoom-Out Animation */
+@keyframes zoomOut {
+  from {
+    transform: scale(1);
+    opacity: 1;
+  }
+  to {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+}
+
+/* Zoom-In-Out Animation */
+/* Prevent Bootstrap from interfering */
+.modal.zoom-in-out .modal-dialog {
+  transform: scale(0.8);
+  opacity: 0;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+/* When modal is shown */
+.modal.zoom-in-out.show .modal-dialog {
+  animation: zoomIn 0.3s ease-out forwards;
+}
+
+/* When modal is hiding */
+.modal.zoom-in-out.fade:not(.show) .modal-dialog {
+  animation: zoomOut 0.3s ease-out forwards;
+}
+
+/* Ensure the backdrop (blur) disappears when closing */
+.modal-backdrop {
+  transition: opacity 0.3s ease;
 }

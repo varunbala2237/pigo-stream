@@ -124,7 +124,7 @@ function Header() {
       </div>
 
       {/* Modal for mobile navbar items */}
-      <div className="modal fade" id="navItemsModal" tabIndex="-1" aria-labelledby="navItemsModalLabel" aria-hidden="true">
+      <div className="modal fade zoom-in-out" id="navItemsModal" tabIndex="-1" aria-labelledby="navItemsModalLabel" aria-hidden="true">
         <div className="modal-dialog modal-dialog-centered mx-auto border-0 m-0 modal-pad">
           <div className="modal-content dynamic-fs bd-callout-dark custom-theme-radius text-white p-0 border-0">
             <div className="modal-body text-center p-0">
@@ -153,7 +153,7 @@ function Header() {
       </div>
 
       {/* Account Details Modal */}
-      <div className="modal fade" id="accountModal" tabIndex="-1" aria-labelledby="accountModalLabel" aria-hidden="true">
+      <div className="modal fade zoom-in-out" id="accountModal" tabIndex="-1" aria-labelledby="accountModalLabel" aria-hidden="true">
         <div className="modal-dialog modal-dialog-centered mx-auto border-0 m-0 modal-pad">
           <div className="modal-content dynamic-fs custom-theme-radius bd-callout-dark text-white border-0">
             <div className="modal-body text-center">
@@ -164,35 +164,33 @@ function Header() {
                 style={{ width: '70px', height: '70px' }}
               />
               <div className="text-wrap text-truncate dynamic-ts">{userName}</div>
-              <div className="text-wrap text-truncate dynamic-fs">{userEmail}<i className="bi bi-patch-check-fill text-primary ms-1"></i></div>
+              <div className="text-wrap text-truncate dynamic-fs">{userEmail}</div>
+              <div className="d-flex justify-content-center w-100 my-3">
+                <button
+                  type="button"
+                  className="btn btn-danger rounded-pill btn-md d-none d-md-inline-block dynamic-fs m-1"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
+                  onClick={signOutWithAccount}
+                >
+                  <i className="bi bi-box-arrow-left me-1 text-white"></i>
+                  <span className="text-white">Sign out</span>
+                </button>
+                <button
+                  type="button"
+                  className="btn btn-danger rounded-pill btn-sm d-md-none dynamic-fs m-1"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
+                  onClick={signOutWithAccount}
+                >
+                  <i className="bi bi-box-arrow-left me-1 text-white"></i>
+                  <span className="text-white">Sign out</span>
+                </button>
+              </div>
               <div className="dynamic-ss text-secondary">
                 <i>
                   We prioritize your privacy by ensuring no information from your Google Account or services is accessed, stored, or retrieved.
                 </i>
-              </div>
-            </div>
-            <div className="modal-footer p-0" style={{ borderTop: '1px solid #343a40' }}>
-              <div className="d-flex justify-content-center w-100">
-                <button
-                  type="button"
-                  className="btn border-0 btn-md d-none d-md-inline-block dynamic-fs w-100 m-1"
-                  data-bs-dismiss="modal"
-                  aria-label="Close"
-                  onClick={signOutWithAccount}
-                >
-                  <i className="bi bi-box-arrow-left me-1 text-danger"></i>
-                  <span className="text-danger">Sign out</span>
-                </button>
-                <button
-                  type="button"
-                  className="btn border-0 btn-sm d-md-none dynamic-fs w-100 m-1"
-                  data-bs-dismiss="modal"
-                  aria-label="Close"
-                  onClick={signOutWithAccount}
-                >
-                  <i className="bi bi-box-arrow-left me-1 text-danger"></i>
-                  <span className="text-danger">Sign out</span>
-                </button>
               </div>
             </div>
           </div>

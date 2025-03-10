@@ -192,7 +192,7 @@ function MovieGrid({ id, type, setBackgroundImage }) {
                 </ul>
               </div>
             </div>
-            <div className="d-flex flex-column align-items-start custom-bg custom-theme-radius my-2 w-100">
+            <div className="d-flex flex-column align-items-start custom-theme-radius my-2 w-100">
               <div className="container py-2 text-white">
                 <div className="d-flex flex-row dynamic-ts">
                   <i className="bi bi-person-fill me-1"></i>

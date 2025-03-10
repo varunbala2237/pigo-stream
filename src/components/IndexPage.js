@@ -10,6 +10,7 @@ const IndexPage = () => {
   const { data: popularMovies, loading: loadingPopularMovies } = useFetchMedia('popular', 'movie');
 
   const [backgroundImage, setBackgroundImage] = useState(null);
+  const [isRecommended, setIsRecommended] = useState(false);
   const [showSearchBar, setShowSearchBar] = useState(false);
   const [triggerSearch, setTriggerSearch] = useState('');
 
@@ -22,9 +23,11 @@ const IndexPage = () => {
 
     if (!loadingRecommendedMedia && recommendedMedia) {
       setBackgroundImage(getImagePath(recommendedMedia));
+      setIsRecommended(true);
     } else if (!loadingPopularMovies && popularMovies.length > 0) {
       const latestMovie = popularMovies[0];
       setBackgroundImage(getImagePath(latestMovie));
+      setIsRecommended(false);
     }
   }, [recommendedMedia, popularMovies, loadingRecommendedMedia, loadingPopularMovies]);
 
@@ -55,7 +58,21 @@ const IndexPage = () => {
           ? `linear-gradient(to bottom, rgba(0, 0, 0, 0), rgb(0, 0, 0)), url(${backgroundImage})`
           : 'none',
         }}
-      ></div>
+      >
+        {/* Dark Overlay */}
+        {!shouldHideBackground && (
+          <div
+            className="position-absolute w-100 h-100"
+            style={{
+            top: 0,
+            left: 0,
+            background: 'rgba(0, 0, 0, 0.6)', // Dark overlay with transparency
+            zIndex: 1, // Behind content
+          }}
+          ></div>
+        )}
+      </div>
+
       <HomePage
         title={title}
         mediaId={mediaId}
@@ -67,6 +84,7 @@ const IndexPage = () => {
         setShowSearchBar={setShowSearchBar}
         triggerSearch={triggerSearch}
         setTriggerSearch={setTriggerSearch}
+        isRecommended={isRecommended}
       />
     </div>
   );

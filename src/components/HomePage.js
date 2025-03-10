@@ -22,6 +22,7 @@ function HomePage({
   setShowSearchBar,
   triggerSearch,
   setTriggerSearch,
+  isRecommended,
 }) {
   const navigate = useNavigate();
 
@@ -39,8 +40,8 @@ function HomePage({
 
   const fabStyle = {
     position: 'fixed',
-    bottom: '26px',
-    right: '26px',
+    bottom: '20px',
+    right: '20px',
     width: '56px',
     height: '56px',
     borderRadius: '50%',
@@ -48,9 +49,10 @@ function HomePage({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.1)',
+    boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.15)',
     cursor: 'pointer',
     border: 'none',
+    zIndex: 1000,
   };
 
   const handleSearchBar = () => {
@@ -203,18 +205,24 @@ function HomePage({
 
         {!showSearchBar && triggerSearch.trim() === '' && title && (
           <div 
-            className="container justify-content-center align-items-end"
+            className="container justify-content-center"
             style={{
                 textAlign: 'start',
               }}
           >
             <div
-              className="d-flex flex-column text-white bd-callout-dark custom-theme-radius"
+              className="d-flex flex-column text-white custom-theme-radius"
               style={{
                 padding: '5%',
               }}
             >
-              <b className="text-wrap dynamic-ts">{title}</b>
+              <div className="d-flex align-items-center">
+                <b className="text-wrap dynamic-ts">{title}</b>
+                {/* Badge for Recommended or Popular */}
+                <span className="badge bg-primary text-white rounded-pill ms-2">
+                  {isRecommended ? 'Recommended' : 'Popular'}
+                </span>
+              </div>
               <div className="dynamic-fs text-white">
                 <div className="dynamic-fs my-2">
                   <span className="me-2">              
@@ -231,12 +239,14 @@ function HomePage({
                     {rating}
                   </span>
                 </div>
-                <div className="text-wrap">{mediaDesc}</div>
-                <button className="btn btn-md d-none d-md-inline-block bd-callout-white rounded-pill border-0 my-2" onClick={handlePlayMedia}>
-                  <span className="text-white">Watch</span>
+                <div className="dynamic-fs my-2">{mediaDesc}</div>
+                <button className="btn btn-md d-none d-md-inline-block bd-callout-dark rounded-pill border-0 my-2" onClick={handlePlayMedia}>
+                  <i className="bi bi-arrow-return-right me-1 text-white"></i>
+                  <span className="text-white">Checkout</span>
                 </button>
-                <button className="btn btn-sm d-md-none bd-callout-white rounded-pill border-0 my-2" onClick={handlePlayMedia}>
-                  <span className="text-white">Watch</span>
+                <button className="btn btn-sm d-md-none bd-callout-dark rounded-pill border-0 my-2" onClick={handlePlayMedia}>
+                  <i className="bi bi-arrow-return-right me-1 text-white"></i>
+                  <span className="text-white">Checkout</span>
                 </button>
                 </div>
             </div>
@@ -249,7 +259,7 @@ function HomePage({
 
         <Footer />
 
-        <button className="bd-callout-dark" style={fabStyle} onClick={handleSearchBar}>
+        <button className="bd-callout-primary" style={fabStyle} onClick={handleSearchBar}>
           {showSearchBar ? <i className="bi bi-x-lg"></i> : <i className="bi bi-search"></i>}
         </button>
 
