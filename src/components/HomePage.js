@@ -242,11 +242,11 @@ function HomePage({
                 <div className="dynamic-fs my-2">{mediaDesc}</div>
                 <button className="btn btn-md d-none d-md-inline-block bd-callout-dark rounded-pill border-0 my-2" onClick={handlePlayMedia}>
                   <i className="bi bi-arrow-return-right me-1 text-white"></i>
-                  <span className="text-white">Checkout</span>
+                  <span className="text-white">See more</span>
                 </button>
                 <button className="btn btn-sm d-md-none bd-callout-dark rounded-pill border-0 my-2" onClick={handlePlayMedia}>
                   <i className="bi bi-arrow-return-right me-1 text-white"></i>
-                  <span className="text-white">Checkout</span>
+                  <span className="text-white">See more</span>
                 </button>
                 </div>
             </div>

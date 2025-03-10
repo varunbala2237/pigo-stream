@@ -280,18 +280,18 @@ function TvGrid({ id, type, setBackgroundImage }) {
                               margin: 0,
                               border: 'none',
                               height: '100px',
+                              width: '200px',
                               display: 'flex',
                               justifyContent: 'space-between',
                               }}
                             >
                               <span
-                                className="bd-callout-dark text-white p-2 custom-theme-radius-low-br"
+                                className="custom-bg text-white p-2 custom-theme-radius-low-br"
                                 style={{
-                                whiteSpace: 'nowrap',
-                                overflowX: 'auto',
-                                display: 'block',
-                                width: '100%',
-                                maxWidth: '100%',
+                                  position: 'absolute',
+                                  whiteSpace: 'nowrap',
+                                  overflowX: 'auto',
+                                  width: '100%',
                                 }}
                               >
                                 Episode {episode.episode_number}: {episode.name}
