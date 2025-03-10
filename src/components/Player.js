@@ -221,13 +221,12 @@ function Player({ mediaURL, averageVote, director, genres, mediaInfo, id, type, 
       </div>
       {showNote && (
         <div className="bd-callout-dark custom-theme-radius dynamic-fs text-white mt-3" style={{padding: '1rem'}}>
-          <i className="bi bi-exclamation-circle me-1"></i>
           {platform === 'windows' || platform === 'android' ? (
-            <>Note: Don't have the app? <span className="link text-primary" onClick={redirectToStore}>
+            <>Don't have the app? <span className="link text-primary" onClick={redirectToStore}>
               <i className="bi bi-bag-check-fill me-1"></i>Get it now
             </span></>
           ) : (
-            <>Note: <span className="link text-danger">Unsupported platform.</span></>
+            <span className="link text-danger">Unsupported platform.</span>
           )}
         </div>
       )}

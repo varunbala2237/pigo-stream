@@ -61,10 +61,13 @@ const Pigostore = () => {
       <div className="container bg-transparent p-0 mx-4 custom-theme-radius" style={{ maxWidth: '600px' }}>
         <div className="section p-4">
           <div className="d-flex justify-content-between align-items-center">
-            <div className="d-flex align-items-center">
-              <p className="text-white me-2 dynamic-hs">PigoPlayer</p>
-              <span className="text-secondary">v{appVersion}</span>
+            <div className="d-flex justify-content-center align-items-center text-center">
+              <p className="text-white me-2 dynamic-hs m-0">PigoPlayer</p>
+              <span className="text-secondary align-self-center">
+                v{appVersion || "1.0.0"}
+              </span>
             </div>
+
             {/* Back button with navigation */}
             <button 
               type="button" 
@@ -83,9 +86,8 @@ const Pigostore = () => {
               </div>
             </div>
           }
-          {error && <p className="text-danger">Error: {error}</p>}
-          {!loading && !error ? ( // Check if not loading and no error
-            downloadLink ? (
+          {!loading ? ( // Check if not loading and no error
+            downloadLink && !error ? (
               <button
                 className="btn btn-primary rounded-pill dynamic-fs"
                 onClick={handleDownload}
@@ -106,17 +108,36 @@ const Pigostore = () => {
             <div className="col-md-6">
               <p className="text-white dynamic-ts">Detected Device</p>
               <ul className="list-unstyled">
-                {supportedDevices.map((device, index) => (
-                  <li key={index} className={`d-flex align-items-center ${device.platform === currentPlatform ? 'text-success' : 'text-secondary'}`}>
-                    {device.platform === currentPlatform ? (
-                      <i className="bi bi-check2-circle me-2"></i> // Show checkmark for current platform
-                    ) : (
-                      <i className="bi bi-circle me-2" style={{ opacity: 0.5 }}></i> // Show disabled circle for other platforms
-                    )}
-                    <span className="dynamic-fs" style={{ opacity: device.platform === currentPlatform ? 1 : 0.5 }}>{device.name}</span>
-                  </li>
-                ))}
-              </ul>
+                {supportedDevices.map((device, index) => {
+                  const isCurrentDevice = device.platform === currentPlatform;
+                  const isSupported = currentPlatform === "windows" || currentPlatform === "android";
+
+                  return (
+                    <li 
+                      key={index} 
+                      className={`d-flex align-items-center ${
+                        isCurrentDevice ? (isSupported ? "text-success" : "text-danger") : "text-secondary"}`
+                      }
+                    >
+                      {isCurrentDevice ? (
+                        isSupported ? (
+                          <i className="bi bi-check2-circle me-2"></i>
+                        ) : (
+                          <i className="bi bi-x-circle me-2"></i>
+                        )
+                      ) : (
+                        <i className="bi bi-circle me-2" style={{ opacity: 0.5 }}></i>
+                      )}
+                      <span 
+                        className="dynamic-fs" 
+                        style={{ opacity: isCurrentDevice ? 1 : 0.5 }}
+                      >
+                        {device.name}
+                      </span>
+                    </li>
+                    );
+                  })}
+                </ul>
             </div>
 
             {/* Instructions Section */}
