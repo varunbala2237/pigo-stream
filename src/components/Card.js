@@ -125,19 +125,19 @@ function Card({ media, type, path, onRemove, handleAlert, isDeletable=true }) {
                     <div className="text-start text-center w-50">
                       <button
                         type="button"
-                        className="btn btn-secondary rounded-pill btn-md d-none d-md-inline-block dynamic-fs m-1" 
+                        className="btn btn-light rounded-pill btn-md d-none d-md-inline-block dynamic-fs m-1" 
                         onClick={() => { setModalVisible(false); setTimeout(() => setShowModal(false), 300); }}
                       >
-                        <i className="bi bi-x-lg me-1 text-white"></i>
-                        <span className="text-white">Cancel</span>
+                        <i className="bi bi-x-lg me-1 text-black"></i>
+                        <span className="text-black">Cancel</span>
                       </button>
                       <button
                         type="button"
-                        className="btn btn-secondary rounded-pill btn-sm d-md-none dynamic-fs m-1" 
+                        className="btn btn-light rounded-pill btn-sm d-md-none dynamic-fs m-1" 
                         onClick={() => { setModalVisible(false); setTimeout(() => setShowModal(false), 300); }}
                       >
-                        <i className="bi bi-x-lg me-1 text-white"></i>
-                        <span className="text-white">Cancel</span>
+                        <i className="bi bi-x-lg me-1 text-black"></i>
+                        <span className="text-black">Cancel</span>
                       </button>
                     </div>          
 
