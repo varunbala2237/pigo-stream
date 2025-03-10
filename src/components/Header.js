@@ -164,13 +164,13 @@ function Header() {
                 style={{ width: '70px', height: '70px' }}
               />
               <div className="text-wrap text-truncate dynamic-ts">{userName}</div>
-              <div className="text-wrap text-truncate dynamic-fs">{userEmail}</div>
+              <div className="text-wrap text-truncate dynamic-fs" contentEditable={false}>{userEmail}</div>
               <div className="dynamic-ss text-secondary">
                 <i>
                   We prioritize your privacy by ensuring no information from your Google Account or services is accessed, stored, or retrieved.
                 </i>
               </div>
-              <div className="d-flex justify-content-center w-100 my-3">
+              <div className="d-flex justify-content-end w-100 mt-2">
                 <button
                   type="button"
                   className="btn btn-danger rounded-pill btn-md d-none d-md-inline-block dynamic-fs m-1"
