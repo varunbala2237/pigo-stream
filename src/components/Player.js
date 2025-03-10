@@ -74,11 +74,13 @@ function Player({ mediaURL, averageVote, director, genres, mediaInfo, id, type, 
       let appURL;
       if (platform === 'windows' || platform === 'android') {
         appURL = `pigoplayer://open?url=${encodeURIComponent(serverLink)}&version=${appVersion}`;
+        window.location.href = appURL;
+      } else if (platform === "macos" || platform === "ios") {
+        window.open(serverLink, "_blank");
       } else {
+        // Return nothing
         return;
       }
-
-      window.location.href = appURL;
     } catch (error) {
       console.error('Error opening app:', error);
     }
@@ -220,11 +222,16 @@ function Player({ mediaURL, averageVote, director, genres, mediaInfo, id, type, 
         </div>
       </div>
       {showNote && (
-        <div className="bd-callout-dark custom-theme-radius dynamic-fs text-white mt-3" style={{padding: '1rem'}}>
+        <div className="bd-callout-dark custom-theme-radius dynamic-fs text-white mt-3" style={{ padding: '1rem' }}>
           {platform === 'windows' || platform === 'android' ? (
             <>Don't have the app? <span className="link text-primary" onClick={redirectToStore}>
               <i className="bi bi-bag-check-fill me-1"></i>Get it now
             </span></>
+          ) : platform === 'macos' || platform === 'ios' ? (
+            <span className="link text-warning">
+              This content may contain redirects and ads.  
+              <strong> For the best experience, open in fullscreen mode.</strong>
+            </span>
           ) : (
             <span className="link text-danger">Unsupported platform.</span>
           )}
