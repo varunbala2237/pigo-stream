@@ -120,39 +120,39 @@ function Card({ media, type, path, onRemove, handleAlert, isDeletable=true }) {
                     Are you sure you want to remove <strong>"{media.title || media.name || 'this item'}"</strong> from {path === '/watch-history' ? 'Watch History' : 'My List'}?
                   </span>
                 </div>
-                <div className="modal-footer d-flex p-0" style={{ borderTop: '1px solid #343a40' }}>
-                  <div className="d-flex justify-content-between w-100">
-                    <div className="text-start w-50" style={{ borderRight: '.5px solid #343a40' }}>
+                <div className="modal-footer d-flex border-0">
+                  <div className="d-flex justify-content-between w-100 mt-2">
+                    <div className="text-start text-center w-50">
                       <button
                         type="button"
-                        className="btn border-0 btn-md d-none d-md-inline-block dynamic-fs w-100 m-1" 
+                        className="btn btn-secondary rounded-pill btn-md d-none d-md-inline-block dynamic-fs m-1" 
                         onClick={() => { setModalVisible(false); setTimeout(() => setShowModal(false), 300); }}
                       >
-                        <i className="bi bi-x-lg me-1 text-secondary"></i>
-                        <span className="text-secondary">Cancel</span>
+                        <i className="bi bi-x-lg me-1 text-white"></i>
+                        <span className="text-white">Cancel</span>
                       </button>
                       <button
                         type="button"
-                        className="btn border-0 btn-sm d-md-none dynamic-fs w-100 m-1" 
+                        className="btn btn-secondary rounded-pill btn-sm d-md-none dynamic-fs m-1" 
                         onClick={() => { setModalVisible(false); setTimeout(() => setShowModal(false), 300); }}
                       >
-                        <i className="bi bi-x-lg me-1 text-secondary"></i>
-                        <span className="text-secondary">Cancel</span>
+                        <i className="bi bi-x-lg me-1 text-white"></i>
+                        <span className="text-white">Cancel</span>
                       </button>
                     </div>          
 
-                    <div className="text-end w-50" style={{ borderLeft: '.5px solid #343a40' }}>
-                      <button type="button" className="btn border-0 btn-md d-none d-md-inline-block dynamic-fs w-100 m-1"
+                    <div className="text-end text-center w-50">
+                      <button type="button" className="btn btn-danger rounded-pill btn-md d-none d-md-inline-block dynamic-fs m-1"
                         onClick={handleRemove}
                       >
-                        <i className="bi bi-trash me-1 text-danger"></i>
-                        <span className="text-danger">Remove</span>
+                        <i className="bi bi-trash me-1 text-white"></i>
+                        <span className="text-white">Remove</span>
                       </button>
-                      <button type="button" className="btn border-0 btn-sm d-md-none dynamic-fs w-100 m-1"
+                      <button type="button" className="btn btn-danger rounded-pill btn-sm d-md-none dynamic-fs m-1"
                         onClick={handleRemove}
                       >
-                        <i className="bi bi-trash me-1 text-danger"></i>
-                        <span className="text-danger">Remove</span>
+                        <i className="bi bi-trash me-1 text-white"></i>
+                        <span className="text-white">Remove</span>
                       </button>
                     </div>
                   </div>
