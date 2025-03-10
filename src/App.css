@@ -93,12 +93,31 @@
 }
 
 .custom-card-img {
-  width: 150px;
+  width: 100%;
+  aspect-ratio: 2 / 3;
+  object-fit: cover;
   overflow: hidden;
 }
 
 .custom-card-container {
-  height: 225px;
+  height: 100%;
+  aspect-ratio: 2 / 3;
+}
+
+/* Overlay Styling */
+.card-overlay {
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  right: 5px;
+}
+
+/* Shadow effect for rating and media type */
+.card-overlay .rating-box,
+.card-overlay .media-type-box {
+  padding: 4px 6px;
+  background: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(4px);
 }
 
 .custom-dropdown {
@@ -238,15 +257,12 @@
   .modal-pad {
     max-width: 65%;
   }
-  .custom-card-img {
-    width: 100px; /* Maintain 2:3 ratio */
-  }
   .custom-cast-card-img {
     height: 70px;
     width: 70px;
   }
   .custom-card-container {
-    height: 180px;
+    height: 200px;
   }
   .dynamic-hs {
     font-size: 1.2rem;
@@ -270,15 +286,12 @@
   .modal-pad {
     max-width: 50%;
   }
-  .custom-card-img {
-    width: 150px;
-  }
   .custom-cast-card-img {
     height: 80px;
     width: 80px;
   }
   .custom-card-container {
-    height: 255px;
+    height: 250px;
   }
   .dynamic-hs {
     font-size: 1.5rem;
@@ -302,15 +315,12 @@
   .modal-pad {
     max-width: 25%;
   }
-  .custom-card-img {
-    width: 200px;
-  }
   .custom-cast-card-img {
     height: 90px;
     width: 90px;
   }
   .custom-card-container {
-    height: 330px;
+    height: 300px;
   }
   .dynamic-hs {
     font-size: 1.6rem;

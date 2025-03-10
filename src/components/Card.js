@@ -88,13 +88,13 @@ function Card({ media, type, path, onRemove, handleAlert, isDeletable=true }) {
           alt='empty'
         />
         {/* Rating Container */}
-        <div className="bd-callout-black dynamic-size dynamic-fs px-1">
+        <div className="card-overlay dynamic-size dynamic-fs px-1">
           <div className="d-flex justify-content-between align-items-center">
-            <div className="text-start">
+            <div className="rating-box custom-theme-radius-low text-start">
               <i className="bi bi-star-fill text-warning"></i>
               <span id="Rating" className="text-white"> {rating} </span>
             </div>
-            <div className="text-end">
+            <div className="media-type-box custom-theme-radius-low text-end">
               {type === 'movie' ? (
                 <i className="bi bi-film text-white"></i>
               ) : (
