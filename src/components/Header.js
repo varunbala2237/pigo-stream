@@ -129,19 +129,19 @@ function Header() {
           <div className="modal-content dynamic-fs bd-callout-dark custom-theme-radius text-white border-0">
             <div className="modal-body text-center p-0">
               <ul className="navbar-nav">
-                <li className="nav-item m-1">
+                <li className="nav-item my-2">
                   <a className={getNavLinkClass("/index")} href="/index">
                     <i className="bi bi-house me-1"></i> Home
                   </a>
                 </li>
                 <li><hr className="text-secondary m-0" /></li>
-                <li className="nav-item m-1">
+                <li className="nav-item my-2">
                   <a className={getNavLinkClass("/my-list")} href="/my-list">
                     <i className="bi bi-bookmark me-1"></i> My List
                   </a>
                 </li>
                 <li><hr className="text-secondary m-0" /></li>
-                <li className="nav-item m-1">
+                <li className="nav-item my-2">
                   <a className={getNavLinkClass("/watch-history")} href="/watch-history">
                     <i className="bi bi-clock me-1"></i> Watch History
                   </a>
@@ -160,7 +160,7 @@ function Header() {
               <img
                 src={userPhotoURL}
                 alt="User"
-                className="rounded-circle mb-2"
+                className="rounded-circle my-2"
                 style={{ width: '70px', height: '70px' }}
               />
               <div className="text-wrap text-truncate dynamic-ts">{userName}</div>
@@ -170,7 +170,7 @@ function Header() {
                   We prioritize your privacy by ensuring no information from your Google Account or services is accessed, stored, or retrieved.
                 </i>
               </div>
-              <div className="d-flex justify-content-end w-100 mt-2">
+              <div className="d-flex justify-content-end w-100 my-2">
                 <button
                   type="button"
                   className="btn btn-danger rounded-pill btn-md d-none d-md-inline-block dynamic-fs m-1"
