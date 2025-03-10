@@ -190,14 +190,14 @@ function WatchHistoryGrid({ userUID }) {
                     {movieHistory.length === movieLimit && (
                         <div className="text-end mb-3">
                             <button
-                                className="btn bg-transparent dynamic-fs border-0 rounded-pill btn-md d-none d-md-inline-block"
+                                className="btn bd-callout-dark dynamic-fs border-0 rounded-pill btn-md d-none d-md-inline-block"
                                 onClick={handleShowMoreMovies}
                             >
                                 <i className="bi bi-chevron-down text-white me-1"></i>
                                 <span className="text-white">Show More</span>
                             </button>
                             <button
-                                className="btn bg-transparent dynamic-fs border-0 rounded-pill btn-sm d-md-none"
+                                className="btn bd-callout-dark dynamic-fs border-0 rounded-pill btn-sm d-md-none"
                                 onClick={handleShowMoreMovies}
                             >
                                 <i className="bi bi-chevron-down text-white me-1"></i>
@@ -251,14 +251,14 @@ function WatchHistoryGrid({ userUID }) {
                     {tvHistory.length === tvLimit && (
                         <div className="text-end mb-3">
                             <button
-                                className="btn bg-transparent dynamic-fs border-0 rounded-pill btn-md d-none d-md-inline-block"
+                                className="btn bd-callout-dark dynamic-fs border-0 rounded-pill btn-md d-none d-md-inline-block"
                                 onClick={handleShowMoreTV}
                             >
                                 <i className="bi bi-chevron-down text-white me-1"></i>
                                 <span className="text-white">Show More</span>
                             </button>
                             <button
-                                className="btn bg-transparent dynamic-fs border-0 rounded-pill btn-sm d-md-none"
+                                className="btn bd-callout-dark dynamic-fs border-0 rounded-pill btn-sm d-md-none"
                                 onClick={handleShowMoreTV}
                             >
                                 <i className="bi bi-chevron-down text-white me-1"></i>

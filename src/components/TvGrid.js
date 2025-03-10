@@ -410,7 +410,7 @@ function TvGrid({ id, type, setBackgroundImage }) {
                   <div className="text-end">
                     {/* Button for medium and large screens */}
                     <button
-                      className="btn bg-transparent dynamic-fs border-0 rounded-pill btn-md d-none d-md-inline-block"
+                      className="btn bd-callout-dark dynamic-fs border-0 rounded-pill btn-md d-none d-md-inline-block"
                       onClick={handleShowMore}
                     >
                       <i className="bi bi-chevron-down text-white me-1"></i>
@@ -419,7 +419,7 @@ function TvGrid({ id, type, setBackgroundImage }) {
 
                     {/* Button for small screens */}
                     <button
-                      className="btn bg-transparent dynamic-fs border-0 rounded-pill btn-sm d-md-none"
+                      className="btn bd-callout-dark dynamic-fs border-0 rounded-pill btn-sm d-md-none"
                       onClick={handleShowMore}
                     >
                       <i className="bi bi-chevron-down text-white me-1"></i>
