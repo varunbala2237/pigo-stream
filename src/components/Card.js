@@ -113,7 +113,7 @@ function Card({ media, type, path, onRemove, handleAlert, isDeletable=true }) {
 
           {/* Confirmation Modal */}
           <div className={`modal fade zoom-in-out ${modalVisible ? 'show' : ''} d-block`} tabIndex="-1" aria-labelledby="confirmDeleteModalLabel" aria-hidden="true" style={{ zIndex: 1050 }}>
-            <div className="modal-dialog modal-dialog-centered mx-auto border-0 m-0 modal-pad">
+            <div className="modal-dialog modal-dialog-centered mx-auto border-0 modal-pad">
               <div className="modal-content dynamic-fs bd-callout-dark custom-theme-radius text-white border-0">
                 <div className="modal-header justify-content-center text-center border-0">
                   <span className="dynamic-fs">

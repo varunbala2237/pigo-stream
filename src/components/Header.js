@@ -125,8 +125,8 @@ function Header() {
 
       {/* Modal for mobile navbar items */}
       <div className="modal fade zoom-in-out" id="navItemsModal" tabIndex="-1" aria-labelledby="navItemsModalLabel" aria-hidden="true">
-        <div className="modal-dialog modal-dialog-centered mx-auto border-0 m-0 modal-pad">
-          <div className="modal-content dynamic-fs bd-callout-dark custom-theme-radius text-white p-0 border-0">
+        <div className="modal-dialog modal-dialog-centered mx-auto border-0 modal-pad">
+          <div className="modal-content dynamic-fs bd-callout-dark custom-theme-radius text-white border-0">
             <div className="modal-body text-center p-0">
               <ul className="navbar-nav">
                 <li className="nav-item m-1">
@@ -154,7 +154,7 @@ function Header() {
 
       {/* Account Details Modal */}
       <div className="modal fade zoom-in-out" id="accountModal" tabIndex="-1" aria-labelledby="accountModalLabel" aria-hidden="true">
-        <div className="modal-dialog modal-dialog-centered mx-auto border-0 m-0 modal-pad">
+        <div className="modal-dialog modal-dialog-centered mx-auto border-0 modal-pad">
           <div className="modal-content dynamic-fs custom-theme-radius bd-callout-dark text-white border-0">
             <div className="modal-body text-center">
               <img
