@@ -165,6 +165,11 @@ function Header() {
               />
               <div className="text-wrap text-truncate dynamic-ts">{userName}</div>
               <div className="text-wrap text-truncate dynamic-fs">{userEmail}</div>
+              <div className="dynamic-ss text-secondary">
+                <i>
+                  We prioritize your privacy by ensuring no information from your Google Account or services is accessed, stored, or retrieved.
+                </i>
+              </div>
               <div className="d-flex justify-content-center w-100 my-3">
                 <button
                   type="button"
@@ -186,11 +191,6 @@ function Header() {
                   <i className="bi bi-box-arrow-left me-1 text-white"></i>
                   <span className="text-white">Sign out</span>
                 </button>
-              </div>
-              <div className="dynamic-ss text-secondary">
-                <i>
-                  We prioritize your privacy by ensuring no information from your Google Account or services is accessed, stored, or retrieved.
-                </i>
               </div>
             </div>
           </div>
