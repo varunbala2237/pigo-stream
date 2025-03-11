@@ -15,7 +15,7 @@
     visibility: visible;
     opacity: 1;
 }
-  
+
 /* Sidebar */
 .sidebar {
     position: fixed;
@@ -27,7 +27,7 @@
     transition: left 0.3s ease-in-out;
     z-index: 1001;
 }
-  
+ 
 .sidebar.open {
     left: 0;
 }

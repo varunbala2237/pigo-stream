@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from "react-router-dom";
 import { auth, signOutWithAccount } from "../firebase/firebase-auth";
+import { Link } from "react-router-dom";
 
 import './Header.css';
 
@@ -33,12 +34,11 @@ function Header() {
 
     return () => unsubscribe();
   }, [navigate]);
-
+  
   const getNavLinkClass = (path) => 
     location.pathname === path 
-      ? "nav-link bd-callout-primary"
-      : "nav-link";
-  
+      ? "btn btn-dark border-0 rounded-pill active" 
+      : "btn border-0 rounded-pill";
 
   return (
     <>
@@ -98,7 +98,7 @@ function Header() {
         </div>
 
         {/* User Profile Section */}
-        <div className="text-center mb-2">
+        <div className="text-center text-white mb-2">
           <img 
             src={userPhotoURL} 
             alt="User" 
@@ -108,58 +108,54 @@ function Header() {
               height: "70px",
             }}
           />
-          <div className="text-wrap text-truncate dynamic-fs text-white">{userName}</div>
-          <div className="text-wrap text-truncate dynamic-fs text-secondary" contentEditable={false}>{userEmail}</div>
+          <div className="text-wrap text-truncate dynamic-ts">{userName}</div>
+          <div className="text-wrap text-truncate dynamic-fs" contentEditable={false}>{userEmail}</div>
         </div>
 
         {/* Navigation Section */}
-        <ul className="navbar-nav my-2 flex-column dynamic-ss text-center custom-theme-radius overflow-hidden gap-1">
+        <ul className="navbar-nav flex-column dynamic-fs flex-grow-1 justify-content-center custom-theme-radius gap-2">
           <li className="nav-item">
-            <a className={`btn btn-dark rounded-pill ${getNavLinkClass("/index")}`} href="/index">
-              <i className="bi bi-house"></i> Home
-            </a>
+            <Link className={`text-white ${getNavLinkClass("/index")}`} to="/index" onClick={() => setSidebarOpen(false)}>
+              <i className="bi bi-house text-primary"></i> Home
+            </Link>
           </li>
           <li className="nav-item">
-            <a className={`btn btn-dark rounded-pill ${getNavLinkClass("/my-list")}`} href="/my-list">
-              <i className="bi bi-bookmark"></i> My List
-            </a>
+            <Link className={`text-white ${getNavLinkClass("/my-list")}`} to="/my-list" onClick={() => setSidebarOpen(false)}>
+              <i className="bi bi-bookmark text-primary"></i> My List
+            </Link>
           </li>
           <li className="nav-item">
-            <a className={`btn btn-dark rounded-pill ${getNavLinkClass("/watch-history")}`} href="/watch-history">
-              <i className="bi bi-clock"></i> Watch History
-            </a>
+            <Link className={`text-white ${getNavLinkClass("/watch-history")}`} to="/watch-history" onClick={() => setSidebarOpen(false)}>
+              <i className="bi bi-clock text-primary"></i> Watch History
+            </Link>
           </li>
         </ul>
 
-        {/* Sign Out Button */}
-        <div className="d-flex mt-auto justify-content-center align-items-center gap-4">
-          <button className="btn btn-md d-none d-md-inline-block rounded-pill btn-danger" onClick={signOutWithAccount}>
+        {/* Sign Out + Social Icons (BOTTOM) */}
+        <div className="d-flex flex-column align-items-center gap-3 pb-3">
+          <button className="btn btn-md rounded-pill btn-danger" onClick={signOutWithAccount}>
             <i className="bi bi-box-arrow-left"></i> Sign Out
           </button>
-          <button className="btn btn-sm d-md-none rounded-pill btn-danger" onClick={signOutWithAccount}>
-            <i className="bi bi-box-arrow-left"></i> Sign Out
-          </button>
-          {/* Telegram Button */}
-          <a
-            href="https://t.me/pigostream"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="bg-white rounded-circle d-flex justify-content-center align-items-center"
-            style={{ width: '20px', height: '20px' }} // Ensures a perfect circle
-          >
-            <i className="bi bi-telegram fs-2 theme-color"></i>
-          </a>
+    
+          {/* Social Icons (GitHub + Telegram) */}
+          <div className="d-flex gap-3">
+            <a href="https://t.me/pigostream" target="_blank" rel="noopener noreferrer" 
+              className="bg-white rounded-circle d-flex justify-content-center align-items-center" 
+              style={{ width: '26px', height: '26px' }}>
+                <i className="bi bi-telegram fs-2 theme-color"></i>
+            </a>
+      
+            <a href="https://github.com/varunbala2237/pigo-stream" target="_blank" rel="noopener noreferrer" 
+              className="bg-black rounded-circle d-flex justify-content-center align-items-center" 
+              style={{ width: '26px', height: '26px' }}>
+              <i className="bi bi-github fs-2 text-white"></i>
+            </a>
+          </div>
 
-          {/* GitHub Button */}
-          <a
-            href="https://github.com/varunbala2237/pigo-stream"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="bg-black rounded-circle d-flex justify-content-center align-items-center"
-            style={{ width: '20px', height: '20px' }} // Ensures a perfect circle
-          >
-            <i className="bi bi-github fs-2 text-white"></i>
-          </a>
+          {/* Small Text Below Icons */}
+          <p className="text-secondary" style={{ fontSize: "12px" }}>
+            Follow us for updates
+          </p>
         </div>
       </div>
     </>
