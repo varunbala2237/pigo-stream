@@ -138,17 +138,17 @@ function Header() {
           </button>
     
           {/* Social Icons (GitHub + Telegram) */}
-          <div className="d-flex gap-3">
+          <div className="d-flex gap-4">
             <a href="https://t.me/pigostream" target="_blank" rel="noopener noreferrer" 
-              className="bg-white rounded-circle d-flex justify-content-center align-items-center" 
-              style={{ width: '26px', height: '26px' }}>
-                <i className="bi bi-telegram fs-2 text-primary"></i>
+              className="d-flex justify-content-center" 
+            >
+              <i className="bi bi-telegram fs-2 text-secondary"></i>
             </a>
       
             <a href="https://github.com/varunbala2237/pigo-stream" target="_blank" rel="noopener noreferrer" 
-              className="bg-black rounded-circle d-flex justify-content-center align-items-center" 
-              style={{ width: '26px', height: '26px' }}>
-              <i className="bi bi-github fs-2 text-white"></i>
+              className="d-flex justify-content-center" 
+            >
+              <i className="bi bi-github fs-2 text-secondary"></i>
             </a>
           </div>
 
