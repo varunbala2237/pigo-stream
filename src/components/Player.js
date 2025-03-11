@@ -4,6 +4,8 @@ import useFetchTrailer from '../hooks/useFetchTrailer';
 import useAppVersion from '../hooks/useAppVersion';
 import { useNavigate } from 'react-router-dom';
 
+import openIframeWindow from "../utils/openIframeWindow";
+
 function Player({ mediaURL, averageVote, director, genres, mediaInfo, id, type, isInList, handleAddToList }) {
   const [imageUrl, setImageUrl] = useState('');
   const [inHistory, setInHistory] = useState(false);
@@ -76,25 +78,7 @@ function Player({ mediaURL, averageVote, director, genres, mediaInfo, id, type, 
         appURL = `pigoplayer://open?url=${encodeURIComponent(serverLink)}&version=${appVersion}`;
         window.location.href = appURL;
       } else if (platform === "macos" || platform === "ios") {
-        const newWindow = window.open("", "_blank", "fullscreen=yes");
-        if (newWindow) {
-          newWindow.document.write(`
-            <html>
-            <head>
-              <style>
-                body, html { margin: 0; padding: 0; height: 100vh; overflow: auto; }
-                iframe { width: 100vw; height: 100vh; border: none; }
-              </style>
-            </head>
-            <body>
-              <iframe src="${serverLink}" allowfullscreen></iframe>
-            </body>
-            </html>
-          `);
-          newWindow.document.close();
-        } else {
-          window.open(serverLink, "_blank");
-        }
+        openIframeWindow(serverLink);
       } else {
         // Return nothing
         return;
