@@ -37,7 +37,7 @@ function Header() {
   
   const getNavLinkClass = (path) => 
     location.pathname === path 
-      ? "btn btn-dark border-0 rounded-pill active" 
+      ? "btn btn-dark border-0 rounded-pill fw-bold active" 
       : "btn border-0 rounded-pill";
 
   return (
@@ -153,7 +153,7 @@ function Header() {
           </div>
 
           {/* Small Text Below Icons */}
-          <p className="text-secondary" style={{ fontSize: "12px" }}>
+          <p className="text-secondary dynamic-ss">
             Follow us for updates
           </p>
         </div>
