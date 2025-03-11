@@ -105,7 +105,7 @@ function WatchHistoryGrid({ userUID }) {
                 <div className="text-end">
                     <button
                         type="button"
-                        className="btn btn-md d-none d-md-inline-block bd-callout-dark rounded-pill text-danger border-0"
+                        className="btn btn-md d-none d-md-inline-block btn-dark bd-callout-dark rounded-pill text-danger border-0"
                         onClick={handleClearHistory}
                         disabled={isClearButtonDisabled}
                     >
@@ -114,7 +114,7 @@ function WatchHistoryGrid({ userUID }) {
                     </button>
                     <button
                         type="button"
-                        className="btn btn-sm d-md-none bd-callout-dark rounded-pill text-danger border-0"
+                        className="btn btn-sm d-md-none btn-dark bd-callout-dark rounded-pill text-danger border-0"
                         onClick={handleClearHistory}
                         disabled={isClearButtonDisabled}
                     >
@@ -190,14 +190,14 @@ function WatchHistoryGrid({ userUID }) {
                     {movieHistory.length === movieLimit && (
                         <div className="text-end mb-3">
                             <button
-                                className="btn bd-callout-dark dynamic-fs border-0 rounded-pill btn-md d-none d-md-inline-block"
+                                className="btn btn-dark bd-callout-dark dynamic-fs border-0 rounded-pill btn-md d-none d-md-inline-block"
                                 onClick={handleShowMoreMovies}
                             >
                                 <i className="bi bi-chevron-down text-white me-1"></i>
                                 <span className="text-white">Show More</span>
                             </button>
                             <button
-                                className="btn bd-callout-dark dynamic-fs border-0 rounded-pill btn-sm d-md-none"
+                                className="btn btn-dark bd-callout-dark dynamic-fs border-0 rounded-pill btn-sm d-md-none"
                                 onClick={handleShowMoreMovies}
                             >
                                 <i className="bi bi-chevron-down text-white me-1"></i>
@@ -251,14 +251,14 @@ function WatchHistoryGrid({ userUID }) {
                     {tvHistory.length === tvLimit && (
                         <div className="text-end mb-3">
                             <button
-                                className="btn bd-callout-dark dynamic-fs border-0 rounded-pill btn-md d-none d-md-inline-block"
+                                className="btn btn-dark bd-callout-dark dynamic-fs border-0 rounded-pill btn-md d-none d-md-inline-block"
                                 onClick={handleShowMoreTV}
                             >
                                 <i className="bi bi-chevron-down text-white me-1"></i>
                                 <span className="text-white">Show More</span>
                             </button>
                             <button
-                                className="btn bd-callout-dark dynamic-fs border-0 rounded-pill btn-sm d-md-none"
+                                className="btn btn-dark bd-callout-dark dynamic-fs border-0 rounded-pill btn-sm d-md-none"
                                 onClick={handleShowMoreTV}
                             >
                                 <i className="bi bi-chevron-down text-white me-1"></i>

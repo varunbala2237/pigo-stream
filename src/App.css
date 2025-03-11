@@ -1,4 +1,4 @@
-/* External css */
+/* External CSS(Global Styles) */
 .bg-blur {
   height: 100%;
   left: 0;
@@ -104,22 +104,6 @@
   aspect-ratio: 2 / 3;
 }
 
-/* Overlay Styling */
-.card-overlay {
-  position: absolute;
-  top: 5px;
-  left: 5px;
-  right: 5px;
-}
-
-/* Shadow effect for rating and media type */
-.card-overlay .rating-box,
-.card-overlay .media-type-box {
-  padding: 4px 6px;
-  background: rgba(0, 0, 0, 0.3);
-  backdrop-filter: blur(4px);
-}
-
 .custom-dropdown {
   max-height: 400px;
   max-width: 250px;
@@ -197,15 +181,6 @@
   border-radius: 0px 0px 4px 0px;
 }
 
-.iframe-overlay {
-  height: 100%;
-  left: 0;
-  pointer-events: none;
-  position: absolute;
-  top: 0;
-  width: 100%;
-}
-
 .spinner-size-2 {
   height: 2rem;
   width: 2rem;
@@ -221,27 +196,6 @@
   flex-direction: column;
   justify-content: center;
   overflow-wrap: break-word;
-}
-
-.trailer-container {
-  height: 0;
-  overflow: hidden;
-  padding-bottom: 56.25%; /* 16:9 Aspect Ratio (height / width = 9 / 16) */
-  position: relative; /* Positioning context for the iframe */
-  width: 100%; /* Full width */
-}
-
-.trailer-iframe {
-  height: 100%; /* Full height */
-  left: 0; /* Align to the left */
-  position: absolute; /* Position it inside the container */
-  top: 0; /* Align to the top */
-  width: 100%; /* Full width */
-}
-
-#player {
-  border: none;
-  box-sizing: border-box;
 }
 
 .custom-textarea::placeholder {

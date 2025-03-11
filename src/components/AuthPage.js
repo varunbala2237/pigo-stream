@@ -4,7 +4,6 @@ import { auth, signInWithGoogle } from '../firebase/firebase-auth';
 import { signInWithEmailAndPassword, createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
 import useCreateUser from '../hooks/useCreateUser';
 import Alert from '../Alert';
-import Footer from './Footer';
 
 function togglePasswordVisibility() {
     const passwordInput = document.getElementById('passwordInput');
@@ -193,7 +192,6 @@ function AuthPage() {
                     </div>
                   </div>
                 </div>
-                <Footer/>
                 </>
             )}
             {alertMessage && <Alert message={alertMessage} onClose={handleAlertDismiss} />}

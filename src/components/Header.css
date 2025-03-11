@@ -1,0 +1,33 @@
+/* Sidebar Overlay */
+.sidebar-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out, visibility 0.3s;
+}
+  
+.sidebar-overlay.open {
+    visibility: visible;
+    opacity: 1;
+}
+  
+/* Sidebar */
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: -250px; /* Hidden by default */
+    width: 250px;
+    height: 100%;
+    padding: 20px;
+    transition: left 0.3s ease-in-out;
+    z-index: 1001;
+}
+  
+.sidebar.open {
+    left: 0;
+}

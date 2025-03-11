@@ -5,7 +5,6 @@ import SearchBar from './SearchBar';
 import SearchGrid from './SearchGrid';
 import MediaGrid from './MediaGrid';
 import GenreGrid from './GenreGrid';
-import Footer from './Footer';
 import useSaveSearchHistory from '../hooks/useSaveSearchHistory';
 import useFetchSearchHistory from '../hooks/useFetchSearchHistory';
 import useRemoveSearchHistory from '../hooks/useRemoveSearchHistory';
@@ -240,11 +239,11 @@ function HomePage({
                   </span>
                 </div>
                 <div className="dynamic-fs my-2">{mediaDesc}</div>
-                <button className="btn btn-md d-none d-md-inline-block bd-callout-dark rounded-pill border-0 my-2" onClick={handlePlayMedia}>
+                <button className="btn btn-dark btn-md d-none d-md-inline-block bd-callout-dark rounded-pill border-0 my-2" onClick={handlePlayMedia}>
                   <i className="bi bi-chevron-down me-1 text-white"></i>
                   <span className="text-white">Show More</span>
                 </button>
-                <button className="btn btn-sm d-md-none bd-callout-dark rounded-pill border-0 my-2" onClick={handlePlayMedia}>
+                <button className="btn btn-dark btn-sm d-md-none bd-callout-dark rounded-pill border-0 my-2" onClick={handlePlayMedia}>
                   <i className="bi bi-chevron-down me-1 text-white"></i>
                   <span className="text-white">Show More</span>
                 </button>
@@ -256,8 +255,6 @@ function HomePage({
         <div className="flex-row text-white w-100">
           {triggerSearch.trim() === '' ? <><MediaGrid /><GenreGrid /></> : <><SearchGrid searchQuery={triggerSearch} /><GenreGrid /></>}
         </div>
-
-        <Footer />
 
         <button className="bd-callout-primary" style={fabStyle} onClick={handleSearchBar}>
           {showSearchBar ? <i className="bi bi-x-lg"></i> : <i className="bi bi-search"></i>}

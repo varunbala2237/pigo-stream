@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import useRemoveWatchHistory from '../hooks/useRemoveWatchHistory';
 import useRemoveFromMyList from '../hooks/useRemoveMyList';
 
+import './Card.css';
+
 function Card({ media, type, path, onRemove, handleAlert, isDeletable=true }) {
   const [imageUrl, setImageUrl] = useState('');
   const [showModal, setShowModal] = useState(false);

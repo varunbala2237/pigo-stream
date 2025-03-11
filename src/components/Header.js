@@ -2,12 +2,15 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from "react-router-dom";
 import { auth, signOutWithAccount } from "../firebase/firebase-auth";
 
+import './Header.css';
+
 function Header() {
   const navigate = useNavigate();
   const location = useLocation();
   const [userEmail, setUserEmail] = useState('');
   const [userPhotoURL, setUserPhotoURL] = useState('');
   const [userName, setUserName] = useState('');
+  const [sidebarOpen, setSidebarOpen] = useState(false);
   const defaultPhotoURL = 'https://cdn-icons-png.flaticon.com/512/149/149071.png';
 
   useEffect(() => {
@@ -31,172 +34,105 @@ function Header() {
     return () => unsubscribe();
   }, [navigate]);
 
-  // Determine the active link based on the current location
-  const getNavLinkClass = (path) => {
-    return location.pathname === path ? 'nav-link active' : 'nav-link';
-  };
+  const getNavLinkClass = (path) => 
+    location.pathname === path 
+      ? "nav-link bd-callout-primary"
+      : "nav-link";
+  
 
   return (
-    <nav className="navbar navbar-expand-lg navbar-dark w-100 custom-theme-radius poppins-medium">
-      <div className="container-fluid">
-        <a className="navbar-brand d-flex align-items-center" href="/">
-          <img
-            className="mr-3"
-            src="favicon.ico"
-            alt="PigoStream"
-            width="40"
-            height="40"
+    <>
+      {/* Top Navbar */}
+      <nav className="navbar navbar-expand-lg navbar-dark custom-theme-radius poppins-medium">
+        <div className="container-fluid">
+          <a className="navbar-brand d-flex align-items-center" href="/">
+            <img className="mr-3" src="favicon.ico" alt="PigoStream" width="40" height="40" />
+            <span className="mb-0 dynamic-hs"><b>Pigo</b>Stream</span>
+          </a>
+
+          <button className="btn btn-dark bd-callout-dark text-white" onClick={() => setSidebarOpen(true)}>
+            <i className="bi bi-list"></i> {/* Sidebar Open Button */}
+          </button>
+        </div>
+      </nav>
+
+      {/* Sidebar Overlay */}
+      <div className={`sidebar-overlay ${sidebarOpen ? "open" : ""}`} onClick={() => setSidebarOpen(false)}></div>
+
+      {/* Sidebar */}
+      <div className={`sidebar d-flex flex-column bd-callout-dark text-white ${sidebarOpen ? "open" : ""}`}>
+        <div className="sidebar-header d-flex justify-content-end">
+          <button className="btn btn-dark bd-callout-dark text-white" onClick={() => setSidebarOpen(false)}>
+            <i className="bi bi-x-lg"></i> {/* Sidebar Close Button */}
+          </button>
+        </div>
+
+        {/* User Profile Section */}
+        <div className="text-center mb-2">
+          <img 
+            src={userPhotoURL} 
+            alt="User" 
+            className="rounded-circle"
+            style={{
+              width : "70px",
+              height: "70px",
+            }}
           />
-          <span className="mb-0 dynamic-hs"><b>Pigo</b>Stream</span>
-        </a>
-        <button
-          className="navbar-toggler"
-        >
-          <span
-            className="navbar-toggler-icon"
-            type="button"
-            data-bs-toggle="modal"
-            data-bs-target="#navItemsModal"
-            aria-label="Toggle navigation"
-            title="Navigate"></span>
-          <span>
-          <button
-              className="btn p-0 text-secondary"
-              id="userDropdown"
-              data-bs-toggle="modal"
-              data-bs-target="#accountModal"
-              aria-label="Toggle account menu"
-              style={{ background: 'none', border: 'none' }}
-              title="Account"
-            >
-              <img
-                src={userPhotoURL}
-                alt="User"
-                className="rounded-circle ms-2"
-                style={{ width: '40px', height: '40px' }}
-              />
-            </button>
-          </span>
-        </button>
+          <div className="text-wrap text-truncate dynamic-fs text-white">{userName}</div>
+          <div className="text-wrap text-truncate dynamic-fs text-secondary" contentEditable={false}>{userEmail}</div>
+        </div>
 
-        <div className="collapse navbar-collapse" id="navbarNav">
-          <ul className="navbar-nav me-auto mb-2 mb-lg-0 text-center">
-            <li className="nav-item">
-              <a className={getNavLinkClass("/index")} href="/index">
-                <i className="bi bi-house me-1"></i>
-                Home
-              </a>
-            </li>
-            <li><hr className="text-secondary" /></li>
-            <li className="nav-item">
-              <a className={getNavLinkClass("/my-list")} href="/my-list">
-                <i className="bi bi-bookmark me-1"></i>
-                My List
-              </a>
-            </li>
-            <li><hr className="text-secondary" /></li>
-            <li className="nav-item">
-              <a className={getNavLinkClass("/watch-history")} href="/watch-history">
-                <i className="bi bi-clock me-1"></i>
-                Watch History
-              </a>
-            </li>
-          </ul>
-          <div className="d-flex d-none d-lg-block align-items-center ms-auto">
-            <button
-              className="btn p-0 text-secondary"
-              id="userDropdown"
-              data-bs-toggle="modal"
-              data-bs-target="#accountModal"
-              aria-label="Toggle account menu"
-              style={{ background: 'none', border: 'none' }}
-              title="Account"
-            >
-              <img
-                src={userPhotoURL}
-                alt="User"
-                className="rounded-circle ms-2"
-                style={{ width: '40px', height: '40px' }}
-              />
-            </button>
-          </div>
+        {/* Navigation Section */}
+        <ul className="navbar-nav my-2 flex-column dynamic-ss text-center custom-theme-radius overflow-hidden gap-1">
+          <li className="nav-item">
+            <a className={`btn btn-dark rounded-pill ${getNavLinkClass("/index")}`} href="/index">
+              <i className="bi bi-house"></i> Home
+            </a>
+          </li>
+          <li className="nav-item">
+            <a className={`btn btn-dark rounded-pill ${getNavLinkClass("/my-list")}`} href="/my-list">
+              <i className="bi bi-bookmark"></i> My List
+            </a>
+          </li>
+          <li className="nav-item">
+            <a className={`btn btn-dark rounded-pill ${getNavLinkClass("/watch-history")}`} href="/watch-history">
+              <i className="bi bi-clock"></i> Watch History
+            </a>
+          </li>
+        </ul>
+
+        {/* Sign Out Button */}
+        <div className="d-flex mt-auto justify-content-center align-items-center gap-4">
+          <button className="btn btn-md d-none d-md-inline-block rounded-pill btn-danger" onClick={signOutWithAccount}>
+            <i className="bi bi-box-arrow-left"></i> Sign Out
+          </button>
+          <button className="btn btn-sm d-md-none rounded-pill btn-danger" onClick={signOutWithAccount}>
+            <i className="bi bi-box-arrow-left"></i> Sign Out
+          </button>
+          {/* Telegram Button */}
+          <a
+            href="https://t.me/pigostream"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="bg-white rounded-circle d-flex justify-content-center align-items-center"
+            style={{ width: '20px', height: '20px' }} // Ensures a perfect circle
+          >
+            <i className="bi bi-telegram fs-2 theme-color"></i>
+          </a>
+
+          {/* GitHub Button */}
+          <a
+            href="https://github.com/varunbala2237/pigo-stream"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="bg-black rounded-circle d-flex justify-content-center align-items-center"
+            style={{ width: '20px', height: '20px' }} // Ensures a perfect circle
+          >
+            <i className="bi bi-github fs-2 text-white"></i>
+          </a>
         </div>
       </div>
-
-      {/* Modal for mobile navbar items */}
-      <div className="modal fade zoom-in-out" id="navItemsModal" tabIndex="-1" aria-labelledby="navItemsModalLabel" aria-hidden="true">
-        <div className="modal-dialog modal-dialog-centered mx-auto border-0 modal-pad">
-          <div className="modal-content dynamic-fs bd-callout-dark custom-theme-radius text-white border-0">
-            <div className="modal-body text-center p-0">
-              <ul className="navbar-nav">
-                <li className="nav-item my-2">
-                  <a className={getNavLinkClass("/index")} href="/index">
-                    <i className="bi bi-house me-1"></i> Home
-                  </a>
-                </li>
-                <li><hr className="text-secondary m-0" /></li>
-                <li className="nav-item my-2">
-                  <a className={getNavLinkClass("/my-list")} href="/my-list">
-                    <i className="bi bi-bookmark me-1"></i> My List
-                  </a>
-                </li>
-                <li><hr className="text-secondary m-0" /></li>
-                <li className="nav-item my-2">
-                  <a className={getNavLinkClass("/watch-history")} href="/watch-history">
-                    <i className="bi bi-clock me-1"></i> Watch History
-                  </a>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Account Details Modal */}
-      <div className="modal fade zoom-in-out" id="accountModal" tabIndex="-1" aria-labelledby="accountModalLabel" aria-hidden="true">
-        <div className="modal-dialog modal-dialog-centered mx-auto border-0 modal-pad">
-          <div className="modal-content dynamic-fs custom-theme-radius bd-callout-dark text-white border-0">
-            <div className="modal-body text-center">
-              <img
-                src={userPhotoURL}
-                alt="User"
-                className="rounded-circle my-2"
-                style={{ width: '70px', height: '70px' }}
-              />
-              <div className="text-wrap text-truncate dynamic-ts">{userName}</div>
-              <div className="text-wrap text-truncate dynamic-fs" contentEditable={false}>{userEmail}</div>
-              <div className="dynamic-ss text-secondary">
-                <i>
-                  We prioritize your privacy by ensuring no information from your Google Account or services is accessed, stored, or retrieved.
-                </i>
-              </div>
-              <div className="d-flex justify-content-end w-100 my-2">
-                <button
-                  type="button"
-                  className="btn btn-danger rounded-pill btn-md d-none d-md-inline-block dynamic-fs m-1"
-                  data-bs-dismiss="modal"
-                  aria-label="Close"
-                  onClick={signOutWithAccount}
-                >
-                  <i className="bi bi-box-arrow-left me-1 text-white"></i>
-                  <span className="text-white">Sign out</span>
-                </button>
-                <button
-                  type="button"
-                  className="btn btn-danger rounded-pill btn-sm d-md-none dynamic-fs m-1"
-                  data-bs-dismiss="modal"
-                  aria-label="Close"
-                  onClick={signOutWithAccount}
-                >
-                  <i className="bi bi-box-arrow-left me-1 text-white"></i>
-                  <span className="text-white">Sign out</span>
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </nav>
+    </>
   );
 }
 

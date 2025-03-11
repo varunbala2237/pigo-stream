@@ -30,7 +30,7 @@ function GenreGrid() {
   };
 
   return (
-    <div className="container mt-4 text-white">
+    <div className="container my-4 text-white">
       <div className="d-flex align-items-center dynamic-ts m-2 px-1">
         <i className="bi bi-shuffle theme-color me-1"></i>
         <b className="mb-0">{selectedMovieGenre} & {selectedTVGenre}</b>

@@ -159,7 +159,7 @@ function TvGrid({ id, type, setBackgroundImage }) {
             <div className="d-flex text-start">
               <div className="dropdown dropup me-2">
                   <button
-                    className="btn btn-dark custom-bg btn-md rounded-pill d-none d-md-inline-block"
+                    className="btn btn-dark bd-callout-dark btn-md rounded-pill d-none d-md-inline-block"
                     id="seasonDropdown"
                     data-bs-toggle="dropdown"
                     aria-expanded="false"
@@ -170,7 +170,7 @@ function TvGrid({ id, type, setBackgroundImage }) {
                   </button>
                   {/* For small screens */}
                   <button
-                    className="btn btn-dark custom-bg btn-sm rounded-pill d-md-none"
+                    className="btn btn-dark bd-callout-dark btn-sm rounded-pill d-md-none"
                     id="seasonDropdown"
                     data-bs-toggle="dropdown"
                     aria-expanded="false"
@@ -226,7 +226,7 @@ function TvGrid({ id, type, setBackgroundImage }) {
               </div>
               <div className="dropdown dropup">
                   <button
-                    className="btn btn-dark custom-bg btn-md rounded-pill d-none d-md-inline-block"
+                    className="btn btn-dark bd-callout-dark btn-md rounded-pill d-none d-md-inline-block"
                     id="episodeDropdown"
                     data-bs-toggle="dropdown"
                     aria-expanded="false"
@@ -237,7 +237,7 @@ function TvGrid({ id, type, setBackgroundImage }) {
                   </button>
                   {/* For small screens */}
                   <button
-                    className="btn btn-dark custom-bg btn-sm rounded-pill d-md-none"
+                    className="btn btn-dark bd-callout-dark btn-sm rounded-pill d-md-none"
                     id="episodeDropdown"
                     data-bs-toggle="dropdown"
                     aria-expanded="false"
@@ -322,7 +322,7 @@ function TvGrid({ id, type, setBackgroundImage }) {
                 <div className="dropdown dropup">
                   {/* Button for medium and large screens */}
                   <button
-                    className="btn btn-dark custom-bg btn-md rounded-pill d-none d-md-inline-block"
+                    className="btn btn-dark bd-callout-dark btn-md rounded-pill d-none d-md-inline-block"
                     id="serverDropdown"
                     data-bs-toggle="dropdown"
                     aria-expanded="false"
@@ -332,7 +332,7 @@ function TvGrid({ id, type, setBackgroundImage }) {
                   </button>
                   {/* Button for small screens */}
                   <button
-                    className="btn btn-dark custom-bg btn-sm rounded-pill d-md-none"
+                    className="btn btn-dark bd-callout-dark btn-sm rounded-pill d-md-none"
                     id="serverDropdown"
                     data-bs-toggle="dropdown"
                     aria-expanded="false"
@@ -410,7 +410,7 @@ function TvGrid({ id, type, setBackgroundImage }) {
                   <div className="text-end">
                     {/* Button for medium and large screens */}
                     <button
-                      className="btn bd-callout-dark dynamic-fs border-0 rounded-pill btn-md d-none d-md-inline-block"
+                      className="btn btn-dark bd-callout-dark dynamic-fs border-0 rounded-pill btn-md d-none d-md-inline-block"
                       onClick={handleShowMore}
                     >
                       <i className="bi bi-chevron-down text-white me-1"></i>
@@ -419,7 +419,7 @@ function TvGrid({ id, type, setBackgroundImage }) {
 
                     {/* Button for small screens */}
                     <button
-                      className="btn bd-callout-dark dynamic-fs border-0 rounded-pill btn-sm d-md-none"
+                      className="btn btn-dark bd-callout-dark dynamic-fs border-0 rounded-pill btn-sm d-md-none"
                       onClick={handleShowMore}
                     >
                       <i className="bi bi-chevron-down text-white me-1"></i>
