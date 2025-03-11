@@ -47,7 +47,7 @@ const IndexPage = () => {
   const shouldHideBackground = showSearchBar || triggerSearch.trim() !== '';
 
   return (
-    <div className="index-page">
+    <div className="index-page poppins-medium">
       <div
         className="background-image"
         style={{

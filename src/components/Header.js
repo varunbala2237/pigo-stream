@@ -43,16 +43,46 @@ function Header() {
   return (
     <>
       {/* Top Navbar */}
-      <nav className="navbar navbar-expand-lg navbar-dark custom-theme-radius poppins-medium">
+      <nav className="navbar navbar-expand-lg navbar-dark custom-theme-radius">
         <div className="container-fluid">
           <a className="navbar-brand d-flex align-items-center" href="/">
             <img className="mr-3" src="favicon.ico" alt="PigoStream" width="40" height="40" />
             <span className="mb-0 dynamic-hs"><b>Pigo</b>Stream</span>
           </a>
 
-          <button className="btn btn-dark bd-callout-dark text-white" onClick={() => setSidebarOpen(true)}>
-            <i className="bi bi-list"></i> {/* Sidebar Open Button */}
-          </button>
+          {/* Conditional Rendering */}
+            {location.pathname === "/play" ? ( // Add more exceptions if needed
+              <>
+                {/* Back button with navigation for small screens */}
+                <button 
+                  type="button" 
+                  className="btn btn-dark bd-callout-dark border-0 btn-sm d-md-none text-white rounded-pill dynamic-fs"
+                  onClick={() => navigate(-1)} // Navigate to the previous page
+                >
+                  <i className="bi bi-chevron-left me-2"></i> 
+                  Back
+                </button>
+                {/* Back button with navigation for large screens */}
+                <button 
+                  type="button" 
+                  className="btn btn-dark bd-callout-dark border-0 btn-md d-none d-md-inline-block text-white rounded-pill dynamic-fs"
+                  onClick={() => navigate(-1)} // Navigate to the previous page
+                >
+                  <i className="bi bi-chevron-left me-2"></i> 
+                  Back
+                </button>
+              </>
+            ) : (
+              <>
+                {/* Sidebar Open Button */}
+                <button 
+                  className="btn btn-dark bd-callout-dark border-0 text-white"  
+                  onClick={() => setSidebarOpen(true)}
+                >
+                  <i className="bi bi-list"></i> {/* Sidebar Open Button */}
+                </button>
+              </>
+            )}
         </div>
       </nav>
 
@@ -62,7 +92,7 @@ function Header() {
       {/* Sidebar */}
       <div className={`sidebar d-flex flex-column bd-callout-dark text-white ${sidebarOpen ? "open" : ""}`}>
         <div className="sidebar-header d-flex justify-content-end">
-          <button className="btn btn-dark bd-callout-dark text-white" onClick={() => setSidebarOpen(false)}>
+          <button className="btn btn-dark bd-callout-dark text-white border-0" onClick={() => setSidebarOpen(false)}>
             <i className="bi bi-x-lg"></i> {/* Sidebar Close Button */}
           </button>
         </div>

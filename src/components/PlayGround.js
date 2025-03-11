@@ -21,9 +21,9 @@ function PlayGround() {
   const GridComponent = type === 'movie' ? MovieGrid : TvGrid;
 
   return (
-    <div className="index-page">
+    <div className="index-page poppins-medium">
       <Header />
-      <div className="container-fluid d-flex flex-column justify-content-center align-items-center poppins-medium">
+      <div className="container-fluid d-flex flex-column justify-content-center align-items-center">
         <div
           className="background-image"
           style={{
