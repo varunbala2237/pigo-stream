@@ -115,17 +115,17 @@ function Header() {
         {/* Navigation Section */}
         <ul className="navbar-nav flex-column dynamic-fs flex-grow-1 justify-content-center custom-theme-radius gap-2">
           <li className="nav-item">
-            <Link className={`text-white ${getNavLinkClass("/index")}`} to="/index" onClick={() => setSidebarOpen(false)}>
+            <Link className={`theme-color ${getNavLinkClass("/index")}`} to="/index" onClick={() => setSidebarOpen(false)}>
               <i className="bi bi-house text-primary"></i> Home
             </Link>
           </li>
           <li className="nav-item">
-            <Link className={`text-white ${getNavLinkClass("/my-list")}`} to="/my-list" onClick={() => setSidebarOpen(false)}>
+            <Link className={`theme-color text-white ${getNavLinkClass("/my-list")}`} to="/my-list" onClick={() => setSidebarOpen(false)}>
               <i className="bi bi-bookmark text-primary"></i> My List
             </Link>
           </li>
           <li className="nav-item">
-            <Link className={`text-white ${getNavLinkClass("/watch-history")}`} to="/watch-history" onClick={() => setSidebarOpen(false)}>
+            <Link className={`theme-color text-white ${getNavLinkClass("/watch-history")}`} to="/watch-history" onClick={() => setSidebarOpen(false)}>
               <i className="bi bi-clock text-primary"></i> Watch History
             </Link>
           </li>
