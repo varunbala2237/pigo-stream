@@ -142,7 +142,7 @@ function Header() {
             <a href="https://t.me/pigostream" target="_blank" rel="noopener noreferrer" 
               className="bg-white rounded-circle d-flex justify-content-center align-items-center" 
               style={{ width: '26px', height: '26px' }}>
-                <i className="bi bi-telegram fs-2 theme-color"></i>
+                <i className="bi bi-telegram fs-2 text-primary"></i>
             </a>
       
             <a href="https://github.com/varunbala2237/pigo-stream" target="_blank" rel="noopener noreferrer" 
