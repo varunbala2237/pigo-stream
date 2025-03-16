@@ -6,6 +6,7 @@ import IndexPage from './components/IndexPage';
 import PlayGround from './components/PlayGround'
 import WatchHistoryPage from './components/WatchHistoryPage';
 import MyListPage from './components/MyListPage';
+import PigoStore from './components/PigoStore';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
             <Route path="/play" element={<PlayGround/>} />
             <Route path="/watch-history" element={<WatchHistoryPage/>} />
             <Route path="/my-list" element={<MyListPage/>} />
+            <Route path="/pigostore" element={<PigoStore />} />
         </Routes>
     </BrowserRouter>
   );
