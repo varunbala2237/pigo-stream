@@ -209,7 +209,7 @@
     max-width: 80%;
   }
   .modal-pad {
-    max-width: 65%;
+    max-width: 90%;
   }
   .custom-cast-card-img {
     height: 70px;
@@ -235,10 +235,10 @@
 /* For iPads and tablets with a width of 768px to 1199px */
 @media (min-width: 768px) and (max-width: 1199px) {
   .form-pad {
-    max-width: 65%;
+    max-width: 60%;
   }
   .modal-pad {
-    max-width: 50%;
+    max-width: 70%;
   }
   .custom-cast-card-img {
     height: 80px;
@@ -267,7 +267,7 @@
     max-width: 30%;
   }
   .modal-pad {
-    max-width: 25%;
+    max-width: 40%;
   }
   .custom-cast-card-img {
     height: 90px;

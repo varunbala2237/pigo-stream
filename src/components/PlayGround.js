@@ -31,7 +31,18 @@ function PlayGround() {
               ? `linear-gradient(to bottom, rgba(0, 0, 0, 0), rgb(0, 0, 0)), url(${backgroundImage})`
               : 'none',
           }}
-        ></div>
+        >
+          {/* Dark Overlay */}
+          <div
+            className="position-absolute w-100 h-100"
+            style={{
+            top: 0,
+            left: 0,
+            background: 'rgba(0, 0, 0, 0.4)',
+            zIndex: 1,
+          }}
+          ></div>
+        </div>
         <GridComponent id={id} type={type} setBackgroundImage={setBackgroundImage} />
       </div>
     </div>

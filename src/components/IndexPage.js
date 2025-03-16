@@ -66,8 +66,8 @@ const IndexPage = () => {
             style={{
             top: 0,
             left: 0,
-            background: 'rgba(0, 0, 0, 0.6)', // Dark overlay with transparency
-            zIndex: 1, // Behind content
+            background: 'rgba(0, 0, 0, 0.4)',
+            zIndex: 1,
           }}
           ></div>
         )}
