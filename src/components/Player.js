@@ -105,7 +105,7 @@ function Player({ mediaURL, averageVote, director, genres, mediaInfo, id, type, 
   };
 
   return (
-    <div className="d-flex flex-column custom-bg custom-theme-radius w-100">
+    <div className="d-flex flex-column custom-bg custom-theme-radius w-100 p-2">
       <div className="d-flex flex-column flex-md-row align-items-start justify-content-between w-100">
         <div className="d-flex flex-row align-items-start custom-theme-radius-low w-100">
           <div className="section border-0">
