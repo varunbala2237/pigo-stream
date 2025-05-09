@@ -109,8 +109,8 @@ function WatchHistoryGrid({ userUID }) {
                         onClick={handleClearHistory}
                         disabled={isClearButtonDisabled}
                     >
-                        <i className="bi bi-trash me-1"></i>
-                        Clear
+                        <i className="bi bi-trash me-2"></i>
+                        Clear History
                     </button>
                     <button
                         type="button"
@@ -118,8 +118,8 @@ function WatchHistoryGrid({ userUID }) {
                         onClick={handleClearHistory}
                         disabled={isClearButtonDisabled}
                     >
-                        <i className="bi bi-trash me-1"></i>
-                        Clear
+                        <i className="bi bi-trash me-2"></i>
+                        Clear History
                     </button>
                 </div>
             </div>
@@ -134,7 +134,7 @@ function WatchHistoryGrid({ userUID }) {
             {fetchError && (
                 <div className="col d-flex vh-50 justify-content-center align-items-center">
                     <div className="d-flex align-items-center dynamic-fs">
-                        <i className="bi bi-wifi-off me-1"></i>
+                        <i className="bi bi-wifi-off me-2"></i>
                         <span className="mb-0">Something went wrong.</span>
                     </div>
                 </div>
@@ -142,7 +142,7 @@ function WatchHistoryGrid({ userUID }) {
             {!fetchLoading && !fetchError && (
                 <>
                     <div className="d-flex align-items-center dynamic-ts m-2 px-1">
-                        <i className="bi bi-clock theme-color me-1"></i>
+                        <i className="bi bi-clock theme-color me-2"></i>
                         <b className="mb-0">Watch History</b>
                     </div>
                     {/* Movies */}
@@ -166,7 +166,7 @@ function WatchHistoryGrid({ userUID }) {
                             </>
                         )}
                         <div ref={moviesRef} className="d-flex overflow-auto" style={{ scrollSnapType: 'x mandatory', gap: '1rem' }}>
-                            {movieHistory.length > 0 ? (
+                            {movieHistory.length > 0 && (
                                 movieHistory.map((movie) => (
                                     <Card
                                         key={movie.id}
@@ -177,13 +177,6 @@ function WatchHistoryGrid({ userUID }) {
                                         handleAlert={handleAlert}
                                     />
                                 ))
-                            ) : (
-                                <div className="col d-flex vh-25 justify-content-center align-items-center">
-                                    <div className="d-flex align-items-center dynamic-fs">
-                                        <i className="bi bi-clock me-1"></i>
-                                        <span className="mb-0">No movies found.</span>
-                                    </div>
-                                </div>
                             )}
                         </div>
                     </div>
@@ -193,14 +186,14 @@ function WatchHistoryGrid({ userUID }) {
                                 className="btn btn-dark bd-callout-dark dynamic-fs border-0 rounded-pill btn-md d-none d-md-inline-block"
                                 onClick={handleShowMoreMovies}
                             >
-                                <i className="bi bi-chevron-down text-white me-1"></i>
+                                <i className="bi bi-chevron-down text-white me-2"></i>
                                 <span className="text-white">Show More</span>
                             </button>
                             <button
                                 className="btn btn-dark bd-callout-dark dynamic-fs border-0 rounded-pill btn-sm d-md-none"
                                 onClick={handleShowMoreMovies}
                             >
-                                <i className="bi bi-chevron-down text-white me-1"></i>
+                                <i className="bi bi-chevron-down text-white me-2"></i>
                                 <span className="text-white">Show More</span>
                             </button>
                         </div>
@@ -227,7 +220,7 @@ function WatchHistoryGrid({ userUID }) {
                             </>
                         )}
                         <div ref={tvRef} className="d-flex overflow-auto" style={{ scrollSnapType: 'x mandatory', gap: '1rem' }}>
-                            {tvHistory.length > 0 ? (
+                            {tvHistory.length > 0 && (
                                 tvHistory.map((show) => (
                                     <Card
                                         key={show.id}
@@ -238,13 +231,6 @@ function WatchHistoryGrid({ userUID }) {
                                         handleAlert={handleAlert}
                                     />
                                 ))
-                            ) : (
-                                <div className="col d-flex vh-25 justify-content-center align-items-center">
-                                    <div className="d-flex align-items-center dynamic-fs">
-                                        <i className="bi bi-clock me-1"></i>
-                                        <span className="mb-0">No tv shows found.</span>
-                                    </div>
-                                </div>
                             )}
                         </div>
                     </div>
@@ -254,16 +240,26 @@ function WatchHistoryGrid({ userUID }) {
                                 className="btn btn-dark bd-callout-dark dynamic-fs border-0 rounded-pill btn-md d-none d-md-inline-block"
                                 onClick={handleShowMoreTV}
                             >
-                                <i className="bi bi-chevron-down text-white me-1"></i>
+                                <i className="bi bi-chevron-down text-white me-2"></i>
                                 <span className="text-white">Show More</span>
                             </button>
                             <button
                                 className="btn btn-dark bd-callout-dark dynamic-fs border-0 rounded-pill btn-sm d-md-none"
                                 onClick={handleShowMoreTV}
                             >
-                                <i className="bi bi-chevron-down text-white me-1"></i>
+                                <i className="bi bi-chevron-down text-white me-2"></i>
                                 <span className="text-white">Show More</span>
                             </button>
+                        </div>
+                    )}
+
+                    {/* If both Movies and TV Shows are empty */}
+                    {movieHistory.length === 0 && tvHistory.length === 0 && (
+                        <div className="col d-flex vh-50 justify-content-center align-items-center mt-3">
+                            <div className="d-flex align-items-center">
+                                <i className="bi bi-clock me-2"></i>
+                                <span className="dynamic-fs">You haven't watched anything yet.</span>
+                            </div>
                         </div>
                     )}
                 </>

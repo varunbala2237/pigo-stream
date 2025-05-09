@@ -46,7 +46,7 @@ function SearchGrid({ searchQuery }) {
       {isError && (
         <div className="col d-flex vh-50 justify-content-center align-items-center">
           <div className="d-flex align-items-center dynamic-fs">
-            <i className="bi bi-wifi-off me-1"></i>
+            <i className="bi bi-wifi-off me-2"></i>
             <span className="mb-0">Something went wrong.</span>
           </div>
         </div>
@@ -54,7 +54,7 @@ function SearchGrid({ searchQuery }) {
       {!isLoading && !isError && (
         <>
           <div className="d-flex align-items-center dynamic-ts m-2 px-1">
-            <i className="bi bi-search theme-color me-1"></i>
+            <i className="bi bi-search theme-color me-2"></i>
             <b className="mb-0">Search</b>
           </div>
           {/* Movies Results */}
@@ -80,17 +80,10 @@ function SearchGrid({ searchQuery }) {
                   </>
                 )}
                 <div ref={moviesRef} className="d-flex overflow-auto" style={{ scrollSnapType: 'x mandatory', gap: '1rem' }}>
-                  {movies?.length > 0 ? (
+                  {movies?.length > 0 && (
                     movies.map((movie, index) => (
                       <Card key={index} media={movie} type={'movie'} path={location.pathname} />
                     ))
-                  ) : (
-                    <div className="col d-flex vh-25 justify-content-center align-items-center">
-                      <div className="d-flex align-items-center">
-                        <i className="bi bi-search me-1"></i>
-                        <span className="dynamic-fs">No movies found.</span>
-                      </div>
-                    </div>
                   )}
                 </div>
               </div>
@@ -120,21 +113,24 @@ function SearchGrid({ searchQuery }) {
                   </>
                 )}
                 <div ref={showsRef} className="d-flex overflow-auto" style={{ scrollSnapType: 'x mandatory', gap: '1rem' }}>
-                  {shows?.length > 0 ? (
+                  {shows?.length > 0 && (
                     shows.map((show, index) => (
                       <Card key={index} media={show} type={'tv'} path={location.pathname} />
                     ))
-                  ) : (
-                    <div className="col d-flex vh-25 justify-content-center align-items-center">
-                      <div className="d-flex align-items-center">
-                        <i className="bi bi-search me-1"></i>
-                        <span className="dynamic-fs">No tv shows found.</span>
-                      </div>
-                    </div>
                   )}
                 </div>
               </div>
             </>
+          )}
+
+          {/* If both Movies and TV Shows are not found */}
+          {movies.length === 0 && shows.length === 0 && (
+            <div className="col d-flex vh-50 justify-content-center align-items-center mt-3">
+              <div className="d-flex align-items-center">
+                <i className="bi bi-search me-2"></i>
+                <span className="dynamic-fs">No results found for "{searchQuery}".</span>
+              </div>
+            </div>
           )}
         </>
       )}

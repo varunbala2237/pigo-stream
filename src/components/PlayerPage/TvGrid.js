@@ -120,7 +120,7 @@ function TvGrid({ id, type, setBackgroundImage }) {
     return (
       <div className="col vh-70 d-flex justify-content-center align-items-center">
         <div className="d-flex text-white align-items-center dynamic-fs">
-          <i className="bi bi-wifi-off me-1"></i>
+          <i className="bi bi-wifi-off me-2"></i>
           <span className="mb-0">Something went wrong.</span>
         </div>
       </div>
@@ -165,7 +165,7 @@ function TvGrid({ id, type, setBackgroundImage }) {
                     aria-expanded="false"
                     aria-haspopup="true"
                   >
-                    <i className="bi bi-chevron-down me-1"></i>
+                    <i className="bi bi-chevron-down me-2"></i>
                     Season {selectedSeason}
                   </button>
                   {/* For small screens */}
@@ -176,7 +176,7 @@ function TvGrid({ id, type, setBackgroundImage }) {
                     aria-expanded="false"
                     aria-haspopup="true"
                   >
-                    <i className="bi bi-chevron-down me-1"></i>
+                    <i className="bi bi-chevron-down me-2"></i>
                     S {selectedSeason}
                   </button>
                   <ul className="dropdown-menu overflow-auto custom-dropdown bd-callout-dark p-0 custom-theme-radius">
@@ -192,7 +192,7 @@ function TvGrid({ id, type, setBackgroundImage }) {
                       <li className="dropdown-item text-white bg-transparent">
                         <div className="col d-flex justify-content-center align-items-center">
                           <div className="d-flex align-items-center dynamic-fs">
-                            <i className="bi bi-wifi-off me-1"></i>
+                            <i className="bi bi-wifi-off me-2"></i>
                             <span className="mb-0">Something went wrong.</span>
                           </div>
                         </div>
@@ -216,7 +216,7 @@ function TvGrid({ id, type, setBackgroundImage }) {
                       <li className="dropdown-item text-white bg-transparent">
                         <div className="col d-flex justify-content-center align-items-center">
                           <div className="d-flex align-items-center dynamic-fs">
-                            <i className="bi bi-database-slash me-1"></i>
+                            <i className="bi bi-database-slash me-2"></i>
                             <span>No season found.</span>
                           </div>
                         </div>
@@ -232,7 +232,7 @@ function TvGrid({ id, type, setBackgroundImage }) {
                     aria-expanded="false"
                     aria-haspopup="true"
                   >
-                    <i className="bi bi-chevron-down me-1"></i>
+                    <i className="bi bi-chevron-down me-2"></i>
                     Episode {selectedEpisode}
                   </button>
                   {/* For small screens */}
@@ -243,7 +243,7 @@ function TvGrid({ id, type, setBackgroundImage }) {
                     aria-expanded="false"
                     aria-haspopup="true"
                   >
-                    <i className="bi bi-chevron-down me-1"></i>
+                    <i className="bi bi-chevron-down me-2"></i>
                     E {selectedEpisode}
                   </button>
                   <ul className="dropdown-menu overflow-auto custom-dropdown bd-callout-dark p-0 custom-theme-radius">
@@ -259,7 +259,7 @@ function TvGrid({ id, type, setBackgroundImage }) {
                       <li className="dropdown-item text-white bg-transparent">
                         <div className="col d-flex justify-content-center align-items-center">
                           <div className="d-flex align-items-center dynamic-fs">
-                            <i className="bi bi-wifi-off me-1"></i>
+                            <i className="bi bi-wifi-off me-2"></i>
                             <span className="mb-0">Something went wrong.</span>
                           </div>
                         </div>
@@ -309,7 +309,7 @@ function TvGrid({ id, type, setBackgroundImage }) {
                       <li className="dropdown-item text-white bg-transparent">
                         <div className="col d-flex justify-content-center align-items-center">
                           <div className="d-flex align-items-center dynamic-fs">
-                            <i className="bi bi-database-slash me-1"></i>
+                            <i className="bi bi-database-slash me-2"></i>
                             <span>No episode found.</span>
                           </div>
                         </div>
@@ -327,7 +327,7 @@ function TvGrid({ id, type, setBackgroundImage }) {
                     data-bs-toggle="dropdown"
                     aria-expanded="false"
                   >
-                    <i className="bi bi-chevron-down me-1"></i>
+                    <i className="bi bi-chevron-down me-2"></i>
                     {selectedServerName ? selectedServerName : 'vidsrc.xyz'}
                   </button>
                   {/* Button for small screens */}
@@ -337,7 +337,7 @@ function TvGrid({ id, type, setBackgroundImage }) {
                     data-bs-toggle="dropdown"
                     aria-expanded="false"
                   >
-                    <i className="bi bi-chevron-down me-1"></i>
+                    <i className="bi bi-chevron-down me-2"></i>
                     {selectedServerName ? selectedServerName : 'vidsrc.xyz'}
                   </button>
                   <ul className="dropdown-menu overflow-auto custom-dropdown bd-callout-dark p-0 custom-theme-radius">
@@ -353,7 +353,7 @@ function TvGrid({ id, type, setBackgroundImage }) {
                       <li className="dropdown-item text-white bg-transparent">
                         <div className="col d-flex justify-content-center align-items-center">
                           <div className="d-flex align-items-center dynamic-fs">
-                            <i className="bi bi-wifi-off me-1"></i>
+                            <i className="bi bi-wifi-off me-2"></i>
                             <span className="mb-0">Something went wrong.</span>
                           </div>
                         </div>
@@ -376,7 +376,7 @@ function TvGrid({ id, type, setBackgroundImage }) {
                       <li className="dropdown-item text-white bg-transparent">
                         <div className="col d-flex justify-content-center align-items-center">
                           <div className="d-flex align-items-center dynamic-fs">
-                            <i className="bi bi-database-slash me-1"></i>
+                            <i className="bi bi-database-slash me-2"></i>
                             <span>No server found.</span>
                           </div>
                         </div>
@@ -389,14 +389,14 @@ function TvGrid({ id, type, setBackgroundImage }) {
             <div className="d-flex flex-column align-items-start custom-theme-radius my-2 w-100">
               <div className="container py-2 text-white">
                 <div className="d-flex flex-row dynamic-ts">
-                  <i className="bi bi-person-fill me-1"></i>
+                  <i className="bi bi-person-fill me-2"></i>
                   Cast
                 </div>
                 <div className="row justify-content-center">
                   {cast.length === 0 ? (
                     <div className="col d-flex vh-35 justify-content-center align-items-center">
                       <div className="d-flex align-items-center dynamic-fs">
-                        <i className="bi bi-database-slash me-1"></i>
+                        <i className="bi bi-database-slash me-2"></i>
                         <span>No cast found.</span>
                       </div>
                     </div>
@@ -413,7 +413,7 @@ function TvGrid({ id, type, setBackgroundImage }) {
                       className="btn btn-dark bd-callout-dark dynamic-fs border-0 rounded-pill btn-md d-none d-md-inline-block"
                       onClick={handleShowMore}
                     >
-                      <i className="bi bi-chevron-down text-white me-1"></i>
+                      <i className="bi bi-chevron-down text-white me-2"></i>
                       <span className="text-white">Show More</span>
                     </button>
 
@@ -422,7 +422,7 @@ function TvGrid({ id, type, setBackgroundImage }) {
                       className="btn btn-dark bd-callout-dark dynamic-fs border-0 rounded-pill btn-sm d-md-none"
                       onClick={handleShowMore}
                     >
-                      <i className="bi bi-chevron-down text-white me-1"></i>
+                      <i className="bi bi-chevron-down text-white me-2"></i>
                       <span className="text-white">Show More</span>
                     </button>
                   </div>

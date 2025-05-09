@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import Header from '../Header';
 import SearchBar from './SearchBar';
 import SearchGrid from './SearchGrid';
-import MediaGrid from '../MediaGrid';
+import TrendingGrid from './TrendingGrid';
 import useSaveSearchHistory from '../../hooks/useSaveSearchHistory';
 import useFetchSearchHistory from '../../hooks/useFetchSearchHistory';
 import useRemoveSearchHistory from '../../hooks/useRemoveSearchHistory';
@@ -239,11 +239,11 @@ function HomePage({
                 </div>
                 <div className="dynamic-fs my-2">{mediaDesc}</div>
                 <button className="btn btn-light btn-md d-none d-md-inline-block bd-callout-light rounded-pill border-0 my-2" onClick={handlePlayMedia}>
-                  <i className="bi bi-chevron-down me-1"></i>
+                  <i className="bi bi-chevron-down me-2"></i>
                   <span>Show More</span>
                 </button>
                 <button className="btn btn-light btn-sm d-md-none bd-callout-light rounded-pill border-0 my-2" onClick={handlePlayMedia}>
-                  <i className="bi bi-chevron-down me-1"></i>
+                  <i className="bi bi-chevron-down me-2"></i>
                   <span>Show More</span>
                 </button>
                 </div>
@@ -252,7 +252,7 @@ function HomePage({
         )}
 
         <div className="flex-row text-white w-100">
-          {triggerSearch.trim() === '' ? <><MediaGrid /></> : <><SearchGrid searchQuery={triggerSearch} /></>}
+          {triggerSearch.trim() === '' ? <><TrendingGrid /></> : <><SearchGrid searchQuery={triggerSearch} /></>}
         </div>
 
         <button className="bd-callout-primary" style={fabStyle} onClick={handleSearchBar}>

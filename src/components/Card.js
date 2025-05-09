@@ -129,7 +129,7 @@ function Card({ media, type, path, onRemove, handleAlert, isDeletable=true }) {
                         className="btn btn-light rounded-pill btn-md d-none d-md-inline-block dynamic-fs m-1" 
                         onClick={() => { setModalVisible(false); setTimeout(() => setShowModal(false), 300); }}
                       >
-                        <i className="bi bi-x-lg me-1 text-black"></i>
+                        <i className="bi bi-x-lg me-2 text-black"></i>
                         <span className="text-black">Cancel</span>
                       </button>
                       <button
@@ -137,7 +137,7 @@ function Card({ media, type, path, onRemove, handleAlert, isDeletable=true }) {
                         className="btn btn-light rounded-pill btn-sm d-md-none dynamic-fs m-1" 
                         onClick={() => { setModalVisible(false); setTimeout(() => setShowModal(false), 300); }}
                       >
-                        <i className="bi bi-x-lg me-1 text-black"></i>
+                        <i className="bi bi-x-lg me-2 text-black"></i>
                         <span className="text-black">Cancel</span>
                       </button>
                     </div>          
@@ -146,13 +146,13 @@ function Card({ media, type, path, onRemove, handleAlert, isDeletable=true }) {
                       <button type="button" className="btn btn-danger rounded-pill btn-md d-none d-md-inline-block dynamic-fs m-1"
                         onClick={handleRemove}
                       >
-                        <i className="bi bi-trash me-1 text-white"></i>
+                        <i className="bi bi-trash me-2 text-white"></i>
                         <span className="text-white">Remove</span>
                       </button>
                       <button type="button" className="btn btn-danger rounded-pill btn-sm d-md-none dynamic-fs m-1"
                         onClick={handleRemove}
                       >
-                        <i className="bi bi-trash me-1 text-white"></i>
+                        <i className="bi bi-trash me-2 text-white"></i>
                         <span className="text-white">Remove</span>
                       </button>
                     </div>

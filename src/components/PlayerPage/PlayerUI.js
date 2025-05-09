@@ -161,7 +161,7 @@ function Player({ mediaURL, averageVote, director, genres, mediaInfo, id, type, 
                 onClick={() => trailerLink && window.open(trailerLink, '_blank')}
                 disabled={!trailerLink}
               >
-                <i className="bi bi-youtube text-danger me-1"></i>
+                <i className="bi bi-youtube text-danger me-2"></i>
                   {"Trailer"}
               </button>
               {/* Smaller button for smaller screen */}
@@ -172,7 +172,7 @@ function Player({ mediaURL, averageVote, director, genres, mediaInfo, id, type, 
                 onClick={() => trailerLink && window.open(trailerLink, '_blank')}
                 disabled={!trailerLink}
               >
-                <i className="bi bi-youtube text-danger me-1"></i>
+                <i className="bi bi-youtube text-danger me-2"></i>
                   {"Trailer"}
               </button>
 
@@ -181,7 +181,7 @@ function Player({ mediaURL, averageVote, director, genres, mediaInfo, id, type, 
                 className="btn btn-dark d-none d-md-block justify-content-center border-0 text-white nowrap rounded-pill custom-bg"
                 onClick={() => openPlayer(mediaURL)}
               >
-                <i className="bi bi-play-circle-fill theme-color me-1"></i>
+                <i className="bi bi-play-circle-fill theme-color me-2"></i>
                 Play
               </button>
               {/* Smaller button for smaller screen */}
@@ -189,7 +189,7 @@ function Player({ mediaURL, averageVote, director, genres, mediaInfo, id, type, 
                 className="btn btn-dark d-block d-md-none btn-sm justify-content-center border-0 text-white nowrap rounded-pill custom-bg"
                 onClick={() => openPlayer(mediaURL)}
               >
-                <i className="bi bi-play-circle-fill theme-color me-1"></i>
+                <i className="bi bi-play-circle-fill theme-color me-2"></i>
                 Play
               </button>
             </div>
@@ -198,7 +198,7 @@ function Player({ mediaURL, averageVote, director, genres, mediaInfo, id, type, 
             <h4 className="text-wrap dynamic-ts">{mediaInfo.title ? mediaInfo.title : mediaInfo.name}</h4>
             <div className="align-items-start justify-content-start w-100">
               <div className="rounded dynamic-fs">
-                <i className="bi bi-star-fill text-warning me-1"></i>
+                <i className="bi bi-star-fill text-warning me-2"></i>
                 <span id="Rating" className="text-white">
                   {averageVote} 
                 </span>
@@ -227,7 +227,7 @@ function Player({ mediaURL, averageVote, director, genres, mediaInfo, id, type, 
         <div className="bd-callout-dark custom-theme-radius dynamic-fs text-white mt-3" style={{ padding: '1rem' }}>
           {platform === 'windows' || platform === 'android' ? (
             <>Don't have the app? <span className="link text-primary" onClick={redirectToStore}>
-              <i className="bi bi-bag-check-fill me-1"></i>Get it now
+              <i className="bi bi-bag-check-fill me-2"></i>Get it now
             </span></>
           ) : platform === 'macos' || platform === 'ios' ? (
             <span className="link text-warning">

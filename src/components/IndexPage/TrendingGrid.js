@@ -1,9 +1,9 @@
 import { React, useRef } from 'react';
 import { useLocation } from 'react-router-dom';
-import Card from './Card';
-import useFetchMedia from '../hooks/useFetchMedia';
+import Card from '../Card';
+import useFetchMedia from '../../hooks/useFetchMedia';
 
-function MediaGrid() {
+function TrendingGrid() {
   const { data: popularMovies, loading: loadingPopularMovies, error: errorPopularMovies } = useFetchMedia('trending', 'movie');
   const { data: popularTv, loading: loadingPopularTv, error: errorPopularTv } = useFetchMedia('trending', 'tv');
   const location = useLocation();
@@ -33,7 +33,7 @@ function MediaGrid() {
   return (
     <div className="container mt-4 text-white">
       <div className="d-flex align-items-center dynamic-ts m-2 px-1">
-        <i className="bi bi-fire theme-color me-1"></i>
+        <i className="bi bi-fire theme-color me-2"></i>
         <b className="mb-0">Trending</b>
       </div>
       {/* Trending Movies Section */}
@@ -68,7 +68,7 @@ function MediaGrid() {
               {errorPopularMovies && (
                 <div className="col d-flex vh-25 justify-content-center align-items-center">
                     <div className="d-flex align-items-center dynamic-fs">
-                        <i className="bi bi-wifi-off me-1"></i>
+                        <i className="bi bi-wifi-off me-2"></i>
                         <span className="mb-0">Something went wrong.</span>
                     </div>
                 </div>
@@ -82,8 +82,8 @@ function MediaGrid() {
                 !errorPopularMovies && (
                   <div className="col d-flex vh-25 justify-content-center align-items-center">
                     <div className="d-flex align-items-center dynamic-fs">
-                      <i className="bi bi-database-slash me-1"></i>
-                      <span className="mb-0">No movies found.</span>
+                      <i className="bi bi-database-slash me-2"></i>
+                      <span className="mb-0">No trending movies found.</span>
                     </div>
                   </div>
                 )
@@ -124,7 +124,7 @@ function MediaGrid() {
               {errorPopularTv && (
                 <div className="col d-flex vh-25 justify-content-center align-items-center">
                     <div className="d-flex align-items-center dynamic-fs">
-                        <i className="bi bi-wifi-off me-1"></i>
+                        <i className="bi bi-wifi-off me-2"></i>
                         <span className="mb-0">Something went wrong.</span>
                     </div>
                 </div>
@@ -138,8 +138,8 @@ function MediaGrid() {
                 !errorPopularTv && (
                   <div className="col d-flex vh-25 justify-content-center align-items-center">
                     <div className="d-flex align-items-center dynamic-fs">
-                      <i className="bi bi-database-slash me-1"></i>
-                      <span className="mb-0">No tv shows found.</span>
+                      <i className="bi bi-database-slash me-2"></i>
+                      <span className="mb-0">No trending tv shows found.</span>
                     </div>
                   </div>
                 )
@@ -151,4 +151,4 @@ function MediaGrid() {
   );
 }
 
-export default MediaGrid;
+export default TrendingGrid;
