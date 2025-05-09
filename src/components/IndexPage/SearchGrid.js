@@ -128,7 +128,7 @@ function SearchGrid({ searchQuery }) {
             <div className="col d-flex vh-50 justify-content-center align-items-center mt-3">
               <div className="d-flex align-items-center">
                 <i className="bi bi-search me-2"></i>
-                <span className="dynamic-fs">No results found for "{searchQuery}".</span>
+                <span className="dynamic-fs">No results found for <strong>"{searchQuery}"</strong>.</span>
               </div>
             </div>
           )}
