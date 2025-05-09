@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import Header from './Header';
-import WatchHistoryGrid from './WatchHistoryGrid';
-import GenreGrid from './GenreGrid';
-import { auth } from '../firebase/firebase-auth'; // Import the auth object
+import Header from '../Header';
+import MyListGrid from './MyListGrid';
+import { auth } from '../../firebase/firebase-auth'; // Import the auth object
 
-function WatchHistoryPage() {
+function MyListPage() {
     const [userUID, setUserUID] = useState(null);
 
     useEffect(() => {
@@ -20,7 +19,7 @@ function WatchHistoryPage() {
 
     useEffect(() => {
         // Retrieve the saved page state from sessionStorage
-        const savedPageState = sessionStorage.getItem('historyPageState');
+        const savedPageState = sessionStorage.getItem('myListPageState');
         if (savedPageState) {
           const { savedScrollPosition } = JSON.parse(savedPageState);
           if (savedScrollPosition !== undefined) {
@@ -46,7 +45,7 @@ function WatchHistoryPage() {
         const pageState = JSON.stringify({
           savedScrollPosition: scrollPosition,
         });
-        sessionStorage.setItem('historyPageState', pageState);
+        sessionStorage.setItem('myListPageState', pageState);
     };
 
     return (
@@ -54,11 +53,11 @@ function WatchHistoryPage() {
           <div className="w-100">
             <Header/>
             <div className="flex-row text-white w-100">
-                {userUID ? <><WatchHistoryGrid userUID={userUID} /><GenreGrid /></> : null}
+                {userUID ? <><MyListGrid userUID={userUID} /></> : null}
             </div>
           </div>
         </div>
     );
 }
 
-export default WatchHistoryPage;
+export default MyListPage;

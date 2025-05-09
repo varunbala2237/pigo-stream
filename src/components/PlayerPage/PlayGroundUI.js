@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
-import Header from './Header';
+import Header from '../Header';
 import MovieGrid from './MovieGrid';
 import TvGrid from './TvGrid';
 

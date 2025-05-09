@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import useSaveWatchHistory from '../hooks/useSaveWatchHistory';
-import useFetchTrailer from '../hooks/useFetchTrailer';
-import useAppVersion from '../hooks/useAppVersion';
+import useSaveWatchHistory from '../../hooks/useSaveWatchHistory';
+import useFetchTrailer from '../../hooks/useFetchTrailer';
+import useAppVersion from '../../hooks/useAppVersion';
 import { useNavigate } from 'react-router-dom';
 
-import openIframeWindow from "../utils/openIframeWindow";
+import openIframeWindow from "../IframePage(Externel)/openIframeWindow";
 
 function Player({ mediaURL, averageVote, director, genres, mediaInfo, id, type, isInList, handleAddToList }) {
   const [imageUrl, setImageUrl] = useState('');

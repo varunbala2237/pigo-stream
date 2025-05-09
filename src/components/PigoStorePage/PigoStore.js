@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom'; // Import useNavigate
-import useAppVersion from '../hooks/useAppVersion';
-import useDownloadApp from '../hooks/useDownloadApp';
+import useAppVersion from '../../hooks/useAppVersion';
+import useDownloadApp from '../../hooks/useDownloadApp';
 
 const Pigostore = () => {
   const [currentPlatform, setCurrentPlatform] = useState(''); // State for current platform

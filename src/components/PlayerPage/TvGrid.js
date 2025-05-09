@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import CastCard from './CastCard';
-import useFetchMediaInfo from '../hooks/useFetchMediaInfo';
-import useFetchSeason from '../hooks/useFetchSeason';
-import useFetchStream from '../hooks/useFetchStream';
-import useSaveMyList from '../hooks/useSaveMyList';
-import useCheckMyList from '../hooks/useCheckMyList';
-import Player from './Player';
-import Alert from '../Alert';
+import CastCard from '../CastCard';
+import useFetchMediaInfo from '../../hooks/useFetchMediaInfo';
+import useFetchSeason from '../../hooks/useFetchSeason';
+import useFetchStream from '../../hooks/useFetchStream';
+import useSaveMyList from '../../hooks/useSaveMyList';
+import useCheckMyList from '../../hooks/useCheckMyList';
+import Player from './PlayerUI';
+import Alert from '../../Alert';
 
 function TvGrid({ id, type, setBackgroundImage }) {
   const [mediaURL, setMediaURL] = useState('');

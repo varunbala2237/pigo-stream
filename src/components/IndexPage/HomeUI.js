@@ -1,14 +1,13 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Header from './Header';
+import Header from '../Header';
 import SearchBar from './SearchBar';
 import SearchGrid from './SearchGrid';
-import MediaGrid from './MediaGrid';
-import GenreGrid from './GenreGrid';
-import useSaveSearchHistory from '../hooks/useSaveSearchHistory';
-import useFetchSearchHistory from '../hooks/useFetchSearchHistory';
-import useRemoveSearchHistory from '../hooks/useRemoveSearchHistory';
-import Alert from '../Alert';
+import MediaGrid from '../MediaGrid';
+import useSaveSearchHistory from '../../hooks/useSaveSearchHistory';
+import useFetchSearchHistory from '../../hooks/useFetchSearchHistory';
+import useRemoveSearchHistory from '../../hooks/useRemoveSearchHistory';
+import Alert from '../../Alert';
 
 function HomePage({
   title,
@@ -239,13 +238,13 @@ function HomePage({
                   </span>
                 </div>
                 <div className="dynamic-fs my-2">{mediaDesc}</div>
-                <button className="btn btn-dark btn-md d-none d-md-inline-block bd-callout-dark rounded-pill border-0 my-2" onClick={handlePlayMedia}>
-                  <i className="bi bi-chevron-down me-1 text-white"></i>
-                  <span className="text-white">Show More</span>
+                <button className="btn btn-light btn-md d-none d-md-inline-block bd-callout-light rounded-pill border-0 my-2" onClick={handlePlayMedia}>
+                  <i className="bi bi-chevron-down me-1"></i>
+                  <span>Show More</span>
                 </button>
-                <button className="btn btn-dark btn-sm d-md-none bd-callout-dark rounded-pill border-0 my-2" onClick={handlePlayMedia}>
-                  <i className="bi bi-chevron-down me-1 text-white"></i>
-                  <span className="text-white">Show More</span>
+                <button className="btn btn-light btn-sm d-md-none bd-callout-light rounded-pill border-0 my-2" onClick={handlePlayMedia}>
+                  <i className="bi bi-chevron-down me-1"></i>
+                  <span>Show More</span>
                 </button>
                 </div>
             </div>
@@ -253,7 +252,7 @@ function HomePage({
         )}
 
         <div className="flex-row text-white w-100">
-          {triggerSearch.trim() === '' ? <><MediaGrid /><GenreGrid /></> : <><SearchGrid searchQuery={triggerSearch} /><GenreGrid /></>}
+          {triggerSearch.trim() === '' ? <><MediaGrid /></> : <><SearchGrid searchQuery={triggerSearch} /></>}
         </div>
 
         <button className="bd-callout-primary" style={fabStyle} onClick={handleSearchBar}>

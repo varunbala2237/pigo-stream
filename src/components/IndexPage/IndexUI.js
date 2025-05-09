@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import useRecommendations from '../hooks/useRecommendations';
-import useFetchMediaDetails from '../hooks/useFetchMediaDetails';
-import useFetchMedia from '../hooks/useFetchMedia';
-import HomePage from './HomePage';
+import useRecommendations from '../../hooks/useRecommendations';
+import useFetchMediaDetails from '../../hooks/useFetchMediaDetails';
+import useFetchMedia from '../../hooks/useFetchMedia';
+import HomeUI from './HomeUI';
 
 const IndexPage = () => {
   const { selectedItemId } = useRecommendations();
@@ -17,7 +17,7 @@ const IndexPage = () => {
   useEffect(() => {
     const getImagePath = (media) => {
       return media.backdrop_path || media.poster_path
-        ? `https://image.tmdb.org/t/p/original${media.backdrop_path || media.poster_path}`
+        ? `https://image.tmdb.org/t/p/w1280${media.backdrop_path || media.poster_path}`
         : null;
     };
 
@@ -73,7 +73,7 @@ const IndexPage = () => {
         )}
       </div>
 
-      <HomePage
+      <HomeUI
         title={title}
         mediaId={mediaId}
         mediaType={mediaType}

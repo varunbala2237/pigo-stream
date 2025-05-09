@@ -1,24 +1,22 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { useLocation } from 'react-router-dom';
-import Card from './Card';
-import useFetchWatchHistory from '../hooks/useFetchWatchHistory';
-import useClearWatchHistory from '../hooks/useClearWatchHistory';
-import Alert from '../Alert';
+import Card from '../Card';
+import useFetchMyList from '../../hooks/useFetchMyList';
+import Alert from '../../Alert';
 
-function WatchHistoryGrid({ userUID }) {
+function MyListGrid({ userUID }) {
     const [initialized, setInitialized] = useState(false);
     const [alertMessage, setAlertMessage] = useState('');
     const [alertType, setAlertType] = useState('');
     const [movieLimit, setMovieLimit] = useState(12);
     const [tvLimit, setTvLimit] = useState(12);
-    const { data, loading: fetchLoading, error: fetchError } = useFetchWatchHistory(userUID, movieLimit, tvLimit);
-    const { clearHistory } = useClearWatchHistory();
+    const { data, loading, error } = useFetchMyList(userUID, movieLimit, tvLimit);
 
-    const [movieHistory, setMovieHistory] = useState([]);
-    const [tvHistory, setTvHistory] = useState([]);
+    const [movieList, setMovieList] = useState([]);
+    const [tvList, setTvList] = useState([]);
     const location = useLocation();
 
-    // Scroll references for movies and TV shows
+    // Refs for scrolling
     const moviesRef = useRef(null);
     const tvRef = useRef(null);
 
@@ -30,8 +28,8 @@ function WatchHistoryGrid({ userUID }) {
 
     useEffect(() => {
         if (data) {
-            setMovieHistory(data.movieHistory || []);
-            setTvHistory(data.tvHistory || []);
+            setMovieList(data.movieList || []);
+            setTvList(data.tvList || []);
         }
     }, [data]);
 
@@ -39,32 +37,18 @@ function WatchHistoryGrid({ userUID }) {
         return null;
     }
 
-    // Function to remove the movie from the movieHistory
     const handleRemove = (id, type) => {
         if (type === 'movie') {
-            setMovieHistory(prevList => prevList.filter(movie => movie.id !== id));
+            setMovieList(prevList => prevList.filter(movie => movie.id !== id));
         } else if (type === 'tv') {
-            setTvHistory(prevList => prevList.filter(show => show.id !== id));
+            setTvList(prevList => prevList.filter(show => show.id !== id));
         }
     };
 
-    const handleClearHistory = async () => {
-        try {
-            await clearHistory();
-            setMovieHistory([]);
-            setTvHistory([]);
-            handleAlert('Watch history cleared successfully.');
-        } catch (error) {
-            handleAlert('Failed to clear watch history.', 'danger');
-        }
-    };
-
-    // Function to load more movies
     const handleShowMoreMovies = () => {
         setMovieLimit(prevLimit => prevLimit + 12);
     };
 
-    // Function to load more TV shows
     const handleShowMoreTV = () => {
         setTvLimit(prevLimit => prevLimit + 12);
     };
@@ -97,41 +81,16 @@ function WatchHistoryGrid({ userUID }) {
         }
     };
 
-    const isClearButtonDisabled = movieHistory.length === 0 && tvHistory.length === 0;
-
     return (
         <div className="container mt-4 text-white">
-            <div className="d-flex justify-content-end align-items-center my-2">
-                <div className="text-end">
-                    <button
-                        type="button"
-                        className="btn btn-md d-none d-md-inline-block btn-dark bd-callout-dark rounded-pill text-danger border-0"
-                        onClick={handleClearHistory}
-                        disabled={isClearButtonDisabled}
-                    >
-                        <i className="bi bi-trash me-1"></i>
-                        Clear
-                    </button>
-                    <button
-                        type="button"
-                        className="btn btn-sm d-md-none btn-dark bd-callout-dark rounded-pill text-danger border-0"
-                        onClick={handleClearHistory}
-                        disabled={isClearButtonDisabled}
-                    >
-                        <i className="bi bi-trash me-1"></i>
-                        Clear
-                    </button>
-                </div>
-            </div>
-
-            {fetchLoading && (
+            {loading && (
                 <div className="col d-flex vh-50 justify-content-center align-items-center">
                   <div className="spinner-border text-light spinner-size-1" role="status">
                     <span className="visually-hidden">Loading...</span>
                   </div>
                 </div>
             )}
-            {fetchError && (
+            {error && (
                 <div className="col d-flex vh-50 justify-content-center align-items-center">
                     <div className="d-flex align-items-center dynamic-fs">
                         <i className="bi bi-wifi-off me-1"></i>
@@ -139,15 +98,14 @@ function WatchHistoryGrid({ userUID }) {
                     </div>
                 </div>
             )}
-            {!fetchLoading && !fetchError && (
+            {!loading && !error && (
                 <>
                     <div className="d-flex align-items-center dynamic-ts m-2 px-1">
-                        <i className="bi bi-clock theme-color me-1"></i>
-                        <b className="mb-0">Watch History</b>
+                        <i className="bi bi-bookmark theme-color me-1"></i>
+                        <b className="mb-0">My List</b>
                     </div>
-                    {/* Movies */}
                     <div className="position-relative my-2">
-                        {movieHistory.length > 3 && (
+                        {movieList.length > 3 && (
                             <>
                                 <button
                                     className="btn btn-dark custom-bg rounded-pill py-2 position-absolute start-0 translate-middle-y d-none d-md-block"
@@ -166,8 +124,8 @@ function WatchHistoryGrid({ userUID }) {
                             </>
                         )}
                         <div ref={moviesRef} className="d-flex overflow-auto" style={{ scrollSnapType: 'x mandatory', gap: '1rem' }}>
-                            {movieHistory.length > 0 ? (
-                                movieHistory.map((movie) => (
+                            {movieList.length > 0 ? (
+                                movieList.map((movie) => (
                                     <Card
                                         key={movie.id}
                                         media={movie}
@@ -180,14 +138,14 @@ function WatchHistoryGrid({ userUID }) {
                             ) : (
                                 <div className="col d-flex vh-25 justify-content-center align-items-center">
                                     <div className="d-flex align-items-center dynamic-fs">
-                                        <i className="bi bi-clock me-1"></i>
+                                        <i className="bi bi-bookmark me-1"></i>
                                         <span className="mb-0">No movies found.</span>
                                     </div>
                                 </div>
                             )}
                         </div>
                     </div>
-                    {movieHistory.length === movieLimit && (
+                    {movieList.length === movieLimit && (
                         <div className="text-end mb-3">
                             <button
                                 className="btn btn-dark bd-callout-dark dynamic-fs border-0 rounded-pill btn-md d-none d-md-inline-block"
@@ -208,7 +166,7 @@ function WatchHistoryGrid({ userUID }) {
 
                     {/* TV Shows */}
                     <div className="position-relative my-2">
-                        {tvHistory.length > 3 && (
+                        {tvList.length > 3 && (
                             <>
                                 <button
                                     className="btn btn-dark custom-bg rounded-pill py-2 position-absolute start-0 translate-middle-y d-none d-md-block"
@@ -227,8 +185,8 @@ function WatchHistoryGrid({ userUID }) {
                             </>
                         )}
                         <div ref={tvRef} className="d-flex overflow-auto" style={{ scrollSnapType: 'x mandatory', gap: '1rem' }}>
-                            {tvHistory.length > 0 ? (
-                                tvHistory.map((show) => (
+                            {tvList.length > 0 ? (
+                                tvList.map((show) => (
                                     <Card
                                         key={show.id}
                                         media={show}
@@ -241,14 +199,14 @@ function WatchHistoryGrid({ userUID }) {
                             ) : (
                                 <div className="col d-flex vh-25 justify-content-center align-items-center">
                                     <div className="d-flex align-items-center dynamic-fs">
-                                        <i className="bi bi-clock me-1"></i>
+                                        <i className="bi bi-bookmark me-1"></i>
                                         <span className="mb-0">No tv shows found.</span>
                                     </div>
                                 </div>
                             )}
                         </div>
                     </div>
-                    {tvHistory.length === tvLimit && (
+                    {tvList.length === tvLimit && (
                         <div className="text-end mb-3">
                             <button
                                 className="btn btn-dark bd-callout-dark dynamic-fs border-0 rounded-pill btn-md d-none d-md-inline-block"
@@ -273,4 +231,4 @@ function WatchHistoryGrid({ userUID }) {
     );
 }
 
-export default WatchHistoryGrid;
+export default MyListGrid;

@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { auth, signInWithGoogle } from '../firebase/firebase-auth';
+import { auth, signInWithGoogle } from '../../firebase/firebase-auth';
 import { signInWithEmailAndPassword, createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
-import useCreateUser from '../hooks/useCreateUser';
-import Alert from '../Alert';
+import useCreateUser from '../../hooks/useCreateUser';
+import Alert from '../../Alert';
 
 function togglePasswordVisibility() {
     const passwordInput = document.getElementById('passwordInput');
