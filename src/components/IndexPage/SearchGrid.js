@@ -36,13 +36,6 @@ function SearchGrid({ searchQuery }) {
 
   return (
     <div className="container mt-4 text-white" id="searchResults">
-      {isLoading && (
-        <div className="col d-flex vh-50 justify-content-center align-items-center">
-          <div className="spinner-border text-light spinner-size-1" role="status">
-            <span className="visually-hidden">Loading...</span>
-          </div>
-        </div>
-      )}
       {isError && (
         <div className="col d-flex vh-50 justify-content-center align-items-center">
           <div className="d-flex align-items-center dynamic-fs">
@@ -51,7 +44,7 @@ function SearchGrid({ searchQuery }) {
           </div>
         </div>
       )}
-      {!isLoading && !isError && (
+      {!isError && (
         <>
           <div className="d-flex align-items-center dynamic-ts m-2 px-1">
             <i className="bi bi-search theme-color me-2"></i>
@@ -80,6 +73,16 @@ function SearchGrid({ searchQuery }) {
                   </>
                 )}
                 <div ref={moviesRef} className="d-flex overflow-auto" style={{ scrollSnapType: 'x mandatory', gap: '1rem' }}>
+                  {isLoading && Array.from({ length: 6 }).map((_, index) => (
+                    <Card
+                      key={`movie-skeleton-${index}`}
+                      media={{ poster_path: null, vote_average: null }}
+                      type="movie"
+                      path="/"
+                      isDeletable={false}
+                      isSkeleton={true}
+                    />
+                  ))}
                   {movies?.length > 0 && (
                     movies.map((movie, index) => (
                       <Card key={index} media={movie} type={'movie'} path={location.pathname} />
@@ -113,6 +116,16 @@ function SearchGrid({ searchQuery }) {
                   </>
                 )}
                 <div ref={showsRef} className="d-flex overflow-auto" style={{ scrollSnapType: 'x mandatory', gap: '1rem' }}>
+                  {isLoading && Array.from({ length: 6 }).map((_, index) => (
+                    <Card
+                      key={`tv-skeleton-${index}`}
+                      media={{ poster_path: null, vote_average: null }}
+                      type="tv"
+                      path="/"
+                      isDeletable={false}
+                      isSkeleton={true}
+                    />
+                  ))}
                   {shows?.length > 0 && (
                     shows.map((show, index) => (
                       <Card key={index} media={show} type={'tv'} path={location.pathname} />

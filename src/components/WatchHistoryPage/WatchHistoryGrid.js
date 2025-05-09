@@ -124,13 +124,6 @@ function WatchHistoryGrid({ userUID }) {
                 </div>
             </div>
 
-            {fetchLoading && (
-                <div className="col d-flex vh-50 justify-content-center align-items-center">
-                  <div className="spinner-border text-light spinner-size-1" role="status">
-                    <span className="visually-hidden">Loading...</span>
-                  </div>
-                </div>
-            )}
             {fetchError && (
                 <div className="col d-flex vh-50 justify-content-center align-items-center">
                     <div className="d-flex align-items-center dynamic-fs">
@@ -139,7 +132,7 @@ function WatchHistoryGrid({ userUID }) {
                     </div>
                 </div>
             )}
-            {!fetchLoading && !fetchError && (
+            {!fetchError && (
                 <>
                     <div className="d-flex align-items-center dynamic-ts m-2 px-1">
                         <i className="bi bi-clock theme-color me-2"></i>
@@ -166,6 +159,16 @@ function WatchHistoryGrid({ userUID }) {
                             </>
                         )}
                         <div ref={moviesRef} className="d-flex overflow-auto" style={{ scrollSnapType: 'x mandatory', gap: '1rem' }}>
+                            {fetchLoading && Array.from({ length: 6 }).map((_, index) => (
+                                <Card
+                                    key={`movie-skeleton-${index}`}
+                                    media={{ poster_path: null, vote_average: null }}
+                                    type="movie"
+                                    path="/"
+                                    isDeletable={false}
+                                    isSkeleton={true}
+                                />
+                            ))}
                             {movieHistory.length > 0 && (
                                 movieHistory.map((movie) => (
                                     <Card
@@ -220,6 +223,16 @@ function WatchHistoryGrid({ userUID }) {
                             </>
                         )}
                         <div ref={tvRef} className="d-flex overflow-auto" style={{ scrollSnapType: 'x mandatory', gap: '1rem' }}>
+                            {fetchLoading && Array.from({ length: 6 }).map((_, index) => (
+                                <Card
+                                    key={`tv-skeleton-${index}`}
+                                    media={{ poster_path: null, vote_average: null }}
+                                    type="tv"
+                                    path="/"
+                                    isDeletable={false}
+                                    isSkeleton={true}
+                                />
+                            ))}
                             {tvHistory.length > 0 && (
                                 tvHistory.map((show) => (
                                     <Card
@@ -254,7 +267,7 @@ function WatchHistoryGrid({ userUID }) {
                     )}
 
                     {/* If both Movies and TV Shows are empty */}
-                    {movieHistory.length === 0 && tvHistory.length === 0 && (
+                    {!fetchLoading && movieHistory.length === 0 && tvHistory.length === 0 && (
                         <div className="col d-flex vh-50 justify-content-center align-items-center mt-3">
                             <div className="d-flex align-items-center">
                                 <i className="bi bi-clock me-2"></i>

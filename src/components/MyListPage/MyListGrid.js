@@ -83,13 +83,6 @@ function MyListGrid({ userUID }) {
 
     return (
         <div className="container mt-4 text-white">
-            {loading && (
-                <div className="col d-flex vh-50 justify-content-center align-items-center">
-                  <div className="spinner-border text-light spinner-size-1" role="status">
-                    <span className="visually-hidden">Loading...</span>
-                  </div>
-                </div>
-            )}
             {error && (
                 <div className="col d-flex vh-50 justify-content-center align-items-center">
                     <div className="d-flex align-items-center dynamic-fs">
@@ -98,7 +91,7 @@ function MyListGrid({ userUID }) {
                     </div>
                 </div>
             )}
-            {!loading && !error && (
+            {!error && (
                 <>
                     <div className="d-flex align-items-center dynamic-ts m-2 px-1">
                         <i className="bi bi-bookmark theme-color me-2"></i>
@@ -124,6 +117,16 @@ function MyListGrid({ userUID }) {
                             </>
                         )}
                         <div ref={moviesRef} className="d-flex overflow-auto" style={{ scrollSnapType: 'x mandatory', gap: '1rem' }}>
+                            {loading && Array.from({ length: 6 }).map((_, index) => (
+                                <Card
+                                    key={`movie-skeleton-${index}`}
+                                    media={{ poster_path: null, vote_average: null }}
+                                    type="movie"
+                                    path="/"
+                                    isDeletable={false}
+                                    isSkeleton={true}
+                                />
+                            ))}
                             {movieList.length > 0 && (
                                 movieList.map((movie) => (
                                     <Card
@@ -178,6 +181,16 @@ function MyListGrid({ userUID }) {
                             </>
                         )}
                         <div ref={tvRef} className="d-flex overflow-auto" style={{ scrollSnapType: 'x mandatory', gap: '1rem' }}>
+                            {loading && Array.from({ length: 6 }).map((_, index) => (
+                                <Card
+                                    key={`tv-skeleton-${index}`}
+                                    media={{ poster_path: null, vote_average: null }}
+                                    type="tv"
+                                    path="/"
+                                    isDeletable={false}
+                                    isSkeleton={true}
+                                />
+                            ))}
                             {tvList.length > 0 && (
                                 tvList.map((show) => (
                                     <Card
@@ -212,7 +225,7 @@ function MyListGrid({ userUID }) {
                     )}
 
                     {/* If both Movies and TV Shows are empty */}
-                    {movieList.length === 0 && tvList.length === 0 && (
+                    {!loading && movieList.length === 0 && tvList.length === 0 && (
                         <div className="col d-flex vh-50 justify-content-center align-items-center mt-3">
                             <div className="d-flex align-items-center">
                                 <i className="bi bi-bookmark me-2"></i>
