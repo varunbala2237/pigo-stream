@@ -121,14 +121,14 @@ function Player({ mediaURL, averageVote, director, genres, mediaInfo, id, type, 
                 <div className="d-flex justify-content-center text-start w-50">
                 {/* Larger button for larger screen */}
                 <button
-                  className={`btn px-2 py-1 d-none d-md-block border-0 text-white rounded-circle btn-light bg-black`}
+                  className={`btn btn-dark px-2 py-1 d-none d-md-block border-0 text-white rounded-circle btn-light custom-bg`}
                   onClick={handleAddToList}
                 >
                   <i className={`bi-${isInList ? 'bookmark-fill' : 'bookmark'}`}></i>
                 </button>
                 {/* Smaller button for smaller screen */}
                 <button
-                  className={`btn d-block d-md-none btn-sm border-0 text-white rounded-circle btn-light bg-black`}
+                  className={`btn btn-dark d-block d-md-none btn-sm border-0 text-white rounded-circle btn-light custom-bg`}
                   onClick={handleAddToList}
                 >
                   <i className={`bi-${isInList ? 'bookmark-fill' : 'bookmark'}`}></i>
@@ -138,14 +138,14 @@ function Player({ mediaURL, averageVote, director, genres, mediaInfo, id, type, 
                 <div className="d-flex justify-content-center text-end w-50">
                 {/* Larger button for larger screen */}
                 <button
-                  className={`btn px-2 py-1 d-none d-md-block border-0 text-white rounded-circle btn-light bg-primary`}
+                  className={`btn btn-primary px-2 py-1 d-none d-md-block border-0 text-white rounded-circle btn-light bg-primary`}
                   onClick={handleShare}
                 >
                   <i className={`bi bi-share-fill`}></i>
                 </button>
                 {/* Smaller button for smaller screen */}
                 <button
-                  className={`btn d-block d-md-none btn-sm border-0 text-white rounded-circle btn-light bg-primary`}
+                  className={`btn btn-primary d-block d-md-none btn-sm border-0 text-white rounded-circle btn-light bg-primary`}
                   onClick={handleShare}
                 >
                   <i className={`bi bi-share-fill`}></i>
