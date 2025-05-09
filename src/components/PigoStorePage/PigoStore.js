@@ -74,7 +74,7 @@ const Pigostore = () => {
               className="btn btn-dark bd-callout-dark border-0 btn-sm d-md-none text-white rounded-pill dynamic-fs"
               onClick={() => navigate(-1)} // Navigate to the previous page
             >
-              <i className="bi bi-chevron-left me-2"></i> 
+              <i className="bi bi-back me-2"></i> 
               Back
             </button>
             {/* Back button with navigation for large screens */}
@@ -83,7 +83,7 @@ const Pigostore = () => {
               className="btn btn-dark bd-callout-dark border-0 btn-md d-none d-md-inline-block text-white rounded-pill dynamic-fs"
               onClick={() => navigate(-1)} // Navigate to the previous page
             >
-              <i className="bi bi-chevron-left me-2"></i> 
+              <i className="bi bi-back me-2"></i> 
               Back
             </button>
           </div>

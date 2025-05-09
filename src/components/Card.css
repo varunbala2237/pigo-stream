@@ -13,3 +13,53 @@
     background: rgba(0, 0, 0, 0.3);
     backdrop-filter: blur(4px);
 }
+
+/* Skeleton Card */
+.skeleton-card {
+    pointer-events: none;
+  }
+  
+.skeleton-image {
+    width: 100%;
+    padding-top: 150%;
+    background-color: #333;
+    border-radius: 1rem;
+}
+  
+.skeleton-bar {
+    width: 40px;
+    height: 12px;
+    background-color: #444;
+    border-radius: 1rem;
+}
+  
+.shimmer {
+    animation: shimmer 1.5s infinite linear;
+    background: linear-gradient(
+      90deg,
+      #333 25%,
+      #444 50%,
+      #333 75%
+    );
+    background-size: 200% 100%;
+}
+  
+@keyframes shimmer {
+    0% {
+      background-position: -200% 0;
+    }
+    100% {
+      background-position: 200% 0;
+    }
+}
+
+/* Custom Modal */
+.modal-dialog.modal-pad {
+  max-width: 350px;
+  width: 100%;
+  margin: auto;
+}
+
+.modal-content {
+  padding: 1rem 1rem;
+}

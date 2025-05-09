@@ -58,13 +58,17 @@ function TrendingGrid() {
             </>
             )}
             <div ref={moviesRef} className="d-flex overflow-auto" style={{ scrollSnapType: 'x mandatory', gap: '1rem' }}>
-              {loadingPopularMovies && (
-                <div className="col d-flex vh-25 justify-content-center align-items-center">
-                  <div className="spinner-border text-light spinner-size-1" role="status">
-                    <span className="visually-hidden">Loading...</span>
-                  </div>
-                </div>
-              )}
+              {loadingPopularMovies && Array.from({ length: 6 }).map((_, index) => (
+                <Card
+                  key={`movie-skeleton-${index}`}
+                  media={{ poster_path: null, vote_average: null }}
+                  type="movie"
+                  path="/"
+                  isDeletable={false}
+                  isSkeleton={true}
+                  />
+              ))}
+
               {errorPopularMovies && (
                 <div className="col d-flex vh-25 justify-content-center align-items-center">
                     <div className="d-flex align-items-center dynamic-fs">
@@ -114,13 +118,16 @@ function TrendingGrid() {
             </>
             )}
             <div ref={tvRef} className="d-flex overflow-auto" style={{ scrollSnapType: 'x mandatory', gap: '1rem' }}>
-            {loadingPopularTv && (
-                <div className="col d-flex vh-25 justify-content-center align-items-center">
-                  <div className="spinner-border text-light spinner-size-1" role="status">
-                    <span className="visually-hidden">Loading...</span>
-                  </div>
-                </div>
-              )}
+              {loadingPopularTv && Array.from({ length: 6 }).map((_, index) => (
+                <Card
+                  key={`tv-skeleton-${index}`}
+                  media={{ poster_path: null, vote_average: null }}
+                  type="tv"
+                  path="/"
+                  isDeletable={false}
+                  isSkeleton={true}
+                  />
+              ))}
               {errorPopularTv && (
                 <div className="col d-flex vh-25 justify-content-center align-items-center">
                     <div className="d-flex align-items-center dynamic-fs">

@@ -5,7 +5,7 @@ import useRemoveFromMyList from '../hooks/useRemoveMyList';
 
 import './Card.css';
 
-function Card({ media, type, path, onRemove, handleAlert, isDeletable=true }) {
+function Card({ media, type, path, onRemove, handleAlert, isDeletable=true, isSkeleton = false }) {
   const [imageUrl, setImageUrl] = useState('');
   const [showModal, setShowModal] = useState(false);
   const [isRemove, setIsRemove] = useState(false);
@@ -74,6 +74,22 @@ function Card({ media, type, path, onRemove, handleAlert, isDeletable=true }) {
 
   // Extracting rating
   const rating = media.vote_average ? media.vote_average.toFixed(1) : '0.0';
+
+  if (isSkeleton) {
+    return (
+      <div className="custom-card-container">
+        <div className="card bg-transparent border-0 position-relative custom-theme-radius skeleton-card">
+          <div className="skeleton-image shimmer"></div>
+          <div className="card-overlay dynamic-size dynamic-fs px-1">
+            <div className="d-flex justify-content-between align-items-center">
+              <div className="rating-box custom-theme-radius-low text-start skeleton-bar"></div>
+              <div className="media-type-box custom-theme-radius-low text-end skeleton-bar"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="custom-card-container">
