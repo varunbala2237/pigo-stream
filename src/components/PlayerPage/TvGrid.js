@@ -9,6 +9,8 @@ import useCheckServerStatus from '../../hooks/useCheckServerStatus';
 import Player from './PlayerUI';
 import Alert from '../../Alert';
 
+import { storeMediaStateSettings, getMediaStateSettings } from '../../utils/mediaStateSettings';
+
 function TvGrid({ id, type, setBackgroundImage }) {
   const [mediaURL, setMediaURL] = useState('');
   const [cast, setCast] = useState([]);
@@ -33,6 +35,9 @@ function TvGrid({ id, type, setBackgroundImage }) {
   // Using the custom hook for checking server status
   const serverStatus = useCheckServerStatus(servers);
 
+  // Retrieve settings from cache if available
+  const cachedSettings = getMediaStateSettings(id);
+
   useEffect(() => {
     if (mediaInfo) {
       setSeasons(mediaInfo.seasons || []);
@@ -43,29 +48,43 @@ function TvGrid({ id, type, setBackgroundImage }) {
       setDirector(director ? director.name : 'Unknown');
 
       if (mediaInfo.seasons && mediaInfo.seasons.length > 0) {
-        const defaultSeasonNumber = mediaInfo.seasons[0]?.season_number || 1;
-        setSelectedSeason(defaultSeasonNumber);
+        if (cachedSettings) {
+          setSelectedSeason(cachedSettings.selectedSeason);
+        } else {
+          const defaultSeasonNumber = mediaInfo.seasons[0]?.season_number || 1;
+          setSelectedSeason(defaultSeasonNumber);
+        }
       }
 
       // Setup the backgroundImage
       setBackgroundImage(`https://image.tmdb.org/t/p/original${mediaInfo.backdrop_path}`);
     }
-  }, [mediaInfo, setBackgroundImage]);
+  }, [mediaInfo, setBackgroundImage, cachedSettings]);
 
   useEffect(() => {
     if (seasonData) {
       setEpisodes(seasonData.episodes || []);
-      const defaultEpisodeNumber = seasonData.episodes[0]?.episode_number || 1;
-      setSelectedEpisode(defaultEpisodeNumber);
+
+      const selectedEp =
+        cachedSettings?.selectedEpisodes?.[selectedSeason] ||
+        seasonData.episodes[0]?.episode_number || 1;
+
+      setSelectedEpisode(selectedEp);
+
     }
-  }, [seasonData, id, type, selectedSeason]);
+  }, [seasonData, id, type, selectedSeason, cachedSettings]);
 
   useEffect(() => {
     // Ensure the first server is selected by default when the servers are loaded
     if (servers && servers.length > 0 && !selectedServerName) {
-      setSelectedServerName(servers[0].server_name);
+      if (cachedSettings) {
+        setSelectedServerName(cachedSettings.selectedServerName);
+      } else {
+        // Set the default server to the first one in the list
+        setSelectedServerName(servers[0].server_name);
+      }
     }
-  }, [servers, selectedServerName]);
+  }, [servers, selectedServerName, cachedSettings]);
 
   useEffect(() => {
     if (servers && servers.length > 0) {
@@ -79,16 +98,42 @@ function TvGrid({ id, type, setBackgroundImage }) {
   }, [selectedServerName, servers]);
 
   const handleSeasonChange = (seasonNumber) => {
+    const currentSettings = getMediaStateSettings(id) || {};
+    const episodeForSeason = currentSettings.selectedEpisodes?.[seasonNumber] || 1;
+
     setSelectedSeason(seasonNumber);
-    setSelectedEpisode(1);
+    setSelectedEpisode(episodeForSeason);
+
+    storeMediaStateSettings(id, {
+      ...currentSettings,
+      selectedSeason: seasonNumber,
+      selectedServerName,
+      selectedEpisodes: {
+        ...(currentSettings.selectedEpisodes || {}),
+        [seasonNumber]: episodeForSeason
+      }
+    });
   };
 
   const handleEpisodeChange = (episodeNumber) => {
     setSelectedEpisode(episodeNumber);
+    const currentSettings = getMediaStateSettings(id) || {};
+    const updatedSelectedEpisodes = {
+      ...(currentSettings.selectedEpisodes || {}),
+      [selectedSeason]: episodeNumber
+    };
+
+    storeMediaStateSettings(id, {
+      ...currentSettings,
+      selectedSeason,
+      selectedServerName,
+      selectedEpisodes: updatedSelectedEpisodes
+    });
   };
 
   const handleServerChange = (serverName) => {
     setSelectedServerName(serverName);
+    storeMediaStateSettings(id, { selectedSeason, selectedEpisode, selectedServerName: serverName });
   };
 
   const handleShowMore = () => {
@@ -256,7 +301,6 @@ function TvGrid({ id, type, setBackgroundImage }) {
                     <div className="text-white">No episodes available</div>
                   )}
                 </div>
-
               </div>
 
               <div className="d-flex flex-column align-items-start custom-theme-radius my-2 w-100">
