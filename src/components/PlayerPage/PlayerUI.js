@@ -118,7 +118,6 @@ function Player({ mediaURL, averageVote, director, genres, mediaInfo, id, type, 
                 maxWidth: '300px',
                 height: 'auto',
                 objectFit: 'cover',
-                borderRadius: '0.5rem',
               }}
             />
 

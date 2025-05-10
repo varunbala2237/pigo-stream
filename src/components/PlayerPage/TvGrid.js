@@ -124,13 +124,18 @@ function TvGrid({ id, type, setBackgroundImage }) {
 
   const handleToggleWatched = (episodeNumber) => {
     const currentSettings = getMediaStateSettings(id) || {};
+    const previousWatched = currentSettings.watchedEpisodes || {};
+
+    const alreadyWatched = previousWatched?.[selectedSeason]?.[episodeNumber];
+
+    // If it's already watched, do nothing
+    if (alreadyWatched) return;
+
     const updatedWatched = {
-      ...(currentSettings.watchedEpisodes || {}),
+      ...previousWatched,
       [selectedSeason]: {
-        ...(currentSettings.watchedEpisodes?.[selectedSeason] || {}),
-        [episodeNumber]: !(
-          currentSettings.watchedEpisodes?.[selectedSeason]?.[episodeNumber]
-        ),
+        ...(previousWatched[selectedSeason] || {}),
+        [episodeNumber]: true, // Always mark as true
       },
     };
 
@@ -331,7 +336,7 @@ function TvGrid({ id, type, setBackgroundImage }) {
                 <div
                   className="overflow-auto"
                   style={{
-                    maxHeight: '268px',
+                    maxHeight: '285px',
                   }}
                 >
                   {episodes.length > 0 ? (
