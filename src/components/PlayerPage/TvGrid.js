@@ -131,6 +131,34 @@ function TvGrid({ id, type, setBackgroundImage }) {
     });
   };
 
+  // Check if the episode has aired
+  function isEpisodeAired(airDateString) {
+    if (!airDateString) return false;
+
+    const airDate = new Date(airDateString);
+    const today = new Date();
+
+    // Normalize both dates to midnight to avoid timezone issues
+    airDate.setHours(0, 0, 0, 0);
+    today.setHours(0, 0, 0, 0);
+
+    return airDate <= today;
+  }
+
+  // Check if the episode aired today
+  function isEpisodeAiredToday(airDateString) {
+    if (!airDateString) return false;
+
+    const airDate = new Date(airDateString);
+    const today = new Date();
+
+    // Normalize both dates to midnight
+    airDate.setHours(0, 0, 0, 0);
+    today.setHours(0, 0, 0, 0);
+
+    return airDate.getTime() === today.getTime(); // Check if dates match
+  }
+
   const handleServerChange = (serverName) => {
     setSelectedServerName(serverName);
     storeMediaStateSettings(id, { selectedSeason, selectedEpisode, selectedServerName: serverName });
@@ -230,10 +258,8 @@ function TvGrid({ id, type, setBackgroundImage }) {
                           onClick={() => handleServerChange(server.server_name)}
                         >
                           <span className="text-truncate dynamic-ss">{server.server_name}</span>
-                          {serverStatus[server.server_name] === 'danger' ? (
-                            <i className="bi bi-x-circle-fill text-danger ms-2"></i>
-                          ) : (
-                            <i className="bi bi-check-circle-fill text-success ms-2"></i>
+                          {serverStatus[server.server_name] === 'danger' && (
+                            <i className="bi bi-exclamation-triangle text-danger ms-2"></i>
                           )}
                         </button>
                       </div>
@@ -292,7 +318,14 @@ function TvGrid({ id, type, setBackgroundImage }) {
                         onClick={() => handleEpisodeChange(episode.episode_number)}
                       >
                         <div className="d-flex flex-column text-wrap px-2">
-                          <span className="fw-bold">Episode {episode.episode_number}</span>
+                          <span className="fw-bold">Episode {episode.episode_number}
+                            {!isEpisodeAired(episode.air_date) && (
+                              <span className="badge bg-warning text-dark ms-2">Unaired</span>
+                            )}
+                            {isEpisodeAiredToday(episode.air_date) && (
+                              <span className="badge bg-success text-white ms-2">New!</span>
+                            )}
+                          </span>
                           <small>{episode.name}</small>
                         </div>
                       </button>

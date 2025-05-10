@@ -8,6 +8,8 @@ import useCheckServerStatus from '../../hooks/useCheckServerStatus';
 import Player from './PlayerUI';
 import Alert from '../../Alert';
 
+import { storeMediaStateSettings, getMediaStateSettings } from '../../utils/mediaStateSettings';
+
 function MovieGrid({ id, type, setBackgroundImage }) {
   const [mediaURL, setMediaURL] = useState('');
   const [cast, setCast] = useState([]);
@@ -27,6 +29,9 @@ function MovieGrid({ id, type, setBackgroundImage }) {
   // Using the custom hook for checking server status
   const serverStatus = useCheckServerStatus(servers);
 
+  // Retrieve settings from cache if available
+  const cachedSettings = getMediaStateSettings(id);
+
   useEffect(() => {
     if (mediaInfo) {
       setCast(mediaInfo.credits?.cast || []);
@@ -42,9 +47,14 @@ function MovieGrid({ id, type, setBackgroundImage }) {
   useEffect(() => {
     // Ensure the first server is selected by default when the servers are loaded
     if (servers && servers.length > 0 && !selectedServerName) {
-      setSelectedServerName(servers[0].server_name);
+      if (cachedSettings) {
+        setSelectedServerName(cachedSettings.selectedServerName);
+      } else {
+        // Set the default server to the first one in the list
+        setSelectedServerName(servers[0].server_name);
+      }
     }
-  }, [servers, selectedServerName]);
+  }, [servers, selectedServerName, cachedSettings]);
 
   useEffect(() => {
     if (servers && servers.length > 0) {
@@ -59,6 +69,7 @@ function MovieGrid({ id, type, setBackgroundImage }) {
 
   const handleServerChange = (serverName) => {
     setSelectedServerName(serverName);
+    storeMediaStateSettings(id, { selectedServerName: serverName });
   };
 
   const handleShowMore = () => {
@@ -149,16 +160,14 @@ function MovieGrid({ id, type, setBackgroundImage }) {
                       <div key={server.server_name} className="col-4 col-sm-3 col-md-4 col-lg-3 col-xl-2">
                         <button
                           className={`btn w-100 d-flex flex-row align-items-center justify-content-center border-0 rounded-pill shadow-sm ${selectedServerName === server.server_name
-                              ? 'btn-primary bd-callout-primary active'
-                              : 'btn-primary bd-callout-dark'
+                            ? 'btn-primary bd-callout-primary active'
+                            : 'btn-primary bd-callout-dark'
                             }`}
                           onClick={() => handleServerChange(server.server_name)}
                         >
                           <span className="text-truncate dynamic-ss">{server.server_name}</span>
-                          {serverStatus[server.server_name] === 'danger' ? (
-                            <i className="bi bi-x-circle-fill text-danger ms-2"></i>
-                          ) : (
-                            <i className="bi bi-check-circle-fill text-success ms-2"></i>
+                          {serverStatus[server.server_name] === 'danger' && (
+                            <i className="bi bi-exclamation-triangle text-danger ms-2"></i>
                           )}
                         </button>
                       </div>
