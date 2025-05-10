@@ -334,7 +334,7 @@ function TvGrid({ id, type, setBackgroundImage }) {
 
                 {/* Episodes Scrollable List */}
                 <div
-                  className="overflow-auto"
+                  className="overflow-auto custom-theme-radius-low"
                   style={{
                     maxHeight: '285px',
                   }}
@@ -370,7 +370,7 @@ function TvGrid({ id, type, setBackgroundImage }) {
                             </div>
                             <div className="d-flex flex-row justify-content-between">
                               <small className="dynamic-ss">{episode.name}</small>
-                              <small className="mt-1 align-self-end dynamic-ss">
+                              <small className="align-self-end dynamic-ss">
                                 {new Date(episode.air_date).toLocaleDateString()}
                               </small>
                             </div>
