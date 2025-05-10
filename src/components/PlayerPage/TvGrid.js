@@ -5,6 +5,7 @@ import useFetchSeason from '../../hooks/useFetchSeason';
 import useFetchStream from '../../hooks/useFetchStream';
 import useSaveMyList from '../../hooks/useSaveMyList';
 import useCheckMyList from '../../hooks/useCheckMyList';
+import useCheckServerStatus from '../../hooks/useCheckServerStatus';
 import Player from './PlayerUI';
 import Alert from '../../Alert';
 
@@ -23,11 +24,14 @@ function TvGrid({ id, type, setBackgroundImage }) {
   const [sliceIndex, setSliceIndex] = useState(12); // Initial slice index
 
   const { data: mediaInfo, loadingInfo, errorInfo } = useFetchMediaInfo(id, type);
-  const { seasonData, loading: loadingSeasonData, error: errorSeasonData } = useFetchSeason(id, selectedSeason);
+  const { seasonData } = useFetchSeason(id, selectedSeason);
   const { servers, loading: loadingLink, error: errorLink } = useFetchStream(id, type, selectedSeason, selectedEpisode);
 
   const { addToList } = useSaveMyList();
   const { isInList, refetch } = useCheckMyList(id);
+
+  // Using the custom hook for checking server status
+  const serverStatus = useCheckServerStatus(servers);
 
   useEffect(() => {
     if (mediaInfo) {
@@ -42,7 +46,7 @@ function TvGrid({ id, type, setBackgroundImage }) {
         const defaultSeasonNumber = mediaInfo.seasons[0]?.season_number || 1;
         setSelectedSeason(defaultSeasonNumber);
       }
-      
+
       // Setup the backgroundImage
       setBackgroundImage(`https://image.tmdb.org/t/p/original${mediaInfo.backdrop_path}`);
     }
@@ -57,9 +61,16 @@ function TvGrid({ id, type, setBackgroundImage }) {
   }, [seasonData, id, type, selectedSeason]);
 
   useEffect(() => {
+    // Ensure the first server is selected by default when the servers are loaded
+    if (servers && servers.length > 0 && !selectedServerName) {
+      setSelectedServerName(servers[0].server_name);
+    }
+  }, [servers, selectedServerName]);
+
+  useEffect(() => {
     if (servers && servers.length > 0) {
-      const selectedServer = selectedServerName 
-        ? servers.find(server => server.server_name === selectedServerName) 
+      const selectedServer = selectedServerName
+        ? servers.find(server => server.server_name === selectedServerName)
         : servers[0];
       if (selectedServer) {
         setMediaURL(selectedServer.server_link);
@@ -141,300 +152,161 @@ function TvGrid({ id, type, setBackgroundImage }) {
   const averageVote = vote_average ? vote_average.toFixed(1) : '0.0';
 
   return (
-  <>
-    <div className="flex-row text-white custom-w-size-100">
-    <div className="row justify-content-center position-relative">
-      <div className="col-lg-8 col-md-10 col-sm-12">
-        <div className="container bg-transparent">
-          <Player mediaURL={mediaURL}
-                  averageVote={averageVote} 
-                  director={director} 
-                  genres={genres}
-                  mediaInfo={mediaInfo} 
-                  id={id} 
-                  type={type}
-                  isInList={isInList}
-                  handleAddToList={handleAddToList} />
-          <div className="d-flex justify-content-between mt-2">
-            <div className="d-flex text-start">
-              <div className="dropdown dropup me-2">
-                  <button
-                    className="btn btn-dark bd-callout-dark border-0 btn-md rounded-pill d-none d-md-inline-block"
-                    id="seasonDropdown"
-                    data-bs-toggle="dropdown"
-                    aria-expanded="false"
-                    aria-haspopup="true"
-                  >
-                    <i className="bi bi-chevron-down me-2"></i>
-                    Season {selectedSeason}
-                  </button>
-                  {/* For small screens */}
-                  <button
-                    className="btn btn-dark bd-callout-dark border-0 btn-sm rounded-pill d-md-none"
-                    id="seasonDropdown"
-                    data-bs-toggle="dropdown"
-                    aria-expanded="false"
-                    aria-haspopup="true"
-                  >
-                    <i className="bi bi-chevron-down me-2"></i>
-                    S {selectedSeason}
-                  </button>
-                  <ul className="dropdown-menu overflow-auto custom-dropdown bd-callout-dark p-0 custom-theme-radius">
-                    {loadingSeasonData ? (
-                      <li className="dropdown-item text-secondary bg-transparent">
-                        <div className="col d-flex justify-content-center align-items-center">
-                          <div className="spinner-border text-light spinner-size-1" role="status">
-                            <span className="visually-hidden">Loading...</span>
-                          </div>
-                        </div>
-                      </li>
-                    ) : errorSeasonData ? (
-                      <li className="dropdown-item text-white bg-transparent">
-                        <div className="col d-flex justify-content-center align-items-center">
-                          <div className="d-flex align-items-center dynamic-fs">
-                            <i className="bi bi-wifi-off me-2"></i>
-                            <span className="mb-0">Something went wrong.</span>
-                          </div>
-                        </div>
-                      </li>
-                    ) : seasons.length > 0 ? (
-                      seasons.map((season, index) => (
-                        <React.Fragment key={season.id}>
-                          <li>
-                            <button
-                              className="dropdown-item text-white bg-transparent text-wrap text-truncate"
-                              onClick={() => handleSeasonChange(season.season_number)}
-                              value={season.season_number}
-                            >
-                              <span className="m-1">{season.name === "Specials" ? season.name : `Season ${season.season_number}`}</span>
-                            </button>
-                          </li>
-                          {index < seasons.length - 1 && <li><hr className="dropdown-divider bg-secondary m-0" /></li>}
-                        </React.Fragment>
-                      ))
-                    ) : (
-                      <li className="dropdown-item text-white bg-transparent">
-                        <div className="col d-flex justify-content-center align-items-center">
-                          <div className="d-flex align-items-center dynamic-fs">
-                            <i className="bi bi-database-slash me-2"></i>
-                            <span>No season found.</span>
-                          </div>
-                        </div>
-                      </li>
-                    )}
-                  </ul>
-              </div>
-              <div className="dropdown dropup">
-                  <button
-                    className="btn btn-dark bd-callout-dark border-0 btn-md rounded-pill d-none d-md-inline-block"
-                    id="episodeDropdown"
-                    data-bs-toggle="dropdown"
-                    aria-expanded="false"
-                    aria-haspopup="true"
-                  >
-                    <i className="bi bi-chevron-down me-2"></i>
-                    Episode {selectedEpisode}
-                  </button>
-                  {/* For small screens */}
-                  <button
-                    className="btn btn-dark bd-callout-dark border-0 btn-sm rounded-pill d-md-none"
-                    id="episodeDropdown"
-                    data-bs-toggle="dropdown"
-                    aria-expanded="false"
-                    aria-haspopup="true"
-                  >
-                    <i className="bi bi-chevron-down me-2"></i>
-                    E {selectedEpisode}
-                  </button>
-                  <ul className="dropdown-menu overflow-auto custom-dropdown bd-callout-dark p-0 custom-theme-radius">
-                    {loadingSeasonData ? (
-                      <li className="dropdown-item text-secondary bg-transparent">
-                        <div className="col d-flex justify-content-center align-items-center">
-                          <div className="spinner-border text-light spinner-size-1" role="status">
-                            <span className="visually-hidden">Loading...</span>
-                          </div>
-                        </div>
-                      </li>
-                    ) : errorSeasonData ? (
-                      <li className="dropdown-item text-white bg-transparent">
-                        <div className="col d-flex justify-content-center align-items-center">
-                          <div className="d-flex align-items-center dynamic-fs">
-                            <i className="bi bi-wifi-off me-2"></i>
-                            <span className="mb-0">Something went wrong.</span>
-                          </div>
-                        </div>
-                      </li>
-                    ) : episodes.length > 0 ? (
-                      episodes.map((episode, index) => (
-                        <React.Fragment key={episode.id}>
-                          <li style={{ margin: 0 }}> {/* Remove margin from the list item */}
-                            <button
-                              className="dropdown-item text-white bg-transparent episode-item"
-                              onClick={() => handleEpisodeChange(episode.episode_number)}
-                              value={episode.episode_number}
-                              style={{
-                              backgroundImage: `url(https://image.tmdb.org/t/p/w300${episode.still_path})`,
-                              backgroundSize: 'cover',
-                              backgroundPosition: 'center',
-                              padding: 0,
-                              margin: 0,
-                              border: 'none',
-                              height: '100px',
-                              width: '200px',
-                              display: 'flex',
-                              justifyContent: 'space-between',
-                              }}
-                            >
-                              <span
-                                className="custom-bg text-white p-2 custom-theme-radius-low-br"
-                                style={{
-                                  position: 'absolute',
-                                  whiteSpace: 'nowrap',
-                                  overflowX: 'auto',
-                                  width: '100%',
-                                }}
-                              >
-                                Episode {episode.episode_number}: {episode.name}
-                              </span>
-                            </button>
-                          </li>
-                          {index < episodes.length - 1 && (
-                            <li style={{ margin: 0 }}>
-                              <hr className="dropdown-divider bg-secondary m-0" style={{ margin: 0, height: '1px' }} />
-                            </li> 
+    <>
+      <div className="flex-row text-white custom-w-size-100">
+        <div className="row justify-content-center position-relative">
+          <div className="col-lg-8 col-md-10 col-sm-12">
+            <div className="container bg-transparent">
+              <Player mediaURL={mediaURL}
+                averageVote={averageVote}
+                director={director}
+                genres={genres}
+                mediaInfo={mediaInfo}
+                id={id}
+                type={type}
+                isInList={isInList}
+                handleAddToList={handleAddToList}
+              />
+
+              <div className="container custom-bg custom-theme-radius w-100 p-2 my-2">
+                <div className="d-flex flex-row dynamic-ts py-2">
+                  <i className="bi bi-hdd-network me-2"></i>
+                  Servers
+                </div>
+                <div className="row g-2">
+                  {servers.length > 0 ? (
+                    servers.map((server) => (
+                      <div key={server.server_name} className="col-3 col-sm-3 col-md-2 col-lg-2 col-xl-2">
+                        <button
+                          className={`btn w-100 d-flex flex-row align-items-center justify-content-center border-0 rounded-pill shadow-sm ${selectedServerName === server.server_name
+                            ? 'btn-primary bd-callout-primary active'
+                            : 'btn-primary bd-callout-dark'
+                            }`}
+                          onClick={() => handleServerChange(server.server_name)}
+                        >
+                          <span className="text-truncate dynamic-ss">{server.server_name}</span>
+                          {serverStatus[server.server_name] === 'danger' ? (
+                            <i className="bi bi-x-circle-fill text-danger ms-2"></i>
+                          ) : (
+                            <i className="bi bi-check-circle-fill text-success ms-2"></i>
                           )}
-                        </React.Fragment>
-                      ))
-                    ) : (
-                      <li className="dropdown-item text-white bg-transparent">
-                        <div className="col d-flex justify-content-center align-items-center">
-                          <div className="d-flex align-items-center dynamic-fs">
-                            <i className="bi bi-database-slash me-2"></i>
-                            <span>No episode found.</span>
-                          </div>
-                        </div>
-                      </li>
-                    )}
-                  </ul>
-                </div>
-              </div>
-              <div className="d-flex justify-content-end">
-                <div className="dropdown dropup">
-                  {/* Button for medium and large screens */}
-                  <button
-                    className="btn btn-dark bd-callout-dark border-0 btn-md rounded-pill d-none d-md-inline-block"
-                    id="serverDropdown"
-                    data-bs-toggle="dropdown"
-                    aria-expanded="false"
-                  >
-                    <i className="bi bi-chevron-down me-2"></i>
-                    {selectedServerName ? selectedServerName : 'vidsrc.xyz'}
-                  </button>
-                  {/* Button for small screens */}
-                  <button
-                    className="btn btn-dark bd-callout-dark border-0 btn-sm rounded-pill d-md-none"
-                    id="serverDropdown"
-                    data-bs-toggle="dropdown"
-                    aria-expanded="false"
-                  >
-                    <i className="bi bi-chevron-down me-2"></i>
-                    {selectedServerName ? selectedServerName : 'vidsrc.xyz'}
-                  </button>
-                  <ul className="dropdown-menu overflow-auto custom-dropdown bd-callout-dark p-0 custom-theme-radius">
-                    {loadingLink ? (
-                      <li className="dropdown-item text-secondary bg-transparent">
-                        <div className="col d-flex justify-content-center align-items-center">
-                          <div className="spinner-border text-light spinner-size-1" role="status">
-                            <span className="visually-hidden">Loading...</span>
-                          </div>
-                        </div>
-                      </li>
-                    ) : errorLink ? (
-                      <li className="dropdown-item text-white bg-transparent">
-                        <div className="col d-flex justify-content-center align-items-center">
-                          <div className="d-flex align-items-center dynamic-fs">
-                            <i className="bi bi-wifi-off me-2"></i>
-                            <span className="mb-0">Something went wrong.</span>
-                          </div>
-                        </div>
-                      </li>
-                    ) : servers.length > 0 ? (
-                      servers.map((server, index) => (
-                        <React.Fragment key={server.server_name}>
-                          <li>
-                            <button
-                              className="dropdown-item text-white bg-transparent text-wrap text-truncate"
-                              onClick={() => handleServerChange(server.server_name)}
-                            >
-                              <span className="m-1">{server.server_name}</span>
-                            </button>
-                          </li>
-                          {index < servers.length - 1 && <li><hr className="dropdown-divider bg-secondary m-0" /></li>}
-                        </React.Fragment>
-                      ))
-                    ) : (
-                      <li className="dropdown-item text-white bg-transparent">
-                        <div className="col d-flex justify-content-center align-items-center">
-                          <div className="d-flex align-items-center dynamic-fs">
-                            <i className="bi bi-database-slash me-2"></i>
-                            <span>No server found.</span>
-                          </div>
-                        </div>
-                      </li>
-                    )}
-                  </ul>
-                </div>
-              </div>
-            </div>
-            <div className="d-flex flex-column align-items-start custom-theme-radius my-2 w-100">
-              <div className="container py-2 text-white">
-                <div className="d-flex flex-row dynamic-ts">
-                  <i className="bi bi-person-fill me-2"></i>
-                  Cast
-                </div>
-                <div className="row justify-content-center">
-                  {cast.length === 0 ? (
-                    <div className="col d-flex vh-35 justify-content-center align-items-center">
-                      <div className="d-flex align-items-center dynamic-fs">
-                        <i className="bi bi-database-slash me-2"></i>
-                        <span>No cast found.</span>
+                        </button>
                       </div>
-                    </div>
-                  ) : (
-                    cast.slice(0, sliceIndex).map(actor => (
-                    <CastCard key={actor.cast_id} actor={actor} />
+
                     ))
+                  ) : (
+                    <div className="text-white">No servers available</div>
                   )}
                 </div>
-                {cast.length > sliceIndex && (
-                  <div className="text-end">
-                    {/* Button for medium and large screens */}
-                    <button
-                      className="btn btn-dark bd-callout-dark dynamic-fs border-0 rounded-pill btn-md d-none d-md-inline-block"
-                      onClick={handleShowMore}
-                    >
-                      <i className="bi bi-chevron-down text-white me-2"></i>
-                      <span className="text-white">Show More</span>
-                    </button>
+              </div>
 
-                    {/* Button for small screens */}
-                    <button
-                      className="btn btn-dark bd-callout-dark dynamic-fs border-0 rounded-pill btn-sm d-md-none"
-                      onClick={handleShowMore}
-                    >
-                      <i className="bi bi-chevron-down text-white me-2"></i>
-                      <span className="text-white">Show More</span>
-                    </button>
+              <div className="container custom-bg custom-theme-radius w-100 p-2 my-2">
+                <div className="d-flex flex-row dynamic-ts py-2">
+                  <i className="bi bi-collection-play me-2"></i>
+                  Seasons & Episodes
+                </div>
+
+                {/* Season Buttons */}
+                <div className="row g-2 mb-2">
+                  {seasons.length > 0 ? (
+                    seasons.map((season) => (
+                      <div key={season.id} className="col-3 col-sm-3 col-md-2 col-lg-2 col-xl-2">
+                        <button
+                          className={`btn w-100 d-flex justify-content-center align-items-center border-0 rounded-pill shadow-sm ${selectedSeason === season.season_number
+                              ? 'btn-primary bd-callout-primary active'
+                              : 'btn-primary bd-callout-dark'
+                            }`}
+                          onClick={() => handleSeasonChange(season.season_number)}
+                        >
+                          <span className="text-truncate dynamic-ss">
+                            {season.name === 'Specials' ? season.name : `S${season.season_number}`}
+                          </span>
+                        </button>
+                      </div>
+                    ))
+                  ) : (
+                    <div className="text-white">No seasons available</div>
+                  )}
+                </div>
+
+                {/* Episodes Scrollable List */}
+                <div
+                  className="overflow-auto"
+                  style={{
+                    maxHeight: '268px',
+                  }}
+                >
+                  {episodes.length > 0 ? (
+                    episodes.map((episode) => (
+                      <button
+                        key={episode.id}
+                        className={`w-100 text-start mb-2 p-2 custom-theme-radius-low border-0 shadow-sm ${selectedEpisode === episode.episode_number
+                            ? 'btn-light bd-callout-light text-black active'
+                            : 'btn-primary bd-callout-dark text-white'
+                          }`}
+                        onClick={() => handleEpisodeChange(episode.episode_number)}
+                      >
+                        <div className="d-flex flex-column px-2">
+                          <span className="fw-bold">Episode {episode.episode_number}</span>
+                          <span className="small text-truncate">{episode.name}</span>
+                        </div>
+                      </button>
+                    ))
+                  ) : (
+                    <div className="text-white">No episodes available</div>
+                  )}
+                </div>
+              </div>
+
+              <div className="d-flex flex-column align-items-start custom-theme-radius my-2 w-100">
+                <div className="container py-2 text-white">
+                  <div className="d-flex flex-row dynamic-ts">
+                    <i className="bi bi-person-fill me-2"></i>
+                    Cast
                   </div>
-                )}
+                  <div className="row justify-content-center">
+                    {cast.length === 0 ? (
+                      <div className="col d-flex vh-35 justify-content-center align-items-center">
+                        <div className="d-flex align-items-center dynamic-fs">
+                          <i className="bi bi-database-slash me-2"></i>
+                          <span>No cast found.</span>
+                        </div>
+                      </div>
+                    ) : (
+                      cast.slice(0, sliceIndex).map(actor => (
+                        <CastCard key={actor.cast_id} actor={actor} />
+                      ))
+                    )}
+                  </div>
+                  {cast.length > sliceIndex && (
+                    <div className="text-end">
+                      {/* Button for medium and large screens */}
+                      <button
+                        className="btn btn-dark bd-callout-dark dynamic-fs border-0 rounded-pill btn-md d-none d-md-inline-block"
+                        onClick={handleShowMore}
+                      >
+                        <i className="bi bi-chevron-down text-white me-2"></i>
+                        <span className="text-white">Show More</span>
+                      </button>
+
+                      {/* Button for small screens */}
+                      <button
+                        className="btn btn-dark bd-callout-dark dynamic-fs border-0 rounded-pill btn-sm d-md-none"
+                        onClick={handleShowMore}
+                      >
+                        <i className="bi bi-chevron-down text-white me-2"></i>
+                        <span className="text-white">Show More</span>
+                      </button>
+                    </div>
+                  )}
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
-    </div>
       {alertMessage && <Alert message={alertMessage} onClose={handleAlertDismiss} type={alertType} />}
-  </>
+    </>
   );
 }
 

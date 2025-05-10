@@ -4,6 +4,7 @@ import useFetchMediaInfo from '../../hooks/useFetchMediaInfo';
 import useFetchStream from '../../hooks/useFetchStream';
 import useSaveMyList from '../../hooks/useSaveMyList';
 import useCheckMyList from '../../hooks/useCheckMyList';
+import useCheckServerStatus from '../../hooks/useCheckServerStatus';
 import Player from './PlayerUI';
 import Alert from '../../Alert';
 
@@ -23,6 +24,9 @@ function MovieGrid({ id, type, setBackgroundImage }) {
   const { addToList } = useSaveMyList();
   const { isInList, refetch } = useCheckMyList(id);
 
+  // Using the custom hook for checking server status
+  const serverStatus = useCheckServerStatus(servers);
+
   useEffect(() => {
     if (mediaInfo) {
       setCast(mediaInfo.credits?.cast || []);
@@ -32,13 +36,20 @@ function MovieGrid({ id, type, setBackgroundImage }) {
       // Setup the backgroundImage
       setBackgroundImage(`https://image.tmdb.org/t/p/original${mediaInfo.backdrop_path}`);
     }
-    
+
   }, [mediaInfo, id, type, setBackgroundImage]);
 
   useEffect(() => {
+    // Ensure the first server is selected by default when the servers are loaded
+    if (servers && servers.length > 0 && !selectedServerName) {
+      setSelectedServerName(servers[0].server_name);
+    }
+  }, [servers, selectedServerName]);
+
+  useEffect(() => {
     if (servers && servers.length > 0) {
-      const selectedServer = selectedServerName 
-        ? servers.find(server => server.server_name === selectedServerName) 
+      const selectedServer = selectedServerName
+        ? servers.find(server => server.server_name === selectedServerName)
         : servers[0];
       if (selectedServer) {
         setMediaURL(selectedServer.server_link);
@@ -113,133 +124,100 @@ function MovieGrid({ id, type, setBackgroundImage }) {
   return (
     <>
       <div className="flex-row text-white custom-w-size-100">
-      <div className="row justify-content-center position-relative">
-        <div className="col-lg-8 col-md-10 col-sm-12">
-          <div className="container bg-transparent">
-            <Player mediaURL={mediaURL}
-                    averageVote={averageVote}
-                    director={director} 
-                    genres={genres}
-                    mediaInfo={mediaInfo} 
-                    id={id} 
-                    type={type}
-                    isInList={isInList}
-                    handleAddToList={handleAddToList} />
-            <div className="d-flex justify-content-end mt-2">
-              <div className="dropdown dropup">
-                {/* Button for medium and large screens */}
-                <button
-                  className="btn btn-dark bd-callout-dark border-0 btn-md rounded-pill d-none d-md-inline-block"
-                  id="serverDropdown"
-                  data-bs-toggle="dropdown"
-                  aria-expanded="false"
-                >
-                  <i className="bi bi-chevron-down me-2"></i>
-                  {selectedServerName ? selectedServerName : 'vidsrc.xyz'}
-                </button>
-                {/* Button for small screens */}
-                <button
-                  className="btn btn-dark bd-callout-dark border-0 btn-sm rounded-pill d-md-none"
-                  id="serverDropdown"
-                  data-bs-toggle="dropdown"
-                  aria-expanded="false"
-                >
-                  <i className="bi bi-chevron-down me-2"></i>
-                  {selectedServerName ? selectedServerName : 'vidsrc.xyz'}
-                </button>
-                <ul className="dropdown-menu overflow-auto custom-dropdown bd-callout-dark p-0 custom-theme-radius">
-                  {loadingLink ? (
-                    <li className="dropdown-item text-white bg-transparent">
-                      <div className="col d-flex justify-content-center align-items-center">
-                        <div className="spinner-border text-light spinner-size-1" role="status">
-                          <span className="visually-hidden">Loading...</span>
-                        </div>
+        <div className="row justify-content-center position-relative">
+          <div className="col-lg-8 col-md-10 col-sm-12">
+            <div className="container bg-transparent">
+              <Player mediaURL={mediaURL}
+                averageVote={averageVote}
+                director={director}
+                genres={genres}
+                mediaInfo={mediaInfo}
+                id={id}
+                type={type}
+                isInList={isInList}
+                handleAddToList={handleAddToList}
+              />
+
+              <div className="container custom-bg custom-theme-radius w-100 p-2 my-2">
+                <div className="d-flex flex-row dynamic-ts py-2">
+                  <i className="bi bi-hdd-network me-2"></i>
+                  Servers
+                </div>
+                <div className="row g-2">
+                  {servers.length > 0 ? (
+                    servers.map((server) => (
+                      <div key={server.server_name} className="col-3 col-sm-3 col-md-2 col-lg-2 col-xl-2">
+                        <button
+                          className={`btn w-100 d-flex flex-row align-items-center justify-content-center border-0 rounded-pill shadow-sm ${selectedServerName === server.server_name
+                              ? 'btn-primary bd-callout-primary active'
+                              : 'btn-primary bd-callout-dark'
+                            }`}
+                          onClick={() => handleServerChange(server.server_name)}
+                        >
+                          <span className="text-truncate dynamic-ss">{server.server_name}</span>
+                          {serverStatus[server.server_name] === 'danger' ? (
+                            <i className="bi bi-x-circle-fill text-danger ms-2"></i>
+                          ) : (
+                            <i className="bi bi-check-circle-fill text-success ms-2"></i>
+                          )}
+                        </button>
                       </div>
-                    </li>
-                  ) : errorLink ? (
-                    <li className="dropdown-item text-white bg-transparent">
-                      <div className="col d-flex justify-content-center align-items-center">
-                        <div className="d-flex align-items-center dynamic-fs">
-                          <i className="bi bi-wifi-off me-2"></i>
-                          <span className="mb-0">Something went wrong.</span>
-                        </div>
-                      </div>
-                    </li>
-                  ) : servers.length > 0 ? (
-                    servers.map((server, index) => (
-                      <React.Fragment key={server.server_name}>
-                        <li>
-                          <button
-                            className="dropdown-item text-white bg-transparent text-wrap text-truncate"
-                            onClick={() => handleServerChange(server.server_name)}
-                          >
-                            <span className="m-1">{server.server_name}</span>
-                          </button>
-                        </li>
-                        {index < servers.length - 1 && <li><hr className="dropdown-divider bg-secondary m-0" /></li>}
-                      </React.Fragment>
+
                     ))
                   ) : (
-                    <li className="dropdown-item text-white bg-transparent">
-                      <div className="col d-flex justify-content-center align-items-center">
+                    <div className="text-white">No servers available</div>
+                  )}
+                </div>
+              </div>
+
+              <div className="d-flex flex-column align-items-start custom-theme-radius my-2 w-100">
+                <div className="container py-2 text-white">
+                  <div className="d-flex flex-row dynamic-ts">
+                    <i className="bi bi-person-fill me-2"></i>
+                    Cast
+                  </div>
+                  <div className="row justify-content-center">
+                    {cast.length === 0 ? (
+                      <div className="col d-flex vh-35 justify-content-center align-items-center">
                         <div className="d-flex align-items-center dynamic-fs">
                           <i className="bi bi-database-slash me-2"></i>
-                          <span className="mb-0">No server found.</span>
+                          <span className="mb-0">No cast found.</span>
                         </div>
                       </div>
-                    </li>
-                  )}
-                </ul>
-              </div>
-            </div>
-            <div className="d-flex flex-column align-items-start custom-theme-radius my-2 w-100">
-              <div className="container py-2 text-white">
-                <div className="d-flex flex-row dynamic-ts">
-                  <i className="bi bi-person-fill me-2"></i>
-                  Cast
-                </div>
-                <div className="row justify-content-center">
-                  {cast.length === 0 ? (
-                    <div className="col d-flex vh-35 justify-content-center align-items-center">
-                      <div className="d-flex align-items-center dynamic-fs">
-                        <i className="bi bi-database-slash me-2"></i>
-                        <span className="mb-0">No cast found.</span>
-                      </div>
-                    </div>
-                  ) : (
-                    cast.slice(0, sliceIndex).map(actor => (
-                      <CastCard key={actor.cast_id} actor={actor} />
-                    ))
-                  )}
-                </div>
-                {cast.length > sliceIndex && (
-                  <div className="text-end">
-                    {/* Button for medium and large screens */}
-                    <button
-                      className="btn btn-dark bd-callout-dark dynamic-fs border-0 rounded-pill btn-md d-none d-md-inline-block"
-                      onClick={handleShowMore}
-                    >
-                      <i className="bi bi-chevron-down text-white me-2"></i>
-                      <span className="text-white">Show More</span>
-                    </button>
-
-                    {/* Button for small screens */}
-                    <button
-                      className="btn btn-dark bd-callout-dark dynamic-fs border-0 rounded-pill btn-sm d-md-none"
-                      onClick={handleShowMore}
-                    >
-                      <i className="bi bi-chevron-down text-white me-2"></i>
-                      <span className="text-white">Show More</span>
-                    </button>
+                    ) : (
+                      cast.slice(0, sliceIndex).map(actor => (
+                        <CastCard key={actor.cast_id} actor={actor} />
+                      ))
+                    )}
                   </div>
-                )}
+                  {cast.length > sliceIndex && (
+                    <div className="text-end">
+                      {/* Button for medium and large screens */}
+                      <button
+                        className="btn btn-dark bd-callout-dark dynamic-fs border-0 rounded-pill btn-md d-none d-md-inline-block"
+                        onClick={handleShowMore}
+                      >
+                        <i className="bi bi-chevron-down text-white me-2"></i>
+                        <span className="text-white">Show More</span>
+                      </button>
+
+                      {/* Button for small screens */}
+                      <button
+                        className="btn btn-dark bd-callout-dark dynamic-fs border-0 rounded-pill btn-sm d-md-none"
+                        onClick={handleShowMore}
+                      >
+                        <i className="bi bi-chevron-down text-white me-2"></i>
+                        <span className="text-white">Show More</span>
+                      </button>
+                    </div>
+                  )}
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-      </div>
-        {alertMessage && <Alert message={alertMessage} onClose={handleAlertDismiss} type={alertType} />}
+      {alertMessage && <Alert message={alertMessage} onClose={handleAlertDismiss} type={alertType} />}
     </>
   );
 }
