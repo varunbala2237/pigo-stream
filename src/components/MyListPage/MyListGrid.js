@@ -94,7 +94,7 @@ function MyListGrid({ userUID }) {
             {!error && (
                 <>
                     <div className="d-flex align-items-center dynamic-ts m-2 px-1">
-                        <i className="bi bi-bookmark theme-color me-2"></i>
+                        <i className="bi bi-bookmark-fill theme-color me-2"></i>
                         <b className="mb-0">My List</b>
                     </div>
                     <div className="position-relative my-2">

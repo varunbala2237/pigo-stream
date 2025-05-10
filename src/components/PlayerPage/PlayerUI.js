@@ -124,14 +124,14 @@ function Player({ mediaURL, averageVote, director, genres, mediaInfo, id, type, 
                   className={`btn btn-dark px-2 py-1 d-none d-md-block border-0 text-white rounded-circle btn-light custom-bg`}
                   onClick={handleAddToList}
                 >
-                  <i className={`bi-${isInList ? 'bookmark-fill' : 'bookmark'}`}></i>
+                  <i className={`bi-${isInList ? 'bookmark-fill theme-color' : 'bookmark'}`}></i>
                 </button>
                 {/* Smaller button for smaller screen */}
                 <button
                   className={`btn btn-dark d-block d-md-none btn-sm border-0 text-white rounded-circle btn-light custom-bg`}
                   onClick={handleAddToList}
                 >
-                  <i className={`bi-${isInList ? 'bookmark-fill' : 'bookmark'}`}></i>
+                  <i className={`bi-${isInList ? 'bookmark-fill theme-color' : 'bookmark'}`}></i>
                 </button>
                 </div>
 

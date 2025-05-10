@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Header from '../Header';
 import MyListGrid from './MyListGrid';
 import { auth } from '../../firebase/firebase-auth'; // Import the auth object
+import Footer from '../Footer';
 
 function MyListPage() {
     const [userUID, setUserUID] = useState(null);
@@ -55,6 +56,7 @@ function MyListPage() {
             <div className="flex-row text-white w-100">
                 {userUID ? <><MyListGrid userUID={userUID} /></> : null}
             </div>
+            <Footer/>
           </div>
         </div>
     );

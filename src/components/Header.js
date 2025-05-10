@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from "react-router-dom";
 import { auth, signOutWithAccount } from "../firebase/firebase-auth";
-import { Link } from "react-router-dom";
 
 import './Header.css';
 
@@ -34,11 +33,6 @@ function Header() {
 
     return () => unsubscribe();
   }, [navigate]);
-  
-  const getNavLinkClass = (path) => 
-    location.pathname === path 
-      ? "btn btn-dark border-0 rounded-pill fw-bold active" 
-      : "btn border-0 rounded-pill";
 
   return (
     <>
@@ -89,74 +83,45 @@ function Header() {
       <div className={`sidebar-overlay ${sidebarOpen ? "open" : ""}`} onClick={() => setSidebarOpen(false)}></div>
 
       {/* Sidebar */}
-      <div className={`sidebar d-flex flex-column bd-callout-dark text-white ${sidebarOpen ? "open" : ""}`}>
-        <div className="sidebar-header d-flex justify-content-end">
-          <button className="btn text-white border-0" onClick={() => setSidebarOpen(false)}>
-            <i className="bi bi-x-lg"></i> {/* Sidebar Close Button */}
-          </button>
-        </div>
-
-        {/* User Profile Section */}
-        <div className="text-center text-white mb-2">
-          <img 
-            src={userPhotoURL} 
-            alt="User" 
-            className="rounded-circle"
-            style={{
-              width : "70px",
-              height: "70px",
-            }}
-          />
-          <div className="text-wrap text-truncate dynamic-ts">{userName}</div>
-          <div className="text-wrap text-truncate dynamic-fs" contentEditable={false}>{userEmail}</div>
-        </div>
-
-        {/* Navigation Section */}
-        <ul className="navbar-nav flex-column dynamic-fs flex-grow-1 justify-content-center custom-theme-radius gap-2">
-          <li className="nav-item">
-            <Link className={`text-white ${getNavLinkClass("/index")}`} to="/index" onClick={() => setSidebarOpen(false)}>
-              <i className="bi bi-house theme-color"></i> Home
-            </Link>
-          </li>
-          <li className="nav-item">
-            <Link className={`text-white ${getNavLinkClass("/my-list")}`} to="/my-list" onClick={() => setSidebarOpen(false)}>
-              <i className="bi bi-bookmark theme-color"></i> My List
-            </Link>
-          </li>
-          <li className="nav-item">
-            <Link className={`text-white ${getNavLinkClass("/watch-history")}`} to="/watch-history" onClick={() => setSidebarOpen(false)}>
-              <i className="bi bi-clock theme-color"></i> Watch History
-            </Link>
-          </li>
-        </ul>
-
-        {/* Sign Out + Social Icons (BOTTOM) */}
-        <div className="d-flex flex-column align-items-center gap-3 pb-3">
-          <button className="btn btn-md rounded-pill btn-danger" onClick={signOutWithAccount}>
-            <i className="bi bi-box-arrow-left"></i> Sign Out
-          </button>
-    
-          {/* Social Icons (GitHub + Telegram) */}
-          <div className="d-flex gap-4">
-            <a href="https://t.me/pigostream" target="_blank" rel="noopener noreferrer" 
-              className="d-flex justify-content-center" 
-            >
-              <i className="bi bi-telegram fs-2 text-secondary"></i>
-            </a>
-      
-            <a href="https://github.com/varunbala2237/pigo-stream" target="_blank" rel="noopener noreferrer" 
-              className="d-flex justify-content-center" 
-            >
-              <i className="bi bi-github fs-2 text-secondary"></i>
-            </a>
+      <div className={`sidebar d-flex flex-column bd-callout-dark text-white ${sidebarOpen ? "open" : ""}`} style={{ height: '100vh' }}>
+        <div>
+          {/* Close Button */}
+          <div className="sidebar-header d-flex justify-content-end">
+            <button className="btn text-white border-0" onClick={() => setSidebarOpen(false)}>
+              <i className="bi bi-x-lg"></i>
+            </button>
           </div>
 
-          {/* Small Text Below Icons */}
-          <p className="text-secondary dynamic-ss">
-            Follow us for updates
-          </p>
+        {/* User Info */}
+        <div className="text-center text-white mb-2">
+            <img 
+              src={userPhotoURL} 
+              alt="User" 
+              className="rounded-circle"
+              style={{ width: "70px", height: "70px" }}
+            />
+            <div className="text-wrap text-truncate dynamic-ts">{userName}</div>
+            <div className="text-wrap text-truncate dynamic-fs" contentEditable={false}>{userEmail}</div>
         </div>
       </div>
+
+      <div className="mt-auto d-flex flex-column align-items-center gap-3 pb-3">
+        <button className="btn btn-md rounded-pill btn-danger" onClick={signOutWithAccount}>
+          <i className="bi bi-box-arrow-left"></i> Sign Out
+        </button>
+
+        <div className="d-flex gap-4">
+          <a href="https://t.me/pigostream" target="_blank" rel="noopener noreferrer" className="d-flex justify-content-center">
+            <i className="bi bi-telegram fs-2 text-secondary"></i>
+          </a>
+          <a href="https://github.com/varunbala2237/pigo-stream" target="_blank" rel="noopener noreferrer" className="d-flex justify-content-center">
+            <i className="bi bi-github fs-2 text-secondary"></i>
+          </a>
+        </div>
+
+        <p className="text-secondary dynamic-ss">Follow us for updates</p>
+      </div>
+    </div>
     </>
   );
 }

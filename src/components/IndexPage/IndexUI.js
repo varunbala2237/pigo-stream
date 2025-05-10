@@ -3,6 +3,7 @@ import useRecommendations from '../../hooks/useRecommendations';
 import useFetchMediaDetails from '../../hooks/useFetchMediaDetails';
 import useFetchMedia from '../../hooks/useFetchMedia';
 import HomeUI from './HomeUI';
+import Footer from '../Footer';
 
 const IndexPage = () => {
   const { selectedItemId } = useRecommendations();
@@ -86,6 +87,8 @@ const IndexPage = () => {
         setTriggerSearch={setTriggerSearch}
         isRecommended={isRecommended}
       />
+
+      <Footer showSearchBar={setShowSearchBar}/>
     </div>
   );
 };
