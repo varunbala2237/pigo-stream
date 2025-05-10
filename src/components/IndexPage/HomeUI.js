@@ -56,6 +56,9 @@ function HomePage({
   const handleSearchBar = () => {
     setShowSearchBar((prevState) => !prevState);
 
+    // Reset search query and trigger search
+    handleSearchInputChange({ target: { value: '' } });
+
     // Scroll to Top
     window.scrollTo({ top: 0 });
   };
@@ -239,12 +242,12 @@ function HomePage({
                 </div>
                 <div className="dynamic-fs my-2">{mediaDesc}</div>
                 <button className="btn btn-dark btn-md d-none d-md-inline-block bd-callout-dark rounded-pill border-0 my-2" onClick={handlePlayMedia}>
-                  <i className="bi bi-chevron-down me-2"></i>
-                  <span>Show More</span>
+                  <i className="bi bi-chevron-right me-2"></i>
+                  <span>See More</span>
                 </button>
                 <button className="btn btn-dark btn-sm d-md-none bd-callout-dark rounded-pill border-0 my-2" onClick={handlePlayMedia}>
-                  <i className="bi bi-chevron-down me-2"></i>
-                  <span>Show More</span>
+                  <i className="bi bi-chevron-right me-2"></i>
+                  <span>See More</span>
                 </button>
                 </div>
             </div>

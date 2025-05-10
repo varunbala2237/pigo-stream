@@ -4,7 +4,7 @@ import useFetchTrailer from '../../hooks/useFetchTrailer';
 import useAppVersion from '../../hooks/useAppVersion';
 import { useNavigate } from 'react-router-dom';
 
-import openIframeWindow from "../IframePage(Externel)/openIframeWindow";
+import openIframeWindow from "../IframePage/openIframeWindow";
 
 function Player({ mediaURL, averageVote, director, genres, mediaInfo, id, type, isInList, handleAddToList }) {
   const [imageUrl, setImageUrl] = useState('');
