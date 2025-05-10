@@ -226,7 +226,7 @@ function MyListGrid({ userUID }) {
 
                     {/* If both Movies and TV Shows are empty */}
                     {!loading && movieList.length === 0 && tvList.length === 0 && (
-                        <div className="col d-flex vh-50 justify-content-center align-items-center mt-3">
+                        <div className="col d-flex vh-25 justify-content-center align-items-center mt-3">
                             <div className="d-flex align-items-center">
                                 <i className="bi bi-bookmark me-2"></i>
                                 <span className="dynamic-fs">Your list is empty.</span>

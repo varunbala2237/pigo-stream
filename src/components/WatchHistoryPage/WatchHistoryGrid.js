@@ -268,7 +268,7 @@ function WatchHistoryGrid({ userUID }) {
 
                     {/* If both Movies and TV Shows are empty */}
                     {!fetchLoading && movieHistory.length === 0 && tvHistory.length === 0 && (
-                        <div className="col d-flex vh-50 justify-content-center align-items-center mt-3">
+                        <div className="col d-flex vh-25 justify-content-center align-items-center mt-3">
                             <div className="d-flex align-items-center">
                                 <i className="bi bi-clock me-2"></i>
                                 <span className="dynamic-fs">You haven't watched anything yet.</span>

@@ -22,7 +22,7 @@ const fetchWithRetry = async (url, options = {}, retries = 5, delay = 1000) => {
   }
 };
 
-const useRecommendations = () => {
+const useGenreRecommendations = () => {
   const [selectedItemId, setSelectedItemId] = useState(null);
   const [userUID, setUserUID] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -131,4 +131,4 @@ const useRecommendations = () => {
   return { selectedItemId, loading, error };
 };
 
-export default useRecommendations;
+export default useGenreRecommendations;

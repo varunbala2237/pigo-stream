@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import useRecommendations from '../../hooks/useRecommendations';
+import useGenreRecommendations from '../../hooks/useGenreRecommendations';
 import useFetchMediaDetails from '../../hooks/useFetchMediaDetails';
 import useFetchMedia from '../../hooks/useFetchMedia';
 import HomeUI from './HomeUI';
 import Footer from '../Footer';
 
 const IndexPage = () => {
-  const { selectedItemId } = useRecommendations();
+  const { selectedItemId } = useGenreRecommendations();
   const { data: recommendedMedia, loading: loadingRecommendedMedia } = useFetchMediaDetails(selectedItemId);
   const { data: popularMovies, loading: loadingPopularMovies } = useFetchMedia('popular', 'movie');
 

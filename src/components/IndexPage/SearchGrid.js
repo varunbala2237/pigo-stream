@@ -138,7 +138,7 @@ function SearchGrid({ searchQuery }) {
 
           {/* If both Movies and TV Shows are not found */}
           {!isLoading && movies.length === 0 && shows.length === 0 && (
-            <div className="col d-flex vh-50 justify-content-center align-items-center mt-3">
+            <div className="col d-flex vh-25 justify-content-center align-items-center mt-3">
               <div className="d-flex align-items-center">
                 <i className="bi bi-search me-2"></i>
                 <span className="dynamic-fs">No results found for <strong>"{searchQuery}"</strong>.</span>
