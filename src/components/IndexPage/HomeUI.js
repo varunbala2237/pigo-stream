@@ -8,6 +8,7 @@ import useSaveSearchHistory from '../../hooks/useSaveSearchHistory';
 import useFetchSearchHistory from '../../hooks/useFetchSearchHistory';
 import useRemoveSearchHistory from '../../hooks/useRemoveSearchHistory';
 import Alert from '../../Alert';
+import ProvidersGrid from './ProvidersGrid';
 
 function HomePage({
   title,
@@ -242,12 +243,12 @@ function HomePage({
                 </div>
                 <div className="dynamic-fs my-2">{mediaDesc}</div>
                 <button className="btn btn-dark btn-md d-none d-md-inline-block bd-callout-dark rounded-pill border-0 my-2" onClick={handlePlayMedia}>
-                  <i className="bi bi-play-circle-fill me-2"></i>
-                  <span>Watch Now!</span>
+                  <i className="bi bi-play-fill me-2"></i>
+                  <span>Watch Now</span>
                 </button>
                 <button className="btn btn-dark btn-sm d-md-none bd-callout-dark rounded-pill border-0 my-2" onClick={handlePlayMedia}>
-                  <i className="bi bi-play-circle-fill me-2"></i>
-                  <span>Watch Now!</span>
+                  <i className="bi bi-play-fill me-2"></i>
+                  <span>Watch Now</span>
                 </button>
                 </div>
             </div>
@@ -255,7 +256,7 @@ function HomePage({
         )}
 
         <div className="flex-row text-white w-100">
-          {triggerSearch.trim() === '' ? <><TrendingGrid /></> : <><SearchGrid searchQuery={triggerSearch} /></>}
+          {triggerSearch.trim() === '' ? <><TrendingGrid /><ProvidersGrid /></> : <><SearchGrid searchQuery={triggerSearch} /></>}
         </div>
 
         <button className="btn btn-dark bd-callout-dark" style={fabStyle} onClick={handleSearchBar}>
