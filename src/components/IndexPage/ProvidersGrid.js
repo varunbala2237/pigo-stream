@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import Card from '../Card';
 import useFetchProviders from '../../hooks/useFetchProviders';
@@ -15,13 +15,31 @@ const PROVIDERS = [
 ];
 
 function ProvidersGrid() {
-    const [selectedProvider, setSelectedProvider] = useState(PROVIDERS[0].id);
+    const [selectedProvider, setSelectedProvider] = useState(null);
     const { movies, tvShows, loading, error } = useFetchProviders(selectedProvider);
     const location = useLocation();
 
     // Scroll references for movies and TV shows
     const moviesRef = useRef(null);
     const tvRef = useRef(null);
+    const providersRef = useRef(null);
+
+    // Load selected provider from localStorage or default to Netflix
+    useEffect(() => {
+        const savedProvider = localStorage.getItem('selectedProvider');
+        if (savedProvider) {
+            setSelectedProvider(Number(savedProvider));
+        } else {
+            setSelectedProvider(PROVIDERS[0].id);
+        }
+    }, []);
+
+    // Save selected provider to localStorage whenever it changes
+    useEffect(() => {
+        if (selectedProvider !== null) {
+            localStorage.setItem('selectedProvider', selectedProvider);
+        }
+    }, [selectedProvider]);
 
     const scrollMovies = (direction) => {
         if (moviesRef.current) {
@@ -40,8 +58,6 @@ function ProvidersGrid() {
             });
         }
     };
-
-    const providersRef = useRef(null);
 
     const scrollProviders = (direction) => {
         if (providersRef.current) {
