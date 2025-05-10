@@ -12,8 +12,14 @@ const IndexPage = () => {
 
   const [backgroundImage, setBackgroundImage] = useState(null);
   const [isRecommended, setIsRecommended] = useState(false);
-  const [showSearchBar, setShowSearchBar] = useState(false);
-  const [triggerSearch, setTriggerSearch] = useState('');
+  const [showSearchBar, setShowSearchBar] = useState(() => {
+    const savedState = localStorage.getItem('showSearchBar');
+    return savedState ? JSON.parse(savedState) : false;
+  });
+  const [triggerSearch, setTriggerSearch] = useState(() => {
+    const savedState = localStorage.getItem('triggerSearch');
+    return savedState ? savedState : '';
+  });
 
   useEffect(() => {
     const getImagePath = (media) => {
@@ -32,6 +38,12 @@ const IndexPage = () => {
     }
   }, [recommendedMedia, popularMovies, loadingRecommendedMedia, loadingPopularMovies]);
 
+  useEffect(() => {
+    // Save state to localStorage whenever it changes
+    localStorage.setItem('showSearchBar', JSON.stringify(showSearchBar));
+    localStorage.setItem('triggerSearch', triggerSearch);
+  }, [showSearchBar, triggerSearch]);
+
   // Extract details for movie or TV show from either recommendation or popular movie
   const mediaDetails = recommendedMedia || (popularMovies.length > 0 ? popularMovies[0] : {});
   const mediaId = mediaDetails.id || selectedItemId;
@@ -42,8 +54,8 @@ const IndexPage = () => {
   const year = mediaDetails.release_date
     ? new Date(mediaDetails.release_date).getFullYear()
     : mediaDetails.first_air_date
-    ? new Date(mediaDetails.first_air_date).getFullYear()
-    : 'N/A';
+      ? new Date(mediaDetails.first_air_date).getFullYear()
+      : 'N/A';
 
   const shouldHideBackground = showSearchBar || triggerSearch.trim() !== '';
 
@@ -54,10 +66,10 @@ const IndexPage = () => {
         style={{
           background: shouldHideBackground ? 'transparent' : undefined,
           backgroundImage: shouldHideBackground
-          ? 'none' // Hide background when search is active or query exists
-          : backgroundImage
-          ? `linear-gradient(to bottom, rgba(0, 0, 0, 0), rgb(0, 0, 0)), url(${backgroundImage})`
-          : 'none',
+            ? 'none' // Hide background when search is active or query exists
+            : backgroundImage
+              ? `linear-gradient(to bottom, rgba(0, 0, 0, 0), rgb(0, 0, 0)), url(${backgroundImage})`
+              : 'none',
         }}
       >
         {/* Dark Overlay */}
@@ -65,11 +77,11 @@ const IndexPage = () => {
           <div
             className="position-absolute w-100 h-100"
             style={{
-            top: 0,
-            left: 0,
-            background: 'rgba(0, 0, 0, 0.4)',
-            zIndex: 1,
-          }}
+              top: 0,
+              left: 0,
+              background: 'rgba(0, 0, 0, 0.4)',
+              zIndex: 1,
+            }}
           ></div>
         )}
       </div>
@@ -88,7 +100,7 @@ const IndexPage = () => {
         isRecommended={isRecommended}
       />
 
-      <Footer showSearchBar={setShowSearchBar}/>
+      <Footer showSearchBar={setShowSearchBar} />
     </div>
   );
 };
