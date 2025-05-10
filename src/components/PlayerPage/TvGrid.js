@@ -21,6 +21,7 @@ function TvGrid({ id, type, setBackgroundImage }) {
   const [episodes, setEpisodes] = useState([]);
   const [selectedSeason, setSelectedSeason] = useState(1);
   const [selectedEpisode, setSelectedEpisode] = useState(1);
+  const [watchedEpisodes, setWatchedEpisodes] = useState({});
   const [selectedServerName, setSelectedServerName] = useState('');
 
   const [sliceIndex, setSliceIndex] = useState(12); // Initial slice index
@@ -60,6 +61,12 @@ function TvGrid({ id, type, setBackgroundImage }) {
       setBackgroundImage(`https://image.tmdb.org/t/p/original${mediaInfo.backdrop_path}`);
     }
   }, [mediaInfo, setBackgroundImage, cachedSettings]);
+
+  useEffect(() => {
+    if (cachedSettings?.watchedEpisodes) {
+      setWatchedEpisodes(cachedSettings.watchedEpisodes);
+    }
+  }, [cachedSettings]);
 
   useEffect(() => {
     if (seasonData) {
@@ -112,6 +119,26 @@ function TvGrid({ id, type, setBackgroundImage }) {
         ...(currentSettings.selectedEpisodes || {}),
         [seasonNumber]: episodeForSeason
       }
+    });
+  };
+
+  const handleToggleWatched = (episodeNumber) => {
+    const currentSettings = getMediaStateSettings(id) || {};
+    const updatedWatched = {
+      ...(currentSettings.watchedEpisodes || {}),
+      [selectedSeason]: {
+        ...(currentSettings.watchedEpisodes?.[selectedSeason] || {}),
+        [episodeNumber]: !(
+          currentSettings.watchedEpisodes?.[selectedSeason]?.[episodeNumber]
+        ),
+      },
+    };
+
+    setWatchedEpisodes(updatedWatched);
+
+    storeMediaStateSettings(id, {
+      ...currentSettings,
+      watchedEpisodes: updatedWatched,
     });
   };
 
@@ -315,17 +342,25 @@ function TvGrid({ id, type, setBackgroundImage }) {
                           ? 'btn-light bd-callout-light text-black active'
                           : 'btn-primary bd-callout-dark text-white'
                           }`}
-                        onClick={() => handleEpisodeChange(episode.episode_number)}
+                        onClick={() => {
+                          handleEpisodeChange(episode.episode_number);
+                          handleToggleWatched(episode.episode_number);
+                        }}
                       >
                         <div className="d-flex flex-column text-wrap px-2">
-                          <span className="fw-bold">Episode {episode.episode_number}
-                            {!isEpisodeAired(episode.air_date) && (
-                              <span className="badge bg-warning text-dark ms-2">Unaired</span>
+                          <div className="d-flex flex-row justify-content-between">
+                            <span className="fw-bold">Episode {episode.episode_number}
+                              {!isEpisodeAired(episode.air_date) && (
+                                <span className="badge bg-warning text-dark ms-2">Unaired</span>
+                              )}
+                              {isEpisodeAiredToday(episode.air_date) && (
+                                <span className="badge bg-primary text-white ms-2">New!</span>
+                              )}
+                            </span>
+                            {watchedEpisodes?.[selectedSeason]?.[episode.episode_number] && (
+                              <i className="bi bi-check-circle-fill text-success ms-2"></i>
                             )}
-                            {isEpisodeAiredToday(episode.air_date) && (
-                              <span className="badge bg-success text-white ms-2">New!</span>
-                            )}
-                          </span>
+                          </div>
                           <div className="d-flex flex-row justify-content-between">
                             <small className="dynamic-ss">{episode.name}</small>
                             <small className="mt-1 align-self-end dynamic-ss">
