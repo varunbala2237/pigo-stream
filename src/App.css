@@ -203,30 +203,55 @@
   opacity: 1;
 }
 
+.provider-card {
+  flex: 0 0 auto;
+  cursor: pointer;
+  height: auto;
+  aspect-ratio: 3 / 2;
+  overflow: hidden;
+}
+
+.provider-logo {
+  width: 80%;
+  height: auto;
+  object-fit: contain;
+}
+
 /* For phones with a maximum width of 767px */
 @media (max-width: 767px) {
+  .provider-card {
+    width: 135px;
+  }
+
   .form-pad {
     max-width: 80%;
   }
+
   .modal-pad {
     max-width: 90%;
   }
+
   .custom-cast-card-img {
     height: 70px;
     width: 70px;
   }
+
   .custom-card-container {
     height: 200px;
   }
+
   .dynamic-hs {
     font-size: 1.2rem;
   }
+
   .dynamic-ts {
     font-size: 1rem;
   }
+
   .dynamic-fs {
     font-size: 0.9rem;
   }
+
   .dynamic-ss {
     font-size: 0.8rem;
   }
@@ -234,28 +259,39 @@
 
 /* For iPads and tablets with a width of 768px to 1199px */
 @media (min-width: 768px) and (max-width: 1199px) {
+  .provider-card {
+    width: 165px;
+  }
+
   .form-pad {
     max-width: 60%;
   }
+
   .modal-pad {
     max-width: 70%;
   }
+
   .custom-cast-card-img {
     height: 80px;
     width: 80px;
   }
+
   .custom-card-container {
     height: 250px;
   }
+
   .dynamic-hs {
     font-size: 1.5rem;
   }
+
   .dynamic-ts {
     font-size: 1.3rem;
   }
+
   .dynamic-fs {
     font-size: 1.1rem;
   }
+
   .dynamic-ss {
     font-size: 1rem;
   }
@@ -263,28 +299,39 @@
 
 /* For laptops and desktops with a width of 1200px and above */
 @media (min-width: 1200px) {
+  .provider-card {
+    width: 200px;
+  }
+
   .form-pad {
     max-width: 30%;
   }
+
   .modal-pad {
     max-width: 40%;
   }
+
   .custom-cast-card-img {
     height: 90px;
     width: 90px;
   }
+
   .custom-card-container {
     height: 300px;
   }
+
   .dynamic-hs {
     font-size: 1.6rem;
   }
+
   .dynamic-ts {
     font-size: 1.2rem;
   }
+
   .dynamic-fs {
     font-size: 1rem;
   }
+
   .dynamic-ss {
     font-size: 0.9rem;
   }
@@ -296,6 +343,7 @@
     transform: scale(0.8);
     opacity: 0;
   }
+
   to {
     transform: scale(1);
     opacity: 1;
@@ -308,6 +356,7 @@
     transform: scale(1);
     opacity: 1;
   }
+
   to {
     transform: scale(0.8);
     opacity: 0;
