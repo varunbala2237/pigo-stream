@@ -340,41 +340,44 @@ function TvGrid({ id, type, setBackgroundImage }) {
                   }}
                 >
                   {episodes.length > 0 ? (
-                    episodes.map((episode) => (
-                      <button
-                        key={episode.id}
-                        className={`w-100 text-start mb-2 p-2 custom-theme-radius-low border-0 shadow-sm ${selectedEpisode === episode.episode_number
-                          ? 'btn-light bd-callout-light text-black active'
-                          : 'btn-primary bd-callout-dark text-white'
-                          }`}
-                        onClick={() => {
-                          handleEpisodeChange(episode.episode_number);
-                          handleToggleWatched(episode.episode_number);
-                        }}
-                      >
-                        <div className="d-flex flex-column text-wrap px-2">
-                          <div className="d-flex flex-row justify-content-between">
-                            <span className="fw-bold">Episode {episode.episode_number}
-                              {!isEpisodeAired(episode.air_date) && (
-                                <span className="badge bg-warning text-dark ms-2">Unaired</span>
+                    episodes.map((episode) => {
+                      const isAired = isEpisodeAired(episode.air_date);
+                      const isAiredToday = isEpisodeAiredToday(episode.air_date);
+
+                      return (
+                        <button
+                          key={episode.id}
+                          className={`w-100 text-start mb-2 p-2 custom-theme-radius-low border-0 shadow-sm ${selectedEpisode === episode.episode_number
+                            ? 'btn-light bd-callout-light text-black active'
+                            : 'btn-dark bd-callout-dark text-white'
+                            }`}
+                          onClick={() => {
+                            handleEpisodeChange(episode.episode_number);
+                            handleToggleWatched(episode.episode_number);
+                          }}
+                          disabled={!isAired}
+                        >
+                          <div className={`d-flex flex-column text-wrap px-2 ${isAired ? '' : 'text-black'}`}>
+                            <div className="d-flex flex-row justify-content-between">
+                              <span className="fw-bold dynamic-fs">Episode {episode.episode_number}
+                                {isAiredToday && (
+                                  <span className="badge bg-primary text-white ms-2">New!</span>
+                                )}
+                              </span>
+                              {watchedEpisodes?.[selectedSeason]?.[episode.episode_number] && (
+                                <i className="bi bi-check2 text-success ms-2"></i>
                               )}
-                              {isEpisodeAiredToday(episode.air_date) && (
-                                <span className="badge bg-primary text-white ms-2">New!</span>
-                              )}
-                            </span>
-                            {watchedEpisodes?.[selectedSeason]?.[episode.episode_number] && isEpisodeAired(episode.air_date) && (
-                              <i className="bi bi-check-circle-fill text-success ms-2"></i>
-                            )}
+                            </div>
+                            <div className="d-flex flex-row justify-content-between">
+                              <small className="dynamic-ss">{episode.name}</small>
+                              <small className="mt-1 align-self-end dynamic-ss">
+                                {new Date(episode.air_date).toLocaleDateString()}
+                              </small>
+                            </div>
                           </div>
-                          <div className="d-flex flex-row justify-content-between">
-                            <small className="dynamic-ss">{episode.name}</small>
-                            <small className="mt-1 align-self-end dynamic-ss">
-                              {new Date(episode.air_date).toLocaleDateString()}
-                            </small>
-                          </div>
-                        </div>
-                      </button>
-                    ))
+                        </button>
+                      );
+                    })
                   ) : (
                     <div className="text-white">No episodes available</div>
                   )}
@@ -424,6 +427,7 @@ function TvGrid({ id, type, setBackgroundImage }) {
                   )}
                 </div>
               </div>
+
             </div>
           </div>
         </div>
