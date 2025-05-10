@@ -176,7 +176,7 @@ function TvGrid({ id, type, setBackgroundImage }) {
                 <div className="row g-2">
                   {servers.length > 0 ? (
                     servers.map((server) => (
-                      <div key={server.server_name} className="col-3 col-sm-3 col-md-2 col-lg-2 col-xl-2">
+                      <div key={server.server_name} className="col-4 col-sm-3 col-md-4 col-lg-3 col-xl-2">
                         <button
                           className={`btn w-100 d-flex flex-row align-items-center justify-content-center border-0 rounded-pill shadow-sm ${selectedServerName === server.server_name
                             ? 'btn-primary bd-callout-primary active'
@@ -210,7 +210,7 @@ function TvGrid({ id, type, setBackgroundImage }) {
                 <div className="row g-2 mb-2">
                   {seasons.length > 0 ? (
                     seasons.map((season) => (
-                      <div key={season.id} className="col-3 col-sm-3 col-md-2 col-lg-2 col-xl-2">
+                      <div key={season.id} className="col-4 col-sm-3 col-md-4 col-lg-3 col-xl-2">
                         <button
                           className={`btn w-100 d-flex justify-content-center align-items-center border-0 rounded-pill shadow-sm ${selectedSeason === season.season_number
                             ? 'btn-primary bd-callout-primary active'
