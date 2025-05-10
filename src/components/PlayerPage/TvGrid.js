@@ -326,7 +326,12 @@ function TvGrid({ id, type, setBackgroundImage }) {
                               <span className="badge bg-success text-white ms-2">New!</span>
                             )}
                           </span>
-                          <small>{episode.name}</small>
+                          <div className="d-flex flex-row justify-content-between">
+                            <small className="dynamic-ss">{episode.name}</small>
+                            <small className="mt-1 align-self-end dynamic-ss">
+                              {new Date(episode.air_date).toLocaleDateString()}
+                            </small>
+                          </div>
                         </div>
                       </button>
                     ))

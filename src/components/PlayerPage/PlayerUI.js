@@ -211,7 +211,11 @@ function Player({ mediaURL, averageVote, director, genres, mediaInfo, id, type, 
             </div>
             <div className="d-flex flex-column flex-wrap mt-2">
               <p className="dynamic-fs me-2">
-                <b>Release Date: </b>{mediaInfo.release_date ? mediaInfo.release_date : mediaInfo.first_air_date}<br />
+                <b>Release Date: </b>
+                {mediaInfo.release_date
+                  ? new Date(mediaInfo.release_date).toLocaleDateString()
+                  : new Date(mediaInfo.first_air_date).toLocaleDateString()}
+                <br />
                 <b>Director: </b>{director}<br />
                 <b>Genres: </b>
                 <span className="text-white">
