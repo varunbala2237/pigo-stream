@@ -362,7 +362,7 @@ function TvGrid({ id, type, setBackgroundImage }) {
                                 <span className="badge bg-primary text-white ms-2">New!</span>
                               )}
                             </span>
-                            {watchedEpisodes?.[selectedSeason]?.[episode.episode_number] && (
+                            {watchedEpisodes?.[selectedSeason]?.[episode.episode_number] && isEpisodeAired(episode.air_date) && (
                               <i className="bi bi-check-circle-fill text-success ms-2"></i>
                             )}
                           </div>
