@@ -168,7 +168,7 @@ function TvGrid({ id, type, setBackgroundImage }) {
                 handleAddToList={handleAddToList}
               />
 
-              <div className="container custom-bg custom-theme-radius w-100 p-2 my-2">
+              <div className="container-fluid custom-bg custom-theme-radius w-100 p-2 my-2">
                 <div className="d-flex flex-row dynamic-ts py-2">
                   <i className="bi bi-hdd-network me-2"></i>
                   Servers
@@ -200,7 +200,7 @@ function TvGrid({ id, type, setBackgroundImage }) {
                 </div>
               </div>
 
-              <div className="container custom-bg custom-theme-radius w-100 p-2 my-2">
+              <div className="container-fluid custom-bg custom-theme-radius w-100 p-2 my-2">
                 <div className="d-flex flex-row dynamic-ts py-2">
                   <i className="bi bi-collection-play me-2"></i>
                   Seasons & Episodes
@@ -213,8 +213,8 @@ function TvGrid({ id, type, setBackgroundImage }) {
                       <div key={season.id} className="col-3 col-sm-3 col-md-2 col-lg-2 col-xl-2">
                         <button
                           className={`btn w-100 d-flex justify-content-center align-items-center border-0 rounded-pill shadow-sm ${selectedSeason === season.season_number
-                              ? 'btn-primary bd-callout-primary active'
-                              : 'btn-primary bd-callout-dark'
+                            ? 'btn-primary bd-callout-primary active'
+                            : 'btn-primary bd-callout-dark'
                             }`}
                           onClick={() => handleSeasonChange(season.season_number)}
                         >
@@ -241,14 +241,14 @@ function TvGrid({ id, type, setBackgroundImage }) {
                       <button
                         key={episode.id}
                         className={`w-100 text-start mb-2 p-2 custom-theme-radius-low border-0 shadow-sm ${selectedEpisode === episode.episode_number
-                            ? 'btn-light bd-callout-light text-black active'
-                            : 'btn-primary bd-callout-dark text-white'
+                          ? 'btn-light bd-callout-light text-black active'
+                          : 'btn-primary bd-callout-dark text-white'
                           }`}
                         onClick={() => handleEpisodeChange(episode.episode_number)}
                       >
-                        <div className="d-flex flex-column px-2">
+                        <div className="d-flex flex-column text-wrap px-2">
                           <span className="fw-bold">Episode {episode.episode_number}</span>
-                          <span className="small text-truncate">{episode.name}</span>
+                          <small>{episode.name}</small>
                         </div>
                       </button>
                     ))
@@ -256,6 +256,7 @@ function TvGrid({ id, type, setBackgroundImage }) {
                     <div className="text-white">No episodes available</div>
                   )}
                 </div>
+
               </div>
 
               <div className="d-flex flex-column align-items-start custom-theme-radius my-2 w-100">

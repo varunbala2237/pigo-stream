@@ -110,70 +110,75 @@ function Player({ mediaURL, averageVote, director, genres, mediaInfo, id, type, 
         <div className="d-flex flex-row align-items-start custom-theme-radius-low w-100">
           <div className="section border-0">
             <img
-              className="img-fluid custom-theme-radius-low mb-3 w-100"
+              className="img-fluid custom-theme-radius-low mb-3"
               src={imageUrl}
               alt=""
-              style={{ height: 'auto', objectFit: 'cover', width: '100%' }}
+              style={{
+                width: '100%',
+                maxWidth: '300px',
+                height: 'auto',
+                objectFit: 'cover',
+                borderRadius: '0.5rem',
+              }}
             />
+
             <div className="d-flex flex-column align-items-stretch justify-content-center">
 
               <div className="d-flex justify-content-between w-100 mb-3">
                 <div className="d-flex justify-content-center text-start w-50">
-                {/* Larger button for larger screen */}
-                <button
-                  className={`btn btn-dark px-2 py-1 d-none d-md-block border-0 text-white rounded-circle btn-light custom-bg`}
-                  onClick={handleAddToList}
-                >
-                  <i className={`bi-${isInList ? 'bookmark-fill theme-color' : 'bookmark'}`}></i>
-                </button>
-                {/* Smaller button for smaller screen */}
-                <button
-                  className={`btn btn-dark d-block d-md-none btn-sm border-0 text-white rounded-circle btn-light custom-bg`}
-                  onClick={handleAddToList}
-                >
-                  <i className={`bi-${isInList ? 'bookmark-fill theme-color' : 'bookmark'}`}></i>
-                </button>
+                  {/* Larger button for larger screen */}
+                  <button
+                    className={`btn btn-dark px-2 py-1 d-none d-md-block border-0 text-white rounded-circle custom-bg`}
+                    onClick={handleAddToList}
+                  >
+                    <i className={`bi-${isInList ? 'bookmark-fill theme-color' : 'bookmark'}`}></i>
+                  </button>
+                  {/* Smaller button for smaller screen */}
+                  <button
+                    className={`btn btn-dark d-block d-md-none btn-sm border-0 text-white rounded-circle custom-bg`}
+                    onClick={handleAddToList}
+                  >
+                    <i className={`bi-${isInList ? 'bookmark-fill theme-color' : 'bookmark'}`}></i>
+                  </button>
                 </div>
 
                 <div className="d-flex justify-content-center text-end w-50">
-                {/* Larger button for larger screen */}
-                <button
-                  className={`btn btn-primary px-2 py-1 d-none d-md-block border-0 text-white rounded-circle btn-light bg-primary`}
-                  onClick={handleShare}
-                >
-                  <i className={`bi bi-share-fill`}></i>
-                </button>
-                {/* Smaller button for smaller screen */}
-                <button
-                  className={`btn btn-primary d-block d-md-none btn-sm border-0 text-white rounded-circle btn-light bg-primary`}
-                  onClick={handleShare}
-                >
-                  <i className={`bi bi-share-fill`}></i>
-                </button>
+                  {/* Larger button for larger screen */}
+                  <button
+                    className={`btn btn-primary px-2 py-1 d-none d-md-block border-0 text-white rounded-circle btn-light bg-primary`}
+                    onClick={handleShare}
+                  >
+                    <i className={`bi bi-share-fill`}></i>
+                  </button>
+                  {/* Smaller button for smaller screen */}
+                  <button
+                    className={`btn btn-primary d-block d-md-none btn-sm border-0 text-white rounded-circle btn-light bg-primary`}
+                    onClick={handleShare}
+                  >
+                    <i className={`bi bi-share-fill`}></i>
+                  </button>
                 </div>
               </div>
 
               {/* Larger button for larger screen */}
               <button
-                className={`btn d-none d-md-block mb-3 justify-content-center border-0 nowrap rounded-pill ${
-                  trailerLink ? 'btn-light' : 'btn-secondary'
-                }`}
+                className={`btn d-none d-md-block mb-3 justify-content-center border-0 nowrap rounded-pill ${trailerLink ? 'btn-light' : 'btn-secondary'
+                  }`}
                 onClick={() => trailerLink && window.open(trailerLink, '_blank')}
                 disabled={!trailerLink}
               >
                 <i className="bi bi-youtube text-danger me-2"></i>
-                  {"Trailer"}
+                {"Trailer"}
               </button>
               {/* Smaller button for smaller screen */}
               <button
-                className={`btn d-block d-md-none btn-sm mb-3 justify-content-center border-0 nowrap rounded-pill ${
-                  trailerLink ? 'btn-light' : 'btn-secondary'
-                }`}
+                className={`btn d-block d-md-none btn-sm mb-3 justify-content-center border-0 nowrap rounded-pill ${trailerLink ? 'btn-light' : 'btn-secondary'
+                  }`}
                 onClick={() => trailerLink && window.open(trailerLink, '_blank')}
                 disabled={!trailerLink}
               >
                 <i className="bi bi-youtube text-danger me-2"></i>
-                  {"Trailer"}
+                {"Trailer"}
               </button>
 
               {/* Larger button for larger screen */}
@@ -200,24 +205,24 @@ function Player({ mediaURL, averageVote, director, genres, mediaInfo, id, type, 
               <div className="rounded dynamic-fs">
                 <i className="bi bi-star-fill text-warning me-2"></i>
                 <span id="Rating" className="text-white">
-                  {averageVote} 
+                  {averageVote}
                 </span>
               </div>
             </div>
             <div className="d-flex flex-column flex-wrap mt-2">
               <p className="dynamic-fs me-2">
-                <b>Release Date: </b>{mediaInfo.release_date ? mediaInfo.release_date : mediaInfo.first_air_date}<br/>
-                <b>Director: </b>{director}<br/>
+                <b>Release Date: </b>{mediaInfo.release_date ? mediaInfo.release_date : mediaInfo.first_air_date}<br />
+                <b>Director: </b>{director}<br />
                 <b>Genres: </b>
-                  <span className="text-white">
-                    {genres?.map((genre, index) => (
-                      <React.Fragment key={index}>
-                        {genre.name}
-                        {index < genres.length - 1 && ", "}
-                      </React.Fragment>
-                    ))}
-                  </span><br />
-                <div className="text-wrap text-break mt-2 dynamic-fs">{mediaInfo.overview}</div><br/>
+                <span className="text-white">
+                  {genres?.map((genre, index) => (
+                    <React.Fragment key={index}>
+                      {genre.name}
+                      {index < genres.length - 1 && ", "}
+                    </React.Fragment>
+                  ))}
+                </span><br />
+                <div className="text-wrap text-break mt-2 dynamic-fs">{mediaInfo.overview}</div><br />
               </p>
             </div>
           </div>
@@ -231,7 +236,7 @@ function Player({ mediaURL, averageVote, director, genres, mediaInfo, id, type, 
             </span></>
           ) : platform === 'macos' || platform === 'ios' ? (
             <span className="link text-warning">
-              This content may contain redirects and ads.  
+              This content may contain redirects and ads.
               <strong> For the best experience, open in fullscreen mode.</strong>
             </span>
           ) : (
