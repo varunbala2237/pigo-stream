@@ -5,4 +5,14 @@
   left: 50%;
   transform: translateX(-50%);
   z-index: 1000;
+  max-width: 100%;
+  white-space: nowrap;
+}
+
+.footer-fixed ul {
+  flex-wrap: nowrap !important;
+}
+
+.footer-fixed .nav-item {
+  flex-shrink: 0;
 }

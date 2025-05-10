@@ -14,17 +14,17 @@ const Footer = () => {
   ];
 
   return (
-    <div className="footer-fixed bd-callout-dark rounded-pill shadow px-4 py-2">
-      <ul className="nav justify-content-between align-items-center">
+    <div className="footer-fixed bd-callout-dark rounded-pill shadow p-2">
+      <ul className="nav flex-nowrap overflow-auto w-100 justify-content-between align-items-center dynamic-fs">
         {navItems.map((item, index) => {
           const isActive = currentPath === item.path;
           return (
             <li key={index} className="nav-item">
               <Link
                 to={item.path}
-                className={`nav-link d-flex align-items-center px-3 ${isActive ? 'fw-bold active' : 'text-secondary'}`}
+                className={`nav-link d-flex align-items-center px-3 ${isActive ? 'theme-color fw-bold active' : 'text-secondary'}`}
               >
-                <i className={`bi ${item.icon} theme-color fs-5`}></i>
+                <i className={`bi ${item.icon} fs-5`}></i>
                 {isActive && <span className="ms-2 text-white">{item.name}</span>}
               </Link>
             </li>
