@@ -12,11 +12,11 @@ function SearchGrid({ searchQuery, setIsSearchLoaded, setHasSearchContent }) {
   const isError = moviesError || showsError;
   const location = useLocation();
 
-  // Scroll references for each row
-  const firstMovieRef = useRef(null);
-  const secondMovieRef = useRef(null);
-  const firstTvShowRef = useRef(null);
-  const secondTvShowRef = useRef(null);
+  // Scroll references for movies and TV shows (2 rows for each)
+  const moviesRef1 = useRef(null);
+  const moviesRef2 = useRef(null);
+  const showsRef1 = useRef(null);
+  const showsRef2 = useRef(null);
 
   useEffect(() => {
     if (isError) {
@@ -33,16 +33,7 @@ function SearchGrid({ searchQuery, setIsSearchLoaded, setHasSearchContent }) {
     }
   }, [isLoading, isError, movies, shows, setHasSearchContent]);
 
-  const scrollMovies = (ref, direction) => {
-    if (ref.current) {
-      ref.current.scrollBy({
-        left: direction === 'left' ? -450 : 450,
-        behavior: 'smooth',
-      });
-    }
-  };
-
-  const scrollTvShows = (ref, direction) => {
+  const scroll = (ref, direction) => {
     if (ref.current) {
       ref.current.scrollBy({
         left: direction === 'left' ? -450 : 450,
@@ -58,30 +49,43 @@ function SearchGrid({ searchQuery, setIsSearchLoaded, setHasSearchContent }) {
         <b className="mb-0">Search</b>
       </div>
 
-      {/* Movies Results */}
-      <div className="position-relative my-2">
-        {movies.length > 3 && (
-          <>
-            <button
-              className="btn btn-dark custom-bg rounded-pill py-2 position-absolute start-0 translate-middle-y d-none d-md-block"
-              onClick={() => scrollMovies(firstMovieRef, 'left')}
-              style={{ zIndex: 1, top: '50%', transform: 'translateY(-50%)' }}
-            >
-              <i className="bi bi-chevron-left"></i>
-            </button>
-            <button
-              className="btn btn-dark custom-bg rounded-pill py-2 position-absolute end-0 translate-middle-y d-none d-md-block"
-              onClick={() => scrollMovies(firstMovieRef, 'right')}
-              style={{ zIndex: 1, top: '50%', transform: 'translateY(-50%)' }}
-            >
-              <i className="bi bi-chevron-right"></i>
-            </button>
-          </>
-        )}
-        <div ref={firstMovieRef} className="d-flex overflow-auto" style={{ scrollSnapType: 'x mandatory', gap: '1rem' }}>
-          {(movies?.length > 0 ? movies.slice(0, 6) : [])
-            .concat(Array.from({ length: Math.max(0, 6 - (movies?.slice(0, 6).length || 0)) }))
-            .map((movie, index) =>
+      {/* First Movies Results */}
+      {(
+        <div className="position-relative my-2">
+          {searchQuery.trim() && movies?.filter(Boolean).length > 3 && (
+            <>
+              <button
+                className="btn btn-dark custom-bg rounded-pill py-2 position-absolute start-0 translate-middle-y d-none d-md-block"
+                onClick={() => scroll(moviesRef1, 'left')}
+                style={{ zIndex: 1, top: '50%', transform: 'translateY(-50%)' }}
+              >
+                <i className="bi bi-chevron-left"></i>
+              </button>
+              <button
+                className="btn btn-dark custom-bg rounded-pill py-2 position-absolute end-0 translate-middle-y d-none d-md-block"
+                onClick={() => scroll(moviesRef1, 'right')}
+                style={{ zIndex: 1, top: '50%', transform: 'translateY(-50%)' }}
+              >
+                <i className="bi bi-chevron-right"></i>
+              </button>
+            </>
+          )}
+          <div
+            ref={moviesRef1}
+            className="d-flex overflow-auto"
+            style={{ scrollSnapType: 'x mandatory', gap: '1rem' }}
+          >
+            {(searchQuery.trim()
+              ? (movies?.slice(0, Math.ceil(movies.length / 2)) || []).concat(
+                Array.from({
+                  length: Math.max(
+                    0,
+                    6 - (movies?.slice(0, Math.ceil(movies.length / 2))?.length || 0)
+                  ),
+                })
+              )
+              : Array.from({ length: 6 })
+            ).map((movie, index) =>
               movie ? (
                 <Card key={index} media={movie} type="movie" path={location.pathname} />
               ) : (
@@ -95,33 +99,48 @@ function SearchGrid({ searchQuery, setIsSearchLoaded, setHasSearchContent }) {
                 />
               )
             )}
+          </div>
         </div>
-      </div>
+      )}
 
-      {/* Second Row Movies */}
-      <div className="position-relative my-2">
-        {movies.length > 3 && (
-          <>
-            <button
-              className="btn btn-dark custom-bg rounded-pill py-2 position-absolute start-0 translate-middle-y d-none d-md-block"
-              onClick={() => scrollMovies(secondMovieRef, 'left')}
-              style={{ zIndex: 1, top: '50%', transform: 'translateY(-50%)' }}
-            >
-              <i className="bi bi-chevron-left"></i>
-            </button>
-            <button
-              className="btn btn-dark custom-bg rounded-pill py-2 position-absolute end-0 translate-middle-y d-none d-md-block"
-              onClick={() => scrollMovies(secondMovieRef, 'right')}
-              style={{ zIndex: 1, top: '50%', transform: 'translateY(-50%)' }}
-            >
-              <i className="bi bi-chevron-right"></i>
-            </button>
-          </>
-        )}
-        <div ref={secondMovieRef} className="d-flex overflow-auto" style={{ scrollSnapType: 'x mandatory', gap: '1rem' }}>
-          {(movies?.length > 6 ? movies.slice(6, 12) : [])
-            .concat(Array.from({ length: Math.max(0, 6 - (movies?.slice(6, 12).length || 0)) }))
-            .map((movie, index) =>
+      {/* Second Movies Results */}
+      {(
+        <div className="position-relative my-2">
+          {searchQuery.trim() && movies?.filter(Boolean).length > 3 && (
+            <>
+              <button
+                className="btn btn-dark custom-bg rounded-pill py-2 position-absolute start-0 translate-middle-y d-none d-md-block"
+                onClick={() => scroll(moviesRef2, 'left')}
+                style={{ zIndex: 1, top: '50%', transform: 'translateY(-50%)' }}
+              >
+                <i className="bi bi-chevron-left"></i>
+              </button>
+              <button
+                className="btn btn-dark custom-bg rounded-pill py-2 position-absolute end-0 translate-middle-y d-none d-md-block"
+                onClick={() => scroll(moviesRef2, 'right')}
+                style={{ zIndex: 1, top: '50%', transform: 'translateY(-50%)' }}
+              >
+                <i className="bi bi-chevron-right"></i>
+              </button>
+            </>
+          )}
+          <div
+            ref={moviesRef2}
+            className="d-flex overflow-auto"
+            style={{ scrollSnapType: 'x mandatory', gap: '1rem' }}
+          >
+            {(searchQuery.trim()
+              ? (movies?.slice(Math.ceil(movies.length / 2)) || [])
+                .concat(
+                  Array.from({
+                    length: Math.max(
+                      0,
+                      6 - (movies?.slice(Math.ceil(movies.length / 2))?.length || 0)
+                    ),
+                  })
+                )
+              : Array.from({ length: 6 }) // Fallback to 6 skeletons if query is empty
+            ).map((movie, index) =>
               movie ? (
                 <Card key={index} media={movie} type="movie" path={location.pathname} />
               ) : (
@@ -135,33 +154,47 @@ function SearchGrid({ searchQuery, setIsSearchLoaded, setHasSearchContent }) {
                 />
               )
             )}
+          </div>
         </div>
-      </div>
+      )}
 
-      {/* TV Shows Results */}
-      <div className="position-relative my-2">
-        {shows.length > 3 && (
-          <>
-            <button
-              className="btn btn-dark custom-bg rounded-pill py-2 position-absolute start-0 translate-middle-y d-none d-md-block"
-              onClick={() => scrollTvShows(firstTvShowRef, 'left')}
-              style={{ zIndex: 1, top: '50%', transform: 'translateY(-50%)' }}
-            >
-              <i className="bi bi-chevron-left"></i>
-            </button>
-            <button
-              className="btn btn-dark custom-bg rounded-pill py-2 position-absolute end-0 translate-middle-y d-none d-md-block"
-              onClick={() => scrollTvShows(firstTvShowRef, 'right')}
-              style={{ zIndex: 1, top: '50%', transform: 'translateY(-50%)' }}
-            >
-              <i className="bi bi-chevron-right"></i>
-            </button>
-          </>
-        )}
-        <div ref={firstTvShowRef} className="d-flex overflow-auto" style={{ scrollSnapType: 'x mandatory', gap: '1rem' }}>
-          {(shows?.length > 0 ? shows.slice(0, 6) : [])
-            .concat(Array.from({ length: Math.max(0, 6 - (shows?.slice(0, 6).length || 0)) }))
-            .map((show, index) =>
+      {/* First TV Shows Results */}
+      {(
+        <div className="position-relative my-2">
+          {searchQuery.trim() && movies?.filter(Boolean).length > 3 && (
+            <>
+              <button
+                className="btn btn-dark custom-bg rounded-pill py-2 position-absolute start-0 translate-middle-y d-none d-md-block"
+                onClick={() => scroll(showsRef1, 'left')}
+                style={{ zIndex: 1, top: '50%', transform: 'translateY(-50%)' }}
+              >
+                <i className="bi bi-chevron-left"></i>
+              </button>
+              <button
+                className="btn btn-dark custom-bg rounded-pill py-2 position-absolute end-0 translate-middle-y d-none d-md-block"
+                onClick={() => scroll(showsRef1, 'right')}
+                style={{ zIndex: 1, top: '50%', transform: 'translateY(-50%)' }}
+              >
+                <i className="bi bi-chevron-right"></i>
+              </button>
+            </>
+          )}
+          <div
+            ref={showsRef1}
+            className="d-flex overflow-auto"
+            style={{ scrollSnapType: 'x mandatory', gap: '1rem' }}
+          >
+            {(searchQuery.trim()
+              ? (shows?.slice(0, Math.ceil(shows.length / 2)) || []).concat(
+                Array.from({
+                  length: Math.max(
+                    0,
+                    6 - (shows?.slice(0, Math.ceil(shows.length / 2))?.length || 0)
+                  ),
+                })
+              )
+              : Array.from({ length: 6 })
+            ).map((show, index) =>
               show ? (
                 <Card key={index} media={show} type="tv" path={location.pathname} />
               ) : (
@@ -175,33 +208,47 @@ function SearchGrid({ searchQuery, setIsSearchLoaded, setHasSearchContent }) {
                 />
               )
             )}
+          </div>
         </div>
-      </div>
+      )}
 
-      {/* Second Row TV Shows */}
-      <div className="position-relative my-2">
-        {shows.length > 3 && (
-          <>
-            <button
-              className="btn btn-dark custom-bg rounded-pill py-2 position-absolute start-0 translate-middle-y d-none d-md-block"
-              onClick={() => scrollTvShows(secondTvShowRef, 'left')}
-              style={{ zIndex: 1, top: '50%', transform: 'translateY(-50%)' }}
-            >
-              <i className="bi bi-chevron-left"></i>
-            </button>
-            <button
-              className="btn btn-dark custom-bg rounded-pill py-2 position-absolute end-0 translate-middle-y d-none d-md-block"
-              onClick={() => scrollTvShows(secondTvShowRef, 'right')}
-              style={{ zIndex: 1, top: '50%', transform: 'translateY(-50%)' }}
-            >
-              <i className="bi bi-chevron-right"></i>
-            </button>
-          </>
-        )}
-        <div ref={secondTvShowRef} className="d-flex overflow-auto" style={{ scrollSnapType: 'x mandatory', gap: '1rem' }}>
-          {(shows?.length > 6 ? shows.slice(6, 12) : [])
-            .concat(Array.from({ length: Math.max(0, 6 - (shows?.slice(6, 12).length || 0)) }))
-            .map((show, index) =>
+      {/* Second TV Shows Results */}
+      {(
+        <div className="position-relative my-2">
+          {searchQuery.trim() && movies?.filter(Boolean).length > 3 && (
+            <>
+              <button
+                className="btn btn-dark custom-bg rounded-pill py-2 position-absolute start-0 translate-middle-y d-none d-md-block"
+                onClick={() => scroll(showsRef2, 'left')}
+                style={{ zIndex: 1, top: '50%', transform: 'translateY(-50%)' }}
+              >
+                <i className="bi bi-chevron-left"></i>
+              </button>
+              <button
+                className="btn btn-dark custom-bg rounded-pill py-2 position-absolute end-0 translate-middle-y d-none d-md-block"
+                onClick={() => scroll(showsRef2, 'right')}
+                style={{ zIndex: 1, top: '50%', transform: 'translateY(-50%)' }}
+              >
+                <i className="bi bi-chevron-right"></i>
+              </button>
+            </>
+          )}
+          <div
+            ref={showsRef2}
+            className="d-flex overflow-auto"
+            style={{ scrollSnapType: 'x mandatory', gap: '1rem' }}
+          >
+            {(searchQuery.trim()
+              ? (shows?.slice(Math.ceil(shows.length / 2)) || []).concat(
+                Array.from({
+                  length: Math.max(
+                    0,
+                    6 - (shows?.slice(Math.ceil(shows.length / 2))?.length || 0)
+                  ),
+                })
+              )
+              : Array.from({ length: 6 })
+            ).map((show, index) =>
               show ? (
                 <Card key={index} media={show} type="tv" path={location.pathname} />
               ) : (
@@ -215,8 +262,9 @@ function SearchGrid({ searchQuery, setIsSearchLoaded, setHasSearchContent }) {
                 />
               )
             )}
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 }
