@@ -148,20 +148,24 @@ function ProvidersGrid({ setIsProvidersLoaded, setHasProvidersContent }) {
                     </>
                 )}
                 <div ref={moviesRef} className="d-flex overflow-auto" style={{ scrollSnapType: 'x mandatory', gap: '1rem' }}>
-                    {!isLoading && !isError && movies.length > 0
-                        ? movies.map((movie) => (
-                            <Card key={movie.id} media={movie} type="movie" path={location.pathname} />
-                        ))
-                        : Array.from({ length: 6 }).map((_, index) => (
-                            <Card
-                                key={`movie-skeleton-${index}`}
-                                media={{ poster_path: null, vote_average: null }}
-                                type="movie"
-                                path="/"
-                                isDeletable={false}
-                                isSkeleton={true}
-                            />
-                        ))}
+                    {(
+                        !isLoading && !isError && movies?.length > 0 ? movies : []
+                    )
+                        .concat(Array.from({ length: Math.max(0, 6 - (movies?.length || 0)) }))
+                        .map((movie, index) =>
+                            movie ? (
+                                <Card key={movie.id} media={movie} type="movie" path={location.pathname} />
+                            ) : (
+                                <Card
+                                    key={`movie-skeleton-${index}`}
+                                    media={{ poster_path: null, vote_average: null }}
+                                    type="movie"
+                                    path="/"
+                                    isDeletable={false}
+                                    isSkeleton={true}
+                                />
+                            )
+                        )}
                 </div>
             </div>
 
@@ -186,20 +190,24 @@ function ProvidersGrid({ setIsProvidersLoaded, setHasProvidersContent }) {
                     </>
                 )}
                 <div ref={tvRef} className="d-flex overflow-auto" style={{ scrollSnapType: 'x mandatory', gap: '1rem' }}>
-                    {!isLoading && !isError && shows.length > 0
-                        ? shows.map((show) => (
-                            <Card key={show.id} media={show} type="tv" path={location.pathname} />
-                        ))
-                        : Array.from({ length: 6 }).map((_, index) => (
-                            <Card
-                                key={`tv-skeleton-${index}`}
-                                media={{ poster_path: null, vote_average: null }}
-                                type="tv"
-                                path="/"
-                                isDeletable={false}
-                                isSkeleton={true}
-                            />
-                        ))}
+                    {(
+                        !isLoading && !isError && shows?.length > 0 ? shows : []
+                    )
+                        .concat(Array.from({ length: Math.max(0, 6 - (shows?.length || 0)) }))
+                        .map((show, index) =>
+                            show ? (
+                                <Card key={show.id} media={show} type="tv" path={location.pathname} />
+                            ) : (
+                                <Card
+                                    key={`tv-skeleton-${index}`}
+                                    media={{ poster_path: null, vote_average: null }}
+                                    type="tv"
+                                    path="/"
+                                    isDeletable={false}
+                                    isSkeleton={true}
+                                />
+                            )
+                        )}
                 </div>
             </div>
         </div>
