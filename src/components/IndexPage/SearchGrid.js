@@ -12,9 +12,11 @@ function SearchGrid({ searchQuery, setIsSearchLoaded, setHasSearchContent }) {
   const isError = moviesError || showsError;
   const location = useLocation();
 
-  // Scroll references for movies and TV shows
-  const moviesRef = useRef(null);
-  const showsRef = useRef(null);
+  // Scroll references for each row
+  const firstMovieRef = useRef(null);
+  const secondMovieRef = useRef(null);
+  const firstTvShowRef = useRef(null);
+  const secondTvShowRef = useRef(null);
 
   useEffect(() => {
     if (isError) {
@@ -31,18 +33,18 @@ function SearchGrid({ searchQuery, setIsSearchLoaded, setHasSearchContent }) {
     }
   }, [isLoading, isError, movies, shows, setHasSearchContent]);
 
-  const scrollMovies = (direction) => {
-    if (moviesRef.current) {
-      moviesRef.current.scrollBy({
+  const scrollMovies = (ref, direction) => {
+    if (ref.current) {
+      ref.current.scrollBy({
         left: direction === 'left' ? -450 : 450,
         behavior: 'smooth',
       });
     }
   };
 
-  const scrollTvShows = (direction) => {
-    if (showsRef.current) {
-      showsRef.current.scrollBy({
+  const scrollTvShows = (ref, direction) => {
+    if (ref.current) {
+      ref.current.scrollBy({
         left: direction === 'left' ? -450 : 450,
         behavior: 'smooth',
       });
@@ -55,32 +57,31 @@ function SearchGrid({ searchQuery, setIsSearchLoaded, setHasSearchContent }) {
         <i className="bi bi-search theme-color me-2"></i>
         <b className="mb-0">Search</b>
       </div>
+
       {/* Movies Results */}
-      {(
-        <div className="position-relative my-2">
-          {movies.length > 3 && (
-            <>
-              <button
-                className="btn btn-dark custom-bg rounded-pill py-2 position-absolute start-0 translate-middle-y d-none d-md-block"
-                onClick={() => scrollMovies('left')}
-                style={{ zIndex: 1, top: '50%', transform: 'translateY(-50%)' }}
-              >
-                <i className="bi bi-chevron-left"></i>
-              </button>
-              <button
-                className="btn btn-dark custom-bg rounded-pill py-2 position-absolute end-0 translate-middle-y d-none d-md-block"
-                onClick={() => scrollMovies('right')}
-                style={{ zIndex: 1, top: '50%', transform: 'translateY(-50%)' }}
-              >
-                <i className="bi bi-chevron-right"></i>
-              </button>
-            </>
-          )}
-          <div ref={moviesRef} className="d-flex overflow-auto" style={{ scrollSnapType: 'x mandatory', gap: '1rem' }}>
-            {(
-              (movies?.length > 0 ? movies : [])
-                .concat(Array.from({ length: Math.max(0, 6 - (movies?.length || 0)) }))
-            ).map((movie, index) =>
+      <div className="position-relative my-2">
+        {movies.length > 3 && (
+          <>
+            <button
+              className="btn btn-dark custom-bg rounded-pill py-2 position-absolute start-0 translate-middle-y d-none d-md-block"
+              onClick={() => scrollMovies(firstMovieRef, 'left')}
+              style={{ zIndex: 1, top: '50%', transform: 'translateY(-50%)' }}
+            >
+              <i className="bi bi-chevron-left"></i>
+            </button>
+            <button
+              className="btn btn-dark custom-bg rounded-pill py-2 position-absolute end-0 translate-middle-y d-none d-md-block"
+              onClick={() => scrollMovies(firstMovieRef, 'right')}
+              style={{ zIndex: 1, top: '50%', transform: 'translateY(-50%)' }}
+            >
+              <i className="bi bi-chevron-right"></i>
+            </button>
+          </>
+        )}
+        <div ref={firstMovieRef} className="d-flex overflow-auto" style={{ scrollSnapType: 'x mandatory', gap: '1rem' }}>
+          {(movies?.length > 0 ? movies.slice(0, 6) : [])
+            .concat(Array.from({ length: Math.max(0, 6 - (movies?.slice(0, 6).length || 0)) }))
+            .map((movie, index) =>
               movie ? (
                 <Card key={index} media={movie} type="movie" path={location.pathname} />
               ) : (
@@ -94,36 +95,73 @@ function SearchGrid({ searchQuery, setIsSearchLoaded, setHasSearchContent }) {
                 />
               )
             )}
-          </div>
         </div>
-      )}
+      </div>
+
+      {/* Second Row Movies */}
+      <div className="position-relative my-2">
+        {movies.length > 3 && (
+          <>
+            <button
+              className="btn btn-dark custom-bg rounded-pill py-2 position-absolute start-0 translate-middle-y d-none d-md-block"
+              onClick={() => scrollMovies(secondMovieRef, 'left')}
+              style={{ zIndex: 1, top: '50%', transform: 'translateY(-50%)' }}
+            >
+              <i className="bi bi-chevron-left"></i>
+            </button>
+            <button
+              className="btn btn-dark custom-bg rounded-pill py-2 position-absolute end-0 translate-middle-y d-none d-md-block"
+              onClick={() => scrollMovies(secondMovieRef, 'right')}
+              style={{ zIndex: 1, top: '50%', transform: 'translateY(-50%)' }}
+            >
+              <i className="bi bi-chevron-right"></i>
+            </button>
+          </>
+        )}
+        <div ref={secondMovieRef} className="d-flex overflow-auto" style={{ scrollSnapType: 'x mandatory', gap: '1rem' }}>
+          {(movies?.length > 6 ? movies.slice(6, 12) : [])
+            .concat(Array.from({ length: Math.max(0, 6 - (movies?.slice(6, 12).length || 0)) }))
+            .map((movie, index) =>
+              movie ? (
+                <Card key={index} media={movie} type="movie" path={location.pathname} />
+              ) : (
+                <Card
+                  key={`movie-skeleton-${index}`}
+                  media={{ poster_path: null, vote_average: null }}
+                  type="movie"
+                  path="/"
+                  isDeletable={false}
+                  isSkeleton={true}
+                />
+              )
+            )}
+        </div>
+      </div>
 
       {/* TV Shows Results */}
-      {(
-        <div className="position-relative my-2">
-          {shows.length > 3 && (
-            <>
-              <button
-                className="btn btn-dark custom-bg rounded-pill py-2 position-absolute start-0 translate-middle-y d-none d-md-block"
-                onClick={() => scrollTvShows('left')}
-                style={{ zIndex: 1, top: '50%', transform: 'translateY(-50%)' }}
-              >
-                <i className="bi bi-chevron-left"></i>
-              </button>
-              <button
-                className="btn btn-dark custom-bg rounded-pill py-2 position-absolute end-0 translate-middle-y d-none d-md-block"
-                onClick={() => scrollTvShows('right')}
-                style={{ zIndex: 1, top: '50%', transform: 'translateY(-50%)' }}
-              >
-                <i className="bi bi-chevron-right"></i>
-              </button>
-            </>
-          )}
-          <div ref={showsRef} className="d-flex overflow-auto" style={{ scrollSnapType: 'x mandatory', gap: '1rem' }}>
-            {(
-              (shows?.length > 0 ? shows : [])
-                .concat(Array.from({ length: Math.max(0, 6 - (shows?.length || 0)) }))
-            ).map((show, index) =>
+      <div className="position-relative my-2">
+        {shows.length > 3 && (
+          <>
+            <button
+              className="btn btn-dark custom-bg rounded-pill py-2 position-absolute start-0 translate-middle-y d-none d-md-block"
+              onClick={() => scrollTvShows(firstTvShowRef, 'left')}
+              style={{ zIndex: 1, top: '50%', transform: 'translateY(-50%)' }}
+            >
+              <i className="bi bi-chevron-left"></i>
+            </button>
+            <button
+              className="btn btn-dark custom-bg rounded-pill py-2 position-absolute end-0 translate-middle-y d-none d-md-block"
+              onClick={() => scrollTvShows(firstTvShowRef, 'right')}
+              style={{ zIndex: 1, top: '50%', transform: 'translateY(-50%)' }}
+            >
+              <i className="bi bi-chevron-right"></i>
+            </button>
+          </>
+        )}
+        <div ref={firstTvShowRef} className="d-flex overflow-auto" style={{ scrollSnapType: 'x mandatory', gap: '1rem' }}>
+          {(shows?.length > 0 ? shows.slice(0, 6) : [])
+            .concat(Array.from({ length: Math.max(0, 6 - (shows?.slice(0, 6).length || 0)) }))
+            .map((show, index) =>
               show ? (
                 <Card key={index} media={show} type="tv" path={location.pathname} />
               ) : (
@@ -137,9 +175,48 @@ function SearchGrid({ searchQuery, setIsSearchLoaded, setHasSearchContent }) {
                 />
               )
             )}
-          </div>
         </div>
-      )}
+      </div>
+
+      {/* Second Row TV Shows */}
+      <div className="position-relative my-2">
+        {shows.length > 3 && (
+          <>
+            <button
+              className="btn btn-dark custom-bg rounded-pill py-2 position-absolute start-0 translate-middle-y d-none d-md-block"
+              onClick={() => scrollTvShows(secondTvShowRef, 'left')}
+              style={{ zIndex: 1, top: '50%', transform: 'translateY(-50%)' }}
+            >
+              <i className="bi bi-chevron-left"></i>
+            </button>
+            <button
+              className="btn btn-dark custom-bg rounded-pill py-2 position-absolute end-0 translate-middle-y d-none d-md-block"
+              onClick={() => scrollTvShows(secondTvShowRef, 'right')}
+              style={{ zIndex: 1, top: '50%', transform: 'translateY(-50%)' }}
+            >
+              <i className="bi bi-chevron-right"></i>
+            </button>
+          </>
+        )}
+        <div ref={secondTvShowRef} className="d-flex overflow-auto" style={{ scrollSnapType: 'x mandatory', gap: '1rem' }}>
+          {(shows?.length > 6 ? shows.slice(6, 12) : [])
+            .concat(Array.from({ length: Math.max(0, 6 - (shows?.slice(6, 12).length || 0)) }))
+            .map((show, index) =>
+              show ? (
+                <Card key={index} media={show} type="tv" path={location.pathname} />
+              ) : (
+                <Card
+                  key={`tv-skeleton-${index}`}
+                  media={{ poster_path: null, vote_average: null }}
+                  type="tv"
+                  path="/"
+                  isDeletable={false}
+                  isSkeleton={true}
+                />
+              )
+            )}
+        </div>
+      </div>
     </div>
   );
 }
