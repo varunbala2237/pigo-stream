@@ -14,7 +14,7 @@ const PROVIDERS = [
     { id: 43, name: 'YouTube', logo: 'https://upload.wikimedia.org/wikipedia/commons/b/b8/YouTube_Logo_2017.svg' },
 ];
 
-function ProvidersGrid() {
+function ProvidersGrid({ setIsProvidersLoaded }) {
     const [selectedProvider, setSelectedProvider] = useState(null);
     const { movies, tvShows, loading, error } = useFetchProviders(selectedProvider);
     const location = useLocation();
@@ -23,6 +23,14 @@ function ProvidersGrid() {
     const moviesRef = useRef(null);
     const tvRef = useRef(null);
     const providersRef = useRef(null);
+
+    useEffect(() => {
+        if (error) {
+            setIsProvidersLoaded(false);
+        } else {
+            setIsProvidersLoaded(true);
+        }
+    }, [error, setIsProvidersLoaded]);
 
     // Load selected provider from localStorage or default to Netflix
     useEffect(() => {
@@ -133,8 +141,11 @@ function ProvidersGrid() {
                     </>
                 )}
                 <div ref={moviesRef} className="d-flex overflow-auto" style={{ scrollSnapType: 'x mandatory', gap: '1rem' }}>
-                    {loading
-                        ? Array.from({ length: 6 }).map((_, index) => (
+                    {!loading && !error && movies.length > 0
+                        ? movies.map((movie) => (
+                            <Card key={movie.id} media={movie} type="movie" path={location.pathname} />
+                        ))
+                        : Array.from({ length: 6 }).map((_, index) => (
                             <Card
                                 key={`movie-skeleton-${index}`}
                                 media={{ poster_path: null, vote_average: null }}
@@ -143,28 +154,7 @@ function ProvidersGrid() {
                                 isDeletable={false}
                                 isSkeleton={true}
                             />
-                        ))
-                        : error
-                            ? (
-                                <div className="col d-flex vh-25 justify-content-center align-items-center">
-                                    <div className="d-flex align-items-center dynamic-fs">
-                                        <i className="bi bi-wifi-off me-2"></i>
-                                        <span className="mb-0">Something went wrong.</span>
-                                    </div>
-                                </div>
-                            )
-                            : movies.length > 0
-                                ? movies.map((movie) => (
-                                    <Card key={movie.id} media={movie} type="movie" path={location.pathname} />
-                                ))
-                                : (
-                                    <div className="col d-flex vh-25 justify-content-center align-items-center">
-                                        <div className="d-flex align-items-center dynamic-fs">
-                                            <i className="bi bi-database-slash me-2"></i>
-                                            <span className="mb-0">No provider movies found.</span>
-                                        </div>
-                                    </div>
-                                )}
+                        ))}
                 </div>
             </div>
 
@@ -189,8 +179,11 @@ function ProvidersGrid() {
                     </>
                 )}
                 <div ref={tvRef} className="d-flex overflow-auto" style={{ scrollSnapType: 'x mandatory', gap: '1rem' }}>
-                    {loading
-                        ? Array.from({ length: 6 }).map((_, index) => (
+                    {!loading && !error && tvShows.length > 0
+                        ? tvShows.map((show) => (
+                            <Card key={show.id} media={show} type="tv" path={location.pathname} />
+                        ))
+                        : Array.from({ length: 6 }).map((_, index) => (
                             <Card
                                 key={`tv-skeleton-${index}`}
                                 media={{ poster_path: null, vote_average: null }}
@@ -199,28 +192,7 @@ function ProvidersGrid() {
                                 isDeletable={false}
                                 isSkeleton={true}
                             />
-                        ))
-                        : error
-                            ? (
-                                <div className="col d-flex vh-25 justify-content-center align-items-center">
-                                    <div className="d-flex align-items-center dynamic-fs">
-                                        <i className="bi bi-wifi-off me-2"></i>
-                                        <span className="mb-0">Something went wrong.</span>
-                                    </div>
-                                </div>
-                            )
-                            : tvShows.length > 0
-                                ? tvShows.map((tv) => (
-                                    <Card key={tv.id} media={tv} type="tv" path={location.pathname} />
-                                ))
-                                : (
-                                    <div className="col d-flex vh-25 justify-content-center align-items-center">
-                                        <div className="d-flex align-items-center dynamic-fs">
-                                            <i className="bi bi-database-slash me-2"></i>
-                                            <span className="mb-0">No provider TV shows found.</span>
-                                        </div>
-                                    </div>
-                                )}
+                        ))}
                 </div>
             </div>
         </div>

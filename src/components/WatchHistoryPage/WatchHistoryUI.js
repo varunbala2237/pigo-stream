@@ -4,7 +4,7 @@ import WatchHistoryGrid from './WatchHistoryGrid';
 import { auth } from '../../firebase/firebase-auth'; // Import the auth object
 import Footer from '../Footer';
 
-function WatchHistoryPage() {
+function WatchHistoryUI() {
     const [userUID, setUserUID] = useState(null);
 
     useEffect(() => {
@@ -62,4 +62,4 @@ function WatchHistoryPage() {
     );
 }
 
-export default WatchHistoryPage;
+export default WatchHistoryUI;

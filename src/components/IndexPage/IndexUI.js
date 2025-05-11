@@ -5,7 +5,7 @@ import useFetchMedia from '../../hooks/useFetchMedia';
 import HomeUI from './HomeUI';
 import Footer from '../Footer';
 
-const IndexPage = () => {
+const IndexUI = () => {
   const { selectedItemId } = useGenreRecommendations();
   const { data: recommendedMedia, loading: loadingRecommendedMedia } = useFetchMediaDetails(selectedItemId);
   const { data: popularMovies, loading: loadingPopularMovies } = useFetchMedia('popular', 'movie');
@@ -105,4 +105,4 @@ const IndexPage = () => {
   );
 };
 
-export default IndexPage;
+export default IndexUI;

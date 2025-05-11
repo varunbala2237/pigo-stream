@@ -7,10 +7,11 @@ import TrendingGrid from './TrendingGrid';
 import useSaveSearchHistory from '../../hooks/useSaveSearchHistory';
 import useFetchSearchHistory from '../../hooks/useFetchSearchHistory';
 import useRemoveSearchHistory from '../../hooks/useRemoveSearchHistory';
+import ConnectionModal from '../../utils/ConnectionModal';
 import Alert from '../../Alert';
 import ProvidersGrid from './ProvidersGrid';
 
-function HomePage({
+function HomeUI({
   title,
   mediaId,
   mediaType,
@@ -29,6 +30,10 @@ function HomePage({
   const [selectedButton, setSelectedButton] = useState('all');
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [welcomeMessage, setWelcomeMessage] = useState('');
+
+  const [isTrendingLoaded, setIsTrendingLoaded] = useState(true);
+  const [isProvidersLoaded, setIsProvidersLoaded] = useState(true);
+  const [showConnectionModal, setShowConnectionModal] = useState(false);
 
   const dropdownRef = useRef(null);
   const inputRef = useRef(null);
@@ -122,6 +127,13 @@ function HomePage({
     };
   }, []);
 
+  useEffect(() => {
+    // Check both flags and show modal if needed
+    if (!isTrendingLoaded || !isProvidersLoaded) {
+      setShowConnectionModal(true);
+    }
+  }, [isTrendingLoaded, isProvidersLoaded]);
+
   const handleSearchInputChange = (e) => {
     const query = e.target.value;
     setSearchQuery(query);
@@ -206,11 +218,11 @@ function HomePage({
         )}
 
         {!showSearchBar && triggerSearch.trim() === '' && title && (
-          <div 
+          <div
             className="container justify-content-center"
             style={{
-                textAlign: 'start',
-              }}
+              textAlign: 'start',
+            }}
           >
             <div
               className="d-flex flex-column text-white custom-theme-radius"
@@ -227,10 +239,10 @@ function HomePage({
               </div>
               <div className="dynamic-fs text-white">
                 <div className="dynamic-fs my-2">
-                  <span className="me-2">              
+                  <span className="me-2">
                     {mediaType === 'movie' ? (
                       <i className="bi bi-film"></i>
-                        ) : (
+                    ) : (
                       <i className="bi bi-tv"></i>
                     )}
                   </span>
@@ -250,18 +262,28 @@ function HomePage({
                   <i className="bi bi-play-fill me-2"></i>
                   <span>Watch Now</span>
                 </button>
-                </div>
+              </div>
             </div>
           </div>
         )}
 
         <div className="flex-row text-white w-100">
-          {triggerSearch.trim() === '' ? <><TrendingGrid /><ProvidersGrid /></> : <><SearchGrid searchQuery={triggerSearch} /></>}
+          {triggerSearch.trim() === '' ?
+            <>
+              <TrendingGrid setIsTrendingLoaded={setIsTrendingLoaded} />
+              <ProvidersGrid setIsProvidersLoaded={setIsProvidersLoaded} />
+            </>
+            :
+            <>
+              <SearchGrid searchQuery={triggerSearch} />
+            </>}
         </div>
 
         <button className="btn btn-dark bd-callout-dark" style={fabStyle} onClick={handleSearchBar}>
           {showSearchBar ? <i className="bi bi-x-lg"></i> : <i className="bi bi-search"></i>}
         </button>
+
+        {showConnectionModal && <ConnectionModal show={showConnectionModal} />}
 
         {welcomeMessage && <Alert message={welcomeMessage} onClose={handleAlertDismiss} type="success" />}
       </div>
@@ -269,4 +291,4 @@ function HomePage({
   );
 }
 
-export default HomePage;
+export default HomeUI;

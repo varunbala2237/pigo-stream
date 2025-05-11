@@ -4,7 +4,7 @@ import MyListGrid from './MyListGrid';
 import { auth } from '../../firebase/firebase-auth'; // Import the auth object
 import Footer from '../Footer';
 
-function MyListPage() {
+function MyListUI() {
     const [userUID, setUserUID] = useState(null);
 
     useEffect(() => {
@@ -62,4 +62,4 @@ function MyListPage() {
     );
 }
 
-export default MyListPage;
+export default MyListUI;

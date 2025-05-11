@@ -20,7 +20,7 @@ function togglePasswordVisibility() {
     }
 }
 
-function AuthPage() {
+function AuthUI() {
     const navigate = useNavigate();
     const [isSignIn, setIsSignIn] = useState(true);
     const [alertMessage, setAlertMessage] = useState('');
@@ -199,4 +199,4 @@ function AuthPage() {
     );
 }
 
-export default AuthPage;
+export default AuthUI;

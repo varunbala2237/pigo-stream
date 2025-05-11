@@ -32,26 +32,6 @@
     background-color: #444;
     border-radius: 1rem;
 }
-  
-.shimmer {
-    animation: shimmer 1.5s infinite linear;
-    background: linear-gradient(
-      90deg,
-      #333 25%,
-      #444 50%,
-      #333 75%
-    );
-    background-size: 200% 100%;
-}
-  
-@keyframes shimmer {
-    0% {
-      background-position: -200% 0;
-    }
-    100% {
-      background-position: 200% 0;
-    }
-}
 
 /* Custom Modal */
 .modal-dialog.modal-pad {

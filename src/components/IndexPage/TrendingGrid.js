@@ -1,9 +1,9 @@
-import { React, useRef } from 'react';
+import { React, useRef, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import Card from '../Card';
 import useFetchMedia from '../../hooks/useFetchMedia';
 
-function TrendingGrid() {
+function TrendingGrid({ setIsTrendingLoaded }) {
   const { data: popularMovies, loading: loadingPopularMovies, error: errorPopularMovies } = useFetchMedia('trending', 'movie');
   const { data: popularTv, loading: loadingPopularTv, error: errorPopularTv } = useFetchMedia('trending', 'tv');
   const location = useLocation();
@@ -11,6 +11,14 @@ function TrendingGrid() {
   // Scroll references for movies and TV shows
   const moviesRef = useRef(null);
   const tvRef = useRef(null);
+
+  useEffect(() => {
+    if (errorPopularMovies || errorPopularTv) {
+      setIsTrendingLoaded(false);
+    } else {
+      setIsTrendingLoaded(true);
+    }
+  }, [errorPopularMovies, errorPopularTv, setIsTrendingLoaded]);
 
   const scrollMovies = (direction) => {
     if (moviesRef.current) {
@@ -58,40 +66,20 @@ function TrendingGrid() {
             </>
           )}
           <div ref={moviesRef} className="d-flex overflow-auto" style={{ scrollSnapType: 'x mandatory', gap: '1rem' }}>
-            {loadingPopularMovies && Array.from({ length: 6 }).map((_, index) => (
-              <Card
-                key={`movie-skeleton-${index}`}
-                media={{ poster_path: null, vote_average: null }}
-                type="movie"
-                path="/"
-                isDeletable={false}
-                isSkeleton={true}
-              />
-            ))}
-
-            {errorPopularMovies && (
-              <div className="col d-flex vh-25 justify-content-center align-items-center">
-                <div className="d-flex align-items-center dynamic-fs">
-                  <i className="bi bi-wifi-off me-2"></i>
-                  <span className="mb-0">Something went wrong.</span>
-                </div>
-              </div>
-            )}
-            {!loadingPopularMovies && !errorPopularMovies && popularMovies.length > 0 ? (
-              popularMovies.map((movie) => (
-                <Card key={movie.id} media={movie} type={'movie'} path={location.pathname} />
+            {!loadingPopularMovies && !errorPopularMovies && popularMovies?.length > 0
+              ? popularMovies.map((movie) => (
+                <Card key={movie.id} media={movie} type="movie" path={location.pathname} />
               ))
-            ) : (
-              !loadingPopularMovies &&
-              !errorPopularMovies && (
-                <div className="col d-flex vh-25 justify-content-center align-items-center">
-                  <div className="d-flex align-items-center dynamic-fs">
-                    <i className="bi bi-database-slash me-2"></i>
-                    <span className="mb-0">No trending movies found.</span>
-                  </div>
-                </div>
-              )
-            )}
+              : Array.from({ length: 6 }).map((_, index) => (
+                <Card
+                  key={`movie-skeleton-${index}`}
+                  media={{ poster_path: null, vote_average: null }}
+                  type="movie"
+                  path="/"
+                  isDeletable={false}
+                  isSkeleton={true}
+                />
+              ))}
           </div>
         </div>
       )}
@@ -118,39 +106,20 @@ function TrendingGrid() {
             </>
           )}
           <div ref={tvRef} className="d-flex overflow-auto" style={{ scrollSnapType: 'x mandatory', gap: '1rem' }}>
-            {loadingPopularTv && Array.from({ length: 6 }).map((_, index) => (
-              <Card
-                key={`tv-skeleton-${index}`}
-                media={{ poster_path: null, vote_average: null }}
-                type="tv"
-                path="/"
-                isDeletable={false}
-                isSkeleton={true}
-              />
-            ))}
-            {errorPopularTv && (
-              <div className="col d-flex vh-25 justify-content-center align-items-center">
-                <div className="d-flex align-items-center dynamic-fs">
-                  <i className="bi bi-wifi-off me-2"></i>
-                  <span className="mb-0">Something went wrong.</span>
-                </div>
-              </div>
-            )}
-            {!loadingPopularTv && !errorPopularTv && popularTv.length > 0 ? (
-              popularTv.map((show) => (
-                <Card key={show.id} media={show} type={'tv'} path={location.pathname} />
+            {!loadingPopularTv && !errorPopularTv && popularTv?.length > 0
+              ? popularTv.map((show) => (
+                <Card key={show.id} media={show} type="tv" path={location.pathname} />
               ))
-            ) : (
-              !loadingPopularTv &&
-              !errorPopularTv && (
-                <div className="col d-flex vh-25 justify-content-center align-items-center">
-                  <div className="d-flex align-items-center dynamic-fs">
-                    <i className="bi bi-database-slash me-2"></i>
-                    <span className="mb-0">No trending tv shows found.</span>
-                  </div>
-                </div>
-              )
-            )}
+              : Array.from({ length: 6 }).map((_, index) => (
+                <Card
+                  key={`tv-skeleton-${index}`}
+                  media={{ poster_path: null, vote_average: null }}
+                  type="tv"
+                  path="/"
+                  isDeletable={false}
+                  isSkeleton={true}
+                />
+              ))}
           </div>
         </div>
       )}
