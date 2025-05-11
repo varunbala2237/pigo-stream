@@ -1,17 +1,16 @@
 /* Skeleton Circle for image placeholder */
-.skeleton-circle {
+.cast-skeleton-circle {
     width: 80px;
     height: 80px;
 }
 
 /* Skeleton Bars for name and character placeholders */
-.skeleton-bar {
+.cast-skeleton-bar {
     height: 15px;
-    width: 50%;
+    width: 70%;
     margin: 0 auto;
-    background: #21252980;
 }
 
-.skeleton-bar:last-child {
-    width: 25%;
+.cast-skeleton-bar:last-child {
+    width: 50%;
 }

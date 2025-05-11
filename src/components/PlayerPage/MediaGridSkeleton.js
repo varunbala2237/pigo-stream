@@ -66,12 +66,12 @@ function MediaGridSkeleton({ mediaInfo, servers, loadingInfo, loadingLink, error
               <div className="container custom-bg custom-theme-radius w-100 p-2 my-2">
                 <div className="dynamic-ts py-2">
                   {/* Grey box for Server Label */}
-                  <div className="skeleton-placeholder skeleton-text" style={{ width: '150px', height: '20px' }}></div>
+                  <div className="player-skeleton-placeholder custom-theme-radius bd-callout-dark" style={{ width: '150px', height: '20px' }}></div>
                 </div>
                 <div className="row g-2">
                   <div className="col-4 col-sm-3 col-md-4 col-lg-3 col-xl-2">
                     <button className="btn w-100 border-0 rounded-pill shadow-sm btn-grey bd-callout-dark">
-                      <span className="skeleton-placeholder skeleton-text" style={{ width: '80%', height: '18px' }}></span>
+                      <span className="player-skeleton-placeholder custom-theme-radius bd-callout-dark" style={{ width: '80%', height: '18px' }}></span>
                     </button>
                   </div>
                 </div>
@@ -79,10 +79,10 @@ function MediaGridSkeleton({ mediaInfo, servers, loadingInfo, loadingLink, error
 
               {/* Cast Section Skeleton */}
               <div className="d-flex flex-column align-items-start custom-theme-radius my-2 w-100">
-                <div className="container py-2 text-white">
+                <div className="container py-2">
                   <div className="dynamic-ts">
                     {/* Grey box for Cast Label */}
-                    <div className="skeleton-placeholder skeleton-text" style={{ width: '100px', height: '20px' }}></div>
+                    <div className="player-skeleton-placeholder custom-theme-radius bd-callout-dark" style={{ width: '100px', height: '20px' }}></div>
                   </div>
                   <div className="row justify-content-center">
                     {/* Skeleton for Cast Cards */}
@@ -91,12 +91,12 @@ function MediaGridSkeleton({ mediaInfo, servers, loadingInfo, loadingLink, error
                     ))}
                   </div>
                   <div className="text-end">
-                    <button className="btn btn-dark custom-bg dynamic-fs border-0 rounded-pill btn-md d-none d-md-inline-block">
+                    <button className="btn btn-dark bd-callout-dark dynamic-fs border-0 rounded-pill btn-md d-none d-md-inline-block">
                       {/* Grey text for Show More */}
                       <div className="skeleton-placeholder skeleton-text" style={{ width: '100px', height: '20px' }}></div>
                     </button>
 
-                    <button className="btn btn-dark custom-bg dynamic-fs border-0 rounded-pill btn-sm d-md-none">
+                    <button className="btn btn-dark bd-callout-dark dynamic-fs border-0 rounded-pill btn-sm d-md-none">
                       {/* Grey text for Show More */}
                       <div className="skeleton-placeholder skeleton-text" style={{ width: '80px', height: '20px' }}></div>
                     </button>

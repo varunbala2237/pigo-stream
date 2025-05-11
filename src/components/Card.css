@@ -9,7 +9,7 @@
 /* Shadow effect for rating and media type */
 .card-overlay .rating-box,
 .card-overlay .media-type-box {
-    padding: 10px 20px;
+    padding: 6px 4px;
     backdrop-filter: blur(4px);
 }
 
@@ -18,13 +18,13 @@
     pointer-events: none;
   }
   
-.skeleton-image {
+.card-skeleton-image {
     width: 100%;
     padding-top: 150%;
 }
   
-.skeleton-bar {
-    width: 12px;
+.card-skeleton-bar {
+    width: 40px;
     height: 12px;
 }
 

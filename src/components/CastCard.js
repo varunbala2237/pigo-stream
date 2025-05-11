@@ -15,12 +15,12 @@ function CastCard({ actor, isSkeleton }) {
         <a href="#cast" className="text-decoration-none">
           {/* Placeholder Circle */}
           <div className="d-flex justify-content-center mb-2">
-            <div className="custom-bg skeleton-circle rounded-circle"></div>
+            <div className="custom-bg cast-skeleton-circle rounded-circle"></div>
           </div>
           {/* Placeholder Text Blocks */}
           <div className="text-center">
-            <div className="custom-bg skeleton-bar mb-1"></div>
-            <div className="custom-bg skeleton-bar"></div>
+            <div className="bd-callout-dark custom-theme-radius cast-skeleton-bar mb-1"></div>
+            <div className="bd-callout-dark custom-theme-radius cast-skeleton-bar"></div>
           </div>
         </a>
       </div>

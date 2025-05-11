@@ -261,20 +261,20 @@ function HomeUI({
             <div className="container justify-content-center" style={{ textAlign: 'start' }}>
               <div className="d-flex flex-column text-white custom-theme-radius" style={{ padding: '5%' }}>
                 <div className="d-flex align-items-center mb-2">
-                  <div className="skeleton-title-bar bd-callout-dark"></div>
-                  <div className="skeleton-badge custom-theme-radius custom-bg ms-2"></div>
+                  <div className="hero-skeleton-title-bar bd-callout-dark"></div>
+                  <div className="hero-skeleton-badge custom-theme-radius custom-bg ms-2"></div>
                 </div>
                 <div className="dynamic-fs text-white">
                   <div className="dynamic-fs my-2 d-flex align-items-center">
-                    <div className="skeleton-icon bd-callout-dark me-2"></div>
-                    <div className="skeleton-bar custom-bg me-2" style={{ width: '50px' }}></div>
-                    <div className="skeleton-icon bd-callout-dark me-2"></div>
-                    <div className="skeleton-bar custom-bg" style={{ width: '50px' }}></div>
+                    <div className="hero-skeleton-icon bd-callout-dark me-2"></div>
+                    <div className="hero-skeleton-bar custom-bg me-2" style={{ width: '50px' }}></div>
+                    <div className="hero-skeleton-icon bd-callout-dark me-2"></div>
+                    <div className="hero-skeleton-bar custom-bg" style={{ width: '50px' }}></div>
                   </div>
                   <div className="dynamic-fs my-2">
-                    <div className="skeleton-bar" style={{ width: '100%' }}></div>
+                    <div className="hero-skeleton-bar" style={{ width: '100%' }}></div>
                   </div>
-                  <div className="btn skeleton-button my-2 bd-callout-dark"></div>
+                  <div className="btn hero-skeleton-button my-2 bd-callout-dark"></div>
                 </div>
               </div>
             </div>
