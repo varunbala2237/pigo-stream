@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom'; // Import useNavigate
-import useAppVersion from '../../hooks/useAppVersion';
-import useDownloadApp from '../../hooks/useDownloadApp';
+import useAppVersion from '../../hooks/PigoStorePage/useAppVersion';
+import useDownloadApp from '../../hooks/PigoStorePage/useDownloadApp';
 import Alert from '../../utils/Alert';
 
 const Pigostore = () => {

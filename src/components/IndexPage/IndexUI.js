@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import useGenreRecommendations from '../../hooks/useGenreRecommendations';
-import useFetchMediaDetails from '../../hooks/useFetchMediaDetails';
-import useFetchMedia from '../../hooks/useFetchMedia';
+import useGenreRecommendations from '../../hooks/IndexPage/useGenreRecommendations';
+import useFetchMediaDetails from '../../hooks/IndexPage/useFetchMediaDetails';
+import useFetchMedia from '../../hooks/IndexPage/useFetchMedia';
 import HomeUI from './HomeUI';
 import Footer from '../Footer';
 

@@ -1,7 +1,7 @@
 import React, { useRef, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import Card from '../Card';
-import useFetchSearch from '../../hooks/useFetchSearch';
+import useFetchSearch from '../../hooks/IndexPage/useFetchSearch';
 
 function SearchGrid({ searchQuery, setIsSearchLoaded, setHasSearchContent }) {
   // Fetch data from useSearch

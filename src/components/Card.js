@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import useRemoveWatchHistory from '../hooks/useRemoveWatchHistory';
-import useRemoveFromMyList from '../hooks/useRemoveMyList';
+import useRemoveWatchHistory from '../hooks/WatchHistoryPage/useRemoveWatchHistory';
+import useRemoveFromMyList from '../hooks/MyListPage/useRemoveMyList';
 
 import './Card.css';
 

@@ -1,8 +1,8 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { useLocation } from 'react-router-dom';
 import Card from '../Card';
-import useFetchWatchHistory from '../../hooks/useFetchWatchHistory';
-import useClearWatchHistory from '../../hooks/useClearWatchHistory';
+import useFetchWatchHistory from '../../hooks/WatchHistoryPage/useFetchWatchHistory';
+import useClearWatchHistory from '../../hooks/WatchHistoryPage/useClearWatchHistory';
 import ConnectionModal from '../../utils/ConnectionModal';
 import Alert from '../../utils/Alert';
 

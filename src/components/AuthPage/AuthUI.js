@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { auth, signInWithGoogle } from '../../firebase/firebase-auth';
 import { signInWithEmailAndPassword, createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
-import useCreateUser from '../../hooks/useCreateUser';
+import useCreateUser from '../../hooks/AuthPage/useCreateUser';
 import Alert from '../../utils/Alert';
 
 function togglePasswordVisibility() {

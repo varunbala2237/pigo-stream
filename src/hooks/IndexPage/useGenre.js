@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
-import { auth } from '../firebase/firebase-auth';
-import useFetchWatchHistory from './useFetchWatchHistory';
+import { auth } from '../../firebase/firebase-auth';
+import useFetchWatchHistory from '../WatchHistoryPage/useFetchWatchHistory';
 
 const BASE_URL = process.env.REACT_APP_SERVER_URL;
 

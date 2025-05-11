@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { auth } from '../firebase/firebase-auth';
+import { auth } from '../../firebase/firebase-auth';
 
 // Base URL of server
 const BASE_URL = process.env.REACT_APP_SERVER_URL;

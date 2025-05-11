@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import Card from '../Card';
-import useFetchProviders from '../../hooks/useFetchProviders';
+import useFetchProviders from '../../hooks/IndexPage/useFetchProviders';
 
 const PROVIDERS = [
     { id: 8, name: 'Netflix', logo: 'https://upload.wikimedia.org/wikipedia/commons/0/08/Netflix_2015_logo.svg' },

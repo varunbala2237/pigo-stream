@@ -1,7 +1,7 @@
 import { React, useRef, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import Card from '../Card';
-import useFetchMedia from '../../hooks/useFetchMedia';
+import useFetchMedia from '../../hooks/IndexPage/useFetchMedia';
 
 function TrendingGrid({ setIsTrendingLoaded, setHasTrendingContent }) {
   const { data: movies, loading: isLoadingMovies, error: isErrorMovies } = useFetchMedia('trending', 'movie');

@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react';
-import { auth } from '../firebase/firebase-auth';
+import { auth } from '../../firebase/firebase-auth';
 
 // Base URL of server
 const BASE_URL = process.env.REACT_APP_SERVER_URL;
 
-const useRemoveSearchHistory = () => {
+const useSaveSearchHistory = () => {
   const [userUID, setUserUID] = useState(null); // State to store userUID
 
   useEffect(() => {
@@ -19,16 +19,17 @@ const useRemoveSearchHistory = () => {
     return () => unsubscribe();
   }, []);
 
-  const removeSearchHistory = async (id) => {
+  const saveSearchHistory = async (searchQuery) => {
     if (userUID) {
       try {
-        const response = await fetch(`${BASE_URL}/users/${userUID}/remove-search-history/${id}`, {
-          method: 'DELETE',
+        const response = await fetch(`${BASE_URL}/users/save-search-history`, {
+          method: 'POST',
           headers: {
             'Content-Type': 'application/json',
           },
+          body: JSON.stringify({ userUID, searchQuery }),
         });
-
+        
         if (!response.ok) {
           throw new Error('Unable to fetch data. Please try again later.');
         }
@@ -40,7 +41,7 @@ const useRemoveSearchHistory = () => {
     }
   };
 
-  return removeSearchHistory;
+  return saveSearchHistory;
 };
 
-export default useRemoveSearchHistory;
+export default useSaveSearchHistory;

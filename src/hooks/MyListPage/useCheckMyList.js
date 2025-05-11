@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
-import useFetchMyList from './useFetchMyList'; // Import the fetch hook
-import { auth } from '../firebase/firebase-config';
+import useFetchMyList from '../MyListPage/useFetchMyList'; // Import the fetch hook
+import { auth } from '../../firebase/firebase-config';
 
 const useCheckMyList = (id, type) => {
   const [isInList, setIsInList] = useState(false);
