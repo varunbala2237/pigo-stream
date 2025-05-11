@@ -75,7 +75,7 @@ const Pigostore = () => {
     <div className="vh-100 d-flex justify-content-center align-items-center poppins-medium"
       style={{ background: "linear-gradient(to bottom, #121229, #121229, black, black)" }}
     >
-      <div className="container bg-transparent p-0 mx-4 custom-theme-radius" style={{ maxWidth: '600px' }}>
+      <div className="container custom-bg p-0 mx-4 custom-theme-radius" style={{ maxWidth: '600px' }}>
         <div className="section p-4">
           <div className="d-flex justify-content-between align-items-center">
             <div className="d-flex justify-content-center align-items-center text-center">
