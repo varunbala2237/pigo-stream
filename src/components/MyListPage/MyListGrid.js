@@ -54,16 +54,13 @@ function MyListGrid({ userUID }) {
         // Check if there is no content available
         if (!loading && !error && !hasContent) {
             setContentAlertMessage('Your list is empty.');
-        } else {
-            setContentAlertMessage('');
-        }
-
-        if (!loading && !error && !hasContent) {
             // Show the alert for 5 seconds
             const timer = setTimeout(() => {
                 setContentAlertMessage('');
             }, 5000);
             return () => clearTimeout(timer);
+        } else {
+            setContentAlertMessage('');
         }
     }, [movieList, tvList, loading, error]);
 

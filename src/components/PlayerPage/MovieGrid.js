@@ -6,7 +6,6 @@ import useSaveMyList from '../../hooks/useSaveMyList';
 import useCheckMyList from '../../hooks/useCheckMyList';
 import useCheckServerStatus from '../../hooks/useCheckServerStatus';
 import Player from './PlayerUI';
-import ConnectionModal from '../../utils/ConnectionModal';
 import Alert from '../../utils/Alert';
 
 import { storeMediaStateSettings, getMediaStateSettings } from '../../utils/mediaStateSettings';
@@ -18,9 +17,6 @@ function MovieGrid({ id, type, setBackgroundImage }) {
   const [alertMessage, setAlertMessage] = useState('');
   const [alertType, setAlertType] = useState('');
   const [selectedServerName, setSelectedServerName] = useState('');
-
-  const [contentAlertMessage, setContentAlertMessage] = useState('');
-  const [showConnectionModal, setShowConnectionModal] = useState(false);
 
   const [sliceIndex, setSliceIndex] = useState(12); // Initial slice index
 
@@ -71,34 +67,6 @@ function MovieGrid({ id, type, setBackgroundImage }) {
     }
   }, [selectedServerName, servers]);
 
-  // Connection modal handling
-  useEffect(() => {
-    if (errorInfo || errorLink) {
-      setShowConnectionModal(true);
-    } else {
-      setShowConnectionModal(false);
-    }
-  }, [errorInfo, errorLink]);
-
-  // Alert handling for no content
-  useEffect(() => {
-    const hasContent = (servers && servers.length > 0);
-    // Check if there is no content available
-    if (!loadingInfo && !loadingLink && !errorInfo && !errorLink && !hasContent) {
-      setContentAlertMessage('No media or content available.');
-    } else {
-      setContentAlertMessage('');
-    }
-
-    if (!loadingInfo && !loadingLink && !errorInfo && !errorLink && !hasContent) {
-      // Show the alert for 5 seconds
-      const timer = setTimeout(() => {
-        setContentAlertMessage('');
-      }, 5000);
-      return () => clearTimeout(timer);
-    }
-  }, [loadingInfo, loadingLink, errorInfo, errorLink, servers]);
-
   const handleServerChange = (serverName) => {
     setSelectedServerName(serverName);
     storeMediaStateSettings(id, { selectedServerName: serverName });
@@ -127,7 +95,6 @@ function MovieGrid({ id, type, setBackgroundImage }) {
   };
 
   const handleAlertDismiss = () => {
-    setContentAlertMessage('');
     setAlertMessage('');
   };
 
@@ -231,14 +198,7 @@ function MovieGrid({ id, type, setBackgroundImage }) {
           </div>
         </div>
       </div>
-      {/* Connection Modal */}
-      {showConnectionModal && <ConnectionModal show={showConnectionModal} />}
-
-      {/* Alert for no content */}
-      {contentAlertMessage && (
-        <Alert message={contentAlertMessage} onClose={handleAlertDismiss} type="primary" />
-      )}
-
+      
       {/* Alert for bookmark */}
       {alertMessage && <Alert message={alertMessage} onClose={handleAlertDismiss} type={alertType} />}
     </>
