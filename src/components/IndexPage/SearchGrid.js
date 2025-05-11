@@ -77,11 +77,13 @@ function SearchGrid({ searchQuery, setIsSearchLoaded, setHasSearchContent }) {
             </>
           )}
           <div ref={moviesRef} className="d-flex overflow-auto" style={{ scrollSnapType: 'x mandatory', gap: '1rem' }}>
-            {movies?.length > 0
-              ? movies.map((movie, index) => (
+            {(
+              (movies?.length > 0 ? movies : [])
+                .concat(Array.from({ length: Math.max(0, 6 - (movies?.length || 0)) }))
+            ).map((movie, index) =>
+              movie ? (
                 <Card key={index} media={movie} type="movie" path={location.pathname} />
-              ))
-              : Array.from({ length: 6 }).map((_, index) => (
+              ) : (
                 <Card
                   key={`movie-skeleton-${index}`}
                   media={{ poster_path: null, vote_average: null }}
@@ -90,7 +92,8 @@ function SearchGrid({ searchQuery, setIsSearchLoaded, setHasSearchContent }) {
                   isDeletable={false}
                   isSkeleton={true}
                 />
-              ))}
+              )
+            )}
           </div>
         </div>
       )}
@@ -117,11 +120,13 @@ function SearchGrid({ searchQuery, setIsSearchLoaded, setHasSearchContent }) {
             </>
           )}
           <div ref={showsRef} className="d-flex overflow-auto" style={{ scrollSnapType: 'x mandatory', gap: '1rem' }}>
-            {shows?.length > 0
-              ? shows.map((show, index) => (
+            {(
+              (shows?.length > 0 ? shows : [])
+                .concat(Array.from({ length: Math.max(0, 6 - (shows?.length || 0)) }))
+            ).map((show, index) =>
+              show ? (
                 <Card key={index} media={show} type="tv" path={location.pathname} />
-              ))
-              : Array.from({ length: 6 }).map((_, index) => (
+              ) : (
                 <Card
                   key={`tv-skeleton-${index}`}
                   media={{ poster_path: null, vote_average: null }}
@@ -130,7 +135,8 @@ function SearchGrid({ searchQuery, setIsSearchLoaded, setHasSearchContent }) {
                   isDeletable={false}
                   isSkeleton={true}
                 />
-              ))}
+              )
+            )}
           </div>
         </div>
       )}
