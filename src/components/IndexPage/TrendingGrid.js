@@ -4,8 +4,11 @@ import Card from '../Card';
 import useFetchMedia from '../../hooks/useFetchMedia';
 
 function TrendingGrid({ setIsTrendingLoaded, setHasTrendingContent }) {
-  const { data: popularMovies, loading: loadingPopularMovies, error: errorPopularMovies } = useFetchMedia('trending', 'movie');
-  const { data: popularTv, loading: loadingPopularTv, error: errorPopularTv } = useFetchMedia('trending', 'tv');
+  const { data: movies, loading: isLoadingMovies, error: isErrorMovies } = useFetchMedia('trending', 'movie');
+  const { data: shows, loading: isLoadingShows, error: isErrorShows } = useFetchMedia('trending', 'tv');
+
+  const isLoading = isLoadingMovies || isLoadingShows;
+  const isError = isErrorMovies || isErrorShows;
   const location = useLocation();
 
   // Scroll references for movies and TV shows
@@ -13,21 +16,21 @@ function TrendingGrid({ setIsTrendingLoaded, setHasTrendingContent }) {
   const tvRef = useRef(null);
 
   useEffect(() => {
-    if (errorPopularMovies || errorPopularTv) {
+    if (isError) {
       setIsTrendingLoaded(false);
     } else {
       setIsTrendingLoaded(true);
     }
-  }, [errorPopularMovies, errorPopularTv, setIsTrendingLoaded]);
+  }, [isError, setIsTrendingLoaded]);
 
   useEffect(() => {
-    if (!loadingPopularMovies && !loadingPopularTv && !errorPopularMovies && !errorPopularTv) {
+    if (!isLoading && !isError) {
       const hasContent =
-        (popularMovies && popularMovies.length > 0) ||
-        (popularTv && popularTv.length > 0);
+        (movies && movies.length > 0) ||
+        (shows && shows.length > 0);
       setHasTrendingContent(hasContent);
     }
-  }, [loadingPopularMovies, loadingPopularTv, errorPopularMovies, errorPopularTv, popularMovies, popularTv, setHasTrendingContent]);
+  }, [isLoading, isError, movies, shows, setHasTrendingContent]);
 
   const scrollMovies = (direction) => {
     if (moviesRef.current) {
@@ -56,7 +59,7 @@ function TrendingGrid({ setIsTrendingLoaded, setHasTrendingContent }) {
       {/* Trending Movies Section */}
       {(
         <div className="position-relative my-2">
-          {popularMovies.length > 3 && (
+          {movies.length > 3 && (
             <>
               <button
                 className="btn btn-dark custom-bg rounded-pill py-2 position-absolute start-0 translate-middle-y d-none d-md-block"
@@ -75,8 +78,8 @@ function TrendingGrid({ setIsTrendingLoaded, setHasTrendingContent }) {
             </>
           )}
           <div ref={moviesRef} className="d-flex overflow-auto" style={{ scrollSnapType: 'x mandatory', gap: '1rem' }}>
-            {!loadingPopularMovies && !errorPopularMovies && popularMovies?.length > 0
-              ? popularMovies.map((movie) => (
+            {!isLoading && !isError && movies?.length > 0
+              ? movies.map((movie) => (
                 <Card key={movie.id} media={movie} type="movie" path={location.pathname} />
               ))
               : Array.from({ length: 6 }).map((_, index) => (
@@ -96,7 +99,7 @@ function TrendingGrid({ setIsTrendingLoaded, setHasTrendingContent }) {
       {/* Trending TV Shows Section */}
       {(
         <div className="position-relative my-2">
-          {popularTv.length > 3 && (
+          {shows.length > 3 && (
             <>
               <button
                 className="btn btn-dark custom-bg rounded-pill py-2 position-absolute start-0 translate-middle-y d-none d-md-block"
@@ -115,8 +118,8 @@ function TrendingGrid({ setIsTrendingLoaded, setHasTrendingContent }) {
             </>
           )}
           <div ref={tvRef} className="d-flex overflow-auto" style={{ scrollSnapType: 'x mandatory', gap: '1rem' }}>
-            {!loadingPopularTv && !errorPopularTv && popularTv?.length > 0
-              ? popularTv.map((show) => (
+            {!isLoading && !isError && shows?.length > 0
+              ? shows.map((show) => (
                 <Card key={show.id} media={show} type="tv" path={location.pathname} />
               ))
               : Array.from({ length: 6 }).map((_, index) => (

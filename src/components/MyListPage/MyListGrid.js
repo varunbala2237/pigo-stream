@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef } from 'react';
 import { useLocation } from 'react-router-dom';
 import Card from '../Card';
 import useFetchMyList from '../../hooks/useFetchMyList';
-import Alert from '../../Alert';
+import Alert from '../../utils/Alert';
 
 function MyListGrid({ userUID }) {
     const [initialized, setInitialized] = useState(false);

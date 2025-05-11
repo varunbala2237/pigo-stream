@@ -8,26 +8,3 @@
 .modal-content {
   padding: 1rem 1rem;
 }
-
-/* Signal Icon Styling */
-.connection-icon {
-  font-size: 3rem;
-  color: #ff4c4c;
-}
-
-/* Modal text Styling */
-.modal-body p {
-  font-size: 1.1rem;
-  color: #ddd;
-}
-
-/* Button Styling */
-.btn-primary {
-  font-size: 1rem;
-  padding: 8px 20px;
-  border-radius: 50px;
-}
-
-.btn-primary i {
-  font-size: 1.1rem;
-}

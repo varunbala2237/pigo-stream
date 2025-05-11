@@ -16,7 +16,7 @@ const PROVIDERS = [
 
 function ProvidersGrid({ setIsProvidersLoaded, setHasProvidersContent }) {
     const [selectedProvider, setSelectedProvider] = useState(null);
-    const { movies, tvShows, loading, error } = useFetchProviders(selectedProvider);
+    const { movies, shows, isLoading, isError } = useFetchProviders(selectedProvider);
     const location = useLocation();
 
     // Scroll references for movies and TV shows
@@ -25,19 +25,19 @@ function ProvidersGrid({ setIsProvidersLoaded, setHasProvidersContent }) {
     const providersRef = useRef(null);
 
     useEffect(() => {
-        if (error) {
+        if (isError) {
             setIsProvidersLoaded(false);
         } else {
             setIsProvidersLoaded(true);
         }
-    }, [error, setIsProvidersLoaded]);
+    }, [isError, setIsProvidersLoaded]);
 
     useEffect(() => {
-        if (!loading && !error) {
-            const hasContent = (movies && movies.length > 0) || (tvShows && tvShows.length > 0);
+        if (!isLoading && !isError) {
+            const hasContent = (movies && movies.length > 0) || (shows && shows.length > 0);
             setHasProvidersContent(hasContent);
         }
-    }, [loading, error, movies, tvShows, setHasProvidersContent]);
+    }, [isLoading, isError, movies, shows, setHasProvidersContent]);
 
     // Load selected provider from localStorage or default to Netflix
     useEffect(() => {
@@ -148,7 +148,7 @@ function ProvidersGrid({ setIsProvidersLoaded, setHasProvidersContent }) {
                     </>
                 )}
                 <div ref={moviesRef} className="d-flex overflow-auto" style={{ scrollSnapType: 'x mandatory', gap: '1rem' }}>
-                    {!loading && !error && movies.length > 0
+                    {!isLoading && !isError && movies.length > 0
                         ? movies.map((movie) => (
                             <Card key={movie.id} media={movie} type="movie" path={location.pathname} />
                         ))
@@ -167,7 +167,7 @@ function ProvidersGrid({ setIsProvidersLoaded, setHasProvidersContent }) {
 
             {/* Providers TV Shows Section */}
             <div className="position-relative my-2">
-                {tvShows.length > 3 && (
+                {shows.length > 3 && (
                     <>
                         <button
                             className="btn btn-dark custom-bg rounded-pill py-2 position-absolute start-0 translate-middle-y d-none d-md-block"
@@ -186,8 +186,8 @@ function ProvidersGrid({ setIsProvidersLoaded, setHasProvidersContent }) {
                     </>
                 )}
                 <div ref={tvRef} className="d-flex overflow-auto" style={{ scrollSnapType: 'x mandatory', gap: '1rem' }}>
-                    {!loading && !error && tvShows.length > 0
-                        ? tvShows.map((show) => (
+                    {!isLoading && !isError && shows.length > 0
+                        ? shows.map((show) => (
                             <Card key={show.id} media={show} type="tv" path={location.pathname} />
                         ))
                         : Array.from({ length: 6 }).map((_, index) => (

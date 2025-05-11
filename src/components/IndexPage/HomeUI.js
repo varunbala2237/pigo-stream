@@ -8,8 +8,9 @@ import useSaveSearchHistory from '../../hooks/useSaveSearchHistory';
 import useFetchSearchHistory from '../../hooks/useFetchSearchHistory';
 import useRemoveSearchHistory from '../../hooks/useRemoveSearchHistory';
 import ConnectionModal from '../../utils/ConnectionModal';
-import Alert from '../../Alert';
+import Alert from '../../utils/Alert';
 import ProvidersGrid from './ProvidersGrid';
+import './HomeUI.css';
 
 function HomeUI({
   title,
@@ -34,11 +35,13 @@ function HomeUI({
   // Error handling flags
   const [isTrendingLoaded, setIsTrendingLoaded] = useState(true);
   const [isProvidersLoaded, setIsProvidersLoaded] = useState(true);
+  const [isSearchLoaded, setIsSearchLoaded] = useState(true);
   const [showConnectionModal, setShowConnectionModal] = useState(false);
 
   // No content handling flags
   const [hasTrendingContent, setHasTrendingContent] = useState(true);
   const [hasProvidersContent, setHasProvidersContent] = useState(true);
+  const [hasSearchContent, setHasSearchContent] = useState(true);
   const [contentAlertMessage, setContentAlertMessage] = useState('');
 
   const dropdownRef = useRef(null);
@@ -133,18 +136,16 @@ function HomeUI({
     };
   }, []);
 
+  // Connection modal handling
   useEffect(() => {
-    // Check both flags and show modal if needed
-    if (!isTrendingLoaded || !isProvidersLoaded) {
+    if (!isTrendingLoaded || !isProvidersLoaded || !isSearchLoaded) {
       setShowConnectionModal(true);
     }
-  }, [isTrendingLoaded, isProvidersLoaded]);
+  }, [isTrendingLoaded, isProvidersLoaded, isSearchLoaded]);
 
+  // Alert handling for no content
   useEffect(() => {
-    if (!isTrendingLoaded || !isProvidersLoaded) {
-      setShowConnectionModal(true);
-    }
-
+    // Check if there is no content available for trending and providers
     if (!hasTrendingContent && !hasProvidersContent) {
       setContentAlertMessage('No content available from trending or providers.');
     } else if (!hasTrendingContent) {
@@ -155,13 +156,21 @@ function HomeUI({
       setContentAlertMessage('');
     }
 
-    if (!hasTrendingContent || !hasProvidersContent) {
+    // Check if there is no content available for search
+    if (!hasSearchContent) {
+      setContentAlertMessage(`No results found for "${searchQuery}".`);
+    } else {
+      setContentAlertMessage('');
+    }
+
+    if (!hasTrendingContent || !hasProvidersContent || !hasSearchContent) {
+      // Show the alert for 5 seconds
       const timer = setTimeout(() => {
         setContentAlertMessage('');
       }, 5000);
       return () => clearTimeout(timer);
     }
-  }, [isTrendingLoaded, isProvidersLoaded, hasTrendingContent, hasProvidersContent]);
+  }, [hasTrendingContent, hasProvidersContent, hasSearchContent, searchQuery]);
 
   const handleSearchInputChange = (e) => {
     const query = e.target.value;
@@ -246,65 +255,82 @@ function HomeUI({
           <Header />
         )}
 
-        {!showSearchBar && triggerSearch.trim() === '' && title && (
-          <div
-            className="container justify-content-center"
-            style={{
-              textAlign: 'start',
-            }}
-          >
-            <div
-              className="d-flex flex-column text-white custom-theme-radius"
-              style={{
-                padding: '5%',
-              }}
-            >
-              <div className="d-flex align-items-center">
-                <b className="text-wrap dynamic-ts">{title}</b>
-                {/* Badge for Recommended or Popular */}
-                <span className="badge bg-primary text-white rounded-pill ms-2">
-                  {isRecommended ? 'Recommended' : 'Popular'}
-                </span>
-              </div>
-              <div className="dynamic-fs text-white">
-                <div className="dynamic-fs my-2">
-                  <span className="me-2">
-                    {mediaType === 'movie' ? (
-                      <i className="bi bi-film"></i>
-                    ) : (
-                      <i className="bi bi-tv"></i>
-                    )}
-                  </span>
-                  <span className="me-2">{year}</span>
-                  <i className="bi bi-star-fill"></i>
-                  <span id="Rating">
-                    {' '}
-                    {rating}
-                  </span>
+        {!showSearchBar && (
+          !title ? (
+            <div className="container justify-content-center" style={{ textAlign: 'start' }}>
+              <div className="d-flex flex-column text-white custom-theme-radius" style={{ padding: '5%' }}>
+                <div className="d-flex align-items-center mb-2">
+                  <div className="skeleton-title-bar"></div>
+                  <div className="skeleton-badge ms-2"></div>
                 </div>
-                <div className="dynamic-fs my-2">{mediaDesc}</div>
-                <button className="btn btn-dark btn-md d-none d-md-inline-block bd-callout-dark rounded-pill border-0 my-2" onClick={handlePlayMedia}>
-                  <i className="bi bi-play-fill me-2"></i>
-                  <span>Watch Now</span>
-                </button>
-                <button className="btn btn-dark btn-sm d-md-none bd-callout-dark rounded-pill border-0 my-2" onClick={handlePlayMedia}>
-                  <i className="bi bi-play-fill me-2"></i>
-                  <span>Watch Now</span>
-                </button>
+                <div className="dynamic-fs text-white">
+                  <div className="dynamic-fs my-2 d-flex align-items-center">
+                    <div className="skeleton-icon me-2"></div>
+                    <div className="skeleton-bar me-2" style={{ width: '50px' }}></div>
+                    <div className="skeleton-icon me-2"></div>
+                    <div className="skeleton-bar" style={{ width: '30px' }}></div>
+                  </div>
+                  <div className="dynamic-fs my-2">
+                    <div className="skeleton-bar" style={{ width: '90%' }}></div>
+                  </div>
+                  <div className="btn skeleton-button my-2"></div>
+                </div>
               </div>
             </div>
-          </div>
+          ) : (
+            <div className="container justify-content-center" style={{ textAlign: 'start' }}>
+              <div className="d-flex flex-column text-white custom-theme-radius" style={{ padding: '5%' }}>
+                <div className="d-flex align-items-center">
+                  <b className="text-wrap dynamic-ts">{title}</b>
+                  {/* Badge for Recommended or Popular */}
+                  <span className="badge bg-primary text-white rounded-pill ms-2">
+                    {isRecommended ? 'Recommended' : 'Popular'}
+                  </span>
+                </div>
+                <div className="dynamic-fs text-white">
+                  <div className="dynamic-fs my-2">
+                    <span className="me-2">
+                      {mediaType === 'movie' ? (
+                        <i className="bi bi-film"></i>
+                      ) : (
+                        <i className="bi bi-tv"></i>
+                      )}
+                    </span>
+                    <span className="me-2">{year}</span>
+                    <i className="bi bi-star-fill"></i>
+                    <span id="Rating"> {rating}</span>
+                  </div>
+                  <div className="dynamic-fs my-2">{mediaDesc}</div>
+                  <button
+                    className="btn btn-dark btn-md d-none d-md-inline-block bd-callout-dark rounded-pill border-0 my-2"
+                    onClick={handlePlayMedia}
+                  >
+                    <i className="bi bi-play-fill me-2"></i>
+                    <span>Watch Now</span>
+                  </button>
+                  <button
+                    className="btn btn-dark btn-sm d-md-none bd-callout-dark rounded-pill border-0 my-2"
+                    onClick={handlePlayMedia}
+                  >
+                    <i className="bi bi-play-fill me-2"></i>
+                    <span>Watch Now</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          )
         )}
 
+        {/* Main content area */}
         <div className="flex-row text-white w-100">
-          {triggerSearch.trim() === '' ?
+          {!showSearchBar ?
             <>
               <TrendingGrid setIsTrendingLoaded={setIsTrendingLoaded} setHasTrendingContent={setHasTrendingContent} />
               <ProvidersGrid setIsProvidersLoaded={setIsProvidersLoaded} setHasProvidersContent={setHasProvidersContent} />
             </>
             :
             <>
-              <SearchGrid searchQuery={triggerSearch} />
+              <SearchGrid searchQuery={triggerSearch} setIsSearchLoaded={setIsSearchLoaded} setHasSearchContent={setHasSearchContent} />
             </>}
         </div>
 
@@ -312,12 +338,15 @@ function HomeUI({
           {showSearchBar ? <i className="bi bi-x-lg"></i> : <i className="bi bi-search"></i>}
         </button>
 
+        {/* Connection Modal */}
         {showConnectionModal && <ConnectionModal show={showConnectionModal} />}
 
+        {/* Alert for no content */}
         {contentAlertMessage && (
-          <Alert message={contentAlertMessage} onClose={handleAlertDismiss} type="danger" />
+          <Alert message={contentAlertMessage} onClose={handleAlertDismiss} type="primary" />
         )}
 
+        {/* Alert for welcome message */}
         {welcomeMessage && <Alert message={welcomeMessage} onClose={handleAlertDismiss} type="success" />}
       </div>
     </div>

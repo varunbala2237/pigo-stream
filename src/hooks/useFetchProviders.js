@@ -23,34 +23,34 @@ const fetchWithRetry = async (url, options = {}, retries = 3, delay = 1000) => {
 // Custom hook for fetching provider data
 const useFetchProviders = (providerId) => {
   const [movies, setMovies] = useState([]);
-  const [tvShows, setTvShows] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const [shows, setShows] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [isError, setIsError] = useState(null);
 
   useEffect(() => {
     if (!providerId) return;
 
     const fetchData = async () => {
-      setLoading(true);
+      setIsLoading(true);
       try {
         const [movieRes, tvRes] = await Promise.all([
           fetchWithRetry(`${BASE_URL}/media/movie/by-provider?provider=${providerId}`),
           fetchWithRetry(`${BASE_URL}/media/tv/by-provider?provider=${providerId}`)
         ]);
         setMovies(movieRes.results || []);
-        setTvShows(tvRes.results || []);
-        setError(null);
+        setShows(tvRes.results || []);
+        setIsError(null);
       } catch (err) {
-        setError(err.message || 'Failed to fetch');
+        setIsError(err.message || 'Failed to fetch');
       } finally {
-        setLoading(false);
+        setIsLoading(false);
       }
     };
 
     fetchData();
   }, [providerId]);
 
-  return { movies, tvShows, loading, error };
+  return { movies, shows, isLoading, isError };
 };
 
 export default useFetchProviders;

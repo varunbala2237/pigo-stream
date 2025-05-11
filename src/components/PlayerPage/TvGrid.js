@@ -7,7 +7,7 @@ import useSaveMyList from '../../hooks/useSaveMyList';
 import useCheckMyList from '../../hooks/useCheckMyList';
 import useCheckServerStatus from '../../hooks/useCheckServerStatus';
 import Player from './PlayerUI';
-import Alert from '../../Alert';
+import Alert from '../../utils/Alert';
 
 import { storeMediaStateSettings, getMediaStateSettings } from '../../utils/mediaStateSettings';
 

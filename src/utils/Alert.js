@@ -1,6 +1,4 @@
 // Alert.js
-import React from 'react';
-
 const Alert = ({ message, onClose, type }) => {
   const alertType = type || 'danger';
   return (
@@ -9,7 +7,7 @@ const Alert = ({ message, onClose, type }) => {
       style={{ width: '90%', zIndex: 9999, bottom: '10px', left: '50%', transform: 'translateX(-50%)' }}
     >
       <div className="d-flex justify-content-between align-items-center text-white">
-        <span className="ps-2">{message}</span>
+        <span className="ps-2"><i className="bi bi-exclamation-circle me-2"></i>{message}</span>
         <button type="button" className="btn btn-transparent border-0" onClick={onClose}><i className="bi bi-x-lg text-white"></i></button>
       </div>
     </div>

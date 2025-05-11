@@ -3,7 +3,7 @@ import { useLocation } from 'react-router-dom';
 import Card from '../Card';
 import useFetchWatchHistory from '../../hooks/useFetchWatchHistory';
 import useClearWatchHistory from '../../hooks/useClearWatchHistory';
-import Alert from '../../Alert';
+import Alert from '../../utils/Alert';
 
 function WatchHistoryGrid({ userUID }) {
     const [initialized, setInitialized] = useState(false);
