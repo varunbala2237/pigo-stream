@@ -392,12 +392,10 @@ function TvGrid({ id, type, setBackgroundImage }) {
                   </div>
                   <div className="row justify-content-center">
                     {cast.length === 0 ? (
-                      <div className="col d-flex vh-35 justify-content-center align-items-center">
-                        <div className="d-flex align-items-center dynamic-fs">
-                          <i className="bi bi-database-slash me-2"></i>
-                          <span>No cast found.</span>
-                        </div>
-                      </div>
+                      // Show 4 dummy skeletal cards when no cast is found
+                      Array.from({ length: 4 }).map((_, index) => (
+                        <CastCard key={index} isSkeleton={true} />
+                      ))
                     ) : (
                       cast.slice(0, sliceIndex).map(actor => (
                         <CastCard key={actor.cast_id} actor={actor} />

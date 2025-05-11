@@ -187,12 +187,9 @@ function MovieGrid({ id, type, setBackgroundImage }) {
                   </div>
                   <div className="row justify-content-center">
                     {cast.length === 0 ? (
-                      <div className="col d-flex vh-35 justify-content-center align-items-center">
-                        <div className="d-flex align-items-center dynamic-fs">
-                          <i className="bi bi-database-slash me-2"></i>
-                          <span className="mb-0">No cast found.</span>
-                        </div>
-                      </div>
+                      Array.from({ length: 4 }).map((_, index) => (
+                        <CastCard key={index} isSkeleton={true} />
+                      ))
                     ) : (
                       cast.slice(0, sliceIndex).map(actor => (
                         <CastCard key={actor.cast_id} actor={actor} />
