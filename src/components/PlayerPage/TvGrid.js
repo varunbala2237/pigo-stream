@@ -7,6 +7,7 @@ import useSaveMyList from '../../hooks/useSaveMyList';
 import useCheckMyList from '../../hooks/useCheckMyList';
 import useCheckServerStatus from '../../hooks/useCheckServerStatus';
 import Player from './PlayerUI';
+import ConnectionModal from '../../utils/ConnectionModal';
 import Alert from '../../utils/Alert';
 
 import { storeMediaStateSettings, getMediaStateSettings } from '../../utils/mediaStateSettings';
@@ -23,6 +24,9 @@ function TvGrid({ id, type, setBackgroundImage }) {
   const [selectedEpisode, setSelectedEpisode] = useState(1);
   const [watchedEpisodes, setWatchedEpisodes] = useState({});
   const [selectedServerName, setSelectedServerName] = useState('');
+
+  const [contentAlertMessage, setContentAlertMessage] = useState('');
+  const [showConnectionModal, setShowConnectionModal] = useState(false);
 
   const [sliceIndex, setSliceIndex] = useState(12); // Initial slice index
 
@@ -103,6 +107,43 @@ function TvGrid({ id, type, setBackgroundImage }) {
       }
     }
   }, [selectedServerName, servers]);
+
+  // Connection modal handling
+  useEffect(() => {
+    if (errorInfo || errorLink) {
+      setShowConnectionModal(true);
+    } else {
+      setShowConnectionModal(false);
+    }
+  }, [errorInfo, errorLink]);
+
+  // Connection modal handling
+  useEffect(() => {
+    if (errorInfo || errorLink) {
+      setShowConnectionModal(true);
+    } else {
+      setShowConnectionModal(false);
+    }
+  }, [errorInfo, errorLink]);
+
+  // Alert handling for no content
+  useEffect(() => {
+    const hasContent = (servers && servers.length > 0);
+    // Check if there is no content available
+    if (!loadingInfo && !loadingLink && !errorInfo && !errorLink && !hasContent) {
+      setContentAlertMessage('No media or content available.');
+    } else {
+      setContentAlertMessage('');
+    }
+
+    if (!loadingInfo && !loadingLink && !errorInfo && !errorLink && !hasContent) {
+      // Show the alert for 5 seconds
+      const timer = setTimeout(() => {
+        setContentAlertMessage('');
+      }, 5000);
+      return () => clearTimeout(timer);
+    }
+  }, [loadingInfo, loadingLink, errorInfo, errorLink, servers]);
 
   const handleSeasonChange = (seasonNumber) => {
     const currentSettings = getMediaStateSettings(id) || {};
@@ -197,7 +238,7 @@ function TvGrid({ id, type, setBackgroundImage }) {
   };
 
   const handleShowMore = () => {
-    setSliceIndex(prevSliceIndex => prevSliceIndex + 12); // Increase slice index by 12
+    setSliceIndex(prevSliceIndex => prevSliceIndex + 12);
   };
 
   const handleAddToList = async () => {
@@ -219,41 +260,17 @@ function TvGrid({ id, type, setBackgroundImage }) {
   };
 
   const handleAlertDismiss = () => {
+    setContentAlertMessage('');
     setAlertMessage('');
   };
 
-  if (loadingInfo || loadingLink) {
-    return (
-      <div className="col vh-70 d-flex justify-content-center align-items-center">
-        <div className="spinner-border text-light spinner-size-1" role="status">
-          <span className="visually-hidden">Loading...</span>
-        </div>
-      </div>
-    );
-  }
-
-  if (errorInfo || errorLink) {
-    return (
-      <div className="col vh-70 d-flex justify-content-center align-items-center">
-        <div className="d-flex text-white align-items-center dynamic-fs">
-          <i className="bi bi-wifi-off me-2"></i>
-          <span className="mb-0">Something went wrong.</span>
-        </div>
-      </div>
-    );
-  }
-
   if (!mediaInfo) {
     return (
-      <div className="col vh-70 d-flex justify-content-center align-items-center">
-        <div className="spinner-border text-light spinner-size-1" role="status">
-          <span className="visually-hidden">Loading...</span>
-        </div>
-      </div>
+      null
     );
   }
 
-  const { genres, vote_average } = mediaInfo;
+  const { genres, vote_average } = mediaInfo ? mediaInfo : {};
   const averageVote = vote_average ? vote_average.toFixed(1) : '0.0';
 
   return (
@@ -430,6 +447,15 @@ function TvGrid({ id, type, setBackgroundImage }) {
           </div>
         </div>
       </div>
+      {/* Connection Modal */}
+      {showConnectionModal && <ConnectionModal show={showConnectionModal} />}
+
+      {/* Alert for no content */}
+      {contentAlertMessage && (
+        <Alert message={contentAlertMessage} onClose={handleAlertDismiss} type="primary" />
+      )}
+
+      {/* Alert for bookmark */}
       {alertMessage && <Alert message={alertMessage} onClose={handleAlertDismiss} type={alertType} />}
     </>
   );

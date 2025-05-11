@@ -43,6 +43,8 @@ function MyListGrid({ userUID }) {
     useEffect(() => {
         if (error) {
             setShowConnectionModal(true);
+        } else {
+            setShowConnectionModal(false);
         }
     }, [error]);
 

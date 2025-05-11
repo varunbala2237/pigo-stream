@@ -56,11 +56,7 @@ function Player({ mediaURL, averageVote, director, genres, mediaInfo, id, type, 
 
   if (loading) {
     return (
-      <div className="col vh-35 d-flex justify-content-center align-items-center">
-        <div className="spinner-border text-light spinner-size-1" role="status">
-          <span className="visually-hidden">Loading...</span>
-        </div>
-      </div>
+      null
     );
   }
 
