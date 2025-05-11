@@ -31,9 +31,15 @@ function HomeUI({
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [welcomeMessage, setWelcomeMessage] = useState('');
 
+  // Error handling flags
   const [isTrendingLoaded, setIsTrendingLoaded] = useState(true);
   const [isProvidersLoaded, setIsProvidersLoaded] = useState(true);
   const [showConnectionModal, setShowConnectionModal] = useState(false);
+
+  // No content handling flags
+  const [hasTrendingContent, setHasTrendingContent] = useState(true);
+  const [hasProvidersContent, setHasProvidersContent] = useState(true);
+  const [contentAlertMessage, setContentAlertMessage] = useState('');
 
   const dropdownRef = useRef(null);
   const inputRef = useRef(null);
@@ -133,6 +139,29 @@ function HomeUI({
       setShowConnectionModal(true);
     }
   }, [isTrendingLoaded, isProvidersLoaded]);
+
+  useEffect(() => {
+    if (!isTrendingLoaded || !isProvidersLoaded) {
+      setShowConnectionModal(true);
+    }
+
+    if (!hasTrendingContent && !hasProvidersContent) {
+      setContentAlertMessage('No content available from trending or providers.');
+    } else if (!hasTrendingContent) {
+      setContentAlertMessage('No trending content available.');
+    } else if (!hasProvidersContent) {
+      setContentAlertMessage('No content found for available providers.');
+    } else {
+      setContentAlertMessage('');
+    }
+
+    if (!hasTrendingContent || !hasProvidersContent) {
+      const timer = setTimeout(() => {
+        setContentAlertMessage('');
+      }, 5000);
+      return () => clearTimeout(timer);
+    }
+  }, [isTrendingLoaded, isProvidersLoaded, hasTrendingContent, hasProvidersContent]);
 
   const handleSearchInputChange = (e) => {
     const query = e.target.value;
@@ -270,8 +299,8 @@ function HomeUI({
         <div className="flex-row text-white w-100">
           {triggerSearch.trim() === '' ?
             <>
-              <TrendingGrid setIsTrendingLoaded={setIsTrendingLoaded} />
-              <ProvidersGrid setIsProvidersLoaded={setIsProvidersLoaded} />
+              <TrendingGrid setIsTrendingLoaded={setIsTrendingLoaded} setHasTrendingContent={setHasTrendingContent} />
+              <ProvidersGrid setIsProvidersLoaded={setIsProvidersLoaded} setHasProvidersContent={setHasProvidersContent} />
             </>
             :
             <>
@@ -284,6 +313,10 @@ function HomeUI({
         </button>
 
         {showConnectionModal && <ConnectionModal show={showConnectionModal} />}
+
+        {contentAlertMessage && (
+          <Alert message={contentAlertMessage} onClose={handleAlertDismiss} type="danger" />
+        )}
 
         {welcomeMessage && <Alert message={welcomeMessage} onClose={handleAlertDismiss} type="success" />}
       </div>

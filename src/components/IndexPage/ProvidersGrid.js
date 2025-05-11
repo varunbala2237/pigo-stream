@@ -14,7 +14,7 @@ const PROVIDERS = [
     { id: 43, name: 'YouTube', logo: 'https://upload.wikimedia.org/wikipedia/commons/b/b8/YouTube_Logo_2017.svg' },
 ];
 
-function ProvidersGrid({ setIsProvidersLoaded }) {
+function ProvidersGrid({ setIsProvidersLoaded, setHasProvidersContent }) {
     const [selectedProvider, setSelectedProvider] = useState(null);
     const { movies, tvShows, loading, error } = useFetchProviders(selectedProvider);
     const location = useLocation();
@@ -31,6 +31,11 @@ function ProvidersGrid({ setIsProvidersLoaded }) {
             setIsProvidersLoaded(true);
         }
     }, [error, setIsProvidersLoaded]);
+
+    useEffect(() => {
+        const hasContent = (movies && movies.length > 0) || (tvShows && tvShows.length > 0);
+        setHasProvidersContent(hasContent);
+    }, [movies, tvShows, setHasProvidersContent]);
 
     // Load selected provider from localStorage or default to Netflix
     useEffect(() => {

@@ -3,7 +3,7 @@ import { useLocation } from 'react-router-dom';
 import Card from '../Card';
 import useFetchMedia from '../../hooks/useFetchMedia';
 
-function TrendingGrid({ setIsTrendingLoaded }) {
+function TrendingGrid({ setIsTrendingLoaded, setHasTrendingContent }) {
   const { data: popularMovies, loading: loadingPopularMovies, error: errorPopularMovies } = useFetchMedia('trending', 'movie');
   const { data: popularTv, loading: loadingPopularTv, error: errorPopularTv } = useFetchMedia('trending', 'tv');
   const location = useLocation();
@@ -19,6 +19,13 @@ function TrendingGrid({ setIsTrendingLoaded }) {
       setIsTrendingLoaded(true);
     }
   }, [errorPopularMovies, errorPopularTv, setIsTrendingLoaded]);
+
+  useEffect(() => {
+    const hasContent =
+      (popularMovies && popularMovies.length > 0) ||
+      (popularTv && popularTv.length > 0);
+    setHasTrendingContent(hasContent);
+  }, [popularMovies, popularTv, setHasTrendingContent]);
 
   const scrollMovies = (direction) => {
     if (moviesRef.current) {
