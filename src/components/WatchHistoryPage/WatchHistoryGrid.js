@@ -3,6 +3,7 @@ import { useLocation } from 'react-router-dom';
 import Card from '../Card';
 import useFetchWatchHistory from '../../hooks/useFetchWatchHistory';
 import useClearWatchHistory from '../../hooks/useClearWatchHistory';
+import ConnectionModal from '../../utils/ConnectionModal';
 import Alert from '../../utils/Alert';
 
 function WatchHistoryGrid({ userUID }) {
@@ -11,16 +12,21 @@ function WatchHistoryGrid({ userUID }) {
     const [alertType, setAlertType] = useState('');
     const [movieLimit, setMovieLimit] = useState(12);
     const [tvLimit, setTvLimit] = useState(12);
-    const { data, loading: fetchLoading, error: fetchError } = useFetchWatchHistory(userUID, movieLimit, tvLimit);
+    const { data, loading, error } = useFetchWatchHistory(userUID, movieLimit, tvLimit);
     const { clearHistory } = useClearWatchHistory();
+
+    const [contentAlertMessage, setContentAlertMessage] = useState('');
+    const [showConnectionModal, setShowConnectionModal] = useState(false);
 
     const [movieHistory, setMovieHistory] = useState([]);
     const [tvHistory, setTvHistory] = useState([]);
     const location = useLocation();
 
-    // Scroll references for movies and TV shows
-    const moviesRef = useRef(null);
-    const tvRef = useRef(null);
+    // Scroll references for movies and TV shows (2 rows for each)
+    const moviesRef1 = useRef(null);
+    const moviesRef2 = useRef(null);
+    const tvRef1 = useRef(null);
+    const tvRef2 = useRef(null);
 
     useEffect(() => {
         if (userUID) {
@@ -34,6 +40,32 @@ function WatchHistoryGrid({ userUID }) {
             setTvHistory(data.tvHistory || []);
         }
     }, [data]);
+
+    // Connection modal handling
+    useEffect(() => {
+        if (error) {
+            setShowConnectionModal(true);
+        }
+    }, [error]);
+
+    // Alert handling for no content
+    useEffect(() => {
+        const hasContent = (movieHistory && movieHistory.length > 0) || (tvHistory && tvHistory.length > 0);
+        // Check if there is no content available
+        if (!loading && !error && !hasContent) {
+            setContentAlertMessage(`You haven't watched anything yet.`);
+        } else {
+            setContentAlertMessage('');
+        }
+
+        if (!loading && !error && !hasContent) {
+            // Show the alert for 5 seconds
+            const timer = setTimeout(() => {
+                setContentAlertMessage('');
+            }, 5000);
+            return () => clearTimeout(timer);
+        }
+    }, [movieHistory, tvHistory, loading, error]);
 
     if (!initialized) {
         return null;
@@ -70,6 +102,7 @@ function WatchHistoryGrid({ userUID }) {
     };
 
     const handleAlertDismiss = () => {
+        setContentAlertMessage('');
         setAlertMessage('');
     };
 
@@ -79,18 +112,9 @@ function WatchHistoryGrid({ userUID }) {
         setTimeout(() => setAlertMessage(''), 5000);
     };
 
-    const scrollMovies = (direction) => {
-        if (moviesRef.current) {
-            moviesRef.current.scrollBy({
-                left: direction === 'left' ? -450 : 450,
-                behavior: 'smooth',
-            });
-        }
-    };
-
-    const scrollTvShows = (direction) => {
-        if (tvRef.current) {
-            tvRef.current.scrollBy({
+    const scroll = (ref, direction) => {
+        if (ref.current) {
+            ref.current.scrollBy({
                 left: direction === 'left' ? -450 : 450,
                 behavior: 'smooth',
             });
@@ -101,7 +125,11 @@ function WatchHistoryGrid({ userUID }) {
 
     return (
         <div className="container mt-4 text-white">
-            <div className="d-flex justify-content-end align-items-center my-2">
+            <div className="d-flex justify-content-end align-items-center my-2 m-2 px-1">
+                <div className="text-start dynamic-ts">
+                    <i className="bi bi-clock theme-color me-2"></i>
+                    <b className="mb-0">Watch History</b>
+                </div>
                 <div className="text-end">
                     <button
                         type="button"
@@ -124,42 +152,108 @@ function WatchHistoryGrid({ userUID }) {
                 </div>
             </div>
 
-            {fetchError && (
-                <div className="col d-flex vh-50 justify-content-center align-items-center">
-                    <div className="d-flex align-items-center dynamic-fs">
-                        <i className="bi bi-wifi-off me-2"></i>
-                        <span className="mb-0">Something went wrong.</span>
-                    </div>
+            {/* First Row of Movies */}
+            <div className="position-relative my-2">
+                {(movieHistory.filter(Boolean).length / 2) > 3 && (
+                    <>
+                        <button
+                            className="btn btn-dark custom-bg rounded-pill py-2 position-absolute start-0 translate-middle-y d-none d-md-block"
+                            onClick={() => scroll(moviesRef1, 'left')}
+                            style={{ zIndex: 1, top: '50%', transform: 'translateY(-50%)' }}
+                        >
+                            <i className="bi bi-chevron-left"></i>
+                        </button>
+                        <button
+                            className="btn btn-dark custom-bg rounded-pill py-2 position-absolute end-0 translate-middle-y d-none d-md-block"
+                            onClick={() => scroll(moviesRef1, 'right')}
+                            style={{ zIndex: 1, top: '50%', transform: 'translateY(-50%)' }}
+                        >
+                            <i className="bi bi-chevron-right"></i>
+                        </button>
+                    </>
+                )}
+
+                <div
+                    ref={moviesRef1}
+                    className="d-flex overflow-auto"
+                    style={{ scrollSnapType: 'x mandatory', gap: '1rem' }}
+                >
+                    {(movieHistory?.slice(0, Math.ceil(movieHistory.length / 2)) || []).concat(
+                        Array.from({
+                            length: Math.max(
+                                0,
+                                6 - (movieHistory?.slice(0, Math.ceil(movieHistory.length / 2))?.length || 0)
+                            ),
+                        })
+                    ).map((movie, index) =>
+                        movie ? (
+                            <Card
+                                key={index}
+                                media={movie}
+                                type="movie"
+                                path={location.pathname}
+                                onRemove={() => handleRemove(movie.id, 'movie')}
+                                handleAlert={handleAlert}
+                            />
+                        ) : (
+                            <Card
+                                key={`movie-skeleton-${index}`}
+                                media={{ poster_path: null, vote_average: null }}
+                                type="movie"
+                                path="/"
+                                isDeletable={false}
+                                isSkeleton={true}
+                            />
+                        )
+                    )}
                 </div>
-            )}
-            {!fetchError && (
-                <>
-                    <div className="d-flex align-items-center dynamic-ts m-2 px-1">
-                        <i className="bi bi-clock theme-color me-2"></i>
-                        <b className="mb-0">Watch History</b>
-                    </div>
-                    {/* Movies */}
-                    <div className="position-relative my-2">
-                        {movieHistory.length > 3 && (
-                            <>
-                                <button
-                                    className="btn btn-dark custom-bg rounded-pill py-2 position-absolute start-0 translate-middle-y d-none d-md-block"
-                                    onClick={() => scrollMovies('left')}
-                                    style={{ zIndex: 1, top: '50%', transform: 'translateY(-50%)' }}
-                                >
-                                    <i className="bi bi-chevron-left"></i>
-                                </button>
-                                <button
-                                    className="btn btn-dark custom-bg rounded-pill py-2 position-absolute end-0 translate-middle-y d-none d-md-block"
-                                    onClick={() => scrollMovies('right')}
-                                    style={{ zIndex: 1, top: '50%', transform: 'translateY(-50%)' }}
-                                >
-                                    <i className="bi bi-chevron-right"></i>
-                                </button>
-                            </>
-                        )}
-                        <div ref={moviesRef} className="d-flex overflow-auto" style={{ scrollSnapType: 'x mandatory', gap: '1rem' }}>
-                            {fetchLoading && Array.from({ length: 6 }).map((_, index) => (
+            </div>
+
+            {/* Second Row of Movies */}
+            <div className="position-relative my-2">
+                {(movieHistory.filter(Boolean).length / 2) > 3 && (
+                    <>
+                        <button
+                            className="btn btn-dark custom-bg rounded-pill py-2 position-absolute start-0 translate-middle-y d-none d-md-block"
+                            onClick={() => scroll(moviesRef2, 'left')}
+                            style={{ zIndex: 1, top: '50%', transform: 'translateY(-50%)' }}
+                        >
+                            <i className="bi bi-chevron-left"></i>
+                        </button>
+                        <button
+                            className="btn btn-dark custom-bg rounded-pill py-2 position-absolute end-0 translate-middle-y d-none d-md-block"
+                            onClick={() => scroll(moviesRef2, 'right')}
+                            style={{ zIndex: 1, top: '50%', transform: 'translateY(-50%)' }}
+                        >
+                            <i className="bi bi-chevron-right"></i>
+                        </button>
+                    </>
+                )}
+
+                <div
+                    ref={moviesRef2}
+                    className="d-flex overflow-auto"
+                    style={{ scrollSnapType: 'x mandatory', gap: '1rem' }}
+                >
+                    {(movieHistory?.slice(Math.ceil(movieHistory.length / 2)) || [])
+                        .concat(
+                            Array.from({
+                                length: Math.max(
+                                    0,
+                                    6 - (movieHistory?.slice(Math.ceil(movieHistory.length / 2))?.length || 0)
+                                ),
+                            })
+                        ).map((movie, index) =>
+                            movie ? (
+                                <Card
+                                    key={index}
+                                    media={movie}
+                                    type="movie"
+                                    path={location.pathname}
+                                    onRemove={() => handleRemove(movie.id, 'movie')}
+                                    handleAlert={handleAlert}
+                                />
+                            ) : (
                                 <Card
                                     key={`movie-skeleton-${index}`}
                                     media={{ poster_path: null, vote_average: null }}
@@ -168,62 +262,75 @@ function WatchHistoryGrid({ userUID }) {
                                     isDeletable={false}
                                     isSkeleton={true}
                                 />
-                            ))}
-                            {movieHistory.length > 0 && (
-                                movieHistory.map((movie) => (
-                                    <Card
-                                        key={movie.id}
-                                        media={movie}
-                                        type={'movie'}
-                                        path={location.pathname}
-                                        onRemove={() => handleRemove(movie.id, 'movie')}
-                                        handleAlert={handleAlert}
-                                    />
-                                ))
-                            )}
-                        </div>
-                    </div>
-                    {movieHistory.length === movieLimit && (
-                        <div className="text-end mb-3">
-                            <button
-                                className="btn btn-dark bd-callout-dark dynamic-fs border-0 rounded-pill btn-md d-none d-md-inline-block"
-                                onClick={handleShowMoreMovies}
-                            >
-                                <i className="bi bi-chevron-down text-white me-2"></i>
-                                <span className="text-white">Show More</span>
-                            </button>
-                            <button
-                                className="btn btn-dark bd-callout-dark dynamic-fs border-0 rounded-pill btn-sm d-md-none"
-                                onClick={handleShowMoreMovies}
-                            >
-                                <i className="bi bi-chevron-down text-white me-2"></i>
-                                <span className="text-white">Show More</span>
-                            </button>
-                        </div>
-                    )}
-
-                    {/* TV Shows */}
-                    <div className="position-relative my-2">
-                        {tvHistory.length > 3 && (
-                            <>
-                                <button
-                                    className="btn btn-dark custom-bg rounded-pill py-2 position-absolute start-0 translate-middle-y d-none d-md-block"
-                                    onClick={() => scrollTvShows('left')}
-                                    style={{ zIndex: 1, top: '50%', transform: 'translateY(-50%)' }}
-                                >
-                                    <i className="bi bi-chevron-left"></i>
-                                </button>
-                                <button
-                                    className="btn btn-dark custom-bg rounded-pill py-2 position-absolute end-0 translate-middle-y d-none d-md-block"
-                                    onClick={() => scrollTvShows('right')}
-                                    style={{ zIndex: 1, top: '50%', transform: 'translateY(-50%)' }}
-                                >
-                                    <i className="bi bi-chevron-right"></i>
-                                </button>
-                            </>
+                            )
                         )}
-                        <div ref={tvRef} className="d-flex overflow-auto" style={{ scrollSnapType: 'x mandatory', gap: '1rem' }}>
-                            {fetchLoading && Array.from({ length: 6 }).map((_, index) => (
+                </div>
+            </div>
+
+            {movieHistory.length === movieLimit && (
+                <div className="text-end mb-3">
+                    <button
+                        className="btn btn-dark bd-callout-dark dynamic-fs border-0 rounded-pill btn-md d-none d-md-inline-block"
+                        onClick={handleShowMoreMovies}
+                    >
+                        <i className="bi bi-chevron-down text-white me-2"></i>
+                        <span className="text-white">Show More</span>
+                    </button>
+                    <button
+                        className="btn btn-dark bd-callout-dark dynamic-fs border-0 rounded-pill btn-sm d-md-none"
+                        onClick={handleShowMoreMovies}
+                    >
+                        <i className="bi bi-chevron-down text-white me-2"></i>
+                        <span className="text-white">Show More</span>
+                    </button>
+                </div>
+            )}
+
+            {/* First Row of TV Shows */}
+            <div className="position-relative my-2">
+                {(tvHistory.filter(Boolean).length / 2) > 3 && (
+                    <>
+                        <button
+                            className="btn btn-dark custom-bg rounded-pill py-2 position-absolute start-0 translate-middle-y d-none d-md-block"
+                            onClick={() => scroll(tvRef1, 'left')}
+                            style={{ zIndex: 1, top: '50%', transform: 'translateY(-50%)' }}
+                        >
+                            <i className="bi bi-chevron-left"></i>
+                        </button>
+                        <button
+                            className="btn btn-dark custom-bg rounded-pill py-2 position-absolute end-0 translate-middle-y d-none d-md-block"
+                            onClick={() => scroll(tvRef1, 'right')}
+                            style={{ zIndex: 1, top: '50%', transform: 'translateY(-50%)' }}
+                        >
+                            <i className="bi bi-chevron-right"></i>
+                        </button>
+                    </>
+                )}
+
+                <div
+                    ref={tvRef1}
+                    className="d-flex overflow-auto"
+                    style={{ scrollSnapType: 'x mandatory', gap: '1rem' }}
+                >
+                    {(tvHistory?.slice(0, Math.ceil(tvHistory.length / 2)) || [])
+                        .concat(
+                            Array.from({
+                                length: Math.max(
+                                    0,
+                                    6 - (tvHistory?.slice(0, Math.ceil(tvHistory.length / 2))?.length || 0)
+                                ),
+                            })
+                        ).map((show, index) =>
+                            show ? (
+                                <Card
+                                    key={index}
+                                    media={show}
+                                    type="tv"
+                                    path={location.pathname}
+                                    onRemove={() => handleRemove(show.id, 'tv')}
+                                    handleAlert={handleAlert}
+                                />
+                            ) : (
                                 <Card
                                     key={`tv-skeleton-${index}`}
                                     media={{ poster_path: null, vote_average: null }}
@@ -232,52 +339,115 @@ function WatchHistoryGrid({ userUID }) {
                                     isDeletable={false}
                                     isSkeleton={true}
                                 />
-                            ))}
-                            {tvHistory.length > 0 && (
-                                tvHistory.map((show) => (
-                                    <Card
-                                        key={show.id}
-                                        media={show}
-                                        type={'tv'}
-                                        path={location.pathname}
-                                        onRemove={() => handleRemove(show.id, 'tv')}
-                                        handleAlert={handleAlert}
-                                    />
-                                ))
-                            )}
-                        </div>
-                    </div>
-                    {tvHistory.length === tvLimit && (
-                        <div className="text-end mb-3">
-                            <button
-                                className="btn btn-dark bd-callout-dark dynamic-fs border-0 rounded-pill btn-md d-none d-md-inline-block"
-                                onClick={handleShowMoreTV}
-                            >
-                                <i className="bi bi-chevron-down text-white me-2"></i>
-                                <span className="text-white">Show More</span>
-                            </button>
-                            <button
-                                className="btn btn-dark bd-callout-dark dynamic-fs border-0 rounded-pill btn-sm d-md-none"
-                                onClick={handleShowMoreTV}
-                            >
-                                <i className="bi bi-chevron-down text-white me-2"></i>
-                                <span className="text-white">Show More</span>
-                            </button>
-                        </div>
-                    )}
+                            )
+                        )}
+                </div>
+            </div>
 
-                    {/* If both Movies and TV Shows are empty */}
-                    {!fetchLoading && movieHistory.length === 0 && tvHistory.length === 0 && (
-                        <div className="col d-flex vh-25 justify-content-center align-items-center mt-3">
-                            <div className="d-flex align-items-center">
-                                <i className="bi bi-clock me-2"></i>
-                                <span className="dynamic-fs">You haven't watched anything yet.</span>
-                            </div>
-                        </div>
-                    )}
-                </>
+            {tvHistory.length === tvLimit && (
+                <div className="text-end mb-3">
+                    <button
+                        className="btn btn-dark bd-callout-dark dynamic-fs border-0 rounded-pill btn-md d-none d-md-inline-block"
+                        onClick={handleShowMoreTV}
+                    >
+                        <i className="bi bi-chevron-down text-white me-2"></i>
+                        <span className="text-white">Show More</span>
+                    </button>
+                    <button
+                        className="btn btn-dark bd-callout-dark dynamic-fs border-0 rounded-pill btn-sm d-md-none"
+                        onClick={handleShowMoreTV}
+                    >
+                        <i className="bi bi-chevron-down text-white me-2"></i>
+                        <span className="text-white">Show More</span>
+                    </button>
+                </div>
             )}
-            
+
+            {/* Second Row of TV Shows */}
+            <div className="position-relative my-2">
+                {(tvHistory.filter(Boolean).length / 2) > 3 && (
+                    <>
+                        <button
+                            className="btn btn-dark custom-bg rounded-pill py-2 position-absolute start-0 translate-middle-y d-none d-md-block"
+                            onClick={() => scroll(tvRef2, 'left')}
+                            style={{ zIndex: 1, top: '50%', transform: 'translateY(-50%)' }}
+                        >
+                            <i className="bi bi-chevron-left"></i>
+                        </button>
+                        <button
+                            className="btn btn-dark custom-bg rounded-pill py-2 position-absolute end-0 translate-middle-y d-none d-md-block"
+                            onClick={() => scroll(tvRef2, 'right')}
+                            style={{ zIndex: 1, top: '50%', transform: 'translateY(-50%)' }}
+                        >
+                            <i className="bi bi-chevron-right"></i>
+                        </button>
+                    </>
+                )}
+
+                <div
+                    ref={tvRef2}
+                    className="d-flex overflow-auto"
+                    style={{ scrollSnapType: 'x mandatory', gap: '1rem' }}
+                >
+                    {(tvHistory?.slice(Math.ceil(tvHistory.length / 2)) || [])
+                        .concat(
+                            Array.from({
+                                length: Math.max(
+                                    0,
+                                    6 - (tvHistory?.slice(Math.ceil(tvHistory.length / 2))?.length || 0)
+                                ),
+                            })
+                        ).map((show, index) =>
+                            show ? (
+                                <Card
+                                    key={index}
+                                    media={show}
+                                    type="tv"
+                                    path={location.pathname}
+                                    onRemove={() => handleRemove(show.id, 'tv')}
+                                    handleAlert={handleAlert}
+                                />
+                            ) : (
+                                <Card
+                                    key={`tv-skeleton-${index}`}
+                                    media={{ poster_path: null, vote_average: null }}
+                                    type="tv"
+                                    path="/"
+                                    isDeletable={false}
+                                    isSkeleton={true}
+                                />
+                            )
+                        )}
+                </div>
+            </div>
+
+            {tvHistory.length === tvLimit && (
+                <div className="text-end mb-3">
+                    <button
+                        className="btn btn-dark bd-callout-dark dynamic-fs border-0 rounded-pill btn-md d-none d-md-inline-block"
+                        onClick={handleShowMoreTV}
+                    >
+                        <i className="bi bi-chevron-down text-white me-2"></i>
+                        <span className="text-white">Show More</span>
+                    </button>
+                    <button
+                        className="btn btn-dark bd-callout-dark dynamic-fs border-0 rounded-pill btn-sm d-md-none"
+                        onClick={handleShowMoreTV}
+                    >
+                        <i className="bi bi-chevron-down text-white me-2"></i>
+                        <span className="text-white">Show More</span>
+                    </button>
+                </div>
+            )}
+
+            {/* Connection Modal */}
+            {showConnectionModal && <ConnectionModal show={showConnectionModal} />}
+
+            {/* Alert for no content */}
+            {contentAlertMessage && (
+                <Alert message={contentAlertMessage} onClose={handleAlertDismiss} type="primary" />
+            )}
+
             {/* Alert for clearing history */}
             {alertMessage && <Alert message={alertMessage} onClose={handleAlertDismiss} type={alertType} />}
         </div>
