@@ -7,6 +7,7 @@ import useSaveMyList from '../../hooks/useSaveMyList';
 import useCheckMyList from '../../hooks/useCheckMyList';
 import useCheckServerStatus from '../../hooks/useCheckServerStatus';
 import Player from './PlayerUI';
+import MediaGridSkeleton from './MediaGridSkeleton';
 import Alert from '../../utils/Alert';
 
 import { storeMediaStateSettings, getMediaStateSettings } from '../../utils/mediaStateSettings';
@@ -224,7 +225,14 @@ function TvGrid({ id, type, setBackgroundImage }) {
 
   if (!mediaInfo) {
     return (
-      null
+      <MediaGridSkeleton
+        mediaInfo={mediaInfo}
+        servers={servers}
+        loadingInfo={loadingInfo}
+        loadingLink={loadingLink}
+        errorInfo={errorInfo}
+        errorLink={errorLink}
+      />
     );
   }
 

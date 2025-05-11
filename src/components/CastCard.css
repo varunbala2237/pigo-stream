@@ -9,6 +9,7 @@
     height: 15px;
     width: 50%;
     margin: 0 auto;
+    background: #21252980;
 }
 
 .skeleton-bar:last-child {

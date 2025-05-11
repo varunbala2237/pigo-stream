@@ -79,11 +79,11 @@ function Card({ media, type, path, onRemove, handleAlert, isDeletable=true, isSk
     return (
       <div className="custom-card-container">
         <div className="card bg-transparent border-0 position-relative custom-theme-radius skeleton-card">
-          <div className="skeleton-image shimmer"></div>
+          <div className="skeleton-image custom-theme-radius custom-bg"></div>
           <div className="card-overlay dynamic-size dynamic-fs px-1">
             <div className="d-flex justify-content-between align-items-center">
-              <div className="rating-box custom-theme-radius-low text-start skeleton-bar"></div>
-              <div className="media-type-box custom-theme-radius-low text-end skeleton-bar"></div>
+              <div className="rating-box text-start skeleton-bar custom-theme-radius custom-bg"></div>
+              <div className="media-type-box text-end skeleton-bar custom-theme-radius custom-bg"></div>
             </div>
           </div>
         </div>

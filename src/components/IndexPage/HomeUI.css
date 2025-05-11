@@ -2,34 +2,28 @@
 .skeleton-title-bar {
   height: 28px;
   width: 60%;
-  background-color: #333;
   border-radius: 1rem;
 }
 
 .skeleton-badge {
   width: 90px;
   height: 22px;
-  background-color: #444;
-  border-radius: 999px;
 }
 
 .skeleton-icon {
   width: 16px;
   height: 16px;
-  background-color: #444;
   border-radius: 50%;
 }
 
 .skeleton-bar {
   height: 12px;
-  background-color: #444;
   border-radius: 1rem;
 }
 
 .skeleton-button {
   width: 120px;
   height: 32px;
-  background-color: #444;
   border-radius: 999px;
   pointer-events: none;
 }

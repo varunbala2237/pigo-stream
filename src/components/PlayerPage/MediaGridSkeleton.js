@@ -1,6 +1,5 @@
 // MediaGridSkeleton.js
-import React, { useState, useEffect } from 'react';
-import PlayerSkeleton from './PlayerSkeleton';
+import { useState, useEffect } from 'react';
 import './MediaGridSkeleton.css';
 import CastCard from '../CastCard';
 import ConnectionModal from '../../utils/ConnectionModal';
@@ -46,11 +45,22 @@ function MediaGridSkeleton({ mediaInfo, servers, loadingInfo, loadingLink, error
     <>
       <div className="flex-row custom-w-size-100">
         <div className="row justify-content-center position-relative">
-          <div className="col-lg-8 col-md-10 col-sm-12">
-            <div className="container bg-transparent">
+          <div className="col-12 px-2" style={{ maxWidth: '100%' }}>
 
-              {/* Player Skeleton */}
-              <PlayerSkeleton />
+            <div className="container bg-transparent">
+              {/* Custom Player Skeleton Box */}
+              <div className="player-skeleton custom-bg custom-theme-radius p-2">
+                <div className="player-skeleton-poster custom-theme-radius-low custom-bg"></div>
+                <div className="player-skeleton-text-block">
+                  {Array.from({ length: 5 }).map((_, idx) => (
+                    <div
+                      key={idx}
+                      className="player-skeleton-line custom-theme-radius-low custom-bg"
+                      style={{ width: `${90 - idx * 10}%` }}
+                    ></div>
+                  ))}
+                </div>
+              </div>
 
               {/* Servers Section Skeleton */}
               <div className="container custom-bg custom-theme-radius w-100 p-2 my-2">
@@ -81,12 +91,12 @@ function MediaGridSkeleton({ mediaInfo, servers, loadingInfo, loadingLink, error
                     ))}
                   </div>
                   <div className="text-end">
-                    <button className="btn btn-dark bd-callout-dark dynamic-fs border-0 rounded-pill btn-md d-none d-md-inline-block">
+                    <button className="btn btn-dark custom-bg dynamic-fs border-0 rounded-pill btn-md d-none d-md-inline-block">
                       {/* Grey text for Show More */}
                       <div className="skeleton-placeholder skeleton-text" style={{ width: '100px', height: '20px' }}></div>
                     </button>
 
-                    <button className="btn btn-dark bd-callout-dark dynamic-fs border-0 rounded-pill btn-sm d-md-none">
+                    <button className="btn btn-dark custom-bg dynamic-fs border-0 rounded-pill btn-sm d-md-none">
                       {/* Grey text for Show More */}
                       <div className="skeleton-placeholder skeleton-text" style={{ width: '80px', height: '20px' }}></div>
                     </button>
