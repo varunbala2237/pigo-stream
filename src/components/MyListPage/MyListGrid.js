@@ -113,7 +113,7 @@ function MyListGrid({ userUID }) {
             </div>
             {/* First Row of Movies */}
             <div className="position-relative my-2">
-                {movieList.filter(Boolean).length > 3 && (
+                {(movieList.filter(Boolean).length / 2) > 3 && (
                     <>
                         <button
                             className="btn btn-dark custom-bg rounded-pill py-2 position-absolute start-0 translate-middle-y d-none d-md-block"
@@ -170,7 +170,7 @@ function MyListGrid({ userUID }) {
 
             {/* Second Row of Movies */}
             <div className="position-relative my-2">
-                {movieList.filter(Boolean).length > 3 && (
+                {(movieList.filter(Boolean).length / 2) > 3 && (
                     <>
                         <button
                             className="btn btn-dark custom-bg rounded-pill py-2 position-absolute start-0 translate-middle-y d-none d-md-block"
@@ -247,7 +247,7 @@ function MyListGrid({ userUID }) {
 
             {/* First Row of TV Shows */}
             <div className="position-relative my-2">
-                {tvList.filter(Boolean).length > 3 && (
+                {(tvList.filter(Boolean).length / 2) > 3 && (
                     <>
                         <button
                             className="btn btn-dark custom-bg rounded-pill py-2 position-absolute start-0 translate-middle-y d-none d-md-block"
@@ -324,7 +324,7 @@ function MyListGrid({ userUID }) {
 
             {/* Second Row of TV Shows */}
             <div className="position-relative my-2">
-                {tvList.filter(Boolean).length > 3 && (
+                {(tvList.filter(Boolean).length / 2) > 3 && (
                     <>
                         <button
                             className="btn btn-dark custom-bg rounded-pill py-2 position-absolute start-0 translate-middle-y d-none d-md-block"
