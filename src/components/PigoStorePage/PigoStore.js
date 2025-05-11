@@ -2,8 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom'; // Import useNavigate
 import useAppVersion from '../../hooks/useAppVersion';
 import useDownloadApp from '../../hooks/useDownloadApp';
+import Alert from '../../utils/Alert';
 
 const Pigostore = () => {
+  const [alertMessage, setAlertMessage] = useState(''); // State for alert message
   const [currentPlatform, setCurrentPlatform] = useState(''); // State for current platform
   const navigate = useNavigate(); // Initialize navigate
 
@@ -18,7 +20,7 @@ const Pigostore = () => {
       if (platform.includes('android')) return 'android';
       if (platform.includes('ios') || platform.includes('iphone') || platform.includes('ipad')) return 'ios';
     }
-    
+
     // Fallback to navigator.userAgent if userAgentData is not available
     const userAgent = navigator.userAgent.toLowerCase();
     if (userAgent.includes('win')) return 'windows';
@@ -34,7 +36,6 @@ const Pigostore = () => {
     setCurrentPlatform(platform); // Set current platform based on detection
   }, []);
 
-
   // Fetch the appVersion
   const { version: appVersion } = useAppVersion(currentPlatform);
   // Fetch download link based on the detected platform
@@ -43,6 +44,22 @@ const Pigostore = () => {
   const handleDownload = async () => {
     if (!downloadLink) return;
     else window.location.href = downloadLink;
+  };
+
+  useEffect(() => {
+    if (!loading && error && !downloadLink) {
+      setAlertMessage('Sorry, downloading isn’t available right now.');
+      const timer = setTimeout(() => {
+        setAlertMessage('');
+      }, 5000);
+      return () => clearTimeout(timer);
+    } else {
+      setAlertMessage('');
+    }
+  }, [loading, error, downloadLink]);
+
+  const handleAlertDismiss = () => {
+    setAlertMessage('');
   };
 
   // List of supported devices with dynamic check
@@ -55,7 +72,7 @@ const Pigostore = () => {
   ];
 
   return (
-    <div className="vh-100 d-flex justify-content-center align-items-center poppins-medium" 
+    <div className="vh-100 d-flex justify-content-center align-items-center poppins-medium"
       style={{ background: "linear-gradient(to bottom, #121229, #121229, black, black)" }}
     >
       <div className="container bg-transparent p-0 mx-4 custom-theme-radius" style={{ maxWidth: '600px' }}>
@@ -69,45 +86,33 @@ const Pigostore = () => {
             </div>
 
             {/* Back button with navigation for small screens */}
-            <button 
-              type="button" 
+            <button
+              type="button"
               className="btn btn-dark bd-callout-dark border-0 btn-sm d-md-none text-white rounded-pill dynamic-fs"
               onClick={() => navigate(-1)} // Navigate to the previous page
             >
-              <i className="bi bi-back me-2"></i> 
+              <i className="bi bi-back me-2"></i>
               Back
             </button>
             {/* Back button with navigation for large screens */}
-            <button 
-              type="button" 
+            <button
+              type="button"
               className="btn btn-dark bd-callout-dark border-0 btn-md d-none d-md-inline-block text-white rounded-pill dynamic-fs"
               onClick={() => navigate(-1)} // Navigate to the previous page
             >
-              <i className="bi bi-back me-2"></i> 
+              <i className="bi bi-back me-2"></i>
               Back
             </button>
           </div>
           <p className="text-white dynamic-fs">Install PigoPlayer for seamless streaming and access content without redirects.</p>
-          {loading && 
-            <div className="col d-flex justify-content-start">
-              <div className="spinner-border text-light spinner-size-1" role="status">
-                <span className="visually-hidden">Loading...</span>
-              </div>
-            </div>
-          }
-          {!loading ? ( // Check if not loading and no error
-            downloadLink && !error ? (
-              <button
-                className="btn btn-primary rounded-pill dynamic-fs"
-                onClick={handleDownload}
-              >
-                <i className="bi bi-file-earmark-zip me-2"></i>
-                Download
-              </button>
-            ) : (
-              <p className="text-danger dynamic-fs">Currently not available.</p>
-            )
-          ) : null} 
+          <button
+            className="btn btn-primary rounded-pill dynamic-fs"
+            onClick={handleDownload}
+            disabled={loading || error}
+          >
+            <i className="bi bi-file-earmark-zip me-2"></i>
+            Download
+          </button>
         </div>
 
         {/* Horizontal Section with two columns for Supported Devices and Instructions */}
@@ -122,10 +127,9 @@ const Pigostore = () => {
                   const isSupported = currentPlatform === "windows" || currentPlatform === "android";
 
                   return (
-                    <li 
-                      key={index} 
-                      className={`d-flex align-items-center ${
-                        isCurrentDevice ? (isSupported ? "text-success" : "text-danger") : "text-secondary"}`
+                    <li
+                      key={index}
+                      className={`d-flex align-items-center ${isCurrentDevice ? (isSupported ? "text-success" : "text-danger") : "text-secondary"}`
                       }
                     >
                       {isCurrentDevice ? (
@@ -137,16 +141,16 @@ const Pigostore = () => {
                       ) : (
                         <i className="bi bi-circle me-2" style={{ opacity: 0.5 }}></i>
                       )}
-                      <span 
-                        className="dynamic-fs" 
+                      <span
+                        className="dynamic-fs"
                         style={{ opacity: isCurrentDevice ? 1 : 0.5 }}
                       >
                         {device.name}
                       </span>
                     </li>
-                    );
-                  })}
-                </ul>
+                  );
+                })}
+              </ul>
             </div>
 
             {/* Instructions Section */}
@@ -161,6 +165,9 @@ const Pigostore = () => {
           </div>
         </div>
       </div>
+
+      {/* Alert for successful removal */}
+      {alertMessage && <Alert message={alertMessage} onClose={handleAlertDismiss} type="danger" />}
     </div>
   );
 };
