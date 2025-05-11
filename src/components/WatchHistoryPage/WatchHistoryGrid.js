@@ -125,7 +125,7 @@ function WatchHistoryGrid({ userUID }) {
 
     return (
         <div className="container mt-4 text-white">
-            <div className="d-flex justify-content-end align-items-center my-2 m-2 px-1">
+            <div className="d-flex justify-content-between align-items-center my-2 m-2 px-1">
                 <div className="text-start dynamic-ts">
                     <i className="bi bi-clock theme-color me-2"></i>
                     <b className="mb-0">Watch History</b>
