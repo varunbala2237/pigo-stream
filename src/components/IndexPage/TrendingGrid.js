@@ -21,11 +21,13 @@ function TrendingGrid({ setIsTrendingLoaded, setHasTrendingContent }) {
   }, [errorPopularMovies, errorPopularTv, setIsTrendingLoaded]);
 
   useEffect(() => {
-    const hasContent =
-      (popularMovies && popularMovies.length > 0) ||
-      (popularTv && popularTv.length > 0);
-    setHasTrendingContent(hasContent);
-  }, [popularMovies, popularTv, setHasTrendingContent]);
+    if (!loadingPopularMovies && !loadingPopularTv && !errorPopularMovies && !errorPopularTv) {
+      const hasContent =
+        (popularMovies && popularMovies.length > 0) ||
+        (popularTv && popularTv.length > 0);
+      setHasTrendingContent(hasContent);
+    }
+  }, [loadingPopularMovies, loadingPopularTv, errorPopularMovies, errorPopularTv, popularMovies, popularTv, setHasTrendingContent]);
 
   const scrollMovies = (direction) => {
     if (moviesRef.current) {

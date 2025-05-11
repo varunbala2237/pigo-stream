@@ -33,9 +33,11 @@ function ProvidersGrid({ setIsProvidersLoaded, setHasProvidersContent }) {
     }, [error, setIsProvidersLoaded]);
 
     useEffect(() => {
-        const hasContent = (movies && movies.length > 0) || (tvShows && tvShows.length > 0);
-        setHasProvidersContent(hasContent);
-    }, [movies, tvShows, setHasProvidersContent]);
+        if (!loading && !error) {
+            const hasContent = (movies && movies.length > 0) || (tvShows && tvShows.length > 0);
+            setHasProvidersContent(hasContent);
+        }
+    }, [loading, error, movies, tvShows, setHasProvidersContent]);
 
     // Load selected provider from localStorage or default to Netflix
     useEffect(() => {
