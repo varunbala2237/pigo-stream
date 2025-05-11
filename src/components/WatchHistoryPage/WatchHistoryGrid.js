@@ -277,6 +277,8 @@ function WatchHistoryGrid({ userUID }) {
                     )}
                 </>
             )}
+            
+            {/* Alert for clearing history */}
             {alertMessage && <Alert message={alertMessage} onClose={handleAlertDismiss} type={alertType} />}
         </div>
     );

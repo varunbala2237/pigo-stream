@@ -59,7 +59,7 @@ function TrendingGrid({ setIsTrendingLoaded, setHasTrendingContent }) {
       {/* Trending Movies Section */}
       {(
         <div className="position-relative my-2">
-          {movies.length > 3 && (
+          {movies.filter(Boolean).length > 3 && (
             <>
               <button
                 className="btn btn-dark custom-bg rounded-pill py-2 position-absolute start-0 translate-middle-y d-none d-md-block"
@@ -103,7 +103,7 @@ function TrendingGrid({ setIsTrendingLoaded, setHasTrendingContent }) {
       {/* Trending TV Shows Section */}
       {(
         <div className="position-relative my-2">
-          {shows.length > 3 && (
+          {shows.filter(Boolean).length > 3 && (
             <>
               <button
                 className="btn btn-dark custom-bg rounded-pill py-2 position-absolute start-0 translate-middle-y d-none d-md-block"

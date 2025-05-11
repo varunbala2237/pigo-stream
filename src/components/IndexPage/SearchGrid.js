@@ -161,7 +161,7 @@ function SearchGrid({ searchQuery, setIsSearchLoaded, setHasSearchContent }) {
       {/* First TV Shows Results */}
       {(
         <div className="position-relative my-2">
-          {searchQuery.trim() && movies?.filter(Boolean).length > 3 && (
+          {searchQuery.trim() && shows?.filter(Boolean).length > 3 && (
             <>
               <button
                 className="btn btn-dark custom-bg rounded-pill py-2 position-absolute start-0 translate-middle-y d-none d-md-block"
@@ -215,7 +215,7 @@ function SearchGrid({ searchQuery, setIsSearchLoaded, setHasSearchContent }) {
       {/* Second TV Shows Results */}
       {(
         <div className="position-relative my-2">
-          {searchQuery.trim() && movies?.filter(Boolean).length > 3 && (
+          {searchQuery.trim() && shows?.filter(Boolean).length > 3 && (
             <>
               <button
                 className="btn btn-dark custom-bg rounded-pill py-2 position-absolute start-0 translate-middle-y d-none d-md-block"

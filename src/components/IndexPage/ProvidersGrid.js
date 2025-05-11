@@ -129,7 +129,7 @@ function ProvidersGrid({ setIsProvidersLoaded, setHasProvidersContent }) {
 
             {/* Providers Movies Section */}
             <div className="position-relative my-2">
-                {movies.length > 3 && (
+                {movies.filter(Boolean).length > 3 && (
                     <>
                         <button
                             className="btn btn-dark custom-bg rounded-pill py-2 position-absolute start-0 translate-middle-y d-none d-md-block"
@@ -171,7 +171,7 @@ function ProvidersGrid({ setIsProvidersLoaded, setHasProvidersContent }) {
 
             {/* Providers TV Shows Section */}
             <div className="position-relative my-2">
-                {shows.length > 3 && (
+                {shows.filter(Boolean).length > 3 && (
                     <>
                         <button
                             className="btn btn-dark custom-bg rounded-pill py-2 position-absolute start-0 translate-middle-y d-none d-md-block"

@@ -210,6 +210,7 @@ function HomeUI({
   };
 
   const handleAlertDismiss = () => {
+    setContentAlertMessage('');
     setWelcomeMessage('');
   };
 
