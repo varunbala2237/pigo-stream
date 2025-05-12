@@ -20,7 +20,7 @@ function MediaGridSkeleton({ mediaInfo, servers, loadingInfo, loadingLink, error
 
   // Alert handling for no content
   useEffect(() => {
-    const hasContent = (mediaInfo && mediaInfo.length > 0) && (servers && servers.length > 0);
+    const hasContent = (mediaInfo && mediaInfo.length > 0) || (servers && servers.length > 0);
     // Check if there is no content available
     if (!loadingInfo && !loadingLink && !errorInfo && !errorLink && !hasContent) {
       setContentAlertMessage('No media or content available.');
