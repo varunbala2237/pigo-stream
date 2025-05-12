@@ -181,7 +181,7 @@ function Player({ mediaURL, averageVote, director, genres, mediaInfo, id, type, 
                 className="btn btn-dark d-none d-md-block justify-content-center border-0 text-white nowrap rounded-pill custom-bg"
                 onClick={() => openPlayer(mediaURL)}
               >
-                <i className="bi bi-play-circle-fill theme-color me-2"></i>
+                <i className="bi bi-play-fill theme-color me-2"></i>
                 Play
               </button>
               {/* Smaller button for smaller screen */}
@@ -189,7 +189,7 @@ function Player({ mediaURL, averageVote, director, genres, mediaInfo, id, type, 
                 className="btn btn-dark d-block d-md-none btn-sm justify-content-center border-0 text-white nowrap rounded-pill custom-bg"
                 onClick={() => openPlayer(mediaURL)}
               >
-                <i className="bi bi-play-circle-fill theme-color me-2"></i>
+                <i className="bi bi-play-fill theme-color me-2"></i>
                 Play
               </button>
             </div>
