@@ -14,12 +14,12 @@ const Footer = () => {
   ];
 
   return (
-    <div className="footer-fixed bd-callout-dark rounded-pill shadow p-2">
-      <ul className="nav flex-nowrap overflow-auto w-100 justify-content-between align-items-center dynamic-fs">
+    <div className="footer-fixed bd-callout-dark rounded-pill shadow">
+      <ul className="nav flex-nowrap overflow-auto h-100 w-100 justify-content-between align-items-center dynamic-fs">
         {navItems.map((item, index) => {
           const isActive = currentPath === item.path;
           return (
-            <li key={index} className={`nav-item rounded-pill ${isActive ? 'bg-white' : ''}`}>
+            <li key={index} className={`nav-item rounded-pill px-2 ${isActive ? 'bg-white fw-bold active' : ''}`}>
               <Link
                 to={item.path}
                 className={`nav-link d-flex align-items-center theme-color`}

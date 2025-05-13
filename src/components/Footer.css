@@ -5,6 +5,7 @@
   left: 50%;
   transform: translateX(-50%);
   z-index: 1000;
+  height: 3.5rem;
   max-width: 100%;
   white-space: nowrap;
 }
@@ -15,4 +16,13 @@
 
 .footer-fixed .nav-item {
   flex-shrink: 0;
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.footer-fixed .nav-link {
+  height: 100%;
+  display: flex;
+  align-items: center;
 }
