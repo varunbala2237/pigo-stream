@@ -143,33 +143,50 @@ function HomeUI({
     }
   }, [isTrendingLoaded, isProvidersLoaded, isSearchLoaded]);
 
+  // Function to handle alert message updates
+  const handleAlertMessage = (hasTrendingContent, hasProvidersContent, hasSearchContent, searchQuery) => {
+    let alertMessage = '';
+
+    // Check if there's no content available for trending and providers
+    if (!hasTrendingContent && !hasProvidersContent) {
+      alertMessage = 'No content available from trending or providers.';
+    } else if (!hasTrendingContent) {
+      alertMessage = 'No trending content available.';
+    } else if (!hasProvidersContent) {
+      alertMessage = 'No content found for available providers.';
+    }
+
+    // Check if there's no content available for search
+    if (!hasSearchContent) {
+      alertMessage = `No results found for "${searchQuery}".`;
+    }
+
+    return alertMessage;
+  };
+
   // Alert handling for no content
   useEffect(() => {
-    // Check if there is no content available for trending and providers
-    if (!hasTrendingContent && !hasProvidersContent) {
-      setContentAlertMessage('No content available from trending or providers.');
-    } else if (!hasTrendingContent) {
-      setContentAlertMessage('No trending content available.');
-    } else if (!hasProvidersContent) {
-      setContentAlertMessage('No content found for available providers.');
+    let showTimer;
+    let hideTimer;
+
+    const alertMessage = handleAlertMessage(hasTrendingContent, hasProvidersContent, hasSearchContent, searchQuery);
+
+    if (alertMessage) {
+      showTimer = setTimeout(() => {
+        setContentAlertMessage(alertMessage);
+
+        hideTimer = setTimeout(() => {
+          setContentAlertMessage('');
+        }, 5000);
+      }, 2000);
     } else {
       setContentAlertMessage('');
     }
 
-    // Check if there is no content available for search
-    if (!hasSearchContent) {
-      setContentAlertMessage(`No results found for "${searchQuery}".`);
-    } else {
-      setContentAlertMessage('');
-    }
-
-    if (!hasTrendingContent || !hasProvidersContent || !hasSearchContent) {
-      // Show the alert for 5 seconds
-      const timer = setTimeout(() => {
-        setContentAlertMessage('');
-      }, 5000);
-      return () => clearTimeout(timer);
-    }
+    return () => {
+      clearTimeout(showTimer);
+      clearTimeout(hideTimer);
+    };
   }, [hasTrendingContent, hasProvidersContent, hasSearchContent, searchQuery]);
 
   const handleSearchInputChange = (e) => {
