@@ -254,6 +254,10 @@ function TvGrid({ id, type, setBackgroundImage }) {
                 type={type}
                 isInList={isInList}
                 handleAddToList={handleAddToList}
+
+                // To make sure always mark the initial episode as watched
+                handleToggleWatched={handleToggleWatched}
+                selectedEpisode={selectedEpisode}
               />
 
               <div className="container-fluid custom-bg custom-theme-radius w-100 p-2 my-2">

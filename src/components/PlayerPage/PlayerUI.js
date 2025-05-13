@@ -6,7 +6,18 @@ import { useNavigate } from 'react-router-dom';
 
 import openIframeWindow from "../IframePage/openIframeWindow";
 
-function Player({ mediaURL, averageVote, director, genres, mediaInfo, id, type, isInList, handleAddToList }) {
+function Player({
+  mediaURL,
+  averageVote,
+  director,
+  genres,
+  mediaInfo,
+  id, type,
+  isInList,
+  handleAddToList,
+  handleToggleWatched,
+  selectedEpisode,
+}) {
   const [imageUrl, setImageUrl] = useState('');
   const [inHistory, setInHistory] = useState(false);
   const { trailerLink, loading } = useFetchTrailer(id, type);
@@ -179,7 +190,10 @@ function Player({ mediaURL, averageVote, director, genres, mediaInfo, id, type, 
               {/* Larger button for larger screen */}
               <button
                 className="btn btn-dark d-none d-md-block justify-content-center border-0 text-white nowrap rounded-pill custom-bg"
-                onClick={() => openPlayer(mediaURL)}
+                onClick={() => {
+                  openPlayer(mediaURL);
+                  if(type === 'tv') handleToggleWatched(selectedEpisode);
+                }}
               >
                 <i className="bi bi-play-fill theme-color me-2"></i>
                 Play
@@ -187,7 +201,10 @@ function Player({ mediaURL, averageVote, director, genres, mediaInfo, id, type, 
               {/* Smaller button for smaller screen */}
               <button
                 className="btn btn-dark d-block d-md-none btn-sm justify-content-center border-0 text-white nowrap rounded-pill custom-bg"
-                onClick={() => openPlayer(mediaURL)}
+                onClick={() => {
+                  openPlayer(mediaURL);
+                  if(type === 'tv') handleToggleWatched(selectedEpisode);
+                }}
               >
                 <i className="bi bi-play-fill theme-color me-2"></i>
                 Play
@@ -227,23 +244,25 @@ function Player({ mediaURL, averageVote, director, genres, mediaInfo, id, type, 
           </div>
         </div>
       </div>
-      {showNote && (
-        <div className="bd-callout-dark custom-theme-radius dynamic-fs text-white mt-3" style={{ padding: '1rem' }}>
-          {platform === 'windows' || platform === 'android' ? (
-            <>Don't have the app? <span className="link text-primary" onClick={redirectToStore}>
-              <i className="bi bi-bag-check-fill me-2"></i>Get it now
-            </span></>
-          ) : platform === 'macos' || platform === 'ios' ? (
-            <span className="link text-warning">
-              This content may contain redirects and ads.
-              <strong> For the best experience, open in fullscreen mode.</strong>
-            </span>
-          ) : (
-            <span className="link text-danger">Unsupported platform.</span>
-          )}
-        </div>
-      )}
-    </div>
+      {
+        showNote && (
+          <div className="bd-callout-dark custom-theme-radius dynamic-fs text-white mt-3" style={{ padding: '1rem' }}>
+            {platform === 'windows' || platform === 'android' ? (
+              <>Don't have the app? <span className="link text-primary" onClick={redirectToStore}>
+                <i className="bi bi-bag-check-fill me-2"></i>Get it now
+              </span></>
+            ) : platform === 'macos' || platform === 'ios' ? (
+              <span className="link text-warning">
+                This content may contain redirects and ads.
+                <strong> For the best experience, open in fullscreen mode.</strong>
+              </span>
+            ) : (
+              <span className="link text-danger">Unsupported platform.</span>
+            )}
+          </div>
+        )
+      }
+    </div >
   );
 }
 
