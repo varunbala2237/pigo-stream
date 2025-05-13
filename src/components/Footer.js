@@ -19,13 +19,13 @@ const Footer = () => {
         {navItems.map((item, index) => {
           const isActive = currentPath === item.path;
           return (
-            <li key={index} className="nav-item">
+            <li key={index} className={`nav-item rounded-pill ${isActive ? 'bg-white' : ''}`}>
               <Link
                 to={item.path}
-                className={`nav-link d-flex align-items-center ${isActive ? 'theme-color fw-bold active' : 'text-secondary'}`}
+                className={`nav-link d-flex align-items-center theme-color`}
               >
                 <i className={`bi ${item.icon} dynamic-ts`}></i>
-                {isActive && <span className="ms-2 text-white">{item.name}</span>}
+                {isActive && <span className="ms-2 text-black">{item.name}</span>}
               </Link>
             </li>
           );
