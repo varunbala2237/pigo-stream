@@ -4,19 +4,26 @@ import Card from '../Card';
 import useFetchProviders from '../../hooks/IndexPage/useFetchProviders';
 
 const PROVIDERS = [
-    { id: 8, name: 'Netflix', logo: 'https://upload.wikimedia.org/wikipedia/commons/0/08/Netflix_2015_logo.svg' },
-    { id: 9, name: 'Amazon Prime', logo: 'https://upload.wikimedia.org/wikipedia/commons/f/f1/Prime_Video.png' },
-    { id: 337, name: 'Disney+', logo: 'https://upload.wikimedia.org/wikipedia/commons/3/3e/Disney%2B_logo.svg' },
-    { id: 386, name: 'Apple TV+', logo: 'https://upload.wikimedia.org/wikipedia/commons/2/28/Apple_TV_Plus_Logo.svg' },
-    { id: 15, name: 'Hulu', logo: 'https://upload.wikimedia.org/wikipedia/commons/f/f9/Hulu_logo_%282018%29.svg' },
-    { id: 387, name: 'Paramount+', logo: 'https://upload.wikimedia.org/wikipedia/commons/9/9f/Paramount_Network.svg' },
-    { id: 531, name: 'Peacock', logo: 'https://upload.wikimedia.org/wikipedia/commons/d/d3/NBCUniversal_Peacock_Logo.svg' },
-    { id: 43, name: 'YouTube', logo: 'https://upload.wikimedia.org/wikipedia/commons/b/b8/YouTube_Logo_2017.svg' },
+    { id: 8, name: 'Netflix', region: 'IN', bg: 'white', logo: 'https://upload.wikimedia.org/wikipedia/commons/0/08/Netflix_2015_logo.svg' },
+    { id: 9, name: 'Amazon Prime', region: 'US', bg: 'white', logo: 'https://upload.wikimedia.org/wikipedia/commons/f/f1/Prime_Video.png' },
+    { id: 337, name: 'Disney+', region: 'US', bg: 'white', logo: 'https://upload.wikimedia.org/wikipedia/commons/3/3e/Disney%2B_logo.svg' },
+    { id: 350, name: 'Apple TV+', region: 'US', bg: 'white', logo: 'https://upload.wikimedia.org/wikipedia/commons/2/28/Apple_TV_Plus_Logo.svg' },
+    { id: 15, name: 'Hulu', region: 'US', bg: 'white', logo: 'https://upload.wikimedia.org/wikipedia/commons/f/f9/Hulu_logo_%282018%29.svg' },
+    { id: 2074, name: 'Lionsgate', region: 'IN', bg: 'white', logo: 'https://upload.wikimedia.org/wikipedia/commons/6/65/Lionsgate_Logo.svg' },
+    { id: 2180, name: 'Sony Pictures', region: 'IN', bg: 'white', logo: 'https://upload.wikimedia.org/wikipedia/commons/c/ca/Sony_logo.svg' },
+    { id: 531, name: 'Paramount+', region: 'US', bg: 'white', logo: 'https://upload.wikimedia.org/wikipedia/commons/4/4e/Paramount%2B_logo.svg' },
+    { id: 1825, name: 'Max', region: 'US', bg: 'white', logo: 'https://upload.wikimedia.org/wikipedia/commons/c/ce/Max_logo.svg' },
+    { id: 526, name: 'AMC+', region: 'US', bg: 'dark', logo: 'https://upload.wikimedia.org/wikipedia/commons/4/4a/AMC%2B_logo.png' },
+    { id: 123, name: 'FXNow', region: 'US', bg: 'white', logo: 'https://cdn2.downdetector.com/static/uploads/c/300/f4061/FXNOW-logo.png' },
+    { id: 283, name: 'Crunchyroll', region: 'US', bg: 'white', logo: 'https://upload.wikimedia.org/wikipedia/commons/8/85/Crunchyroll_2024_stacked.svg' },
 ];
 
 function ProvidersGrid({ setIsProvidersLoaded, setHasProvidersContent }) {
     const [selectedProvider, setSelectedProvider] = useState(null);
-    const { movies, shows, isLoading, isError } = useFetchProviders(selectedProvider);
+    const { movies, shows, isLoading, isError } = useFetchProviders(
+        selectedProvider,
+        PROVIDERS.find(p => p.id === selectedProvider)?.region
+    );
     const location = useLocation();
 
     // Scroll references for movies and TV shows
@@ -113,7 +120,7 @@ function ProvidersGrid({ setIsProvidersLoaded, setHasProvidersContent }) {
                     {PROVIDERS.map((provider) => (
                         <div
                             key={provider.id}
-                            className={`provider-card bg-white custom-theme-radius-low d-flex justify-content-center align-items-center ${selectedProvider === provider.id ? 'border border-3 border-primary' : ''}`}
+                            className={`provider-card bg-${provider.bg} custom-theme-radius-low d-flex justify-content-center align-items-center ${selectedProvider === provider.id ? 'border border-3 border-primary' : ''}`}
                             onClick={() => setSelectedProvider(provider.id)}
                             style={{ scrollSnapAlign: 'start' }}
                         >

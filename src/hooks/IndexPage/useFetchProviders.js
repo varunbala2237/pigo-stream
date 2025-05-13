@@ -21,7 +21,7 @@ const fetchWithRetry = async (url, options = {}, retries = 3, delay = 1000) => {
 };
 
 // Custom hook for fetching provider data
-const useFetchProviders = (providerId) => {
+const useFetchProviders = (providerId, region) => {
   const [movies, setMovies] = useState([]);
   const [shows, setShows] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -34,8 +34,8 @@ const useFetchProviders = (providerId) => {
       setIsLoading(true);
       try {
         const [movieRes, tvRes] = await Promise.all([
-          fetchWithRetry(`${BASE_URL}/media/movie/by-provider?provider=${providerId}`),
-          fetchWithRetry(`${BASE_URL}/media/tv/by-provider?provider=${providerId}`)
+          fetchWithRetry(`${BASE_URL}/media/movie/by-provider?provider=${providerId}&region=${region}`),
+          fetchWithRetry(`${BASE_URL}/media/tv/by-provider?provider=${providerId}&region=${region}`)
         ]);
         setMovies(movieRes.results || []);
         setShows(tvRes.results || []);
@@ -48,7 +48,7 @@ const useFetchProviders = (providerId) => {
     };
 
     fetchData();
-  }, [providerId]);
+  }, [providerId, region]);
 
   return { movies, shows, isLoading, isError };
 };
