@@ -21,20 +21,25 @@ function MediaGridSkeleton({ mediaInfo, servers, loadingInfo, loadingLink, error
   // Alert handling for no content
   useEffect(() => {
     const hasContent = (mediaInfo && mediaInfo.length > 0) || (servers && servers.length > 0);
-    // Check if there is no content available
+    let showTimer;
+    let hideTimer;
+
     if (!loadingInfo && !loadingLink && !errorInfo && !errorLink && !hasContent) {
-      setContentAlertMessage('No media or content available.');
+      showTimer = setTimeout(() => {
+        setContentAlertMessage('No media or content available.');
+
+        hideTimer = setTimeout(() => {
+          setContentAlertMessage('');
+        }, 5000);
+      }, 2000);
     } else {
       setContentAlertMessage('');
     }
 
-    if (!loadingInfo && !loadingLink && !errorInfo && !errorLink && !hasContent) {
-      // Show the alert for 5 seconds
-      const timer = setTimeout(() => {
-        setContentAlertMessage('');
-      }, 5000);
-      return () => clearTimeout(timer);
-    }
+    return () => {
+      clearTimeout(showTimer);
+      clearTimeout(hideTimer);
+    };
   }, [loadingInfo, loadingLink, errorInfo, errorLink, mediaInfo, servers]);
 
   const handleAlertDismiss = () => {
