@@ -42,7 +42,7 @@ function Header() {
           <div className="d-flex align-items-center gap-2">
             {/* Sidebar Open Button */}
             <button 
-              className="btn btn-dark bd-callout-dark border-0 custom-theme-radius text-white"  
+              className="btn btn-dark bd-callout-dark border-0 rounded-circle text-white py-2"  
               onClick={() => setSidebarOpen(true)}
             >
               <i className="bi bi-three-dots"></i> {/* Sidebar Open Button */}
@@ -87,7 +87,7 @@ function Header() {
         <div>
           {/* Close Button */}
           <div className="sidebar-header d-flex justify-content-end">
-            <button className="btn text-white border-0" onClick={() => setSidebarOpen(false)}>
+            <button className="btn btn-dark bd-callout-dark border-0 rounded-circle text-white py-2" onClick={() => setSidebarOpen(false)}>
               <i className="bi bi-x-lg"></i>
             </button>
           </div>
