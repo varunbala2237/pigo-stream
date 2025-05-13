@@ -1,5 +1,5 @@
 /* Sidebar Overlay */
-.sidebar-overlay {
+.sidebar-backdrop {
     position: fixed;
     top: 0;
     left: 0;
@@ -11,7 +11,7 @@
     transition: opacity 0.3s ease-in-out, visibility 0.3s;
 }
   
-.sidebar-overlay.open {
+.sidebar-backdrop.open {
     visibility: visible;
     opacity: 1;
 }

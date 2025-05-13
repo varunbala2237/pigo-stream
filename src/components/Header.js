@@ -80,7 +80,7 @@ function Header() {
       </nav>
 
       {/* Sidebar Overlay */}
-      <div className={`sidebar-overlay ${sidebarOpen ? "open" : ""}`} onClick={() => setSidebarOpen(false)}></div>
+      <div className={`sidebar-backdrop ${sidebarOpen ? "open" : ""}`} onClick={() => setSidebarOpen(false)}></div>
 
       {/* Sidebar */}
       <div className={`sidebar d-flex flex-column bd-callout-dark text-white ${sidebarOpen ? "open" : ""}`} style={{ height: '100vh' }}>

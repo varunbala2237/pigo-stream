@@ -121,8 +121,8 @@ function Card({ media, type, path, onRemove, handleAlert, isDeletable = true, is
           <div className="card-skeleton-image custom-theme-radius custom-bg"></div>
           <div className="card-overlay dynamic-size dynamic-fs px-1">
             <div className="d-flex justify-content-between align-items-center">
-              <div className="rating-box text-start card-skeleton-bar custom-theme-radius custom-bg"></div>
-              <div className="media-type-box text-end card-skeleton-bar custom-theme-radius custom-bg"></div>
+              <div className="rating-box text-start card-skeleton-bar rounded-pill custom-bg"></div>
+              <div className="media-type-box text-end card-skeleton-bar rounded-pill custom-bg"></div>
             </div>
           </div>
         </div>
@@ -144,14 +144,14 @@ function Card({ media, type, path, onRemove, handleAlert, isDeletable = true, is
           src={imageUrl}
           alt='empty'
         />
-        {/* Rating Container */}
+        {/* Overlay Container */}
         <div className="card-overlay dynamic-size dynamic-fs px-1">
           <div className="d-flex justify-content-between align-items-center">
-            <div className="rating-box custom-theme-radius-low text-start">
+            <div className="rating-box rounded-pill text-start custom-bg px-2 py-1">
               <i className="bi bi-star-fill text-warning"></i>
               <span id="Rating" className="text-white"> {rating} </span>
             </div>
-            <div className="media-type-box custom-theme-radius-low text-end">
+            <div className="media-type-box rounded-circle text-end custom-bg px-2 py-1">
               {type === 'movie' ? (
                 <i className="bi bi-film text-white"></i>
               ) : (
