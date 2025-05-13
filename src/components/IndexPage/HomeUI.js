@@ -51,23 +51,6 @@ function HomeUI({
   const saveSearchHistory = useSaveSearchHistory();
   const removeSearchHistory = useRemoveSearchHistory();
 
-  const fabStyle = {
-    position: 'fixed',
-    bottom: '20px',
-    right: '20px',
-    width: '56px',
-    height: '56px',
-    borderRadius: '50%',
-    color: '#fff',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.15)',
-    cursor: 'pointer',
-    border: 'none',
-    zIndex: 1000,
-  };
-
   const handleSearchBar = () => {
     setShowSearchBar((prevState) => !prevState);
 
@@ -352,7 +335,7 @@ function HomeUI({
             </>}
         </div>
 
-        <button className="btn btn-dark bd-callout-dark" style={fabStyle} onClick={handleSearchBar}>
+        <button className="btn btn-dark fab bd-callout-dark border-0 rounded-circle shadow" onClick={handleSearchBar}>
           {showSearchBar ? <i className="bi bi-x-lg"></i> : <i className="bi bi-search"></i>}
         </button>
 

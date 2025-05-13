@@ -27,3 +27,16 @@
   border-radius: 999px;
   pointer-events: none;
 }
+
+/* Floating Action Button */
+.fab {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 56px;
+  height: 56px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
