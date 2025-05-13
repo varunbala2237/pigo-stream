@@ -340,7 +340,6 @@ function TvGrid({ id, type, setBackgroundImage }) {
                             }`}
                           onClick={() => {
                             handleEpisodeChange(episode.episode_number);
-                            handleToggleWatched(episode.episode_number);
                           }}
                           disabled={!isAired}
                         >
