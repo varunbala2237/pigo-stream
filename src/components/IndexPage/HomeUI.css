@@ -24,7 +24,7 @@
 .hero-skeleton-button {
   width: 120px;
   height: 32px;
-  border-radius: 999px;
+  border-radius: 1rem;
   pointer-events: none;
 }
 
@@ -33,8 +33,8 @@
   position: fixed;
   bottom: 20px;
   right: 20px;
-  width: 56px;
-  height: 56px;
+  width: 3.5rem;
+  height: 3.5rem;
   display: flex;
   justify-content: center;
   align-items: center;

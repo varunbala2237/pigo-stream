@@ -22,7 +22,7 @@ const Footer = () => {
             <li key={index} className="nav-item">
               <Link
                 to={item.path}
-                className={`nav-link d-flex align-items-center px-3 ${isActive ? 'theme-color fw-bold active' : 'text-secondary'}`}
+                className={`nav-link d-flex align-items-center ${isActive ? 'theme-color fw-bold active' : 'text-secondary'}`}
               >
                 <i className={`bi ${item.icon} dynamic-ts`}></i>
                 {isActive && <span className="ms-2 text-white">{item.name}</span>}
