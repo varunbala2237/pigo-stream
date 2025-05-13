@@ -53,17 +53,25 @@ function WatchHistoryGrid({ userUID }) {
     // Alert handling for no content
     useEffect(() => {
         const hasContent = (movieHistory && movieHistory.length > 0) || (tvHistory && tvHistory.length > 0);
-        // Check if there is no content available
+        let showTimer;
+        let hideTimer;
+
         if (!loading && !error && !hasContent) {
-            setContentAlertMessage(`You haven't watched anything yet.`);
-            // Show the alert for 5 seconds
-            const timer = setTimeout(() => {
-                setContentAlertMessage('');
-            }, 5000);
-            return () => clearTimeout(timer);
+            showTimer = setTimeout(() => {
+                setContentAlertMessage(`You haven't watched anything yet.`);
+
+                hideTimer = setTimeout(() => {
+                    setContentAlertMessage('');
+                }, 5000);
+            }, 2000);
         } else {
             setContentAlertMessage('');
         }
+
+        return () => {
+            clearTimeout(showTimer);
+            clearTimeout(hideTimer);
+        };
     }, [movieHistory, tvHistory, loading, error]);
 
     if (!initialized) {

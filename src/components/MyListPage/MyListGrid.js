@@ -51,17 +51,25 @@ function MyListGrid({ userUID }) {
     // Alert handling for no content
     useEffect(() => {
         const hasContent = (movieList && movieList.length > 0) || (tvList && tvList.length > 0);
-        // Check if there is no content available
+        let showTimer;
+        let hideTimer;
+
         if (!loading && !error && !hasContent) {
-            setContentAlertMessage('Your list is empty.');
-            // Show the alert for 5 seconds
-            const timer = setTimeout(() => {
-                setContentAlertMessage('');
-            }, 5000);
-            return () => clearTimeout(timer);
+            showTimer = setTimeout(() => {
+                setContentAlertMessage('Your list is empty.');
+
+                hideTimer = setTimeout(() => {
+                    setContentAlertMessage('');
+                }, 5000);
+            }, 2000);
         } else {
             setContentAlertMessage('');
         }
+
+        return () => {
+            clearTimeout(showTimer);
+            clearTimeout(hideTimer);
+        };
     }, [movieList, tvList, loading, error]);
 
     if (!initialized) {
