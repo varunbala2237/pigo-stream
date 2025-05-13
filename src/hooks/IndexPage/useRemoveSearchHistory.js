@@ -35,7 +35,7 @@ const useRemoveSearchHistory = () => {
 
         await response.json();
       } catch (error) {
-        throw new Error('Failed to fetch data. Please check your connection or contact support.');
+        throw new Error('Failed to fetch data. Server is not responding.');
       }
     }
   };

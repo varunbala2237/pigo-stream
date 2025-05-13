@@ -17,7 +17,7 @@ const clearWatchHistory = async (userUID) => {
       throw new Error('Unable to fetch data. Please try again later.');
     }
   } catch (err) {
-    throw new Error('Failed to fetch data. Please check your connection or contact support.');
+    throw new Error('Failed to fetch data. Server is not responding.');
   }
 };
 

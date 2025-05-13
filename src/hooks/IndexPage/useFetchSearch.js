@@ -19,7 +19,7 @@ const fetchWithRetry = async (url, options = {}, retries = 5, delay = 1000, time
       if (i < retries - 1) {
         await new Promise((resolve) => setTimeout(resolve, delay));
       } else {
-        throw new Error('Failed to fetch data. Please check your connection or contact support.');
+        throw new Error('Failed to fetch data. Server is not responding.');
       }
     }
   }
