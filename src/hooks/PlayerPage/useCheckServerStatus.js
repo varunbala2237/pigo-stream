@@ -1,58 +1,48 @@
 import { useState, useEffect } from 'react';
 
-// Helper function for fetch with retry and timeout
-const fetchWithRetry = async (url, options = {}, retries = 3, delay = 500) => {
-  let attempt = 0;
-  
-  const fetchRequest = async () => {
-    try {
-      const response = await fetch(url, options);
-      if (!response.ok) throw new Error('Unable to fetch data.');
-      return true; // Return true if successful
-    } catch (err) {
-      if (attempt < retries) {
-        attempt++;
-        await new Promise(resolve => setTimeout(resolve, delay)); // Retry after delay
-        return fetchRequest(); // Retry
-      }
-      return false; // Return false if all retries fail
-    }
-  };
+// Fast CORS-tolerant fetch with timeout
+const fetchWithTimeout = (url, timeout = 3000) => {
+  return new Promise((resolve) => {
+    const timer = setTimeout(() => resolve(false), timeout);
 
-  return fetchRequest();
+    fetch(url, {
+      method: 'HEAD',
+      mode: 'no-cors',
+    })
+      .then(() => {
+        clearTimeout(timer);
+        resolve(true);
+      })
+      .catch(() => {
+        clearTimeout(timer);
+        resolve(false);
+      });
+  });
 };
 
-// Custom hook for checking server status
 const useCheckServerStatus = (servers) => {
-  const [serverStatus, setServerStatus] = useState({});
+  const [serverStatus, setServerStatus] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const checkServerStatus = async () => {
-      const statusPromises = servers.map(server => 
-        fetchWithRetry(server.server_link).then(isServerUp => ({
-          server_name: server.server_name,
-          status: isServerUp ? 'success' : 'danger'
-        }))
+      setLoading(true);
+
+      const statusPromises = servers.map(server =>
+        fetchWithTimeout(server.server_link)
       );
 
-      // Wait for all the promises to resolve concurrently
       const results = await Promise.all(statusPromises);
-      
-      // Create an object from the results to set state
-      const statusObj = results.reduce((acc, { server_name, status }) => {
-        acc[server_name] = status;
-        return acc;
-      }, {});
-
-      setServerStatus(statusObj);
+      setServerStatus(results);
+      setLoading(false);
     };
 
     if (servers.length > 0) {
       checkServerStatus();
     }
-  }, [servers]); // Re-run the effect when servers change
+  }, [servers]);
 
-  return serverStatus;
+  return { serverStatus, loading };
 };
 
 export default useCheckServerStatus;

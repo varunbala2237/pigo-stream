@@ -28,7 +28,7 @@ function MovieGrid({ id, type, setBackgroundImage }) {
   const { isInList, refetch } = useCheckMyList(id);
 
   // Using the custom hook for checking server status
-  const serverStatus = useCheckServerStatus(servers);
+  const { serverStatus, loading: serverStatusLoading } = useCheckServerStatus(servers);
 
   // Retrieve settings from cache if available
   const cachedSettings = getMediaStateSettings(id);
@@ -139,7 +139,7 @@ function MovieGrid({ id, type, setBackgroundImage }) {
                 </div>
                 <div className="row g-2">
                   {servers.length > 0 ? (
-                    servers.map((server) => (
+                    servers.map((server, index) => (
                       <div key={server.server_name} className="col-4 col-sm-3 col-md-4 col-lg-3 col-xl-2">
                         <button
                           className={`btn w-100 d-flex flex-row align-items-center justify-content-center border-0 rounded-pill shadow-sm ${selectedServerName === server.server_name
@@ -149,7 +149,7 @@ function MovieGrid({ id, type, setBackgroundImage }) {
                           onClick={() => handleServerChange(server.server_name)}
                         >
                           <span className="text-truncate dynamic-ss">{server.server_name}</span>
-                          {serverStatus[server.server_name] === 'danger' && (
+                          {!serverStatusLoading && !serverStatus[index] && (
                             <i className="bi bi-exclamation-triangle text-danger ms-2"></i>
                           )}
                         </button>
