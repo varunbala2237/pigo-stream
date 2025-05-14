@@ -3,7 +3,6 @@ import useGenreRecommendations from '../../hooks/IndexPage/useGenreRecommendatio
 import useFetchMediaDetails from '../../hooks/IndexPage/useFetchMediaDetails';
 import useFetchMedia from '../../hooks/IndexPage/useFetchMedia';
 import HomeUI from './HomeUI';
-import Footer from '../Footer';
 
 const IndexUI = () => {
   const { selectedItemId } = useGenreRecommendations();
@@ -100,11 +99,6 @@ const IndexUI = () => {
         setTriggerSearch={setTriggerSearch}
         isRecommended={isRecommended}
       />
-
-      {/* Footer Backspace */}
-      <div className="divider" style={{ height: '5rem' }}></div>
-      {/* Footer */}
-      <Footer />
     </div>
   );
 };

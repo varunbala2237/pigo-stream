@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Header from '../Header';
+import Footer from '../Footer';
 import SearchBar from './SearchBar';
 import SearchGrid from './SearchGrid';
 import TrendingGrid from './TrendingGrid';
@@ -334,6 +335,10 @@ function HomeUI({
               <SearchGrid searchQuery={triggerSearch} setIsSearchLoaded={setIsSearchLoaded} setHasSearchContent={setHasSearchContent} />
             </>}
         </div>
+
+        {/* Footer Backspace & Footer */}
+        <div className="divider" style={{ height: '5rem' }}></div>
+        <Footer />
 
         <button className="btn btn-dark fab bd-callout-dark border-0 rounded-circle shadow" onClick={handleSearchBar}>
           {showSearchBar ? <i className="bi bi-x-lg"></i> : <i className="bi bi-search"></i>}
