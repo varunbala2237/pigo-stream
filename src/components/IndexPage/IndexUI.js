@@ -100,6 +100,9 @@ const IndexUI = () => {
         isRecommended={isRecommended}
       />
 
+      {/* Footer Backspace */}
+      <div className="divider" style={{ height: '5rem' }}></div>
+      {/* Footer */}
       <Footer />
     </div>
   );
