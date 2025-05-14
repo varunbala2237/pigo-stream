@@ -31,8 +31,8 @@
 /* Floating Action Button */
 .fab {
   position: fixed;
-  bottom: 20px;
-  right: 20px;
+  bottom: 1rem;
+  right: 1rem;
   width: 3.5rem;
   height: 3.5rem;
   display: flex;

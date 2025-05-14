@@ -41,38 +41,39 @@ function Header() {
       <nav className="navbar navbar-expand-lg navbar-dark custom-theme-radius">
         <div className="container-fluid">
           <div className="d-flex align-items-center gap-2">
-            {/* Sidebar Open Button */}
-            <button 
-              className="btn btn-dark bd-callout-dark border-0 rounded-circle text-white py-2"  
-              onClick={() => setSidebarOpen(true)}
-            >
-              <i className="bi bi-three-dots"></i> {/* Sidebar Open Button */}
-            </button>
-
-            <a className="navbar-brand d-flex align-items-center" href="/">
-              <img className="mr-3" src="favicon.ico" alt="PigoStream" width="40" height="40" />
+            <div className="navbar-brand rounded-pill d-flex align-items-center">
+              {/* Sidebar Open Button & Icon */}
+              <div className="d-flex align-items-center custom-bg rounded-pill me-2 ps-2">
+                <button
+                  className="btn btn-dark bd-callout-dark border-0 rounded-circle text-white shadow py-2"
+                  onClick={() => setSidebarOpen(true)}
+                >
+                  <i className="bi bi-three-dots"></i> {/* Sidebar Open Button */}
+                </button>
+                <a href="/"><img src="favicon.ico" alt="PigoStream" width="56" height="56" /></a>
+              </div>
               <span className="mb-0 dynamic-hs"><b>Pigo</b>Stream</span>
-            </a>
+            </div>
           </div>
 
           {location.pathname === "/play" && (
             <>
               {/* Back button with navigation for small screens */}
-              <button 
-                type="button" 
+              <button
+                type="button"
                 className="btn btn-dark bd-callout-dark border-0 btn-sm d-md-none text-white rounded-pill dynamic-fs"
                 onClick={() => navigate(-1)} // Navigate to the previous page
               >
-                <i className="bi bi-back me-2"></i> 
+                <i className="bi bi-back me-2"></i>
                 Back
               </button>
               {/* Back button with navigation for large screens */}
-              <button 
-                type="button" 
+              <button
+                type="button"
                 className="btn btn-dark bd-callout-dark border-0 btn-md d-none d-md-inline-block text-white rounded-pill dynamic-fs"
                 onClick={() => navigate(-1)} // Navigate to the previous page
               >
-                <i className="bi bi-back me-2"></i> 
+                <i className="bi bi-back me-2"></i>
                 Back
               </button>
             </>
@@ -93,36 +94,36 @@ function Header() {
             </button>
           </div>
 
-        {/* User Info */}
-        <div className="text-center text-white mb-2">
-            <img 
-              src={userPhotoURL} 
-              alt="User" 
+          {/* User Info */}
+          <div className="text-center text-white mb-2">
+            <img
+              src={userPhotoURL}
+              alt="User"
               className="rounded-circle"
               style={{ width: "70px", height: "70px" }}
             />
             <div className="text-wrap text-truncate dynamic-ts">{userName}</div>
             <div className="text-wrap text-truncate dynamic-fs" contentEditable={false}>{userEmail}</div>
-        </div>
-      </div>
-
-      <div className="mt-auto d-flex flex-column align-items-center gap-3 pb-3">
-        <button className="btn btn-md rounded-pill btn-danger" onClick={signOutWithAccount}>
-          <i className="bi bi-box-arrow-left"></i> Sign Out
-        </button>
-
-        <div className="d-flex gap-4">
-          <a href="https://t.me/pigostream" target="_blank" rel="noopener noreferrer" className="d-flex justify-content-center">
-            <i className="bi bi-telegram fs-2 text-secondary"></i>
-          </a>
-          <a href="https://github.com/varunbala2237/pigo-stream" target="_blank" rel="noopener noreferrer" className="d-flex justify-content-center">
-            <i className="bi bi-github fs-2 text-secondary"></i>
-          </a>
+          </div>
         </div>
 
-        <p className="text-secondary dynamic-ss">Follow us for updates</p>
+        <div className="mt-auto d-flex flex-column align-items-center gap-3 pb-3">
+          <button className="btn btn-md rounded-pill btn-danger" onClick={signOutWithAccount}>
+            <i className="bi bi-box-arrow-left"></i> Sign Out
+          </button>
+
+          <div className="d-flex gap-4">
+            <a href="https://t.me/pigostream" target="_blank" rel="noopener noreferrer" className="d-flex justify-content-center">
+              <i className="bi bi-telegram fs-2 text-secondary"></i>
+            </a>
+            <a href="https://github.com/varunbala2237/pigo-stream" target="_blank" rel="noopener noreferrer" className="d-flex justify-content-center">
+              <i className="bi bi-github fs-2 text-secondary"></i>
+            </a>
+          </div>
+
+          <p className="text-secondary dynamic-ss">Follow us for updates</p>
+        </div>
       </div>
-    </div>
     </>
   );
 }
