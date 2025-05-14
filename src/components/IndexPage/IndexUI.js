@@ -79,13 +79,14 @@ const IndexUI = () => {
             style={{
               top: 0,
               left: 0,
-              background: 'rgba(0, 0, 0, 0.5)',
+              background: 'rgba(0, 0, 0, 0.4)',
               zIndex: 1,
             }}
           ></div>
         )}
       </div>
 
+      {/* HomeUI */}
       <HomeUI
         title={title}
         mediaId={mediaId}
