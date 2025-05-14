@@ -350,6 +350,9 @@ function HomeUI({
         {/* Alert for welcome message */}
         {welcomeMessage && <Alert message={welcomeMessage} onClose={handleAlertDismiss} type="success" />}
       </div>
+      
+      {/* Footer Backdrop */}
+      <div style={{ height: '5rem' }}></div>
     </div>
   );
 }
