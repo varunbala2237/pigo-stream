@@ -51,20 +51,6 @@ function HomeUI({
   const saveSearchHistory = useSaveSearchHistory();
   const removeSearchHistory = useRemoveSearchHistory();
 
-  const handleSearchBar = () => {
-    setShowSearchBar((prevState) => !prevState);
-
-    // Reset search query and trigger search
-    handleSearchInputChange({ target: { value: '' } });
-
-    // Scroll to Top
-    window.scrollTo({ top: 0 });
-  };
-
-  const handlePlayMedia = async () => {
-    navigate(`/play?id=${mediaId}&type=${mediaType}`);
-  };
-
   useEffect(() => {
     const savedWelcomeMessage = sessionStorage.getItem('welcomeMessage');
     if (savedWelcomeMessage) {
@@ -172,6 +158,16 @@ function HomeUI({
     };
   }, [hasTrendingContent, hasProvidersContent, hasSearchContent, searchQuery]);
 
+  const handleSearchBar = () => {
+    setShowSearchBar((prevState) => !prevState);
+
+    // Reset search query and trigger search
+    handleSearchInputChange({ target: { value: '' } });
+
+    // Scroll to Top
+    window.scrollTo({ top: 0 });
+  };
+
   const handleSearchInputChange = (e) => {
     const query = e.target.value;
     setSearchQuery(query);
@@ -234,6 +230,10 @@ function HomeUI({
   const handleFocus = () => {
     refetch();
     setIsDropdownOpen(true);
+  };
+
+  const handlePlayMedia = async () => {
+    navigate(`/play?id=${mediaId}&type=${mediaType}`);
   };
 
   return (
