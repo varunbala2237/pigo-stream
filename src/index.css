@@ -164,6 +164,10 @@ code {
   color: #51a6f5;
 }
 
+.theme-bg {
+  background-color: #51a6f5;
+}
+
 /* Custom heights and widths */
 .vh-25 {
   min-height: 25vh;

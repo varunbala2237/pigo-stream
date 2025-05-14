@@ -3,7 +3,7 @@ import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import './Footer.css'; // Minimal, optional
 
-const Footer = () => {
+const Footer = ({ showSearchBar = null, handleSearchBar = null }) => {
   const location = useLocation();
   const currentPath = location.pathname;
 
@@ -15,7 +15,7 @@ const Footer = () => {
 
   return (
     <div className="footer-fixed bd-callout-dark rounded-pill shadow">
-      <ul className="nav flex-nowrap overflow-auto h-100 w-100 justify-content-between align-items-center dynamic-fs">
+      <ul className="nav gap-2 flex-nowrap overflow-auto justify-content-between align-items-center dynamic-fs">
         {navItems.map((item, index) => {
           const isActive = currentPath === item.path;
           return (
@@ -30,6 +30,14 @@ const Footer = () => {
             </li>
           );
         })}
+
+        {showSearchBar !== null && (
+          <li className="nav-item rounded-pill">
+            <button className="btn btn-dark search-bar-btn theme-bg border-0 rounded-circle" onClick={handleSearchBar}>
+              {showSearchBar ? <i className="bi bi-x-lg"></i> : <i className="bi bi-search"></i>}
+            </button>
+          </li>
+        )}
       </ul>
     </div>
   );

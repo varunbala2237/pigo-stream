@@ -26,3 +26,9 @@
   display: flex;
   align-items: center;
 }
+
+/* Search Bar Button */
+.search-bar-btn {
+  height: 3rem;
+  width: 3rem;
+}

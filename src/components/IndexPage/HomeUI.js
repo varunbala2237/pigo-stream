@@ -338,11 +338,7 @@ function HomeUI({
 
         {/* Footer Backspace & Footer */}
         <div className="divider" style={{ height: '5rem' }}></div>
-        <Footer />
-
-        <button className="btn btn-dark fab bd-callout-dark border-0 rounded-circle shadow" onClick={handleSearchBar}>
-          {showSearchBar ? <i className="bi bi-x-lg"></i> : <i className="bi bi-search"></i>}
-        </button>
+        <Footer showSearchBar={showSearchBar} handleSearchBar={handleSearchBar}/>
 
         {/* Connection Modal */}
         {showConnectionModal && <ConnectionModal show={showConnectionModal} />}

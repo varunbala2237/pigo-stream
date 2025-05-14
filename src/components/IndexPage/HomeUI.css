@@ -27,16 +27,3 @@
   border-radius: 1rem;
   pointer-events: none;
 }
-
-/* Floating Action Button */
-.fab {
-  position: fixed;
-  bottom: 1rem;
-  right: 1rem;
-  width: 3rem;
-  height: 3rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1001;
-}
