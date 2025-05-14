@@ -43,14 +43,14 @@ function Header() {
           <div className="d-flex align-items-center gap-2">
             <div className="navbar-brand rounded-pill d-flex align-items-center">
               {/* Sidebar Open Button & Icon */}
-              <div className="d-flex align-items-center custom-bg rounded-pill me-2 ps-2">
+              <div className="d-flex align-items-center custom-bg rounded-pill shadow me-2 ps-1">
                 <button
                   className="btn btn-dark bd-callout-dark border-0 rounded-circle text-white shadow py-2"
                   onClick={() => setSidebarOpen(true)}
                 >
                   <i className="bi bi-three-dots"></i> {/* Sidebar Open Button */}
                 </button>
-                <a href="/"><img src="favicon.ico" alt="PigoStream" width="56" height="56" /></a>
+                <a href="/"><img src="favicon.ico" alt="PigoStream" width="48" height="48" /></a>
               </div>
               <span className="mb-0 dynamic-hs"><b>Pigo</b>Stream</span>
             </div>
@@ -89,7 +89,7 @@ function Header() {
         <div>
           {/* Close Button */}
           <div className="sidebar-header d-flex justify-content-end">
-            <button className="btn btn-dark bd-callout-dark border-0 rounded-circle text-white py-2" onClick={() => setSidebarOpen(false)}>
+            <button className="btn btn-dark bd-callout-dark border-0 rounded-circle text-white shadow py-2" onClick={() => setSidebarOpen(false)}>
               <i className="bi bi-x-lg"></i>
             </button>
           </div>
