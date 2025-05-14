@@ -166,6 +166,11 @@ code {
 
 .theme-bg {
   background-color: #51a6f5;
+  transition: background-color 0.3s ease;
+}
+
+.theme-bg:hover {
+  background-color: #3b8ed1;
 }
 
 /* Custom heights and widths */
@@ -192,5 +197,4 @@ code {
 .w-50 {
   width: 50%;
 }
-
 /* End of main parts */
