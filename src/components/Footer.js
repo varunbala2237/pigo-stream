@@ -15,7 +15,7 @@ const Footer = ({ showSearchBar = null, handleSearchBar = null }) => {
 
   return (
     <div className="footer-fixed bd-callout-dark rounded-pill shadow">
-      <ul className="nav gap-2 flex-nowrap overflow-auto justify-content-between align-items-center dynamic-fs">
+      <ul className="nav h-100 gap-2 flex-nowrap overflow-auto justify-content-between align-items-center dynamic-fs">
         {navItems.map((item, index) => {
           const isActive = currentPath === item.path;
           return (
