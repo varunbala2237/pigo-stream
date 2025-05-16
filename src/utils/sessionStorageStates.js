@@ -1,4 +1,4 @@
-// sessionStates.js
+// sessionStorageStates.js
 const SESSION_KEY = 'pageStates';
 
 function getSessionObject() {
