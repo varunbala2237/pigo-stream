@@ -36,6 +36,12 @@ function AuthUI() {
             setIsLoading(false);
         }, 10000); // Set a timeout of 10 seconds
 
+        const triggerIndexPage = () => {
+            sessionStorage.setItem('welcomeMessage', "Welcome to PigoStream!");
+            setShowResendButton(false);
+            navigate('/index');
+        };
+
         const unsubscribe = auth.onAuthStateChanged(async (user) => {
             clearTimeout(timeoutId); // Clear the timeout if confirmation is received
             setIsLoading(false);
@@ -46,16 +52,27 @@ function AuthUI() {
             await user.reload();
             if (user) {
                 if (user.emailVerified) {
-                    sessionStorage.setItem('welcomeMessage', "Welcome to PigoStream!");
-                    setShowResendButton(false);
-                    navigate('/index');
+                    triggerIndexPage();
                 }
             }
         });
 
+        const checkEmailVerification = async () => {
+            const user = auth.currentUser;
+            if (user) {
+                await user.reload();
+                if (user.emailVerified) {
+                    triggerIndexPage();
+                }
+            }
+        };
+
+        window.addEventListener('focus', checkEmailVerification);
+
         return () => {
             clearTimeout(timeoutId); // Clean up the timeout
             unsubscribe(); // Clean up the observer
+            window.removeEventListener('focus', checkEmailVerification);
         };
     }, [navigate]);
 
@@ -84,13 +101,7 @@ function AuthUI() {
             if (user) {
                 // Reload user info
                 await user.reload();
-                if (user.emailVerified) {
-                    const isNewUser = user.metadata.creationTime === user.metadata.lastSignInTime;
-                    const welcomeMessage = isNewUser ? "Welcome to PigoStream!" : "Welcome back to PigoStream!";
-
-                    // Store the message in sessionStorage
-                    sessionStorage.setItem('welcomeMessage', welcomeMessage);
-                } else {
+                if (!user.emailVerified) {
                     setAlertMessage("Email verification pending. Please click resend and check your inbox.");
                     setShowResendButton(true);
                     setTimeout(() => setAlertMessage(''), 5000);
