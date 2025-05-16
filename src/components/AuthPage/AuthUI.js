@@ -46,6 +46,8 @@ function AuthUI() {
             clearTimeout(timeoutId); // Clear the timeout if confirmation is received
             setIsLoading(false);
 
+            if (!user) return;
+
             // Reload user info
             await user.reload();
             if (user) {
