@@ -43,17 +43,12 @@ function Header() {
           <div className="d-flex align-items-center gap-2">
             <div className="navbar-brand rounded-pill d-flex align-items-center">
               {/* Sidebar Open Button & Icon */}
-              <div className="d-flex align-items-center custom-bg rounded-pill shadow me-2">
+              <div className="d-flex align-items-center custom-bg rounded-pill shadow me-2 ps-1">
                 <button
-                  className="btn btn-dark bd-callout-dark border-0 rounded-circle text-white shadow p-0 m-1"
+                  className="btn btn-dark bd-callout-dark border-0 rounded-circle text-white shadow py-2"
                   onClick={() => setSidebarOpen(true)}
                 >
-                  <img
-                    src={userPhotoURL}
-                    alt="User"
-                    className="rounded-circle"
-                    width="40" height="40"
-                  />
+                  <i className="bi bi-three-dots-vertical"></i> {/* Sidebar Open Button */}
                 </button>
                 <a href="/"><img src="favicon.ico" alt="PigoStream" width="48" height="48" /></a>
               </div>
