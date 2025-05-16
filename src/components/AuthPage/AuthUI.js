@@ -192,6 +192,7 @@ function AuthUI() {
 
     const toggleAuthMode = () => {
         setAlertMessage('');
+        setShowResendButton(false);
         setIsSignIn((prev) => !prev);
     };
 
