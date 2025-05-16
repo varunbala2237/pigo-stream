@@ -98,7 +98,7 @@ function AuthUI() {
             const user = userCredential.user;
             await updateProfile(user, { displayName });
 
-            // Sending verification email & realoding state
+            // Sending verification email
             await user.sendEmailVerification();
         } catch (error) {
             setAlertMessage(error.message);
