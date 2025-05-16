@@ -15,6 +15,9 @@ import Alert from '../../utils/Alert';
 
 function AuthUI() {
     const navigate = useNavigate();
+    const [userName, setUserName] = useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
     const [showPassword, setShowPassword] = useState(false);
     const [isSignIn, setIsSignIn] = useState(true);
     const [showResendButton, setShowResendButton] = useState(false);
@@ -88,8 +91,6 @@ function AuthUI() {
     const signInWithCredentials = async (event) => {
         event.preventDefault();
         setIsSubmitting(true);
-        const email = document.getElementById('userEmail').value;
-        const password = document.getElementById('passwordInput').value;
 
         try {
             const userCredential = await signInWithEmailAndPassword(auth, email, password);
@@ -124,7 +125,6 @@ function AuthUI() {
     };
 
     const handleForgotPassword = async () => {
-        const email = document.getElementById('userEmail').value;
         if (!email) {
             setAlertMessage('Please enter your email to reset your password.');
             setTimeout(() => setAlertMessage(''), 5000);
@@ -144,14 +144,11 @@ function AuthUI() {
     const signUpWithCredentials = async (event) => {
         event.preventDefault();
         setIsSubmitting(true);
-        const displayName = document.getElementById('userName').value;
-        const email = document.getElementById('userEmail').value;
-        const password = document.getElementById('passwordInput').value;
 
         try {
             const userCredential = await createUserWithEmailAndPassword(auth, email, password);
             const user = userCredential.user;
-            await updateProfile(user, { displayName });
+            await updateProfile(user, { userName });
 
             // Sending verification email & realoding state
             await user.sendEmailVerification();
@@ -238,9 +235,11 @@ function AuthUI() {
                                     <div className="mb-3 dynamic-ts">
                                         <label htmlFor="userName" className="form-label">Username</label>
                                         <input
+                                            id="userName"
                                             type="text"
                                             className="form-control custom-bg rounded-pill custom-textarea text-white dynamic-fs"
-                                            id="userName"
+                                            value={userName}
+                                            onChange={(e) => setUserName(e.target.value)}
                                             placeholder="Enter username"
                                             required={!isSignIn}
                                         />
@@ -251,6 +250,8 @@ function AuthUI() {
                                     <input
                                         id="userEmail"
                                         type="email"
+                                        value={email}
+                                        onChange={(e) => setEmail(e.target.value)}
                                         className="form-control custom-bg rounded-pill custom-textarea text-white dynamic-fs"
                                         placeholder="Enter e-mail address"
                                         required
@@ -262,6 +263,8 @@ function AuthUI() {
                                         <input
                                             id="passwordInput"
                                             type={showPassword ? 'text' : 'password'}
+                                            value={password}
+                                            onChange={(e) => setPassword(e.target.value)}
                                             className="form-control custom-bg text-white custom-textarea rounded-pill-l border-0 dynamic-fs"
                                             placeholder="Enter password"
                                             required
@@ -304,7 +307,7 @@ function AuthUI() {
                                     )}
                                     <p className="text-white mb-2 text-center">or</p>
                                     <button className="btn btn-primary rounded-pill dynamic-fs mb-2" onClick={signInWithGoogle}>
-                                        Sign in with <i className="bi bi-google"></i>oogle
+                                        <i className="bi bi-google me-2"></i>Sign in with Google
                                     </button>
                                 </div>
                             </form>
@@ -330,7 +333,7 @@ function AuthUI() {
                 </>
             )}
 
-            {/* Alert */}
+            {/* Alert messages*/}
             {alertMessage && <Alert message={alertMessage} onClose={handleAlertDismiss} />}
         </div>
     );
