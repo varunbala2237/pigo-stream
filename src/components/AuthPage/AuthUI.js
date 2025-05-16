@@ -164,6 +164,7 @@ function AuthUI() {
                 setResendCooldown(30); // 30 second cooldown
             } catch (error) {
                 setAlertMessage('Failed to resend verification email. Please try again.');
+                setResendCooldown(30); // 30 second cooldown
             } finally {
                 setTimeout(() => setAlertMessage(''), 5000);
             }
@@ -287,7 +288,7 @@ function AuthUI() {
                                                 onClick={resendVerificationEmail}
                                                 disabled={resendCooldown > 0}
                                             >
-                                                {resendCooldown > 0 ? `Resend after (${resendCooldown}s)` : 'Resend'}
+                                                {resendCooldown > 0 ? `Try again in (${resendCooldown}s)` : 'Resend'}
                                             </button>
                                         </div>
                                     )}
