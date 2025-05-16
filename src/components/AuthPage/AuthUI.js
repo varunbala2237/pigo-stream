@@ -1,8 +1,15 @@
 // AuthUI.js
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { auth, signInWithGoogle } from '../../firebase/firebase-auth';
-import { signInWithEmailAndPassword, createUserWithEmailAndPassword, updateProfile, signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
+import { auth } from '../../firebase/firebase-auth';
+import {
+    signInWithEmailAndPassword,
+    createUserWithEmailAndPassword,
+    updateProfile,
+    sendPasswordResetEmail,
+    signInWithPopup,
+    GoogleAuthProvider
+} from 'firebase/auth';
 import useCreateUser from '../../hooks/AuthPage/useCreateUser';
 import Alert from '../../utils/Alert';
 
@@ -10,7 +17,10 @@ function AuthUI() {
     const navigate = useNavigate();
     const [showPassword, setShowPassword] = useState(false);
     const [isSignIn, setIsSignIn] = useState(true);
+    const [showResendButton, setShowResendButton] = useState(false);
+    const [resendCooldown, setResendCooldown] = useState(0);
     const [isEmailVerified, setIsEmailVerified] = useState(false);
+    const [isSubmitting, setIsSubmitting] = useState(false);
     const [alertMessage, setAlertMessage] = useState('');
     const [isLoading, setIsLoading] = useState(true);
 
@@ -57,12 +67,27 @@ function AuthUI() {
     useEffect(() => {
         if (isEmailVerified) {
             sessionStorage.setItem('welcomeMessage', "Welcome to PigoStream!");
+            setShowResendButton(false);
             navigate('/index');
         }
     }, [isEmailVerified, navigate]);
 
+    useEffect(() => {
+        if (resendCooldown > 0) {
+            const intervalId = setInterval(() => {
+                setResendCooldown((prev) => {
+                    if (prev <= 1) clearInterval(intervalId);
+                    return prev - 1;
+                });
+            }, 1000);
+
+            return () => clearInterval(intervalId);
+        }
+    }, [resendCooldown]);
+
     const signInWithCredentials = async (event) => {
         event.preventDefault();
+        setIsSubmitting(true);
         const email = document.getElementById('userEmail').value;
         const password = document.getElementById('passwordInput').value;
 
@@ -72,23 +97,53 @@ function AuthUI() {
 
 
             if (user) {
-                const isNewUser = user.metadata.creationTime === user.metadata.lastSignInTime;
-                const welcomeMessage = isNewUser ? "Welcome to PigoStream!" : "Welcome back to PigoStream!";
+                if (user.emailVerified) {
+                    const isNewUser = user.metadata.creationTime === user.metadata.lastSignInTime;
+                    const welcomeMessage = isNewUser ? "Welcome to PigoStream!" : "Welcome back to PigoStream!";
 
-                // Store the message in sessionStorage
-                sessionStorage.setItem('welcomeMessage', welcomeMessage);
+                    // Store the message in sessionStorage
+                    sessionStorage.setItem('welcomeMessage', welcomeMessage);
 
-                // Trigger navigating useEffect
-                setIsEmailVerified(true);
+                    // Trigger navigating useEffect
+                    setIsEmailVerified(true);
+                } else {
+                    // Sending verification email & realoding state
+                    await user.sendEmailVerification();
+
+                    setAlertMessage("Email verification is pending! Please check your inbox and verify your email before signing in.");
+                    setShowResendButton(true);
+                    setTimeout(() => setAlertMessage(''), 5000);
+                }
             }
         } catch (error) {
             setAlertMessage(error.message);
+            setTimeout(() => setAlertMessage(''), 5000);
+        } finally {
+            setIsSubmitting(false);
+        }
+    };
+
+    const handleForgotPassword = async () => {
+        const email = document.getElementById('userEmail').value;
+        if (!email) {
+            setAlertMessage('Please enter your email to reset your password.');
+            setTimeout(() => setAlertMessage(''), 5000);
+            return;
+        }
+
+        try {
+            await sendPasswordResetEmail(auth, email);
+            setAlertMessage('Password reset email sent! Check your inbox.');
+        } catch (error) {
+            setAlertMessage(error.message);
+        } finally {
             setTimeout(() => setAlertMessage(''), 5000);
         }
     };
 
     const signUpWithCredentials = async (event) => {
         event.preventDefault();
+        setIsSubmitting(true);
         const displayName = document.getElementById('userName').value;
         const email = document.getElementById('userEmail').value;
         const password = document.getElementById('passwordInput').value;
@@ -98,11 +153,33 @@ function AuthUI() {
             const user = userCredential.user;
             await updateProfile(user, { displayName });
 
-            // Sending verification email
+            // Sending verification email & realoding state
             await user.sendEmailVerification();
+
+            setAlertMessage("Verification email sent! Please check your inbox and verify your email before signing in.");
+            setShowResendButton(true);
+            setTimeout(() => setAlertMessage(''), 5000);
         } catch (error) {
             setAlertMessage(error.message);
             setTimeout(() => setAlertMessage(''), 5000);
+        } finally {
+            setIsSubmitting(false);
+        }
+    };
+
+    // Only works when user is trying to sign in or sign up
+    const resendVerificationEmail = async () => {
+        const user = auth.currentUser;
+        if (user && !user.emailVerified && resendCooldown === 0) {
+            try {
+                await user.sendEmailVerification();
+                setAlertMessage('Verification email resent! Check your inbox.');
+                setResendCooldown(30); // 30 second cooldown
+            } catch (error) {
+                setAlertMessage('Failed to resend verification email. Please try again.');
+            } finally {
+                setTimeout(() => setAlertMessage(''), 5000);
+            }
         }
     };
 
@@ -112,7 +189,7 @@ function AuthUI() {
         event.preventDefault();
         try {
             const userCredential = await signInWithPopup(auth, googleProvider);
-            const { user } = userCredential.user;
+            const { user } = userCredential;
 
             if (user) {
                 const isNewUser = user.metadata.creationTime === user.metadata.lastSignInTime;
@@ -179,9 +256,9 @@ function AuthUI() {
                                         required
                                     />
                                 </div>
-                                <div className="mb-3 dynamic-ts">
+                                <div className="mb-2 dynamic-ts">
                                     <label htmlFor="password" className="form-label">Password</label>
-                                    <div className="input-group custom-input-group">
+                                    <div className="input-group custom-input-group mb-2">
                                         <input
                                             id="passwordInput"
                                             type={showPassword ? 'text' : 'password'}
@@ -197,18 +274,41 @@ function AuthUI() {
                                             <i className={`bi ${showPassword ? 'bi-eye-slash' : 'bi-eye'}`}></i>
                                         </button>
                                     </div>
+                                    {isSignIn && (
+                                        <div className="d-flex justify-content-end">
+                                            <button
+                                                type="button"
+                                                className="btn btn-transparent text-danger border-0 rounded-pill dynamic-fs"
+                                                onClick={handleForgotPassword}
+                                            >
+                                                Forgot Password
+                                            </button>
+                                        </div>
+                                    )}
                                 </div>
-                                <div className="d-grid gap-2 dynamic-fs">
-                                    <button type="submit" className="btn btn-success custom-theme-btn rounded-pill">
-                                        {isSignIn ? 'Sign in' : 'Sign up'}
+                                <div className="d-grid dynamic-fs">
+                                    <button type="submit" className="btn btn-success custom-theme-btn rounded-pill dynamic-fs mb-2" disabled={isSubmitting}>
+                                        {isSubmitting ? 'Loading...' : isSignIn ? 'Sign in' : 'Sign up'}
                                     </button>
+                                    {showResendButton && (
+                                        <div className="d-flex justify-content-end mb-2">
+                                            <button
+                                                type="button"
+                                                className="btn btn-transparent text-primary border-0 rounded-pill dynamic-fs"
+                                                onClick={resendVerificationEmail}
+                                                disabled={resendCooldown > 0}
+                                            >
+                                                {resendCooldown > 0 ? `Resend after (${resendCooldown}s)` : 'Resend'}
+                                            </button>
+                                        </div>
+                                    )}
                                     <p className="text-white mb-2 text-center">or</p>
-                                    <button className="btn btn-primary rounded-pill" onClick={signInWithGoogle}>
+                                    <button className="btn btn-primary rounded-pill dynamic-fs mb-2" onClick={signInWithGoogle}>
                                         Sign in with <i className="bi bi-google"></i>oogle
                                     </button>
                                 </div>
                             </form>
-                            <div className="mt-3 text-center text-white dynamic-fs">
+                            <div className="text-center text-white dynamic-fs">
                                 {isSignIn ? (
                                     <p>
                                         Don't have an account?
@@ -229,6 +329,8 @@ function AuthUI() {
                     </div>
                 </>
             )}
+
+            {/* Alert */}
             {alertMessage && <Alert message={alertMessage} onClose={handleAlertDismiss} />}
         </div>
     );
