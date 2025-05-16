@@ -10,7 +10,7 @@ import Player from './PlayerUI';
 import MediaGridSkeleton from './MediaGridSkeleton';
 import Alert from '../../utils/Alert';
 
-import { setLocalStorageMediaStates, getLocalStorageMediaStates } from '../../utils/localStorageMediaStates';
+import { setLocalStorageMediaStates, getLocalStorageMediaStates } from '../../utils/localStorageStates';
 
 function TvGrid({ id, type, setBackgroundImage }) {
   const [mediaURL, setMediaURL] = useState('');
