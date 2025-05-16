@@ -9,7 +9,7 @@ function setSessionObject(obj) {
   sessionStorage.setItem(SESSION_KEY, JSON.stringify(obj));
 }
 
-// Accepts variable arguments: getSessionValue('HomeUI', 'Grids', 'TrendingGrid', 'MoviesScrollState')
+// Store all page states from sessionStorage
 export function getSessionValue(...path) {
   let obj = getSessionObject();
   for (let key of path) {
@@ -19,7 +19,7 @@ export function getSessionValue(...path) {
   return obj;
 }
 
-// Accepts variable arguments: setSessionValue('HomeUI', 'Grids', 'ProvidersGrid', 'Providers', 'selectedProvider', value)
+// Retrieve all page states from sessionStorage
 export function setSessionValue(...args) {
   const value = args.pop(); // Last item is the value
   const keys = args;
