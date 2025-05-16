@@ -49,11 +49,6 @@ function AuthUI() {
                     sessionStorage.setItem('welcomeMessage', "Welcome to PigoStream!");
                     setShowResendButton(false);
                     navigate('/index');
-                } else {
-                    setAlertMessage("Email not verified. Please check your inbox or click resend the email.");
-                    setTimeout(() => setAlertMessage(''), 5000);
-
-                    setShowResendButton(true);
                 }
             }
         });
