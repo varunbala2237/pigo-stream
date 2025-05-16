@@ -50,7 +50,7 @@ function AuthUI() {
                     setShowResendButton(false);
                     navigate('/index');
                 } else {
-                    setAlertMessage("Email not verified. Please click resend the email and check your inbox.");
+                    setAlertMessage("Email not verified. Please check your inbox or click resend the email.");
                     setTimeout(() => setAlertMessage(''), 5000);
 
                     setShowResendButton(true);
