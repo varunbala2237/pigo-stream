@@ -42,17 +42,17 @@ function AuthUI() {
 
             if (!user) return; // No user signed in
 
+            // Reload user info
+            await user.reload();
             if (user) {
-                // Reload user info
-                await user.reload();
                 if (user.emailVerified) {
                     sessionStorage.setItem('welcomeMessage', "Welcome to PigoStream!");
                     setShowResendButton(false);
                     navigate('/index');
                 } else {
-                    setAlertMessage("Email not verified. Please check your inbox.");
+                    setAlertMessage("Email not verified. Please click resend the email and check your inbox.");
                     setTimeout(() => setAlertMessage(''), 5000);
-                
+
                     setShowResendButton(true);
                 }
             }
@@ -87,6 +87,8 @@ function AuthUI() {
 
 
             if (user) {
+                // Reload user info
+                await user.reload();
                 if (user.emailVerified) {
                     const isNewUser = user.metadata.creationTime === user.metadata.lastSignInTime;
                     const welcomeMessage = isNewUser ? "Welcome to PigoStream!" : "Welcome back to PigoStream!";
@@ -94,11 +96,7 @@ function AuthUI() {
                     // Store the message in sessionStorage
                     sessionStorage.setItem('welcomeMessage', welcomeMessage);
                 } else {
-                    // Sending verification email & reload
-                    await user.reload();
-                    await sendEmailVerification(user);
-
-                    setAlertMessage("Email verification is pending! Please check your inbox and verify your email before signing in.");
+                    setAlertMessage("Email verification pending. Please click resend and check your inbox.");
                     setShowResendButton(true);
                     setTimeout(() => setAlertMessage(''), 5000);
                 }
@@ -140,7 +138,7 @@ function AuthUI() {
             // Sending verification email
             await sendEmailVerification(user);
 
-            setAlertMessage("Verification email sent! Please check your inbox and verify your email before signing in.");
+            setAlertMessage("Verification email sent! Please check your inbox.");
             setShowResendButton(true);
             setTimeout(() => setAlertMessage(''), 5000);
         } catch (error) {
