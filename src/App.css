@@ -77,19 +77,14 @@
   backdrop-filter: blur(4px);
 }
 
-.custom-border {
+.rounded-pill-l {
   border: none;
-  border-radius: 1rem;
+  border-radius: 50rem 0px 0px 50rem !important;
 }
 
-.custom-border-l {
+.rounded-pill-r {
   border: none;
-  border-radius: 1rem 0px 0px 1rem;
-}
-
-.custom-border-r {
-  border: none;
-  border-radius: 0px 1rem 1rem 0px;
+  border-radius: 0px 50rem 50rem 0px !important;
 }
 
 .custom-card-img {
@@ -166,19 +161,19 @@
 }
 
 .custom-theme-radius {
-  border-radius: 1rem;
+  border-radius: 1rem !important;
 }
 
 .custom-theme-radius-bottom {
-  border-radius: 0px 0px 1rem 1rem;
+  border-radius: 0px 0px 1rem 1rem !important;
 }
 
 .custom-theme-radius-low {
-  border-radius: .5rem;
+  border-radius: .5rem !important;
 }
 
 .custom-theme-radius-low-br {
-  border-radius: 0px 0px .5rem 0px;
+  border-radius: 0px 0px .5rem 0px !important;
 }
 
 .spinner-size-2 {

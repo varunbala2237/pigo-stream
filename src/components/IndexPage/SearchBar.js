@@ -14,12 +14,12 @@ function SearchBar({
 }) {
     return (
         <div className="container-fluid px-3 my-3">
-          <div className="d-flex position-relative justify-content-center align-items-center">
-            <div ref={inputRef} className="input-group custom-input-group custom-border">
+          <div className="d-flex position-relative justify-content-center align-items-center shadow">
+            <div ref={inputRef} className="input-group custom-input-group">
                   <input
                     id="prompt"
                     type="text"
-                    className="form-control custom-bg text-white dynamic-fs custom-textarea custom-border-l border-0"
+                    className="form-control custom-bg text-white dynamic-fs custom-textarea rounded-pill-l border-0"
                     placeholder="Search..."
                     value={searchQuery}
                     onChange={handleSearchInputChange}
@@ -52,7 +52,7 @@ function SearchBar({
                                 {query}
                               </li>
                               <button className="btn btn-transparent border-0 me-2" onClick={(e) => handleRemoveSearchHistory(e, id)}>
-                                <i className="bi bi-x-lg text-white"></i>
+                                <i className="bi bi-trash text-white"></i>
                               </button>
                             </div>
                             {index < searchHistory.length - 1 && <li className="dropdown-divider bg-secondary m-0"></li>}
@@ -62,12 +62,12 @@ function SearchBar({
                     </ul>
                   )}
 
-                  <button className="btn btn-dark custom-bg m-0 border-0 custom-border-r" onClick={handleSearchSubmit}>
+                  <button className={`btn btn-dark custom-bg m-0 border-0 ${!searchQuery ? 'rounded-pill-r' : ''}`} onClick={handleSearchSubmit}>
                     <i className="bi bi-search"></i>
                   </button>
 
                   {searchQuery && (
-                    <button className="btn btn-dark custom-bg m-0 border-0 custom-border-r" type="button" onClick={() => handleSearchInputChange({ target: { value: '' } })}>
+                    <button className="btn btn-dark custom-bg m-0 border-0 rounded-pill-r" type="button" onClick={() => handleSearchInputChange({ target: { value: '' } })}>
                       <i className="bi bi-x-lg"></i>
                     </button>
                   )}

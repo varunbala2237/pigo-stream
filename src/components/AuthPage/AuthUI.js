@@ -127,7 +127,7 @@ function AuthUI() {
                                 <label htmlFor="userName" className="form-label">Username</label>
                                 <input
                                     type="text"
-                                    className="form-control custom-bg custom-border custom-textarea text-white dynamic-fs"
+                                    className="form-control custom-bg rounded-pill custom-textarea text-white dynamic-fs"
                                     id="userName"
                                     placeholder="Enter username"
                                     required={!isSignIn}
@@ -138,7 +138,7 @@ function AuthUI() {
                             <label htmlFor="userEmail" className="form-label">E-mail address</label>
                             <input
                                 type="text"
-                                className="form-control custom-bg custom-border custom-textarea text-white dynamic-fs"
+                                className="form-control custom-bg rounded-pill custom-textarea text-white dynamic-fs"
                                 id="userEmail"
                                 placeholder="Enter e-mail address"
                                 required
@@ -146,16 +146,16 @@ function AuthUI() {
                         </div>
                         <div className="mb-3 dynamic-ts">
                             <label htmlFor="password" className="form-label">Password</label>
-                            <div className="input-group custom-input-group custom-border">
+                            <div className="input-group custom-input-group">
                                 <input
                                     id="passwordInput"
                                     type="password"
-                                    className="form-control custom-bg text-white custom-textarea custom-border-l border-0 dynamic-fs"
+                                    className="form-control custom-bg text-white custom-textarea rounded-pill-l border-0 dynamic-fs"
                                     placeholder="Enter password"
                                     required
                                 />
                                 <button
-                                    className="btn btn-dark custom-bg m-0 border-0 custom-border-r"
+                                    className="btn btn-dark custom-bg m-0 border-0 rounded-pill-r"
                                     type="button"
                                     onClick={togglePasswordVisibility}
                                 >
@@ -164,11 +164,11 @@ function AuthUI() {
                             </div>
                         </div>
                         <div className="d-grid gap-2 dynamic-fs">
-                            <button type="submit" className="btn btn-success custom-theme-btn custom-theme-radius">
+                            <button type="submit" className="btn btn-success custom-theme-btn rounded-pill">
                                 {isSignIn ? 'Sign in' : 'Sign up'}
                             </button>
                             <p className="text-white mb-2 text-center">or</p>
-                            <button className="btn btn-primary custom-theme-radius" onClick={signInWithGoogle}>
+                            <button className="btn btn-primary rounded-pill" onClick={signInWithGoogle}>
                                 Sign in with <i className="bi bi-google"></i>oogle
                             </button>
                         </div>
