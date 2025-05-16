@@ -6,6 +6,7 @@ import {
     signInWithEmailAndPassword,
     createUserWithEmailAndPassword,
     updateProfile,
+    sendEmailVerification,
     sendPasswordResetEmail,
     signInWithPopup,
     GoogleAuthProvider
@@ -22,7 +23,6 @@ function AuthUI() {
     const [isSignIn, setIsSignIn] = useState(true);
     const [showResendButton, setShowResendButton] = useState(false);
     const [resendCooldown, setResendCooldown] = useState(0);
-    const [isEmailVerified, setIsEmailVerified] = useState(false);
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [alertMessage, setAlertMessage] = useState('');
     const [isLoading, setIsLoading] = useState(true);
@@ -36,11 +36,25 @@ function AuthUI() {
             setIsLoading(false);
         }, 10000); // Set a timeout of 10 seconds
 
-        const unsubscribe = auth.onAuthStateChanged((user) => {
+        const unsubscribe = auth.onAuthStateChanged(async (user) => {
             clearTimeout(timeoutId); // Clear the timeout if confirmation is received
             setIsLoading(false);
+
+            if (!user) return; // No user signed in
+
             if (user) {
-                navigate('/index');
+                // Reload user info
+                await user.reload();
+                if (user.emailVerified) {
+                    sessionStorage.setItem('welcomeMessage', "Welcome to PigoStream!");
+                    setShowResendButton(false);
+                    navigate('/index');
+                } else {
+                    setAlertMessage("Email not verified. Please check your inbox.");
+                    setTimeout(() => setAlertMessage(''), 5000);
+                
+                    setShowResendButton(true);
+                }
             }
         });
 
@@ -48,32 +62,7 @@ function AuthUI() {
             clearTimeout(timeoutId); // Clean up the timeout
             unsubscribe(); // Clean up the observer
         };
-    }, [navigate, isEmailVerified]);
-
-    // This whole useEffect for sign up and sign in users only
-    useEffect(() => {
-        const unsubscribe = auth.onAuthStateChanged(async (user) => {
-            if (user) {
-                if (user.emailVerified) {
-                    // Trigger navigating useEffect
-                    setIsEmailVerified(true);
-                }
-            }
-        });
-
-        return () => {
-            unsubscribe(); // Clean up the observer
-        };
-    }, []);
-
-    // This whole useEffect for navigating to main page if email verified
-    useEffect(() => {
-        if (isEmailVerified) {
-            sessionStorage.setItem('welcomeMessage', "Welcome to PigoStream!");
-            setShowResendButton(false);
-            navigate('/index');
-        }
-    }, [isEmailVerified, navigate]);
+    }, [navigate]);
 
     useEffect(() => {
         if (resendCooldown > 0) {
@@ -104,12 +93,10 @@ function AuthUI() {
 
                     // Store the message in sessionStorage
                     sessionStorage.setItem('welcomeMessage', welcomeMessage);
-
-                    // Trigger navigating useEffect
-                    setIsEmailVerified(true);
                 } else {
-                    // Sending verification email & realoding state
-                    await user.sendEmailVerification();
+                    // Sending verification email & reload
+                    await user.reload();
+                    await sendEmailVerification(user);
 
                     setAlertMessage("Email verification is pending! Please check your inbox and verify your email before signing in.");
                     setShowResendButton(true);
@@ -148,10 +135,10 @@ function AuthUI() {
         try {
             const userCredential = await createUserWithEmailAndPassword(auth, email, password);
             const user = userCredential.user;
-            await updateProfile(user, { userName });
+            await updateProfile(user, { displayName: userName });
 
-            // Sending verification email & realoding state
-            await user.sendEmailVerification();
+            // Sending verification email
+            await sendEmailVerification(user);
 
             setAlertMessage("Verification email sent! Please check your inbox and verify your email before signing in.");
             setShowResendButton(true);
@@ -169,7 +156,10 @@ function AuthUI() {
         const user = auth.currentUser;
         if (user && !user.emailVerified && resendCooldown === 0) {
             try {
-                await user.sendEmailVerification();
+                // Reload user state and send verification email
+                await user.reload();
+                await sendEmailVerification(user);
+
                 setAlertMessage('Verification email resent! Check your inbox.');
                 setResendCooldown(30); // 30 second cooldown
             } catch (error) {
@@ -194,10 +184,6 @@ function AuthUI() {
 
                 // Store the welcome message in sessionStorage
                 sessionStorage.setItem('welcomeMessage', welcomeMessage);
-
-                // Reload user state
-                await user.reload();
-                if (user.emailVerified) setIsEmailVerified(true);
             }
         } catch (error) {
             setAlertMessage(error.message);
