@@ -114,7 +114,14 @@ function TvGrid({ id, type, setBackgroundImage }) {
     if (episodes.length > 0 && episodeScrollRef.current) {
       const currentSettings = getLocalMediaStates(id) || {};
       const savedScrollTop = currentSettings.episodeScrollTops?.[selectedEpisode] || 0;
-      episodeScrollRef.current.scrollTop = savedScrollTop;
+      
+      const timer = setTimeout(() => {
+        if (episodeScrollRef.current) {
+          episodeScrollRef.current.scrollTop = savedScrollTop;
+        }
+      }, 500); // Default delay for scroll state
+
+      return () => clearTimeout(timer);
     }
   }, [episodes, selectedEpisode, id]);
 
@@ -277,8 +284,6 @@ function TvGrid({ id, type, setBackgroundImage }) {
                 type={type}
                 isInList={isInList}
                 handleAddToList={handleAddToList}
-
-                // To make sure always mark the initial episode as watched
                 handleToggleWatched={handleToggleWatched}
                 selectedEpisode={selectedEpisode}
               />
