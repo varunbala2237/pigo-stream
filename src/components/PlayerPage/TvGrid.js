@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import CastCard from '../CastCard';
 import useFetchMediaInfo from '../../hooks/PlayerPage/useFetchMediaInfo';
 import useFetchSeason from '../../hooks/PlayerPage/useFetchSeason';
@@ -22,6 +22,7 @@ function TvGrid({ id, type, setBackgroundImage }) {
   const [episodes, setEpisodes] = useState([]);
   const [selectedSeason, setSelectedSeason] = useState(1);
   const [selectedEpisode, setSelectedEpisode] = useState(1);
+  const episodeScrollRef = useRef(null);
   const [watchedEpisodes, setWatchedEpisodes] = useState({});
   const [selectedServerName, setSelectedServerName] = useState('');
 
@@ -78,7 +79,6 @@ function TvGrid({ id, type, setBackgroundImage }) {
         seasonData.episodes[0]?.episode_number || 1;
 
       setSelectedEpisode(selectedEp);
-
     }
   }, [seasonData, id, type, selectedSeason, cachedSettings]);
 
@@ -321,6 +321,7 @@ function TvGrid({ id, type, setBackgroundImage }) {
 
                 {/* Episodes Scrollable List */}
                 <div
+                  ref={episodeScrollRef}
                   className="overflow-auto custom-theme-radius-low"
                   style={{
                     maxHeight: '285px',
