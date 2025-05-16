@@ -10,7 +10,7 @@ import Player from './PlayerUI';
 import MediaGridSkeleton from './MediaGridSkeleton';
 import Alert from '../../utils/Alert';
 
-import { storeMediaStateSettings, getMediaStateSettings } from '../../utils/mediaStateSettings';
+import { setLocalStorageMediaStates, getLocalStorageMediaStates } from '../../utils/localStorageMediaStates';
 
 function TvGrid({ id, type, setBackgroundImage }) {
   const [mediaURL, setMediaURL] = useState('');
@@ -38,7 +38,7 @@ function TvGrid({ id, type, setBackgroundImage }) {
   const { serverStatus, loading: serverStatusLoading } = useCheckServerStatus(servers);
 
   // Retrieve settings from cache if available
-  const cachedSettings = getMediaStateSettings(id);
+  const cachedSettings = getLocalStorageMediaStates(id);
 
   useEffect(() => {
     if (mediaInfo) {
@@ -106,13 +106,13 @@ function TvGrid({ id, type, setBackgroundImage }) {
   }, [selectedServerName, servers]);
 
   const handleSeasonChange = (seasonNumber) => {
-    const currentSettings = getMediaStateSettings(id) || {};
+    const currentSettings = getLocalStorageMediaStates(id) || {};
     const episodeForSeason = currentSettings.selectedEpisodes?.[seasonNumber] || 1;
 
     setSelectedSeason(seasonNumber);
     setSelectedEpisode(episodeForSeason);
 
-    storeMediaStateSettings(id, {
+    setLocalStorageMediaStates(id, {
       ...currentSettings,
       selectedSeason: seasonNumber,
       selectedServerName,
@@ -124,7 +124,7 @@ function TvGrid({ id, type, setBackgroundImage }) {
   };
 
   const handleToggleWatched = (episodeNumber) => {
-    const currentSettings = getMediaStateSettings(id) || {};
+    const currentSettings = getLocalStorageMediaStates(id) || {};
     const previousWatched = currentSettings.watchedEpisodes || {};
 
     const alreadyWatched = previousWatched?.[selectedSeason]?.[episodeNumber];
@@ -142,7 +142,7 @@ function TvGrid({ id, type, setBackgroundImage }) {
 
     setWatchedEpisodes(updatedWatched);
 
-    storeMediaStateSettings(id, {
+    setLocalStorageMediaStates(id, {
       ...currentSettings,
       watchedEpisodes: updatedWatched,
     });
@@ -150,13 +150,13 @@ function TvGrid({ id, type, setBackgroundImage }) {
 
   const handleEpisodeChange = (episodeNumber) => {
     setSelectedEpisode(episodeNumber);
-    const currentSettings = getMediaStateSettings(id) || {};
+    const currentSettings = getLocalStorageMediaStates(id) || {};
     const updatedSelectedEpisodes = {
       ...(currentSettings.selectedEpisodes || {}),
       [selectedSeason]: episodeNumber
     };
 
-    storeMediaStateSettings(id, {
+    setLocalStorageMediaStates(id, {
       ...currentSettings,
       selectedSeason,
       selectedServerName,
@@ -194,7 +194,7 @@ function TvGrid({ id, type, setBackgroundImage }) {
 
   const handleServerChange = (serverName) => {
     setSelectedServerName(serverName);
-    storeMediaStateSettings(id, { selectedSeason, selectedEpisode, selectedServerName: serverName });
+    setLocalStorageMediaStates(id, { selectedSeason, selectedEpisode, selectedServerName: serverName });
   };
 
   const handleShowMore = () => {

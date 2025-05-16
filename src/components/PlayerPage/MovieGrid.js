@@ -9,7 +9,7 @@ import Player from './PlayerUI';
 import MediaGridSkeleton from './MediaGridSkeleton';
 import Alert from '../../utils/Alert';
 
-import { storeMediaStateSettings, getMediaStateSettings } from '../../utils/mediaStateSettings';
+import { setLocalStorageMediaStates, getLocalStorageMediaStates } from '../../utils/localStorageMediaStates';
 
 function MovieGrid({ id, type, setBackgroundImage }) {
   const [mediaURL, setMediaURL] = useState('');
@@ -31,7 +31,7 @@ function MovieGrid({ id, type, setBackgroundImage }) {
   const { serverStatus, loading: serverStatusLoading } = useCheckServerStatus(servers);
 
   // Retrieve settings from cache if available
-  const cachedSettings = getMediaStateSettings(id);
+  const cachedSettings = getLocalStorageMediaStates(id);
 
   useEffect(() => {
     if (mediaInfo) {
@@ -70,7 +70,7 @@ function MovieGrid({ id, type, setBackgroundImage }) {
 
   const handleServerChange = (serverName) => {
     setSelectedServerName(serverName);
-    storeMediaStateSettings(id, { selectedServerName: serverName });
+    setLocalStorageMediaStates(id, { selectedServerName: serverName });
   };
 
   const handleShowMore = () => {
