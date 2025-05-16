@@ -273,7 +273,7 @@ function AuthUI() {
                                         <div className="d-flex justify-content-end">
                                             <button
                                                 type="button"
-                                                className="btn btn-transparent text-danger border-0 rounded-pill dynamic-fs"
+                                                className="btn btn-transparent text-primary border-0 dynamic-fs"
                                                 onClick={handleForgotPassword}
                                             >
                                                 Forgot Password
@@ -289,7 +289,7 @@ function AuthUI() {
                                         <div className="d-flex justify-content-end mb-2">
                                             <button
                                                 type="button"
-                                                className="btn btn-transparent text-primary border-0 rounded-pill dynamic-fs"
+                                                className="btn btn-transparent text-primary border-0 dynamic-fs"
                                                 onClick={resendVerificationEmail}
                                                 disabled={resendCooldown > 0}
                                             >
@@ -325,7 +325,6 @@ function AuthUI() {
                 </>
             )}
 
-            {/* Alert messages*/}
             {alertMessage && <Alert message={alertMessage} onClose={handleAlertDismiss} />}
         </div>
     );
