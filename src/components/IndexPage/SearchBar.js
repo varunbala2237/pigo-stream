@@ -62,15 +62,9 @@ function SearchBar({
                     </ul>
                   )}
 
-                  <button className={`btn btn-dark custom-bg m-0 border-0 ${!searchQuery ? 'rounded-pill-r' : ''}`} onClick={handleSearchSubmit}>
+                  <button className="btn btn-dark custom-bg m-0 border-0 rounded-pill-r" onClick={handleSearchSubmit}>
                     <i className="bi bi-search"></i>
                   </button>
-
-                  {searchQuery && (
-                    <button className="btn btn-dark custom-bg m-0 border-0 rounded-pill-r" type="button" onClick={() => handleSearchInputChange({ target: { value: '' } })}>
-                      <i className="bi bi-x-lg"></i>
-                    </button>
-                  )}
             </div>
           </div>
         </div>
