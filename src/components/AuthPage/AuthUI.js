@@ -46,8 +46,6 @@ function AuthUI() {
             clearTimeout(timeoutId); // Clear the timeout if confirmation is received
             setIsLoading(false);
 
-            if (!user) return; // No user signed in
-
             // Reload user info
             await user.reload();
             if (user) {
@@ -59,8 +57,10 @@ function AuthUI() {
 
         const checkEmailVerification = async () => {
             const user = auth.currentUser;
+
+            // Reload user info
+            await user.reload();
             if (user) {
-                await user.reload();
                 if (user.emailVerified) {
                     triggerIndexPage();
                 }
@@ -217,7 +217,7 @@ function AuthUI() {
             ) : (
                 <>
                     <div className="container vh-100 d-flex bg-transparent border-0 justify-content-center align-items-center">
-                        <div className="card bg-transparent border-0 p-4 w-100 form-pad">
+                        <div className="card custom-bg custom-theme-radius p-4 w-100 form-pad">
                             <div className="card-header d-flex justify-content-center align-items-center text-white">
                                 <img className="mb-2" src="favicon.ico" alt="PigoStream" width="40" height="40" />
                                 <h3 className="text-center dynamic-hs">{isSignIn ? 'Sign in' : 'Sign up'}</h3>
@@ -249,7 +249,7 @@ function AuthUI() {
                                         required
                                     />
                                 </div>
-                                <div className="mb-2 dynamic-ts">
+                                <div className="mb-3 dynamic-ts">
                                     <label htmlFor="password" className="form-label">Password</label>
                                     <div className="input-group custom-input-group mb-2">
                                         <input
