@@ -64,12 +64,14 @@ function TvGrid({ id, type, setBackgroundImage }) {
     }
   }, [mediaInfo, setBackgroundImage, cachedSettings]);
 
+  // Retrieving watched episodes
   useEffect(() => {
     if (cachedSettings?.watchedEpisodes) {
       setWatchedEpisodes(cachedSettings.watchedEpisodes);
     }
   }, [cachedSettings]);
 
+  // Retrieving seasons and selected season
   useEffect(() => {
     if (seasonData) {
       setEpisodes(seasonData.episodes || []);
@@ -82,6 +84,7 @@ function TvGrid({ id, type, setBackgroundImage }) {
     }
   }, [seasonData, id, type, selectedSeason, cachedSettings]);
 
+  // Retrieving selected servers
   useEffect(() => {
     // Ensure the first server is selected by default when the servers are loaded
     if (servers && servers.length > 0 && !selectedServerName) {
@@ -94,6 +97,7 @@ function TvGrid({ id, type, setBackgroundImage }) {
     }
   }, [servers, selectedServerName, cachedSettings]);
 
+  // Retrieving selected server link
   useEffect(() => {
     if (servers && servers.length > 0) {
       const selectedServer = selectedServerName
@@ -104,6 +108,15 @@ function TvGrid({ id, type, setBackgroundImage }) {
       }
     }
   }, [selectedServerName, servers]);
+
+  // Retrieve episodes scroll state
+  useEffect(() => {
+    if (episodes.length > 0 && episodeScrollRef.current) {
+      const currentSettings = getLocalMediaStates(id) || {};
+      const savedScrollTop = currentSettings.episodeScrollTops?.[selectedEpisode] || 0;
+      episodeScrollRef.current.scrollTop = savedScrollTop;
+    }
+  }, [episodes, selectedEpisode, id]);
 
   const handleSeasonChange = (seasonNumber) => {
     const currentSettings = getLocalMediaStates(id) || {};
@@ -148,20 +161,30 @@ function TvGrid({ id, type, setBackgroundImage }) {
     });
   };
 
+  // Change epsiode and scroll state
   const handleEpisodeChange = (episodeNumber) => {
-    setSelectedEpisode(episodeNumber);
+    const scrollTop = episodeScrollRef.current?.scrollTop || 0;
     const currentSettings = getLocalMediaStates(id) || {};
+
+    const updatedScrollTops = {
+      ...(currentSettings.episodeScrollTops || {}),
+      [episodeNumber]: scrollTop,
+    };
+
     const updatedSelectedEpisodes = {
       ...(currentSettings.selectedEpisodes || {}),
-      [selectedSeason]: episodeNumber
+      [selectedSeason]: episodeNumber,
     };
 
     setLocalMediaStates(id, {
       ...currentSettings,
       selectedSeason,
       selectedServerName,
-      selectedEpisodes: updatedSelectedEpisodes
+      episodeScrollTops: updatedScrollTops,
+      selectedEpisodes: updatedSelectedEpisodes,
     });
+
+    setSelectedEpisode(episodeNumber);
   };
 
   // Check if the episode has aired

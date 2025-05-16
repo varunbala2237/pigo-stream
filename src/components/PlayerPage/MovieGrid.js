@@ -45,6 +45,7 @@ function MovieGrid({ id, type, setBackgroundImage }) {
 
   }, [mediaInfo, id, type, setBackgroundImage]);
 
+  // Retrieving selected servers
   useEffect(() => {
     // Ensure the first server is selected by default when the servers are loaded
     if (servers && servers.length > 0 && !selectedServerName) {
@@ -57,6 +58,7 @@ function MovieGrid({ id, type, setBackgroundImage }) {
     }
   }, [servers, selectedServerName, cachedSettings]);
 
+  // Retrieving selected server link
   useEffect(() => {
     if (servers && servers.length > 0) {
       const selectedServer = selectedServerName
