@@ -120,7 +120,7 @@ function AuthUI() {
 
         try {
             await sendPasswordResetEmail(auth, email);
-            setAlertMessage('Password reset email sent! Check your inbox.');
+            setAlertMessage('If this email is registered, a password reset email has been sent.');
         } catch (error) {
             setAlertMessage(error.message);
         } finally {
