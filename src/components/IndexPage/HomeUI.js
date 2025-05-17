@@ -53,6 +53,7 @@ function HomeUI({
   const saveSearchHistory = useSaveSearchHistory();
   const removeSearchHistory = useRemoveSearchHistory();
 
+  // Restoring states
   useEffect(() => {
     const savedWelcomeMessage = getSessionValue('HomeUI', 'welcomeMessage');
     const savedSearchQuery = getSessionValue('HomeUI', 'searchQuery') || '';
@@ -72,7 +73,7 @@ function HomeUI({
     }
 
     if (savedScrollPosition) {
-      window.scrollTo({ top: savedScrollPosition });
+      window.scrollTo({ top: savedScrollPosition, behavior: 'instant' });
     }
 
     const handleScroll = () => {
@@ -166,7 +167,7 @@ function HomeUI({
     handleSearchInputChange({ target: { value: '' } });
 
     // Scroll to Top
-    window.scrollTo({ top: 0 });
+    window.scrollTo({ top: 0, behavior: 'instant' });
   };
 
   const handleSearchInputChange = (e) => {
