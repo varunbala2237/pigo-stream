@@ -72,8 +72,8 @@ function SearchGrid({ searchQuery, setIsSearchLoaded, setHasSearchContent }) {
           )}
           <div
             ref={moviesRef1}
-            className="d-flex overflow-auto"
-            style={{ scrollSnapType: 'x mandatory', gap: '1rem' }}
+            className="d-flex overflow-auto gap-3"
+            style={{ scrollSnapType: 'x mandatory' }}
           >
             {(searchQuery.trim()
               ? (movies?.slice(0, Math.ceil(movies.length / 2)) || []).concat(
@@ -126,8 +126,8 @@ function SearchGrid({ searchQuery, setIsSearchLoaded, setHasSearchContent }) {
           )}
           <div
             ref={moviesRef2}
-            className="d-flex overflow-auto"
-            style={{ scrollSnapType: 'x mandatory', gap: '1rem' }}
+            className="d-flex overflow-auto gap-3"
+            style={{ scrollSnapType: 'x mandatory' }}
           >
             {(searchQuery.trim()
               ? (movies?.slice(Math.ceil(movies.length / 2)) || [])
@@ -181,8 +181,8 @@ function SearchGrid({ searchQuery, setIsSearchLoaded, setHasSearchContent }) {
           )}
           <div
             ref={showsRef1}
-            className="d-flex overflow-auto"
-            style={{ scrollSnapType: 'x mandatory', gap: '1rem' }}
+            className="d-flex overflow-auto gap-3"
+            style={{ scrollSnapType: 'x mandatory' }}
           >
             {(searchQuery.trim()
               ? (shows?.slice(0, Math.ceil(shows.length / 2)) || []).concat(
@@ -235,8 +235,8 @@ function SearchGrid({ searchQuery, setIsSearchLoaded, setHasSearchContent }) {
           )}
           <div
             ref={showsRef2}
-            className="d-flex overflow-auto"
-            style={{ scrollSnapType: 'x mandatory', gap: '1rem' }}
+            className="d-flex overflow-auto gap-3"
+            style={{ scrollSnapType: 'x mandatory' }}
           >
             {(searchQuery.trim()
               ? (shows?.slice(Math.ceil(shows.length / 2)) || []).concat(
