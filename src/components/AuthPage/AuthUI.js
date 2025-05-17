@@ -14,7 +14,7 @@ import {
 import useCreateUser from '../../hooks/AuthPage/useCreateUser';
 import Alert from '../../utils/Alert';
 
-import { setSessionValue } from '../../utils/sessionStorageStates';
+import { getSessionValue, setSessionValue } from '../../utils/sessionStorageStates';
 
 function AuthUI() {
     const navigate = useNavigate();
@@ -85,6 +85,24 @@ function AuthUI() {
             window.removeEventListener('focus', checkEmailVerification);
         };
     }, [navigate]);
+
+    useEffect(() => {
+        // Restore session values
+        const savedEmail = getSessionValue('AuthUI', 'email');
+        const savedUserName = getSessionValue('AuthUI', 'userName');
+        const savedScrollY = getSessionValue('AuthUI', 'pageScrollState');
+
+        if (savedEmail) setEmail(savedEmail);
+        if (savedUserName) setUserName(savedUserName);
+        if (savedScrollY) window.scrollTo(0, savedScrollY);
+
+        const handleScroll = () => {
+            setSessionValue('AuthUI', 'pageScrollState', window.scrollY);
+        };
+
+        window.addEventListener('scroll', handleScroll);
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, []);
 
     useEffect(() => {
         if (resendCooldown > 0) {

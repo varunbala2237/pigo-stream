@@ -72,18 +72,16 @@ function HomeUI({
       setTriggerSearch(savedSearchQuery);
     }
 
-    if (savedScrollPosition) {
-      window.scrollTo({ top: savedScrollPosition, behavior: 'instant' });
-    }
+    if (savedScrollPosition) window.scrollTo({ top: savedScrollPosition, behavior: 'instant' });
 
-    const handleScroll = () => {
+    const handlePageScroll = () => {
       const scrollPosition = window.scrollY;
       setSessionValue('HomeUI', 'pageScrollState', scrollPosition);
     };
 
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handlePageScroll);
     return () => {
-      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('scroll', handlePageScroll);
     };
   }, [setTriggerSearch]);
 
