@@ -59,9 +59,11 @@ function ProvidersGrid({ setIsProvidersLoaded, setHasProvidersContent }) {
 
         setSelectedProvider(savedProvider ?? PROVIDERS[0].id);
 
-        if (providersRef.current) providersRef.current.scrollTo({ left: savedProvidersScroll, behavior: 'instant' });
-        if (moviesRef.current) moviesRef.current.scrollTo({ left: savedMoviesScroll, behavior: 'instant' });
-        if (showsRef.current) showsRef.current.scrollTo({ left: savedShowsScroll, behavior: 'instant' });
+        requestAnimationFrame(() => {
+            if (providersRef.current) providersRef.current.scrollTo({ left: savedProvidersScroll, behavior: 'instant' });
+            if (moviesRef.current) moviesRef.current.scrollTo({ left: savedMoviesScroll, behavior: 'instant' });
+            if (showsRef.current) showsRef.current.scrollTo({ left: savedShowsScroll, behavior: 'instant' });
+        });
     }, [isLoading, isError]);
 
     // Save selectedProvider and providersScroll on change

@@ -41,8 +41,10 @@ function TrendingGrid({ setIsTrendingLoaded, setHasTrendingContent }) {
     const savedMoviesScroll = getSessionValue(...SESSION_PATH, 'moviesScroll') || 0;
     const savedShowsScroll = getSessionValue(...SESSION_PATH, 'showsScroll') || 0;
 
-    if (moviesRef.current) moviesRef.current.scrollTo({ left: savedMoviesScroll, behavior: 'instant' });
-    if (showsRef.current) showsRef.current.scrollTo({ left: savedShowsScroll, behavior: 'instant' });
+    requestAnimationFrame(() => {
+      if (moviesRef.current) moviesRef.current.scrollTo({ left: savedMoviesScroll, behavior: 'instant' });
+      if (showsRef.current) showsRef.current.scrollTo({ left: savedShowsScroll, behavior: 'instant' });
+    });
   }, [isLoading, isError]);
 
   // Save scroll positions for movies and shows
