@@ -88,22 +88,32 @@ function AuthUI() {
 
     useEffect(() => {
         // Restore session values
-        const savedEmail = getSessionValue('AuthUI', 'email');
-        const savedUserName = getSessionValue('AuthUI', 'userName');
-        const savedScrollY = getSessionValue('AuthUI', 'pageScrollState');
+        const savedUserName = getSessionValue('AuthUI', 'userName') || '';
+        const savedEmail = getSessionValue('AuthUI', 'email') || '';
+        const savedScrollY = getSessionValue('AuthUI', 'pageScrollState') || 0;
 
-        if (savedEmail) setEmail(savedEmail);
         if (savedUserName) setUserName(savedUserName);
-        if (savedScrollY) window.scrollTo(0, savedScrollY);
+        if (savedEmail) setEmail(savedEmail);
+        if (savedScrollY) window.scrollTo({ top: savedScrollY, behavior: 'instant' });
 
-        const handleScroll = () => {
+        const handlePageScroll = () => {
             setSessionValue('AuthUI', 'pageScrollState', window.scrollY);
         };
 
-        window.addEventListener('scroll', handleScroll);
-        return () => window.removeEventListener('scroll', handleScroll);
+        window.addEventListener('scroll', handlePageScroll);
+        return () => window.removeEventListener('scroll', handlePageScroll);
     }, []);
 
+    // Save session values
+    useEffect(() => {
+        setSessionValue('AuthUI', 'userName', userName);
+    }, [userName]);
+
+    useEffect(() => {
+        setSessionValue('AuthUI', 'email', email);
+    }, [email]);
+
+    // Resend button cooldown
     useEffect(() => {
         if (resendCooldown > 0) {
             const intervalId = setInterval(() => {
