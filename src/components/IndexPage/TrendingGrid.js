@@ -58,16 +58,16 @@ function TrendingGrid({ setIsTrendingLoaded, setHasTrendingContent }) {
       setSessionValue(...SESSION_PATH, 'moviesScroll', moviesNode.scrollLeft);
     };
 
-    const handleTvScroll = () => {
+    const handleShowsScroll = () => {
       setSessionValue(...SESSION_PATH, 'showsScroll', showsNode.scrollLeft);
     };
 
     moviesNode.addEventListener('scroll', handleMoviesScroll);
-    showsNode.addEventListener('scroll', handleTvScroll);
+    showsNode.addEventListener('scroll', handleShowsScroll);
 
     return () => {
       moviesNode.removeEventListener('scroll', handleMoviesScroll);
-      showsNode.removeEventListener('scroll', handleTvScroll);
+      showsNode.removeEventListener('scroll', handleShowsScroll);
     };
   }, []);
 

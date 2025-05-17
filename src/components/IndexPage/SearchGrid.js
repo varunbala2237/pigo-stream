@@ -3,6 +3,10 @@ import { useLocation } from 'react-router-dom';
 import Card from '../Card';
 import useFetchSearch from '../../hooks/IndexPage/useFetchSearch';
 
+import { getSessionValue, setSessionValue } from '../../utils/sessionStorageStates';
+
+const SESSION_PATH = ['HomeUI', 'Grids', 'SearchGrid'];
+
 function SearchGrid({ searchQuery, setIsSearchLoaded, setHasSearchContent }) {
   // Fetch data from useSearch
   const { data: movies, loading: moviesLoading, error: moviesError } = useFetchSearch('movie', searchQuery);
@@ -32,6 +36,59 @@ function SearchGrid({ searchQuery, setIsSearchLoaded, setHasSearchContent }) {
       setHasSearchContent(hasContent);
     }
   }, [isLoading, isError, movies, shows, setHasSearchContent]);
+
+  // Load from sessionStorage on mount
+  useEffect(() => {
+    const savedMoviesScroll1 = getSessionValue(...SESSION_PATH, 'moviesScroll1') || 0;
+    const savedMoviesScroll2 = getSessionValue(...SESSION_PATH, 'moviesScroll2') || 0;
+    const savedShowsScroll1 = getSessionValue(...SESSION_PATH, 'showsScroll1') || 0;
+    const savedShowsScroll2 = getSessionValue(...SESSION_PATH, 'showsScroll2') || 0;
+
+    requestAnimationFrame(() => {
+      if (moviesRef1.current) moviesRef1.current.scrollTo({ left: savedMoviesScroll1, behavior: 'instant' });
+      if (moviesRef2.current) moviesRef2.current.scrollTo({ left: savedMoviesScroll2, behavior: 'instant' });
+      if (showsRef1.current) showsRef1.current.scrollTo({ left: savedShowsScroll1, behavior: 'instant' });
+      if (showsRef2.current) showsRef2.current.scrollTo({ left: savedShowsScroll2, behavior: 'instant' });
+    });
+  }, [isLoading, isError]);
+
+  // Save scroll positions for movies and shows
+  useEffect(() => {
+    const moviesNode1 = moviesRef1.current;
+    const moviesNode2 = moviesRef2.current;
+    const showsNode1 = showsRef1.current;
+    const showsNode2 = showsRef2.current;
+
+    if (!moviesNode1 || !moviesNode2 || !showsNode1 || !showsNode2) return;
+
+    const handleMoviesScroll1 = () => {
+      setSessionValue(...SESSION_PATH, 'moviesScroll1', moviesNode1.scrollLeft);
+    };
+
+    const handleMoviesScroll2 = () => {
+      setSessionValue(...SESSION_PATH, 'moviesScroll2', moviesNode2.scrollLeft);
+    };
+
+    const handleShowsScroll1 = () => {
+      setSessionValue(...SESSION_PATH, 'showsScroll1', showsNode1.scrollLeft);
+    };
+
+    const handleShowsScroll2 = () => {
+      setSessionValue(...SESSION_PATH, 'showsScroll2', showsNode2.scrollLeft);
+    };
+
+    moviesNode1.addEventListener('scroll', handleMoviesScroll1);
+    moviesNode2.addEventListener('scroll', handleMoviesScroll2);
+    showsNode1.addEventListener('scroll', handleShowsScroll1);
+    showsNode2.addEventListener('scroll', handleShowsScroll2);
+
+    return () => {
+      moviesNode1.removeEventListener('scroll', handleMoviesScroll1);
+      moviesNode2.removeEventListener('scroll', handleMoviesScroll2);
+      showsNode1.removeEventListener('scroll', handleShowsScroll1);
+      showsNode2.removeEventListener('scroll', handleShowsScroll2);
+    };
+  }, []);
 
   const scroll = (ref, direction) => {
     if (ref.current) {
