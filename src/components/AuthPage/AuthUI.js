@@ -96,7 +96,11 @@ function AuthUI() {
         if (savedUserName) setUserName(savedUserName);
         if (savedEmail) setEmail(savedEmail);
         setIsSignIn(savedIsSignInState);
-        if (savedScrollY) window.scrollTo({ top: savedScrollY, behavior: 'instant' });
+        if (savedScrollY) {
+            requestAnimationFrame(() => {
+                window.scrollTo({ top: savedScrollY, behavior: 'instant' });
+            });
+        }
 
         const handlePageScroll = () => {
             setSessionValue('AuthUI', 'pageScrollState', window.scrollY);

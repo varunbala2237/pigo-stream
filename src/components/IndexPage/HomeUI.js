@@ -72,7 +72,11 @@ function HomeUI({
       setTriggerSearch(savedSearchQuery);
     }
 
-    if (savedScrollPosition) window.scrollTo({ top: savedScrollPosition, behavior: 'instant' });
+    if (savedScrollPosition) {
+      requestAnimationFrame(() => {
+        window.scrollTo({ top: savedScrollPosition, behavior: 'instant' });
+      });
+    }
 
     const handlePageScroll = () => {
       const scrollPosition = window.scrollY;
@@ -165,7 +169,9 @@ function HomeUI({
     handleSearchInputChange({ target: { value: '' } });
 
     // Scroll to Top
-    window.scrollTo({ top: 0, behavior: 'instant' });
+    requestAnimationFrame(() => {
+      window.scrollTo({ top: 0, behavior: 'instant' });
+    });
   };
 
   const handleSearchInputChange = (e) => {
