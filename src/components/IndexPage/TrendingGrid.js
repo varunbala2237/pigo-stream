@@ -3,6 +3,10 @@ import { useLocation } from 'react-router-dom';
 import Card from '../Card';
 import useFetchMedia from '../../hooks/IndexPage/useFetchMedia';
 
+import { getSessionValue, setSessionValue } from '../../utils/sessionStorageStates';
+
+const SESSION_PATH = ['HomeUI', 'Grids', 'TrendingGrid'];
+
 function TrendingGrid({ setIsTrendingLoaded, setHasTrendingContent }) {
   const { data: movies, loading: isLoadingMovies, error: isErrorMovies } = useFetchMedia('trending', 'movie');
   const { data: shows, loading: isLoadingShows, error: isErrorShows } = useFetchMedia('trending', 'tv');
@@ -32,18 +36,42 @@ function TrendingGrid({ setIsTrendingLoaded, setHasTrendingContent }) {
     }
   }, [isLoading, isError, movies, shows, setHasTrendingContent]);
 
-  const scrollMovies = (direction) => {
-    if (moviesRef.current) {
-      moviesRef.current.scrollBy({
-        left: direction === 'left' ? -450 : 450,
-        behavior: 'smooth',
-      });
-    }
-  };
+  // Load from sessionStorage on mount
+  useEffect(() => {
+    const savedMoviesScroll = getSessionValue(...SESSION_PATH, 'moviesScroll') || 0;
+    const savedShowsScroll = getSessionValue(...SESSION_PATH, 'showsScroll') || 0;
 
-  const scrollTvShows = (direction) => {
-    if (showsRef.current) {
-      showsRef.current.scrollBy({
+    if (moviesRef.current) moviesRef.current.scrollTo({ left: savedMoviesScroll, behavior: 'instant' });
+    if (showsRef.current) showsRef.current.scrollTo({ left: savedShowsScroll, behavior: 'instant' });
+  }, [isLoading, isError]);
+
+  // Save scroll positions for movies and shows
+  useEffect(() => {
+    const moviesNode = moviesRef.current;
+    const showsNode = showsRef.current;
+
+    if (!moviesNode || !showsNode) return;
+
+    const handleMoviesScroll = () => {
+      setSessionValue(...SESSION_PATH, 'moviesScroll', moviesNode.scrollLeft);
+    };
+
+    const handleTvScroll = () => {
+      setSessionValue(...SESSION_PATH, 'showsScroll', showsNode.scrollLeft);
+    };
+
+    moviesNode.addEventListener('scroll', handleMoviesScroll);
+    showsNode.addEventListener('scroll', handleTvScroll);
+
+    return () => {
+      moviesNode.removeEventListener('scroll', handleMoviesScroll);
+      showsNode.removeEventListener('scroll', handleTvScroll);
+    };
+  }, []);
+
+  const scroll = (ref, direction) => {
+    if (ref.current) {
+      ref.current.scrollBy({
         left: direction === 'left' ? -450 : 450,
         behavior: 'smooth',
       });
@@ -63,21 +91,21 @@ function TrendingGrid({ setIsTrendingLoaded, setHasTrendingContent }) {
             <>
               <button
                 className="btn btn-dark custom-bg rounded-pill py-2 position-absolute start-0 translate-middle-y d-none d-md-block"
-                onClick={() => scrollMovies('left')}
+                onClick={() => scroll(moviesRef, 'left')}
                 style={{ zIndex: 1, top: '50%', transform: 'translateY(-50%)' }}
               >
                 <i className="bi bi-chevron-left"></i>
               </button>
               <button
                 className="btn btn-dark custom-bg rounded-pill py-2 position-absolute end-0 translate-middle-y d-none d-md-block"
-                onClick={() => scrollMovies('right')}
+                onClick={() => scroll(moviesRef, 'right')}
                 style={{ zIndex: 1, top: '50%', transform: 'translateY(-50%)' }}
               >
                 <i className="bi bi-chevron-right"></i>
               </button>
             </>
           )}
-          <div ref={moviesRef} className="d-flex overflow-auto" style={{ scrollSnapType: 'x mandatory', gap: '1rem' }}>
+          <div ref={moviesRef} className="d-flex overflow-auto gap-3" style={{ scrollSnapType: 'x mandatory' }}>
             {(
               !isLoading && !isError && movies?.length > 0 ? movies : []
             )
@@ -107,21 +135,21 @@ function TrendingGrid({ setIsTrendingLoaded, setHasTrendingContent }) {
             <>
               <button
                 className="btn btn-dark custom-bg rounded-pill py-2 position-absolute start-0 translate-middle-y d-none d-md-block"
-                onClick={() => scrollTvShows('left')}
+                onClick={() => scroll(showsRef, 'left')}
                 style={{ zIndex: 1, top: '50%', transform: 'translateY(-50%)' }}
               >
                 <i className="bi bi-chevron-left"></i>
               </button>
               <button
                 className="btn btn-dark custom-bg rounded-pill py-2 position-absolute end-0 translate-middle-y d-none d-md-block"
-                onClick={() => scrollTvShows('right')}
+                onClick={() => scroll(showsRef, 'right')}
                 style={{ zIndex: 1, top: '50%', transform: 'translateY(-50%)' }}
               >
                 <i className="bi bi-chevron-right"></i>
               </button>
             </>
           )}
-          <div ref={showsRef} className="d-flex overflow-auto" style={{ scrollSnapType: 'x mandatory', gap: '1rem' }}>
+          <div ref={showsRef} className="d-flex overflow-auto gap-3" style={{ scrollSnapType: 'x mandatory' }}>
             {(
               !isLoading && !isError && shows?.length > 0 ? shows : []
             )

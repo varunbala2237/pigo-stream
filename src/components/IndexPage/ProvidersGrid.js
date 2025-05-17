@@ -81,13 +81,12 @@ function ProvidersGrid({ setIsProvidersLoaded, setHasProvidersContent }) {
         return () => providersNode.removeEventListener('scroll', handleProvidersScroll);
     }, [selectedProvider]);
 
-    // Save scroll positions for movies and TV
+    // Save scroll positions for movies and shows
     useEffect(() => {
         const moviesNode = moviesRef.current;
         const showsNode = showsRef.current;
 
-        if (!moviesNode) return;
-        if (!showsNode) return;
+        if (!moviesNode || !showsNode) return;
 
         const handleMoviesScroll = () => {
             setSessionValue(...SESSION_PATH, 'moviesScroll', moviesNode.scrollLeft);
