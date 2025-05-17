@@ -37,9 +37,8 @@ function AuthUI() {
         }, 10000); // Set a timeout of 10 seconds
 
         const triggerIndexPage = () => {
-            sessionStorage.setItem('welcomeMessage', "Welcome to PigoStream!");
             setShowResendButton(false);
-            navigate('/index');
+            navigate('/index'); // Navigate to index
         };
 
         const unsubscribe = auth.onAuthStateChanged(async (user) => {
@@ -145,6 +144,12 @@ function AuthUI() {
 
             // Sending verification email
             await sendEmailVerification(user);
+
+            // Welcome message for new user
+            const isNewUser = user.metadata.creationTime === user.metadata.lastSignInTime;
+            if (isNewUser) {
+                sessionStorage.setItem('welcomeMessage', "Welcome to PigoStream!");
+            }
 
             setAlertMessage("Verification email sent! Please check your inbox.");
             setShowResendButton(true);
