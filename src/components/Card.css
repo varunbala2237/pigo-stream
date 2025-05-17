@@ -9,6 +9,7 @@
 /* Shadow effect for rating and media type */
 .card-overlay .rating-box,
 .card-overlay .media-type-box {
+  margin: 5px 0px;
   padding: 6px 4px;
   backdrop-filter: blur(4px);
 }
