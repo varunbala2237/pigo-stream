@@ -31,7 +31,6 @@ function HomeUI({
   const navigate = useNavigate();
 
   const [searchQuery, setSearchQuery] = useState('');
-  const [selectedButton, setSelectedButton] = useState('all');
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [welcomeMessage, setWelcomeMessage] = useState('');
 
@@ -58,7 +57,7 @@ function HomeUI({
     const savedWelcomeMessage = getSessionValue('HomeUI', 'welcomeMessage');
     const savedSearchQuery = getSessionValue('HomeUI', 'searchQuery') || '';
     const savedScrollPosition = getSessionValue('HomeUI', 'pageScrollState') || 0;
-    
+
     if (savedWelcomeMessage) {
       setWelcomeMessage(savedWelcomeMessage);
       setTimeout(() => {
@@ -67,31 +66,27 @@ function HomeUI({
       }, 5000);
     }
 
-    const savedPageState = sessionStorage.getItem('indexPageState');
-    if (savedPageState) {
-      const { savedFilter, savedScrollPosition, savedSearchQuery } = JSON.parse(savedPageState);
-      if (savedFilter) setSelectedButton(savedFilter);
-      if (savedSearchQuery && savedSearchQuery.trim() !== '') {
-        setSearchQuery(savedSearchQuery);
-        setTriggerSearch(savedSearchQuery);
-      }
-      if (savedScrollPosition !== undefined) {
-        setTimeout(() => {
-          window.scrollTo({ top: savedScrollPosition });
-        }, 500);
-      }
+    if (savedSearchQuery.trim() !== '') {
+      setSearchQuery(savedSearchQuery);
+      setTriggerSearch(savedSearchQuery);
+    }
+
+    if (savedScrollPosition) {
+      setTimeout(() => {
+        window.scrollTo({ top: savedScrollPosition });
+      }, 500);
     }
 
     const handleScroll = () => {
       const scrollPosition = window.scrollY;
-      updateLocalStorage(selectedButton, scrollPosition, searchQuery);
+      setSessionValue('HomeUI', 'pageScrollState', scrollPosition);
     };
 
     window.addEventListener('scroll', handleScroll);
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
-  }, [searchQuery, selectedButton, setTriggerSearch]);
+  }, [setTriggerSearch]);
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -179,7 +174,7 @@ function HomeUI({
   const handleSearchInputChange = (e) => {
     const query = e.target.value;
     setSearchQuery(query);
-    updateLocalStorage(selectedButton, window.scrollY, query);
+    setSessionValue('HomeUI', 'searchQuery', query);
     if (query === '') setTriggerSearch('');
   };
 
@@ -202,15 +197,6 @@ function HomeUI({
     e.preventDefault();
     removeSearchHistory(id);
     refetch();
-  };
-
-  const updateLocalStorage = (filter, scrollPosition, query) => {
-    const pageState = JSON.stringify({
-      savedFilter: filter,
-      savedScrollPosition: scrollPosition,
-      savedSearchQuery: query,
-    });
-    sessionStorage.setItem('indexPageState', pageState);
   };
 
   const handleAlertDismiss = () => {
