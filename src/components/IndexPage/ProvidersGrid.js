@@ -70,13 +70,19 @@ function ProvidersGrid({ setIsProvidersLoaded, setHasProvidersContent }) {
 
     // Save selectedProvider and providersScroll on change
     useEffect(() => {
+        const providersNode = providersRef.current;
+        if (!providersNode) return;
+
         if (selectedProvider !== null) {
             setSessionValue(...SESSION_PATH, 'selectedProvider', selectedProvider);
         }
 
-        if (providersRef.current) {
-            setSessionValue(...SESSION_PATH, 'providersScroll', providersRef.current.scrollLeft);
-        }
+        const handleProvidersScroll = () => {
+            setSessionValue(...SESSION_PATH, 'providersScroll', providersNode.scrollLeft);
+        };
+
+        providersNode.addEventListener('scroll', handleProvidersScroll);
+        return () => providersNode.removeEventListener('scroll', handleProvidersScroll);
     }, [selectedProvider]);
 
     const scroll = (ref, direction) => {
