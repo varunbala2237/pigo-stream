@@ -79,29 +79,13 @@ function ProvidersGrid({ setIsProvidersLoaded, setHasProvidersContent }) {
         }
     }, [selectedProvider]);
 
-    // Save scroll positions on scroll
     useEffect(() => {
-        const moviesNode = moviesRef.current;
-        const tvNode = tvRef.current;
-
-        if (!moviesNode || !tvNode) return;
-
-        const onMoviesScroll = () => {
-            setSessionValue(...SESSION_PATH, 'moviesScroll', moviesNode.scrollLeft);
-        };
-
-        const onTvScroll = () => {
-            setSessionValue(...SESSION_PATH, 'tvScroll', tvNode.scrollLeft);
-        };
-
-        moviesNode.addEventListener('scroll', onMoviesScroll);
-        tvNode.addEventListener('scroll', onTvScroll);
-
-        return () => {
-            moviesNode.removeEventListener('scroll', onMoviesScroll);
-            tvNode.removeEventListener('scroll', onTvScroll);
-        };
-    }, []);
+        if (providersRef.current) {
+            const node = providersRef.current;
+            const maxScrollLeft = node.scrollWidth - node.clientWidth;
+            alert(`Max scroll left of providers container: ${maxScrollLeft}`);
+        }
+    }, [providersRef]);
 
     const scroll = (ref, direction) => {
         if (ref.current) {
