@@ -13,6 +13,8 @@ import Alert from '../../utils/Alert';
 import ProvidersGrid from './ProvidersGrid';
 import './HomeUI.css';
 
+import { getSessionValue, setSessionValue, removeSessionValue } from '../../utils/sessionStorageStates';
+
 function HomeUI({
   title,
   mediaId,
@@ -53,11 +55,13 @@ function HomeUI({
   const removeSearchHistory = useRemoveSearchHistory();
 
   useEffect(() => {
-    const savedWelcomeMessage = sessionStorage.getItem('welcomeMessage');
+    const savedWelcomeMessage = getSessionValue('HomeUI', 'welcomeMessage');
     if (savedWelcomeMessage) {
       setWelcomeMessage(savedWelcomeMessage);
-      setTimeout(() => setWelcomeMessage(''), 5000);
-      sessionStorage.removeItem('welcomeMessage');
+      setTimeout(() => {
+        setWelcomeMessage('');
+        removeSessionValue('HomeUI', 'welcomeMessage');
+      }, 5000);
     }
 
     const savedPageState = sessionStorage.getItem('indexPageState');
@@ -338,7 +342,7 @@ function HomeUI({
 
         {/* Footer Backspace & Footer */}
         <div className="divider" style={{ height: '5rem' }}></div>
-        <Footer showSearchBar={showSearchBar} handleSearchBar={handleSearchBar}/>
+        <Footer showSearchBar={showSearchBar} handleSearchBar={handleSearchBar} />
 
         {/* Connection Modal */}
         {showConnectionModal && <ConnectionModal show={showConnectionModal} />}

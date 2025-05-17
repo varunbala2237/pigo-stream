@@ -38,3 +38,26 @@ export function setSessionValue(...args) {
   nested[lastKey] = value;
   setSessionObject(obj);
 }
+
+// Remove all page states from sessionStorage state
+export function removeSessionValue(...path) {
+  if (path.length === 0) return;
+
+  const keys = [...path];
+  const lastKey = keys.pop();
+
+  let obj = getSessionObject();
+  let nested = obj;
+
+  for (const key of keys) {
+    if (!nested[key] || typeof nested[key] !== 'object') {
+      return;
+    }
+    nested = nested[key];
+  }
+
+  if (nested && Object.prototype.hasOwnProperty.call(nested, lastKey)) {
+    delete nested[lastKey];
+    setSessionObject(obj);
+  }
+}
