@@ -42,37 +42,44 @@ function AuthUI() {
         };
 
         const unsubscribe = auth.onAuthStateChanged(async (user) => {
-            clearTimeout(timeoutId); // Clear the timeout if confirmation is received
-            setIsLoading(false);
+            clearTimeout(timeoutId); // Clear fallback
 
-            if (!user) return;
+            if (!user) {
+                setIsLoading(false);
+                return; // !important
+            }
 
-            // Reload user info
-            await user.reload();
-            if (user) {
-                if (user.emailVerified) {
-                    triggerIndexPage();
-                }
+            // Safe reload with fallback on failure
+            await user.reload().catch(() => {
+                setIsLoading(false);
+                return;
+            });
+
+            if (user?.emailVerified) {
+                triggerIndexPage();
+            } else {
+                setIsLoading(false);
             }
         });
 
         const checkEmailVerification = async () => {
             const user = auth.currentUser;
 
+            if (!user) return; // !important
+
             // Reload user info
             await user.reload();
-            if (user) {
-                if (user.emailVerified) {
-                    triggerIndexPage();
-                }
+
+            if (user?.emailVerified) {
+                triggerIndexPage();
             }
         };
 
         window.addEventListener('focus', checkEmailVerification);
 
         return () => {
-            clearTimeout(timeoutId); // Clean up the timeout
-            unsubscribe(); // Clean up the observer
+            clearTimeout(timeoutId); // Clear fallback
+            unsubscribe(); // Safe to call
             window.removeEventListener('focus', checkEmailVerification);
         };
     }, [navigate]);
@@ -102,6 +109,7 @@ function AuthUI() {
             if (user) {
                 // Reload user info
                 await user.reload();
+
                 if (!user.emailVerified) {
                     setAlertMessage("Email verification pending. Please click resend and check your inbox.");
                     setShowResendButton(true);
@@ -169,6 +177,8 @@ function AuthUI() {
             try {
                 // Reload user state and send verification email
                 await user.reload();
+
+                // Sending verification email
                 await sendEmailVerification(user);
 
                 setAlertMessage('Verification email resent! Check your inbox.');
