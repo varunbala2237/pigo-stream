@@ -3,6 +3,8 @@ import { useLocation } from 'react-router-dom';
 import Card from '../Card';
 import useFetchProviders from '../../hooks/IndexPage/useFetchProviders';
 
+import { getSessionValue, setSessionValue } from '../../utils/sessionStorageStates';
+
 const PROVIDERS = [
     { id: 8, name: 'Netflix', region: 'IN', bg: 'white', logo: 'https://upload.wikimedia.org/wikipedia/commons/0/08/Netflix_2015_logo.svg' },
     { id: 9, name: 'Amazon Prime', region: 'US', bg: 'white', logo: 'https://upload.wikimedia.org/wikipedia/commons/f/f1/Prime_Video.png' },
@@ -17,6 +19,8 @@ const PROVIDERS = [
     { id: 123, name: 'FXNow', region: 'US', bg: 'white', logo: 'https://cdn2.downdetector.com/static/uploads/c/300/f4061/FXNOW-logo.png' },
     { id: 283, name: 'Crunchyroll', region: 'US', bg: 'white', logo: 'https://upload.wikimedia.org/wikipedia/commons/8/85/Crunchyroll_2024_stacked.svg' },
 ];
+
+const SESSION_PATH = ['HomeUI', 'Grids', 'ProvidersGrid'];
 
 function ProvidersGrid({ setIsProvidersLoaded, setHasProvidersContent }) {
     const [selectedProvider, setSelectedProvider] = useState(null);
@@ -46,44 +50,62 @@ function ProvidersGrid({ setIsProvidersLoaded, setHasProvidersContent }) {
         }
     }, [isLoading, isError, movies, shows, setHasProvidersContent]);
 
-    // Load selected provider from localStorage or default to Netflix
+    // Load from sessionStorage on mount
     useEffect(() => {
-        const savedProvider = localStorage.getItem('selectedProvider');
-        if (savedProvider) {
-            setSelectedProvider(Number(savedProvider));
-        } else {
-            setSelectedProvider(PROVIDERS[0].id);
-        }
+        const savedProvider = getSessionValue(...SESSION_PATH, 'selectedProvider');
+        const savedProvidersScroll = getSessionValue(...SESSION_PATH, 'providersScroll') || 0;
+        const savedMoviesScroll = getSessionValue(...SESSION_PATH, 'moviesScroll') || 0;
+        const savedTvScroll = getSessionValue(...SESSION_PATH, 'tvScroll') || 0;
+
+        setSelectedProvider(savedProvider ?? PROVIDERS[0].id);
+
+        const timeoutId = setTimeout(() => {
+            if (providersRef.current) providersRef.current.scrollLeft = savedProvidersScroll;
+            if (moviesRef.current) moviesRef.current.scrollLeft = savedMoviesScroll;
+            if (tvRef.current) tvRef.current.scrollLeft = savedTvScroll;
+        }, 500);
+
+        return () => clearTimeout(timeoutId);
     }, []);
 
-    // Save selected provider to localStorage whenever it changes
+    // Save selectedProvider and providersScroll on change
     useEffect(() => {
         if (selectedProvider !== null) {
-            localStorage.setItem('selectedProvider', selectedProvider);
+            setSessionValue(...SESSION_PATH, 'selectedProvider', selectedProvider);
+        }
+
+        if (providersRef.current) {
+            setSessionValue(...SESSION_PATH, 'providersScroll', providersRef.current.scrollLeft);
         }
     }, [selectedProvider]);
 
-    const scrollMovies = (direction) => {
-        if (moviesRef.current) {
-            moviesRef.current.scrollBy({
-                left: direction === 'left' ? -450 : 450,
-                behavior: 'smooth',
-            });
-        }
-    };
+    // Save scroll positions on scroll
+    useEffect(() => {
+        const moviesNode = moviesRef.current;
+        const tvNode = tvRef.current;
 
-    const scrollTvShows = (direction) => {
-        if (tvRef.current) {
-            tvRef.current.scrollBy({
-                left: direction === 'left' ? -450 : 450,
-                behavior: 'smooth',
-            });
-        }
-    };
+        if (!moviesNode || !tvNode) return;
 
-    const scrollProviders = (direction) => {
-        if (providersRef.current) {
-            providersRef.current.scrollBy({
+        const onMoviesScroll = () => {
+            setSessionValue(...SESSION_PATH, 'moviesScroll', moviesNode.scrollLeft);
+        };
+
+        const onTvScroll = () => {
+            setSessionValue(...SESSION_PATH, 'tvScroll', tvNode.scrollLeft);
+        };
+
+        moviesNode.addEventListener('scroll', onMoviesScroll);
+        tvNode.addEventListener('scroll', onTvScroll);
+
+        return () => {
+            moviesNode.removeEventListener('scroll', onMoviesScroll);
+            tvNode.removeEventListener('scroll', onTvScroll);
+        };
+    }, []);
+
+    const scroll = (ref, direction) => {
+        if (ref.current) {
+            ref.current.scrollBy({
                 left: direction === 'left' ? -450 : 450,
                 behavior: 'smooth',
             });
@@ -98,14 +120,14 @@ function ProvidersGrid({ setIsProvidersLoaded, setHasProvidersContent }) {
                     <>
                         <button
                             className="btn btn-dark custom-bg rounded-pill py-2 position-absolute start-0 translate-middle-y d-none d-md-block"
-                            onClick={() => scrollProviders('left')}
+                            onClick={() => scroll(providersRef, 'left')}
                             style={{ zIndex: 1, top: '50%', transform: 'translateY(-50%)' }}
                         >
                             <i className="bi bi-chevron-left"></i>
                         </button>
                         <button
                             className="btn btn-dark custom-bg rounded-pill py-2 position-absolute end-0 translate-middle-y d-none d-md-block"
-                            onClick={() => scrollProviders('right')}
+                            onClick={() => scroll(providersRef, 'right')}
                             style={{ zIndex: 1, top: '50%', transform: 'translateY(-50%)' }}
                         >
                             <i className="bi bi-chevron-right"></i>
@@ -140,14 +162,14 @@ function ProvidersGrid({ setIsProvidersLoaded, setHasProvidersContent }) {
                     <>
                         <button
                             className="btn btn-dark custom-bg rounded-pill py-2 position-absolute start-0 translate-middle-y d-none d-md-block"
-                            onClick={() => scrollMovies('left')}
+                            onClick={() => scroll(moviesRef, 'left')}
                             style={{ zIndex: 1, top: '50%', transform: 'translateY(-50%)' }}
                         >
                             <i className="bi bi-chevron-left"></i>
                         </button>
                         <button
                             className="btn btn-dark custom-bg rounded-pill py-2 position-absolute end-0 translate-middle-y d-none d-md-block"
-                            onClick={() => scrollMovies('right')}
+                            onClick={() => scroll(moviesRef, 'right')}
                             style={{ zIndex: 1, top: '50%', transform: 'translateY(-50%)' }}
                         >
                             <i className="bi bi-chevron-right"></i>
@@ -182,14 +204,14 @@ function ProvidersGrid({ setIsProvidersLoaded, setHasProvidersContent }) {
                     <>
                         <button
                             className="btn btn-dark custom-bg rounded-pill py-2 position-absolute start-0 translate-middle-y d-none d-md-block"
-                            onClick={() => scrollTvShows('left')}
+                            onClick={() => scroll(tvRef, 'left')}
                             style={{ zIndex: 1, top: '50%', transform: 'translateY(-50%)' }}
                         >
                             <i className="bi bi-chevron-left"></i>
                         </button>
                         <button
                             className="btn btn-dark custom-bg rounded-pill py-2 position-absolute end-0 translate-middle-y d-none d-md-block"
-                            onClick={() => scrollTvShows('right')}
+                            onClick={() => scroll(tvRef, 'right')}
                             style={{ zIndex: 1, top: '50%', transform: 'translateY(-50%)' }}
                         >
                             <i className="bi bi-chevron-right"></i>

@@ -168,7 +168,9 @@ function HomeUI({
     handleSearchInputChange({ target: { value: '' } });
 
     // Scroll to Top
-    window.scrollTo({ top: 0 });
+    setTimeout(() => {
+      window.scrollTo({ top: 0 });
+    }, 500);
   };
 
   const handleSearchInputChange = (e) => {
