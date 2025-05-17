@@ -59,11 +59,9 @@ function ProvidersGrid({ setIsProvidersLoaded, setHasProvidersContent }) {
 
         setSelectedProvider(savedProvider ?? PROVIDERS[0].id);
 
-        if (!isLoading && !isError) {
-            if (providersRef.current) providersRef.current.scrollLeft = savedProvidersScroll;
-            if (moviesRef.current) moviesRef.current.scrollLeft = savedMoviesScroll;
-            if (showsRef.current) showsRef.current.scrollLeft = savedShowsScroll;
-        }
+        if (providersRef.current) providersRef.current.scrollTo({ left: savedProvidersScroll, behavior: 'instant' });
+        if (moviesRef.current) moviesRef.current.scrollTo({ left: savedMoviesScroll, behavior: 'instant' });
+        if (showsRef.current) showsRef.current.scrollTo({ left: savedShowsScroll, behavior: 'instant' });
     }, [isLoading, isError]);
 
     // Save selectedProvider and providersScroll on change
@@ -142,7 +140,7 @@ function ProvidersGrid({ setIsProvidersLoaded, setHasProvidersContent }) {
                 <div
                     ref={providersRef}
                     className="d-flex overflow-auto gap-3 px-4"
-                    style={{ scrollSnapType: 'x mandatory', scrollBehavior: 'smooth' }}
+                    style={{ scrollSnapType: 'x mandatory' }}
                 >
                     {PROVIDERS.map((provider) => (
                         <div
@@ -181,7 +179,7 @@ function ProvidersGrid({ setIsProvidersLoaded, setHasProvidersContent }) {
                         </button>
                     </>
                 )}
-                <div ref={moviesRef} className="d-flex overflow-auto gap-3" style={{ scrollSnapType: 'x mandatory', scrollBehavior: 'smooth' }}>
+                <div ref={moviesRef} className="d-flex overflow-auto gap-3" style={{ scrollSnapType: 'x mandatory' }}>
                     {(
                         !isLoading && !isError && movies?.length > 0 ? movies : []
                     )
@@ -223,7 +221,7 @@ function ProvidersGrid({ setIsProvidersLoaded, setHasProvidersContent }) {
                         </button>
                     </>
                 )}
-                <div ref={showsRef} className="d-flex overflow-auto gap-3" style={{ scrollSnapType: 'x mandatory', scrollBehavior: 'smooth' }}>
+                <div ref={showsRef} className="d-flex overflow-auto gap-3" style={{ scrollSnapType: 'x mandatory' }}>
                     {(
                         !isLoading && !isError && shows?.length > 0 ? shows : []
                     )
