@@ -72,9 +72,7 @@ function HomeUI({
     }
 
     if (savedScrollPosition) {
-      setTimeout(() => {
-        window.scrollTo({ top: savedScrollPosition });
-      }, 500);
+      window.scrollTo({ top: savedScrollPosition });
     }
 
     const handleScroll = () => {
@@ -168,9 +166,7 @@ function HomeUI({
     handleSearchInputChange({ target: { value: '' } });
 
     // Scroll to Top
-    setTimeout(() => {
-      window.scrollTo({ top: 0 });
-    }, 500);
+    window.scrollTo({ top: 0 });
   };
 
   const handleSearchInputChange = (e) => {
