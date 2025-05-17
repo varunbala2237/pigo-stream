@@ -202,10 +202,10 @@ function AuthUI() {
 
             if (user) {
                 const isNewUser = user.metadata.creationTime === user.metadata.lastSignInTime;
-                const welcomeMessage = isNewUser ? "Welcome to PigoStream!" : "Welcome back to PigoStream!";
 
-                // Store the welcome message in sessionStorage
-                sessionStorage.setItem('welcomeMessage', welcomeMessage);
+                if (isNewUser) {
+                    sessionStorage.setItem('welcomeMessage', "Welcome to PigoStream!");
+                }
             }
         } catch (error) {
             setAlertMessage(error.message);
