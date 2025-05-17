@@ -9,7 +9,7 @@ function setSessionObject(obj) {
   sessionStorage.setItem(SESSION_KEY, JSON.stringify(obj));
 }
 
-// Store all page states from sessionStorage
+// Store all states from sessionStorage
 export function getSessionValue(...path) {
   let obj = getSessionObject();
   for (let key of path) {
@@ -19,7 +19,7 @@ export function getSessionValue(...path) {
   return obj;
 }
 
-// Retrieve all page states from sessionStorage
+// Retrieve all states from sessionStorage
 export function setSessionValue(...args) {
   const value = args.pop(); // Last item is the value
   const keys = args;
@@ -39,7 +39,7 @@ export function setSessionValue(...args) {
   setSessionObject(obj);
 }
 
-// Remove all page states from sessionStorage state
+// Remove all states from sessionStorage state
 export function removeSessionValue(...path) {
   if (path.length === 0) return;
 

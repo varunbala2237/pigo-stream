@@ -56,6 +56,9 @@ function HomeUI({
 
   useEffect(() => {
     const savedWelcomeMessage = getSessionValue('HomeUI', 'welcomeMessage');
+    const savedSearchQuery = getSessionValue('HomeUI', 'searchQuery') || '';
+    const savedScrollPosition = getSessionValue('HomeUI', 'pageScrollState') || 0;
+    
     if (savedWelcomeMessage) {
       setWelcomeMessage(savedWelcomeMessage);
       setTimeout(() => {
