@@ -90,10 +90,12 @@ function AuthUI() {
         // Restore session values
         const savedUserName = getSessionValue('AuthUI', 'userName') || '';
         const savedEmail = getSessionValue('AuthUI', 'email') || '';
+        const savedIsSignInState = getSessionValue('AuthUI', 'isSignInState') ?? true;
         const savedScrollY = getSessionValue('AuthUI', 'pageScrollState') || 0;
 
         if (savedUserName) setUserName(savedUserName);
         if (savedEmail) setEmail(savedEmail);
+        setIsSignIn(savedIsSignInState);
         if (savedScrollY) window.scrollTo({ top: savedScrollY, behavior: 'instant' });
 
         const handlePageScroll = () => {
@@ -246,7 +248,11 @@ function AuthUI() {
     const toggleAuthMode = () => {
         setAlertMessage('');
         setShowResendButton(false);
-        setIsSignIn((prev) => !prev);
+        setIsSignIn((prev) => {
+            const next = !prev;
+            setSessionValue('AuthUI', 'isSignInState', next);
+            return next;
+        });
     };
 
     const handleAlertDismiss = () => {
