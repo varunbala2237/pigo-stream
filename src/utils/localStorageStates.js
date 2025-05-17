@@ -1,6 +1,5 @@
 // localStorageStates.js
 
-/* Media functions */
 // Store media states in localStorage
 export const setLocalMediaStates = (id, settings) => {
   localStorage.setItem(`media_${id}_states`, JSON.stringify(settings));
