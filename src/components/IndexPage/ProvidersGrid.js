@@ -79,14 +79,6 @@ function ProvidersGrid({ setIsProvidersLoaded, setHasProvidersContent }) {
         }
     }, [selectedProvider]);
 
-    useEffect(() => {
-        if (providersRef.current) {
-            const node = providersRef.current;
-            const maxScrollLeft = node.scrollWidth - node.clientWidth;
-            alert(`Max scroll left of providers container: ${maxScrollLeft}`);
-        }
-    }, [providersRef]);
-
     const scroll = (ref, direction) => {
         if (ref.current) {
             ref.current.scrollBy({
