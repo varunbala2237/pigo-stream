@@ -141,8 +141,8 @@ function MyListGrid({ userUID }) {
 
                 <div
                     ref={moviesRef1}
-                    className="d-flex overflow-auto"
-                    style={{ scrollSnapType: 'x mandatory', gap: '1rem' }}
+                    className="d-flex overflow-auto gap-3"
+                    style={{ scrollSnapType: 'x mandatory' }}
                 >
                     {(movieList?.slice(0, Math.ceil(movieList.length / 2)) || []).concat(
                         Array.from({
@@ -198,8 +198,8 @@ function MyListGrid({ userUID }) {
 
                 <div
                     ref={moviesRef2}
-                    className="d-flex overflow-auto"
-                    style={{ scrollSnapType: 'x mandatory', gap: '1rem' }}
+                    className="d-flex overflow-auto gap-3"
+                    style={{ scrollSnapType: 'x mandatory' }}
                 >
                     {(movieList?.slice(Math.ceil(movieList.length / 2)) || [])
                         .concat(
@@ -275,8 +275,8 @@ function MyListGrid({ userUID }) {
 
                 <div
                     ref={showsRef1}
-                    className="d-flex overflow-auto"
-                    style={{ scrollSnapType: 'x mandatory', gap: '1rem' }}
+                    className="d-flex overflow-auto gap-3"
+                    style={{ scrollSnapType: 'x mandatory' }}
                 >
                     {(tvList?.slice(0, Math.ceil(tvList.length / 2)) || [])
                         .concat(
@@ -352,8 +352,8 @@ function MyListGrid({ userUID }) {
 
                 <div
                     ref={showsRef2}
-                    className="d-flex overflow-auto"
-                    style={{ scrollSnapType: 'x mandatory', gap: '1rem' }}
+                    className="d-flex overflow-auto gap-3"
+                    style={{ scrollSnapType: 'x mandatory' }}
                 >
                     {(tvList?.slice(Math.ceil(tvList.length / 2)) || [])
                         .concat(
