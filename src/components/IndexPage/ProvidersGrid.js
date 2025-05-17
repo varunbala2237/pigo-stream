@@ -55,7 +55,7 @@ function ProvidersGrid({ setIsProvidersLoaded, setHasProvidersContent }) {
         const savedProvider = getSessionValue(...SESSION_PATH, 'selectedProvider');
         const savedProvidersScroll = getSessionValue(...SESSION_PATH, 'providersScroll') || 0;
         const savedMoviesScroll = getSessionValue(...SESSION_PATH, 'moviesScroll') || 0;
-        const savedShowsScroll = getSessionValue(...SESSION_PATH, 'showsRef') || 0;
+        const savedShowsScroll = getSessionValue(...SESSION_PATH, 'showsScroll') || 0;
 
         setSelectedProvider(savedProvider ?? PROVIDERS[0].id);
 
@@ -84,6 +84,32 @@ function ProvidersGrid({ setIsProvidersLoaded, setHasProvidersContent }) {
         providersNode.addEventListener('scroll', handleProvidersScroll);
         return () => providersNode.removeEventListener('scroll', handleProvidersScroll);
     }, [selectedProvider]);
+
+    // Save scroll positions for movies and TV
+    useEffect(() => {
+        const moviesNode = moviesRef.current;
+        const showsNode = showsRef.current;
+
+        const handleMoviesScroll = () => {
+            if (moviesNode) {
+                setSessionValue(...SESSION_PATH, 'moviesScroll', moviesNode.scrollLeft);
+            }
+        };
+
+        const handleTvScroll = () => {
+            if (showsNode) {
+                setSessionValue(...SESSION_PATH, 'showsScroll', showsNode.scrollLeft);
+            }
+        };
+
+        moviesNode?.addEventListener('scroll', handleMoviesScroll);
+        showsNode?.addEventListener('scroll', handleTvScroll);
+
+        return () => {
+            moviesNode?.removeEventListener('scroll', handleMoviesScroll);
+            showsNode?.removeEventListener('scroll', handleTvScroll);
+        };
+    }, []);
 
     const scroll = (ref, direction) => {
         if (ref.current) {
