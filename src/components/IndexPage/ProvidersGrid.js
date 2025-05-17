@@ -32,7 +32,7 @@ function ProvidersGrid({ setIsProvidersLoaded, setHasProvidersContent }) {
 
     // Scroll references for movies and TV shows
     const moviesRef = useRef(null);
-    const tvRef = useRef(null);
+    const showsRef = useRef(null);
     const providersRef = useRef(null);
 
     useEffect(() => {
@@ -55,14 +55,14 @@ function ProvidersGrid({ setIsProvidersLoaded, setHasProvidersContent }) {
         const savedProvider = getSessionValue(...SESSION_PATH, 'selectedProvider');
         const savedProvidersScroll = getSessionValue(...SESSION_PATH, 'providersScroll') || 0;
         const savedMoviesScroll = getSessionValue(...SESSION_PATH, 'moviesScroll') || 0;
-        const savedTvScroll = getSessionValue(...SESSION_PATH, 'tvScroll') || 0;
+        const savedShowsScroll = getSessionValue(...SESSION_PATH, 'showsRef') || 0;
 
         setSelectedProvider(savedProvider ?? PROVIDERS[0].id);
 
         const timeoutId = setTimeout(() => {
             if (providersRef.current) providersRef.current.scrollLeft = savedProvidersScroll;
             if (moviesRef.current) moviesRef.current.scrollLeft = savedMoviesScroll;
-            if (tvRef.current) tvRef.current.scrollLeft = savedTvScroll;
+            if (showsRef.current) showsRef.current.scrollLeft = savedShowsScroll;
         }, 500);
 
         return () => clearTimeout(timeoutId);
@@ -186,21 +186,21 @@ function ProvidersGrid({ setIsProvidersLoaded, setHasProvidersContent }) {
                     <>
                         <button
                             className="btn btn-dark custom-bg rounded-pill py-2 position-absolute start-0 translate-middle-y d-none d-md-block"
-                            onClick={() => scroll(tvRef, 'left')}
+                            onClick={() => scroll(showsRef, 'left')}
                             style={{ zIndex: 1, top: '50%', transform: 'translateY(-50%)' }}
                         >
                             <i className="bi bi-chevron-left"></i>
                         </button>
                         <button
                             className="btn btn-dark custom-bg rounded-pill py-2 position-absolute end-0 translate-middle-y d-none d-md-block"
-                            onClick={() => scroll(tvRef, 'right')}
+                            onClick={() => scroll(showsRef, 'right')}
                             style={{ zIndex: 1, top: '50%', transform: 'translateY(-50%)' }}
                         >
                             <i className="bi bi-chevron-right"></i>
                         </button>
                     </>
                 )}
-                <div ref={tvRef} className="d-flex overflow-auto" style={{ scrollSnapType: 'x mandatory', gap: '1rem' }}>
+                <div ref={showsRef} className="d-flex overflow-auto" style={{ scrollSnapType: 'x mandatory', gap: '1rem' }}>
                     {(
                         !isLoading && !isError && shows?.length > 0 ? shows : []
                     )

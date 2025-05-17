@@ -25,8 +25,8 @@ function WatchHistoryGrid({ userUID }) {
     // Scroll references for movies and TV shows (2 rows for each)
     const moviesRef1 = useRef(null);
     const moviesRef2 = useRef(null);
-    const tvRef1 = useRef(null);
-    const tvRef2 = useRef(null);
+    const showsRef1 = useRef(null);
+    const showsRef2 = useRef(null);
 
     useEffect(() => {
         if (userUID) {
@@ -299,14 +299,14 @@ function WatchHistoryGrid({ userUID }) {
                     <>
                         <button
                             className="btn btn-dark custom-bg rounded-pill py-2 position-absolute start-0 translate-middle-y d-none d-md-block"
-                            onClick={() => scroll(tvRef1, 'left')}
+                            onClick={() => scroll(showsRef1, 'left')}
                             style={{ zIndex: 1, top: '50%', transform: 'translateY(-50%)' }}
                         >
                             <i className="bi bi-chevron-left"></i>
                         </button>
                         <button
                             className="btn btn-dark custom-bg rounded-pill py-2 position-absolute end-0 translate-middle-y d-none d-md-block"
-                            onClick={() => scroll(tvRef1, 'right')}
+                            onClick={() => scroll(showsRef1, 'right')}
                             style={{ zIndex: 1, top: '50%', transform: 'translateY(-50%)' }}
                         >
                             <i className="bi bi-chevron-right"></i>
@@ -315,7 +315,7 @@ function WatchHistoryGrid({ userUID }) {
                 )}
 
                 <div
-                    ref={tvRef1}
+                    ref={showsRef1}
                     className="d-flex overflow-auto"
                     style={{ scrollSnapType: 'x mandatory', gap: '1rem' }}
                 >
@@ -376,14 +376,14 @@ function WatchHistoryGrid({ userUID }) {
                     <>
                         <button
                             className="btn btn-dark custom-bg rounded-pill py-2 position-absolute start-0 translate-middle-y d-none d-md-block"
-                            onClick={() => scroll(tvRef2, 'left')}
+                            onClick={() => scroll(showsRef2, 'left')}
                             style={{ zIndex: 1, top: '50%', transform: 'translateY(-50%)' }}
                         >
                             <i className="bi bi-chevron-left"></i>
                         </button>
                         <button
                             className="btn btn-dark custom-bg rounded-pill py-2 position-absolute end-0 translate-middle-y d-none d-md-block"
-                            onClick={() => scroll(tvRef2, 'right')}
+                            onClick={() => scroll(showsRef2, 'right')}
                             style={{ zIndex: 1, top: '50%', transform: 'translateY(-50%)' }}
                         >
                             <i className="bi bi-chevron-right"></i>
@@ -392,7 +392,7 @@ function WatchHistoryGrid({ userUID }) {
                 )}
 
                 <div
-                    ref={tvRef2}
+                    ref={showsRef2}
                     className="d-flex overflow-auto"
                     style={{ scrollSnapType: 'x mandatory', gap: '1rem' }}
                 >

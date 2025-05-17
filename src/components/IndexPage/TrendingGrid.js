@@ -13,7 +13,7 @@ function TrendingGrid({ setIsTrendingLoaded, setHasTrendingContent }) {
 
   // Scroll references for movies and TV shows
   const moviesRef = useRef(null);
-  const tvRef = useRef(null);
+  const showsRef = useRef(null);
 
   useEffect(() => {
     if (isError) {
@@ -42,8 +42,8 @@ function TrendingGrid({ setIsTrendingLoaded, setHasTrendingContent }) {
   };
 
   const scrollTvShows = (direction) => {
-    if (tvRef.current) {
-      tvRef.current.scrollBy({
+    if (showsRef.current) {
+      showsRef.current.scrollBy({
         left: direction === 'left' ? -450 : 450,
         behavior: 'smooth',
       });
@@ -121,7 +121,7 @@ function TrendingGrid({ setIsTrendingLoaded, setHasTrendingContent }) {
               </button>
             </>
           )}
-          <div ref={tvRef} className="d-flex overflow-auto" style={{ scrollSnapType: 'x mandatory', gap: '1rem' }}>
+          <div ref={showsRef} className="d-flex overflow-auto" style={{ scrollSnapType: 'x mandatory', gap: '1rem' }}>
             {(
               !isLoading && !isError && shows?.length > 0 ? shows : []
             )
