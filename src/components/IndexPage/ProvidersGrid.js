@@ -90,24 +90,23 @@ function ProvidersGrid({ setIsProvidersLoaded, setHasProvidersContent }) {
         const moviesNode = moviesRef.current;
         const showsNode = showsRef.current;
 
+        if (!moviesNode) return;
+        if (!showsNode) return;
+
         const handleMoviesScroll = () => {
-            if (moviesNode) {
-                setSessionValue(...SESSION_PATH, 'moviesScroll', moviesNode.scrollLeft);
-            }
+            setSessionValue(...SESSION_PATH, 'moviesScroll', moviesNode.scrollLeft);
         };
 
         const handleTvScroll = () => {
-            if (showsNode) {
-                setSessionValue(...SESSION_PATH, 'showsScroll', showsNode.scrollLeft);
-            }
+            setSessionValue(...SESSION_PATH, 'showsScroll', showsNode.scrollLeft);
         };
 
-        moviesNode?.addEventListener('scroll', handleMoviesScroll);
-        showsNode?.addEventListener('scroll', handleTvScroll);
+        moviesNode.addEventListener('scroll', handleMoviesScroll);
+        showsNode.addEventListener('scroll', handleTvScroll);
 
         return () => {
-            moviesNode?.removeEventListener('scroll', handleMoviesScroll);
-            showsNode?.removeEventListener('scroll', handleTvScroll);
+            moviesNode.removeEventListener('scroll', handleMoviesScroll);
+            showsNode.removeEventListener('scroll', handleTvScroll);
         };
     }, []);
 
