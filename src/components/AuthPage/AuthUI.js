@@ -14,6 +14,8 @@ import {
 import useCreateUser from '../../hooks/AuthPage/useCreateUser';
 import Alert from '../../utils/Alert';
 
+import { setSessionValue } from '../../utils/sessionStorageStates';
+
 function AuthUI() {
     const navigate = useNavigate();
     const [userName, setUserName] = useState('');
@@ -156,7 +158,7 @@ function AuthUI() {
             // Welcome message for new user
             const isNewUser = user.metadata.creationTime === user.metadata.lastSignInTime;
             if (isNewUser) {
-                sessionStorage.setItem('welcomeMessage', "Welcome to PigoStream!");
+                setSessionValue('HomeUI', 'welcomeMessage', 'Welcome to PigoStream!');
             }
 
             setAlertMessage("Verification email sent! Please check your inbox.");
@@ -204,7 +206,7 @@ function AuthUI() {
                 const isNewUser = user.metadata.creationTime === user.metadata.lastSignInTime;
 
                 if (isNewUser) {
-                    sessionStorage.setItem('welcomeMessage', "Welcome to PigoStream!");
+                    setSessionValue('HomeUI', 'welcomeMessage', 'Welcome to PigoStream!');
                 }
             }
         } catch (error) {
