@@ -59,14 +59,12 @@ function ProvidersGrid({ setIsProvidersLoaded, setHasProvidersContent }) {
 
         setSelectedProvider(savedProvider ?? PROVIDERS[0].id);
 
-        const timeoutId = setTimeout(() => {
+        if (!isLoading && !isError) {
             if (providersRef.current) providersRef.current.scrollLeft = savedProvidersScroll;
             if (moviesRef.current) moviesRef.current.scrollLeft = savedMoviesScroll;
             if (showsRef.current) showsRef.current.scrollLeft = savedShowsScroll;
-        }, 500);
-
-        return () => clearTimeout(timeoutId);
-    }, []);
+        }
+    }, [isLoading, isError]);
 
     // Save selectedProvider and providersScroll on change
     useEffect(() => {
