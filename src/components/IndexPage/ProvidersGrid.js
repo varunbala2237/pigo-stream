@@ -183,7 +183,7 @@ function ProvidersGrid({ setIsProvidersLoaded, setHasProvidersContent }) {
                         </button>
                     </>
                 )}
-                <div ref={moviesRef} className="d-flex overflow-auto" style={{ scrollSnapType: 'x mandatory', gap: '1rem' }}>
+                <div ref={moviesRef} className="d-flex overflow-auto gap-3" style={{ scrollSnapType: 'x mandatory', scrollBehavior: 'smooth' }}>
                     {(
                         !isLoading && !isError && movies?.length > 0 ? movies : []
                     )
@@ -225,7 +225,7 @@ function ProvidersGrid({ setIsProvidersLoaded, setHasProvidersContent }) {
                         </button>
                     </>
                 )}
-                <div ref={showsRef} className="d-flex overflow-auto" style={{ scrollSnapType: 'x mandatory', gap: '1rem' }}>
+                <div ref={showsRef} className="d-flex overflow-auto gap-3" style={{ scrollSnapType: 'x mandatory', scrollBehavior: 'smooth' }}>
                     {(
                         !isLoading && !isError && shows?.length > 0 ? shows : []
                     )
