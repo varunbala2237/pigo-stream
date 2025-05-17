@@ -178,7 +178,7 @@ function HomeUI({
     const query = e.target.value;
     setSearchQuery(query);
     setSessionValue('HomeUI', 'searchQuery', query);
-    if (query === '') setTriggerSearch('');
+    setTriggerSearch(query);
   };
 
   const handleSelectSearch = (query) => {
