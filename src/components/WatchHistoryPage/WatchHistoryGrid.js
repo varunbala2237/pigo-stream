@@ -6,6 +6,10 @@ import useClearWatchHistory from '../../hooks/WatchHistoryPage/useClearWatchHist
 import ConnectionModal from '../../utils/ConnectionModal';
 import Alert from '../../utils/Alert';
 
+import { getSessionValue, setSessionValue } from '../../utils/sessionStorageStates';
+
+const SESSION_PATH = ['HomeUI', 'Grids', 'WatchHistoryGrid'];
+
 function WatchHistoryGrid({ userUID }) {
     const [initialized, setInitialized] = useState(false);
     const [alertMessage, setAlertMessage] = useState('');
