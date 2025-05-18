@@ -22,7 +22,7 @@ function MyListUI() {
 
   // Restoring page states
   useEffect(() => {
-    const savedScrollPosition = getSessionValue('MyListUI', 'myListUIScrollState') || 0;
+    const savedScrollPosition = getSessionValue('MyListUI', 'pageScrollState') || 0;
 
     if (savedScrollPosition) {
       requestAnimationFrame(() => {
@@ -32,7 +32,7 @@ function MyListUI() {
 
     const handlePageScroll = () => {
       const scrollPosition = window.scrollY;
-      setSessionValue('MyListUI', 'myListUIScrollState', scrollPosition);
+      setSessionValue('MyListUI', 'pageScrollState', scrollPosition);
     };
 
     window.addEventListener('scroll', handlePageScroll);

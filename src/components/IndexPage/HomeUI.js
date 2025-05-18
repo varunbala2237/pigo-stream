@@ -57,7 +57,7 @@ function HomeUI({
   useEffect(() => {
     const savedWelcomeMessage = getSessionValue('HomeUI', 'welcomeMessage');
     const savedSearchQuery = getSessionValue('HomeUI', 'searchQuery') || '';
-    const savedScrollPosition = getSessionValue('HomeUI', 'homeUIScrollState') || 0;
+    const savedScrollPosition = getSessionValue('HomeUI', 'pageScrollState') || 0;
 
     if (savedWelcomeMessage) {
       setWelcomeMessage(savedWelcomeMessage);
@@ -80,7 +80,7 @@ function HomeUI({
 
     const handlePageScroll = () => {
       const scrollPosition = window.scrollY;
-      setSessionValue('HomeUI', 'homeUIScrollState', scrollPosition);
+      setSessionValue('HomeUI', 'pageScrollState', scrollPosition);
     };
 
     window.addEventListener('scroll', handlePageScroll);
