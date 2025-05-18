@@ -8,7 +8,6 @@ import useCheckMyList from '../../hooks/MyListPage/useCheckMyList';
 import useCheckServerStatus from '../../hooks/PlayerPage/useCheckServerStatus';
 import Player from './Player';
 import MediaGridSkeleton from './MediaGridSkeleton';
-import Alert from '../../utils/Alert';
 
 import { setLocalMediaStates, getLocalMediaStates } from '../../utils/localStorageStates';
 
@@ -16,8 +15,6 @@ function TvGrid({ id, type, setBackgroundImage }) {
   const [mediaURL, setMediaURL] = useState('');
   const [cast, setCast] = useState([]);
   const [director, setDirector] = useState('');
-  const [alertMessage, setAlertMessage] = useState('');
-  const [alertType, setAlertType] = useState('');
   const [seasons, setSeasons] = useState([]);
   const [episodes, setEpisodes] = useState([]);
   const [selectedSeason, setSelectedSeason] = useState(1);
@@ -233,24 +230,13 @@ function TvGrid({ id, type, setBackgroundImage }) {
 
   const handleAddToList = async () => {
     try {
-      if (isInList) {
-        setAlertMessage('Already exists in My List.');
-        setAlertType('primary');
-        setTimeout(() => setAlertMessage(''), 5000);
-      } else {
+      if (!isInList) {
         await addToList(id, type);
         refetch();
-        setAlertMessage('Successfully added to My List.');
-        setAlertType('success');
-        setTimeout(() => setAlertMessage(''), 5000);
       }
     } catch (error) {
       console.error(error.message);
     }
-  };
-
-  const handleAlertDismiss = () => {
-    setAlertMessage('');
   };
 
   if (!mediaInfo) {
@@ -445,9 +431,6 @@ function TvGrid({ id, type, setBackgroundImage }) {
           </div>
         </div>
       </div>
-
-      {/* Alert for bookmark */}
-      {alertMessage && <Alert message={alertMessage} onClose={handleAlertDismiss} type={alertType} />}
     </>
   );
 }
