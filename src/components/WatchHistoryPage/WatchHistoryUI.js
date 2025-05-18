@@ -49,7 +49,7 @@ function WatchHistoryUI() {
 
         {/* WatchHistoryGrid */}
         <div className="flex-row text-white w-100">
-          {userUID ? <><WatchHistoryGrid userUID={userUID} /></> : null}
+          <WatchHistoryGrid userUID={userUID} />
         </div>
 
         {/* Footer Backspace */}
