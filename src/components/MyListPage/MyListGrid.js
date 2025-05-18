@@ -14,7 +14,7 @@ function MyListGrid({ userUID }) {
     const [alertType, setAlertType] = useState('');
     const [movieLimit, setMovieLimit] = useState(12);
     const [tvLimit, setTvLimit] = useState(12);
-    const { data: { movieList = [], tvList = [] } = {}, loading: isLoading, error: isError, refetch } = useFetchMyList(userUID, movieLimit, tvLimit);
+    const { data: { moviesList = [], showsList = [] } = {}, loading: isLoading, error: isError, refetch } = useFetchMyList(userUID, movieLimit, tvLimit);
 
     const [contentAlertMessage, setContentAlertMessage] = useState('');
     const [showConnectionModal, setShowConnectionModal] = useState(false);
@@ -91,7 +91,7 @@ function MyListGrid({ userUID }) {
 
     // Alert handling for no content
     useEffect(() => {
-        const hasContent = (movieList && movieList.length > 0) || (tvList && tvList.length > 0);
+        const hasContent = (moviesList && moviesList.length > 0) || (showsList && showsList.length > 0);
         let showTimer;
         let hideTimer;
 
@@ -111,13 +111,13 @@ function MyListGrid({ userUID }) {
             clearTimeout(showTimer);
             clearTimeout(hideTimer);
         };
-    }, [movieList, tvList, isLoading, isError]);
+    }, [moviesList, showsList, isLoading, isError]);
 
     const handleShowMoreMovies = () => {
         setMovieLimit(prevLimit => prevLimit + 12);
     };
 
-    const handleShowMoreTV = () => {
+    const handleShowMoreShows = () => {
         setTvLimit(prevLimit => prevLimit + 12);
     };
 
@@ -149,7 +149,7 @@ function MyListGrid({ userUID }) {
             </div>
             {/* First Row of Movies */}
             <div className="position-relative my-3">
-                {(movieList.filter(Boolean).length / 2) > 3 && (
+                {(moviesList.filter(Boolean).length / 2) > 3 && (
                     <>
                         <button
                             className="btn btn-dark custom-bg rounded-pill py-2 position-absolute start-0 translate-middle-y d-none d-md-block"
@@ -173,11 +173,11 @@ function MyListGrid({ userUID }) {
                     className="d-flex overflow-auto gap-3"
                     style={{ scrollSnapType: 'x mandatory' }}
                 >
-                    {(movieList?.slice(0, Math.ceil(movieList.length / 2)) || []).concat(
+                    {(moviesList?.slice(0, Math.ceil(moviesList.length / 2)) || []).concat(
                         Array.from({
                             length: Math.max(
                                 0,
-                                6 - (movieList?.slice(0, Math.ceil(movieList.length / 2))?.length || 0)
+                                6 - (moviesList?.slice(0, Math.ceil(moviesList.length / 2))?.length || 0)
                             ),
                         })
                     ).map((movie, index) =>
@@ -206,7 +206,7 @@ function MyListGrid({ userUID }) {
 
             {/* Second Row of Movies */}
             <div className="position-relative my-3">
-                {(movieList.filter(Boolean).length / 2) > 3 && (
+                {(moviesList.filter(Boolean).length / 2) > 3 && (
                     <>
                         <button
                             className="btn btn-dark custom-bg rounded-pill py-2 position-absolute start-0 translate-middle-y d-none d-md-block"
@@ -230,12 +230,12 @@ function MyListGrid({ userUID }) {
                     className="d-flex overflow-auto gap-3"
                     style={{ scrollSnapType: 'x mandatory' }}
                 >
-                    {(movieList?.slice(Math.ceil(movieList.length / 2)) || [])
+                    {(moviesList?.slice(Math.ceil(moviesList.length / 2)) || [])
                         .concat(
                             Array.from({
                                 length: Math.max(
                                     0,
-                                    6 - (movieList?.slice(Math.ceil(movieList.length / 2))?.length || 0)
+                                    6 - (moviesList?.slice(Math.ceil(moviesList.length / 2))?.length || 0)
                                 ),
                             })
                         ).map((movie, index) =>
@@ -262,7 +262,7 @@ function MyListGrid({ userUID }) {
                 </div>
             </div>
 
-            {movieList.length === movieLimit && (
+            {moviesList.length === movieLimit && (
                 <div className="text-end mb-3">
                     <button
                         className="btn btn-dark bd-callout-dark dynamic-fs border-0 rounded-pill btn-md d-none d-md-inline-block"
@@ -283,7 +283,7 @@ function MyListGrid({ userUID }) {
 
             {/* First Row of TV Shows */}
             <div className="position-relative my-3">
-                {(tvList.filter(Boolean).length / 2) > 3 && (
+                {(showsList.filter(Boolean).length / 2) > 3 && (
                     <>
                         <button
                             className="btn btn-dark custom-bg rounded-pill py-2 position-absolute start-0 translate-middle-y d-none d-md-block"
@@ -307,12 +307,12 @@ function MyListGrid({ userUID }) {
                     className="d-flex overflow-auto gap-3"
                     style={{ scrollSnapType: 'x mandatory' }}
                 >
-                    {(tvList?.slice(0, Math.ceil(tvList.length / 2)) || [])
+                    {(showsList?.slice(0, Math.ceil(showsList.length / 2)) || [])
                         .concat(
                             Array.from({
                                 length: Math.max(
                                     0,
-                                    6 - (tvList?.slice(0, Math.ceil(tvList.length / 2))?.length || 0)
+                                    6 - (showsList?.slice(0, Math.ceil(showsList.length / 2))?.length || 0)
                                 ),
                             })
                         ).map((show, index) =>
@@ -341,7 +341,7 @@ function MyListGrid({ userUID }) {
 
             {/* Second Row of TV Shows */}
             <div className="position-relative my-3">
-                {(tvList.filter(Boolean).length / 2) > 3 && (
+                {(showsList.filter(Boolean).length / 2) > 3 && (
                     <>
                         <button
                             className="btn btn-dark custom-bg rounded-pill py-2 position-absolute start-0 translate-middle-y d-none d-md-block"
@@ -365,12 +365,12 @@ function MyListGrid({ userUID }) {
                     className="d-flex overflow-auto gap-3"
                     style={{ scrollSnapType: 'x mandatory' }}
                 >
-                    {(tvList?.slice(Math.ceil(tvList.length / 2)) || [])
+                    {(showsList?.slice(Math.ceil(showsList.length / 2)) || [])
                         .concat(
                             Array.from({
                                 length: Math.max(
                                     0,
-                                    6 - (tvList?.slice(Math.ceil(tvList.length / 2))?.length || 0)
+                                    6 - (showsList?.slice(Math.ceil(showsList.length / 2))?.length || 0)
                                 ),
                             })
                         ).map((show, index) =>
@@ -397,18 +397,18 @@ function MyListGrid({ userUID }) {
                 </div>
             </div>
 
-            {tvList.length === tvLimit && (
+            {showsList.length === tvLimit && (
                 <div className="text-end mb-3">
                     <button
                         className="btn btn-dark bd-callout-dark dynamic-fs border-0 rounded-pill btn-md d-none d-md-inline-block"
-                        onClick={handleShowMoreTV}
+                        onClick={handleShowMoreShows}
                     >
                         <i className="bi bi-chevron-right text-white me-2"></i>
                         <span className="text-white">Show More</span>
                     </button>
                     <button
                         className="btn btn-dark bd-callout-dark dynamic-fs border-0 rounded-pill btn-sm d-md-none"
-                        onClick={handleShowMoreTV}
+                        onClick={handleShowMoreShows}
                     >
                         <i className="bi bi-chevron-right text-white me-2"></i>
                         <span className="text-white">Show More</span>
