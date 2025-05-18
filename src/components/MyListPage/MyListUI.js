@@ -4,6 +4,8 @@ import MyListGrid from './MyListGrid';
 import { auth } from '../../firebase/firebase-auth'; // Import the auth object
 import Footer from '../Footer';
 
+import { getSessionValue, setSessionValue } from '../../utils/sessionStorageStates';
+
 function MyListUI() {
   const [userUID, setUserUID] = useState(null);
 
@@ -17,37 +19,6 @@ function MyListUI() {
     });
     return () => unsubscribe();
   }, []);
-
-  useEffect(() => {
-    // Retrieve the saved page state from sessionStorage
-    const savedPageState = sessionStorage.getItem('myListPageState');
-    if (savedPageState) {
-      const { savedScrollPosition } = JSON.parse(savedPageState);
-      if (savedScrollPosition !== undefined) {
-        // Delay the scroll action to ensure the DOM is fully rendered
-        setTimeout(() => {
-          window.scrollTo({ top: savedScrollPosition });
-        }, 500);
-      }
-    }
-
-    const handleScroll = () => {
-      const scrollPosition = window.scrollY;
-      updateLocalStorage(scrollPosition);
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, []);
-
-  const updateLocalStorage = (scrollPosition) => {
-    const pageState = JSON.stringify({
-      savedScrollPosition: scrollPosition,
-    });
-    sessionStorage.setItem('myListPageState', pageState);
-  };
 
   return (
     <div className="container-fluid d-flex flex-column justify-content-center align-items-center poppins-medium p-0">

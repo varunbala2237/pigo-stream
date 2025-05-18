@@ -53,7 +53,7 @@ function HomeUI({
   const saveSearchHistory = useSaveSearchHistory();
   const removeSearchHistory = useRemoveSearchHistory();
 
-  // Restoring states
+  // Restoring page states
   useEffect(() => {
     const savedWelcomeMessage = getSessionValue('HomeUI', 'welcomeMessage');
     const savedSearchQuery = getSessionValue('HomeUI', 'searchQuery') || '';
