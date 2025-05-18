@@ -22,7 +22,7 @@ function WatchHistoryUI() {
 
   // Restoring page states
   useEffect(() => {
-    const savedScrollPosition = getSessionValue('WatchHistoryUI', 'pageScrollState') || 0;
+    const savedScrollPosition = getSessionValue('WatchHistoryUI', 'watchHistoryUIScrollState') || 0;
 
     if (savedScrollPosition) {
       requestAnimationFrame(() => {
@@ -32,7 +32,7 @@ function WatchHistoryUI() {
 
     const handlePageScroll = () => {
       const scrollPosition = window.scrollY;
-      setSessionValue('WatchHistoryUI', 'pageScrollState', scrollPosition);
+      setSessionValue('WatchHistoryUI', 'watchHistoryUIScrollState', scrollPosition);
     };
 
     window.addEventListener('scroll', handlePageScroll);
