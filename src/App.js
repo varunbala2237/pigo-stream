@@ -6,7 +6,7 @@ import IndexUI from './components/IndexPage/IndexUI';
 import PlayGroundUI from './components/PlayerPage/PlayGroundUI';
 import WatchHistoryUI from './components/WatchHistoryPage/WatchHistoryUI';
 import MyListUI from './components/MyListPage/MyListUI';
-import PigoStore from './components/PigoStorePage/PigoStore';
+import PigoStoreUI from './components/PigoStorePage/PigoStoreUI';
 
 function App() {
   return (
@@ -17,7 +17,7 @@ function App() {
             <Route path="/play" element={<PlayGroundUI/>} />
             <Route path="/watch-history" element={<WatchHistoryUI/>} />
             <Route path="/my-list" element={<MyListUI/>} />
-            <Route path="/pigostore" element={<PigoStore />} />
+            <Route path="/pigostore" element={<PigoStoreUI />} />
         </Routes>
     </BrowserRouter>
   );
