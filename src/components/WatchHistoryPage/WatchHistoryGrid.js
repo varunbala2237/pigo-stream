@@ -16,7 +16,7 @@ function WatchHistoryGrid({ userUID }) {
     const [alertType, setAlertType] = useState('');
     const [movieLimit, setMovieLimit] = useState(12);
     const [tvLimit, setTvLimit] = useState(12);
-    const { data, loading, error } = useFetchWatchHistory(userUID, movieLimit, tvLimit);
+    const { data, loading: isLoading, error: isError } = useFetchWatchHistory(userUID, movieLimit, tvLimit);
     const { clearHistory } = useClearWatchHistory();
 
     const [contentAlertMessage, setContentAlertMessage] = useState('');
@@ -47,12 +47,12 @@ function WatchHistoryGrid({ userUID }) {
 
     // Connection modal handling
     useEffect(() => {
-        if (error) {
+        if (isError) {
             setShowConnectionModal(true);
         } else {
             setShowConnectionModal(false);
         }
-    }, [error]);
+    }, [isError]);
 
     // Alert handling for no content
     useEffect(() => {
@@ -60,7 +60,7 @@ function WatchHistoryGrid({ userUID }) {
         let showTimer;
         let hideTimer;
 
-        if (!loading && !error && !hasContent) {
+        if (!isLoading && !isError && !hasContent) {
             showTimer = setTimeout(() => {
                 setContentAlertMessage(`You haven't watched anything yet.`);
 
@@ -76,7 +76,7 @@ function WatchHistoryGrid({ userUID }) {
             clearTimeout(showTimer);
             clearTimeout(hideTimer);
         };
-    }, [movieHistory, tvHistory, loading, error]);
+    }, [movieHistory, tvHistory, isLoading, isError]);
 
     if (!initialized) {
         return null;
@@ -97,7 +97,7 @@ function WatchHistoryGrid({ userUID }) {
             setMovieHistory([]);
             setTvHistory([]);
             handleAlert('Watch history cleared successfully.');
-        } catch (error) {
+        } catch (isError) {
             handleAlert('Failed to clear watch history.', 'danger');
         }
     };
