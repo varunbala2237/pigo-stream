@@ -5,7 +5,7 @@ import useFetchStream from '../../hooks/PlayerPage/useFetchStream';
 import useSaveMyList from '../../hooks/MyListPage/useSaveMyList';
 import useCheckMyList from '../../hooks/MyListPage/useCheckMyList';
 import useCheckServerStatus from '../../hooks/PlayerPage/useCheckServerStatus';
-import Player from './PlayerUI';
+import Player from './Player';
 import MediaGridSkeleton from './MediaGridSkeleton';
 import Alert from '../../utils/Alert';
 
