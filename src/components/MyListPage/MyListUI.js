@@ -20,6 +20,27 @@ function MyListUI() {
     return () => unsubscribe();
   }, []);
 
+  // Restoring page states
+  useEffect(() => {
+    const savedScrollPosition = getSessionValue('MyListUI', 'pageScrollState') || 0;
+
+    if (savedScrollPosition) {
+      requestAnimationFrame(() => {
+        window.scrollTo({ top: savedScrollPosition, behavior: 'instant' });
+      });
+    }
+
+    const handlePageScroll = () => {
+      const scrollPosition = window.scrollY;
+      setSessionValue('MyListUI', 'pageScrollState', scrollPosition);
+    };
+
+    window.addEventListener('scroll', handlePageScroll);
+    return () => {
+      window.removeEventListener('scroll', handlePageScroll);
+    };
+  }, []);
+
   return (
     <div className="container-fluid d-flex flex-column justify-content-center align-items-center poppins-medium p-0">
       <div className="w-100">
@@ -30,7 +51,7 @@ function MyListUI() {
         <div className="flex-row text-white w-100">
           {userUID ? <><MyListGrid userUID={userUID} /></> : null}
         </div>
-        
+
         {/* Footer Backspace */}
         <div className="divider" style={{ height: '4rem' }}></div>
         {/* Footer */}
