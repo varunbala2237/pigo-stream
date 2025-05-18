@@ -12,9 +12,9 @@ const SESSION_PATH = ['HomeUI', 'Grids', 'MyListGrid'];
 function MyListGrid({ userUID }) {
     const [alertMessage, setAlertMessage] = useState('');
     const [alertType, setAlertType] = useState('');
-    const [moviesLimit, setMovieLimit] = useState(12);
-    const [showsLimit, setTvLimit] = useState(12);
-    const { data: { moviesList = [], showsList = [] } = {}, loading: isLoading, error: isError, refetch } = useFetchMyList(userUID, moviesLimit, showsLimit);
+    const [movieLimit, setMovieLimit] = useState(12);
+    const [tvLimit, setTvLimit] = useState(12);
+    const { data: { movieList = [], tvList = [] } = {}, loading: isLoading, error: isError, refetch } = useFetchMyList(userUID, movieLimit, tvLimit);
 
     const [contentAlertMessage, setContentAlertMessage] = useState('');
     const [showConnectionModal, setShowConnectionModal] = useState(false);
@@ -29,10 +29,16 @@ function MyListGrid({ userUID }) {
 
     // Load from sessionStorage on mount
     useEffect(() => {
+        const savedMovieLimit = getSessionValue(...SESSION_PATH, 'movieLimit') || 12;
+        const savedTvLimit = getSessionValue(...SESSION_PATH, 'tvLimit') || 12;
+
         const savedMoviesScroll1 = getSessionValue(...SESSION_PATH, 'moviesScroll1') || 0;
         const savedMoviesScroll2 = getSessionValue(...SESSION_PATH, 'moviesScroll2') || 0;
         const savedShowsScroll1 = getSessionValue(...SESSION_PATH, 'showsScroll1') || 0;
         const savedShowsScroll2 = getSessionValue(...SESSION_PATH, 'showsScroll2') || 0;
+
+        if (savedMovieLimit) setMovieLimit(savedMovieLimit);
+        if (savedTvLimit) setTvLimit(savedTvLimit);
 
         requestAnimationFrame(() => {
             if (moviesRef1.current) moviesRef1.current.scrollTo({ left: savedMoviesScroll1, behavior: 'instant' });
@@ -41,6 +47,12 @@ function MyListGrid({ userUID }) {
             if (showsRef2.current) showsRef2.current.scrollTo({ left: savedShowsScroll2, behavior: 'instant' });
         });
     }, [isLoading, isError]);
+
+    // Save media limits
+    useEffect(() => {
+        setSessionValue(...SESSION_PATH, 'moviesLimit', movieLimit);
+        setSessionValue(...SESSION_PATH, 'showsLimit', tvLimit);
+    }, [movieLimit, tvLimit]);
 
     // Save scroll positions for movies and shows
     useEffect(() => {
@@ -91,7 +103,7 @@ function MyListGrid({ userUID }) {
 
     // Alert handling for no content
     useEffect(() => {
-        const hasContent = (moviesList && moviesList.length > 0) || (showsList && showsList.length > 0);
+        const hasContent = (movieList && movieList.length > 0) || (tvList && tvList.length > 0);
         let showTimer;
         let hideTimer;
 
@@ -111,13 +123,13 @@ function MyListGrid({ userUID }) {
             clearTimeout(showTimer);
             clearTimeout(hideTimer);
         };
-    }, [moviesList, showsList, isLoading, isError]);
+    }, [movieList, tvList, isLoading, isError]);
 
     const handleShowMoreMovies = () => {
         setMovieLimit(prevLimit => prevLimit + 12);
     };
 
-    const handleShowMoreShows = () => {
+    const handleShowMoreTV = () => {
         setTvLimit(prevLimit => prevLimit + 12);
     };
 
@@ -149,7 +161,7 @@ function MyListGrid({ userUID }) {
             </div>
             {/* First Row of Movies */}
             <div className="position-relative my-3">
-                {(moviesList.filter(Boolean).length / 2) > 3 && (
+                {(movieList.filter(Boolean).length / 2) > 3 && (
                     <>
                         <button
                             className="btn btn-dark custom-bg rounded-pill py-2 position-absolute start-0 translate-middle-y d-none d-md-block"
@@ -173,11 +185,11 @@ function MyListGrid({ userUID }) {
                     className="d-flex overflow-auto gap-3"
                     style={{ scrollSnapType: 'x mandatory' }}
                 >
-                    {(moviesList?.slice(0, Math.ceil(moviesList.length / 2)) || []).concat(
+                    {(movieList?.slice(0, Math.ceil(movieList.length / 2)) || []).concat(
                         Array.from({
                             length: Math.max(
                                 0,
-                                6 - (moviesList?.slice(0, Math.ceil(moviesList.length / 2))?.length || 0)
+                                6 - (movieList?.slice(0, Math.ceil(movieList.length / 2))?.length || 0)
                             ),
                         })
                     ).map((movie, index) =>
@@ -206,7 +218,7 @@ function MyListGrid({ userUID }) {
 
             {/* Second Row of Movies */}
             <div className="position-relative my-3">
-                {(moviesList.filter(Boolean).length / 2) > 3 && (
+                {(movieList.filter(Boolean).length / 2) > 3 && (
                     <>
                         <button
                             className="btn btn-dark custom-bg rounded-pill py-2 position-absolute start-0 translate-middle-y d-none d-md-block"
@@ -230,12 +242,12 @@ function MyListGrid({ userUID }) {
                     className="d-flex overflow-auto gap-3"
                     style={{ scrollSnapType: 'x mandatory' }}
                 >
-                    {(moviesList?.slice(Math.ceil(moviesList.length / 2)) || [])
+                    {(movieList?.slice(Math.ceil(movieList.length / 2)) || [])
                         .concat(
                             Array.from({
                                 length: Math.max(
                                     0,
-                                    6 - (moviesList?.slice(Math.ceil(moviesList.length / 2))?.length || 0)
+                                    6 - (movieList?.slice(Math.ceil(movieList.length / 2))?.length || 0)
                                 ),
                             })
                         ).map((movie, index) =>
@@ -262,7 +274,7 @@ function MyListGrid({ userUID }) {
                 </div>
             </div>
 
-            {moviesList.length === moviesLimit && (
+            {movieList.length === movieLimit && (
                 <div className="text-end mb-3">
                     <button
                         className="btn btn-dark bd-callout-dark dynamic-fs border-0 rounded-pill btn-md d-none d-md-inline-block"
@@ -283,7 +295,7 @@ function MyListGrid({ userUID }) {
 
             {/* First Row of TV Shows */}
             <div className="position-relative my-3">
-                {(showsList.filter(Boolean).length / 2) > 3 && (
+                {(tvList.filter(Boolean).length / 2) > 3 && (
                     <>
                         <button
                             className="btn btn-dark custom-bg rounded-pill py-2 position-absolute start-0 translate-middle-y d-none d-md-block"
@@ -307,12 +319,12 @@ function MyListGrid({ userUID }) {
                     className="d-flex overflow-auto gap-3"
                     style={{ scrollSnapType: 'x mandatory' }}
                 >
-                    {(showsList?.slice(0, Math.ceil(showsList.length / 2)) || [])
+                    {(tvList?.slice(0, Math.ceil(tvList.length / 2)) || [])
                         .concat(
                             Array.from({
                                 length: Math.max(
                                     0,
-                                    6 - (showsList?.slice(0, Math.ceil(showsList.length / 2))?.length || 0)
+                                    6 - (tvList?.slice(0, Math.ceil(tvList.length / 2))?.length || 0)
                                 ),
                             })
                         ).map((show, index) =>
@@ -341,7 +353,7 @@ function MyListGrid({ userUID }) {
 
             {/* Second Row of TV Shows */}
             <div className="position-relative my-3">
-                {(showsList.filter(Boolean).length / 2) > 3 && (
+                {(tvList.filter(Boolean).length / 2) > 3 && (
                     <>
                         <button
                             className="btn btn-dark custom-bg rounded-pill py-2 position-absolute start-0 translate-middle-y d-none d-md-block"
@@ -365,12 +377,12 @@ function MyListGrid({ userUID }) {
                     className="d-flex overflow-auto gap-3"
                     style={{ scrollSnapType: 'x mandatory' }}
                 >
-                    {(showsList?.slice(Math.ceil(showsList.length / 2)) || [])
+                    {(tvList?.slice(Math.ceil(tvList.length / 2)) || [])
                         .concat(
                             Array.from({
                                 length: Math.max(
                                     0,
-                                    6 - (showsList?.slice(Math.ceil(showsList.length / 2))?.length || 0)
+                                    6 - (tvList?.slice(Math.ceil(tvList.length / 2))?.length || 0)
                                 ),
                             })
                         ).map((show, index) =>
@@ -397,18 +409,18 @@ function MyListGrid({ userUID }) {
                 </div>
             </div>
 
-            {showsList.length === showsLimit && (
+            {tvList.length === tvLimit && (
                 <div className="text-end mb-3">
                     <button
                         className="btn btn-dark bd-callout-dark dynamic-fs border-0 rounded-pill btn-md d-none d-md-inline-block"
-                        onClick={handleShowMoreShows}
+                        onClick={handleShowMoreTV}
                     >
                         <i className="bi bi-chevron-right text-white me-2"></i>
                         <span className="text-white">Show More</span>
                     </button>
                     <button
                         className="btn btn-dark bd-callout-dark dynamic-fs border-0 rounded-pill btn-sm d-md-none"
-                        onClick={handleShowMoreShows}
+                        onClick={handleShowMoreTV}
                     >
                         <i className="bi bi-chevron-right text-white me-2"></i>
                         <span className="text-white">Show More</span>
