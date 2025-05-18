@@ -11,19 +11,16 @@ import { getSessionValue, setSessionValue } from '../../utils/sessionStorageStat
 const SESSION_PATH = ['WatchHistoryUI', 'Grids', 'WatchHistoryGrid'];
 
 function WatchHistoryGrid({ userUID }) {
-    const [initialized, setInitialized] = useState(false);
     const [alertMessage, setAlertMessage] = useState('');
     const [alertType, setAlertType] = useState('');
     const [movieLimit, setMovieLimit] = useState(12);
     const [tvLimit, setTvLimit] = useState(12);
-    const { data, loading: isLoading, error: isError } = useFetchWatchHistory(userUID, movieLimit, tvLimit);
+    const { data: { movieHistory = [], tvHistory = [] } = {}, loading: isLoading, error: isError, refetch } = useFetchWatchHistory(userUID, movieLimit, tvLimit);
     const { clearHistory } = useClearWatchHistory();
 
     const [contentAlertMessage, setContentAlertMessage] = useState('');
     const [showConnectionModal, setShowConnectionModal] = useState(false);
 
-    const [movieHistory, setMovieHistory] = useState([]);
-    const [tvHistory, setTvHistory] = useState([]);
     const location = useLocation();
 
     // Scroll references for movies and TV shows (2 rows for each)
@@ -31,19 +28,6 @@ function WatchHistoryGrid({ userUID }) {
     const moviesRef2 = useRef(null);
     const showsRef1 = useRef(null);
     const showsRef2 = useRef(null);
-
-    useEffect(() => {
-        if (userUID) {
-            setInitialized(true);
-        }
-    }, [userUID]);
-
-    useEffect(() => {
-        if (data) {
-            setMovieHistory(data.movieHistory || []);
-            setTvHistory(data.tvHistory || []);
-        }
-    }, [data]);
 
     // Connection modal handling
     useEffect(() => {
@@ -78,24 +62,10 @@ function WatchHistoryGrid({ userUID }) {
         };
     }, [movieHistory, tvHistory, isLoading, isError]);
 
-    if (!initialized) {
-        return null;
-    }
-
-    // Function to remove the movie from the movieHistory
-    const handleRemove = (id, type) => {
-        if (type === 'movie') {
-            setMovieHistory(prevList => prevList.filter(movie => movie.id !== id));
-        } else if (type === 'tv') {
-            setTvHistory(prevList => prevList.filter(show => show.id !== id));
-        }
-    };
-
     const handleClearHistory = async () => {
         try {
             await clearHistory();
-            setMovieHistory([]);
-            setTvHistory([]);
+            refetch();
             handleAlert('Watch history cleared successfully.');
         } catch (isError) {
             handleAlert('Failed to clear watch history.', 'danger');
@@ -203,7 +173,7 @@ function WatchHistoryGrid({ userUID }) {
                                 media={movie}
                                 type="movie"
                                 path={location.pathname}
-                                onRemove={() => handleRemove(movie.id, 'movie')}
+                                onRemove={refetch}
                                 handleAlert={handleAlert}
                             />
                         ) : (
@@ -261,7 +231,7 @@ function WatchHistoryGrid({ userUID }) {
                                     media={movie}
                                     type="movie"
                                     path={location.pathname}
-                                    onRemove={() => handleRemove(movie.id, 'movie')}
+                                    onRemove={refetch}
                                     handleAlert={handleAlert}
                                 />
                             ) : (
@@ -338,7 +308,7 @@ function WatchHistoryGrid({ userUID }) {
                                     media={show}
                                     type="tv"
                                     path={location.pathname}
-                                    onRemove={() => handleRemove(show.id, 'tv')}
+                                    onRemove={refetch}
                                     handleAlert={handleAlert}
                                 />
                             ) : (
@@ -396,7 +366,7 @@ function WatchHistoryGrid({ userUID }) {
                                     media={show}
                                     type="tv"
                                     path={location.pathname}
-                                    onRemove={() => handleRemove(show.id, 'tv')}
+                                    onRemove={refetch}
                                     handleAlert={handleAlert}
                                 />
                             ) : (
