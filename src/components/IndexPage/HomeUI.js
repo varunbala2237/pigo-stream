@@ -333,7 +333,7 @@ function HomeUI({
         </div>
 
         {/* Footer Backspace & Footer */}
-        <div className="divider" style={{ height: '5rem' }}></div>
+        <div className="divider" style={{ height: '4rem' }}></div>
         <Footer showSearchBar={showSearchBar} handleSearchBar={handleSearchBar} />
 
         {/* Connection Modal */}

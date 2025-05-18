@@ -61,7 +61,7 @@ function WatchHistoryUI() {
         </div>
         
         {/* Footer Backspace */}
-        <div className="divider" style={{ height: '5rem' }}></div>
+        <div className="divider" style={{ height: '4rem' }}></div>
         {/* Footer */}
         <Footer />
       </div>
