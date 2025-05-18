@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 const BASE_URL = process.env.REACT_APP_SERVER_URL;
 
 // Helper function for fetch with retry and timeout
-const fetchWithRetry = async (url, options = {}, retries = 5, delay = 1000) => {
+const fetchWithRetry = async (url, options = {}, retries = 3, delay = 1000) => {
   for (let i = 0; i < retries; i++) {
     try {
       const response = await fetch(url, options);
