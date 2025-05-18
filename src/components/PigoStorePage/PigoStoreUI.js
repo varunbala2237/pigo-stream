@@ -4,7 +4,9 @@ import useAppVersion from '../../hooks/PigoStorePage/useAppVersion';
 import useDownloadApp from '../../hooks/PigoStorePage/useDownloadApp';
 import Alert from '../../utils/Alert';
 
-const Pigostore = () => {
+import { getSessionValue, setSessionValue } from '../../utils/sessionStorageStates';
+
+const PigostoreUI = () => {
   const [alertMessage, setAlertMessage] = useState(''); // State for alert message
   const [currentPlatform, setCurrentPlatform] = useState(''); // State for current platform
   const navigate = useNavigate(); // Initialize navigate
@@ -30,6 +32,27 @@ const Pigostore = () => {
     if (/iphone|ipad|ipod/i.test(userAgent)) return 'ios';
     return 'unknown';
   };
+
+  // Restoring page states
+  useEffect(() => {
+    const savedScrollPosition = getSessionValue('PigoStoreUI', 'pageScrollState') || 0;
+
+    if (savedScrollPosition) {
+      requestAnimationFrame(() => {
+        window.scrollTo({ top: savedScrollPosition, behavior: 'instant' });
+      });
+    }
+
+    const handlePageScroll = () => {
+      const scrollPosition = window.scrollY;
+      setSessionValue('PigoStoreUI', 'pageScrollState', scrollPosition);
+    };
+
+    window.addEventListener('scroll', handlePageScroll);
+    return () => {
+      window.removeEventListener('scroll', handlePageScroll);
+    };
+  }, []);
 
   useEffect(() => {
     const platform = detectPlatform();
@@ -172,4 +195,4 @@ const Pigostore = () => {
   );
 };
 
-export default Pigostore;
+export default PigostoreUI;

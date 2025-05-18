@@ -15,7 +15,9 @@ function PlayGround() {
 
   useEffect(() => {
     // Initial scroll to top
-    window.scrollTo({ top: 0 });
+    requestAnimationFrame(() => {
+      window.scrollTo({ top: 0, behavior: 'instant' });
+    });
   }, []);
 
   const GridComponent = type === 'movie' ? MovieGrid : TvGrid;
@@ -36,11 +38,11 @@ function PlayGround() {
           <div
             className="position-absolute w-100 h-100"
             style={{
-            top: 0,
-            left: 0,
-            background: 'rgba(0, 0, 0, 0.4)',
-            zIndex: 1,
-          }}
+              top: 0,
+              left: 0,
+              background: 'rgba(0, 0, 0, 0.4)',
+              zIndex: 1,
+            }}
           ></div>
         </div>
         <GridComponent id={id} type={type} setBackgroundImage={setBackgroundImage} />

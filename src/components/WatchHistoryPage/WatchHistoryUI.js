@@ -4,6 +4,8 @@ import WatchHistoryGrid from './WatchHistoryGrid';
 import { auth } from '../../firebase/firebase-auth'; // Import the auth object
 import Footer from '../Footer';
 
+import { getSessionValue, setSessionValue } from '../../utils/sessionStorageStates';
+
 function WatchHistoryUI() {
   const [userUID, setUserUID] = useState(null);
 
@@ -18,36 +20,26 @@ function WatchHistoryUI() {
     return () => unsubscribe();
   }, []);
 
+  // Restoring page states
   useEffect(() => {
-    // Retrieve the saved page state from sessionStorage
-    const savedPageState = sessionStorage.getItem('historyPageState');
-    if (savedPageState) {
-      const { savedScrollPosition } = JSON.parse(savedPageState);
-      if (savedScrollPosition !== undefined) {
-        // Delay the scroll action to ensure the DOM is fully rendered
-        setTimeout(() => {
-          window.scrollTo({ top: savedScrollPosition });
-        }, 500);
-      }
+    const savedScrollPosition = getSessionValue('WatchHistoryUI', 'pageScrollState') || 0;
+
+    if (savedScrollPosition) {
+      requestAnimationFrame(() => {
+        window.scrollTo({ top: savedScrollPosition, behavior: 'instant' });
+      });
     }
 
-    const handleScroll = () => {
+    const handlePageScroll = () => {
       const scrollPosition = window.scrollY;
-      updateLocalStorage(scrollPosition);
+      setSessionValue('WatchHistoryUI', 'pageScrollState', scrollPosition);
     };
 
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handlePageScroll);
     return () => {
-      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('scroll', handlePageScroll);
     };
   }, []);
-
-  const updateLocalStorage = (scrollPosition) => {
-    const pageState = JSON.stringify({
-      savedScrollPosition: scrollPosition,
-    });
-    sessionStorage.setItem('historyPageState', pageState);
-  };
 
   return (
     <div className="container-fluid d-flex flex-column justify-content-center align-items-center poppins-medium p-0">
@@ -59,7 +51,7 @@ function WatchHistoryUI() {
         <div className="flex-row text-white w-100">
           {userUID ? <><WatchHistoryGrid userUID={userUID} /></> : null}
         </div>
-        
+
         {/* Footer Backspace */}
         <div className="divider" style={{ height: '4rem' }}></div>
         {/* Footer */}
