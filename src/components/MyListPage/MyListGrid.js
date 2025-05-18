@@ -6,7 +6,6 @@ import ConnectionModal from '../../utils/ConnectionModal';
 import Alert from '../../utils/Alert';
 
 function MyListGrid({ userUID }) {
-    const [initialized, setInitialized] = useState(false);
     const [alertMessage, setAlertMessage] = useState('');
     const [alertType, setAlertType] = useState('');
     const [movieLimit, setMovieLimit] = useState(12);
@@ -25,12 +24,6 @@ function MyListGrid({ userUID }) {
     const moviesRef2 = useRef(null);
     const showsRef1 = useRef(null);
     const showsRef2 = useRef(null);
-
-    useEffect(() => {
-        if (userUID) {
-            setInitialized(true);
-        }
-    }, [userUID]);
 
     useEffect(() => {
         if (data) {
@@ -71,10 +64,6 @@ function MyListGrid({ userUID }) {
             clearTimeout(hideTimer);
         };
     }, [movieList, tvList, loading, error]);
-
-    if (!initialized) {
-        return null;
-    }
 
     const handleRemove = (id, type) => {
         if (type === 'movie') {
