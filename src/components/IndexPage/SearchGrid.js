@@ -108,7 +108,7 @@ function SearchGrid({ searchQuery, setIsSearchLoaded, setHasSearchContent }) {
 
       {/* First Movies Results */}
       {(
-        <div className="position-relative my-2">
+        <div className="position-relative my-3">
           {searchQuery.trim() && (movies?.filter(Boolean).length / 2) > 3 && (
             <>
               <button
@@ -162,7 +162,7 @@ function SearchGrid({ searchQuery, setIsSearchLoaded, setHasSearchContent }) {
 
       {/* Second Movies Results */}
       {(
-        <div className="position-relative my-2">
+        <div className="position-relative my-3">
           {searchQuery.trim() && (movies?.filter(Boolean).length / 2) > 3 && (
             <>
               <button
@@ -217,7 +217,7 @@ function SearchGrid({ searchQuery, setIsSearchLoaded, setHasSearchContent }) {
 
       {/* First TV Shows Results */}
       {(
-        <div className="position-relative my-2">
+        <div className="position-relative my-3">
           {searchQuery.trim() && (shows?.filter(Boolean).length / 2) > 3 && (
             <>
               <button
@@ -271,7 +271,7 @@ function SearchGrid({ searchQuery, setIsSearchLoaded, setHasSearchContent }) {
 
       {/* Second TV Shows Results */}
       {(
-        <div className="position-relative my-2">
+        <div className="position-relative my-3">
           {searchQuery.trim() && (shows?.filter(Boolean).length / 2) > 3 && (
             <>
               <button

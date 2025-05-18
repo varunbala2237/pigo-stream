@@ -119,7 +119,7 @@ function MyListGrid({ userUID }) {
                 <b className="mb-0">My List</b>
             </div>
             {/* First Row of Movies */}
-            <div className="position-relative my-2">
+            <div className="position-relative my-3">
                 {(movieList.filter(Boolean).length / 2) > 3 && (
                     <>
                         <button
@@ -176,7 +176,7 @@ function MyListGrid({ userUID }) {
             </div>
 
             {/* Second Row of Movies */}
-            <div className="position-relative my-2">
+            <div className="position-relative my-3">
                 {(movieList.filter(Boolean).length / 2) > 3 && (
                     <>
                         <button
@@ -253,7 +253,7 @@ function MyListGrid({ userUID }) {
             )}
 
             {/* First Row of TV Shows */}
-            <div className="position-relative my-2">
+            <div className="position-relative my-3">
                 {(tvList.filter(Boolean).length / 2) > 3 && (
                     <>
                         <button
@@ -330,7 +330,7 @@ function MyListGrid({ userUID }) {
             )}
 
             {/* Second Row of TV Shows */}
-            <div className="position-relative my-2">
+            <div className="position-relative my-3">
                 {(tvList.filter(Boolean).length / 2) > 3 && (
                     <>
                         <button

@@ -140,7 +140,7 @@ function ProvidersGrid({ setIsProvidersLoaded, setHasProvidersContent }) {
                 )}
                 <div
                     ref={providersRef}
-                    className="d-flex overflow-auto gap-3 px-4"
+                    className="d-flex overflow-auto gap-3"
                     style={{ scrollSnapType: 'x mandatory' }}
                 >
                     {PROVIDERS.map((provider) => (
@@ -161,7 +161,7 @@ function ProvidersGrid({ setIsProvidersLoaded, setHasProvidersContent }) {
             </div>
 
             {/* Providers Movies Section */}
-            <div className="position-relative my-2">
+            <div className="position-relative my-3">
                 {movies.filter(Boolean).length > 3 && (
                     <>
                         <button
@@ -203,7 +203,7 @@ function ProvidersGrid({ setIsProvidersLoaded, setHasProvidersContent }) {
             </div>
 
             {/* Providers TV Shows Section */}
-            <div className="position-relative my-2">
+            <div className="position-relative my-3">
                 {shows.filter(Boolean).length > 3 && (
                     <>
                         <button
