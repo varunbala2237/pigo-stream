@@ -14,13 +14,11 @@ function MyListGrid({ userUID }) {
     const [alertType, setAlertType] = useState('');
     const [movieLimit, setMovieLimit] = useState(12);
     const [tvLimit, setTvLimit] = useState(12);
-    const { data, loading: isLoading, error: isError } = useFetchMyList(userUID, movieLimit, tvLimit);
+    const { data: { movieList = [], tvList = [] } = {}, loading: isLoading, error: isError, refetch } = useFetchMyList(userUID, movieLimit, tvLimit);
 
     const [contentAlertMessage, setContentAlertMessage] = useState('');
     const [showConnectionModal, setShowConnectionModal] = useState(false);
 
-    const [movieList, setMovieList] = useState([]);
-    const [tvList, setTvList] = useState([]);
     const location = useLocation();
 
     // Scroll references for movies and TV shows (2 rows for each)
@@ -82,13 +80,6 @@ function MyListGrid({ userUID }) {
         };
     }, []);
 
-    useEffect(() => {
-        if (data) {
-            setMovieList(data.movieList || []);
-            setTvList(data.tvList || []);
-        }
-    }, [data]);
-
     // Connection modal handling
     useEffect(() => {
         if (isError) {
@@ -121,14 +112,6 @@ function MyListGrid({ userUID }) {
             clearTimeout(hideTimer);
         };
     }, [movieList, tvList, isLoading, isError]);
-
-    const handleRemove = (id, type) => {
-        if (type === 'movie') {
-            setMovieList(prevList => prevList.filter(movie => movie.id !== id));
-        } else if (type === 'tv') {
-            setTvList(prevList => prevList.filter(show => show.id !== id));
-        }
-    };
 
     const handleShowMoreMovies = () => {
         setMovieLimit(prevLimit => prevLimit + 12);
@@ -204,7 +187,7 @@ function MyListGrid({ userUID }) {
                                 media={movie}
                                 type="movie"
                                 path={location.pathname}
-                                onRemove={() => handleRemove(movie.id, 'movie')}
+                                onRemove={refetch}
                                 handleAlert={handleAlert}
                             />
                         ) : (
@@ -262,7 +245,7 @@ function MyListGrid({ userUID }) {
                                     media={movie}
                                     type="movie"
                                     path={location.pathname}
-                                    onRemove={() => handleRemove(movie.id, 'movie')}
+                                    onRemove={refetch}
                                     handleAlert={handleAlert}
                                 />
                             ) : (
@@ -339,7 +322,7 @@ function MyListGrid({ userUID }) {
                                     media={show}
                                     type="tv"
                                     path={location.pathname}
-                                    onRemove={() => handleRemove(show.id, 'tv')}
+                                    onRemove={refetch}
                                     handleAlert={handleAlert}
                                 />
                             ) : (
@@ -416,7 +399,7 @@ function MyListGrid({ userUID }) {
                                     media={show}
                                     type="tv"
                                     path={location.pathname}
-                                    onRemove={() => handleRemove(show.id, 'tv')}
+                                    onRemove={refetch}
                                     handleAlert={handleAlert}
                                 />
                             ) : (
