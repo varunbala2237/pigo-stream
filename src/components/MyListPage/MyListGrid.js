@@ -5,12 +5,16 @@ import useFetchMyList from '../../hooks/MyListPage/useFetchMyList';
 import ConnectionModal from '../../utils/ConnectionModal';
 import Alert from '../../utils/Alert';
 
+import { getSessionValue, setSessionValue } from '../../utils/sessionStorageStates';
+
+const SESSION_PATH = ['HomeUI', 'Grids', 'MyListGrid'];
+
 function MyListGrid({ userUID }) {
     const [alertMessage, setAlertMessage] = useState('');
     const [alertType, setAlertType] = useState('');
     const [movieLimit, setMovieLimit] = useState(12);
     const [tvLimit, setTvLimit] = useState(12);
-    const { data, loading, error } = useFetchMyList(userUID, movieLimit, tvLimit);
+    const { data, loading: isLoading, error: isError } = useFetchMyList(userUID, movieLimit, tvLimit);
 
     const [contentAlertMessage, setContentAlertMessage] = useState('');
     const [showConnectionModal, setShowConnectionModal] = useState(false);
@@ -25,6 +29,59 @@ function MyListGrid({ userUID }) {
     const showsRef1 = useRef(null);
     const showsRef2 = useRef(null);
 
+    // Load from sessionStorage on mount
+    useEffect(() => {
+        const savedMoviesScroll1 = getSessionValue(...SESSION_PATH, 'moviesScroll1') || 0;
+        const savedMoviesScroll2 = getSessionValue(...SESSION_PATH, 'moviesScroll2') || 0;
+        const savedShowsScroll1 = getSessionValue(...SESSION_PATH, 'showsScroll1') || 0;
+        const savedShowsScroll2 = getSessionValue(...SESSION_PATH, 'showsScroll2') || 0;
+
+        requestAnimationFrame(() => {
+            if (moviesRef1.current) moviesRef1.current.scrollTo({ left: savedMoviesScroll1, behavior: 'instant' });
+            if (moviesRef2.current) moviesRef2.current.scrollTo({ left: savedMoviesScroll2, behavior: 'instant' });
+            if (showsRef1.current) showsRef1.current.scrollTo({ left: savedShowsScroll1, behavior: 'instant' });
+            if (showsRef2.current) showsRef2.current.scrollTo({ left: savedShowsScroll2, behavior: 'instant' });
+        });
+    }, [isLoading, isError]);
+
+    // Save scroll positions for movies and shows
+    useEffect(() => {
+        const moviesNode1 = moviesRef1.current;
+        const moviesNode2 = moviesRef2.current;
+        const showsNode1 = showsRef1.current;
+        const showsNode2 = showsRef2.current;
+
+        if (!moviesNode1 || !moviesNode2 || !showsNode1 || !showsNode2) return;
+
+        const handleMoviesScroll1 = () => {
+            setSessionValue(...SESSION_PATH, 'moviesScroll1', moviesNode1.scrollLeft);
+        };
+
+        const handleMoviesScroll2 = () => {
+            setSessionValue(...SESSION_PATH, 'moviesScroll2', moviesNode2.scrollLeft);
+        };
+
+        const handleShowsScroll1 = () => {
+            setSessionValue(...SESSION_PATH, 'showsScroll1', showsNode1.scrollLeft);
+        };
+
+        const handleShowsScroll2 = () => {
+            setSessionValue(...SESSION_PATH, 'showsScroll2', showsNode2.scrollLeft);
+        };
+
+        moviesNode1.addEventListener('scroll', handleMoviesScroll1);
+        moviesNode2.addEventListener('scroll', handleMoviesScroll2);
+        showsNode1.addEventListener('scroll', handleShowsScroll1);
+        showsNode2.addEventListener('scroll', handleShowsScroll2);
+
+        return () => {
+            moviesNode1.removeEventListener('scroll', handleMoviesScroll1);
+            moviesNode2.removeEventListener('scroll', handleMoviesScroll2);
+            showsNode1.removeEventListener('scroll', handleShowsScroll1);
+            showsNode2.removeEventListener('scroll', handleShowsScroll2);
+        };
+    }, []);
+
     useEffect(() => {
         if (data) {
             setMovieList(data.movieList || []);
@@ -34,12 +91,12 @@ function MyListGrid({ userUID }) {
 
     // Connection modal handling
     useEffect(() => {
-        if (error) {
+        if (isError) {
             setShowConnectionModal(true);
         } else {
             setShowConnectionModal(false);
         }
-    }, [error]);
+    }, [isError]);
 
     // Alert handling for no content
     useEffect(() => {
@@ -47,7 +104,7 @@ function MyListGrid({ userUID }) {
         let showTimer;
         let hideTimer;
 
-        if (!loading && !error && !hasContent) {
+        if (!isLoading && !isError && !hasContent) {
             showTimer = setTimeout(() => {
                 setContentAlertMessage('Your list is empty.');
 
@@ -63,7 +120,7 @@ function MyListGrid({ userUID }) {
             clearTimeout(showTimer);
             clearTimeout(hideTimer);
         };
-    }, [movieList, tvList, loading, error]);
+    }, [movieList, tvList, isLoading, isError]);
 
     const handleRemove = (id, type) => {
         if (type === 'movie') {
