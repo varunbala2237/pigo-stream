@@ -268,14 +268,14 @@ function MyListGrid({ userUID }) {
                         className="btn btn-dark bd-callout-dark dynamic-fs border-0 rounded-pill btn-md d-none d-md-inline-block"
                         onClick={handleShowMoreMovies}
                     >
-                        <i className="bi bi-chevron-down text-white me-2"></i>
+                        <i className="bi bi-chevron-right text-white me-2"></i>
                         <span className="text-white">Show More</span>
                     </button>
                     <button
                         className="btn btn-dark bd-callout-dark dynamic-fs border-0 rounded-pill btn-sm d-md-none"
                         onClick={handleShowMoreMovies}
                     >
-                        <i className="bi bi-chevron-down text-white me-2"></i>
+                        <i className="bi bi-chevron-right text-white me-2"></i>
                         <span className="text-white">Show More</span>
                     </button>
                 </div>
@@ -338,25 +338,6 @@ function MyListGrid({ userUID }) {
                         )}
                 </div>
             </div>
-
-            {tvList.length === tvLimit && (
-                <div className="text-end mb-3">
-                    <button
-                        className="btn btn-dark bd-callout-dark dynamic-fs border-0 rounded-pill btn-md d-none d-md-inline-block"
-                        onClick={handleShowMoreTV}
-                    >
-                        <i className="bi bi-chevron-down text-white me-2"></i>
-                        <span className="text-white">Show More</span>
-                    </button>
-                    <button
-                        className="btn btn-dark bd-callout-dark dynamic-fs border-0 rounded-pill btn-sm d-md-none"
-                        onClick={handleShowMoreTV}
-                    >
-                        <i className="bi bi-chevron-down text-white me-2"></i>
-                        <span className="text-white">Show More</span>
-                    </button>
-                </div>
-            )}
 
             {/* Second Row of TV Shows */}
             <div className="position-relative my-3">
@@ -422,14 +403,14 @@ function MyListGrid({ userUID }) {
                         className="btn btn-dark bd-callout-dark dynamic-fs border-0 rounded-pill btn-md d-none d-md-inline-block"
                         onClick={handleShowMoreTV}
                     >
-                        <i className="bi bi-chevron-down text-white me-2"></i>
+                        <i className="bi bi-chevron-right text-white me-2"></i>
                         <span className="text-white">Show More</span>
                     </button>
                     <button
                         className="btn btn-dark bd-callout-dark dynamic-fs border-0 rounded-pill btn-sm d-md-none"
                         onClick={handleShowMoreTV}
                     >
-                        <i className="bi bi-chevron-down text-white me-2"></i>
+                        <i className="bi bi-chevron-right text-white me-2"></i>
                         <span className="text-white">Show More</span>
                     </button>
                 </div>
