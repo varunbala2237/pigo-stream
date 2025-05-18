@@ -7,7 +7,7 @@ import Alert from '../../utils/Alert';
 
 import { getSessionValue, setSessionValue } from '../../utils/sessionStorageStates';
 
-const SESSION_PATH = ['HomeUI', 'Grids', 'MyListGrid'];
+const SESSION_PATH = ['MyListUI', 'Grids', 'MyListGrid'];
 
 function MyListGrid({ userUID }) {
     const [alertMessage, setAlertMessage] = useState('');

@@ -8,7 +8,7 @@ import Alert from '../../utils/Alert';
 
 import { getSessionValue, setSessionValue } from '../../utils/sessionStorageStates';
 
-const SESSION_PATH = ['HomeUI', 'Grids', 'WatchHistoryGrid'];
+const SESSION_PATH = ['WatchHistoryUI', 'Grids', 'WatchHistoryGrid'];
 
 function WatchHistoryGrid({ userUID }) {
     const [initialized, setInitialized] = useState(false);
