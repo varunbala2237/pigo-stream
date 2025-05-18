@@ -12,9 +12,9 @@ const SESSION_PATH = ['HomeUI', 'Grids', 'MyListGrid'];
 function MyListGrid({ userUID }) {
     const [alertMessage, setAlertMessage] = useState('');
     const [alertType, setAlertType] = useState('');
-    const [movieLimit, setMovieLimit] = useState(12);
-    const [tvLimit, setTvLimit] = useState(12);
-    const { data: { moviesList = [], showsList = [] } = {}, loading: isLoading, error: isError, refetch } = useFetchMyList(userUID, movieLimit, tvLimit);
+    const [moviesLimit, setMovieLimit] = useState(12);
+    const [showsLimit, setTvLimit] = useState(12);
+    const { data: { moviesList = [], showsList = [] } = {}, loading: isLoading, error: isError, refetch } = useFetchMyList(userUID, moviesLimit, showsLimit);
 
     const [contentAlertMessage, setContentAlertMessage] = useState('');
     const [showConnectionModal, setShowConnectionModal] = useState(false);
@@ -262,7 +262,7 @@ function MyListGrid({ userUID }) {
                 </div>
             </div>
 
-            {moviesList.length === movieLimit && (
+            {moviesList.length === moviesLimit && (
                 <div className="text-end mb-3">
                     <button
                         className="btn btn-dark bd-callout-dark dynamic-fs border-0 rounded-pill btn-md d-none d-md-inline-block"
@@ -397,7 +397,7 @@ function MyListGrid({ userUID }) {
                 </div>
             </div>
 
-            {showsList.length === tvLimit && (
+            {showsList.length === showsLimit && (
                 <div className="text-end mb-3">
                     <button
                         className="btn btn-dark bd-callout-dark dynamic-fs border-0 rounded-pill btn-md d-none d-md-inline-block"
