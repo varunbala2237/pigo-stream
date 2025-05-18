@@ -49,7 +49,7 @@ function MyListUI() {
 
         {/* MyListGrid */}
         <div className="flex-row text-white w-100">
-          {userUID ? <><MyListGrid userUID={userUID} /></> : null}
+          {userUID && <MyListGrid userUID={userUID} />}
         </div>
 
         {/* Footer Backspace */}
