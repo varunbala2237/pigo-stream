@@ -48,12 +48,6 @@ function MyListGrid({ userUID }) {
         });
     }, [isLoading, isError]);
 
-    // Save media limits
-    useEffect(() => {
-        setSessionValue(...SESSION_PATH, 'moviesLimit', movieLimit);
-        setSessionValue(...SESSION_PATH, 'showsLimit', tvLimit);
-    }, [movieLimit, tvLimit]);
-
     // Save scroll positions for movies and shows
     useEffect(() => {
         const moviesNode1 = moviesRef1.current;
@@ -126,11 +120,19 @@ function MyListGrid({ userUID }) {
     }, [movieList, tvList, isLoading, isError]);
 
     const handleShowMoreMovies = () => {
-        setMovieLimit(prevLimit => prevLimit + 12);
+        setMovieLimit(prevLimit => {
+            const newLimit = prevLimit + 12;
+            setSessionValue(...SESSION_PATH, 'movieLimit', newLimit);
+            return newLimit;
+        });
     };
 
     const handleShowMoreTV = () => {
-        setTvLimit(prevLimit => prevLimit + 12);
+        setTvLimit(prevLimit => {
+            const newLimit = prevLimit + 12;
+            setSessionValue(...SESSION_PATH, 'tvLimit', newLimit);
+            return newLimit;
+        });
     };
 
     const handleAlertDismiss = () => {
