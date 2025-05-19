@@ -119,7 +119,7 @@ function Player({
             <img
               className="img-fluid custom-theme-radius-low mb-3"
               src={imageUrl}
-              alt=""
+              alt="empty"
               style={{
                 width: '100%',
                 maxWidth: '300px',
