@@ -9,9 +9,10 @@ import Player from './Player';
 import MediaGridSkeleton from './MediaGridSkeleton';
 
 import { getStorageValue, setStorageValue } from '../../utils/localStorageStates';
+import { getSessionValue, setSessionValue } from '../../utils/sessionStorageStates';
 
 function MovieGrid({ id, type, setBackgroundImage }) {
-  const MOVIE_SESSION_PATH = React.useMemo(
+  const MOVIE_STORAGE_PATH = React.useMemo(
     () => ['PlayGroundUI', 'Grids', 'MovieGrid', `${id}`],
     [id]
   );
@@ -21,7 +22,9 @@ function MovieGrid({ id, type, setBackgroundImage }) {
   const [director, setDirector] = useState('');
   const [selectedServerName, setSelectedServerName] = useState('');
 
-  const [sliceIndex, setSliceIndex] = useState(12); // Initial slice index
+  const [sliceIndex, setSliceIndex] = useState(() =>
+    getSessionValue(...MOVIE_STORAGE_PATH, 'sliceIndex') || 12
+  );
 
   const { data: mediaInfo, loadingInfo, errorInfo } = useFetchMediaInfo(id, type);
   const { servers, loading: loadingLink, error: errorLink } = useFetchStream(id, type);
@@ -46,7 +49,7 @@ function MovieGrid({ id, type, setBackgroundImage }) {
 
   // Load from localStorage on mount
   useEffect(() => {
-    const savedSelectedServer = getStorageValue(...MOVIE_SESSION_PATH, 'selectedServer');
+    const savedSelectedServer = getStorageValue(...MOVIE_STORAGE_PATH, 'selectedServer');
     // Ensure the first server is selected by default when the servers are loaded
     if (servers && servers.length > 0) {
       if (savedSelectedServer) {
@@ -56,7 +59,7 @@ function MovieGrid({ id, type, setBackgroundImage }) {
         setSelectedServerName(servers[0].server_name);
       }
     }
-  }, [MOVIE_SESSION_PATH, servers]);
+  }, [MOVIE_STORAGE_PATH, servers]);
 
   // Retrieving selected server link
   useEffect(() => {
@@ -72,11 +75,15 @@ function MovieGrid({ id, type, setBackgroundImage }) {
 
   const handleServerChange = (serverName) => {
     setSelectedServerName(serverName);
-    setStorageValue(...MOVIE_SESSION_PATH, 'selectedServer', serverName);
+    setStorageValue(...MOVIE_STORAGE_PATH, 'selectedServer', serverName);
   };
 
   const handleShowMore = () => {
-    setSliceIndex(prevSliceIndex => prevSliceIndex + 12);
+    setSliceIndex(prevSliceIndex => {
+      const newIndex = prevSliceIndex + 12;
+      setSessionValue(...MOVIE_STORAGE_PATH, 'sliceIndex', newIndex);
+      return newIndex;
+    });
   };
 
   const handleAddToList = async () => {
