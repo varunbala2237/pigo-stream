@@ -9,7 +9,6 @@ import useCheckServerStatus from '../../hooks/PlayerPage/useCheckServerStatus';
 import Player from './Player';
 import MediaGridSkeleton from './MediaGridSkeleton';
 
-import { setLocalMediaStates, getLocalMediaStates } from '../../utils/localStorageStates';
 import { getStorageValue, setStorageValue } from '../../utils/localStorageStates';
 import { getSessionValue, setSessionValue } from '../../utils/sessionStorageStates';
 
@@ -27,7 +26,6 @@ function TvGrid({ id, type, setBackgroundImage }) {
   const [selectedSeason, setSelectedSeason] = useState(1);
   const [selectedEpisode, setSelectedEpisode] = useState(1);
   const episodeScrollRef = useRef(null);
-  const [watchedEpisodes, setWatchedEpisodes] = useState({});
   const [selectedServerName, setSelectedServerName] = useState('');
 
   const [sliceIndex, setSliceIndex] = useState(() =>
@@ -43,9 +41,6 @@ function TvGrid({ id, type, setBackgroundImage }) {
 
   // Using the custom hook for checking server status
   const { serverStatus, loading: serverStatusLoading } = useCheckServerStatus(servers);
-
-  // Retrieve settings from cache if available
-  const cachedSettings = getLocalMediaStates(id);
 
   useEffect(() => {
     if (mediaInfo) {
@@ -72,25 +67,17 @@ function TvGrid({ id, type, setBackgroundImage }) {
     }
   }, [mediaInfo, TV_STORAGE_PATH, setBackgroundImage]);
 
-  // Retrieving watched episodes
-  useEffect(() => {
-    if (cachedSettings?.watchedEpisodes) {
-      setWatchedEpisodes(cachedSettings.watchedEpisodes);
-    }
-  }, [cachedSettings]);
-
   // Retrieving seasons and selected season
   useEffect(() => {
     if (seasonData) {
       setEpisodes(seasonData.episodes || []);
 
-      const selectedEp =
-        cachedSettings?.selectedEpisodes?.[selectedSeason] ||
-        seasonData.episodes[0]?.episode_number || 1;
+      const savedSelectedEpisode = getStorageValue(...TV_STORAGE_PATH, 'selectedEpisode') || 
+        seasonData.episodes[0]?.episode_number;
 
-      setSelectedEpisode(selectedEp);
+      setSelectedEpisode(savedSelectedEpisode);
     }
-  }, [seasonData, id, type, selectedSeason, cachedSettings]);
+  }, [seasonData, TV_STORAGE_PATH, id, type, selectedSeason]);
 
   // Load from localStorage on mount
   useEffect(() => {
@@ -118,89 +105,15 @@ function TvGrid({ id, type, setBackgroundImage }) {
     }
   }, [selectedServerName, servers]);
 
-  // Retrieve episodes scroll state
-  useEffect(() => {
-    if (episodes.length > 0 && episodeScrollRef.current) {
-      const currentSettings = getLocalMediaStates(id) || {};
-      const savedScrollTop = currentSettings.episodeScrollTops?.[selectedEpisode] || 0;
-
-      const timer = setTimeout(() => {
-        if (episodeScrollRef.current) {
-          episodeScrollRef.current.scrollTop = savedScrollTop;
-        }
-      }, 500); // Default delay for scroll state
-
-      return () => clearTimeout(timer);
-    }
-  }, [episodes, selectedEpisode, id]);
-
   const handleSeasonChange = (seasonNumber) => {
-    const currentSettings = getLocalMediaStates(id) || {};
-    const episodeForSeason = currentSettings.selectedEpisodes?.[seasonNumber] || 1;
-
     setSelectedSeason(seasonNumber);
-    setSelectedEpisode(episodeForSeason);
-
-    setLocalMediaStates(id, {
-      ...currentSettings,
-      selectedSeason: seasonNumber,
-      selectedServerName,
-      selectedEpisodes: {
-        ...(currentSettings.selectedEpisodes || {}),
-        [seasonNumber]: episodeForSeason
-      }
-    });
-  };
-
-  const handleToggleWatched = (episodeNumber) => {
-    const currentSettings = getLocalMediaStates(id) || {};
-    const previousWatched = currentSettings.watchedEpisodes || {};
-
-    const alreadyWatched = previousWatched?.[selectedSeason]?.[episodeNumber];
-
-    // If it's already watched, do nothing
-    if (alreadyWatched) return;
-
-    const updatedWatched = {
-      ...previousWatched,
-      [selectedSeason]: {
-        ...(previousWatched[selectedSeason] || {}),
-        [episodeNumber]: true, // Always mark as true
-      },
-    };
-
-    setWatchedEpisodes(updatedWatched);
-
-    setLocalMediaStates(id, {
-      ...currentSettings,
-      watchedEpisodes: updatedWatched,
-    });
+    setStorageValue(...TV_STORAGE_PATH, 'selectedSeason', seasonNumber);
   };
 
   // Change epsiode and scroll state
   const handleEpisodeChange = (episodeNumber) => {
-    const scrollTop = episodeScrollRef.current?.scrollTop || 0;
-    const currentSettings = getLocalMediaStates(id) || {};
-
-    const updatedScrollTops = {
-      ...(currentSettings.episodeScrollTops || {}),
-      [episodeNumber]: scrollTop,
-    };
-
-    const updatedSelectedEpisodes = {
-      ...(currentSettings.selectedEpisodes || {}),
-      [selectedSeason]: episodeNumber,
-    };
-
-    setLocalMediaStates(id, {
-      ...currentSettings,
-      selectedSeason,
-      selectedServerName,
-      episodeScrollTops: updatedScrollTops,
-      selectedEpisodes: updatedSelectedEpisodes,
-    });
-
     setSelectedEpisode(episodeNumber);
+    setStorageValue(...TV_STORAGE_PATH, 'selectedEpisode', episodeNumber);
   };
 
   // Check if the episode has aired
@@ -286,7 +199,6 @@ function TvGrid({ id, type, setBackgroundImage }) {
                 type={type}
                 isInList={isInList}
                 handleAddToList={handleAddToList}
-                handleToggleWatched={handleToggleWatched}
                 selectedEpisode={selectedEpisode}
               />
 
@@ -381,9 +293,6 @@ function TvGrid({ id, type, setBackgroundImage }) {
                                   <span className="badge bg-primary text-white ms-2">New!</span>
                                 )}
                               </span>
-                              {watchedEpisodes?.[selectedSeason]?.[episode.episode_number] && (
-                                <i className="bi bi-check2 text-success ms-2"></i>
-                              )}
                             </div>
                             <div className="d-flex flex-row justify-content-between">
                               <small className="dynamic-ss">{episode.name}</small>
