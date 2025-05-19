@@ -10,8 +10,15 @@ import Player from './Player';
 import MediaGridSkeleton from './MediaGridSkeleton';
 
 import { setLocalMediaStates, getLocalMediaStates } from '../../utils/localStorageStates';
+import { getStorageValue, setStorageValue } from '../../utils/localStorageStates';
+import { getSessionValue, setSessionValue } from '../../utils/sessionStorageStates';
 
 function TvGrid({ id, type, setBackgroundImage }) {
+  const TV_STORAGE_PATH = React.useMemo(
+    () => ['PlayGroundUI', 'Grids', 'TvGrid', `${id}`],
+    [id]
+  );
+
   const [mediaURL, setMediaURL] = useState('');
   const [cast, setCast] = useState([]);
   const [director, setDirector] = useState('');
@@ -23,7 +30,9 @@ function TvGrid({ id, type, setBackgroundImage }) {
   const [watchedEpisodes, setWatchedEpisodes] = useState({});
   const [selectedServerName, setSelectedServerName] = useState('');
 
-  const [sliceIndex, setSliceIndex] = useState(12); // Initial slice index
+  const [sliceIndex, setSliceIndex] = useState(() =>
+    getSessionValue(...TV_STORAGE_PATH, 'sliceIndex') || 12
+  );
 
   const { data: mediaInfo, loadingInfo, errorInfo } = useFetchMediaInfo(id, type);
   const { seasonData } = useFetchSeason(id, selectedSeason);
@@ -47,9 +56,11 @@ function TvGrid({ id, type, setBackgroundImage }) {
       );
       setDirector(director ? director.name : 'Unknown');
 
+      const savedSelectedSeason = getStorageValue(...TV_STORAGE_PATH, 'selectedSeason');
+
       if (mediaInfo.seasons && mediaInfo.seasons.length > 0) {
-        if (cachedSettings) {
-          setSelectedSeason(cachedSettings.selectedSeason);
+        if (savedSelectedSeason) {
+          setSelectedSeason(savedSelectedSeason);
         } else {
           const defaultSeasonNumber = mediaInfo.seasons[0]?.season_number || 1;
           setSelectedSeason(defaultSeasonNumber);
@@ -59,7 +70,7 @@ function TvGrid({ id, type, setBackgroundImage }) {
       // Setup the backgroundImage
       setBackgroundImage(`https://image.tmdb.org/t/p/original${mediaInfo.backdrop_path}`);
     }
-  }, [mediaInfo, setBackgroundImage, cachedSettings]);
+  }, [mediaInfo, TV_STORAGE_PATH, setBackgroundImage]);
 
   // Retrieving watched episodes
   useEffect(() => {
@@ -81,18 +92,19 @@ function TvGrid({ id, type, setBackgroundImage }) {
     }
   }, [seasonData, id, type, selectedSeason, cachedSettings]);
 
-  // Retrieving selected servers
+  // Load from localStorage on mount
   useEffect(() => {
+    const savedSelectedServer = getStorageValue(...TV_STORAGE_PATH, 'selectedServer');
     // Ensure the first server is selected by default when the servers are loaded
-    if (servers && servers.length > 0 && !selectedServerName) {
-      if (cachedSettings) {
-        setSelectedServerName(cachedSettings.selectedServerName);
+    if (servers && servers.length > 0) {
+      if (savedSelectedServer) {
+        setSelectedServerName(savedSelectedServer);
       } else {
         // Set the default server to the first one in the list
         setSelectedServerName(servers[0].server_name);
       }
     }
-  }, [servers, selectedServerName, cachedSettings]);
+  }, [TV_STORAGE_PATH, servers]);
 
   // Retrieving selected server link
   useEffect(() => {
@@ -111,7 +123,7 @@ function TvGrid({ id, type, setBackgroundImage }) {
     if (episodes.length > 0 && episodeScrollRef.current) {
       const currentSettings = getLocalMediaStates(id) || {};
       const savedScrollTop = currentSettings.episodeScrollTops?.[selectedEpisode] || 0;
-      
+
       const timer = setTimeout(() => {
         if (episodeScrollRef.current) {
           episodeScrollRef.current.scrollTop = savedScrollTop;
@@ -221,11 +233,15 @@ function TvGrid({ id, type, setBackgroundImage }) {
 
   const handleServerChange = (serverName) => {
     setSelectedServerName(serverName);
-    setLocalMediaStates(id, { selectedSeason, selectedEpisode, selectedServerName: serverName });
+    setStorageValue(...TV_STORAGE_PATH, 'selectedServer', serverName);
   };
 
   const handleShowMore = () => {
-    setSliceIndex(prevSliceIndex => prevSliceIndex + 12);
+    setSliceIndex(prevSliceIndex => {
+      const newIndex = prevSliceIndex + 12;
+      setSessionValue(...TV_STORAGE_PATH, 'sliceIndex', newIndex);
+      return newIndex;
+    });
   };
 
   const handleAddToList = async () => {
@@ -349,7 +365,7 @@ function TvGrid({ id, type, setBackgroundImage }) {
                       return (
                         <button
                           key={episode.id}
-                          className={`w-100 text-start mb-2 p-2 custom-theme-radius-low border-0 shadow-sm ${selectedEpisode === episode.episode_number
+                          className={`w-100 text-start mt-2 p-2 custom-theme-radius border-0 shadow ${selectedEpisode === episode.episode_number
                             ? 'btn-light bd-callout-light text-black active'
                             : 'btn-dark bd-callout-dark text-white'
                             }`}
