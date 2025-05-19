@@ -12,6 +12,8 @@ import MediaGridSkeleton from './MediaGridSkeleton';
 import { getStorageValue, setStorageValue } from '../../utils/localStorageStates';
 import { getSessionValue, setSessionValue } from '../../utils/sessionStorageStates';
 
+const SEASON_STATE_KEY = 'seasonState';
+
 function TvGrid({ id, type, setBackgroundImage }) {
   const TV_STORAGE_PATH = React.useMemo(
     () => ['PlayGroundUI', 'Grids', 'TvGrid', `${id}`],
@@ -67,17 +69,25 @@ function TvGrid({ id, type, setBackgroundImage }) {
     }
   }, [mediaInfo, TV_STORAGE_PATH, setBackgroundImage]);
 
-  // Retrieving seasons and selected season
   useEffect(() => {
     if (seasonData) {
-      setEpisodes(seasonData.episodes || []);
+      const episodes = seasonData.episodes || [];
+      setEpisodes(episodes);
 
-      const savedSelectedEpisode = getStorageValue(...TV_STORAGE_PATH, 'selectedEpisode') || 
-        seasonData.episodes[0]?.episode_number;
+      const seasonState = getStorageValue(...TV_STORAGE_PATH, SEASON_STATE_KEY) || {};
+      const currentSeasonState = seasonState[selectedSeason] || {};
+      const savedEpisode = currentSeasonState.episode;
 
-      setSelectedEpisode(savedSelectedEpisode);
+      const fallbackEpisode = episodes[0]?.episode_number;
+      const episodeToSet = episodes.find(ep => ep.episode_number === savedEpisode)
+        ? savedEpisode
+        : fallbackEpisode;
+
+      if (episodeToSet) {
+        setSelectedEpisode(episodeToSet);
+      }
     }
-  }, [seasonData, TV_STORAGE_PATH, id, type, selectedSeason]);
+  }, [seasonData, selectedSeason, TV_STORAGE_PATH]);
 
   // Load from localStorage on mount
   useEffect(() => {
@@ -108,12 +118,30 @@ function TvGrid({ id, type, setBackgroundImage }) {
   const handleSeasonChange = (seasonNumber) => {
     setSelectedSeason(seasonNumber);
     setStorageValue(...TV_STORAGE_PATH, 'selectedSeason', seasonNumber);
+
+    // Try to load saved episode and scroll position
+    const seasonState = getStorageValue(...TV_STORAGE_PATH, SEASON_STATE_KEY) || {};
+    const seasonInfo = seasonState[seasonNumber];
+
+    if (seasonInfo?.episode) {
+      setSelectedEpisode(seasonInfo.episode);
+    } else {
+      setSelectedEpisode(undefined); // Will be handled in useEffect on seasonData
+    }
+
+    // Scroll restoration could be done in another effect if needed
   };
 
-  // Change epsiode and scroll state
   const handleEpisodeChange = (episodeNumber) => {
     setSelectedEpisode(episodeNumber);
-    setStorageValue(...TV_STORAGE_PATH, 'selectedEpisode', episodeNumber);
+
+    const seasonState = getStorageValue(...TV_STORAGE_PATH, SEASON_STATE_KEY) || {};
+    seasonState[selectedSeason] = {
+      ...(seasonState[selectedSeason] || {}),
+      episode: episodeNumber,
+      // Optionally add scroll info here later
+    };
+    setStorageValue(...TV_STORAGE_PATH, SEASON_STATE_KEY, seasonState);
   };
 
   // Check if the episode has aired
