@@ -1,5 +1,5 @@
 // sessionStorageStates.js
-const SESSION_KEY = 'pageStates';
+const SESSION_KEY = 'pageSessionStates';
 
 function getSessionObject() {
   return JSON.parse(sessionStorage.getItem(SESSION_KEY)) || {};

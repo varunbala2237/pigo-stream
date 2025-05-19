@@ -1,5 +1,5 @@
 // localStorageStates.js
-const STORAGE_KEY = 'pageStates';
+const STORAGE_KEY = 'pageStorageStates';
 
 function getStorageObject() {
   try {
