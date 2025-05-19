@@ -238,8 +238,8 @@ function Player({
                     </React.Fragment>
                   ))}
                 </span><br />
-                <div className="text-wrap text-break mt-2 dynamic-fs">{mediaInfo.overview}</div><br />
               </p>
+              <div className="text-wrap text-break dynamic-fs">{mediaInfo.overview}</div><br />
             </div>
           </div>
         </div>
