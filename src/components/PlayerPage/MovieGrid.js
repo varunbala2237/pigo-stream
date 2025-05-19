@@ -172,8 +172,8 @@ function MovieGrid({ id, type, setBackgroundImage }) {
                         <CastCard key={index} isSkeleton={true} />
                       ))
                     ) : (
-                      cast.slice(0, sliceIndex).map(actor => (
-                        <CastCard key={actor.cast_id} actor={actor} />
+                      cast.slice(0, sliceIndex).map((actor, index) => (
+                        <CastCard key={actor.cast_id ?? `${actor.name}-${index}`} actor={actor} />
                       ))
                     )}
                   </div>
