@@ -8,9 +8,14 @@ import useCheckServerStatus from '../../hooks/PlayerPage/useCheckServerStatus';
 import Player from './Player';
 import MediaGridSkeleton from './MediaGridSkeleton';
 
-import { setLocalMediaStates, getLocalMediaStates } from '../../utils/localStorageStates';
+import { getStorageValue, setStorageValue } from '../../utils/localStorageStates';
 
 function MovieGrid({ id, type, setBackgroundImage }) {
+  const MOVIE_SESSION_PATH = React.useMemo(
+    () => ['PlayGroundUI', 'Grids', 'MovieGrid', `${id}`],
+    [id]
+  );
+
   const [mediaURL, setMediaURL] = useState('');
   const [cast, setCast] = useState([]);
   const [director, setDirector] = useState('');
@@ -27,9 +32,6 @@ function MovieGrid({ id, type, setBackgroundImage }) {
   // Using the custom hook for checking server status
   const { serverStatus, loading: serverStatusLoading } = useCheckServerStatus(servers);
 
-  // Retrieve settings from cache if available
-  const cachedSettings = getLocalMediaStates(id);
-
   useEffect(() => {
     if (mediaInfo) {
       setCast(mediaInfo.credits?.cast || []);
@@ -42,18 +44,19 @@ function MovieGrid({ id, type, setBackgroundImage }) {
 
   }, [mediaInfo, id, type, setBackgroundImage]);
 
-  // Retrieving selected servers
+  // Load from localStorage on mount
   useEffect(() => {
+    const savedSelectedServer = getStorageValue(...MOVIE_SESSION_PATH, 'selectedServer');
     // Ensure the first server is selected by default when the servers are loaded
-    if (servers && servers.length > 0 && !selectedServerName) {
-      if (cachedSettings) {
-        setSelectedServerName(cachedSettings.selectedServerName);
+    if (servers && servers.length > 0) {
+      if (savedSelectedServer) {
+        setSelectedServerName(savedSelectedServer);
       } else {
         // Set the default server to the first one in the list
         setSelectedServerName(servers[0].server_name);
       }
     }
-  }, [servers, selectedServerName, cachedSettings]);
+  }, [MOVIE_SESSION_PATH, servers]);
 
   // Retrieving selected server link
   useEffect(() => {
@@ -69,7 +72,7 @@ function MovieGrid({ id, type, setBackgroundImage }) {
 
   const handleServerChange = (serverName) => {
     setSelectedServerName(serverName);
-    setLocalMediaStates(id, { selectedServerName: serverName });
+    setStorageValue(...MOVIE_SESSION_PATH, 'selectedServer', serverName);
   };
 
   const handleShowMore = () => {
