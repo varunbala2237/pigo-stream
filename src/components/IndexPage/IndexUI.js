@@ -11,14 +11,8 @@ const IndexUI = () => {
 
   const [backgroundImage, setBackgroundImage] = useState(null);
   const [isRecommended, setIsRecommended] = useState(false);
-  const [showSearchBar, setShowSearchBar] = useState(() => {
-    const savedState = localStorage.getItem('showSearchBar');
-    return savedState ? JSON.parse(savedState) : false;
-  });
-  const [triggerSearch, setTriggerSearch] = useState(() => {
-    const savedState = localStorage.getItem('triggerSearch');
-    return savedState ? savedState : '';
-  });
+  const [showSearchBar, setShowSearchBar] = useState(false);
+  const [triggerSearch, setTriggerSearch] = useState('');
 
   useEffect(() => {
     const getImagePath = (media) => {
