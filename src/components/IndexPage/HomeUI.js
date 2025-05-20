@@ -170,9 +170,8 @@ function HomeUI({
 
   const handleSearchBar = () => {
     setShowSearchBar((prevState) => {
-      const newState = !prevState;
-      setSessionValue('HomeUI', 'showSearchBar', newState);
-      return newState;
+      setSessionValue('HomeUI', 'showSearchBar', (!prevState).toString());
+      return !prevState;
     });
 
     // Reset search query and trigger search
