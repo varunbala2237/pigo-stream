@@ -56,6 +56,7 @@ function HomeUI({
   // Restoring page states
   useEffect(() => {
     const savedWelcomeMessage = getSessionValue('HomeUI', 'welcomeMessage');
+    const savedShowSearchBar = getSessionValue('HomeUI', 'showSearchBar');
     const savedSearchQuery = getSessionValue('HomeUI', 'searchQuery') || '';
     const savedTriggerSearch = getSessionValue('HomeUI', 'triggerSearch') || '';
     const savedScrollPosition = getSessionValue('HomeUI', 'pageScrollState') || 0;
@@ -66,6 +67,10 @@ function HomeUI({
         setWelcomeMessage('');
         removeSessionValue('HomeUI', 'welcomeMessage');
       }, 5000);
+    }
+
+    if (savedShowSearchBar !== null) {
+      setShowSearchBar(savedShowSearchBar === 'true');
     }
 
     if (savedSearchQuery.trim() !== '' && savedTriggerSearch.trim() !== '') {
@@ -88,7 +93,7 @@ function HomeUI({
     return () => {
       window.removeEventListener('scroll', handlePageScroll);
     };
-  }, [setTriggerSearch]);
+  }, [setShowSearchBar, setTriggerSearch]);
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -164,7 +169,11 @@ function HomeUI({
   }, [hasTrendingContent, hasProvidersContent, hasSearchContent, searchQuery]);
 
   const handleSearchBar = () => {
-    setShowSearchBar((prevState) => !prevState);
+    setShowSearchBar((prevState) => {
+      const newState = !prevState;
+      setSessionValue('HomeUI', 'showSearchBar', newState);
+      return newState;
+    });
 
     // Reset search query and trigger search
     handleSearchInputChange({ target: { value: '' } });
@@ -336,7 +345,7 @@ function HomeUI({
 
         {/* Footer Backspace & Footer */}
         <div className="divider" style={{ height: '4rem' }}></div>
-        <Footer showSearchBar={showSearchBar} handleSearchBar={handleSearchBar} />
+        <Footer showSearchBar={showSearchBar} setShowSearchBar={setShowSearchBar} handleSearchBar={handleSearchBar} />
 
         {/* Connection Modal */}
         {showConnectionModal && <ConnectionModal show={showConnectionModal} />}
