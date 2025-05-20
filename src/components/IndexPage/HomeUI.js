@@ -57,6 +57,7 @@ function HomeUI({
   useEffect(() => {
     const savedWelcomeMessage = getSessionValue('HomeUI', 'welcomeMessage');
     const savedSearchQuery = getSessionValue('HomeUI', 'searchQuery') || '';
+    const savedTriggerSearch = getSessionValue('HomeUI', 'triggerSearch') || '';
     const savedScrollPosition = getSessionValue('HomeUI', 'pageScrollState') || 0;
 
     if (savedWelcomeMessage) {
@@ -67,9 +68,9 @@ function HomeUI({
       }, 5000);
     }
 
-    if (savedSearchQuery.trim() !== '') {
+    if (savedSearchQuery.trim() !== '' && savedTriggerSearch.trim() !== '') {
       setSearchQuery(savedSearchQuery);
-      setTriggerSearch(savedSearchQuery);
+      setTriggerSearch(savedTriggerSearch);
     }
 
     if (savedScrollPosition) {
@@ -179,6 +180,7 @@ function HomeUI({
     setSearchQuery(query);
     setSessionValue('HomeUI', 'searchQuery', query);
     setTriggerSearch(query);
+    setSessionValue('HomeUI', 'triggerSearch', query);
   };
 
   const handleSelectSearch = (query) => {
