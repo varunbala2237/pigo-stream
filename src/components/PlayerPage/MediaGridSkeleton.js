@@ -31,7 +31,7 @@ function MediaGridSkeleton({ mediaInfo, servers, loadingInfo, loadingLink, error
         hideTimer = setTimeout(() => {
           setContentAlertMessage('');
         }, 5000);
-      }, 2000);
+      }, 3000);
     } else {
       setContentAlertMessage('');
     }

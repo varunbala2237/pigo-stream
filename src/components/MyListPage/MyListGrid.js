@@ -108,7 +108,7 @@ function MyListGrid({ userUID }) {
                 hideTimer = setTimeout(() => {
                     setContentAlertMessage('');
                 }, 5000);
-            }, 2000);
+            }, 3000);
         } else {
             setContentAlertMessage('');
         }
