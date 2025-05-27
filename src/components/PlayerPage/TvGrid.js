@@ -316,7 +316,7 @@ function TvGrid({ id, type, setBackgroundImage }) {
                       return (
                         <button
                           key={episode.id}
-                          className={`w-100 text-start mt-2 p-2 custom-theme-radius border-0 shadow ${selectedEpisode === episode.episode_number
+                          className={`w-100 text-start mt-2 p-2 custom-theme-radius-low border-0 shadow ${selectedEpisode === episode.episode_number
                             ? 'btn-light bd-callout-light text-black active'
                             : 'btn-dark bd-callout-dark text-white'
                             }`}
