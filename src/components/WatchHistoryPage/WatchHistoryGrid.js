@@ -105,7 +105,7 @@ function WatchHistoryGrid({ userUID }) {
 
         if (!isLoading && !isError && !hasContent) {
             showTimer = setTimeout(() => {
-                setContentAlertMessage(`You haven't watched anything yet.`);
+                setContentAlertMessage(`Looks like you haven’t watched anything yet. Watch something to get started!`);
 
                 hideTimer = setTimeout(() => {
                     setContentAlertMessage('');

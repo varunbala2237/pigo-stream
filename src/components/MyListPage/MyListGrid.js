@@ -103,7 +103,7 @@ function MyListGrid({ userUID }) {
 
         if (!isLoading && !isError && !hasContent) {
             showTimer = setTimeout(() => {
-                setContentAlertMessage('Your list is empty.');
+                setContentAlertMessage('Looks like your list is empty. Add something to get started!');
 
                 hideTimer = setTimeout(() => {
                     setContentAlertMessage('');
