@@ -3,8 +3,6 @@ import useSaveWatchHistory from '../../hooks/WatchHistoryPage/useSaveWatchHistor
 import useFetchTrailer from '../../hooks/PlayerPage/useFetchTrailer';
 import useAppVersion from '../../hooks/PigoStorePage/useAppVersion';
 import { useNavigate } from 'react-router-dom';
-import './Player.css';
-
 import openIframeWindow from "../IframePage/openIframeWindow";
 
 function Player({
