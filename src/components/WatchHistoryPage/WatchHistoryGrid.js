@@ -199,7 +199,7 @@ function WatchHistoryGrid({ userUID }) {
             </div>
 
             {/* First Row of Movies */}
-            <div className="position-relative my-3">
+            <div className="position-relative custom-margin-y">
                 {(movieHistory.filter(Boolean).length / 2) > 3 && (
                     <>
                         <button
@@ -256,7 +256,7 @@ function WatchHistoryGrid({ userUID }) {
             </div>
 
             {/* Second Row of Movies */}
-            <div className="position-relative my-3">
+            <div className="position-relative custom-margin-y">
                 {(movieHistory.filter(Boolean).length / 2) > 3 && (
                     <>
                         <button
@@ -333,7 +333,7 @@ function WatchHistoryGrid({ userUID }) {
             )}
 
             {/* First Row of TV Shows */}
-            <div className="position-relative my-3">
+            <div className="position-relative custom-margin-y">
                 {(tvHistory.filter(Boolean).length / 2) > 3 && (
                     <>
                         <button
@@ -391,7 +391,7 @@ function WatchHistoryGrid({ userUID }) {
             </div>
 
             {/* Second Row of TV Shows */}
-            <div className="position-relative my-3">
+            <div className="position-relative custom-margin-y">
                 {(tvHistory.filter(Boolean).length / 2) > 3 && (
                     <>
                         <button

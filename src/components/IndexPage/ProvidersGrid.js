@@ -119,7 +119,7 @@ function ProvidersGrid({ setIsProvidersLoaded, setHasProvidersContent }) {
     return (
         <div className="container text-white">
             {/* Providers Selection Section */}
-            <div className="position-relative my-3">
+            <div className="position-relative custom-margin-y">
                 {PROVIDERS.length > 4 && (
                     <>
                         <button
@@ -164,7 +164,7 @@ function ProvidersGrid({ setIsProvidersLoaded, setHasProvidersContent }) {
             </div>
 
             {/* Providers Movies Section */}
-            <div className="position-relative my-3">
+            <div className="position-relative custom-margin-y">
                 {movies.filter(Boolean).length > 3 && (
                     <>
                         <button
@@ -206,7 +206,7 @@ function ProvidersGrid({ setIsProvidersLoaded, setHasProvidersContent }) {
             </div>
 
             {/* Providers TV Shows Section */}
-            <div className="position-relative my-3">
+            <div className="position-relative custom-margin-y">
                 {shows.filter(Boolean).length > 3 && (
                     <>
                         <button
