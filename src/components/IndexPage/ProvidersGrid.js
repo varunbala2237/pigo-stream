@@ -118,6 +118,10 @@ function ProvidersGrid({ setIsProvidersLoaded, setHasProvidersContent }) {
 
     return (
         <div className="container text-white">
+            <div className="d-flex align-items-center dynamic-ts m-2 px-1">
+                <i className="bi bi-cast theme-color me-2"></i>
+                <b className="mb-0">Streaming Platforms</b>
+            </div>
             {/* Providers Selection Section */}
             <div className="position-relative custom-margin-y">
                 {PROVIDERS.length > 4 && (

@@ -21,7 +21,7 @@ const Footer = ({ showSearchBar = null, handleSearchBar = null }) => {
             <li key={index} className="nav-item px-2 text-center">
               <Link
                 to={item.path}
-                className="nav-link d-flex flex-column align-items-center text-decoration-none"
+                className="nav-link d-flex flex-column align-items-center text-decoration-none dynamic-ts"
               >
                 <i className={`bi ${item.icon} ${isActive ? 'theme-color' : 'text-secondary'}`}></i>
                 <span className={`dynamic-ss ${isActive ? 'text-white' : 'text-secondary'}`}>{item.name}</span>
@@ -33,7 +33,7 @@ const Footer = ({ showSearchBar = null, handleSearchBar = null }) => {
         {showSearchBar !== null && (
           <li className="nav-item px-2 text-center">
             <button
-              className={`btn border-0 d-flex flex-column align-items-center justify-content-center text-decoration-none`}
+              className={`btn border-0 d-flex flex-column align-items-center justify-content-center text-decoration-none dynamic-ts`}
               style={{ width: '3rem', height: '3rem' }}
               onClick={handleSearchBar}
             >
