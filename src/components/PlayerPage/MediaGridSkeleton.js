@@ -26,7 +26,7 @@ function MediaGridSkeleton({ mediaInfo, servers, loadingInfo, loadingLink, error
 
     if (!loadingInfo && !loadingLink && !errorInfo && !errorLink && !hasContent) {
       showTimer = setTimeout(() => {
-        setContentAlertMessage('No media or content available.');
+        setContentAlertMessage('No media content found at the moment. Please check back later.');
 
         hideTimer = setTimeout(() => {
           setContentAlertMessage('');
