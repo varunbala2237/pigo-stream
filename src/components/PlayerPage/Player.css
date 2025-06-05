@@ -1,0 +1,44 @@
+/* Common button content styling */
+.btn {
+  position: relative;
+  overflow: hidden;
+  transition: background-color 0.3s ease;
+}
+
+.btn .btn-content {
+  display: block;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.btn .hover-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.9);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.btn:hover .default {
+  transform: translateY(-100%);
+  opacity: 0;
+}
+
+.btn:hover .hover-text {
+  transform: translate(-50%, -50%) scale(1);
+  opacity: 1;
+}
+
+/* Optional: Custom trailer and play button styles */
+.trailer-btn {
+  background-color: #ff0000; /* YouTube red */
+  color: white;
+  border: none;
+  border-radius: 50px;
+}
+
+.play-btn {
+  background-color: #1a1a1a; /* PigoPlayer dark */
+  color: white;
+  border-radius: 50px;
+}
