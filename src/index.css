@@ -9,16 +9,15 @@ body {
   margin: 0;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  /* Custom scrollbar styles */
+  scrollbar-width: thin;
+  scrollbar-color: #343a40 transparent;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
-}
-
-/* Custom scrollbar */
-::-webkit-scrollbar {
-  display: none;
 }
 
 /* Poppins Font */
@@ -197,4 +196,5 @@ code {
 .w-50 {
   width: 50%;
 }
+
 /* End of main parts */
