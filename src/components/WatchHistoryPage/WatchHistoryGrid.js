@@ -11,15 +11,16 @@ import { getSessionValue, setSessionValue } from '../../utils/sessionStorageStat
 const SESSION_PATH = ['WatchHistoryUI', 'Grids', 'WatchHistoryGrid'];
 
 function WatchHistoryGrid({ userUID }) {
-    const [alertMessage, setAlertMessage] = useState('');
-    const [alertType, setAlertType] = useState('');
     const [movieLimit, setMovieLimit] = useState(12);
     const [tvLimit, setTvLimit] = useState(12);
     const { data: { movieHistory = [], tvHistory = [] } = {}, loading: isLoading, error: isError, refetch } = useFetchWatchHistory(userUID, movieLimit, tvLimit);
     const { clearHistory } = useClearWatchHistory();
 
-    const [contentAlertMessage, setContentAlertMessage] = useState('');
+    // Connection modal state
     const [showConnectionModal, setShowConnectionModal] = useState(false);
+
+    // Alert messages
+    const [alert, setAlert] = useState({ message: '', type: '', key: '' });
 
     const location = useLocation();
 
@@ -105,14 +106,14 @@ function WatchHistoryGrid({ userUID }) {
 
         if (!isLoading && !isError && !hasContent) {
             showTimer = setTimeout(() => {
-                setContentAlertMessage(`Looks like you haven’t watched anything yet. Watch something to get started!`);
+                setAlert({ message: 'Looks like you haven’t watched anything yet. Watch something to get started!', type: 'primary', key: 'content' });
 
                 hideTimer = setTimeout(() => {
-                    setContentAlertMessage('');
+                    setAlert({ message: '', type: '', key: '' });
                 }, 5000);
             }, 2000);
         } else {
-            setContentAlertMessage('');
+            setAlert((prev) => (prev.key === 'content' ? { message: '', type: '', key: '' } : prev));
         }
 
         return () => {
@@ -148,14 +149,12 @@ function WatchHistoryGrid({ userUID }) {
     };
 
     const handleAlertDismiss = () => {
-        setContentAlertMessage('');
-        setAlertMessage('');
+        setAlert({ message: '', type: '', key: '' });
     };
 
     const handleAlert = (message) => {
-        setAlertMessage(message);
-        setAlertType("success");
-        setTimeout(() => setAlertMessage(''), 5000);
+        setAlert({ message: message, type: 'success', key: 'feedback' });
+        setTimeout(() => setAlert(''), 5000);
     };
 
     const scroll = (ref, direction) => {
@@ -470,13 +469,10 @@ function WatchHistoryGrid({ userUID }) {
             {/* Connection Modal */}
             {showConnectionModal && <ConnectionModal show={showConnectionModal} />}
 
-            {/* Alert for no content */}
-            {contentAlertMessage && (
-                <Alert message={contentAlertMessage} onClose={handleAlertDismiss} type="primary" />
+            {/* Alert Message */}
+            {alert.message && (
+                <Alert message={alert.message} onClose={handleAlertDismiss} type={alert.type} />
             )}
-
-            {/* Alert for clearing history */}
-            {alertMessage && <Alert message={alertMessage} onClose={handleAlertDismiss} type={alertType} />}
         </div>
     );
 }
