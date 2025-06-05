@@ -14,6 +14,18 @@
   backdrop-filter: blur(4px);
 }
 
+/* Card Image */
+.custom-card-img {
+  transition: transform 0.3s ease-in-out;
+  width: 100%;
+  border-radius: inherit;
+}
+
+/* Hover effect on the image only */
+.card:hover .custom-card-img {
+  transform: scale(1.05);
+}
+
 /* Blurry and dark backdrop with smooth animation */
 .modal-backdrop.fade {
   position: fixed;

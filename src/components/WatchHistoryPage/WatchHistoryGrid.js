@@ -184,7 +184,7 @@ function WatchHistoryGrid({ userUID }) {
                         disabled={isClearButtonDisabled}
                     >
                         <i className="bi bi-trash me-2"></i>
-                        Clear History
+                        Remove All
                     </button>
                     <button
                         type="button"
@@ -193,7 +193,7 @@ function WatchHistoryGrid({ userUID }) {
                         disabled={isClearButtonDisabled}
                     >
                         <i className="bi bi-trash me-2"></i>
-                        Clear History
+                        Remove All
                     </button>
                 </div>
             </div>
