@@ -10,16 +10,16 @@ import { getSessionValue, setSessionValue } from '../../utils/sessionStorageStat
 const SESSION_PATH = ['MyListUI', 'Grids', 'MyListGrid'];
 
 function MyListGrid({ userUID }) {
-    const [alertMessage, setAlertMessage] = useState('');
-    const [alertType, setAlertType] = useState('');
+    const location = useLocation();
     const [movieLimit, setMovieLimit] = useState(12);
     const [tvLimit, setTvLimit] = useState(12);
     const { data: { movieList = [], tvList = [] } = {}, loading: isLoading, error: isError, refetch } = useFetchMyList(userUID, movieLimit, tvLimit);
 
-    const [contentAlertMessage, setContentAlertMessage] = useState('');
+    // Connection modal state
     const [showConnectionModal, setShowConnectionModal] = useState(false);
 
-    const location = useLocation();
+    // Alert messages
+    const [alert, setAlert] = useState({ message: '', type: '', key: '' });
 
     // Scroll references for movies and TV shows (2 rows for each)
     const moviesRef1 = useRef(null);
@@ -103,14 +103,14 @@ function MyListGrid({ userUID }) {
 
         if (!isLoading && !isError && !hasContent) {
             showTimer = setTimeout(() => {
-                setContentAlertMessage('Looks like your list is empty. Add something to get started!');
+                setAlert({ message: 'Looks like your list is empty. Add something to get started!', type: 'primary', key: 'content' });
 
                 hideTimer = setTimeout(() => {
-                    setContentAlertMessage('');
+                    setAlert({ message: '', type: '', key: '' });
                 }, 5000);
             }, 2000);
         } else {
-            setContentAlertMessage('');
+            setAlert((prev) => (prev.key === 'content' ? { message: '', type: '', key: '' } : prev));
         }
 
         return () => {
@@ -136,14 +136,12 @@ function MyListGrid({ userUID }) {
     };
 
     const handleAlertDismiss = () => {
-        setContentAlertMessage('');
-        setAlertMessage('');
+        setAlert({ message: '', type: '', key: '' });
     };
 
     const handleAlert = (message) => {
-        setAlertMessage(message);
-        setAlertType("success");
-        setTimeout(() => setAlertMessage(''), 5000);
+        setAlert({ message: message, type: 'success', key: 'feedback' });
+        setTimeout(() => setAlert(''), 5000);
     };
 
     const scroll = (ref, direction) => {
@@ -433,13 +431,10 @@ function MyListGrid({ userUID }) {
             {/* Connection Modal */}
             {showConnectionModal && <ConnectionModal show={showConnectionModal} />}
 
-            {/* Alert for no content */}
-            {contentAlertMessage && (
-                <Alert message={contentAlertMessage} onClose={handleAlertDismiss} type="primary" />
+            {/* Alert Message */}
+            {alert.message && (
+                <Alert message={alert.message} onClose={handleAlertDismiss} type={alert.type} />
             )}
-
-            {/* Alert for successful removal */}
-            {alertMessage && <Alert message={alertMessage} onClose={handleAlertDismiss} type={alertType} />}
         </div>
     );
 }
