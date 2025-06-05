@@ -127,38 +127,39 @@ function Player({
 
             <div className="d-flex flex-column align-items-stretch justify-content-center">
 
-              <div className="d-flex justify-content-between w-100 mb-3">
-                <div className="d-flex justify-content-center text-start w-50">
-                  {/* Larger button for larger screen */}
+              <div className="d-flex justify-content-between rounded-pill w-100 mb-3">
+                <div className="d-flex rounded-pill overflow-hidden border-0 w-100">
+                  {/* Large and Small List Buttons*/}
                   <button
-                    className={`btn btn-dark px-2 py-1 d-none d-md-block border-0 text-white rounded-circle custom-bg`}
+                    className="btn btn-dark d-none d-md-block rounded-pill-l border-0 text-white custom-bg flex-grow-1"
                     onClick={handleAddToList}
                   >
                     <i className={`bi-${isInList ? 'bookmark-fill theme-color' : 'bookmark'}`}></i>
                   </button>
-                  {/* Smaller button for smaller screen */}
-                  <button
-                    className={`btn btn-dark d-block d-md-none btn-sm border-0 text-white rounded-circle custom-bg`}
-                    onClick={handleAddToList}
-                  >
-                    <i className={`bi-${isInList ? 'bookmark-fill theme-color' : 'bookmark'}`}></i>
-                  </button>
-                </div>
 
-                <div className="d-flex justify-content-center text-end w-50">
-                  {/* Larger button for larger screen */}
                   <button
-                    className={`btn btn-primary px-2 py-1 d-none d-md-block border-0 text-white rounded-circle btn-light bg-primary`}
-                    onClick={handleShare}
+                    className="btn btn-dark d-block d-md-none btn-sm rounded-pill-l border-0 text-white custom-bg flex-grow-1"
+                    onClick={handleAddToList}
                   >
-                    <i className={`bi bi-share-fill`}></i>
+                    <i className={`bi-${isInList ? 'bookmark-fill theme-color' : 'bookmark'}`}></i>
                   </button>
-                  {/* Smaller button for smaller screen */}
+
+                  {/* Divider Line */}
+                  <div className="bg-secondary" style={{ width: '1px' }}></div>
+
+                  {/* Large and Small Share Buttons*/}
                   <button
-                    className={`btn btn-primary d-block d-md-none btn-sm border-0 text-white rounded-circle btn-light bg-primary`}
+                    className="btn btn-dark d-none d-md-block rounded-pill-r border-0 text-white custom-bg flex-grow-1"
                     onClick={handleShare}
                   >
-                    <i className={`bi bi-share-fill`}></i>
+                    <i className="bi bi-share-fill"></i>
+                  </button>
+
+                  <button
+                    className="btn btn-dark d-block d-md-none btn-sm rounded-pill-r border-0 text-white custom-bg flex-grow-1"
+                    onClick={handleShare}
+                  >
+                    <i className="bi bi-share-fill"></i>
                   </button>
                 </div>
               </div>
