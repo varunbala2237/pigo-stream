@@ -3,7 +3,7 @@ const Alert = ({ message, onClose, type }) => {
   const alertType = type || 'danger';
   return (
     <div 
-      className={`alert position-fixed bd-callout-${alertType} p-2 custom-theme-radius fade show fixed-bottom mx-auto`} role="alert"
+      className={`alert position-fixed bd-callout-${alertType} p-2 custom-theme-radius-low fade show fixed-bottom mx-auto`} role="alert"
       style={{ width: '90%', zIndex: 9999, bottom: '1 rem', left: '50%', transform: 'translateX(-50%)' }}
     >
       <div className="d-flex justify-content-between align-items-center text-white">

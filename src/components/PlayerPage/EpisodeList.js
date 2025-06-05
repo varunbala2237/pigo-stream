@@ -12,7 +12,7 @@ function EpisodeList({
     <div
       ref={episodeScrollRef}
       className="overflow-auto custom-theme-radius-low"
-      style={{ maxHeight: '285px' }}
+      style={{ maxHeight: '280px' }}
     >
       {episodes.length > 0 ? (
         episodes.map(episode => {
@@ -22,7 +22,7 @@ function EpisodeList({
           return (
             <button
               key={episode.id}
-              className={`w-100 text-start mt-2 p-2 custom-theme-radius-low border-0 shadow ${
+              className={`w-100 text-start p-2 custom-margin-top custom-theme-radius-low border-0 shadow ${
                 selectedEpisode === episode.episode_number
                   ? 'btn-light bd-callout-light text-black active'
                   : 'btn-dark bd-callout-dark text-white'

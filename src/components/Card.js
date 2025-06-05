@@ -117,8 +117,8 @@ function Card({ media, type, path, onRemove, handleAlert, isDeletable = true, is
   if (isSkeleton) {
     return (
       <div className="custom-card-container">
-        <div className="card bg-transparent border-0 position-relative custom-theme-radius skeleton-card">
-          <div className="card-skeleton-image custom-theme-radius custom-bg"></div>
+        <div className="card bg-transparent border-0 position-relative custom-theme-radius-low skeleton-card">
+          <div className="card-skeleton-image custom-theme-radius-low custom-bg"></div>
           <div className="card-overlay dynamic-size dynamic-fs px-1">
             <div className="d-flex justify-content-between align-items-center">
               <div className="rating-box text-start card-skeleton-bar rounded-pill custom-bg"></div>
@@ -133,7 +133,7 @@ function Card({ media, type, path, onRemove, handleAlert, isDeletable = true, is
   return (
     <div className="custom-card-container">
       <div
-        className="card bg-transparent border-0 position-relative custom-theme-radius"
+        className="card bg-transparent border-0 position-relative custom-theme-radius-low"
         onClick={handlePlayMedia}
         onContextMenu={handleRightClick}
         onMouseDown={(e) => e.button === 0 && setTimeout(() => handleLongClick(e), 2500)}
@@ -171,7 +171,7 @@ function Card({ media, type, path, onRemove, handleAlert, isDeletable = true, is
           {/* Confirmation Modal */}
           <div className={`modal fade zoom-in-out ${modalVisible ? 'show' : ''} d-block`} tabIndex="-1">
             <div className="modal-dialog modal-dialog-centered mx-auto border-0 modal-pad">
-              <div ref={modalRef} className="modal-content dynamic-fs bd-callout-dark custom-theme-radius text-white border-0">
+              <div ref={modalRef} className="modal-content dynamic-fs bd-callout-dark custom-theme-radius-low text-white border-0">
                 <div className="modal-body justify-content-center text-center border-0">
                   <span className="dynamic-fs">
                     Are you sure you want to remove <strong>"{media.title || media.name || 'this item'}"</strong> from {path === '/watch-history' ? 'Watch History' : 'My List'}?

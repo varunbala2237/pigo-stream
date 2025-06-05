@@ -30,7 +30,7 @@ function SearchBar({
                   {isDropdownOpen && (
                     <ul
                       ref={dropdownRef}
-                      className="dropdown-menu show position-absolute bd-callout-dark custom-theme-radius p-0"
+                      className="dropdown-menu show position-absolute bd-callout-dark custom-theme-radius-low p-0"
                       style={{ top: '100%', left: 0, right: 0, maxWidth: '100vw', zIndex: 1000 }}
                     >
                       {searchHistory.length === 0 ? (

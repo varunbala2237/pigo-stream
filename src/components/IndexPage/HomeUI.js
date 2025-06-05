@@ -266,10 +266,10 @@ function HomeUI({
         {!showSearchBar && (
           !title ? (
             <div className="container justify-content-center" style={{ textAlign: 'start' }}>
-              <div className="d-flex flex-column text-white custom-theme-radius" style={{ padding: '5%' }}>
+              <div className="d-flex flex-column text-white custom-theme-radius-low" style={{ padding: '5%' }}>
                 <div className="d-flex align-items-center mb-2">
                   <div className="hero-skeleton-title-bar bd-callout-dark"></div>
-                  <div className="hero-skeleton-badge custom-theme-radius custom-bg ms-2"></div>
+                  <div className="hero-skeleton-badge custom-theme-radius-low custom-bg ms-2"></div>
                 </div>
                 <div className="dynamic-fs text-white">
                   <div className="dynamic-fs my-2 d-flex align-items-center">
@@ -287,7 +287,7 @@ function HomeUI({
             </div>
           ) : (
             <div className="container justify-content-center" style={{ textAlign: 'start' }}>
-              <div className="d-flex flex-column text-white custom-theme-radius" style={{ padding: '5%' }}>
+              <div className="d-flex flex-column text-white custom-theme-radius-low" style={{ padding: '5%' }}>
                 <div className="d-flex align-items-center">
                   <b className="text-wrap dynamic-ts">{title}</b>
                   {/* Badge for Recommended or Popular */}

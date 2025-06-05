@@ -112,7 +112,7 @@ function Player({
   };
 
   return (
-    <div className="d-flex flex-column custom-bg custom-theme-radius w-100 p-2">
+    <div className="d-flex flex-column custom-bg custom-theme-radius-low w-100 p-2">
       <div className="d-flex flex-column flex-md-row align-items-start justify-content-between w-100">
         <div className="d-flex flex-row align-items-start custom-theme-radius-low w-100">
           <div className="section border-0">
@@ -246,7 +246,7 @@ function Player({
       </div>
       {
         showNote && (
-          <div className="bd-callout-dark custom-theme-radius dynamic-fs text-white mt-3" style={{ padding: '1rem' }}>
+          <div className="bd-callout-dark custom-theme-radius-low dynamic-fs text-white mt-3" style={{ padding: '1rem' }}>
             {platform === 'windows' || platform === 'android' ? (
               <>Don't have the app? <span className="link text-primary" onClick={redirectToStore}>
                 <i className="bi bi-bag-check-fill me-2"></i>Get it now

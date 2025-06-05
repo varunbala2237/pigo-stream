@@ -38,7 +38,7 @@ function Header() {
   return (
     <>
       {/* Top Navbar */}
-      <nav className="navbar navbar-expand-lg navbar-dark custom-theme-radius">
+      <nav className="navbar navbar-expand-lg navbar-dark custom-theme-radius-low">
         <div className="container-fluid">
           <div className="d-flex align-items-center gap-2">
             <div className="navbar-brand rounded-pill d-flex align-items-center">
@@ -107,7 +107,7 @@ function Header() {
           </div>
         </div>
 
-        <div className="mt-auto d-flex flex-column align-items-center gap-3 pb-3">
+        <div className="mt-auto d-flex flex-column align-items-center custom-gap pb-3">
           <button className="btn btn-md rounded-pill btn-danger" onClick={signOutWithAccount}>
             <i className="bi bi-box-arrow-left"></i> Sign Out
           </button>

@@ -221,7 +221,7 @@ function WatchHistoryGrid({ userUID }) {
 
                 <div
                     ref={moviesRef1}
-                    className="d-flex overflow-auto gap-3"
+                    className="d-flex overflow-auto custom-gap"
                     style={{ scrollSnapType: 'x mandatory' }}
                 >
                     {(movieHistory?.slice(0, Math.ceil(movieHistory.length / 2)) || []).concat(
@@ -278,7 +278,7 @@ function WatchHistoryGrid({ userUID }) {
 
                 <div
                     ref={moviesRef2}
-                    className="d-flex overflow-auto gap-3"
+                    className="d-flex overflow-auto custom-gap"
                     style={{ scrollSnapType: 'x mandatory' }}
                 >
                     {(movieHistory?.slice(Math.ceil(movieHistory.length / 2)) || [])
@@ -355,7 +355,7 @@ function WatchHistoryGrid({ userUID }) {
 
                 <div
                     ref={showsRef1}
-                    className="d-flex overflow-auto gap-3"
+                    className="d-flex overflow-auto custom-gap"
                     style={{ scrollSnapType: 'x mandatory' }}
                 >
                     {(tvHistory?.slice(0, Math.ceil(tvHistory.length / 2)) || [])
@@ -413,7 +413,7 @@ function WatchHistoryGrid({ userUID }) {
 
                 <div
                     ref={showsRef2}
-                    className="d-flex overflow-auto gap-3"
+                    className="d-flex overflow-auto custom-gap"
                     style={{ scrollSnapType: 'x mandatory' }}
                 >
                     {(tvHistory?.slice(Math.ceil(tvHistory.length / 2)) || [])

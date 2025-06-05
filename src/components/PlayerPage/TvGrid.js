@@ -242,7 +242,7 @@ function TvGrid({ id, type, setBackgroundImage }) {
                 selectedEpisode={selectedEpisode}
               />
 
-              <div className="container-fluid custom-bg custom-theme-radius w-100 p-2 my-2">
+              <div className="container-fluid custom-bg custom-theme-radius-low w-100 p-2 my-2">
                 <div className="d-flex flex-row dynamic-ts py-2">
                   <i className="bi bi-hdd-network me-2"></i>
                   Servers
@@ -272,7 +272,7 @@ function TvGrid({ id, type, setBackgroundImage }) {
                 </div>
               </div>
 
-              <div className="container-fluid custom-bg custom-theme-radius w-100 p-2 my-2">
+              <div className="container-fluid custom-bg custom-theme-radius-low w-100 p-2 my-2">
                 <div className="d-flex flex-row dynamic-ts py-2">
                   <i className="bi bi-collection-play me-2"></i>
                   Seasons & Episodes
@@ -312,7 +312,7 @@ function TvGrid({ id, type, setBackgroundImage }) {
                 />
               </div>
 
-              <div className="d-flex flex-column align-items-start custom-theme-radius my-2 w-100">
+              <div className="d-flex flex-column align-items-start custom-theme-radius-low my-2 w-100">
                 <div className="container py-2 text-white">
                   <div className="d-flex flex-row dynamic-ts">
                     <i className="bi bi-person-fill me-2"></i>

@@ -19,8 +19,8 @@ function CastCard({ actor, isSkeleton }) {
           </div>
           {/* Placeholder Text Blocks */}
           <div className="text-center">
-            <div className="bd-callout-dark custom-theme-radius cast-skeleton-bar mb-1"></div>
-            <div className="bd-callout-dark custom-theme-radius cast-skeleton-bar"></div>
+            <div className="bd-callout-dark custom-theme-radius-low cast-skeleton-bar mb-1"></div>
+            <div className="bd-callout-dark custom-theme-radius-low cast-skeleton-bar"></div>
           </div>
         </a>
       </div>

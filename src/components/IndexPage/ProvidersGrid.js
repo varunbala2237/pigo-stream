@@ -6,15 +6,15 @@ import useFetchProviders from '../../hooks/IndexPage/useFetchProviders';
 import { getSessionValue, setSessionValue } from '../../utils/sessionStorageStates';
 
 const PROVIDERS = [
-    { id: 8, name: 'Netflix', region: 'IN', bg: 'white', logo: 'https://upload.wikimedia.org/wikipedia/commons/0/08/Netflix_2015_logo.svg' },
+    { id: 8, name: 'Netflix', region: 'IN', bg: 'dark', logo: 'https://upload.wikimedia.org/wikipedia/commons/0/08/Netflix_2015_logo.svg' },
     { id: 9, name: 'Amazon Prime', region: 'US', bg: 'white', logo: 'https://upload.wikimedia.org/wikipedia/commons/f/f1/Prime_Video.png' },
     { id: 337, name: 'Disney+', region: 'US', bg: 'white', logo: 'https://upload.wikimedia.org/wikipedia/commons/3/3e/Disney%2B_logo.svg' },
     { id: 350, name: 'Apple TV+', region: 'US', bg: 'white', logo: 'https://upload.wikimedia.org/wikipedia/commons/2/28/Apple_TV_Plus_Logo.svg' },
-    { id: 15, name: 'Hulu', region: 'US', bg: 'white', logo: 'https://upload.wikimedia.org/wikipedia/commons/f/f9/Hulu_logo_%282018%29.svg' },
+    { id: 15, name: 'Hulu', region: 'US', bg: 'dark', logo: 'https://upload.wikimedia.org/wikipedia/commons/f/f9/Hulu_logo_%282018%29.svg' },
     { id: 2074, name: 'Lionsgate', region: 'IN', bg: 'white', logo: 'https://upload.wikimedia.org/wikipedia/commons/6/65/Lionsgate_Logo.svg' },
     { id: 2180, name: 'Sony Pictures', region: 'IN', bg: 'white', logo: 'https://upload.wikimedia.org/wikipedia/commons/c/ca/Sony_logo.svg' },
     { id: 531, name: 'Paramount+', region: 'US', bg: 'white', logo: 'https://upload.wikimedia.org/wikipedia/commons/4/4e/Paramount%2B_logo.svg' },
-    { id: 1825, name: 'Max', region: 'US', bg: 'white', logo: 'https://upload.wikimedia.org/wikipedia/commons/c/ce/Max_logo.svg' },
+    { id: 1825, name: 'Max', region: 'US', bg: 'dark', logo: 'https://upload.wikimedia.org/wikipedia/commons/c/ce/Max_logo.svg' },
     { id: 526, name: 'AMC+', region: 'US', bg: 'dark', logo: 'https://upload.wikimedia.org/wikipedia/commons/4/4a/AMC%2B_logo.png' },
     { id: 123, name: 'FXNow', region: 'US', bg: 'white', logo: 'https://cdn2.downdetector.com/static/uploads/c/300/f4061/FXNOW-logo.png' },
     { id: 283, name: 'Crunchyroll', region: 'US', bg: 'white', logo: 'https://upload.wikimedia.org/wikipedia/commons/8/85/Crunchyroll_2024_stacked.svg' },
@@ -140,15 +140,18 @@ function ProvidersGrid({ setIsProvidersLoaded, setHasProvidersContent }) {
                 )}
                 <div
                     ref={providersRef}
-                    className="d-flex overflow-auto gap-3"
+                    className="d-flex overflow-auto"
                     style={{ scrollSnapType: 'x mandatory' }}
                 >
-                    {PROVIDERS.map((provider) => (
+                    {PROVIDERS.map((provider, index) => (
                         <div
                             key={provider.id}
-                            className={`provider-card bg-${provider.bg} custom-theme-radius d-flex justify-content-center align-items-center ${selectedProvider === provider.id ? 'border border-2 border-primary' : ''}`}
+                            className={`provider-card bg-${provider.bg} d-flex justify-content-center align-items-center ${selectedProvider === provider.id ? 'border border-2 border-primary' : ''}`}
                             onClick={() => setSelectedProvider(provider.id)}
-                            style={{ scrollSnapAlign: 'start' }}
+                            style={{
+                                scrollSnapAlign: 'start',
+                                borderRight: index !== PROVIDERS.length - 1 ? '4px solid #343a40' : 'none',
+                            }}
                         >
                             <img
                                 src={provider.logo}
@@ -180,7 +183,7 @@ function ProvidersGrid({ setIsProvidersLoaded, setHasProvidersContent }) {
                         </button>
                     </>
                 )}
-                <div ref={moviesRef} className="d-flex overflow-auto gap-3" style={{ scrollSnapType: 'x mandatory' }}>
+                <div ref={moviesRef} className="d-flex overflow-auto custom-gap" style={{ scrollSnapType: 'x mandatory' }}>
                     {(
                         !isLoading && !isError && movies?.length > 0 ? movies : []
                     )
@@ -222,7 +225,7 @@ function ProvidersGrid({ setIsProvidersLoaded, setHasProvidersContent }) {
                         </button>
                     </>
                 )}
-                <div ref={showsRef} className="d-flex overflow-auto gap-3" style={{ scrollSnapType: 'x mandatory' }}>
+                <div ref={showsRef} className="d-flex overflow-auto custom-gap" style={{ scrollSnapType: 'x mandatory' }}>
                     {(
                         !isLoading && !isError && shows?.length > 0 ? shows : []
                     )

@@ -173,6 +173,26 @@ code {
 }
 
 /* Custom heights and widths */
+.custom-margin-top {
+  margin-top: 4px;
+}
+
+.custom-margin-bottom {
+  margin-bottom: 4px;
+}
+
+.custom-margin-left {
+  margin-left: 4px;
+}
+
+.custom-margin-right {
+  margin-right: 4px;
+}
+
+.custom-gap{
+  gap: 4px;
+}
+
 .vh-25 {
   min-height: 25vh;
 }

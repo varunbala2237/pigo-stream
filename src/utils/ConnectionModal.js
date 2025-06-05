@@ -24,7 +24,7 @@ function ConnectionModal({ show }) {
       {show && (
         <div className="modal fade zoom-in-out show d-block" tabIndex="-1">
           <div className="modal-dialog modal-dialog-centered mx-auto border-0 modal-pad">
-            <div ref={modalRef} className="modal-content dynamic-fs bd-callout-dark custom-theme-radius text-white border-0">
+            <div ref={modalRef} className="modal-content dynamic-fs bd-callout-dark custom-theme-radius-low text-white border-0">
               <div className="modal-body justify-content-center text-center border-0">
                 <i className="bi bi-wifi-off text-danger fs-1"></i>
                 <p className="mt-3 dynamic-fs">Server is not responding</p>
