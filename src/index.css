@@ -189,6 +189,14 @@ code {
   margin-right: 4px;
 }
 
+.custom-margin-x {
+  margin: 0px 4px;
+}
+
+.custom-margin-y {
+  margin: 4px 0px;
+}
+
 .custom-gap{
   gap: 4px;
 }
