@@ -32,7 +32,6 @@ function HomeUI({
 
   const [searchQuery, setSearchQuery] = useState('');
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const [welcomeMessage, setWelcomeMessage] = useState('');
 
   // Error handling flags
   const [isTrendingLoaded, setIsTrendingLoaded] = useState(true);
@@ -44,7 +43,9 @@ function HomeUI({
   const [hasTrendingContent, setHasTrendingContent] = useState(true);
   const [hasProvidersContent, setHasProvidersContent] = useState(true);
   const [hasSearchContent, setHasSearchContent] = useState(true);
-  const [contentAlertMessage, setContentAlertMessage] = useState('');
+
+  // Alert messages
+  const [alert, setAlert] = useState({ message: '', type: '', key: '' });
 
   const dropdownRef = useRef(null);
   const inputRef = useRef(null);
@@ -62,9 +63,9 @@ function HomeUI({
     const savedScrollPosition = getSessionValue('HomeUI', 'pageScrollState') || 0;
 
     if (savedWelcomeMessage) {
-      setWelcomeMessage(savedWelcomeMessage);
+      setAlert({ message: savedWelcomeMessage, type: 'success', key: 'welcome' });
       setTimeout(() => {
-        setWelcomeMessage('');
+        setAlert((prev) => (prev.key === 'welcome' ? { message: '', type: '', key: '' } : prev));
         removeSessionValue('HomeUI', 'welcomeMessage');
       }, 5000);
     }
@@ -152,14 +153,14 @@ function HomeUI({
 
     if (alertMessage) {
       showTimer = setTimeout(() => {
-        setContentAlertMessage(alertMessage);
+        setAlert({ message: alertMessage, type: 'primary', key: 'content' });
 
         hideTimer = setTimeout(() => {
-          setContentAlertMessage('');
+          setAlert({ message: '', type: '', key: '' });
         }, 5000);
       }, 2000);
     } else {
-      setContentAlertMessage('');
+      setAlert((prev) => (prev.key === 'content' ? { message: '', type: '', key: '' } : prev));
     }
 
     return () => {
@@ -213,8 +214,7 @@ function HomeUI({
   };
 
   const handleAlertDismiss = () => {
-    setContentAlertMessage('');
-    setWelcomeMessage('');
+    setAlert({ message: '', type: '', key: '' });
   };
 
   const handleSearchSubmit = () => {
@@ -349,13 +349,10 @@ function HomeUI({
         {/* Connection Modal */}
         {showConnectionModal && <ConnectionModal show={showConnectionModal} />}
 
-        {/* Alert for no content */}
-        {contentAlertMessage && (
-          <Alert message={contentAlertMessage} onClose={handleAlertDismiss} type="primary" />
+        {/* Alert Message */}
+        {alert.message && (
+          <Alert message={alert.message} onClose={handleAlertDismiss} type={alert.type} />
         )}
-
-        {/* Alert for welcome message */}
-        {welcomeMessage && <Alert message={welcomeMessage} onClose={handleAlertDismiss} type="success" />}
       </div>
     </div>
   );
