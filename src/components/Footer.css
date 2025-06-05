@@ -1,34 +1,5 @@
 /* Footer.css */
 .footer-fixed {
-  position: fixed;
-  bottom: 1rem;
-  left: 50%;
-  transform: translateX(-50%);
+  height: 4rem;
   z-index: 1000;
-  height: 3rem;
-  max-width: 100%;
-  white-space: nowrap;
-}
-
-.footer-fixed ul {
-  flex-wrap: nowrap !important;
-}
-
-.footer-fixed .nav-item {
-  flex-shrink: 0;
-  height: 100%;
-  display: flex;
-  align-items: center;
-}
-
-.footer-fixed .nav-link {
-  height: 100%;
-  display: flex;
-  align-items: center;
-}
-
-/* Search Bar Button */
-.search-bar-btn {
-  height: 3rem;
-  width: 3rem;
 }

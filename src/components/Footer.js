@@ -1,7 +1,6 @@
-// Footer.jsx
-import React from 'react';
+// Footer.js
 import { Link, useLocation } from 'react-router-dom';
-import './Footer.css'; // Minimal, optional
+import './Footer.css';
 
 const Footer = ({ showSearchBar = null, handleSearchBar = null }) => {
   const location = useLocation();
@@ -10,31 +9,36 @@ const Footer = ({ showSearchBar = null, handleSearchBar = null }) => {
   const navItems = [
     { path: '/index', name: 'Home', icon: 'bi-house' },
     { path: '/my-list', name: 'My List', icon: 'bi-bookmark-fill' },
-    { path: '/watch-history', name: 'Watch History', icon: 'bi-clock' },
+    { path: '/watch-history', name: 'Watch History', icon: 'bi-clock-history' },
   ];
 
   return (
-    <div className="footer-fixed bd-callout-dark rounded-pill shadow">
-      <ul className="nav h-100 gap-2 flex-nowrap overflow-auto justify-content-between align-items-center dynamic-fs">
+    <div className="footer-fixed bd-callout-dark w-100 position-fixed bottom-0 shadow">
+      <ul className="nav h-100 flex-nowrap overflow-auto justify-content-evenly align-items-center px-2 dynamic-fs">
         {navItems.map((item, index) => {
           const isActive = currentPath === item.path;
           return (
-            <li key={index} className={`nav-item rounded-pill ${isActive ? 'bg-white fw-bold active' : ''}`}>
+            <li key={index} className="nav-item px-2 text-center">
               <Link
                 to={item.path}
-                className={`nav-link d-flex align-items-center theme-color`}
+                className="nav-link d-flex flex-column align-items-center text-decoration-none"
               >
-                <i className={`bi ${item.icon} dynamic-ts`}></i>
-                {isActive && <span className="ms-2 text-black">{item.name}</span>}
+                <i className={`bi ${item.icon} ${isActive ? 'theme-color' : 'text-secondary'}`}></i>
+                <span className={`dynamic-ss ${isActive ? 'text-white' : 'text-secondary'}`}>{item.name}</span>
               </Link>
             </li>
           );
         })}
 
         {showSearchBar !== null && (
-          <li className="nav-item rounded-pill">
-            <button className="btn btn-dark search-bar-btn theme-bg border-0 rounded-circle" onClick={handleSearchBar}>
-              {showSearchBar ? <i className="bi bi-x-lg"></i> : <i className="bi bi-search"></i>}
+          <li className="nav-item px-2 text-center">
+            <button
+              className={`btn border-0 d-flex flex-column align-items-center justify-content-center text-decoration-none`}
+              style={{ width: '3rem', height: '3rem' }}
+              onClick={handleSearchBar}
+            >
+              <i className={`bi ${showSearchBar ? 'bi-x-lg theme-color' : 'bi-search text-secondary'}`}></i>
+              <span className={`dynamic-ss ${showSearchBar ? 'text-white' : 'text-secondary'}`}>{showSearchBar ? 'Close' : 'Search'}</span>
             </button>
           </li>
         )}
