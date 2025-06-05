@@ -1,8 +1,10 @@
+// PlayGroundUI.js
 import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import Header from '../Header';
 import MovieGrid from './MovieGrid';
 import TvGrid from './TvGrid';
+import Footer from '../Footer';
 
 function PlayGround() {
   const location = useLocation();
@@ -46,6 +48,10 @@ function PlayGround() {
           ></div>
         </div>
         <GridComponent id={id} type={type} setBackgroundImage={setBackgroundImage} />
+
+        {/* Footer Backspace & Footer */}
+        <div className="divider" style={{ height: '4rem' }}></div>
+        <Footer />
       </div>
     </div>
   );
