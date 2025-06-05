@@ -117,7 +117,7 @@ function Card({ media, type, path, onRemove, handleAlert, isDeletable = true, is
   if (isSkeleton) {
     return (
       <div className="custom-card-container">
-        <div className="card bg-transparent border border-2 border-secondary position-relative custom-theme-radius skeleton-card">
+        <div className="card bg-transparent border-0 position-relative custom-theme-radius skeleton-card">
           <div className="card-skeleton-image custom-theme-radius custom-bg"></div>
           <div className="card-overlay dynamic-size dynamic-fs px-1">
             <div className="d-flex justify-content-between align-items-center">
@@ -133,7 +133,7 @@ function Card({ media, type, path, onRemove, handleAlert, isDeletable = true, is
   return (
     <div className="custom-card-container">
       <div
-        className="card bg-transparent border border-2 border-secondary position-relative custom-theme-radius"
+        className="card bg-transparent border-0 position-relative custom-theme-radius"
         onClick={handlePlayMedia}
         onContextMenu={handleRightClick}
         onMouseDown={(e) => e.button === 0 && setTimeout(() => handleLongClick(e), 2500)}
