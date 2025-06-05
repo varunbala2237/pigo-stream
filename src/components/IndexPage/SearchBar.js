@@ -13,7 +13,7 @@ function SearchBar({
   dropdownRef,
 }) {
     return (
-        <div className="container-fluid px-3 custom-margin-y">
+        <div className="container-fluid px-3 my-3">
           <div className="d-flex position-relative justify-content-center align-items-center shadow">
             <div ref={inputRef} className="input-group custom-input-group">
                   <input

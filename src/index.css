@@ -11,8 +11,16 @@ body {
   -moz-osx-font-smoothing: grayscale;
 
   /* Custom scrollbar styles */
-  scrollbar-width: thin;
   scrollbar-color: #343a40 transparent;
+}
+
+.scroll-hide {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.scroll-hide::-webkit-scrollbar {
+  display: none;
 }
 
 code {
