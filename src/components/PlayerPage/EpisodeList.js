@@ -12,7 +12,7 @@ function EpisodeList({
     <div
       ref={episodeScrollRef}
       className="overflow-auto custom-theme-radius-low"
-      style={{ maxHeight: '280px' }}
+      style={{ maxHeight: '300px' }}
     >
       {episodes.length > 0 ? (
         episodes.map(episode => {
