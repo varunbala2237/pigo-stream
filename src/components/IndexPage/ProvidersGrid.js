@@ -146,11 +146,15 @@ function ProvidersGrid({ setIsProvidersLoaded, setHasProvidersContent }) {
                     {PROVIDERS.map((provider, index) => (
                         <div
                             key={provider.id}
-                            className={`provider-card bg-${provider.bg} d-flex justify-content-center align-items-center ${selectedProvider === provider.id ? 'border border-2 border-primary' : ''}`}
+                            className={
+                                `provider-card 
+                                bg-${provider.bg} 
+                                custom-margin-right custom-theme-radius-low d-flex justify-content-center align-items-center 
+                                ${selectedProvider === provider.id ? 'border border-2 border-primary' : ''}`
+                            }
                             onClick={() => setSelectedProvider(provider.id)}
                             style={{
-                                scrollSnapAlign: 'start',
-                                borderRight: index !== PROVIDERS.length - 1 ? '4px solid #343a40' : 'none',
+                                scrollSnapAlign: 'start'
                             }}
                         >
                             <img
