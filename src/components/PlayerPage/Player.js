@@ -15,7 +15,6 @@ function Player({
   id, type,
   isInList,
   handleAddToList,
-  handleToggleWatched,
   selectedEpisode,
 }) {
   const [imageUrl, setImageUrl] = useState('');
@@ -192,7 +191,6 @@ function Player({
                 className="btn btn-dark d-none d-md-block justify-content-center border-0 text-white nowrap rounded-pill custom-bg"
                 onClick={() => {
                   openPlayer(mediaURL);
-                  if(type === 'tv') handleToggleWatched(selectedEpisode);
                 }}
               >
                 <i className="bi bi-play-fill theme-color me-2"></i>
@@ -203,7 +201,6 @@ function Player({
                 className="btn btn-dark d-block d-md-none btn-sm justify-content-center border-0 text-white nowrap rounded-pill custom-bg"
                 onClick={() => {
                   openPlayer(mediaURL);
-                  if(type === 'tv') handleToggleWatched(selectedEpisode);
                 }}
               >
                 <i className="bi bi-play-fill theme-color me-2"></i>
