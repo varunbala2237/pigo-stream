@@ -129,7 +129,7 @@ function SearchGrid({ searchQuery, setIsSearchLoaded, setHasSearchContent }) {
           )}
           <div
             ref={moviesRef1}
-            className="d-flex overflow-auto scroll-hide custom-gap"
+            className="d-flex custom-theme-radius-low overflow-auto scroll-hide custom-gap"
             style={{ scrollSnapType: 'x mandatory' }}
           >
             {(searchQuery.trim()
@@ -183,7 +183,7 @@ function SearchGrid({ searchQuery, setIsSearchLoaded, setHasSearchContent }) {
           )}
           <div
             ref={moviesRef2}
-            className="d-flex overflow-auto scroll-hide custom-gap"
+            className="d-flex custom-theme-radius-low overflow-auto scroll-hide custom-gap"
             style={{ scrollSnapType: 'x mandatory' }}
           >
             {(searchQuery.trim()
@@ -238,7 +238,7 @@ function SearchGrid({ searchQuery, setIsSearchLoaded, setHasSearchContent }) {
           )}
           <div
             ref={showsRef1}
-            className="d-flex overflow-auto scroll-hide custom-gap"
+            className="d-flex custom-theme-radius-low overflow-auto scroll-hide custom-gap"
             style={{ scrollSnapType: 'x mandatory' }}
           >
             {(searchQuery.trim()
@@ -292,7 +292,7 @@ function SearchGrid({ searchQuery, setIsSearchLoaded, setHasSearchContent }) {
           )}
           <div
             ref={showsRef2}
-            className="d-flex overflow-auto scroll-hide custom-gap"
+            className="d-flex custom-theme-radius-low overflow-auto scroll-hide custom-gap"
             style={{ scrollSnapType: 'x mandatory' }}
           >
             {(searchQuery.trim()

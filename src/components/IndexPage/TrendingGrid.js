@@ -107,7 +107,7 @@ function TrendingGrid({ setIsTrendingLoaded, setHasTrendingContent }) {
               </button>
             </>
           )}
-          <div ref={moviesRef} className="d-flex overflow-auto scroll-hide custom-gap" style={{ scrollSnapType: 'x mandatory' }}>
+          <div ref={moviesRef} className="d-flex custom-theme-radius-low overflow-auto scroll-hide custom-gap" style={{ scrollSnapType: 'x mandatory' }}>
             {(
               !isLoading && !isError && movies?.length > 0 ? movies : []
             )
@@ -151,7 +151,7 @@ function TrendingGrid({ setIsTrendingLoaded, setHasTrendingContent }) {
               </button>
             </>
           )}
-          <div ref={showsRef} className="d-flex overflow-auto scroll-hide custom-gap" style={{ scrollSnapType: 'x mandatory' }}>
+          <div ref={showsRef} className="d-flex custom-theme-radius-low overflow-auto scroll-hide custom-gap" style={{ scrollSnapType: 'x mandatory' }}>
             {(
               !isLoading && !isError && shows?.length > 0 ? shows : []
             )
