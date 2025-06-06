@@ -140,7 +140,7 @@ function ProvidersGrid({ setIsProvidersLoaded, setHasProvidersContent }) {
                 )}
                 <div
                     ref={providersRef}
-                    className="d-flex overflow-auto"
+                    className="d-flex overflow-auto scroll-hide"
                     style={{ scrollSnapType: 'x mandatory' }}
                 >
                     {PROVIDERS.map((provider, index) => (
@@ -187,7 +187,7 @@ function ProvidersGrid({ setIsProvidersLoaded, setHasProvidersContent }) {
                         </button>
                     </>
                 )}
-                <div ref={moviesRef} className="d-flex overflow-auto custom-gap" style={{ scrollSnapType: 'x mandatory' }}>
+                <div ref={moviesRef} className="d-flex overflow-auto scroll-hide custom-gap" style={{ scrollSnapType: 'x mandatory' }}>
                     {(
                         !isLoading && !isError && movies?.length > 0 ? movies : []
                     )
@@ -229,7 +229,7 @@ function ProvidersGrid({ setIsProvidersLoaded, setHasProvidersContent }) {
                         </button>
                     </>
                 )}
-                <div ref={showsRef} className="d-flex overflow-auto custom-gap" style={{ scrollSnapType: 'x mandatory' }}>
+                <div ref={showsRef} className="d-flex overflow-auto scroll-hide custom-gap" style={{ scrollSnapType: 'x mandatory' }}>
                     {(
                         !isLoading && !isError && shows?.length > 0 ? shows : []
                     )
