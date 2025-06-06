@@ -187,7 +187,7 @@ function Player({
 
               {/* Larger button for larger screen */}
               <button
-                className="btn btn-dark d-none d-md-block justify-content-center border border-2 border-black text-white nowrap rounded-pill custom-bg"
+                className="btn btn-dark d-none d-md-block justify-content-center border-0 text-white nowrap rounded-pill custom-bg"
                 onClick={() => {
                   openPlayer(mediaURL);
                 }}
@@ -197,7 +197,7 @@ function Player({
               </button>
               {/* Smaller button for smaller screen */}
               <button
-                className="btn btn-dark d-block d-md-none btn-sm justify-content-center border border-2 border-black text-white nowrap rounded-pill custom-bg"
+                className="btn btn-dark d-block d-md-none btn-sm justify-content-center border-0 text-white nowrap rounded-pill custom-bg"
                 onClick={() => {
                   openPlayer(mediaURL);
                 }}

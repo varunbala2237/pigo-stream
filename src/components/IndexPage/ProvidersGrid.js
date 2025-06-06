@@ -14,7 +14,7 @@ const PROVIDERS = [
     { id: 2074, name: 'Lionsgate', region: 'IN', bg: 'white', logo: 'https://upload.wikimedia.org/wikipedia/commons/6/65/Lionsgate_Logo.svg' },
     { id: 2180, name: 'Sony Pictures', region: 'IN', bg: 'white', logo: 'https://upload.wikimedia.org/wikipedia/commons/c/ca/Sony_logo.svg' },
     { id: 531, name: 'Paramount+', region: 'US', bg: 'white', logo: 'https://upload.wikimedia.org/wikipedia/commons/4/4e/Paramount%2B_logo.svg' },
-    { id: 1825, name: 'Max', region: 'US', bg: 'dark', logo: 'https://upload.wikimedia.org/wikipedia/commons/c/ce/Max_logo.svg' },
+    { id: 1825, name: 'Max', region: 'US', bg: 'white', logo: 'https://upload.wikimedia.org/wikipedia/commons/c/ce/Max_logo.svg' },
     { id: 526, name: 'AMC+', region: 'US', bg: 'dark', logo: 'https://upload.wikimedia.org/wikipedia/commons/4/4a/AMC%2B_logo.png' },
     { id: 123, name: 'FXNow', region: 'US', bg: 'white', logo: 'https://cdn2.downdetector.com/static/uploads/c/300/f4061/FXNOW-logo.png' },
     { id: 283, name: 'Crunchyroll', region: 'US', bg: 'white', logo: 'https://upload.wikimedia.org/wikipedia/commons/8/85/Crunchyroll_2024_stacked.svg' },
