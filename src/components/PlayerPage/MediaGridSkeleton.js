@@ -6,7 +6,10 @@ import ConnectionModal from '../../utils/ConnectionModal';
 import Alert from '../../utils/Alert';
 
 function MediaGridSkeleton({ mediaInfo, servers, loadingInfo, loadingLink, errorInfo, errorLink }) {
-  const [contentAlertMessage, setContentAlertMessage] = useState('');
+  // Alert messages
+  const [alert, setAlert] = useState({ message: '', type: '', key: '' });
+
+  // Connection modal state
   const [showConnectionModal, setShowConnectionModal] = useState(false);
 
   // Connection modal handling
@@ -26,14 +29,14 @@ function MediaGridSkeleton({ mediaInfo, servers, loadingInfo, loadingLink, error
 
     if (!loadingInfo && !loadingLink && !errorInfo && !errorLink && !hasContent) {
       showTimer = setTimeout(() => {
-        setContentAlertMessage('No media content found at the moment. Please check back later.');
+        setAlert({ message: 'No media content found at the moment.', type: 'primary', key: 'content' });
 
         hideTimer = setTimeout(() => {
-          setContentAlertMessage('');
+          setAlert({ message: '', type: '', key: '' });
         }, 5000);
       }, 2000);
     } else {
-      setContentAlertMessage('');
+      setAlert((prev) => (prev.key === 'content' ? { message: '', type: '', key: '' } : prev));
     }
 
     return () => {
@@ -43,7 +46,7 @@ function MediaGridSkeleton({ mediaInfo, servers, loadingInfo, loadingLink, error
   }, [loadingInfo, loadingLink, errorInfo, errorLink, mediaInfo, servers]);
 
   const handleAlertDismiss = () => {
-    setContentAlertMessage('');
+    setAlert({ message: '', type: '', key: '' });
   };
 
   return (
@@ -116,9 +119,9 @@ function MediaGridSkeleton({ mediaInfo, servers, loadingInfo, loadingLink, error
       {/* Connection Modal */}
       {showConnectionModal && <ConnectionModal show={showConnectionModal} />}
 
-      {/* Alert for no content */}
-      {contentAlertMessage && (
-        <Alert message={contentAlertMessage} onClose={handleAlertDismiss} type="primary" />
+      {/* Alert Message */}
+      {alert.message && (
+        <Alert message={alert.message} onClose={handleAlertDismiss} type={alert.type} />
       )}
     </>
   );
