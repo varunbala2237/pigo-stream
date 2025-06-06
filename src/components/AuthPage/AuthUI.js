@@ -323,7 +323,7 @@ function AuthUI() {
                                             type="button"
                                             onClick={() => setShowPassword((prev) => !prev)}
                                         >
-                                            <i className={`bi ${showPassword ? 'bi-eye-slash' : 'bi-eye'} theme-color`}></i>
+                                            <i className={`bi ${showPassword ? 'bi-eye-slash' : 'bi-eye'}`}></i>
                                         </button>
                                     </div>
                                     {isSignIn && (

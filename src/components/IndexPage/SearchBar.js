@@ -20,7 +20,7 @@ function SearchBar({
                     id="prompt"
                     type="text"
                     className="form-control custom-bg text-white dynamic-fs custom-textarea rounded-pill-l border-0"
-                    placeholder="Search..."
+                    placeholder="Type here..."
                     value={searchQuery}
                     onChange={handleSearchInputChange}
                     onFocus={handleFocus}
@@ -62,8 +62,9 @@ function SearchBar({
                     </ul>
                   )}
 
-                  <button className="btn btn-dark custom-bg border-0 rounded-pill-r" onClick={handleSearchSubmit}>
-                    <i className="bi bi-search theme-color"></i>
+                  <button className="btn btn-primary border-0 rounded-pill-r" onClick={handleSearchSubmit}>
+                    <i className="bi bi-search me-2"></i>
+                    <span className="dynamic-fs">Search</span>
                   </button>
             </div>
           </div>

@@ -37,7 +37,7 @@ const Footer = ({ showSearchBar = null, handleSearchBar = null }) => {
               style={{ width: '3rem', height: '3rem' }}
               onClick={handleSearchBar}
             >
-              <i className={`bi ${showSearchBar ? 'bi-x-lg theme-color' : 'bi-search text-secondary'}`}></i>
+              <i className={`bi ${showSearchBar ? 'bi-x-lg text-white' : 'bi-search text-secondary'}`}></i>
               <span className={`dynamic-ss ${showSearchBar ? 'text-white' : 'text-secondary'}`}>{showSearchBar ? 'Close' : 'Search'}</span>
             </button>
           </li>
