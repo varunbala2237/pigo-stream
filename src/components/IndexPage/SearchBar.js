@@ -62,7 +62,7 @@ function SearchBar({
                     </ul>
                   )}
 
-                  <button className="btn btn-dark custom-bg m-0 border-0 rounded-pill-r" onClick={handleSearchSubmit}>
+                  <button className="btn btn-dark custom-bg border-0 rounded-pill-r" onClick={handleSearchSubmit}>
                     <i className="bi bi-search"></i>
                   </button>
             </div>
