@@ -103,7 +103,7 @@ function SearchGrid({ searchQuery, setIsSearchLoaded, setHasSearchContent }) {
     <div className="container mt-4 text-white" id="searchResults">
       <div className="d-flex align-items-center dynamic-ts m-2 px-1">
         <i className="bi bi-search theme-color me-2"></i>
-        <b className="mb-0">Search</b>
+        <b className="mb-0">Search Results</b>
       </div>
 
       {/* First Movies Results */}
