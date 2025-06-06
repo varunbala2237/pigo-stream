@@ -22,7 +22,7 @@ const openIframeWindow = (serverLink) => {
       padding: 10px 20px;
       border-radius: 20px;
       border: none;
-      background-color: rgba(0, 0, 0, 0.7);
+      background-color: rgba(33, 37, 41, 0.5);
       color: white;
       font-size: 16px;
       font-weight: bold;
