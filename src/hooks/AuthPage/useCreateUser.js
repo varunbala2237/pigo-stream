@@ -8,7 +8,7 @@ const useCreateUser = () => {
   useEffect(() => {
     const initializeUserCollections = async (userUID) => {
       try {
-        const response = await fetch(`${BASE_URL}/users`, {
+        const response = await fetch(`${BASE_URL}/auth/users`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
