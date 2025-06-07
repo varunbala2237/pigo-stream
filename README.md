@@ -1,23 +1,31 @@
 # Deployed Project Link 🎉
-https://pigostream-site.web.app/
+🔗 https://pigostream-site.web.app/
 
-# You Need to Create Node.js/Express.js Web Service for Database Interactions
-For this project, Im using Firebase for database and authentication.
+# You Need to Create Node.js/Express.js Web Service for Server Side Operations and Database Management
+📂 For this project, Im using Firebase for database and authentication.
 
-# Full Project Pack
--> React app deployed in [Firebase](https://firebase.google.com/).
+# Full Project Stack
+📺 React app deployed in [Firebase](https://firebase.google.com/).
 
--> Node.js/Express.js main server with recommendations route deployed in [Render](https://dashboard.render.com/).
+🌐 Node.js/Express.js main server with recommendations route deployed in [Render](https://dashboard.render.com/).
+
+# Authentication
+🤵Firebase authentication libraries are used
+
+📧 Email verification is needed to login into the site
 
 # API's Used
-Im currently using using TMDB API for both Movies and TV Shows Metadata.
-Visit https://www.themoviedb.org/ for more details.
+Im currently using TMDB API for both Movies and TV Shows Metadata.
+
+🎥 Visit https://www.themoviedb.org/ for more details.
 
 # Databases Used
+📃 Firebase Database(Real-Time, Firestore)
 
--> Firebase Database(Real-Time, Firestore)
+💻 Supabase PostgreSQL Database(Session Pool)
 
--> Supabase PostgreSQL Database(Session Pool)
+# External App
+📲 Using native Flutter Webview player to stream the content
 
 Here is complete overview of creating a React Project ⬇️
 
