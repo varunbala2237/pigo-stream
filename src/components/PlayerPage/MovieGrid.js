@@ -53,7 +53,7 @@ function MovieGrid({ id, type, setBackgroundImage }) {
     const savedSelectedServer = getStorageValue(...MOVIE_STORAGE_PATH, 'selectedServer');
     // Ensure the first server is selected by default when the servers are loaded
     if (servers && servers.length > 0) {
-      if (savedSelectedServer) {
+      if (savedSelectedServer && servers.some(server => server.server_name === savedSelectedServer.server_name)) {
         setSelectedServer(savedSelectedServer);
       } else {
         // Set the default server to the first one in the list
