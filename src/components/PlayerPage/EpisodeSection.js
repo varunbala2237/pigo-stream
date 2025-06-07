@@ -1,6 +1,6 @@
-// EpisodeList.js
+// EpisodeSection.js
 
-function EpisodeList({
+function EpisodeSection({
   episodes,
   selectedEpisode,
   onEpisodeChange,
@@ -54,4 +54,4 @@ function EpisodeList({
   );
 }
 
-export default EpisodeList;
+export default EpisodeSection;

@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import CastCard from '../CastCard';
-import EpisodeList from './EpisodeList';
+import EpisodeSection from './EpisodeSection';
 import useFetchMediaInfo from '../../hooks/PlayerPage/useFetchMediaInfo';
 import useFetchSeason from '../../hooks/PlayerPage/useFetchSeason';
 import useFetchServers from '../../hooks/PlayerPage/useFetchServers';
@@ -8,6 +8,7 @@ import useSaveMyList from '../../hooks/MyListPage/useSaveMyList';
 import useCheckMyList from '../../hooks/MyListPage/useCheckMyList';
 import useCheckServerStatus from '../../hooks/PlayerPage/useCheckServerStatus';
 import Player from './Player';
+import ServerSection from './ServerSection';
 import MediaGridSkeleton from './MediaGridSkeleton';
 
 import { getStorageValue, setStorageValue } from '../../utils/localStorageStates';
@@ -29,7 +30,7 @@ function TvGrid({ id, type, setBackgroundImage }) {
   const [selectedSeason, setSelectedSeason] = useState(1);
   const [selectedEpisode, setSelectedEpisode] = useState(1);
   const episodeScrollRef = useRef(null);
-  const [selectedServerName, setSelectedServerName] = useState('');
+  const [selectedServer, setSelectedServer] = useState('');
 
   const [sliceIndex, setSliceIndex] = useState(() =>
     getSessionValue(...TV_STORAGE_PATH, 'sliceIndex') || 12
@@ -103,10 +104,10 @@ function TvGrid({ id, type, setBackgroundImage }) {
     // Ensure the first server is selected by default when the servers are loaded
     if (servers && servers.length > 0) {
       if (savedSelectedServer) {
-        setSelectedServerName(savedSelectedServer);
+        setSelectedServer(savedSelectedServer);
       } else {
         // Set the default server to the first one in the list
-        setSelectedServerName(servers[0].server_name);
+        setSelectedServer(servers[0]);
       }
     }
   }, [TV_STORAGE_PATH, servers]);
@@ -114,14 +115,14 @@ function TvGrid({ id, type, setBackgroundImage }) {
   // Retrieving selected server link
   useEffect(() => {
     if (servers && servers.length > 0) {
-      const selectedServer = selectedServerName
-        ? servers.find(server => server.server_name === selectedServerName)
+      const server = selectedServer
+        ? servers.find(server => server.server_name === selectedServer.server_name)
         : servers[0];
-      if (selectedServer) {
+      if (server) {
         setMediaURL(selectedServer.server_link);
       }
     }
-  }, [selectedServerName, servers]);
+  }, [selectedServer, servers]);
 
   const handleSeasonChange = (seasonNumber) => {
     setSelectedSeason(seasonNumber);
@@ -184,9 +185,9 @@ function TvGrid({ id, type, setBackgroundImage }) {
     return airDate.getTime() === today.getTime(); // Check if dates match
   }
 
-  const handleServerChange = (serverName) => {
-    setSelectedServerName(serverName);
-    setStorageValue(...TV_STORAGE_PATH, 'selectedServer', serverName);
+  const handleServerChange = (server) => {
+    setSelectedServer(server);
+    setStorageValue(...TV_STORAGE_PATH, 'selectedServer', server);
   };
 
   const handleShowMore = () => {
@@ -242,43 +243,23 @@ function TvGrid({ id, type, setBackgroundImage }) {
                 selectedEpisode={selectedEpisode}
               />
 
-              <div className="container-fluid custom-bg custom-theme-radius-low w-100 p-2 my-2">
-                <div className="d-flex flex-row dynamic-ts py-2">
-                  <i className="bi bi-hdd-network me-2"></i>
-                  Servers
-                </div>
-                <div className="row g-2">
-                  {servers.length > 0 ? (
-                    servers.map((server, index) => (
-                      <div key={server.server_name} className="col-4 col-sm-3 col-md-4 col-lg-3 col-xl-2">
-                        <button
-                          className={`btn w-100 d-flex flex-row align-items-center justify-content-center border-0 rounded-pill shadow-sm ${selectedServerName === server.server_name
-                            ? 'btn-primary bd-callout-primary active'
-                            : 'btn-primary bd-callout-dark'
-                            }`}
-                          onClick={() => handleServerChange(server.server_name)}
-                        >
-                          <span className="text-truncate dynamic-ss">{server.server_name}</span>
-                          {!serverStatusLoading && !serverStatus[index] && (
-                            <i className="bi bi-exclamation-triangle text-danger ms-2"></i>
-                          )}
-                        </button>
-                      </div>
+              {/* Server Section */}
+              <ServerSection
+                servers={servers}
+                selectedServer={selectedServer}
+                handleServerChange={handleServerChange}
+                serverStatus={serverStatus}
+                serverStatusLoading={serverStatusLoading}
+              />
 
-                    ))
-                  ) : (
-                    <div className="text-white">No servers available</div>
-                  )}
-                </div>
-              </div>
-
+              {/* Seasons and Episodes Sections */}
               <div className="container-fluid custom-bg custom-theme-radius-low w-100 p-2 my-2">
                 <div className="d-flex flex-row dynamic-ts py-2">
                   <i className="bi bi-collection-play me-2"></i>
                   Seasons & Episodes
                 </div>
 
-                {/* Season Buttons */}
+                {/* Season Section */}
                 <div className="row g-2 mb-2">
                   {seasons.length > 0 ? (
                     seasons.map((season) => (
@@ -301,8 +282,8 @@ function TvGrid({ id, type, setBackgroundImage }) {
                   )}
                 </div>
 
-                {/* Episodes Scrollable List */}
-                <EpisodeList
+                {/* Episodes Section */}
+                <EpisodeSection
                   episodes={episodes}
                   selectedEpisode={selectedEpisode}
                   onEpisodeChange={handleEpisodeChange}
