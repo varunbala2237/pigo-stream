@@ -1,10 +1,10 @@
 # Deployed Project Link 🎉
 🔗 https://pigostream-site.web.app/
 
-# You Need to Create Node.js/Express.js Web Service for Database Interactions
+# You Need to Create Node.js/Express.js Web Service for Server Side Operations and Database Management
 📂 For this project, Im using Firebase for database and authentication.
 
-# Full Project Pack
+# Full Project Stack
 📺 React app deployed in [Firebase](https://firebase.google.com/).
 
 🌐 Node.js/Express.js main server with recommendations route deployed in [Render](https://dashboard.render.com/).
