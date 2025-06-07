@@ -244,14 +244,19 @@ function Player({
         showNote && (
           <div className="bd-callout-dark custom-theme-radius-low dynamic-fs text-white mt-3" style={{ padding: '1rem' }}>
             {platform === 'windows' || platform === 'android' ? (
-              <>Don't have the app? <span className="link text-primary" onClick={redirectToStore}>
-                <i className="bi bi-bag-check-fill me-2"></i>Get it now
-              </span></>
+              <>
+                <i className="bi bi-info-circle me-2"></i>
+                Don't have the app?
+                <span className="link text-primary" onClick={redirectToStore}>
+                  <i className="bi bi-bag-check-fill me-2"></i>Get it now
+                </span>
+              </>
             ) : platform === 'macos' || platform === 'ios' ? (
-              <span className="link text-warning">
+              <>
+                <i className="bi bi-info-circle me-2"></i>
                 This content may contain redirects and ads.
-                <strong> For the best experience, open in fullscreen mode.</strong>
-              </span>
+                <span className="link text-warning"> For the best experience, open in fullscreen mode.</span>
+              </>
             ) : (
               <span className="link text-danger">Unsupported platform.</span>
             )}
