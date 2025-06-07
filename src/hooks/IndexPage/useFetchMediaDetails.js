@@ -28,7 +28,7 @@ const useFetchMediaDetails = (id) => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const url = `${BASE_URL}/media-details?id=${id}`;
+      const url = `${BASE_URL}/index/media-details?id=${id}`;
 
       try {
         const result = await fetchWithRetry(url);

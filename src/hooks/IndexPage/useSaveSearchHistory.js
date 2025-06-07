@@ -22,7 +22,7 @@ const useSaveSearchHistory = () => {
   const saveSearchHistory = async (searchQuery) => {
     if (userUID) {
       try {
-        const response = await fetch(`${BASE_URL}/users/save-search-history`, {
+        const response = await fetch(`${BASE_URL}/index/save-search-history`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
