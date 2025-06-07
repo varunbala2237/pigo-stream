@@ -24,7 +24,7 @@ const useFetchSearchHistory = () => {
   const fetchSearchHistory = useCallback(async () => {
     if (userUID) {
       try {
-        const response = await fetch(`${BASE_URL}/index/search-history/${userUID}`, {
+        const response = await fetch(`${BASE_URL}/index/fetch-search-history/${userUID}`, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',

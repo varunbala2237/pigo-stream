@@ -29,7 +29,7 @@ const useFetchWatchHistory = (userUID, movieLimit, tvLimit) => {
   const fetchWatchHistory = useCallback(async () => {
     if (!userUID) return;
 
-    let url = `${BASE_URL}/users/${userUID}/watch-history?movieLimit=${movieLimit}&tvLimit=${tvLimit}`;
+    let url = `${BASE_URL}/watch-history/${userUID}/fetch-watch-history?movieLimit=${movieLimit}&tvLimit=${tvLimit}`;
 
     setLoading(true);
     setError(null);

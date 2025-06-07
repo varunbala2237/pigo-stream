@@ -28,7 +28,7 @@ const useFetchServers = (id, type, selectedSeason, selectedEpisode) => {
 
     useEffect(() => {
         const fetchSeasonData = async () => {
-            let url = `${BASE_URL}/streams/servers?id=${id}&type=${type}&season=${selectedSeason}&episode=${selectedEpisode}`;
+            let url = `${BASE_URL}/sources/servers?id=${id}&type=${type}&season=${selectedSeason}&episode=${selectedEpisode}`;
 
             try {
                 setLoading(true);

@@ -29,7 +29,7 @@ const useFetchMyList = (userUID, movieLimit, tvLimit) => {
   const fetchMyList = useCallback(async () => {
     if (!userUID) return;
 
-    let url = `${BASE_URL}/users/${userUID}/my-list?movieLimit=${movieLimit}&tvLimit=${tvLimit}`;
+    let url = `${BASE_URL}/my-list/${userUID}/fetch-my-list?movieLimit=${movieLimit}&tvLimit=${tvLimit}`;
 
     setLoading(true);
     setError(null);

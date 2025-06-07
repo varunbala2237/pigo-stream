@@ -7,7 +7,7 @@ const BASE_URL = process.env.REACT_APP_SERVER_URL;
 // Helper function for sending watch history to the server
 const saveWatchHistory = async (userUID, id, type) => {
   try {
-    const response = await fetch(`${BASE_URL}/users/save-watch-history`, {
+    const response = await fetch(`${BASE_URL}/watch-history/save-watch-history`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ userUID, id, type }),

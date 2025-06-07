@@ -15,7 +15,7 @@ const useDownloadApp = (platform) => {
       setError(null); // Reset error state before new fetch
 
       try {
-        const response = await fetch(`${BASE_URL}/download-app?platform=${platform}`);
+        const response = await fetch(`${BASE_URL}/pigostore/download-app?platform=${platform}`);
         
         if (!response.ok) {
           throw new Error('Unable to fetch data. Please try again later.');
