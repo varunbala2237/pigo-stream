@@ -21,14 +21,14 @@ const fetchWithRetry = async (url, options = {}, retries = 3, delay = 1000) => {
 };
 
 // Custom hook for retrieving servers
-const useFetchStream = (id, type, selectedSeason, selectedEpisode) => {
+const useFetchServers = (id, type, selectedSeason, selectedEpisode) => {
     const [servers, setServers] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
     useEffect(() => {
         const fetchSeasonData = async () => {
-            let url = `${BASE_URL}/stream?id=${id}&type=${type}&season=${selectedSeason}&episode=${selectedEpisode}`;
+            let url = `${BASE_URL}/servers?id=${id}&type=${type}&season=${selectedSeason}&episode=${selectedEpisode}`;
 
             try {
                 setLoading(true);
@@ -47,4 +47,4 @@ const useFetchStream = (id, type, selectedSeason, selectedEpisode) => {
     return { servers, loading, error };
 };
 
-export default useFetchStream;
+export default useFetchServers;

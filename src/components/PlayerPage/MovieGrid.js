@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import CastCard from '../CastCard';
 import useFetchMediaInfo from '../../hooks/PlayerPage/useFetchMediaInfo';
-import useFetchStream from '../../hooks/PlayerPage/useFetchStream';
+import useFetchServers from '../../hooks/PlayerPage/useFetchServers';
 import useSaveMyList from '../../hooks/MyListPage/useSaveMyList';
 import useCheckMyList from '../../hooks/MyListPage/useCheckMyList';
 import useCheckServerStatus from '../../hooks/PlayerPage/useCheckServerStatus';
@@ -27,7 +27,7 @@ function MovieGrid({ id, type, setBackgroundImage }) {
   );
 
   const { data: mediaInfo, loadingInfo, errorInfo } = useFetchMediaInfo(id, type);
-  const { servers, loading: loadingLink, error: errorLink } = useFetchStream(id, type);
+  const { servers, loading: loadingLink, error: errorLink } = useFetchServers(id, type);
 
   const { addToList } = useSaveMyList();
   const { isInList, refetch } = useCheckMyList(id);

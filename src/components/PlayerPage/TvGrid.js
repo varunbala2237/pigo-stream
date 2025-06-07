@@ -3,7 +3,7 @@ import CastCard from '../CastCard';
 import EpisodeList from './EpisodeList';
 import useFetchMediaInfo from '../../hooks/PlayerPage/useFetchMediaInfo';
 import useFetchSeason from '../../hooks/PlayerPage/useFetchSeason';
-import useFetchStream from '../../hooks/PlayerPage/useFetchStream';
+import useFetchServers from '../../hooks/PlayerPage/useFetchServers';
 import useSaveMyList from '../../hooks/MyListPage/useSaveMyList';
 import useCheckMyList from '../../hooks/MyListPage/useCheckMyList';
 import useCheckServerStatus from '../../hooks/PlayerPage/useCheckServerStatus';
@@ -37,7 +37,7 @@ function TvGrid({ id, type, setBackgroundImage }) {
 
   const { data: mediaInfo, loadingInfo, errorInfo } = useFetchMediaInfo(id, type);
   const { seasonData } = useFetchSeason(id, selectedSeason);
-  const { servers, loading: loadingLink, error: errorLink } = useFetchStream(id, type, selectedSeason, selectedEpisode);
+  const { servers, loading: loadingLink, error: errorLink } = useFetchServers(id, type, selectedSeason, selectedEpisode);
 
   const { addToList } = useSaveMyList();
   const { isInList, refetch } = useCheckMyList(id);
