@@ -52,7 +52,7 @@ function Header() {
                 </button>
                 <a href="/"><img src="favicon.ico" alt="PigoStream" width="48" height="48" /></a>
               </div>
-              <span className="mb-0 dynamic-hs"><b>Pigo</b>Stream</span>
+              <span className="dynamic-hs"><b>Pigo</b>Stream</span>
             </div>
           </div>
 

@@ -276,8 +276,8 @@ function AuthUI() {
                     <div className="container vh-100 d-flex bg-transparent border-0 justify-content-center align-items-center">
                         <div className="card custom-bg custom-theme-radius-low p-4 w-100 form-pad">
                             <div className="card-header d-flex justify-content-center align-items-center text-white">
-                                <img className="mb-2" src="favicon.ico" alt="PigoStream" width="40" height="40" />
-                                <h3 className="text-center dynamic-hs">{isSignIn ? 'Sign in' : 'Sign up'}</h3>
+                                <img src="favicon.ico" alt="PigoStream" width="48" height="48" />
+                                <span className="dynamic-hs"><b>Pigo</b>Stream</span>
                             </div>
                             <form onSubmit={isSignIn ? signInWithCredentials : signUpWithCredentials} className="text-white">
                                 {!isSignIn && (
