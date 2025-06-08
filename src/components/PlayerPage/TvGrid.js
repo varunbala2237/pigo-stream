@@ -119,7 +119,7 @@ function TvGrid({ id, type, setBackgroundImage }) {
         ? servers.find(server => server.server_name === selectedServer.server_name)
         : servers[0];
       if (server) {
-        setMediaURL(selectedServer.server_link);
+        setMediaURL(server.server_link);
       }
     }
   }, [selectedServer, servers]);
