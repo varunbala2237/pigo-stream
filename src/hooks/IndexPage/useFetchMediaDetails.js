@@ -1,3 +1,4 @@
+// useFetchMediaDetails.js
 import { useState, useEffect } from 'react';
 
 // Base URL of the server

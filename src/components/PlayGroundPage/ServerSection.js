@@ -1,5 +1,4 @@
 // ServerSection.js
-
 function ServerSection({
     servers,
     selectedServer,

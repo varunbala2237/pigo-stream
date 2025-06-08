@@ -1,3 +1,4 @@
+// useFetchSearchHistory.js
 import { useState, useEffect, useCallback } from 'react';
 import { auth } from '../../firebase/firebase-auth';
 

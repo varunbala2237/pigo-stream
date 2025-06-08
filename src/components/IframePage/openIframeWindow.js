@@ -1,3 +1,4 @@
+// openIframeWindow.js
 const openIframeWindow = (serverLink) => {
   const newWindow = window.open("", "_blank", "fullscreen=yes");
   if (!newWindow) {

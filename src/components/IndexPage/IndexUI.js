@@ -1,3 +1,4 @@
+// IndexUI.js
 import { useState, useEffect } from 'react';
 import useGenreRecommendations from '../../hooks/IndexPage/useGenreRecommendations';
 import useFetchMediaDetails from '../../hooks/IndexPage/useFetchMediaDetails';

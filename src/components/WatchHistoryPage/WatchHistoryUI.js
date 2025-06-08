@@ -1,3 +1,4 @@
+// WatchHistoryUI.js
 import { useState, useEffect } from 'react';
 import Header from '../Header';
 import WatchHistoryGrid from './WatchHistoryGrid';

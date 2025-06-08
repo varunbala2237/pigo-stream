@@ -1,3 +1,4 @@
+// useCheckServerStatus.js
 import { useState, useEffect } from 'react';
 
 // Fast CORS-tolerant fetch with timeout

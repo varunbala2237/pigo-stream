@@ -1,3 +1,4 @@
+// useCheckMyList.js
 import { useState, useEffect } from 'react';
 import useFetchMyList from '../MyListPage/useFetchMyList'; // Import the fetch hook
 import { auth } from '../../firebase/firebase-config';

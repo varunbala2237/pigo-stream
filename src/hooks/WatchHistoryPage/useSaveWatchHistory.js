@@ -1,3 +1,4 @@
+// useSaveWatchHistory.js
 import { useState, useEffect } from 'react';
 import { auth } from '../../firebase/firebase-auth'; // Import the auth object
 

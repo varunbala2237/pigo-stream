@@ -1,3 +1,4 @@
+// MovieGrid.js
 import React, { useState, useEffect } from 'react';
 import CastCard from '../CastCard';
 import useFetchMediaInfo from '../../hooks/PlayGroundPage/useFetchMediaInfo';

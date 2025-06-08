@@ -1,3 +1,4 @@
+// useCreateUser.js
 import { useEffect } from 'react';
 import { auth } from '../../firebase/firebase-auth';
 

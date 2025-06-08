@@ -1,6 +1,6 @@
+// ShowGrid.js
 import React, { useState, useEffect, useRef } from 'react';
 import CastCard from '../CastCard';
-import EpisodeSection from './EpisodeSection';
 import useFetchMediaInfo from '../../hooks/PlayGroundPage/useFetchMediaInfo';
 import useFetchSeason from '../../hooks/PlayGroundPage/useFetchSeason';
 import useFetchServers from '../../hooks/PlayGroundPage/useFetchServers';
@@ -9,6 +9,8 @@ import useCheckMyList from '../../hooks/MyListPage/useCheckMyList';
 import useCheckServerStatus from '../../hooks/PlayGroundPage/useCheckServerStatus';
 import Player from './Player';
 import ServerSection from './ServerSection';
+import SeasonSection from './SeasonSection';
+import EpisodeSection from './EpisodeSection';
 import MediaGridSkeleton from './MediaGridSkeleton';
 
 import { getStorageValue, setStorageValue } from '../../utils/localStorageStates';
@@ -269,27 +271,11 @@ function ShowGrid({ id, type, setBackgroundImage }) {
                 </div>
 
                 {/* Season Section */}
-                <div className="row g-2 mb-2">
-                  {seasons.length > 0 ? (
-                    seasons.map((season) => (
-                      <div key={season.id} className="col-4 col-sm-3 col-md-4 col-lg-3 col-xl-2">
-                        <button
-                          className={`btn w-100 d-flex justify-content-center align-items-center border-0 rounded-pill shadow-sm ${selectedSeason === season.season_number
-                            ? 'btn-primary bd-callout-primary active'
-                            : 'btn-primary bd-callout-dark'
-                            }`}
-                          onClick={() => handleSeasonChange(season.season_number)}
-                        >
-                          <span className="text-truncate dynamic-ss">
-                            {season.name === 'Specials' ? season.name : `S${season.season_number}`}
-                          </span>
-                        </button>
-                      </div>
-                    ))
-                  ) : (
-                    <div className="text-white">No seasons available</div>
-                  )}
-                </div>
+                <SeasonSection
+                  seasons={seasons}
+                  selectedSeason={selectedSeason}
+                  onSeasonChange={handleSeasonChange}
+                />
 
                 {/* Episodes Section */}
                 <EpisodeSection

@@ -1,3 +1,4 @@
+// ConnectionModal.js
 import { useEffect, useRef } from 'react';
 import './ConnectionModal.css';
 
