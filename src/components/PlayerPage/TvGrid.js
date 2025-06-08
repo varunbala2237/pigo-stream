@@ -30,7 +30,7 @@ function TvGrid({ id, type, setBackgroundImage }) {
   const [selectedSeason, setSelectedSeason] = useState(1);
   const [selectedEpisode, setSelectedEpisode] = useState(1);
   const episodeScrollRef = useRef(null);
-  const [selectedServer, setSelectedServer] = useState(null);
+  const [selectedServer, setSelectedServer] = useState('');
 
   const [sliceIndex, setSliceIndex] = useState(() =>
     getSessionValue(...TV_STORAGE_PATH, 'sliceIndex') || 12
