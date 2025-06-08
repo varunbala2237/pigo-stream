@@ -13,7 +13,7 @@ function MyListGrid({ userUID }) {
     const location = useLocation();
     const [movieLimit, setMovieLimit] = useState(12);
     const [showLimit, setShowLimit] = useState(12);
-    const { data: { movieList = [], showsList = [] } = {}, loading: isLoading, error: isError, refetch } = useFetchMyList(userUID, movieLimit, showLimit);
+    const { data: { moviesList = [], showsList = [] } = {}, loading: isLoading, error: isError, refetch } = useFetchMyList(userUID, movieLimit, showLimit);
 
     // Connection modal state
     const [showConnectionModal, setShowConnectionModal] = useState(false);
@@ -97,7 +97,7 @@ function MyListGrid({ userUID }) {
 
     // Alert handling for no content
     useEffect(() => {
-        const hasContent = (movieList && movieList.length > 0) || (showsList && showsList.length > 0);
+        const hasContent = (moviesList && moviesList.length > 0) || (showsList && showsList.length > 0);
         let showTimer;
         let hideTimer;
 
@@ -117,7 +117,7 @@ function MyListGrid({ userUID }) {
             clearTimeout(showTimer);
             clearTimeout(hideTimer);
         };
-    }, [movieList, showsList, isLoading, isError]);
+    }, [moviesList, showsList, isLoading, isError]);
 
     const handleShowMoreMovies = () => {
         setMovieLimit(prevLimit => {
@@ -161,7 +161,7 @@ function MyListGrid({ userUID }) {
             </div>
             {/* First Row of Movies */}
             <div className="position-relative custom-margin-y">
-                {(movieList.filter(Boolean).length / 2) > 3 && (
+                {(moviesList.filter(Boolean).length / 2) > 3 && (
                     <>
                         <button
                             className="btn btn-dark custom-bg rounded-pill py-2 position-absolute start-0 translate-middle-y d-none d-md-block"
@@ -185,11 +185,11 @@ function MyListGrid({ userUID }) {
                     className="d-flex custom-theme-radius-low overflow-auto scroll-hide custom-gap"
                     style={{ scrollSnapType: 'x mandatory' }}
                 >
-                    {(movieList?.slice(0, Math.ceil(movieList.length / 2)) || []).concat(
+                    {(moviesList?.slice(0, Math.ceil(moviesList.length / 2)) || []).concat(
                         Array.from({
                             length: Math.max(
                                 0,
-                                6 - (movieList?.slice(0, Math.ceil(movieList.length / 2))?.length || 0)
+                                6 - (moviesList?.slice(0, Math.ceil(moviesList.length / 2))?.length || 0)
                             ),
                         })
                     ).map((movie, index) =>
@@ -218,7 +218,7 @@ function MyListGrid({ userUID }) {
 
             {/* Second Row of Movies */}
             <div className="position-relative custom-margin-y">
-                {(movieList.filter(Boolean).length / 2) > 3 && (
+                {(moviesList.filter(Boolean).length / 2) > 3 && (
                     <>
                         <button
                             className="btn btn-dark custom-bg rounded-pill py-2 position-absolute start-0 translate-middle-y d-none d-md-block"
@@ -242,12 +242,12 @@ function MyListGrid({ userUID }) {
                     className="d-flex custom-theme-radius-low overflow-auto scroll-hide custom-gap"
                     style={{ scrollSnapType: 'x mandatory' }}
                 >
-                    {(movieList?.slice(Math.ceil(movieList.length / 2)) || [])
+                    {(moviesList?.slice(Math.ceil(moviesList.length / 2)) || [])
                         .concat(
                             Array.from({
                                 length: Math.max(
                                     0,
-                                    6 - (movieList?.slice(Math.ceil(movieList.length / 2))?.length || 0)
+                                    6 - (moviesList?.slice(Math.ceil(moviesList.length / 2))?.length || 0)
                                 ),
                             })
                         ).map((movie, index) =>
@@ -274,7 +274,7 @@ function MyListGrid({ userUID }) {
                 </div>
             </div>
 
-            {movieList.length === movieLimit && (
+            {moviesList.length === movieLimit && (
                 <div className="text-end mb-3">
                     <button
                         className="btn btn-dark bd-callout-dark dynamic-fs border-0 rounded-pill btn-md d-none d-md-inline-block"

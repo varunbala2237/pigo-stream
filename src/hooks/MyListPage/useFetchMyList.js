@@ -22,7 +22,7 @@ const fetchWithRetry = async (url, options = {}, retries = 3, delay = 1000) => {
 
 // Custom hook for fetching my list
 const useFetchMyList = (userUID, movieLimit, showLimit) => {
-  const [data, setData] = useState({ movieList: [], showsList: [] });
+  const [data, setData] = useState({ moviesList: [], showsList: [] });
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 

@@ -25,7 +25,7 @@ const useCheckMyList = (id, type) => {
   // Check if the item is in the list once data is fetched
   useEffect(() => {
     if (!loading && data) {
-      const isInList = data.movieList.some(item => item.id.toString() === id.toString()) ||
+      const isInList = data.moviesList.some(item => item.id.toString() === id.toString()) ||
                        data.showsList.some(item => item.id.toString() === id.toString());
       setIsInList(isInList);
     }

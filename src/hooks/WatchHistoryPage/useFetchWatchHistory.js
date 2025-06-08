@@ -22,7 +22,7 @@ const fetchWithRetry = async (url, options = {}, retries = 3, delay = 1000) => {
 
 // Custom hook for fetching watch history
 const useFetchWatchHistory = (userUID, movieLimit, showLimit) => {
-  const [data, setData] = useState({ movieHistory: [], showsHistory: [] });
+  const [data, setData] = useState({ moviesHistory: [], showsHistory: [] });
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 

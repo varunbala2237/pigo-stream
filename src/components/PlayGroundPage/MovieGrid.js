@@ -13,7 +13,7 @@ import { getStorageValue, setStorageValue } from '../../utils/localStorageStates
 import { getSessionValue, setSessionValue } from '../../utils/sessionStorageStates';
 
 function MovieGrid({ id, type, setBackgroundImage }) {
-  const MOVIE_STORAGE_PATH = React.useMemo(
+  const MOVIES_STORAGE_PATH = React.useMemo(
     () => ['PlayGroundUI', 'Grids', 'MovieGrid', `${id}`],
     [id]
   );
@@ -24,7 +24,7 @@ function MovieGrid({ id, type, setBackgroundImage }) {
   const [selectedServer, setSelectedServer] = useState('');
 
   const [sliceIndex, setSliceIndex] = useState(() =>
-    getSessionValue(...MOVIE_STORAGE_PATH, 'sliceIndex') || 12
+    getSessionValue(...MOVIES_STORAGE_PATH, 'sliceIndex') || 12
   );
 
   const { data: mediaInfo, loadingInfo, errorInfo } = useFetchMediaInfo(id, type);
@@ -50,7 +50,7 @@ function MovieGrid({ id, type, setBackgroundImage }) {
 
   // Load from localStorage on mount
   useEffect(() => {
-    const savedSelectedServer = getStorageValue(...MOVIE_STORAGE_PATH, 'selectedServer');
+    const savedSelectedServer = getStorageValue(...MOVIES_STORAGE_PATH, 'selectedServer');
 
     if (servers && servers.length > 0) {
       const isAnime = mediaInfo?.genres?.some(g => g.id === 16);
@@ -69,7 +69,7 @@ function MovieGrid({ id, type, setBackgroundImage }) {
         setSelectedServer(defaultServer);
       }
     }
-  }, [MOVIE_STORAGE_PATH, servers, mediaInfo, type]);
+  }, [MOVIES_STORAGE_PATH, servers, mediaInfo, type]);
 
   // Retrieving selected server link
   useEffect(() => {
@@ -85,13 +85,13 @@ function MovieGrid({ id, type, setBackgroundImage }) {
 
   const handleServerChange = (server) => {
     setSelectedServer(server);
-    setStorageValue(...MOVIE_STORAGE_PATH, 'selectedServer', server);
+    setStorageValue(...MOVIES_STORAGE_PATH, 'selectedServer', server);
   };
 
   const handleShowMore = () => {
     setSliceIndex(prevSliceIndex => {
       const newIndex = prevSliceIndex + 12;
-      setSessionValue(...MOVIE_STORAGE_PATH, 'sliceIndex', newIndex);
+      setSessionValue(...MOVIES_STORAGE_PATH, 'sliceIndex', newIndex);
       return newIndex;
     });
   };

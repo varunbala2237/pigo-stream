@@ -13,7 +13,7 @@ const SESSION_PATH = ['WatchHistoryUI', 'Grids', 'WatchHistoryGrid'];
 function WatchHistoryGrid({ userUID }) {
     const [movieLimit, setMovieLimit] = useState(12);
     const [showLimit, setShowLimit] = useState(12);
-    const { data: { movieHistory = [], showsHistory = [] } = {}, loading: isLoading, error: isError, refetch } = useFetchWatchHistory(userUID, movieLimit, showLimit);
+    const { data: { moviesHistory = [], showsHistory = [] } = {}, loading: isLoading, error: isError, refetch } = useFetchWatchHistory(userUID, movieLimit, showLimit);
     const { clearHistory } = useClearWatchHistory();
 
     // Connection modal state
@@ -100,7 +100,7 @@ function WatchHistoryGrid({ userUID }) {
 
     // Alert handling for no content
     useEffect(() => {
-        const hasContent = (movieHistory && movieHistory.length > 0) || (showsHistory && showsHistory.length > 0);
+        const hasContent = (moviesHistory && moviesHistory.length > 0) || (showsHistory && showsHistory.length > 0);
         let showTimer;
         let hideTimer;
 
@@ -120,7 +120,7 @@ function WatchHistoryGrid({ userUID }) {
             clearTimeout(showTimer);
             clearTimeout(hideTimer);
         };
-    }, [movieHistory, showsHistory, isLoading, isError]);
+    }, [moviesHistory, showsHistory, isLoading, isError]);
 
     const handleClearHistory = async () => {
         try {
@@ -166,7 +166,7 @@ function WatchHistoryGrid({ userUID }) {
         }
     };
 
-    const isClearButtonDisabled = movieHistory.length === 0 && showsHistory.length === 0;
+    const isClearButtonDisabled = moviesHistory.length === 0 && showsHistory.length === 0;
 
     return (
         <div className="container mt-4 text-white">
@@ -199,7 +199,7 @@ function WatchHistoryGrid({ userUID }) {
 
             {/* First Row of Movies */}
             <div className="position-relative custom-margin-y">
-                {(movieHistory.filter(Boolean).length / 2) > 3 && (
+                {(moviesHistory.filter(Boolean).length / 2) > 3 && (
                     <>
                         <button
                             className="btn btn-dark custom-bg rounded-pill py-2 position-absolute start-0 translate-middle-y d-none d-md-block"
@@ -223,11 +223,11 @@ function WatchHistoryGrid({ userUID }) {
                     className="d-flex custom-theme-radius-low overflow-auto scroll-hide custom-gap"
                     style={{ scrollSnapType: 'x mandatory' }}
                 >
-                    {(movieHistory?.slice(0, Math.ceil(movieHistory.length / 2)) || []).concat(
+                    {(moviesHistory?.slice(0, Math.ceil(moviesHistory.length / 2)) || []).concat(
                         Array.from({
                             length: Math.max(
                                 0,
-                                6 - (movieHistory?.slice(0, Math.ceil(movieHistory.length / 2))?.length || 0)
+                                6 - (moviesHistory?.slice(0, Math.ceil(moviesHistory.length / 2))?.length || 0)
                             ),
                         })
                     ).map((movie, index) =>
@@ -256,7 +256,7 @@ function WatchHistoryGrid({ userUID }) {
 
             {/* Second Row of Movies */}
             <div className="position-relative custom-margin-y">
-                {(movieHistory.filter(Boolean).length / 2) > 3 && (
+                {(moviesHistory.filter(Boolean).length / 2) > 3 && (
                     <>
                         <button
                             className="btn btn-dark custom-bg rounded-pill py-2 position-absolute start-0 translate-middle-y d-none d-md-block"
@@ -280,12 +280,12 @@ function WatchHistoryGrid({ userUID }) {
                     className="d-flex custom-theme-radius-low overflow-auto scroll-hide custom-gap"
                     style={{ scrollSnapType: 'x mandatory' }}
                 >
-                    {(movieHistory?.slice(Math.ceil(movieHistory.length / 2)) || [])
+                    {(moviesHistory?.slice(Math.ceil(moviesHistory.length / 2)) || [])
                         .concat(
                             Array.from({
                                 length: Math.max(
                                     0,
-                                    6 - (movieHistory?.slice(Math.ceil(movieHistory.length / 2))?.length || 0)
+                                    6 - (moviesHistory?.slice(Math.ceil(moviesHistory.length / 2))?.length || 0)
                                 ),
                             })
                         ).map((movie, index) =>
@@ -312,7 +312,7 @@ function WatchHistoryGrid({ userUID }) {
                 </div>
             </div>
 
-            {movieHistory.length === movieLimit && (
+            {moviesHistory.length === movieLimit && (
                 <div className="text-end mb-3">
                     <button
                         className="btn btn-dark bd-callout-dark dynamic-fs border-0 rounded-pill btn-md d-none d-md-inline-block"

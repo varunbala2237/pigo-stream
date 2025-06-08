@@ -74,12 +74,12 @@ const useGenreRecommendations = () => {
         const selectedItemIds = [];
 
         // Pre-calculate the genres for movies and shows from watchHistory
-        const movieHistory = watchHistory.movieHistory || [];
-        const showHistory = watchHistory.showHistory || [];
+        const moviesHistory = watchHistory.moviesHistory || [];
+        const showsHistory = watchHistory.showsHistory || [];
 
         // Create lists of genre names for movie and show history
-        const movieGenres = movieHistory.flatMap((movie) => movie.genres.map((genre) => genre.name));
-        const showGenres = showHistory.flatMap((show) => show.genres.map((genre) => genre.name));
+        const movieGenres = moviesHistory.flatMap((movie) => movie.genres.map((genre) => genre.name));
+        const showGenres = showsHistory.flatMap((show) => show.genres.map((genre) => genre.name));
 
         // Normalize genre names to lowercase and trimmed
         const normalizeGenres = (genres) => genres.map((genre) => genre.toLowerCase().trim());
