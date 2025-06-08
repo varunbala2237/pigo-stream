@@ -51,16 +51,25 @@ function MovieGrid({ id, type, setBackgroundImage }) {
   // Load from localStorage on mount
   useEffect(() => {
     const savedSelectedServer = getStorageValue(...MOVIE_STORAGE_PATH, 'selectedServer');
-    // Ensure the first server is selected by default when the servers are loaded
+
     if (servers && servers.length > 0) {
-      if (savedSelectedServer && servers.some(server => server.server_name === savedSelectedServer.server_name)) {
+      const isAnime = mediaInfo?.genres?.some(g => g.id === 16);
+
+      const preferredType = isAnime ? 'anime' : type;
+
+      if (
+        savedSelectedServer &&
+        servers.some(server => server.server_name === savedSelectedServer.server_name)
+      ) {
         setSelectedServer(savedSelectedServer);
       } else {
-        // Set the default server to the first one in the list
-        setSelectedServer(servers[0]);
+        const defaultServer =
+          servers.find(server => server.server_media_type === preferredType) || servers[0];
+
+        setSelectedServer(defaultServer);
       }
     }
-  }, [MOVIE_STORAGE_PATH, servers]);
+  }, [MOVIE_STORAGE_PATH, servers, mediaInfo, type]);
 
   // Retrieving selected server link
   useEffect(() => {
