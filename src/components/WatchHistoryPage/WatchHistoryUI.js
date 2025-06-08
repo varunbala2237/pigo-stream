@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import Header from '../Header';
 import WatchHistoryGrid from './WatchHistoryGrid';
 import { auth } from '../../firebase/firebase-auth'; // Import the auth object

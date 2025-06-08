@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import './ConnectionModal.css';
 
 function ConnectionModal({ show }) {

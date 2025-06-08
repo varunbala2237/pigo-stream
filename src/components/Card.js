@@ -1,4 +1,5 @@
-import React, { useState, useEffect, useRef } from 'react';
+// Card.js
+import { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import useRemoveWatchHistory from '../hooks/WatchHistoryPage/useRemoveWatchHistory';
 import useRemoveFromMyList from '../hooks/MyListPage/useRemoveMyList';
@@ -107,7 +108,7 @@ function Card({ media, type, path, onRemove, handleAlert, isDeletable = true, is
       setShowModal(true);
       setTimeout(() => {
         setModalVisible(true);
-      }, 10);
+      }, 100);
     }
   };
 
@@ -136,7 +137,7 @@ function Card({ media, type, path, onRemove, handleAlert, isDeletable = true, is
         className="card bg-transparent border-0 position-relative custom-theme-radius-low"
         onClick={handlePlayMedia}
         onContextMenu={handleRightClick}
-        onMouseDown={(e) => e.button === 0 && setTimeout(() => handleLongClick(e), 2500)}
+        onMouseDown={(e) => e.button === 0 && setTimeout(() => handleLongClick(e), 700)}
         style={{ cursor: isRemove ? 'default' : 'pointer', overflow: 'hidden' }}
       >
         <img
