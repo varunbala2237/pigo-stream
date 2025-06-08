@@ -105,23 +105,16 @@ function ShowGrid({ id, type, setBackgroundImage }) {
     const savedSelectedServer = getStorageValue(...SHOWS_STORAGE_PATH, 'selectedServer');
 
     if (servers && servers.length > 0) {
-      const isAnime = mediaInfo?.genres?.some(g => g.id === 16);
-
-      const preferredType = isAnime ? 'anime' : type;
-
       if (
         savedSelectedServer &&
         servers.some(server => server.server_name === savedSelectedServer.server_name)
       ) {
         setSelectedServer(savedSelectedServer);
       } else {
-        const defaultServer =
-          servers.find(server => server.server_media_type === preferredType) || servers[0];
-
-        setSelectedServer(defaultServer);
+        setSelectedServer(servers[0]);
       }
     }
-  }, [SHOWS_STORAGE_PATH, servers, mediaInfo, type]);
+  }, [SHOWS_STORAGE_PATH, servers]);
 
   // Retrieving selected server link
   useEffect(() => {
