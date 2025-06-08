@@ -15,7 +15,7 @@
 📧 Email verification is needed to login into the site
 
 # API's Used
-Im currently using TMDB API for both Movies and TV Shows Metadata.
+Im currently using TMDB API for both Movies and shows Metadata.
 
 🎥 Visit https://www.themoviedb.org/ for more details.
 

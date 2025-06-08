@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import Header from '../Header';
 import MovieGrid from './MovieGrid';
-import TvGrid from './TvGrid';
+import ShowGrid from './ShowGrid';
 import Footer from '../Footer';
 
 function PlayGround() {
@@ -22,7 +22,7 @@ function PlayGround() {
     });
   }, []);
 
-  const GridComponent = type === 'movie' ? MovieGrid : TvGrid;
+  const GridComponent = type === 'movie' ? MovieGrid : ShowGrid;
 
   return (
     <div className="index-page poppins-medium">

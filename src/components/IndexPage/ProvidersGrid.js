@@ -30,7 +30,7 @@ function ProvidersGrid({ setIsProvidersLoaded, setHasProvidersContent }) {
     );
     const location = useLocation();
 
-    // Scroll references for movies and TV shows
+    // Scroll references for movies and shows
     const moviesRef = useRef(null);
     const showsRef = useRef(null);
     const providersRef = useRef(null);
@@ -209,7 +209,7 @@ function ProvidersGrid({ setIsProvidersLoaded, setHasProvidersContent }) {
                 </div>
             </div>
 
-            {/* Providers TV Shows Section */}
+            {/* Providers shows Section */}
             <div className="position-relative custom-margin-y">
                 {shows.filter(Boolean).length > 3 && (
                     <>

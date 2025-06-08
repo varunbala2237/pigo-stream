@@ -21,15 +21,15 @@ const fetchWithRetry = async (url, options = {}, retries = 3, delay = 1000) => {
 };
 
 // Custom hook for fetching my list
-const useFetchMyList = (userUID, movieLimit, tvLimit) => {
-  const [data, setData] = useState({ movieList: [], tvList: [] });
+const useFetchMyList = (userUID, movieLimit, showLimit) => {
+  const [data, setData] = useState({ movieList: [], showsList: [] });
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   const fetchMyList = useCallback(async () => {
     if (!userUID) return;
 
-    let url = `${BASE_URL}/my-list/${userUID}/fetch-my-list?movieLimit=${movieLimit}&tvLimit=${tvLimit}`;
+    let url = `${BASE_URL}/my-list/${userUID}/fetch-my-list?movieLimit=${movieLimit}&showLimit=${showLimit}`;
 
     setLoading(true);
     setError(null);
@@ -42,7 +42,7 @@ const useFetchMyList = (userUID, movieLimit, tvLimit) => {
     } finally {
       setLoading(false);
     }
-  }, [userUID, movieLimit, tvLimit]);
+  }, [userUID, movieLimit, showLimit]);
 
   useEffect(() => {
     fetchMyList();

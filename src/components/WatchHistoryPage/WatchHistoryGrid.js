@@ -12,8 +12,8 @@ const SESSION_PATH = ['WatchHistoryUI', 'Grids', 'WatchHistoryGrid'];
 
 function WatchHistoryGrid({ userUID }) {
     const [movieLimit, setMovieLimit] = useState(12);
-    const [tvLimit, setTvLimit] = useState(12);
-    const { data: { movieHistory = [], tvHistory = [] } = {}, loading: isLoading, error: isError, refetch } = useFetchWatchHistory(userUID, movieLimit, tvLimit);
+    const [showLimit, setShowLimit] = useState(12);
+    const { data: { movieHistory = [], showsHistory = [] } = {}, loading: isLoading, error: isError, refetch } = useFetchWatchHistory(userUID, movieLimit, showLimit);
     const { clearHistory } = useClearWatchHistory();
 
     // Connection modal state
@@ -24,7 +24,7 @@ function WatchHistoryGrid({ userUID }) {
 
     const location = useLocation();
 
-    // Scroll references for movies and TV shows (2 rows for each)
+    // Scroll references for movies and shows (2 rows for each)
     const moviesRef1 = useRef(null);
     const moviesRef2 = useRef(null);
     const showsRef1 = useRef(null);
@@ -33,7 +33,7 @@ function WatchHistoryGrid({ userUID }) {
     // Load from sessionStorage on mount
     useEffect(() => {
         const savedMovieLimit = getSessionValue(...SESSION_PATH, 'movieLimit') || 12;
-        const savedTvLimit = getSessionValue(...SESSION_PATH, 'tvLimit') || 12;
+        const savedShowLimit = getSessionValue(...SESSION_PATH, 'showLimit') || 12;
 
         const savedMoviesScroll1 = getSessionValue(...SESSION_PATH, 'moviesScroll1') || 0;
         const savedMoviesScroll2 = getSessionValue(...SESSION_PATH, 'moviesScroll2') || 0;
@@ -41,7 +41,7 @@ function WatchHistoryGrid({ userUID }) {
         const savedShowsScroll2 = getSessionValue(...SESSION_PATH, 'showsScroll2') || 0;
 
         if (savedMovieLimit) setMovieLimit(savedMovieLimit);
-        if (savedTvLimit) setTvLimit(savedTvLimit);
+        if (savedShowLimit) setShowLimit(savedShowLimit);
 
         requestAnimationFrame(() => {
             if (moviesRef1.current) moviesRef1.current.scrollTo({ left: savedMoviesScroll1, behavior: 'instant' });
@@ -100,7 +100,7 @@ function WatchHistoryGrid({ userUID }) {
 
     // Alert handling for no content
     useEffect(() => {
-        const hasContent = (movieHistory && movieHistory.length > 0) || (tvHistory && tvHistory.length > 0);
+        const hasContent = (movieHistory && movieHistory.length > 0) || (showsHistory && showsHistory.length > 0);
         let showTimer;
         let hideTimer;
 
@@ -120,7 +120,7 @@ function WatchHistoryGrid({ userUID }) {
             clearTimeout(showTimer);
             clearTimeout(hideTimer);
         };
-    }, [movieHistory, tvHistory, isLoading, isError]);
+    }, [movieHistory, showsHistory, isLoading, isError]);
 
     const handleClearHistory = async () => {
         try {
@@ -140,10 +140,10 @@ function WatchHistoryGrid({ userUID }) {
         });
     };
 
-    const handleShowMoreTV = () => {
-        setTvLimit(prevLimit => {
+    const handleShowMoreShows = () => {
+        setShowLimit(prevLimit => {
             const newLimit = prevLimit + 12;
-            setSessionValue(...SESSION_PATH, 'tvLimit', newLimit);
+            setSessionValue(...SESSION_PATH, 'showLimit', newLimit);
             return newLimit;
         });
     };
@@ -166,7 +166,7 @@ function WatchHistoryGrid({ userUID }) {
         }
     };
 
-    const isClearButtonDisabled = movieHistory.length === 0 && tvHistory.length === 0;
+    const isClearButtonDisabled = movieHistory.length === 0 && showsHistory.length === 0;
 
     return (
         <div className="container mt-4 text-white">
@@ -331,9 +331,9 @@ function WatchHistoryGrid({ userUID }) {
                 </div>
             )}
 
-            {/* First Row of TV Shows */}
+            {/* First Row of shows */}
             <div className="position-relative custom-margin-y">
-                {(tvHistory.filter(Boolean).length / 2) > 3 && (
+                {(showsHistory.filter(Boolean).length / 2) > 3 && (
                     <>
                         <button
                             className="btn btn-dark custom-bg rounded-pill py-2 position-absolute start-0 translate-middle-y d-none d-md-block"
@@ -357,12 +357,12 @@ function WatchHistoryGrid({ userUID }) {
                     className="d-flex custom-theme-radius-low overflow-auto scroll-hide custom-gap"
                     style={{ scrollSnapType: 'x mandatory' }}
                 >
-                    {(tvHistory?.slice(0, Math.ceil(tvHistory.length / 2)) || [])
+                    {(showsHistory?.slice(0, Math.ceil(showsHistory.length / 2)) || [])
                         .concat(
                             Array.from({
                                 length: Math.max(
                                     0,
-                                    6 - (tvHistory?.slice(0, Math.ceil(tvHistory.length / 2))?.length || 0)
+                                    6 - (showsHistory?.slice(0, Math.ceil(showsHistory.length / 2))?.length || 0)
                                 ),
                             })
                         ).map((show, index) =>
@@ -389,9 +389,9 @@ function WatchHistoryGrid({ userUID }) {
                 </div>
             </div>
 
-            {/* Second Row of TV Shows */}
+            {/* Second Row of shows */}
             <div className="position-relative custom-margin-y">
-                {(tvHistory.filter(Boolean).length / 2) > 3 && (
+                {(showsHistory.filter(Boolean).length / 2) > 3 && (
                     <>
                         <button
                             className="btn btn-dark custom-bg rounded-pill py-2 position-absolute start-0 translate-middle-y d-none d-md-block"
@@ -415,12 +415,12 @@ function WatchHistoryGrid({ userUID }) {
                     className="d-flex custom-theme-radius-low overflow-auto scroll-hide custom-gap"
                     style={{ scrollSnapType: 'x mandatory' }}
                 >
-                    {(tvHistory?.slice(Math.ceil(tvHistory.length / 2)) || [])
+                    {(showsHistory?.slice(Math.ceil(showsHistory.length / 2)) || [])
                         .concat(
                             Array.from({
                                 length: Math.max(
                                     0,
-                                    6 - (tvHistory?.slice(Math.ceil(tvHistory.length / 2))?.length || 0)
+                                    6 - (showsHistory?.slice(Math.ceil(showsHistory.length / 2))?.length || 0)
                                 ),
                             })
                         ).map((show, index) =>
@@ -447,18 +447,18 @@ function WatchHistoryGrid({ userUID }) {
                 </div>
             </div>
 
-            {tvHistory.length === tvLimit && (
+            {showsHistory.length === showLimit && (
                 <div className="text-end mb-3">
                     <button
                         className="btn btn-dark bd-callout-dark dynamic-fs border-0 rounded-pill btn-md d-none d-md-inline-block"
-                        onClick={handleShowMoreTV}
+                        onClick={handleShowMoreShows}
                     >
                         <i className="bi bi-chevron-right text-white me-2"></i>
                         <span className="text-white">Show More</span>
                     </button>
                     <button
                         className="btn btn-dark bd-callout-dark dynamic-fs border-0 rounded-pill btn-sm d-md-none"
-                        onClick={handleShowMoreTV}
+                        onClick={handleShowMoreShows}
                     >
                         <i className="bi bi-chevron-right text-white me-2"></i>
                         <span className="text-white">Show More</span>

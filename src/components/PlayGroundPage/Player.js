@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import useSaveWatchHistory from '../../hooks/WatchHistoryPage/useSaveWatchHistory';
-import useFetchTrailer from '../../hooks/PlayerPage/useFetchTrailer';
+import useFetchTrailer from '../../hooks/PlayGroundPage/useFetchTrailer';
 import useAppVersion from '../../hooks/PigoStorePage/useAppVersion';
 import { useNavigate } from 'react-router-dom';
 import openIframeWindow from "../IframePage/openIframeWindow";

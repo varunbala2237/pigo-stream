@@ -28,7 +28,7 @@ const useGenreRecommendations = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  // Fetch the history of recently watched movie and tv based on user UID
+  // Fetch the history of recently watched movie and show based on user UID
   const { data: watchHistory } = useFetchWatchHistory(userUID, 1, 1);
 
   // Fetch the authenticated user's UID
@@ -73,19 +73,19 @@ const useGenreRecommendations = () => {
         // Step 4: Match genres between watchHistory and recommended items
         const selectedItemIds = [];
 
-        // Pre-calculate the genres for movies and TV shows from watchHistory
+        // Pre-calculate the genres for movies and shows from watchHistory
         const movieHistory = watchHistory.movieHistory || [];
-        const tvHistory = watchHistory.tvHistory || [];
+        const showHistory = watchHistory.showHistory || [];
 
-        // Create lists of genre names for movie and tv history
+        // Create lists of genre names for movie and show history
         const movieGenres = movieHistory.flatMap((movie) => movie.genres.map((genre) => genre.name));
-        const tvGenres = tvHistory.flatMap((tv) => tv.genres.map((genre) => genre.name));
+        const showGenres = showHistory.flatMap((show) => show.genres.map((genre) => genre.name));
 
         // Normalize genre names to lowercase and trimmed
         const normalizeGenres = (genres) => genres.map((genre) => genre.toLowerCase().trim());
 
         const normalizedMovieGenres = normalizeGenres(movieGenres);
-        const normalizedTvGenres = normalizeGenres(tvGenres);
+        const normalizedShowGenres = normalizeGenres(showGenres);
 
         filteredItems.forEach(item => {
           const itemGenres = item.genres.map((genre) => genre.name) || [];
@@ -94,7 +94,7 @@ const useGenreRecommendations = () => {
           const normalizedItemGenres = normalizeGenres(itemGenres);
 
           // Check if any genre from the item matches any genre from the watched media
-          const matchingGenres = normalizedItemGenres.filter(genre => normalizedMovieGenres.includes(genre) || normalizedTvGenres.includes(genre));
+          const matchingGenres = normalizedItemGenres.filter(genre => normalizedMovieGenres.includes(genre) || normalizedShowGenres.includes(genre));
 
           // If there is a genre match, add the item ID to the selected list
           if (matchingGenres.length > 0) {

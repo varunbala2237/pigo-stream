@@ -37,7 +37,7 @@ const IndexUI = () => {
     localStorage.setItem('triggerSearch', triggerSearch);
   }, [showSearchBar, triggerSearch]);
 
-  // Extract details for movie or TV show from either recommendation or popular movie
+  // Extract details for movie or show from either recommendation or popular movie
   const mediaDetails = recommendedMedia || (popularMovies.length > 0 ? popularMovies[0] : {});
   const mediaId = mediaDetails.id || selectedItemId;
   const title = mediaDetails.title || mediaDetails.name || null;

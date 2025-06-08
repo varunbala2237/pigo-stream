@@ -26,7 +26,7 @@ const useCheckMyList = (id, type) => {
   useEffect(() => {
     if (!loading && data) {
       const isInList = data.movieList.some(item => item.id.toString() === id.toString()) ||
-                       data.tvList.some(item => item.id.toString() === id.toString());
+                       data.showsList.some(item => item.id.toString() === id.toString());
       setIsInList(isInList);
     }
   }, [data, loading, id, type]);

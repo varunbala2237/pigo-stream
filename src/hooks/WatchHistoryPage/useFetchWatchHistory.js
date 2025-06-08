@@ -21,15 +21,15 @@ const fetchWithRetry = async (url, options = {}, retries = 3, delay = 1000) => {
 };
 
 // Custom hook for fetching watch history
-const useFetchWatchHistory = (userUID, movieLimit, tvLimit) => {
-  const [data, setData] = useState({ movieHistory: [], tvHistory: [] });
+const useFetchWatchHistory = (userUID, movieLimit, showLimit) => {
+  const [data, setData] = useState({ movieHistory: [], showsHistory: [] });
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   const fetchWatchHistory = useCallback(async () => {
     if (!userUID) return;
 
-    let url = `${BASE_URL}/watch-history/${userUID}/fetch-watch-history?movieLimit=${movieLimit}&tvLimit=${tvLimit}`;
+    let url = `${BASE_URL}/watch-history/${userUID}/fetch-watch-history?movieLimit=${movieLimit}&showLimit=${showLimit}`;
 
     setLoading(true);
     setError(null);
@@ -42,7 +42,7 @@ const useFetchWatchHistory = (userUID, movieLimit, tvLimit) => {
     } finally {
       setLoading(false);
     }
-  }, [userUID, movieLimit, tvLimit]);
+  }, [userUID, movieLimit, showLimit]);
 
   useEffect(() => {
     fetchWatchHistory();

@@ -33,12 +33,12 @@ const useFetchProviders = (providerId, region) => {
     const fetchData = async () => {
       setIsLoading(true);
       try {
-        const [movieRes, tvRes] = await Promise.all([
+        const [movieRes, showRes] = await Promise.all([
           fetchWithRetry(`${BASE_URL}/index/media/movie/by-provider?provider=${providerId}&region=${region}`),
           fetchWithRetry(`${BASE_URL}/index/media/tv/by-provider?provider=${providerId}&region=${region}`)
         ]);
         setMovies(movieRes.results || []);
-        setShows(tvRes.results || []);
+        setShows(showRes.results || []);
         setIsError(null);
       } catch (err) {
         setIsError(err.message || 'Failed to fetch');

@@ -15,7 +15,7 @@ function TrendingGrid({ setIsTrendingLoaded, setHasTrendingContent }) {
   const isError = isErrorMovies || isErrorShows;
   const location = useLocation();
 
-  // Scroll references for movies and TV shows
+  // Scroll references for movies and shows
   const moviesRef = useRef(null);
   const showsRef = useRef(null);
 
@@ -130,7 +130,7 @@ function TrendingGrid({ setIsTrendingLoaded, setHasTrendingContent }) {
         </div>
       )}
 
-      {/* Trending TV Shows Section */}
+      {/* Trending shows Section */}
       {(
         <div className="position-relative custom-margin-y">
           {shows.filter(Boolean).length > 3 && (

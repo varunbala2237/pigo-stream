@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import CastCard from '../CastCard';
-import useFetchMediaInfo from '../../hooks/PlayerPage/useFetchMediaInfo';
-import useFetchServers from '../../hooks/PlayerPage/useFetchServers';
+import useFetchMediaInfo from '../../hooks/PlayGroundPage/useFetchMediaInfo';
+import useFetchServers from '../../hooks/PlayGroundPage/useFetchServers';
 import useSaveMyList from '../../hooks/MyListPage/useSaveMyList';
 import useCheckMyList from '../../hooks/MyListPage/useCheckMyList';
-import useCheckServerStatus from '../../hooks/PlayerPage/useCheckServerStatus';
+import useCheckServerStatus from '../../hooks/PlayGroundPage/useCheckServerStatus';
 import Player from './Player';
 import ServerSection from './ServerSection';
 import MediaGridSkeleton from './MediaGridSkeleton';

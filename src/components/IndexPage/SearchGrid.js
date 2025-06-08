@@ -16,7 +16,7 @@ function SearchGrid({ searchQuery, setIsSearchLoaded, setHasSearchContent }) {
   const isError = moviesError || showsError;
   const location = useLocation();
 
-  // Scroll references for movies and TV shows (2 rows for each)
+  // Scroll references for movies and shows (2 rows for each)
   const moviesRef1 = useRef(null);
   const moviesRef2 = useRef(null);
   const showsRef1 = useRef(null);
@@ -215,7 +215,7 @@ function SearchGrid({ searchQuery, setIsSearchLoaded, setHasSearchContent }) {
         </div>
       )}
 
-      {/* First TV Shows Results */}
+      {/* First shows Results */}
       {(
         <div className="position-relative custom-margin-y">
           {searchQuery.trim() && (shows?.filter(Boolean).length / 2) > 3 && (
@@ -269,7 +269,7 @@ function SearchGrid({ searchQuery, setIsSearchLoaded, setHasSearchContent }) {
         </div>
       )}
 
-      {/* Second TV Shows Results */}
+      {/* Second shows Results */}
       {(
         <div className="position-relative custom-margin-y">
           {searchQuery.trim() && (shows?.filter(Boolean).length / 2) > 3 && (

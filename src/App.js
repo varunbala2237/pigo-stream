@@ -3,7 +3,7 @@ import './App.css'
 import { Routes, Route, BrowserRouter } from 'react-router-dom';
 import AuthUI from './components/AuthPage/AuthUI';
 import IndexUI from './components/IndexPage/IndexUI';
-import PlayGroundUI from './components/PlayerPage/PlayGroundUI';
+import PlayGroundUI from './components/PlayGroundPage/PlayGroundUI';
 import WatchHistoryUI from './components/WatchHistoryPage/WatchHistoryUI';
 import MyListUI from './components/MyListPage/MyListUI';
 import PigoStoreUI from './components/PigoStorePage/PigoStoreUI';

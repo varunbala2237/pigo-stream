@@ -1,7 +1,7 @@
 {
   "short_name": "PigoStream",
-  "name": "PigoStream - Movies & TV Shows",
-  "description": "Enjoy free streaming of movies and TV shows seamlessly with PigoStream.",
+  "name": "PigoStream - Movies & shows",
+  "description": "Enjoy free streaming of movies and shows seamlessly with PigoStream.",
   "icons": [
     {
       "src": "favicon.ico",

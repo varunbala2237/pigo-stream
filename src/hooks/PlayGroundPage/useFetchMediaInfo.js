@@ -28,7 +28,7 @@ const useFetchMediaInfo = (id, type) => {
 
   useEffect(() => {
     const fetchData = async () => {
-      let url = `${BASE_URL}/player/media-info?id=${id}&type=${type}`;
+      let url = `${BASE_URL}/playground/media-info?id=${id}&type=${type}`;
 
       try {
         const result = await fetchWithRetry(url);

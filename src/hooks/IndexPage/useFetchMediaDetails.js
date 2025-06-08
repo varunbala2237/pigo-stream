@@ -20,7 +20,7 @@ const fetchWithRetry = async (url, options = {}, retries = 3, delay = 1000) => {
   }
 };
 
-// Custom hook for fetching media details (movie or tv)
+// Custom hook for fetching media details (movie or show)
 const useFetchMediaDetails = (id) => {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
