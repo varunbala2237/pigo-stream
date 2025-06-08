@@ -21,7 +21,7 @@ function MovieGrid({ id, type, setBackgroundImage }) {
   const [mediaURL, setMediaURL] = useState('');
   const [cast, setCast] = useState([]);
   const [director, setDirector] = useState('');
-  const [selectedServer, setSelectedServer] = useState('');
+  const [selectedServer, setSelectedServer] = useState(null);
 
   const [sliceIndex, setSliceIndex] = useState(() =>
     getSessionValue(...MOVIE_STORAGE_PATH, 'sliceIndex') || 12
