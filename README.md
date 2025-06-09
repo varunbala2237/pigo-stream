@@ -1,101 +1,95 @@
-# Deployed Project Link 🎉
-🔗 https://pigostream-site.web.app/
+# PigoStream
+  
+🎉 Deployed project 🔗 [Visit PigoStream](https://pigostream-site.web.app/)
 
-# You Need to Create Node.js/Express.js Web Service for Server Side Operations and Database Management
-📂 For this project, Im using Firebase for database and authentication.
+## Overview
 
-# Full Project Stack
-📺 React app deployed in [Firebase](https://firebase.google.com/).
+PigoStream is a full-stack streaming platform featuring:
 
-🌐 Node.js/Express.js main server with recommendations route deployed in [Render](https://dashboard.render.com/).
+- React frontend deployed on Firebase  
+- Node.js/Express backend deployed on Render  
+- Firebase for authentication & real-time database  
+- Supabase PostgreSQL for session management  
+- TMDB API for movies and TV shows metadata  
+- Native Flutter Webview player for streaming content (Required for Android & Windows)
 
-# Authentication
-🤵Firebase authentication libraries are used
+## Backend Service
 
-📧 Email verification is needed to login into the site
+The backend is a Node.js/Express.js server responsible for:
 
-# API's Used
-Im currently using TMDB API for both Movies and shows Metadata.
+- Handling recommendation routes  
+- Managing user sessions  
+- Interacting with Firebase and Supabase databases
 
-🎥 Visit https://www.themoviedb.org/ for more details.
+### How to Set Up and Deploy the Backend
 
-# Databases Used
-📃 Firebase Database(Real-Time, Firestore)
+1. Clone the backend repository or use your backend folder.
 
-💻 Supabase PostgreSQL Database(Session Pool)
+2. Install dependencies by running:  
+   `npm install`
 
-# External App
-📲 Using native Flutter Webview player to stream the content
+3. Create a `.env` file in the root directory and add your environment variables, for example:  
+   `PORT=3001`  
+   `FIREBASE_CONFIG=your_firebase_config`  
+   `SUPABASE_URL=your_supabase_url`  
+   `SUPABASE_KEY=your_supabase_key`  
+   `TMDB_API_KEY=your_tmdb_api_key`
 
-Here is complete overview of creating a React Project ⬇️
+5. Run the backend locally with:  
+   `npm start`  
+   This will start the server on `http://localhost:3001`.
 
-# Getting Started with Create React App
+6. To deploy on Render (or any cloud platform):  
+   - Push your backend code to a Git repository.  
+   - Create a new Web Service on Render and connect the repository.  
+   - Set your environment variables in Render’s dashboard.  
+   - Render will automatically build and deploy your backend server.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Full Project Stack
 
-## Available Scripts
+- 📺 React frontend hosted on [Firebase](https://firebase.google.com/)  
+- 🌐 Node.js/Express backend hosted on [Render](https://dashboard.render.com/)
 
-In the project directory, you can run:
+## Authentication
 
-### `npm start`
+- Firebase Authentication manages user sign-up and login  
+- Email verification is required to activate accounts
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## APIs Used
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- TMDB API provides metadata for movies and TV shows  
+- Visit [TMDB](https://www.themoviedb.org/) for more information
 
-### `npm test`
+## Databases
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- Firebase Realtime Database and Firestore for realtime data storage  
+- Supabase PostgreSQL used for session pooling
 
-### `npm run build`
+## External Components (Required for Android & Windows)
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- Native Flutter Webview player is integrated for streaming video content 🔗 [Download PigoPlayer](https://pigostream-site.web.app/pigostore)
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Getting Started with React Frontend
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+This React app was bootstrapped using [Create React App](https://github.com/facebook/create-react-app).
 
-### `npm run eject`
+### Quick Start
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+1. Install frontend dependencies:  
+   `npm install`
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+2. Run the app in development mode:  
+   `npm start`  
+   Open `http://localhost:3000` in your browser to view it. The app will reload automatically on code changes.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+3. Build the app for production:  
+   `npm run build`  
+   This generates an optimized build in the `build` folder, ready for deployment.
 
 ## Learn More
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- [Create React App Documentation](https://facebook.github.io/create-react-app/docs/getting-started)  
+- [React Official Documentation](https://reactjs.org/)
 
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Feel free to contribute or ask questions.  
+Happy streaming! 🚀
