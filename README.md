@@ -1,101 +1,104 @@
-# Deployed Project Link 🎉
-🔗 https://pigostream-site.web.app/
+# PigoStream
 
-# You Need to Create Node.js/Express.js Web Service for Server Side Operations and Database Management
-📂 For this project, Im using Firebase for database and authentication.
+## Deployed Project Link 🎉  
+🔗 [https://pigostream-site.web.app/](https://pigostream-site.web.app/)
 
-# Full Project Stack
-📺 React app deployed in [Firebase](https://firebase.google.com/).
+---
 
-🌐 Node.js/Express.js main server with recommendations route deployed in [Render](https://dashboard.render.com/).
+## Overview
 
-# Authentication
-🤵Firebase authentication libraries are used
+This project features a full-stack streaming platform built with React for the frontend and Node.js/Express.js for backend server operations. It utilizes Firebase for authentication and real-time database management, and Supabase PostgreSQL for session handling.
 
-📧 Email verification is needed to login into the site
+---
 
-# API's Used
-Im currently using TMDB API for both Movies and shows Metadata.
+## Backend Service
 
-🎥 Visit https://www.themoviedb.org/ for more details.
+A Node.js/Express.js web service powers server-side logic, including recommendation routes and database management.
 
-# Databases Used
-📃 Firebase Database(Real-Time, Firestore)
+---
 
-💻 Supabase PostgreSQL Database(Session Pool)
+## Full Project Stack
 
-# External App
-📲 Using native Flutter Webview player to stream the content
+- 📺 React app deployed on [Firebase](https://firebase.google.com/).  
+- 🌐 Node.js/Express.js backend deployed on [Render](https://dashboard.render.com/).
 
-Here is complete overview of creating a React Project ⬇️
+---
 
-# Getting Started with Create React App
+## Authentication
+
+- Firebase authentication libraries are used to manage user login and registration.  
+- Email verification is required to activate user accounts.
+
+---
+
+## APIs Used
+
+- TMDB API provides metadata for movies and TV shows.  
+- 🎥 More details at [https://www.themoviedb.org/](https://www.themoviedb.org/).
+
+---
+
+## Databases
+
+- Firebase Realtime Database and Firestore for real-time data management.  
+- Supabase PostgreSQL database for session pooling.
+
+---
+
+## External Components
+
+- The app integrates a native Flutter Webview player for streaming video content.
+
+---
+
+## Getting Started with React
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+### Available Scripts
 
 In the project directory, you can run:
 
-### `npm start`
+#### `npm start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Runs the app in development mode.  
+Open [http://localhost:3000](http://localhost:3000) to view it in your browser.  
+The page reloads automatically on code changes. Lint errors will appear in the console.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+#### `npm test`
 
-### `npm test`
+Launches the test runner in interactive watch mode.  
+More info: [Running Tests](https://facebook.github.io/create-react-app/docs/running-tests).
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+#### `npm run build`
 
-### `npm run build`
+Builds the app for production to the `build` folder.  
+Bundles React in production mode and optimizes the build for best performance.  
+Files are minified, and filenames include hashes.  
+Your app is ready for deployment.  
+More info: [Deployment](https://facebook.github.io/create-react-app/docs/deployment).
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+#### `npm run eject`
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+**Warning:** This is a one-way operation. Once you eject, you cannot go back.  
+It copies all configuration files and dependencies directly into your project, giving full control over build tools and configurations.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+---
 
 ## Learn More
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- [Create React App Documentation](https://facebook.github.io/create-react-app/docs/getting-started)  
+- [React Documentation](https://reactjs.org/)
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### Additional Topics
 
-### Code Splitting
+- [Code Splitting](https://facebook.github.io/create-react-app/docs/code-splitting)  
+- [Analyzing Bundle Size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)  
+- [Making a Progressive Web App](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)  
+- [Advanced Configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)  
+- [Troubleshooting Build Failures](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+---
 
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Feel free to contribute or ask questions.  
+Happy streaming! 🚀
