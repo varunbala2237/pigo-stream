@@ -1,7 +1,4 @@
 /* Footer.css */
 .footer-fixed {
-  height: 4rem;
   z-index: 1000;
-  overflow-x: auto;
-  overflow-y: hidden;
 }
