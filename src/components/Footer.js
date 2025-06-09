@@ -14,11 +14,11 @@ const Footer = ({ showSearchBar = null, handleSearchBar = null }) => {
 
   return (
     <div className="footer-fixed bd-callout-dark w-100 position-fixed bottom-0 shadow">
-      <ul className="nav h-100 flex-nowrap justify-content-evenly align-items-center px-2 dynamic-fs">
+      <ul className="nav h-100 w-100 align-items-center px-2 dynamic-fs d-flex">
         {navItems.map((item, index) => {
           const isActive = currentPath === item.path;
           return (
-            <li key={index} className="nav-item px-2 text-center">
+            <li key={index} className="nav-item text-center flex-fill">
               <Link
                 to={item.path}
                 className="nav-link d-flex flex-column align-items-center text-decoration-none dynamic-ts"
@@ -31,7 +31,7 @@ const Footer = ({ showSearchBar = null, handleSearchBar = null }) => {
         })}
 
         {showSearchBar !== null && (
-          <li className="nav-item px-2 text-center">
+          <li className="nav-item text-center flex-fill">
             <button
               className={`btn border-0 d-flex flex-column align-items-center justify-content-center text-decoration-none dynamic-ts`}
               style={{ width: '3rem', height: '3rem' }}
