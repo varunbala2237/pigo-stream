@@ -1,6 +1,6 @@
 # PigoStream
   
-Deployed Project Link 🎉 🔗 [PigoStream](https://pigostream-site.web.app/)
+🎉 Check out deployed project 🔗 [PigoStream](https://pigostream-site.web.app/)
 
 ## Overview
 
