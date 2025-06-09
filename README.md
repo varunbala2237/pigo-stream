@@ -7,96 +7,109 @@
 
 ## Overview
 
-This project features a full-stack streaming platform built with React for the frontend and Node.js/Express.js for backend server operations. It utilizes Firebase for authentication and real-time database management, and Supabase PostgreSQL for session handling.
+PigoStream is a full-stack streaming platform featuring:
+
+- React frontend deployed on Firebase  
+- Node.js/Express backend deployed on Render  
+- Firebase for authentication & real-time database  
+- Supabase PostgreSQL for session management  
+- TMDB API for movies and TV shows metadata  
+- Native Flutter Webview player for streaming content
 
 ---
 
 ## Backend Service
 
-A Node.js/Express.js web service powers server-side logic, including recommendation routes and database management.
+The backend is a Node.js/Express.js server responsible for:
+
+- Handling recommendation routes  
+- Managing user sessions  
+- Interacting with Firebase and Supabase databases
+
+### How to Set Up and Deploy the Backend
+
+1. Clone the backend repository or use your backend folder.
+
+2. Install dependencies by running:  
+   `npm install`
+
+3. Create a `.env` file in the root directory and add your environment variables, for example:
+
+  `PORT=5000
+  FIREBASE_CONFIG=your_firebase_config
+  SUPABASE_URL=your_supabase_url
+  SUPABASE_KEY=your_supabase_key
+  TMDB_API_KEY=your_tmdb_api_key`
+
+4. Run the backend locally with:  
+   `npm start`  
+   This will start the server on `http://localhost:5000`.
+
+5. To deploy on Render (or any cloud platform):  
+   - Push your backend code to a Git repository.  
+   - Create a new Web Service on Render and connect the repository.  
+   - Set your environment variables in Render’s dashboard.  
+   - Render will automatically build and deploy your backend server.
 
 ---
 
 ## Full Project Stack
 
-- 📺 React app deployed on [Firebase](https://firebase.google.com/).  
-- 🌐 Node.js/Express.js backend deployed on [Render](https://dashboard.render.com/).
+- 📺 React frontend hosted on [Firebase](https://firebase.google.com/)  
+- 🌐 Node.js/Express backend hosted on [Render](https://dashboard.render.com/)
 
 ---
 
 ## Authentication
 
-- Firebase authentication libraries are used to manage user login and registration.  
-- Email verification is required to activate user accounts.
+- Firebase Authentication manages user sign-up and login  
+- Email verification is required to activate accounts
 
 ---
 
 ## APIs Used
 
-- TMDB API provides metadata for movies and TV shows.  
-- 🎥 More details at [https://www.themoviedb.org/](https://www.themoviedb.org/).
+- TMDB API provides metadata for movies and TV shows  
+- Visit [TMDB](https://www.themoviedb.org/) for more information
 
 ---
 
 ## Databases
 
-- Firebase Realtime Database and Firestore for real-time data management.  
-- Supabase PostgreSQL database for session pooling.
+- Firebase Realtime Database and Firestore for realtime data storage  
+- Supabase PostgreSQL used for session pooling
 
 ---
 
 ## External Components
 
-- The app integrates a native Flutter Webview player for streaming video content.
+- Native Flutter Webview player is integrated for streaming video content
 
 ---
 
-## Getting Started with React
+## Getting Started with React Frontend
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This React app was bootstrapped using [Create React App](https://github.com/facebook/create-react-app).
 
-### Available Scripts
+### Quick Start
 
-In the project directory, you can run:
+1. Install frontend dependencies:  
+   `npm install`
 
-#### `npm start`
+2. Run the app in development mode:  
+   `npm start`  
+   Open `http://localhost:3000` in your browser to view it. The app will reload automatically on code changes.
 
-Runs the app in development mode.  
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.  
-The page reloads automatically on code changes. Lint errors will appear in the console.
-
-#### `npm test`
-
-Launches the test runner in interactive watch mode.  
-More info: [Running Tests](https://facebook.github.io/create-react-app/docs/running-tests).
-
-#### `npm run build`
-
-Builds the app for production to the `build` folder.  
-Bundles React in production mode and optimizes the build for best performance.  
-Files are minified, and filenames include hashes.  
-Your app is ready for deployment.  
-More info: [Deployment](https://facebook.github.io/create-react-app/docs/deployment).
-
-#### `npm run eject`
-
-**Warning:** This is a one-way operation. Once you eject, you cannot go back.  
-It copies all configuration files and dependencies directly into your project, giving full control over build tools and configurations.
+3. Build the app for production:  
+   `npm run build`  
+   This generates an optimized build in the `build` folder, ready for deployment.
 
 ---
 
 ## Learn More
 
 - [Create React App Documentation](https://facebook.github.io/create-react-app/docs/getting-started)  
-- [React Documentation](https://reactjs.org/)
-
-### Additional Topics
-
-- [Code Splitting](https://facebook.github.io/create-react-app/docs/code-splitting)  
-- [Analyzing Bundle Size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)  
-- [Making a Progressive Web App](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)  
-- [Advanced Configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)  
-- [Troubleshooting Build Failures](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- [React Official Documentation](https://reactjs.org/)
 
 ---
 
