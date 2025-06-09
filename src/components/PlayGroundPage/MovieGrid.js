@@ -8,7 +8,7 @@ import useCheckMyList from '../../hooks/MyListPage/useCheckMyList';
 import useCheckServerStatus from '../../hooks/PlayGroundPage/useCheckServerStatus';
 import Player from './Player';
 import ServerSection from './Sections/ServerSection';
-import MediaGridSkeleton from './MediaGridSkeleton';
+import PlayGroundSkeleton from './PlayGroundSkeleton';
 
 import { getStorageValue, setStorageValue } from '../../utils/localStorageStates';
 import { getSessionValue, setSessionValue } from '../../utils/sessionStorageStates';
@@ -103,7 +103,7 @@ function MovieGrid({ id, type, setBackgroundImage }) {
 
   if (!mediaInfo) {
     return (
-      <MediaGridSkeleton
+      <PlayGroundSkeleton
         mediaInfo={mediaInfo}
         servers={servers}
         loadingInfo={loadingInfo}

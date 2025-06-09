@@ -1,11 +1,11 @@
-// MediaGridSkeleton.js
+// PlayGroundSkeleton.js
 import { useState, useEffect } from 'react';
-import './MediaGridSkeleton.css';
+import './PlayGroundSkeleton.css';
 import CastCard from '../CastCard';
 import ConnectionModal from '../../utils/ConnectionModal';
 import Alert from '../../utils/Alert';
 
-function MediaGridSkeleton({ mediaInfo, servers, loadingInfo, loadingLink, errorInfo, errorLink }) {
+function PlayGroundSkeleton({ mediaInfo, servers, loadingInfo, loadingLink, errorInfo, errorLink }) {
   // Alert messages
   const [alert, setAlert] = useState({ message: '', type: '', key: '' });
 
@@ -127,4 +127,4 @@ function MediaGridSkeleton({ mediaInfo, servers, loadingInfo, loadingLink, error
   );
 }
 
-export default MediaGridSkeleton;
+export default PlayGroundSkeleton;
