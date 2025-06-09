@@ -83,7 +83,7 @@ function TrendingGrid({ setIsTrendingLoaded, setHasTrendingContent }) {
 
   return (
     <div className="container mt-4 text-white">
-      <div className="d-flex align-items-center dynamic-ts m-2 px-1">
+      <div className="d-flex align-items-center dynamic-ts m-2">
         <i className="bi bi-fire theme-color me-2"></i>
         <b className="mb-0">Trending</b>
       </div>
