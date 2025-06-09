@@ -3,8 +3,6 @@
 ## Deployed Project Link 🎉  
 🔗 [https://pigostream-site.web.app/](https://pigostream-site.web.app/)
 
----
-
 ## Overview
 
 PigoStream is a full-stack streaming platform featuring:
@@ -15,8 +13,6 @@ PigoStream is a full-stack streaming platform featuring:
 - Supabase PostgreSQL for session management  
 - TMDB API for movies and TV shows metadata  
 - Native Flutter Webview player for streaming content
-
----
 
 ## Backend Service
 
@@ -54,41 +50,29 @@ The backend is a Node.js/Express.js server responsible for:
    - Set your environment variables in Render’s dashboard.  
    - Render will automatically build and deploy your backend server.
 
----
-
 ## Full Project Stack
 
 - 📺 React frontend hosted on [Firebase](https://firebase.google.com/)  
 - 🌐 Node.js/Express backend hosted on [Render](https://dashboard.render.com/)
-
----
 
 ## Authentication
 
 - Firebase Authentication manages user sign-up and login  
 - Email verification is required to activate accounts
 
----
-
 ## APIs Used
 
 - TMDB API provides metadata for movies and TV shows  
 - Visit [TMDB](https://www.themoviedb.org/) for more information
-
----
 
 ## Databases
 
 - Firebase Realtime Database and Firestore for realtime data storage  
 - Supabase PostgreSQL used for session pooling
 
----
-
 ## External Components
 
 - Native Flutter Webview player is integrated for streaming video content
-
----
 
 ## Getting Started with React Frontend
 
@@ -107,14 +91,10 @@ This React app was bootstrapped using [Create React App](https://github.com/face
    `npm run build`  
    This generates an optimized build in the `build` folder, ready for deployment.
 
----
-
 ## Learn More
 
 - [Create React App Documentation](https://facebook.github.io/create-react-app/docs/getting-started)  
 - [React Official Documentation](https://reactjs.org/)
-
----
 
 Feel free to contribute or ask questions.  
 Happy streaming! 🚀
