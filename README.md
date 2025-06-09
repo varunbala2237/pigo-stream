@@ -26,21 +26,21 @@ The backend is a Node.js/Express.js server responsible for:
 1. Create your own backend project, for example:
    `server/server.js`
 
-3. Install dependencies by running:  
+2. Install dependencies by running:  
    `npm install`
 
-4. Create a `.env` file in the root directory and add your environment variables, for example:  
+3. Create a `.env` file in the root directory and add your environment variables, for example:  
    `PORT=3001`  
    `FIREBASE_CONFIG=your_firebase_config`  
    `SUPABASE_URL=your_supabase_url`    
    `TMDB_API_KEY=your_tmdb_api_key`
    ...
 
-5. Run the backend locally with:  
+4. Run the backend locally with:  
    `npm start`  
    This will start the server on `http://localhost:3001`.
 
-6. To deploy on Render (or any cloud platform):  
+5. To deploy on Render (or any cloud platform):  
    - Push your backend code to a Git repository.  
    - Create a new Web Service on Render and connect the repository.  
    - Set your environment variables in Render’s dashboard.  
