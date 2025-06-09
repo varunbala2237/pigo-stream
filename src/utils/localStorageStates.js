@@ -1,9 +1,14 @@
 // localStorageStates.js
-const STORAGE_KEY = 'pageStorageStates';
+import { auth } from '../firebase/firebase-auth';
+
+function getStorageKey() {
+  const user = auth.currentUser;
+  return user ? `user_${user.uid}` : 'default_key';
+}
 
 function getStorageObject() {
   try {
-    const item = localStorage.getItem(STORAGE_KEY);
+    const item = localStorage.getItem(getStorageKey());
     return item ? JSON.parse(item) : {};
   } catch {
     return {};
@@ -12,7 +17,7 @@ function getStorageObject() {
 
 function setStorageObject(obj) {
   try {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(obj));
+    localStorage.setItem(getStorageKey(), JSON.stringify(obj));
   } catch {
     // Fail silently or handle quota exceeded errors here if needed
   }
