@@ -23,7 +23,7 @@ The backend is a Node.js/Express.js server responsible for:
 
 ### How to Set Up and Deploy the Backend
 
-1. Create your own backend project, for example:
+1. Create your own backend project, for example:  
    `server/server.js`
 
 2. Install dependencies by running:  
