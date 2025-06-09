@@ -8,9 +8,9 @@ import useSaveMyList from '../../hooks/MyListPage/useSaveMyList';
 import useCheckMyList from '../../hooks/MyListPage/useCheckMyList';
 import useCheckServerStatus from '../../hooks/PlayGroundPage/useCheckServerStatus';
 import Player from './Player';
-import ServerSection from './ServerSection';
-import SeasonSection from './SeasonSection';
-import EpisodeSection from './EpisodeSection';
+import ServerSection from './Sections/ServerSection';
+import SeasonSection from './Sections/SeasonSection';
+import EpisodeSection from './Sections/EpisodeSection';
 import MediaGridSkeleton from './MediaGridSkeleton';
 
 import { getStorageValue, setStorageValue } from '../../utils/localStorageStates';

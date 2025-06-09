@@ -7,7 +7,7 @@ import useSaveMyList from '../../hooks/MyListPage/useSaveMyList';
 import useCheckMyList from '../../hooks/MyListPage/useCheckMyList';
 import useCheckServerStatus from '../../hooks/PlayGroundPage/useCheckServerStatus';
 import Player from './Player';
-import ServerSection from './ServerSection';
+import ServerSection from './Sections/ServerSection';
 import MediaGridSkeleton from './MediaGridSkeleton';
 
 import { getStorageValue, setStorageValue } from '../../utils/localStorageStates';
