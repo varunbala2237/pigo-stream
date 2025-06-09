@@ -11,7 +11,7 @@ PigoStream is a full-stack streaming platform featuring:
 - Firebase for authentication & real-time database  
 - Supabase PostgreSQL for session management  
 - TMDB API for movies and TV shows metadata  
-- Native Flutter Webview player for streaming content
+- Native Flutter Webview player for streaming content(Must needed for Android & Windows)
 
 ## Backend Service
 
@@ -65,7 +65,7 @@ The backend is a Node.js/Express.js server responsible for:
 - Firebase Realtime Database and Firestore for realtime data storage  
 - Supabase PostgreSQL used for session pooling
 
-## External Components
+## External Components(Must needed for Android & Windows)
 
 - Native Flutter Webview player is integrated for streaming video content 🔗 [Download PigoPlayer](https://pigostream-site.web.app/pigostore)
 
