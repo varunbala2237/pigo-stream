@@ -1,7 +1,7 @@
 {
   "short_name": "PigoStream",
-  "name": "PigoStream - Movies, TV Shows & Anime",
-  "description": "Enjoy free streaming of movies, tv shows and anime seamlessly with PigoStream.",
+  "name": "PigoStream Version 1",
+  "description": "Enjoy free streaming of movies, tv shows and anime seamlessly.",
   "icons": [
     {
       "src": "favicon.ico",
@@ -24,7 +24,7 @@
   "theme_color": "#000000",
   "background_color": "#000000",
   "scope": "/",
-  "categories": ["entertainment", "movies", "tv", "media"],
+  "categories": ["entertainment", "movies", "tv", "anime"],
   "lang": "en",
   "dir": "ltr"
 }
