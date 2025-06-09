@@ -1,6 +1,6 @@
 # PigoStream
   
-🎉 Deployed project 🔗 [Visit](https://pigostream-site.web.app/)
+🎉 Deployed project 🔗 [Visit PigoStream](https://pigostream-site.web.app/)
 
 ## Overview
 
@@ -67,7 +67,7 @@ The backend is a Node.js/Express.js server responsible for:
 
 ## External Components
 
-- Native Flutter Webview player is integrated for streaming video content, PigoPlayer 🔗 [Download](https://pigostream-site.web.app/pigostore)
+- Native Flutter Webview player is integrated for streaming video content 🔗 [Download PigoPlayer](https://pigostream-site.web.app/pigostore)
 
 ## Getting Started with React Frontend
 
