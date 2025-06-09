@@ -23,12 +23,13 @@ The backend is a Node.js/Express.js server responsible for:
 
 ### How to Set Up and Deploy the Backend
 
-1. Create your own backend project.
+1. Create your own backend project, for example:
+   `server/server.js`
 
-2. Install dependencies by running:  
+3. Install dependencies by running:  
    `npm install`
 
-3. Create a `.env` file in the root directory and add your environment variables, for example:  
+4. Create a `.env` file in the root directory and add your environment variables, for example:  
    `PORT=3001`  
    `FIREBASE_CONFIG=your_firebase_config`  
    `SUPABASE_URL=your_supabase_url`    
