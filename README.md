@@ -30,14 +30,10 @@ The backend is a Node.js/Express.js server responsible for:
    `npm install`
 
 3. Create a `.env` file in the root directory and add your environment variables, for example:  
-   `PORT=3001`
-   
-   `FIREBASE_CONFIG=your_firebase_config`
-   
-   `SUPABASE_URL=your_supabase_url`
-   
-   `SUPABASE_KEY=your_supabase_key`
-   
+   `PORT=3001`  
+   `FIREBASE_CONFIG=your_firebase_config`  
+   `SUPABASE_URL=your_supabase_url`  
+   `SUPABASE_KEY=your_supabase_key`  
    `TMDB_API_KEY=your_tmdb_api_key`
 
 5. Run the backend locally with:  
