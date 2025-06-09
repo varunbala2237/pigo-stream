@@ -34,7 +34,6 @@ The backend is a Node.js/Express.js server responsible for:
    `npm install`
 
 3. Create a `.env` file in the root directory and add your environment variables, for example:
-
   `PORT=5000`
   
   `FIREBASE_CONFIG=your_firebase_config`
