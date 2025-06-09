@@ -17,13 +17,13 @@ PigoStream is a full-stack streaming platform featuring:
 
 The backend is a Node.js/Express.js server responsible for:
 
-- Handling recommendation routes  
-- Managing user sessions  
+- Managing user sessions
+- Handling recommendations
 - Interacting with Firebase and Supabase databases
 
 ### How to Set Up and Deploy the Backend
 
-1. Clone the backend repository or use your backend folder.
+1. Create your own backend project.
 
 2. Install dependencies by running:  
    `npm install`
@@ -31,9 +31,9 @@ The backend is a Node.js/Express.js server responsible for:
 3. Create a `.env` file in the root directory and add your environment variables, for example:  
    `PORT=3001`  
    `FIREBASE_CONFIG=your_firebase_config`  
-   `SUPABASE_URL=your_supabase_url`  
-   `SUPABASE_KEY=your_supabase_key`  
+   `SUPABASE_URL=your_supabase_url`    
    `TMDB_API_KEY=your_tmdb_api_key`
+   ...
 
 5. Run the backend locally with:  
    `npm start`  
