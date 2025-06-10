@@ -1,12 +1,12 @@
-// Player.js
+// PlayerSection.js
 import React, { useState, useEffect } from 'react';
-import useSaveWatchHistory from '../../hooks/WatchHistoryPage/useSaveWatchHistory';
-import useFetchTrailer from '../../hooks/PlayGroundPage/useFetchTrailer';
-import useAppVersion from '../../hooks/PigoStorePage/useAppVersion';
+import useSaveWatchHistory from '../../../hooks/WatchHistoryPage/useSaveWatchHistory';
+import useFetchTrailer from '../../../hooks/PlayGroundPage/useFetchTrailer';
+import useAppVersion from '../../../hooks/PigoStorePage/useAppVersion';
 import { useNavigate } from 'react-router-dom';
-import openIframeWindow from "../IframePage/openIframeWindow";
+import openIframeWindow from "../../IframePage/openIframeWindow";
 
-function Player({
+function PlayerSection({
   mediaURL,
   averageVote,
   director,
@@ -268,4 +268,4 @@ function Player({
   );
 }
 
-export default Player;
+export default PlayerSection;

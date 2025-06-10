@@ -6,7 +6,7 @@ import useFetchServers from '../../hooks/PlayGroundPage/useFetchServers';
 import useSaveMyList from '../../hooks/MyListPage/useSaveMyList';
 import useCheckMyList from '../../hooks/MyListPage/useCheckMyList';
 import useCheckServerStatus from '../../hooks/PlayGroundPage/useCheckServerStatus';
-import Player from './Player';
+import PlayerSection from './Sections/PlayerSection';
 import ServerSection from './Sections/ServerSection';
 import PlayGroundSkeleton from './PlayGroundSkeleton';
 
@@ -123,7 +123,7 @@ function MovieGrid({ id, type, setBackgroundImage }) {
         <div className="row justify-content-center position-relative">
           <div className="col-lg-8 col-md-10 col-sm-12">
             <div className="container bg-transparent">
-              <Player mediaURL={mediaURL}
+              <PlayerSection mediaURL={mediaURL}
                 averageVote={averageVote}
                 director={director}
                 genres={genres}
