@@ -1,5 +1,7 @@
 /* App.css */
 /* External CSS(Global Styles) */
+
+/* Reusable Styles, Dynamic Resolutions & Animations */
 .bg-blur {
   height: 100%;
   left: 0;
@@ -76,6 +78,10 @@
   background-color: rgba(33, 37, 41, 0.5);
   border: none;
   backdrop-filter: blur(4px);
+}
+
+.nowrap {
+  white-space: nowrap;
 }
 
 .rounded-pill-l {

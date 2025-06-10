@@ -43,7 +43,7 @@ function MyListUI() {
   }, []);
 
   return (
-    <div className="container-fluid d-flex flex-column justify-content-center align-items-center poppins-medium p-0">
+    <div className="container-fluid d-flex flex-column justify-content-center align-items-center inter-regular p-0">
       <div className="w-100">
         {/* Header */}
         <Header />

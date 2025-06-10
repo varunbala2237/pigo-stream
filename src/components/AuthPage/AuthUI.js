@@ -264,7 +264,7 @@ function AuthUI() {
     };
 
     return (
-        <div className="d-flex flex-column vh-100 w-100 poppins-medium">
+        <div className="d-flex flex-column vh-100 w-100 inter-regular">
             {isLoading ? (
                 <div className="d-flex justify-content-center align-items-center vh-100">
                     <div className="spinner-border theme-color spinner-size-3" role="status">

@@ -95,14 +95,14 @@ const PigostoreUI = () => {
   ];
 
   return (
-    <div className="vh-100 d-flex justify-content-center align-items-center poppins-medium"
+    <div className="vh-100 d-flex justify-content-center align-items-center inter-regular"
       style={{ background: "linear-gradient(to bottom, #121229, #121229, black, black)" }}
     >
       <div className="container custom-bg p-0 mx-4 custom-theme-radius-low" style={{ maxWidth: '600px' }}>
         <div className="section p-4">
           <div className="d-flex justify-content-between align-items-center">
             <div className="d-flex justify-content-center align-items-center text-center">
-              <p className="text-white me-2 dynamic-hs m-0">PigoPlayer</p>
+              <p className="text-white me-2 dynamic-hs m-0"><b>Pigo</b>Player</p>
               <span className="text-secondary align-self-center">
                 v{appVersion || "0.1.0"} {/* Display app version */}
               </span>

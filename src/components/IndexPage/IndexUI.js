@@ -4,6 +4,7 @@ import useGenreRecommendations from '../../hooks/IndexPage/useGenreRecommendatio
 import useFetchMediaDetails from '../../hooks/IndexPage/useFetchMediaDetails';
 import useFetchMedia from '../../hooks/IndexPage/useFetchMedia';
 import HomeUI from './HomeUI';
+import './IndexUI.css';
 
 const IndexUI = () => {
   const { selectedItemId } = useGenreRecommendations();
@@ -54,7 +55,7 @@ const IndexUI = () => {
   const shouldHideBackground = showSearchBar || triggerSearch.trim() !== '';
 
   return (
-    <div className="index-page poppins-medium">
+    <div className="index-page inter-regular">
       <div
         className="background-image"
         style={{
