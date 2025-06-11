@@ -247,9 +247,9 @@ function PlayerSection({
             {platform === 'windows' || platform === 'android' ? (
               <>
                 <i className="bi bi-info-circle me-2"></i>
-                Don't have the app?
+                Don't have the player app?
                 <span className="link text-primary" onClick={redirectToStore}>
-                  <i className="bi bi-bag-check-fill me-2"></i>Get it now
+                  <i className="bi bi-bag-check-fill mx-2"></i>Get it now
                 </span>
               </>
             ) : platform === 'macos' || platform === 'ios' ? (
