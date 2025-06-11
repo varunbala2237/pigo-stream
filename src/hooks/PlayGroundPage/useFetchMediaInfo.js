@@ -29,7 +29,7 @@ const useFetchMediaInfo = (id, type) => {
 
   useEffect(() => {
     const fetchData = async () => {
-      let url = `${BASE_URL}/playground/media-info?id=${id}&type=${type}`;
+      let url = `${BASE_URL}/pigo-stream/playground/media-info?id=${id}&type=${type}`;
 
       try {
         const result = await fetchWithRetry(url);

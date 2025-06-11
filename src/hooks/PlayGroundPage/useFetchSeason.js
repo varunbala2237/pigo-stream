@@ -29,7 +29,7 @@ const useFetchSeason = (id, seasonNumber) => {
 
     useEffect(() => {
         const fetchSeasonData = async () => {
-            let url = `${BASE_URL}/playground/season?id=${id}&seasonNumber=${seasonNumber}`;
+            let url = `${BASE_URL}/pigo-stream/playground/season?id=${id}&seasonNumber=${seasonNumber}`;
 
             try {
                 const data = await fetchWithRetry(url);

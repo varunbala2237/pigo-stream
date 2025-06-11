@@ -35,7 +35,7 @@ const useAppVersion = (platform) => {
         return;
       }
 
-      const url = `${BASE_URL}/pigostore/app-version?platform=${platform}`;
+      const url = `${BASE_URL}/pigo-stream/pigostore/app-version?platform=${platform}`;
 
       try {
         const result = await fetchWithRetry(url);

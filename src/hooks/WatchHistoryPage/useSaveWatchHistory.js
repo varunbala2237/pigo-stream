@@ -8,7 +8,7 @@ const BASE_URL = process.env.REACT_APP_SERVER_URL;
 // Helper function for sending watch history to the server
 const saveWatchHistory = async (userUID, id, type) => {
   try {
-    const response = await fetch(`${BASE_URL}/watch-history/save-watch-history`, {
+    const response = await fetch(`${BASE_URL}/pigo-stream/watch-history/save-watch-history`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ userUID, id, type }),
@@ -24,7 +24,7 @@ const saveWatchHistory = async (userUID, id, type) => {
 // Helper function for sending data to the second server
 const sendWatchDataToNewServer = async (userUID, id) => {
   try {
-    const response = await fetch(`${BASE_URL}/recommender/insert`, {
+    const response = await fetch(`${BASE_URL}/pigo-stream/recommender/insert`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ user_id: userUID, item_id: id, watched: true }),

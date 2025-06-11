@@ -10,7 +10,7 @@ const useFetchTrailer = (id, type) => {
 
   useEffect(() => {
     const fetchTrailer = async () => {
-      const url = `${BASE_URL}/playground/media-trailer?id=${id}&type=${type}`;
+      const url = `${BASE_URL}/pigo-stream/playground/media-trailer?id=${id}&type=${type}`;
       try {
         setLoading(true);
         const response = await fetch(url);

@@ -53,14 +53,14 @@ const useGenreRecommendations = () => {
         return;
       }
 
-      const url2 = `${BASE_URL}/recommender/user_recommendations?user_id=${userUID}`;
+      const url2 = `${BASE_URL}/pigo-stream/recommender/user_recommendations?user_id=${userUID}`;
 
       try {
         const recommendations = await fetchWithRetry(url2);
 
         // Step 1: Fetch media details for each recommendation
         const mediaDetailsPromises = recommendations.map(async (itemId) => {
-          const url1 = `${BASE_URL}/media-details?id=${itemId}`;
+          const url1 = `${BASE_URL}/pigo-stream/media-details?id=${itemId}`;
           const result = await fetchWithRetry(url1);
           return result;
         });

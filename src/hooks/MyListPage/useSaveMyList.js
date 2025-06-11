@@ -8,7 +8,7 @@ const BASE_URL = process.env.REACT_APP_SERVER_URL;
 // Helper function for sending my list to the server
 const saveMyList = async (userUID, id, type) => {
   try {
-    const response = await fetch(`${BASE_URL}/my-list/save-my-list`, {
+    const response = await fetch(`${BASE_URL}/pigo-stream/my-list/save-my-list`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ userUID, id, type }),

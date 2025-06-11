@@ -35,8 +35,8 @@ const useFetchProviders = (providerId, region) => {
       setIsLoading(true);
       try {
         const [movieRes, showRes] = await Promise.all([
-          fetchWithRetry(`${BASE_URL}/index/media/movie/by-provider?provider=${providerId}&region=${region}`),
-          fetchWithRetry(`${BASE_URL}/index/media/tv/by-provider?provider=${providerId}&region=${region}`)
+          fetchWithRetry(`${BASE_URL}/pigo-stream/index/media/movie/by-provider?provider=${providerId}&region=${region}`),
+          fetchWithRetry(`${BASE_URL}/pigo-stream/index/media/tv/by-provider?provider=${providerId}&region=${region}`)
         ]);
         setMovies(movieRes.results || []);
         setShows(showRes.results || []);

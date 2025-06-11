@@ -8,7 +8,7 @@ const BASE_URL = process.env.REACT_APP_SERVER_URL;
 // Helper function for deleting my list from the server
 const removeMyList = async (userUID, id, type) => {
   try {
-    const response = await fetch(`${BASE_URL}/my-list/remove-my-list`, {
+    const response = await fetch(`${BASE_URL}/pigo-stream/my-list/remove-my-list`, {
       method: 'DELETE',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ userUID, id, type }),

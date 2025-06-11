@@ -30,7 +30,7 @@ const useFetchWatchHistory = (userUID, movieLimit, showLimit) => {
   const fetchWatchHistory = useCallback(async () => {
     if (!userUID) return;
 
-    let url = `${BASE_URL}/watch-history/${userUID}/fetch-watch-history?movieLimit=${movieLimit}&showLimit=${showLimit}`;
+    let url = `${BASE_URL}/pigo-stream/watch-history/${userUID}/fetch-watch-history?movieLimit=${movieLimit}&showLimit=${showLimit}`;
 
     setLoading(true);
     setError(null);

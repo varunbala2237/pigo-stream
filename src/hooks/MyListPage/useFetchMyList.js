@@ -30,7 +30,7 @@ const useFetchMyList = (userUID, movieLimit, showLimit) => {
   const fetchMyList = useCallback(async () => {
     if (!userUID) return;
 
-    let url = `${BASE_URL}/my-list/${userUID}/fetch-my-list?movieLimit=${movieLimit}&showLimit=${showLimit}`;
+    let url = `${BASE_URL}/pigo-stream/my-list/${userUID}/fetch-my-list?movieLimit=${movieLimit}&showLimit=${showLimit}`;
 
     setLoading(true);
     setError(null);
