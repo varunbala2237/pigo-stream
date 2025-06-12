@@ -33,7 +33,7 @@ The backend is a Node.js/Express.js server responsible for:
    `PORT=3001`  
    `FIREBASE_CONFIG=your_firebase_config`  
    `SUPABASE_URL=your_supabase_url`    
-   `TMDB_API_KEY=your_tmdb_api_key`
+   `TMDB_API_KEY=your_tmdb_api_key`    
    ...
 
 4. Run the backend locally with:  
