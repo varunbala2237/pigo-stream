@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import Header from '../Header';
 import MovieGrid from './MovieGrid';
-import ShowGrid from './ShowGrid';
+import TvGrid from './TvGrid';
 import Footer from '../Footer';
 
 function PlayGround() {
@@ -22,7 +22,7 @@ function PlayGround() {
     });
   }, []);
 
-  const GridComponent = type === 'movie' ? MovieGrid : ShowGrid;
+  const GridComponent = type === 'movie' ? MovieGrid : TvGrid;
 
   return (
     <div className="index-page inter-regular">

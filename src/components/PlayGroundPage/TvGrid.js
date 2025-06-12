@@ -1,4 +1,4 @@
-// ShowGrid.js
+// TvGrid.js
 import React, { useState, useEffect, useRef } from 'react';
 import CastCard from '../CastCard';
 import useFetchMediaInfo from '../../hooks/PlayGroundPage/useFetchMediaInfo';
@@ -18,9 +18,9 @@ import { getSessionValue, setSessionValue } from '../../utils/sessionStorageStat
 
 const SEASON_STATE_KEY = 'seasonState';
 
-function ShowGrid({ id, type, setBackgroundImage }) {
-  const SHOWS_STORAGE_PATH = React.useMemo(
-    () => ['PlayGroundUI', 'Grids', 'ShowGrid', `${id}`],
+function TvGrid({ id, type, setBackgroundImage }) {
+  const TV_STORAGE_PATH = React.useMemo(
+    () => ['PlayGroundUI', 'Grids', 'TvGrid', `${id}`],
     [id]
   );
 
@@ -35,7 +35,7 @@ function ShowGrid({ id, type, setBackgroundImage }) {
   const [selectedServer, setSelectedServer] = useState('');
 
   const [sliceIndex, setSliceIndex] = useState(() =>
-    getSessionValue(...SHOWS_STORAGE_PATH, 'sliceIndex') || 12
+    getSessionValue(...TV_STORAGE_PATH, 'sliceIndex') || 12
   );
 
   const { data: mediaInfo, loadingInfo, errorInfo } = useFetchMediaInfo(id, type);
@@ -57,7 +57,7 @@ function ShowGrid({ id, type, setBackgroundImage }) {
       );
       setDirector(director ? director.name : 'Unknown');
 
-      const savedSelectedSeason = getStorageValue(...SHOWS_STORAGE_PATH, 'selectedSeason');
+      const savedSelectedSeason = getStorageValue(...TV_STORAGE_PATH, 'selectedSeason');
 
       if (mediaInfo.seasons && mediaInfo.seasons.length > 0) {
         if (savedSelectedSeason) {
@@ -71,14 +71,14 @@ function ShowGrid({ id, type, setBackgroundImage }) {
       // Setup the backgroundImage
       setBackgroundImage(`https://image.tmdb.org/t/p/original${mediaInfo.backdrop_path}`);
     }
-  }, [mediaInfo, SHOWS_STORAGE_PATH, setBackgroundImage]);
+  }, [mediaInfo, TV_STORAGE_PATH, setBackgroundImage]);
 
   useEffect(() => {
     if (seasonData) {
       const episodes = seasonData.episodes || [];
       setEpisodes(episodes);
 
-      const seasonState = getStorageValue(...SHOWS_STORAGE_PATH, SEASON_STATE_KEY) || {};
+      const seasonState = getStorageValue(...TV_STORAGE_PATH, SEASON_STATE_KEY) || {};
       const currentSeasonState = seasonState[selectedSeason] || {};
       const savedEpisode = currentSeasonState.episode;
 
@@ -98,11 +98,11 @@ function ShowGrid({ id, type, setBackgroundImage }) {
         if (episodeRefNode) episodeRefNode.scrollTo({ top: savedScroll, behavior: 'instant' });
       });
     }
-  }, [seasonData, selectedSeason, SHOWS_STORAGE_PATH]);
+  }, [seasonData, selectedSeason, TV_STORAGE_PATH]);
 
   // Load from localStorage on mount
   useEffect(() => {
-    const savedSelectedServer = getStorageValue(...SHOWS_STORAGE_PATH, 'selectedServer');
+    const savedSelectedServer = getStorageValue(...TV_STORAGE_PATH, 'selectedServer');
 
     if (servers && servers.length > 0) {
       if (
@@ -114,7 +114,7 @@ function ShowGrid({ id, type, setBackgroundImage }) {
         setSelectedServer(servers[0]);
       }
     }
-  }, [SHOWS_STORAGE_PATH, servers]);
+  }, [TV_STORAGE_PATH, servers]);
 
   // Retrieving selected server link
   useEffect(() => {
@@ -130,10 +130,10 @@ function ShowGrid({ id, type, setBackgroundImage }) {
 
   const handleSeasonChange = (seasonNumber) => {
     setSelectedSeason(seasonNumber);
-    setStorageValue(...SHOWS_STORAGE_PATH, 'selectedSeason', seasonNumber);
+    setStorageValue(...TV_STORAGE_PATH, 'selectedSeason', seasonNumber);
 
     // Try to load saved episode and scroll position
-    const seasonState = getStorageValue(...SHOWS_STORAGE_PATH, SEASON_STATE_KEY) || {};
+    const seasonState = getStorageValue(...TV_STORAGE_PATH, SEASON_STATE_KEY) || {};
     const seasonInfo = seasonState[seasonNumber];
 
     if (seasonInfo?.episode) {
@@ -152,13 +152,13 @@ function ShowGrid({ id, type, setBackgroundImage }) {
 
     setSelectedEpisode(episodeNumber);
 
-    const seasonState = getStorageValue(...SHOWS_STORAGE_PATH, SEASON_STATE_KEY) || {};
+    const seasonState = getStorageValue(...TV_STORAGE_PATH, SEASON_STATE_KEY) || {};
     seasonState[selectedSeason] = {
       ...(seasonState[selectedSeason] || {}),
       episode: episodeNumber,
       scroll: episodeRefNode.scrollTop,
     };
-    setStorageValue(...SHOWS_STORAGE_PATH, SEASON_STATE_KEY, seasonState);
+    setStorageValue(...TV_STORAGE_PATH, SEASON_STATE_KEY, seasonState);
   };
 
   // Check if the episode has aired
@@ -191,13 +191,13 @@ function ShowGrid({ id, type, setBackgroundImage }) {
 
   const handleServerChange = (server) => {
     setSelectedServer(server);
-    setStorageValue(...SHOWS_STORAGE_PATH, 'selectedServer', server);
+    setStorageValue(...TV_STORAGE_PATH, 'selectedServer', server);
   };
 
   const handleShowMore = () => {
     setSliceIndex(prevSliceIndex => {
       const newIndex = prevSliceIndex + 12;
-      setSessionValue(...SHOWS_STORAGE_PATH, 'sliceIndex', newIndex);
+      setSessionValue(...TV_STORAGE_PATH, 'sliceIndex', newIndex);
       return newIndex;
     });
   };
@@ -331,4 +331,4 @@ function ShowGrid({ id, type, setBackgroundImage }) {
   );
 }
 
-export default ShowGrid;
+export default TvGrid;
