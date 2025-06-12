@@ -40,6 +40,7 @@ The backend is a Node.js/Express.js server responsible for:
    `server/server.js`
 
 2. Install dependencies by running:
+   
    `npm init`    
    `npm install`
 
