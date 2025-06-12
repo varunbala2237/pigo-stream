@@ -1,4 +1,4 @@
-## ⚠️ Important Notice
+# ⚠️ Important Notice
 
 > This React application is built with react-scripts@5.0.1, which is the final and currently outdated version of Create React App (CRA).
 While it still works reliably for development and deployment, CRA is now in maintenance mode and not recommended for new projects.
