@@ -55,7 +55,7 @@ const IndexUI = () => {
   const shouldHideBackground = showSearchBar || triggerSearch.trim() !== '';
 
   return (
-    <div className="index-page inter-regular">
+    <div className="index-page">
       <div
         className="background-image"
         style={{

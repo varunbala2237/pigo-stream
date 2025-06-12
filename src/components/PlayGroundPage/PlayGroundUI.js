@@ -25,7 +25,7 @@ function PlayGround() {
   const GridComponent = type === 'movie' ? MovieGrid : TvGrid;
 
   return (
-    <div className="index-page inter-regular">
+    <div className="index-page">
       <Header />
       <div className="container-fluid d-flex flex-column justify-content-center align-items-center">
         <div
