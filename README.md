@@ -36,6 +36,7 @@ The backend is a Node.js/Express.js server responsible for:
    SUPABASE_URL=your_supabase_url    
    TMDB_API_KEY=your_tmdb_api_key    
    ...
+   ```
 
 5. Run the backend locally with:  
    `npm start`  
