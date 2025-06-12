@@ -11,11 +11,11 @@ While it still works reliably for development and deployment, CRA is now in main
 > That said, this project remains fully functional, and you can continue using it as-is for development, learning, or deployment.
 > Migration is optional and can be planned incrementally over time.
 
-# PigoStream
+# 🎬 PigoStream
   
 🎉 Deployed project 🔗 [Visit PigoStream](https://pigostream-site.web.app/)
 
-## Overview
+## 🧾 Overview
 
 PigoStream is a full-stack streaming platform featuring:
 
@@ -26,7 +26,7 @@ PigoStream is a full-stack streaming platform featuring:
 - TMDB API for movies and TV shows metadata  
 - Native Flutter Webview player for streaming content (Required for Android & Windows)
 
-## Backend Service
+## 🛠️ Backend Service
 
 The backend is a Node.js/Express.js server responsible for:
 
@@ -34,7 +34,7 @@ The backend is a Node.js/Express.js server responsible for:
 - Handling recommendations
 - Interacting with Firebase and Supabase databases
 
-### How to Set Up and Deploy the Backend
+### ⚙️ How to Set Up and Deploy the Backend
 
 1. Create your own backend project, for example:  
    `server/server.js`
@@ -61,35 +61,35 @@ The backend is a Node.js/Express.js server responsible for:
    - Set your environment variables in Render’s dashboard.  
    - Render will automatically build and deploy your backend server.
 
-## Full Project Stack
+## 🧱 Full Project Stack
 
 - 📺 React frontend hosted on [Firebase](https://firebase.google.com/)  
 - 🌐 Node.js/Express backend hosted on [Render](https://dashboard.render.com/)
 
-## Authentication
+## 🔐 Authentication
 
 - Firebase Authentication manages user sign-up and login  
 - Email verification is required to activate accounts
 
-## APIs Used
+## 🌍 APIs Used
 
 - TMDB API provides metadata for movies and TV shows  
 - Visit [TMDB](https://www.themoviedb.org/) for more information
 
-## Databases
+## 🗄️ Databases
 
 - Firebase Realtime Database and Firestore for realtime data storage  
 - Supabase PostgreSQL used for session pooling
 
-## External Components (Required for Android & Windows)
+## 📦 External Components (Required for Android & Windows)
 
 - Native Flutter Webview player is integrated for streaming video content 🔗 [Download PigoPlayer](https://pigostream-site.web.app/pigostore)
 
-## Getting Started with React Frontend
+## 🚀 Getting Started with React Frontend
 
 This React app was bootstrapped using [Create React App](https://github.com/facebook/create-react-app).
 
-### Quick Start
+### ⚡ Quick Start
 
 1. Install frontend dependencies:  
    `npm install`
@@ -102,7 +102,7 @@ This React app was bootstrapped using [Create React App](https://github.com/face
    `npm run build`  
    This generates an optimized build in the `build` folder, ready for deployment.
 
-## Learn More
+## 📚 Learn More
 
 - [Create React App Documentation](https://facebook.github.io/create-react-app/docs/getting-started)  
 - [React Official Documentation](https://reactjs.org/)
