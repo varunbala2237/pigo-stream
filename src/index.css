@@ -1,16 +1,20 @@
 /* index.css */
 :root {
+  /* Main Font Styles */
   --main-font: "Inter", "Helvetica Neue", Arial, sans-serif;
 }
 
 body {
+  /* Main Body Styles */
   background: black;
   background-size: cover;
   background-attachment: fixed;
-  font-family: var(--main-font);
   margin: 0;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  /* Global Font Family */
+  font-family: var(--main-font);
 
   /* Global Custom Scrollbar Default Styles */
   scrollbar-color: #343a40 transparent;
@@ -65,7 +69,7 @@ body {
   margin: 4px 0px;
 }
 
-.custom-gap{
+.custom-gap {
   gap: 4px;
 }
 
