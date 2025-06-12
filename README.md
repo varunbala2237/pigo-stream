@@ -40,7 +40,8 @@ The backend is a Node.js/Express.js server responsible for:
    `server/server.js`
 
 2. Install dependencies by running:  
-   `npm init`    
+   `npm init`  
+   and  
    `npm install`
 
 4. Create a `.env` file in the root directory and add your environment variables, for example:  
