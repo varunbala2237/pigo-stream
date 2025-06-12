@@ -1,4 +1,8 @@
-# ⚠️ Important Notice
+# 🎬 PigoStream
+  
+🎉 Deployed project 🔗 [Visit PigoStream](https://pigostream-site.web.app/)
+
+## ⚠️ Important Notice
 
 > This React application is built with react-scripts@5.0.1, which is the final and currently outdated version of Create React App (CRA).
 While it still works reliably for development and deployment, CRA is now in maintenance mode and not recommended for new projects.
@@ -10,10 +14,6 @@ While it still works reliably for development and deployment, CRA is now in main
 >
 > That said, this project remains fully functional, and you can continue using it as-is for development, learning, or deployment.
 > Migration is optional and can be planned incrementally over time.
-
-# 🎬 PigoStream
-  
-🎉 Deployed project 🔗 [Visit PigoStream](https://pigostream-site.web.app/)
 
 ## 🧾 Overview
 
