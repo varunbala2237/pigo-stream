@@ -1,8 +1,21 @@
-# PigoStream
+# 🎬 PigoStream
   
 🎉 Deployed project 🔗 [Visit PigoStream](https://pigostream-site.web.app/)
 
-## Overview
+## ⚠️ Important Notice
+
+> This React application is built with react-scripts@5.0.1, which is the final and currently outdated version of Create React App (CRA).
+While it still works reliably for development and deployment, CRA is now in maintenance mode and not recommended for new projects.
+>
+> 🟡 If you're starting a new project or planning long-term development, consider migrating to more modern alternatives like:
+> - Vite — A fast, lightweight build tool and dev server for modern frontend apps
+> - Next.js — A powerful React framework with built-in SSR and API routes
+> - Remix — A full-stack web framework with focus on data and routing
+>
+> That said, this project remains fully functional, and you can continue using it as-is for development, learning, or deployment.
+> Migration is optional and can be planned incrementally over time.
+
+## 🧾 Overview
 
 PigoStream is a full-stack streaming platform featuring:
 
@@ -13,7 +26,7 @@ PigoStream is a full-stack streaming platform featuring:
 - TMDB API for movies and TV shows metadata  
 - Native Flutter Webview player for streaming content (Required for Android & Windows)
 
-## Backend Service
+## 🛠️ Backend Service
 
 The backend is a Node.js/Express.js server responsible for:
 
@@ -21,15 +34,18 @@ The backend is a Node.js/Express.js server responsible for:
 - Handling recommendations
 - Interacting with Firebase and Supabase databases
 
-### How to Set Up and Deploy the Backend
+### ⚙️ How to Set Up and Deploy the Backend
 
 1. Create your own backend project, for example:  
    `server/server.js`
 
-2. Install dependencies by running:  
+2. Create `package.json` by running:  
+   `npm init`
+   
+4. Install `node_modules` by running:  
    `npm install`
 
-3. Create a `.env` file in the root directory and add your environment variables, for example:  
+5. Create a `.env` file in the root directory and add your environment variables, for example:  
    ```env
    PORT=3001  
    FIREBASE_CONFIG=your_firebase_config  
@@ -38,45 +54,45 @@ The backend is a Node.js/Express.js server responsible for:
    ...
    ```
 
-5. Run the backend locally with:  
+6. Run the backend locally with:  
    `npm start`  
    This will start the server on `http://localhost:3001`.
 
-6. To deploy on Render (or any cloud platform):  
+7. To deploy on Render (or any cloud platform):  
    - Push your backend code to a Git repository.  
    - Create a new Web Service on Render and connect the repository.  
    - Set your environment variables in Render’s dashboard.  
    - Render will automatically build and deploy your backend server.
 
-## Full Project Stack
+## 🧱 Full Project Stack
 
 - 📺 React frontend hosted on [Firebase](https://firebase.google.com/)  
 - 🌐 Node.js/Express backend hosted on [Render](https://dashboard.render.com/)
 
-## Authentication
+## 🔐 Authentication
 
 - Firebase Authentication manages user sign-up and login  
 - Email verification is required to activate accounts
 
-## APIs Used
+## 🌍 APIs Used
 
 - TMDB API provides metadata for movies and TV shows  
 - Visit [TMDB](https://www.themoviedb.org/) for more information
 
-## Databases
+## 🗄️ Databases
 
 - Firebase Realtime Database and Firestore for realtime data storage  
 - Supabase PostgreSQL used for session pooling
 
-## External Components (Required for Android & Windows)
+## 📦 External Components (Required for Android & Windows)
 
 - Native Flutter Webview player is integrated for streaming video content 🔗 [Download PigoPlayer](https://pigostream-site.web.app/pigostore)
 
-## Getting Started with React Frontend
+## 🚀 Getting Started with React Frontend
 
 This React app was bootstrapped using [Create React App](https://github.com/facebook/create-react-app).
 
-### Quick Start
+### ⚡ Quick Start
 
 1. Install frontend dependencies:  
    `npm install`
@@ -89,7 +105,7 @@ This React app was bootstrapped using [Create React App](https://github.com/face
    `npm run build`  
    This generates an optimized build in the `build` folder, ready for deployment.
 
-## Learn More
+## 📚 Learn More
 
 - [Create React App Documentation](https://facebook.github.io/create-react-app/docs/getting-started)  
 - [React Official Documentation](https://reactjs.org/)
