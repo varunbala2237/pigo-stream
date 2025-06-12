@@ -1,11 +1,16 @@
 {
   "rules": {
+    ".read": false,
+    ".write": false,
+    
     "users": {
       "$userUID": {
         ".read": "auth != null && auth.uid === $userUID",
         ".write": "auth != null && auth.uid === $userUID",
         "searchHistory": {
-          ".indexOn": ["timestamp"]
+          ".indexOn": [
+            "timestamp"
+          ]
         }
       }
     }
