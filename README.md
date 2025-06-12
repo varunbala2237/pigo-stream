@@ -39,8 +39,7 @@ The backend is a Node.js/Express.js server responsible for:
 1. Create your own backend project, for example:  
    `server/server.js`
 
-2. Install dependencies by running:
-   
+2. Install dependencies by running:  
    `npm init`    
    `npm install`
 
