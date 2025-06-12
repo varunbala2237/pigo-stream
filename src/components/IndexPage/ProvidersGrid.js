@@ -158,9 +158,6 @@ function ProvidersGrid({ setIsProvidersLoaded, setHasProvidersContent }) {
                                 ${selectedProvider === provider.id ? 'border border-2 border-primary' : ''}`
                             }
                             onClick={() => setSelectedProvider(provider.id)}
-                            style={{
-                                scrollSnapAlign: 'start'
-                            }}
                         >
                             <img
                                 src={provider.logo}
