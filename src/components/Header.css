@@ -1,4 +1,10 @@
 /* Header.css */
+
+/* Floating Header */
+.navbar {
+    z-index: 1040 !important;
+}
+
 /* Sidebar Overlay */
 .sidebar-backdrop {
     position: fixed;
