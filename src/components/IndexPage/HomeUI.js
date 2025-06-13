@@ -125,11 +125,11 @@ function HomeUI({
   }, []);
 
   // Page loading state handling
-   useEffect(() => {
+  useEffect(() => {
     if (!isProvidersLoading && !isTrendingLoading) {
       setIsPageLoading(false);
     }
-  }, [isProvidersLoading, isTrendingLoading]); 
+  }, [isProvidersLoading, isTrendingLoading]);
 
   // Connection modal handling
   useEffect(() => {
@@ -356,6 +356,9 @@ function HomeUI({
             </>
             :
             <>
+              {/* SearchGrid Backspace for SearchBar.js */}
+              <div className="divider" style={{ height: '4rem' }}></div>
+
               <SearchGrid searchQuery={triggerSearch} setIsSearchLoading={setIsSearchLoading} setIsSearchLoaded={setIsSearchLoaded} setHasSearchContent={setHasSearchContent} />
             </>}
         </div>
