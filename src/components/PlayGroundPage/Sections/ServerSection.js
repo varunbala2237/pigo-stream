@@ -18,10 +18,10 @@ function ServerSection({
                     servers.map((server, index) => (
                         <div key={server.server_name} className="col-4 col-sm-3 col-md-4 col-lg-3 col-xl-2">
                             <button
-                                className={`btn w-100 d-flex flex-row align-items-center justify-content-center border-0 rounded-pill shadow-sm 
+                                className={`btn btn-dark bd-callout-dark w-100 align-items-center justify-content-center text-white shadow-sm 
                                     ${selectedServer.server_name === server.server_name
-                                        ? 'btn-primary bd-callout-primary active'
-                                        : 'btn-primary bd-callout-dark'
+                                        ? 'border border-2 border-primary'
+                                        : 'border-0'
                                     }`}
                                 onClick={() => handleServerChange(server)}
                             >
