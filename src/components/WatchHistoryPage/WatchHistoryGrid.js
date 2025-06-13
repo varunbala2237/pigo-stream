@@ -174,7 +174,7 @@ function WatchHistoryGrid({ userUID }) {
         <>
             {/* Overlay spinner for loading state */}
             <OverlaySpinner visible={isLoading} />
-            
+
             <div className="container mt-4 text-white">
                 <div className="d-flex justify-content-between align-items-center my-2 m-2">
                     <div className="text-start dynamic-ts">
@@ -471,15 +471,15 @@ function WatchHistoryGrid({ userUID }) {
                         </button>
                     </div>
                 )}
-
-                {/* Connection Modal */}
-                {showConnectionModal && <ConnectionModal show={showConnectionModal} />}
-
-                {/* Alert Message */}
-                {alert.message && (
-                    <Alert message={alert.message} onClose={handleAlertDismiss} type={alert.type} />
-                )}
             </div>
+
+            {/* Connection Modal */}
+            {showConnectionModal && <ConnectionModal show={showConnectionModal} />}
+
+            {/* Alert Message */}
+            {alert.message && (
+                <Alert message={alert.message} onClose={handleAlertDismiss} type={alert.type} />
+            )}
         </>
     );
 }
