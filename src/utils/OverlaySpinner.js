@@ -1,8 +1,18 @@
 // OverlaySpinner.js
-import React from 'react';
+import React, { useEffect } from 'react';
 import './OverlaySpinner.css'; // Import the CSS
 
 const OverlaySpinner = ({ visible }) => {
+    useEffect(() => {
+        if (visible) {
+            document.body.style.overflow = 'hidden'; // Lock the scroll
+        }
+
+        return () => {
+            document.body.style.overflow = 'auto'; // Unlock the scroll
+        };
+    }, [visible]);
+
     if (!visible) return null;
 
     return (

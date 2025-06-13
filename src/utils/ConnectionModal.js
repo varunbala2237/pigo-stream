@@ -27,18 +27,20 @@ function ConnectionModal({ show }) {
           <div className="modal-dialog modal-dialog-centered mx-auto border-0 modal-pad">
             <div ref={modalRef} className="modal-content dynamic-fs bd-callout-dark custom-theme-radius-low text-white border-0">
               <div className="modal-body justify-content-center text-center border-0">
-                <i className="bi bi-wifi-off text-danger fs-1"></i>
+                <i className="bi bi-database-x text-danger fs-1"></i>
                 <p className="mt-3 dynamic-fs">Server is not responding</p>
                 <button
                   className="btn btn-primary border-0 rounded-pill btn-md d-none d-md-inline-block mt-3"
                   onClick={() => window.location.reload()}
                 >
+                  <i className="bi bi-arrow-clockwise me-2" />
                   Retry
                 </button>
                 <button
                   className="btn btn-primary border-0 rounded-pill btn-sm d-md-none mt-3 px-3"
                   onClick={() => window.location.reload()}
                 >
+                  <i className="bi bi-arrow-clockwise me-2" />
                   Retry
                 </button>
               </div>

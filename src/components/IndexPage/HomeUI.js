@@ -12,6 +12,7 @@ import useRemoveSearchHistory from '../../hooks/IndexPage/useRemoveSearchHistory
 import ConnectionModal from '../../utils/ConnectionModal';
 import Alert from '../../utils/Alert';
 import ProvidersGrid from './ProvidersGrid';
+import OverlaySpinner from '../../utils/OverlaySpinner';
 import './HomeUI.css';
 
 import { getSessionValue, setSessionValue, removeSessionValue } from '../../utils/sessionStorageStates';
@@ -44,6 +45,9 @@ function HomeUI({
   const [hasTrendingContent, setHasTrendingContent] = useState(true);
   const [hasProvidersContent, setHasProvidersContent] = useState(true);
   const [hasSearchContent, setHasSearchContent] = useState(true);
+
+  // Unified page state handlings flag
+  const [isPageLoading, setIsPageLoading] = useState(true);
 
   // Alert messages
   const [alert, setAlert] = useState({ message: '', type: '', key: '' });
@@ -170,6 +174,16 @@ function HomeUI({
     };
   }, [hasTrendingContent, hasProvidersContent, hasSearchContent, searchQuery]);
 
+  // Unified page state handling useEffect
+  useEffect(() => {
+    const isAllStillLoading =
+      hasTrendingContent ||
+      hasProvidersContent ||
+      hasSearchContent;
+
+    setIsPageLoading(isAllStillLoading);
+  }, [hasTrendingContent, hasProvidersContent, hasSearchContent]);
+
   const handleSearchBar = () => {
     setShowSearchBar((prevState) => {
       setSessionValue('HomeUI', 'showSearchBar', (!prevState).toString());
@@ -247,6 +261,9 @@ function HomeUI({
   return (
     <div className="container-fluid d-flex flex-column justify-content-center align-items-center p-0">
       <div className="w-100">
+        {/* Overlay spinner for loading state */}
+        <OverlaySpinner visible={isPageLoading} />
+
         {showSearchBar ? (
           <SearchBar
             searchQuery={searchQuery}
