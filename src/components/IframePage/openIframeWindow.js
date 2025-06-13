@@ -19,7 +19,7 @@ const openIframeWindow = (serverLink) => {
       top: 10px;
       left: 50%;
       transform: translateX(-50%);
-      z-index: 999 !important;
+      z-index: 1040 !important;
       padding: 10px 20px;
       border-radius: 20px;
       border: none;
@@ -38,7 +38,7 @@ const openIframeWindow = (serverLink) => {
       top: 0; left: 0;
       width: 100vw; height: 100vh;
       background: transparent;
-      z-index: 999 !important;
+      z-index: 1030 !important;
       pointer-events: none;
     }
   `;
