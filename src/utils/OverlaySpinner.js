@@ -6,6 +6,8 @@ const OverlaySpinner = ({ visible }) => {
     useEffect(() => {
         if (visible) {
             document.body.style.overflow = 'hidden'; // Lock the scroll
+        } else {
+           document.body.style.overflow = 'auto'; // Unlock the scroll 
         }
 
         return () => {

@@ -36,6 +36,12 @@ function HomeUI({
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   // Error handling flags
+  const [isTrendingLoading, setIsTrendingLoading] = useState(true);
+  const [isProvidersLoading, setIsProvidersLoading] = useState(true);
+  const [isSearchLoading, setIsSearchLoading] = useState(true);
+  const [isPageLoading, setIsPageLoading] = useState(true);
+
+  // Error handling flags
   const [isTrendingLoaded, setIsTrendingLoaded] = useState(true);
   const [isProvidersLoaded, setIsProvidersLoaded] = useState(true);
   const [isSearchLoaded, setIsSearchLoaded] = useState(true);
@@ -45,9 +51,6 @@ function HomeUI({
   const [hasTrendingContent, setHasTrendingContent] = useState(true);
   const [hasProvidersContent, setHasProvidersContent] = useState(true);
   const [hasSearchContent, setHasSearchContent] = useState(true);
-
-  // Unified page state handlings flag
-  const [isPageLoading, setIsPageLoading] = useState(true);
 
   // Alert messages
   const [alert, setAlert] = useState({ message: '', type: '', key: '' });
@@ -173,16 +176,6 @@ function HomeUI({
       clearTimeout(hideTimer);
     };
   }, [hasTrendingContent, hasProvidersContent, hasSearchContent, searchQuery]);
-
-  // Unified page state handling useEffect
-  useEffect(() => {
-    const isAllStillLoading =
-      hasTrendingContent ||
-      hasProvidersContent ||
-      hasSearchContent;
-
-    setIsPageLoading(isAllStillLoading);
-  }, [hasTrendingContent, hasProvidersContent, hasSearchContent]);
 
   const handleSearchBar = () => {
     setShowSearchBar((prevState) => {
