@@ -28,7 +28,7 @@ function AuthUI() {
     const [resendCooldown, setResendCooldown] = useState(0);
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [alertMessage, setAlertMessage] = useState('');
-    const [isLoading, setIsLoading] = useState(true);
+    const [isPageLoading, setIsPageLoading] = useState(true);
 
     // Initialize the user collections
     useCreateUser();
@@ -36,7 +36,7 @@ function AuthUI() {
     // This whole useEffect is only for already signed in cold starting users
     useEffect(() => {
         const timeoutId = setTimeout(() => {
-            setIsLoading(false);
+            setIsPageLoading(false);
         }, 10000); // Set a timeout of 10 seconds
 
         const triggerIndexPage = () => {
@@ -48,20 +48,20 @@ function AuthUI() {
             clearTimeout(timeoutId); // Clear fallback
 
             if (!user) {
-                setIsLoading(false);
+                setIsPageLoading(false);
                 return; // !important
             }
 
             // Safe reload with fallback on failure
             await user.reload().catch(() => {
-                setIsLoading(false);
+                setIsPageLoading(false);
                 return;
             });
 
             if (user?.emailVerified) {
                 triggerIndexPage();
             } else {
-                setIsLoading(false);
+                setIsPageLoading(false);
             }
         });
 
@@ -269,7 +269,7 @@ function AuthUI() {
             <div className="container vh-100 d-flex bg-transparent border-0 justify-content-center align-items-center">
 
                 {/* Overlay spinner for loading state */}
-                <OverlaySpinner visible={isLoading} />
+                <OverlaySpinner visible={isPageLoading} />
 
                 <div className="card custom-bg custom-theme-radius-low p-4 w-100 form-pad">
                     <div className="card-header d-flex justify-content-center align-items-center text-white">
