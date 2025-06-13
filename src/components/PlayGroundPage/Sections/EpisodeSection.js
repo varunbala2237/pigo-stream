@@ -21,11 +21,10 @@ function EpisodeSection({
           return (
             <button
               key={episode.id}
-              className={`w-100 text-start p-2 custom-margin-top custom-theme-radius-low border-0 shadow ${
-                selectedEpisode === episode.episode_number
-                  ? 'btn-light bd-callout-light text-black active'
-                  : 'btn-dark bd-callout-dark text-white'
-              }`}
+              className={`w-100 text-start p-2 custom-margin-top custom-theme-radius-low bd-callout-dark text-white shadow-sm ${selectedEpisode === episode.episode_number
+                  ? 'btn btn-outline-primary border-2'
+                  : 'btn btn-dark border-0'
+                }`}
               onClick={() => onEpisodeChange(episode.episode_number)}
               disabled={!aired}
             >

@@ -6,11 +6,10 @@ function SeasonSection({ seasons, selectedSeason, onSeasonChange }) {
         seasons.map((season) => (
           <div key={season.id} className="col-4 col-sm-3 col-md-4 col-lg-3 col-xl-2">
             <button
-              className={`btn w-100 d-flex justify-content-center align-items-center border-0 rounded-pill shadow-sm ${
-                selectedSeason === season.season_number
-                  ? 'btn-primary bd-callout-primary active'
-                  : 'btn-primary bd-callout-dark'
-              }`}
+              className={`btn w-100 d-flex justify-content-center align-items-center bd-callout-dark text-white shadow-sm ${selectedSeason === season.season_number
+                ? 'btn btn-outline-primary border-2'
+                : 'btn btn-dark border-0'
+                }`}
               onClick={() => onSeasonChange(season.season_number)}
             >
               <span className="text-truncate dynamic-ss">
