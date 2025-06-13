@@ -23,7 +23,7 @@ const PROVIDERS = [
 
 const SESSION_PATH = ['HomeUI', 'Grids', 'ProvidersGrid'];
 
-function ProvidersGrid({ setIsProvidersLoaded, setHasProvidersContent }) {
+function ProvidersGrid({ setIsProvidersLoading, setIsProvidersLoaded, setHasProvidersContent }) {
     const [selectedProvider, setSelectedProvider] = useState(null);
     const { movies, shows, isLoading, isError } = useFetchProviders(
         selectedProvider,
@@ -36,6 +36,16 @@ function ProvidersGrid({ setIsProvidersLoaded, setHasProvidersContent }) {
     const showsRef = useRef(null);
     const providersRef = useRef(null);
 
+    // Loading handling
+    useEffect(() => {
+        if (isLoading) {
+            setIsProvidersLoading(true);
+        } else {
+            setIsProvidersLoading(false);
+        }
+    }, [isLoading, setIsProvidersLoading]);
+
+    // Error handling
     useEffect(() => {
         if (isError) {
             setIsProvidersLoaded(false);
@@ -44,6 +54,7 @@ function ProvidersGrid({ setIsProvidersLoaded, setHasProvidersContent }) {
         }
     }, [isError, setIsProvidersLoaded]);
 
+    // No content handling
     useEffect(() => {
         if (!isLoading && !isError) {
             const hasContent = (movies && movies.length > 0) || (shows && shows.length > 0);
