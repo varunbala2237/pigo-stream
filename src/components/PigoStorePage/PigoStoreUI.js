@@ -2,8 +2,8 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom'; // Import useNavigate
 import useAppVersion from '../../hooks/PigoStorePage/useAppVersion';
 import useDownloadApp from '../../hooks/PigoStorePage/useDownloadApp';
-import Alert from '../../utils/Alert';
 import OverlaySpinner from '../../utils/OverlaySpinner';
+import Alert from '../../utils/Alert';
 
 import { getSessionValue, setSessionValue } from '../../utils/sessionStorageStates';
 

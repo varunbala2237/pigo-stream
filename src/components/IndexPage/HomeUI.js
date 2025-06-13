@@ -6,13 +6,13 @@ import Footer from '../Footer';
 import SearchBar from './SearchBar';
 import SearchGrid from './SearchGrid';
 import TrendingGrid from './TrendingGrid';
+import ProvidersGrid from './ProvidersGrid';
 import useSaveSearchHistory from '../../hooks/IndexPage/useSaveSearchHistory';
 import useFetchSearchHistory from '../../hooks/IndexPage/useFetchSearchHistory';
 import useRemoveSearchHistory from '../../hooks/IndexPage/useRemoveSearchHistory';
+import OverlaySpinner from '../../utils/OverlaySpinner';
 import ConnectionModal from '../../utils/ConnectionModal';
 import Alert from '../../utils/Alert';
-import ProvidersGrid from './ProvidersGrid';
-import OverlaySpinner from '../../utils/OverlaySpinner';
 import './HomeUI.css';
 
 import { getSessionValue, setSessionValue, removeSessionValue } from '../../utils/sessionStorageStates';

@@ -12,8 +12,8 @@ import {
     GoogleAuthProvider
 } from 'firebase/auth';
 import useCreateUser from '../../hooks/AuthPage/useCreateUser';
-import Alert from '../../utils/Alert';
 import OverlaySpinner from '../../utils/OverlaySpinner';
+import Alert from '../../utils/Alert';
 
 import { getSessionValue, setSessionValue } from '../../utils/sessionStorageStates';
 
