@@ -1,0 +1,9 @@
+/* Alert.css */
+.alert {
+    width: 90%;
+    z-index: 1050 !important;
+    bottom: 1rem;
+    left: 50%;
+    transform: translateX(-50%);
+    position: absolute;
+}
