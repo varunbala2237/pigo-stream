@@ -9,6 +9,7 @@ import useCheckServerStatus from '../../hooks/PlayGroundPage/useCheckServerStatu
 import PlayerSection from './Sections/PlayerSection';
 import ServerSection from './Sections/ServerSection';
 import OverlaySpinner from '../../utils/OverlaySpinner';
+import ConnectionModal from '../../utils/ConnectionModal';
 
 import { getStorageValue, setStorageValue } from '../../utils/localStorageStates';
 import { getSessionValue, setSessionValue } from '../../utils/sessionStorageStates';
@@ -105,10 +106,16 @@ function MovieGrid({ id, type, setBackgroundImage }) {
   };
 
   if (!mediaInfo) {
-    // Overlay spinner for loading state
-    return (
-      <OverlaySpinner visible={isLoading} />
-    );
+    // Handling loading state and error state
+    if (isError) {
+      return (
+        <ConnectionModal show={isError}/>
+      );
+    } else {
+      return (
+        <OverlaySpinner visible={isLoading} />
+      );
+    }
   }
 
   const { genres = [], vote_average } = mediaInfo ? mediaInfo : {};
