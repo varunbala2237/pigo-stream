@@ -266,12 +266,12 @@ function AuthUI() {
 
     return (
         <div className="d-flex flex-column vh-100 w-100">
-            <div className="container vh-100 d-flex bg-transparent border-0 justify-content-center align-items-center">
+            <div className="container vh-100 d-flex bg-transparent justify-content-center align-items-center">
 
                 {/* Overlay spinner for loading state */}
                 <OverlaySpinner visible={isPageLoading} />
 
-                <div className="card custom-bg custom-theme-radius-low p-4 w-100 form-pad">
+                <div className="card form-pad custom-bg custom-theme-radius-low px-4 w-100">
                     <div className="card-header d-flex justify-content-center align-items-center text-white">
                         <img src="favicon.ico" alt="PigoStream" width="48" height="48" />
                         <span className="dynamic-hs"><b>Pigo</b>Stream</span>

@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'; // Import useNavigate
 import useAppVersion from '../../hooks/PigoStorePage/useAppVersion';
 import useDownloadApp from '../../hooks/PigoStorePage/useDownloadApp';
 import Alert from '../../utils/Alert';
+import OverlaySpinner from '../../utils/OverlaySpinner';
 
 import { getSessionValue, setSessionValue } from '../../utils/sessionStorageStates';
 
@@ -62,7 +63,7 @@ const PigostoreUI = () => {
   // Fetch the appVersion
   const { version: appVersion } = useAppVersion(currentPlatform);
   // Fetch download link based on the detected platform
-  const { downloadLink, loading, error } = useDownloadApp(currentPlatform);
+  const { downloadLink, loading: isLoading, error: isError } = useDownloadApp(currentPlatform);
 
   const handleDownload = async () => {
     if (!downloadLink) return;
@@ -70,7 +71,7 @@ const PigostoreUI = () => {
   };
 
   useEffect(() => {
-    if (!loading && error && !downloadLink) {
+    if (!isLoading && isError && !downloadLink) {
       setAlertMessage('Sorry, downloading isn’t available right now.');
       const timer = setTimeout(() => {
         setAlertMessage('');
@@ -79,7 +80,7 @@ const PigostoreUI = () => {
     } else {
       setAlertMessage('');
     }
-  }, [loading, error, downloadLink]);
+  }, [isLoading, isError, downloadLink]);
 
   const handleAlertDismiss = () => {
     setAlertMessage('');
@@ -95,10 +96,13 @@ const PigostoreUI = () => {
   ];
 
   return (
-    <div className="vh-100 d-flex justify-content-center align-items-center"
+    <div className="vh-100 w-100 d-flex flex-column justify-content-center align-items-center"
       style={{ background: "linear-gradient(to bottom, #121229, #121229, black, black)" }}
     >
-      <div className="container custom-bg p-0 mx-4 custom-theme-radius-low" style={{ maxWidth: '600px' }}>
+      {/* Overlay spinner for loading state */}
+      <OverlaySpinner visible={isLoading} />
+
+      <div className="container form-pad custom-bg mx-4 custom-theme-radius-low">
         <div className="section p-4">
           <div className="d-flex justify-content-between align-items-center">
             <div className="d-flex justify-content-center align-items-center text-center">
@@ -131,7 +135,7 @@ const PigostoreUI = () => {
           <button
             className="btn btn-primary rounded-pill dynamic-fs"
             onClick={handleDownload}
-            disabled={loading || error}
+            disabled={isLoading || isError}
           >
             <i className="bi bi-file-earmark-zip me-2"></i>
             Download
