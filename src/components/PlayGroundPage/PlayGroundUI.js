@@ -1,12 +1,10 @@
 // PlayGroundUI.js
 import { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
-import { mapMedia } from 'tmdb-to-anilist';
 import useFetchMediaInfo from '../../hooks/PlayGroundPage/useFetchMediaInfo';
 import Header from '../Header';
 import MovieGrid from './MovieGrid';
 import TvGrid from './TvGrid';
-import AnimeGrid from './AnimeGrid';
 import OverlaySpinner from '../../utils/OverlaySpinner';
 import ConnectionModal from '../../utils/ConnectionModal';
 import Footer from '../Footer';
@@ -19,7 +17,6 @@ function PlayGround() {
 
   // Retrive full tmdb metadata of the id and type
   const { data: mediaInfo, loading: isLoading, error: isError } = useFetchMediaInfo(id, type);
-  const [animeMediaInfo, setAnimeMediaInfo] = useState(null);
 
   // Setup backgroundImage
   const [backgroundImage, setBackgroundImage] = useState('');
@@ -31,35 +28,17 @@ function PlayGround() {
     });
   }, []);
 
-  useEffect(() => {
-    if (mediaInfo) {
-      const result = mapMedia(mediaInfo);
-      console.log('[AniList Mapping Result]', result);
-      if (result) setAnimeMediaInfo(result);
-      else setAnimeMediaInfo(null);
-    }
-  }, [mediaInfo]);
-
+  // Handling loading state and error state
   if (!mediaInfo) {
-    // Handling loading state and error state
-    if (isError) {
-      return (
-        <ConnectionModal show={isError} />
-      );
-    } else {
-      return (
-        <OverlaySpinner visible={isLoading} />
-      );
-    }
+    return isError ? (
+      <ConnectionModal show={isError} />
+    ) : (
+      <OverlaySpinner visible={isLoading} />
+    );
   }
 
-  let GridComponent;
-
-  if (animeMediaInfo && Array.isArray(animeMediaInfo)) {
-    GridComponent = AnimeGrid;
-  } else {
-    GridComponent = type === 'movie' ? MovieGrid : TvGrid;
-  }
+  // Route to media type grids
+  const GridComponent = type === 'movie' ? MovieGrid : TvGrid;
 
   return (
     <div className="index-page">
@@ -90,7 +69,6 @@ function PlayGround() {
           id={id}
           type={type}
           mediaInfo={mediaInfo}
-          animeMediaInfo={animeMediaInfo}
           setBackgroundImage={setBackgroundImage}
         />
 
