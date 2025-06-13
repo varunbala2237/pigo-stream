@@ -8,7 +8,7 @@ import { getSessionValue, setSessionValue } from '../../utils/sessionStorageStat
 
 const SESSION_PATH = ['HomeUI', 'Grids', 'TrendingGrid'];
 
-function TrendingGrid({ setIsTrendingLoaded, setHasTrendingContent }) {
+function TrendingGrid({ setIsTrendingLoading, setIsTrendingLoaded, setHasTrendingContent }) {
   const { data: movies, loading: isLoadingMovies, error: isErrorMovies } = useFetchMedia('trending', 'movie');
   const { data: shows, loading: isLoadingShows, error: isErrorShows } = useFetchMedia('trending', 'tv');
 
@@ -20,6 +20,16 @@ function TrendingGrid({ setIsTrendingLoaded, setHasTrendingContent }) {
   const moviesRef = useRef(null);
   const showsRef = useRef(null);
 
+  // Loading handling
+  useEffect(() => {
+    if (isLoading) {
+      setIsTrendingLoading(true);
+    } else {
+      setIsTrendingLoading(false);
+    }
+  }, [isLoading, setIsTrendingLoading]);
+
+  // Error handling
   useEffect(() => {
     if (isError) {
       setIsTrendingLoaded(false);
@@ -28,6 +38,7 @@ function TrendingGrid({ setIsTrendingLoaded, setHasTrendingContent }) {
     }
   }, [isError, setIsTrendingLoaded]);
 
+  // No content handling
   useEffect(() => {
     if (!isLoading && !isError) {
       const hasContent =

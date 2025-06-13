@@ -126,10 +126,10 @@ function HomeUI({
 
   // Page loading state handling
    useEffect(() => {
-    if (!isProvidersLoading) {
+    if (!isProvidersLoading && !isTrendingLoading) {
       setIsPageLoading(false);
     }
-  }, [isProvidersLoading]); 
+  }, [isProvidersLoading, isTrendingLoading]); 
 
   // Connection modal handling
   useEffect(() => {
@@ -351,7 +351,7 @@ function HomeUI({
         <div className="flex-row text-white w-100">
           {!showSearchBar ?
             <>
-              <TrendingGrid setIsTrendingLoading={setIsTrendingLoaded} setIsTrendingLoaded={setIsTrendingLoaded} setHasTrendingContent={setHasTrendingContent} />
+              <TrendingGrid setIsTrendingLoading={setIsTrendingLoading} setIsTrendingLoaded={setIsTrendingLoaded} setHasTrendingContent={setHasTrendingContent} />
               <ProvidersGrid setIsProvidersLoading={setIsProvidersLoading} setIsProvidersLoaded={setIsProvidersLoaded} setHasProvidersContent={setHasProvidersContent} />
             </>
             :
