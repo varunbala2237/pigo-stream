@@ -260,14 +260,13 @@ function TvGrid({ id, type, setBackgroundImage }) {
                 serverStatusLoading={serverStatusLoading}
               />
 
-              {/* Seasons and Episodes Sections */}
+              {/* Seasons Section */}
               <div className="container-fluid custom-bg custom-theme-radius-low w-100 p-2 my-2">
                 <div className="d-flex flex-row dynamic-ts py-2">
-                  <i className="bi bi-collection-play me-2"></i>
-                  Seasons & Episodes
+                  <i className="bi bi-grid me-2"></i>
+                  Seasons
                 </div>
 
-                {/* Season Section */}
                 <SeasonSection
                   seasons={seasons}
                   selectedSeason={selectedSeason}
@@ -275,6 +274,11 @@ function TvGrid({ id, type, setBackgroundImage }) {
                 />
 
                 {/* Episodes Section */}
+                <div className="d-flex flex-row dynamic-ts py-2">
+                  <i className="bi bi-collection-play me-2"></i>
+                  Episodes
+                </div>
+
                 <EpisodeSection
                   episodes={episodes}
                   selectedEpisode={selectedEpisode}
