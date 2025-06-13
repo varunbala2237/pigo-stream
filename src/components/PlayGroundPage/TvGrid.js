@@ -10,15 +10,13 @@ import PlayerSection from './Sections/PlayerSection';
 import ServerSection from './Sections/ServerSection';
 import SeasonSection from './Sections/SeasonSection';
 import EpisodeSection from './Sections/EpisodeSection';
-import OverlaySpinner from '../../utils/OverlaySpinner';
-import ConnectionModal from '../../utils/ConnectionModal';
 
 import { getStorageValue, setStorageValue } from '../../utils/localStorageStates';
 import { getSessionValue, setSessionValue } from '../../utils/sessionStorageStates';
 
 const SEASON_STATE_KEY = 'seasonState';
 
-function TvGrid({ id, type, mediaInfo, loadingInfo, errorInfo, setBackgroundImage }) {
+function TvGrid({ id, type, mediaInfo, setBackgroundImage }) {
   const TV_STORAGE_PATH = React.useMemo(
     () => ['PlayGroundUI', 'Grids', 'TvGrid', `${id}`],
     [id]
@@ -41,10 +39,7 @@ function TvGrid({ id, type, mediaInfo, loadingInfo, errorInfo, setBackgroundImag
 
   // Fetch all available seasons and servers
   const { seasonData } = useFetchSeason(id, selectedSeason);
-  const { servers, loading: loadingLink, error: errorLink } = useFetchServers(id, type, selectedSeason, selectedEpisode);
-
-  const isLoading = loadingInfo || loadingLink;
-  const isError = errorInfo || errorLink;
+  const { servers } = useFetchServers(id, type, selectedSeason, selectedEpisode);
 
   const { addToList } = useSaveMyList();
   const { isInList, refetch } = useCheckMyList(id);
@@ -216,19 +211,6 @@ function TvGrid({ id, type, mediaInfo, loadingInfo, errorInfo, setBackgroundImag
       console.error(error.message);
     }
   };
-
-  if (!mediaInfo) {
-    // Handling loading state and error state
-    if (isError) {
-      return (
-        <ConnectionModal show={isError} />
-      );
-    } else {
-      return (
-        <OverlaySpinner visible={isLoading} />
-      );
-    }
-  }
 
   const { genres, vote_average } = mediaInfo ? mediaInfo : {};
   const averageVote = vote_average ? vote_average.toFixed(1) : '0.0';

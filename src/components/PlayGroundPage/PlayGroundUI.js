@@ -7,6 +7,8 @@ import Header from '../Header';
 import MovieGrid from './MovieGrid';
 import TvGrid from './TvGrid';
 import AnimeGrid from './AnimeGrid';
+import OverlaySpinner from '../../utils/OverlaySpinner';
+import ConnectionModal from '../../utils/ConnectionModal';
 import Footer from '../Footer';
 
 function PlayGround() {
@@ -16,7 +18,7 @@ function PlayGround() {
   const type = queryParams.get('type');
 
   // Retrive full tmdb metadata of the id and type
-  const { data: mediaInfo, loadingInfo, errorInfo } = useFetchMediaInfo(id, type);
+  const { data: mediaInfo, loading: isLoading, error: isError } = useFetchMediaInfo(id, type);
   const [animeMediaInfo, setAnimeMediaInfo] = useState(null);
 
   // Setup backgroundImage
@@ -32,10 +34,24 @@ function PlayGround() {
   useEffect(() => {
     if (mediaInfo) {
       const result = mapMedia(mediaInfo);
+      console.log('[AniList Mapping Result]', result);
       if (result) setAnimeMediaInfo(result);
       else setAnimeMediaInfo(null);
     }
   }, [mediaInfo]);
+
+  if (!mediaInfo) {
+    // Handling loading state and error state
+    if (isError) {
+      return (
+        <ConnectionModal show={isError} />
+      );
+    } else {
+      return (
+        <OverlaySpinner visible={isLoading} />
+      );
+    }
+  }
 
   let GridComponent;
 
@@ -74,8 +90,6 @@ function PlayGround() {
           id={id}
           type={type}
           mediaInfo={mediaInfo}
-          loadingInfo={loadingInfo}
-          errorInfo={errorInfo}
           animeMediaInfo={animeMediaInfo}
           setBackgroundImage={setBackgroundImage}
         />

@@ -7,13 +7,11 @@ import useCheckMyList from '../../hooks/MyListPage/useCheckMyList';
 import useCheckServerStatus from '../../hooks/PlayGroundPage/useCheckServerStatus';
 import PlayerSection from './Sections/PlayerSection';
 import ServerSection from './Sections/ServerSection';
-import OverlaySpinner from '../../utils/OverlaySpinner';
-import ConnectionModal from '../../utils/ConnectionModal';
 
 import { getStorageValue, setStorageValue } from '../../utils/localStorageStates';
 import { getSessionValue, setSessionValue } from '../../utils/sessionStorageStates';
 
-function MovieGrid({ id, type, mediaInfo, loadingInfo, errorInfo, setBackgroundImage }) {
+function MovieGrid({ id, type, mediaInfo, setBackgroundImage }) {
   const MOVIES_STORAGE_PATH = React.useMemo(
     () => ['PlayGroundUI', 'Grids', 'MovieGrid', `${id}`],
     [id]
@@ -30,10 +28,7 @@ function MovieGrid({ id, type, mediaInfo, loadingInfo, errorInfo, setBackgroundI
   );
 
   // Fetch all available servers
-  const { servers, loading: loadingLink, error: errorLink } = useFetchServers(id, type);
-
-  const isLoading = loadingInfo || loadingLink;
-  const isError = errorInfo || errorLink;
+  const { servers  } = useFetchServers(id, type);
 
   const { addToList } = useSaveMyList();
   const { isInList, refetch } = useCheckMyList(id);
@@ -104,19 +99,6 @@ function MovieGrid({ id, type, mediaInfo, loadingInfo, errorInfo, setBackgroundI
       console.error(error.message);
     }
   };
-
-  if (!mediaInfo) {
-    // Handling loading state and error state
-    if (isError) {
-      return (
-        <ConnectionModal show={isError}/>
-      );
-    } else {
-      return (
-        <OverlaySpinner visible={isLoading} />
-      );
-    }
-  }
 
   const { genres = [], vote_average } = mediaInfo ? mediaInfo : {};
   const averageVote = vote_average ? vote_average.toFixed(1) : '0.0';
