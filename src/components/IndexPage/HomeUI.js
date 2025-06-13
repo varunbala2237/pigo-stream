@@ -364,7 +364,6 @@ function HomeUI({
             <>
               {/* SearchGrid Backspace for SearchBar.js */}
               <div className="divider" style={{ height: '4rem' }}></div>
-
               <SearchGrid searchQuery={triggerSearch} setIsSearchLoading={setIsSearchLoading} setIsSearchLoaded={setIsSearchLoaded} setHasSearchContent={setHasSearchContent} />
             </>}
         </div>
