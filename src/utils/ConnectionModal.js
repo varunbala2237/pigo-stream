@@ -1,20 +1,10 @@
 // ConnectionModal.js
-import { useEffect, useRef } from 'react';
+import { useRef } from 'react';
 import './ConnectionModal.css';
 
 function ConnectionModal({ show }) {
   // Ref to track outside clicks
   const modalRef = useRef();
-
-  useEffect(() => {
-    if (show) {
-      document.body.style.overflow = 'hidden'; // Lock the scroll
-    }
-
-    return () => {
-      document.body.style.overflow = 'auto'; // Unlock scroll
-    };
-  }, [show]);
 
   return (
     <>

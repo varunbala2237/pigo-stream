@@ -51,14 +51,12 @@ function Card({ media, type, path, onRemove, handleAlert, isDeletable = true, is
     };
 
     if (showModal) {
-      document.body.style.overflow = 'hidden'; // Lock the scroll
       document.body.addEventListener('mousedown', handleModalClose);  // handle click events
       document.body.addEventListener('keydown', handleModalClose);   // handle ESC key
     }
 
     // Cleanup listeners and unlock scroll when modal is closed
     return () => {
-      document.body.style.overflow = 'auto'; // Unlock scroll
       document.body.removeEventListener('mousedown', handleModalClose);
       document.body.removeEventListener('keydown', handleModalClose);
     };
