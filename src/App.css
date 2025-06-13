@@ -2,30 +2,6 @@
 /* External CSS(Global Styles) */
 
 /* Reusable Styles, Dynamic Resolutions & Animations */
-.bg-blur {
-  height: 100%;
-  left: 0;
-  opacity: 0.7;
-  position: absolute;
-  top: 0;
-  width: 100%;
-  background-position: center;
-  background-size: cover;
-  filter: blur(10px);
-  z-index: -1;
-}
-
-.bg-blur::before {
-  content: '';
-  height: 100%;
-  left: 0;
-  position: absolute;
-  top: 0;
-  width: 100%;
-  background-color: rgba(0, 0, 0, 0.3);
-  z-index: 1;
-}
-
 .bd-callout-white {
   background-color: rgba(120, 120, 120, 0.8);
   position: relative;
@@ -153,18 +129,6 @@
 
 .custom-theme-color {
   background-color: #88ab33;
-}
-
-.custom-theme-overlay {
-  background-color: black;
-  border-radius: 0.35rem;
-  height: 100%;
-  left: 0;
-  opacity: 0.2;
-  position: absolute;
-  top: 0;
-  width: 100%;
-  z-index: -1;
 }
 
 .custom-theme-radius {

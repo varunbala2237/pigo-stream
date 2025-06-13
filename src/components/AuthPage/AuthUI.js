@@ -13,6 +13,7 @@ import {
 } from 'firebase/auth';
 import useCreateUser from '../../hooks/AuthPage/useCreateUser';
 import Alert from '../../utils/Alert';
+import OverlaySpinner from '../../utils/OverlaySpinner';
 
 import { getSessionValue, setSessionValue } from '../../utils/sessionStorageStates';
 
@@ -265,123 +266,118 @@ function AuthUI() {
 
     return (
         <div className="d-flex flex-column vh-100 w-100">
-            {isLoading ? (
-                <div className="d-flex justify-content-center align-items-center vh-100">
-                    <div className="spinner-border theme-color spinner-size-3" role="status">
-                        <span className="visually-hidden">Loading...</span>
+            <div className="container vh-100 d-flex bg-transparent border-0 justify-content-center align-items-center">
+
+                {/* Overlay spinner for loading state */}
+                <OverlaySpinner visible={isLoading} />
+
+                <div className="card custom-bg custom-theme-radius-low p-4 w-100 form-pad">
+                    <div className="card-header d-flex justify-content-center align-items-center text-white">
+                        <img src="favicon.ico" alt="PigoStream" width="48" height="48" />
+                        <span className="dynamic-hs"><b>Pigo</b>Stream</span>
+                    </div>
+                    <form onSubmit={isSignIn ? signInWithCredentials : signUpWithCredentials} className="text-white">
+                        {!isSignIn && (
+                            <div className="mb-3 dynamic-ts">
+                                <label htmlFor="userName" className="form-label">Username</label>
+                                <input
+                                    id="userName"
+                                    type="text"
+                                    className="form-control custom-bg rounded-pill custom-textarea text-white dynamic-fs"
+                                    value={userName}
+                                    onChange={(e) => setUserName(e.target.value)}
+                                    placeholder="Enter username"
+                                    required={!isSignIn}
+                                />
+                            </div>
+                        )}
+                        <div className="mb-3 dynamic-ts">
+                            <label htmlFor="userEmail" className="form-label">E-mail address</label>
+                            <input
+                                id="userEmail"
+                                type="email"
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
+                                className="form-control custom-bg rounded-pill custom-textarea text-white dynamic-fs"
+                                placeholder="Enter e-mail address"
+                                required
+                            />
+                        </div>
+                        <div className="mb-3 dynamic-ts">
+                            <label htmlFor="password" className="form-label">Password</label>
+                            <div className="input-group custom-input-group mb-2">
+                                <input
+                                    id="passwordInput"
+                                    type={showPassword ? 'text' : 'password'}
+                                    value={password}
+                                    onChange={(e) => setPassword(e.target.value)}
+                                    className="form-control custom-bg text-white custom-textarea rounded-pill-l border-0 dynamic-fs"
+                                    placeholder="Enter password"
+                                    required
+                                />
+                                <button
+                                    className="btn btn-dark custom-bg m-0 border-0 rounded-pill-r"
+                                    type="button"
+                                    onClick={() => setShowPassword((prev) => !prev)}
+                                >
+                                    <i className={`bi ${showPassword ? 'bi-eye-slash' : 'bi-eye'}`}></i>
+                                </button>
+                            </div>
+                            {isSignIn && (
+                                <div className="d-flex justify-content-end">
+                                    <button
+                                        type="button"
+                                        className="btn btn-transparent text-primary border-0 dynamic-fs"
+                                        onClick={handleForgotPassword}
+                                    >
+                                        Forgot Password
+                                    </button>
+                                </div>
+                            )}
+                        </div>
+                        <div className="d-grid dynamic-fs">
+                            <button type="submit" className="btn btn-success custom-theme-btn rounded-pill dynamic-fs mb-2" disabled={isSubmitting}>
+                                {isSubmitting ? 'Loading...' : isSignIn ? 'Sign in' : 'Sign up'}
+                            </button>
+                            {showResendButton && (
+                                <div className="d-flex justify-content-end mb-2">
+                                    <button
+                                        type="button"
+                                        className="btn btn-transparent text-primary border-0 dynamic-fs"
+                                        onClick={resendVerificationEmail}
+                                        disabled={resendCooldown > 0}
+                                    >
+                                        {resendCooldown > 0 ? `Try again in (${resendCooldown}s)` : 'Resend'}
+                                    </button>
+                                </div>
+                            )}
+                            <p className="text-white mb-2 text-center">or</p>
+                            <button className="btn btn-primary rounded-pill dynamic-fs mb-2" onClick={signInWithGoogle}>
+                                <i className="bi bi-google me-2"></i>Sign in with Google
+                            </button>
+                        </div>
+                    </form>
+                    <div className="text-center text-white dynamic-fs">
+                        {isSignIn ? (
+                            <p>
+                                Don't have an account?
+                                <button type="button" className="btn btn-transparent text-primary border-0 dynamic-fs" onClick={toggleAuthMode}>
+                                    Sign up
+                                </button>
+                            </p>
+                        ) : (
+                            <p>
+                                Already have an account?
+                                <button type="button" className="btn btn-transparent text-primary border-0 dynamic-fs" onClick={toggleAuthMode}>
+                                    Sign in
+                                </button>
+                            </p>
+                        )}
                     </div>
                 </div>
-            ) : (
-                <>
-                    <div className="container vh-100 d-flex bg-transparent border-0 justify-content-center align-items-center">
-                        <div className="card custom-bg custom-theme-radius-low p-4 w-100 form-pad">
-                            <div className="card-header d-flex justify-content-center align-items-center text-white">
-                                <img src="favicon.ico" alt="PigoStream" width="48" height="48" />
-                                <span className="dynamic-hs"><b>Pigo</b>Stream</span>
-                            </div>
-                            <form onSubmit={isSignIn ? signInWithCredentials : signUpWithCredentials} className="text-white">
-                                {!isSignIn && (
-                                    <div className="mb-3 dynamic-ts">
-                                        <label htmlFor="userName" className="form-label">Username</label>
-                                        <input
-                                            id="userName"
-                                            type="text"
-                                            className="form-control custom-bg rounded-pill custom-textarea text-white dynamic-fs"
-                                            value={userName}
-                                            onChange={(e) => setUserName(e.target.value)}
-                                            placeholder="Enter username"
-                                            required={!isSignIn}
-                                        />
-                                    </div>
-                                )}
-                                <div className="mb-3 dynamic-ts">
-                                    <label htmlFor="userEmail" className="form-label">E-mail address</label>
-                                    <input
-                                        id="userEmail"
-                                        type="email"
-                                        value={email}
-                                        onChange={(e) => setEmail(e.target.value)}
-                                        className="form-control custom-bg rounded-pill custom-textarea text-white dynamic-fs"
-                                        placeholder="Enter e-mail address"
-                                        required
-                                    />
-                                </div>
-                                <div className="mb-3 dynamic-ts">
-                                    <label htmlFor="password" className="form-label">Password</label>
-                                    <div className="input-group custom-input-group mb-2">
-                                        <input
-                                            id="passwordInput"
-                                            type={showPassword ? 'text' : 'password'}
-                                            value={password}
-                                            onChange={(e) => setPassword(e.target.value)}
-                                            className="form-control custom-bg text-white custom-textarea rounded-pill-l border-0 dynamic-fs"
-                                            placeholder="Enter password"
-                                            required
-                                        />
-                                        <button
-                                            className="btn btn-dark custom-bg m-0 border-0 rounded-pill-r"
-                                            type="button"
-                                            onClick={() => setShowPassword((prev) => !prev)}
-                                        >
-                                            <i className={`bi ${showPassword ? 'bi-eye-slash' : 'bi-eye'}`}></i>
-                                        </button>
-                                    </div>
-                                    {isSignIn && (
-                                        <div className="d-flex justify-content-end">
-                                            <button
-                                                type="button"
-                                                className="btn btn-transparent text-primary border-0 dynamic-fs"
-                                                onClick={handleForgotPassword}
-                                            >
-                                                Forgot Password
-                                            </button>
-                                        </div>
-                                    )}
-                                </div>
-                                <div className="d-grid dynamic-fs">
-                                    <button type="submit" className="btn btn-success custom-theme-btn rounded-pill dynamic-fs mb-2" disabled={isSubmitting}>
-                                        {isSubmitting ? 'Loading...' : isSignIn ? 'Sign in' : 'Sign up'}
-                                    </button>
-                                    {showResendButton && (
-                                        <div className="d-flex justify-content-end mb-2">
-                                            <button
-                                                type="button"
-                                                className="btn btn-transparent text-primary border-0 dynamic-fs"
-                                                onClick={resendVerificationEmail}
-                                                disabled={resendCooldown > 0}
-                                            >
-                                                {resendCooldown > 0 ? `Try again in (${resendCooldown}s)` : 'Resend'}
-                                            </button>
-                                        </div>
-                                    )}
-                                    <p className="text-white mb-2 text-center">or</p>
-                                    <button className="btn btn-primary rounded-pill dynamic-fs mb-2" onClick={signInWithGoogle}>
-                                        <i className="bi bi-google me-2"></i>Sign in with Google
-                                    </button>
-                                </div>
-                            </form>
-                            <div className="text-center text-white dynamic-fs">
-                                {isSignIn ? (
-                                    <p>
-                                        Don't have an account?
-                                        <button type="button" className="btn btn-transparent text-primary border-0 dynamic-fs" onClick={toggleAuthMode}>
-                                            Sign up
-                                        </button>
-                                    </p>
-                                ) : (
-                                    <p>
-                                        Already have an account?
-                                        <button type="button" className="btn btn-transparent text-primary border-0 dynamic-fs" onClick={toggleAuthMode}>
-                                            Sign in
-                                        </button>
-                                    </p>
-                                )}
-                            </div>
-                        </div>
-                    </div>
-                </>
-            )}
+            </div>
 
+            {/* Alert message handling */}
             {alertMessage && <Alert message={alertMessage} onClose={handleAlertDismiss} />}
         </div>
     );

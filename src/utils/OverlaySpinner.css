@@ -1,0 +1,27 @@
+/* OverlaySpinner.css */
+
+/* Matches the modal backdrop with blur and dark translucent effect */
+.overlay-spinner {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 998 !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  /* Smooth blur and dimmed background */
+  backdrop-filter: blur(1.2rem);
+  background-color: rgba(0, 0, 0, 0.25);
+  transition:
+    opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+    backdrop-filter 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+    background-color 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.spinner-size-3 {
+  width: 3rem;
+  height: 3rem;
+}
