@@ -16,12 +16,12 @@ function ServerSection({
             <div className="row g-2">
                 {servers.length > 0 ? (
                     servers.map((server, index) => (
-                        <div key={server.server_name} className="col-4 col-sm-3 col-md-4 col-lg-3 col-xl-2">
+                        <div key={server.server_name} className="d-flex col-4 col-sm-3 col-md-4 col-lg-3 col-xl-2">
                             <button
-                                className={`btn btn-dark bd-callout-dark w-100 align-items-center justify-content-center text-white shadow-sm 
+                                className={`btn w-100 align-items-center justify-content-center text-white border-0 shadow-sm
                                     ${selectedServer.server_name === server.server_name
-                                        ? 'border border-2 border-primary'
-                                        : 'border-0'
+                                        ? 'btn-primary bd-callout-primary rounded-pill active'
+                                        : 'btn-dark bd-callout-dark rounded-pill'
                                     }`}
                                 onClick={() => handleServerChange(server)}
                             >
