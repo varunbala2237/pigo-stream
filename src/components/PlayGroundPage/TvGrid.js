@@ -11,7 +11,7 @@ import PlayerSection from './Sections/PlayerSection';
 import ServerSection from './Sections/ServerSection';
 import SeasonSection from './Sections/SeasonSection';
 import EpisodeSection from './Sections/EpisodeSection';
-import PlayGroundSkeleton from './PlayGroundSkeleton';
+import OverlaySpinner from '../../utils/OverlaySpinner';
 
 import { getStorageValue, setStorageValue } from '../../utils/localStorageStates';
 import { getSessionValue, setSessionValue } from '../../utils/sessionStorageStates';
@@ -214,15 +214,9 @@ function TvGrid({ id, type, setBackgroundImage }) {
   };
 
   if (!mediaInfo) {
+    // Overlay spinner for loading state
     return (
-      <PlayGroundSkeleton
-        mediaInfo={mediaInfo}
-        servers={servers}
-        loadingInfo={loadingInfo}
-        loadingLink={loadingLink}
-        errorInfo={errorInfo}
-        errorLink={errorLink}
-      />
+      <OverlaySpinner visible={true} /> // Set default as true
     );
   }
 

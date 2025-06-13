@@ -8,7 +8,7 @@ import useCheckMyList from '../../hooks/MyListPage/useCheckMyList';
 import useCheckServerStatus from '../../hooks/PlayGroundPage/useCheckServerStatus';
 import PlayerSection from './Sections/PlayerSection';
 import ServerSection from './Sections/ServerSection';
-import PlayGroundSkeleton from './PlayGroundSkeleton';
+import OverlaySpinner from '../../utils/OverlaySpinner';
 
 import { getStorageValue, setStorageValue } from '../../utils/localStorageStates';
 import { getSessionValue, setSessionValue } from '../../utils/sessionStorageStates';
@@ -30,6 +30,9 @@ function MovieGrid({ id, type, setBackgroundImage }) {
 
   const { data: mediaInfo, loadingInfo, errorInfo } = useFetchMediaInfo(id, type);
   const { servers, loading: loadingLink, error: errorLink } = useFetchServers(id, type);
+
+  const isLoading = loadingInfo || loadingLink;
+  const isError = errorInfo || errorLink;
 
   const { addToList } = useSaveMyList();
   const { isInList, refetch } = useCheckMyList(id);
@@ -102,15 +105,9 @@ function MovieGrid({ id, type, setBackgroundImage }) {
   };
 
   if (!mediaInfo) {
+    // Overlay spinner for loading state
     return (
-      <PlayGroundSkeleton
-        mediaInfo={mediaInfo}
-        servers={servers}
-        loadingInfo={loadingInfo}
-        loadingLink={loadingLink}
-        errorInfo={errorInfo}
-        errorLink={errorLink}
-      />
+      <OverlaySpinner visible={isLoading} />
     );
   }
 
