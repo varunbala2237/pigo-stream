@@ -13,12 +13,12 @@
   height: 70vh;
   background-size: cover;
   background-position: center;
-  z-index: -1;
+  z-index: -1 !important;
 }
 
 .index-page .homepage {
   position: relative;
-  z-index: 1;
+  z-index: 1 !important;
   background: transparent;
   padding-top: 50px;
 }
