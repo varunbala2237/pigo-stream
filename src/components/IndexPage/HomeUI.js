@@ -126,10 +126,16 @@ function HomeUI({
 
   // Page loading state handling
   useEffect(() => {
-    if (!isProvidersLoading && !isTrendingLoading) {
-      setIsPageLoading(false);
+    if (showSearchBar) {
+      if (!isSearchLoading) {
+        setIsPageLoading(false);
+      }
+    } else {
+      if (!isTrendingLoading && !isProvidersLoading) {
+        setIsPageLoading(false);
+      }
     }
-  }, [isProvidersLoading, isTrendingLoading]);
+  }, [showSearchBar, isTrendingLoading, isProvidersLoading, isSearchLoading]);
 
   // Connection modal handling
   useEffect(() => {
