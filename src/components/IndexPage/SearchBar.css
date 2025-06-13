@@ -7,7 +7,7 @@
   left: 50%;
   transform: translateX(-50%);
   width: 90%;
-  z-index: 1050;
+  z-index: 1040 !important;
 }
 
 /* Keeps the input-group positioned for the dropdown */
