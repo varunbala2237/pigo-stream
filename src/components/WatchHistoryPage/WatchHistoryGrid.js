@@ -4,6 +4,7 @@ import { useLocation } from 'react-router-dom';
 import Card from '../Card';
 import useFetchWatchHistory from '../../hooks/WatchHistoryPage/useFetchWatchHistory';
 import useClearWatchHistory from '../../hooks/WatchHistoryPage/useClearWatchHistory';
+import OverlaySpinner from '../../utils/OverlaySpinner';
 import ConnectionModal from '../../utils/ConnectionModal';
 import Alert from '../../utils/Alert';
 
@@ -170,123 +171,69 @@ function WatchHistoryGrid({ userUID }) {
     const isClearButtonDisabled = moviesHistory.length === 0 && showsHistory.length === 0;
 
     return (
-        <div className="container mt-4 text-white">
-            <div className="d-flex justify-content-between align-items-center my-2 m-2">
-                <div className="text-start dynamic-ts">
-                    <i className="bi bi-clock-history theme-color me-2"></i>
-                    <b className="mb-0">Watch History</b>
-                </div>
-                <div className="text-end">
-                    <button
-                        type="button"
-                        className="btn btn-md d-none d-md-inline-block btn-danger bd-callout-danger rounded-pill border-0"
-                        onClick={handleClearHistory}
-                        disabled={isClearButtonDisabled}
-                    >
-                        <i className="bi bi-trash me-2"></i>
-                        Remove All
-                    </button>
-                    <button
-                        type="button"
-                        className="btn btn-sm d-md-none btn-danger bd-callout-danger rounded-pill border-0"
-                        onClick={handleClearHistory}
-                        disabled={isClearButtonDisabled}
-                    >
-                        <i className="bi bi-trash me-2"></i>
-                        Remove All
-                    </button>
-                </div>
-            </div>
-
-            {/* First Row of Movies */}
-            <div className="position-relative custom-margin-y">
-                {(moviesHistory.filter(Boolean).length / 2) > 3 && (
-                    <>
+        <>
+            {/* Overlay spinner for loading state */}
+            <OverlaySpinner visible={isLoading} />
+            
+            <div className="container mt-4 text-white">
+                <div className="d-flex justify-content-between align-items-center my-2 m-2">
+                    <div className="text-start dynamic-ts">
+                        <i className="bi bi-clock-history theme-color me-2"></i>
+                        <b className="mb-0">Watch History</b>
+                    </div>
+                    <div className="text-end">
                         <button
-                            className="btn btn-dark custom-bg rounded-pill py-2 position-absolute start-0 translate-middle-y d-none d-md-block"
-                            onClick={() => scroll(moviesRef1, 'left')}
-                            style={{ zIndex: 1, top: '50%', transform: 'translateY(-50%)' }}
+                            type="button"
+                            className="btn btn-md d-none d-md-inline-block btn-danger bd-callout-danger rounded-pill border-0"
+                            onClick={handleClearHistory}
+                            disabled={isClearButtonDisabled}
                         >
-                            <i className="bi bi-chevron-left"></i>
+                            <i className="bi bi-trash me-2"></i>
+                            Remove All
                         </button>
                         <button
-                            className="btn btn-dark custom-bg rounded-pill py-2 position-absolute end-0 translate-middle-y d-none d-md-block"
-                            onClick={() => scroll(moviesRef1, 'right')}
-                            style={{ zIndex: 1, top: '50%', transform: 'translateY(-50%)' }}
+                            type="button"
+                            className="btn btn-sm d-md-none btn-danger bd-callout-danger rounded-pill border-0"
+                            onClick={handleClearHistory}
+                            disabled={isClearButtonDisabled}
                         >
-                            <i className="bi bi-chevron-right"></i>
+                            <i className="bi bi-trash me-2"></i>
+                            Remove All
                         </button>
-                    </>
-                )}
+                    </div>
+                </div>
 
-                <div
-                    ref={moviesRef1}
-                    className="d-flex custom-theme-radius-low overflow-auto scroll-hide custom-gap"
-                    style={{ scrollSnapType: 'x mandatory' }}
-                >
-                    {(moviesHistory?.slice(0, Math.ceil(moviesHistory.length / 2)) || []).concat(
-                        Array.from({
-                            length: Math.max(
-                                0,
-                                6 - (moviesHistory?.slice(0, Math.ceil(moviesHistory.length / 2))?.length || 0)
-                            ),
-                        })
-                    ).map((movie, index) =>
-                        movie ? (
-                            <Card
-                                key={index}
-                                media={movie}
-                                type="movie"
-                                path={location.pathname}
-                                onRemove={refetch}
-                                handleAlert={handleAlert}
-                            />
-                        ) : (
-                            <Card
-                                key={`movie-skeleton-${index}`}
-                                media={{ poster_path: null, vote_average: null }}
-                                type="movie"
-                                path="/"
-                                isDeletable={false}
-                                isSkeleton={true}
-                            />
-                        )
+                {/* First Row of Movies */}
+                <div className="position-relative custom-margin-y">
+                    {(moviesHistory.filter(Boolean).length / 2) > 3 && (
+                        <>
+                            <button
+                                className="btn btn-dark custom-bg rounded-pill py-2 position-absolute start-0 translate-middle-y d-none d-md-block"
+                                onClick={() => scroll(moviesRef1, 'left')}
+                                style={{ zIndex: 1, top: '50%', transform: 'translateY(-50%)' }}
+                            >
+                                <i className="bi bi-chevron-left"></i>
+                            </button>
+                            <button
+                                className="btn btn-dark custom-bg rounded-pill py-2 position-absolute end-0 translate-middle-y d-none d-md-block"
+                                onClick={() => scroll(moviesRef1, 'right')}
+                                style={{ zIndex: 1, top: '50%', transform: 'translateY(-50%)' }}
+                            >
+                                <i className="bi bi-chevron-right"></i>
+                            </button>
+                        </>
                     )}
-                </div>
-            </div>
 
-            {/* Second Row of Movies */}
-            <div className="position-relative custom-margin-y">
-                {(moviesHistory.filter(Boolean).length / 2) > 3 && (
-                    <>
-                        <button
-                            className="btn btn-dark custom-bg rounded-pill py-2 position-absolute start-0 translate-middle-y d-none d-md-block"
-                            onClick={() => scroll(moviesRef2, 'left')}
-                            style={{ zIndex: 1, top: '50%', transform: 'translateY(-50%)' }}
-                        >
-                            <i className="bi bi-chevron-left"></i>
-                        </button>
-                        <button
-                            className="btn btn-dark custom-bg rounded-pill py-2 position-absolute end-0 translate-middle-y d-none d-md-block"
-                            onClick={() => scroll(moviesRef2, 'right')}
-                            style={{ zIndex: 1, top: '50%', transform: 'translateY(-50%)' }}
-                        >
-                            <i className="bi bi-chevron-right"></i>
-                        </button>
-                    </>
-                )}
-
-                <div
-                    ref={moviesRef2}
-                    className="d-flex custom-theme-radius-low overflow-auto scroll-hide custom-gap"
-                    style={{ scrollSnapType: 'x mandatory' }}
-                >
-                    {(moviesHistory?.slice(Math.ceil(moviesHistory.length / 2)) || [])
-                        .concat(
+                    <div
+                        ref={moviesRef1}
+                        className="d-flex custom-theme-radius-low overflow-auto scroll-hide custom-gap"
+                        style={{ scrollSnapType: 'x mandatory' }}
+                    >
+                        {(moviesHistory?.slice(0, Math.ceil(moviesHistory.length / 2)) || []).concat(
                             Array.from({
                                 length: Math.max(
                                     0,
-                                    6 - (moviesHistory?.slice(Math.ceil(moviesHistory.length / 2))?.length || 0)
+                                    6 - (moviesHistory?.slice(0, Math.ceil(moviesHistory.length / 2))?.length || 0)
                                 ),
                             })
                         ).map((movie, index) =>
@@ -310,171 +257,230 @@ function WatchHistoryGrid({ userUID }) {
                                 />
                             )
                         )}
+                    </div>
                 </div>
-            </div>
 
-            {moviesHistory.length === movieLimit && (
-                <div className="text-end mb-3">
-                    <button
-                        className="btn btn-dark bd-callout-dark dynamic-fs border-0 rounded-pill btn-md d-none d-md-inline-block"
-                        onClick={handleShowMoreMovies}
+                {/* Second Row of Movies */}
+                <div className="position-relative custom-margin-y">
+                    {(moviesHistory.filter(Boolean).length / 2) > 3 && (
+                        <>
+                            <button
+                                className="btn btn-dark custom-bg rounded-pill py-2 position-absolute start-0 translate-middle-y d-none d-md-block"
+                                onClick={() => scroll(moviesRef2, 'left')}
+                                style={{ zIndex: 1, top: '50%', transform: 'translateY(-50%)' }}
+                            >
+                                <i className="bi bi-chevron-left"></i>
+                            </button>
+                            <button
+                                className="btn btn-dark custom-bg rounded-pill py-2 position-absolute end-0 translate-middle-y d-none d-md-block"
+                                onClick={() => scroll(moviesRef2, 'right')}
+                                style={{ zIndex: 1, top: '50%', transform: 'translateY(-50%)' }}
+                            >
+                                <i className="bi bi-chevron-right"></i>
+                            </button>
+                        </>
+                    )}
+
+                    <div
+                        ref={moviesRef2}
+                        className="d-flex custom-theme-radius-low overflow-auto scroll-hide custom-gap"
+                        style={{ scrollSnapType: 'x mandatory' }}
                     >
-                        <i className="bi bi-chevron-right text-white me-2"></i>
-                        <span className="text-white">Show More</span>
-                    </button>
-                    <button
-                        className="btn btn-dark bd-callout-dark dynamic-fs border-0 rounded-pill btn-sm d-md-none"
-                        onClick={handleShowMoreMovies}
-                    >
-                        <i className="bi bi-chevron-right text-white me-2"></i>
-                        <span className="text-white">Show More</span>
-                    </button>
+                        {(moviesHistory?.slice(Math.ceil(moviesHistory.length / 2)) || [])
+                            .concat(
+                                Array.from({
+                                    length: Math.max(
+                                        0,
+                                        6 - (moviesHistory?.slice(Math.ceil(moviesHistory.length / 2))?.length || 0)
+                                    ),
+                                })
+                            ).map((movie, index) =>
+                                movie ? (
+                                    <Card
+                                        key={index}
+                                        media={movie}
+                                        type="movie"
+                                        path={location.pathname}
+                                        onRemove={refetch}
+                                        handleAlert={handleAlert}
+                                    />
+                                ) : (
+                                    <Card
+                                        key={`movie-skeleton-${index}`}
+                                        media={{ poster_path: null, vote_average: null }}
+                                        type="movie"
+                                        path="/"
+                                        isDeletable={false}
+                                        isSkeleton={true}
+                                    />
+                                )
+                            )}
+                    </div>
                 </div>
-            )}
 
-            {/* First Row of shows */}
-            <div className="position-relative custom-margin-y">
-                {(showsHistory.filter(Boolean).length / 2) > 3 && (
-                    <>
+                {moviesHistory.length === movieLimit && (
+                    <div className="text-end mb-3">
                         <button
-                            className="btn btn-dark custom-bg rounded-pill py-2 position-absolute start-0 translate-middle-y d-none d-md-block"
-                            onClick={() => scroll(showsRef1, 'left')}
-                            style={{ zIndex: 1, top: '50%', transform: 'translateY(-50%)' }}
+                            className="btn btn-dark bd-callout-dark dynamic-fs border-0 rounded-pill btn-md d-none d-md-inline-block"
+                            onClick={handleShowMoreMovies}
                         >
-                            <i className="bi bi-chevron-left"></i>
+                            <i className="bi bi-chevron-right text-white me-2"></i>
+                            <span className="text-white">Show More</span>
                         </button>
                         <button
-                            className="btn btn-dark custom-bg rounded-pill py-2 position-absolute end-0 translate-middle-y d-none d-md-block"
-                            onClick={() => scroll(showsRef1, 'right')}
-                            style={{ zIndex: 1, top: '50%', transform: 'translateY(-50%)' }}
+                            className="btn btn-dark bd-callout-dark dynamic-fs border-0 rounded-pill btn-sm d-md-none"
+                            onClick={handleShowMoreMovies}
                         >
-                            <i className="bi bi-chevron-right"></i>
+                            <i className="bi bi-chevron-right text-white me-2"></i>
+                            <span className="text-white">Show More</span>
                         </button>
-                    </>
+                    </div>
                 )}
 
-                <div
-                    ref={showsRef1}
-                    className="d-flex custom-theme-radius-low overflow-auto scroll-hide custom-gap"
-                    style={{ scrollSnapType: 'x mandatory' }}
-                >
-                    {(showsHistory?.slice(0, Math.ceil(showsHistory.length / 2)) || [])
-                        .concat(
-                            Array.from({
-                                length: Math.max(
-                                    0,
-                                    6 - (showsHistory?.slice(0, Math.ceil(showsHistory.length / 2))?.length || 0)
-                                ),
-                            })
-                        ).map((show, index) =>
-                            show ? (
-                                <Card
-                                    key={index}
-                                    media={show}
-                                    type="tv"
-                                    path={location.pathname}
-                                    onRemove={refetch}
-                                    handleAlert={handleAlert}
-                                />
-                            ) : (
-                                <Card
-                                    key={`tv-skeleton-${index}`}
-                                    media={{ poster_path: null, vote_average: null }}
-                                    type="tv"
-                                    path="/"
-                                    isDeletable={false}
-                                    isSkeleton={true}
-                                />
-                            )
-                        )}
-                </div>
-            </div>
+                {/* First Row of shows */}
+                <div className="position-relative custom-margin-y">
+                    {(showsHistory.filter(Boolean).length / 2) > 3 && (
+                        <>
+                            <button
+                                className="btn btn-dark custom-bg rounded-pill py-2 position-absolute start-0 translate-middle-y d-none d-md-block"
+                                onClick={() => scroll(showsRef1, 'left')}
+                                style={{ zIndex: 1, top: '50%', transform: 'translateY(-50%)' }}
+                            >
+                                <i className="bi bi-chevron-left"></i>
+                            </button>
+                            <button
+                                className="btn btn-dark custom-bg rounded-pill py-2 position-absolute end-0 translate-middle-y d-none d-md-block"
+                                onClick={() => scroll(showsRef1, 'right')}
+                                style={{ zIndex: 1, top: '50%', transform: 'translateY(-50%)' }}
+                            >
+                                <i className="bi bi-chevron-right"></i>
+                            </button>
+                        </>
+                    )}
 
-            {/* Second Row of shows */}
-            <div className="position-relative custom-margin-y">
-                {(showsHistory.filter(Boolean).length / 2) > 3 && (
-                    <>
+                    <div
+                        ref={showsRef1}
+                        className="d-flex custom-theme-radius-low overflow-auto scroll-hide custom-gap"
+                        style={{ scrollSnapType: 'x mandatory' }}
+                    >
+                        {(showsHistory?.slice(0, Math.ceil(showsHistory.length / 2)) || [])
+                            .concat(
+                                Array.from({
+                                    length: Math.max(
+                                        0,
+                                        6 - (showsHistory?.slice(0, Math.ceil(showsHistory.length / 2))?.length || 0)
+                                    ),
+                                })
+                            ).map((show, index) =>
+                                show ? (
+                                    <Card
+                                        key={index}
+                                        media={show}
+                                        type="tv"
+                                        path={location.pathname}
+                                        onRemove={refetch}
+                                        handleAlert={handleAlert}
+                                    />
+                                ) : (
+                                    <Card
+                                        key={`tv-skeleton-${index}`}
+                                        media={{ poster_path: null, vote_average: null }}
+                                        type="tv"
+                                        path="/"
+                                        isDeletable={false}
+                                        isSkeleton={true}
+                                    />
+                                )
+                            )}
+                    </div>
+                </div>
+
+                {/* Second Row of shows */}
+                <div className="position-relative custom-margin-y">
+                    {(showsHistory.filter(Boolean).length / 2) > 3 && (
+                        <>
+                            <button
+                                className="btn btn-dark custom-bg rounded-pill py-2 position-absolute start-0 translate-middle-y d-none d-md-block"
+                                onClick={() => scroll(showsRef2, 'left')}
+                                style={{ zIndex: 1, top: '50%', transform: 'translateY(-50%)' }}
+                            >
+                                <i className="bi bi-chevron-left"></i>
+                            </button>
+                            <button
+                                className="btn btn-dark custom-bg rounded-pill py-2 position-absolute end-0 translate-middle-y d-none d-md-block"
+                                onClick={() => scroll(showsRef2, 'right')}
+                                style={{ zIndex: 1, top: '50%', transform: 'translateY(-50%)' }}
+                            >
+                                <i className="bi bi-chevron-right"></i>
+                            </button>
+                        </>
+                    )}
+
+                    <div
+                        ref={showsRef2}
+                        className="d-flex custom-theme-radius-low overflow-auto scroll-hide custom-gap"
+                        style={{ scrollSnapType: 'x mandatory' }}
+                    >
+                        {(showsHistory?.slice(Math.ceil(showsHistory.length / 2)) || [])
+                            .concat(
+                                Array.from({
+                                    length: Math.max(
+                                        0,
+                                        6 - (showsHistory?.slice(Math.ceil(showsHistory.length / 2))?.length || 0)
+                                    ),
+                                })
+                            ).map((show, index) =>
+                                show ? (
+                                    <Card
+                                        key={index}
+                                        media={show}
+                                        type="tv"
+                                        path={location.pathname}
+                                        onRemove={refetch}
+                                        handleAlert={handleAlert}
+                                    />
+                                ) : (
+                                    <Card
+                                        key={`tv-skeleton-${index}`}
+                                        media={{ poster_path: null, vote_average: null }}
+                                        type="tv"
+                                        path="/"
+                                        isDeletable={false}
+                                        isSkeleton={true}
+                                    />
+                                )
+                            )}
+                    </div>
+                </div>
+
+                {showsHistory.length === showLimit && (
+                    <div className="text-end mb-3">
                         <button
-                            className="btn btn-dark custom-bg rounded-pill py-2 position-absolute start-0 translate-middle-y d-none d-md-block"
-                            onClick={() => scroll(showsRef2, 'left')}
-                            style={{ zIndex: 1, top: '50%', transform: 'translateY(-50%)' }}
+                            className="btn btn-dark bd-callout-dark dynamic-fs border-0 rounded-pill btn-md d-none d-md-inline-block"
+                            onClick={handleShowMoreShows}
                         >
-                            <i className="bi bi-chevron-left"></i>
+                            <i className="bi bi-chevron-right text-white me-2"></i>
+                            <span className="text-white">Show More</span>
                         </button>
                         <button
-                            className="btn btn-dark custom-bg rounded-pill py-2 position-absolute end-0 translate-middle-y d-none d-md-block"
-                            onClick={() => scroll(showsRef2, 'right')}
-                            style={{ zIndex: 1, top: '50%', transform: 'translateY(-50%)' }}
+                            className="btn btn-dark bd-callout-dark dynamic-fs border-0 rounded-pill btn-sm d-md-none"
+                            onClick={handleShowMoreShows}
                         >
-                            <i className="bi bi-chevron-right"></i>
+                            <i className="bi bi-chevron-right text-white me-2"></i>
+                            <span className="text-white">Show More</span>
                         </button>
-                    </>
+                    </div>
                 )}
 
-                <div
-                    ref={showsRef2}
-                    className="d-flex custom-theme-radius-low overflow-auto scroll-hide custom-gap"
-                    style={{ scrollSnapType: 'x mandatory' }}
-                >
-                    {(showsHistory?.slice(Math.ceil(showsHistory.length / 2)) || [])
-                        .concat(
-                            Array.from({
-                                length: Math.max(
-                                    0,
-                                    6 - (showsHistory?.slice(Math.ceil(showsHistory.length / 2))?.length || 0)
-                                ),
-                            })
-                        ).map((show, index) =>
-                            show ? (
-                                <Card
-                                    key={index}
-                                    media={show}
-                                    type="tv"
-                                    path={location.pathname}
-                                    onRemove={refetch}
-                                    handleAlert={handleAlert}
-                                />
-                            ) : (
-                                <Card
-                                    key={`tv-skeleton-${index}`}
-                                    media={{ poster_path: null, vote_average: null }}
-                                    type="tv"
-                                    path="/"
-                                    isDeletable={false}
-                                    isSkeleton={true}
-                                />
-                            )
-                        )}
-                </div>
+                {/* Connection Modal */}
+                {showConnectionModal && <ConnectionModal show={showConnectionModal} />}
+
+                {/* Alert Message */}
+                {alert.message && (
+                    <Alert message={alert.message} onClose={handleAlertDismiss} type={alert.type} />
+                )}
             </div>
-
-            {showsHistory.length === showLimit && (
-                <div className="text-end mb-3">
-                    <button
-                        className="btn btn-dark bd-callout-dark dynamic-fs border-0 rounded-pill btn-md d-none d-md-inline-block"
-                        onClick={handleShowMoreShows}
-                    >
-                        <i className="bi bi-chevron-right text-white me-2"></i>
-                        <span className="text-white">Show More</span>
-                    </button>
-                    <button
-                        className="btn btn-dark bd-callout-dark dynamic-fs border-0 rounded-pill btn-sm d-md-none"
-                        onClick={handleShowMoreShows}
-                    >
-                        <i className="bi bi-chevron-right text-white me-2"></i>
-                        <span className="text-white">Show More</span>
-                    </button>
-                </div>
-            )}
-
-            {/* Connection Modal */}
-            {showConnectionModal && <ConnectionModal show={showConnectionModal} />}
-
-            {/* Alert Message */}
-            {alert.message && (
-                <Alert message={alert.message} onClose={handleAlertDismiss} type={alert.type} />
-            )}
-        </div>
+        </>
     );
 }
 
