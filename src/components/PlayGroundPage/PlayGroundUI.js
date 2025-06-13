@@ -1,9 +1,12 @@
 // PlayGroundUI.js
 import { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
+import { mapMedia } from 'tmdb-to-anilist';
+import useFetchMediaInfo from '../../hooks/PlayGroundPage/useFetchMediaInfo';
 import Header from '../Header';
 import MovieGrid from './MovieGrid';
 import TvGrid from './TvGrid';
+import AnimeGrid from './AnimeGrid';
 import Footer from '../Footer';
 
 function PlayGround() {
@@ -11,6 +14,10 @@ function PlayGround() {
   const queryParams = new URLSearchParams(location.search);
   const id = queryParams.get('id');
   const type = queryParams.get('type');
+
+  // Retrive full tmdb metadata of the id and type
+  const { data: mediaInfo, loadingInfo, errorInfo } = useFetchMediaInfo(id, type);
+  const [animeMediaInfo, setAnimeMediaInfo] = useState(null);
 
   // Setup backgroundImage
   const [backgroundImage, setBackgroundImage] = useState('');
@@ -22,7 +29,21 @@ function PlayGround() {
     });
   }, []);
 
-  const GridComponent = type === 'movie' ? MovieGrid : TvGrid;
+  useEffect(() => {
+    if (mediaInfo) {
+      const result = mapMedia(mediaInfo);
+      if (result) setAnimeMediaInfo(result);
+      else setAnimeMediaInfo(null);
+    }
+  }, [mediaInfo]);
+
+  let GridComponent;
+
+  if (animeMediaInfo && Array.isArray(animeMediaInfo)) {
+    GridComponent = AnimeGrid;
+  } else {
+    GridComponent = type === 'movie' ? MovieGrid : TvGrid;
+  }
 
   return (
     <div className="index-page">
@@ -47,7 +68,17 @@ function PlayGround() {
             }}
           ></div>
         </div>
-        <GridComponent id={id} type={type} setBackgroundImage={setBackgroundImage} />
+
+        {/* Grid Components */}
+        <GridComponent
+          id={id}
+          type={type}
+          mediaInfo={mediaInfo}
+          loadingInfo={loadingInfo}
+          errorInfo={errorInfo}
+          animeMediaInfo={animeMediaInfo}
+          setBackgroundImage={setBackgroundImage}
+        />
 
         {/* Footer Backspace & Footer */}
         <div className="divider" style={{ height: '4rem' }}></div>
