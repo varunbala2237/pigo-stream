@@ -12,6 +12,7 @@ import ServerSection from './Sections/ServerSection';
 import SeasonSection from './Sections/SeasonSection';
 import EpisodeSection from './Sections/EpisodeSection';
 import OverlaySpinner from '../../utils/OverlaySpinner';
+import ConnectionModal from '../../utils/ConnectionModal';
 
 import { getStorageValue, setStorageValue } from '../../utils/localStorageStates';
 import { getSessionValue, setSessionValue } from '../../utils/sessionStorageStates';
@@ -41,6 +42,9 @@ function TvGrid({ id, type, setBackgroundImage }) {
   const { data: mediaInfo, loadingInfo, errorInfo } = useFetchMediaInfo(id, type);
   const { seasonData } = useFetchSeason(id, selectedSeason);
   const { servers, loading: loadingLink, error: errorLink } = useFetchServers(id, type, selectedSeason, selectedEpisode);
+
+  const isLoading = loadingInfo || loadingLink;
+  const isError = errorInfo || errorLink;
 
   const { addToList } = useSaveMyList();
   const { isInList, refetch } = useCheckMyList(id);
@@ -214,10 +218,16 @@ function TvGrid({ id, type, setBackgroundImage }) {
   };
 
   if (!mediaInfo) {
-    // Overlay spinner for loading state
-    return (
-      <OverlaySpinner visible={true} /> // Set default as true
-    );
+    // Handling loading state and error state
+    if (isError) {
+      return (
+        <ConnectionModal show={isError} />
+      );
+    } else {
+      return (
+        <OverlaySpinner visible={isLoading} />
+      );
+    }
   }
 
   const { genres, vote_average } = mediaInfo ? mediaInfo : {};
