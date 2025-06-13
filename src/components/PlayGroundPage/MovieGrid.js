@@ -1,7 +1,6 @@
 // MovieGrid.js
 import React, { useState, useEffect } from 'react';
 import CastCard from '../CastCard';
-import useFetchMediaInfo from '../../hooks/PlayGroundPage/useFetchMediaInfo';
 import useFetchServers from '../../hooks/PlayGroundPage/useFetchServers';
 import useSaveMyList from '../../hooks/MyListPage/useSaveMyList';
 import useCheckMyList from '../../hooks/MyListPage/useCheckMyList';
@@ -14,12 +13,13 @@ import ConnectionModal from '../../utils/ConnectionModal';
 import { getStorageValue, setStorageValue } from '../../utils/localStorageStates';
 import { getSessionValue, setSessionValue } from '../../utils/sessionStorageStates';
 
-function MovieGrid({ id, type, setBackgroundImage }) {
+function MovieGrid({ id, type, mediaInfo, loadingInfo, errorInfo, setBackgroundImage }) {
   const MOVIES_STORAGE_PATH = React.useMemo(
     () => ['PlayGroundUI', 'Grids', 'MovieGrid', `${id}`],
     [id]
   );
 
+  // Initialize required useStates
   const [mediaURL, setMediaURL] = useState('');
   const [cast, setCast] = useState([]);
   const [director, setDirector] = useState('');
@@ -29,7 +29,7 @@ function MovieGrid({ id, type, setBackgroundImage }) {
     getSessionValue(...MOVIES_STORAGE_PATH, 'sliceIndex') || 12
   );
 
-  const { data: mediaInfo, loadingInfo, errorInfo } = useFetchMediaInfo(id, type);
+  // Fetch all available servers
   const { servers, loading: loadingLink, error: errorLink } = useFetchServers(id, type);
 
   const isLoading = loadingInfo || loadingLink;
