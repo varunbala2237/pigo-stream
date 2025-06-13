@@ -1,0 +1,13 @@
+/* SearchBar.css */
+.search-bar {
+    z-index: 1040 !important;
+}
+
+.search-bar-dropdown {
+    top: 100%;
+    left: 0;
+    right: 0;
+    max-width: 100vw;
+    z-index: 1040 !important;
+    position: absolute;
+}

@@ -20,7 +20,7 @@ function SearchBar({
                   <input
                     id="prompt"
                     type="text"
-                    className="form-control custom-bg text-white dynamic-fs custom-textarea rounded-pill-l border-0"
+                    className="search-bar form-control custom-bg text-white dynamic-fs custom-textarea rounded-pill-l border-0"
                     placeholder="Type here..."
                     value={searchQuery}
                     onChange={handleSearchInputChange}
@@ -31,8 +31,7 @@ function SearchBar({
                   {isDropdownOpen && (
                     <ul
                       ref={dropdownRef}
-                      className="dropdown-menu show position-absolute bd-callout-dark custom-theme-radius-low p-0"
-                      style={{ top: '100%', left: 0, right: 0, maxWidth: '100vw', zIndex: 1000 }}
+                      className="search-bar-dropdown dropdown-menu show position-absolute bd-callout-dark custom-theme-radius-low p-0"
                     >
                       {searchHistory.length === 0 ? (
                         <li className="dropdown-item text-white bg-transparent text-nowrap text-truncate dynamic-fs">No search history.</li>
