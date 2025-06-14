@@ -11,7 +11,7 @@ function EpisodeSection({
     <div
       ref={episodeScrollRef}
       className="d-flex flex-column overflow-auto custom-theme-radius-low"
-      style={{ maxHeight: '300px' }}
+      style={{ maxHeight: '235px' }}
     >
       {episodes.length > 0 ? (
         episodes.map(episode => {
@@ -21,10 +21,10 @@ function EpisodeSection({
           return (
             <button
               key={episode.id}
-              className={`btn w-100 text-start custom-margin-top custom-theme-radius-low text-white border-0 shadow-sm 
+              className={`btn btn-dark bd-callout-dark w-100 text-start custom-margin-top custom-theme-radius-low text-white border-0 shadow-sm 
                 ${selectedEpisode === episode.episode_number
-                  ? 'btn-primary bd-callout-primary active'
-                  : 'btn-dark bd-callout-dark'
+                  ? 'active'
+                  : ''
                 }`}
               onClick={() => onEpisodeChange(episode.episode_number)}
               disabled={!aired}
