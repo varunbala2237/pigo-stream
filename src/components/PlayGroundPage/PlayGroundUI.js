@@ -6,6 +6,7 @@ import useFetchMediaInfo from '../../hooks/PlayGroundPage/useFetchMediaInfo';
 import Header from '../Header';
 import MovieGrid from './MovieGrid';
 import TvGrid from './TvGrid';
+import AnimeGrid from './AnimeGrid';
 import OverlaySpinner from '../../utils/OverlaySpinner';
 import ConnectionModal from '../../utils/ConnectionModal';
 import Footer from '../Footer';
@@ -48,7 +49,7 @@ function PlayGround() {
   }, [mediaInfo]);
 
   // Handling loading state and error state
-  if (!mediaInfo) {
+  if (isLoading || isError) {
     return isError ? (
       <ConnectionModal show={isError} />
     ) : (
@@ -56,7 +57,7 @@ function PlayGround() {
     );
   }
 
-  // Route to media type grids
+  // Decide which GridComponent to render
   const GridComponent = type === 'movie' ? MovieGrid : TvGrid;
 
   return (
@@ -88,6 +89,7 @@ function PlayGround() {
           id={id}
           type={type}
           mediaInfo={mediaInfo}
+          animeMediaInfo={animeMediaInfo}
           setBackgroundImage={setBackgroundImage}
         />
 

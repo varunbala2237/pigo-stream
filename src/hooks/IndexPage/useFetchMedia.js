@@ -33,7 +33,7 @@ const useFetchMedia = (endpoint, type) => {
 
       try {
         const result = await fetchWithRetry(url);
-        setData(result.results || []);
+        setData(result.results || null);
       } catch (err) {
         setError(err.message);
       } finally {
