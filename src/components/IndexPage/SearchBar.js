@@ -42,7 +42,7 @@ function SearchBar({
                 [...searchHistory].reverse().map(({ id, query }, index) => (
                   <React.Fragment key={id}>
                     <div className="d-flex justify-content-between align-items-center">
-                      <i className="bi bi-clock text-white mx-3"></i>
+                      <i className="bi bi-clock-history text-white mx-3"></i>
                       <li
                         className="dropdown-item d-flex justify-content-between align-items-center text-white bg-transparent dynamic-fs"
                         onClick={() => handleSelectSearch(query)}
@@ -62,7 +62,7 @@ function SearchBar({
                       </button>
                     </div>
                     {index < searchHistory.length - 1 && (
-                      <li className="dropdown-divider bg-secondary m-0"></li>
+                      <li className="dropdown-divider bg-secondary"></li>
                     )}
                   </React.Fragment>
                 ))
