@@ -1,6 +1,7 @@
 // PlayGroundUI.js
 import { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
+import { mapMedia } from 'tmdb-to-anilist';
 import useFetchMediaInfo from '../../hooks/PlayGroundPage/useFetchMediaInfo';
 import Header from '../Header';
 import MovieGrid from './MovieGrid';
@@ -21,12 +22,30 @@ function PlayGround() {
   // Setup backgroundImage
   const [backgroundImage, setBackgroundImage] = useState('');
 
+  // Store the mapped AniList data
+  const [animeMediaInfo, setAnimeMediaInfo] = useState(null);
+
   useEffect(() => {
     // Initial scroll to top
     requestAnimationFrame(() => {
       window.scrollTo({ top: 0, behavior: 'instant' });
     });
   }, []);
+
+  // Fetch AniList mapping once TMDB mediaInfo is ready
+  useEffect(() => {
+    if (mediaInfo) {
+      (async () => {
+        try {
+          const result = await mapMedia(mediaInfo);
+          setAnimeMediaInfo(result);
+          console.log('🧠 AniList Media Info:', result); // ✅ Log the mapped result
+        } catch (err) {
+          console.error('Failed to fetch AniList data:', err);
+        }
+      })();
+    }
+  }, [mediaInfo]);
 
   // Handling loading state and error state
   if (!mediaInfo) {
