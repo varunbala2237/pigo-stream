@@ -4,7 +4,6 @@ import CastCard from '../CastCard';
 import useFetchServers from '../../hooks/PlayGroundPage/useFetchServers';
 import useSaveMyList from '../../hooks/MyListPage/useSaveMyList';
 import useCheckMyList from '../../hooks/MyListPage/useCheckMyList';
-import useCheckServerStatus from '../../hooks/PlayGroundPage/useCheckServerStatus';
 import PlayerSection from './Sections/PlayerSection';
 import ServerSection from './Sections/ServerSection';
 
@@ -32,9 +31,6 @@ function MovieGrid({ id, type, mediaInfo, setBackgroundImage }) {
 
   const { addToList } = useSaveMyList();
   const { isInList, refetch } = useCheckMyList(id);
-
-  // Using the custom hook for checking server status
-  const { serverStatus, loading: serverStatusLoading } = useCheckServerStatus(servers);
 
   useEffect(() => {
     if (mediaInfo) {
@@ -125,8 +121,6 @@ function MovieGrid({ id, type, mediaInfo, setBackgroundImage }) {
                 servers={servers}
                 selectedServer={selectedServer}
                 handleServerChange={handleServerChange}
-                serverStatus={serverStatus}
-                serverStatusLoading={serverStatusLoading}
               />
 
               <div className="d-flex flex-column align-items-start custom-theme-radius-low my-2 w-100">

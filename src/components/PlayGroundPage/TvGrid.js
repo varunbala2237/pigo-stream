@@ -5,7 +5,6 @@ import useFetchSeason from '../../hooks/PlayGroundPage/useFetchSeason';
 import useFetchServers from '../../hooks/PlayGroundPage/useFetchServers';
 import useSaveMyList from '../../hooks/MyListPage/useSaveMyList';
 import useCheckMyList from '../../hooks/MyListPage/useCheckMyList';
-import useCheckServerStatus from '../../hooks/PlayGroundPage/useCheckServerStatus';
 import PlayerSection from './Sections/PlayerSection';
 import ServerSection from './Sections/ServerSection';
 import SeasonSection from './Sections/SeasonSection';
@@ -43,9 +42,6 @@ function TvGrid({ id, type, mediaInfo, setBackgroundImage }) {
 
   const { addToList } = useSaveMyList();
   const { isInList, refetch } = useCheckMyList(id);
-
-  // Using the custom hook for checking server status
-  const { serverStatus, loading: serverStatusLoading } = useCheckServerStatus(servers);
 
   useEffect(() => {
     if (mediaInfo) {
@@ -238,8 +234,6 @@ function TvGrid({ id, type, mediaInfo, setBackgroundImage }) {
                 servers={servers}
                 selectedServer={selectedServer}
                 handleServerChange={handleServerChange}
-                serverStatus={serverStatus}
-                serverStatusLoading={serverStatusLoading}
               />
 
               {/* Seasons Section */}
