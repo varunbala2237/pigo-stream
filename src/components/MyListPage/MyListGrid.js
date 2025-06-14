@@ -24,67 +24,47 @@ function MyListGrid({ userUID }) {
     const [alert, setAlert] = useState({ message: '', type: '', key: '' });
 
     // Scroll references for movies and shows (2 rows for each)
-    const moviesRef1 = useRef(null);
-    const moviesRef2 = useRef(null);
-    const showsRef1 = useRef(null);
-    const showsRef2 = useRef(null);
+    const moviesRef = useRef(null);
+    const showsRef = useRef(null);
 
     // Load from sessionStorage on mount
     useEffect(() => {
         const savedMovieLimit = getSessionValue(...SESSION_PATH, 'movieLimit') || 12;
         const savedShowLimit = getSessionValue(...SESSION_PATH, 'showLimit') || 12;
 
-        const savedMoviesScroll1 = getSessionValue(...SESSION_PATH, 'moviesScroll1') || 0;
-        const savedMoviesScroll2 = getSessionValue(...SESSION_PATH, 'moviesScroll2') || 0;
-        const savedShowsScroll1 = getSessionValue(...SESSION_PATH, 'showsScroll1') || 0;
-        const savedShowsScroll2 = getSessionValue(...SESSION_PATH, 'showsScroll2') || 0;
+        const savedMoviesScroll = getSessionValue(...SESSION_PATH, 'moviesScroll') || 0;
+        const savedShowsScroll = getSessionValue(...SESSION_PATH, 'showsScroll') || 0;
 
         if (savedMovieLimit) setMovieLimit(savedMovieLimit);
         if (savedShowLimit) setShowLimit(savedShowLimit);
 
         requestAnimationFrame(() => {
-            if (moviesRef1.current) moviesRef1.current.scrollTo({ left: savedMoviesScroll1, behavior: 'instant' });
-            if (moviesRef2.current) moviesRef2.current.scrollTo({ left: savedMoviesScroll2, behavior: 'instant' });
-            if (showsRef1.current) showsRef1.current.scrollTo({ left: savedShowsScroll1, behavior: 'instant' });
-            if (showsRef2.current) showsRef2.current.scrollTo({ left: savedShowsScroll2, behavior: 'instant' });
+            if (moviesRef.current) moviesRef.current.scrollTo({ left: savedMoviesScroll, behavior: 'instant' });
+            if (showsRef.current) showsRef.current.scrollTo({ left: savedShowsScroll, behavior: 'instant' });
         });
     }, [isLoading, isError]);
 
     // Save scroll positions for movies and shows
     useEffect(() => {
-        const moviesNode1 = moviesRef1.current;
-        const moviesNode2 = moviesRef2.current;
-        const showsNode1 = showsRef1.current;
-        const showsNode2 = showsRef2.current;
+        const moviesNode = moviesRef.current;
+        const showsNode = showsRef.current;
 
-        if (!moviesNode1 || !moviesNode2 || !showsNode1 || !showsNode2) return;
+        if (!moviesNode || !showsNode) return;
 
-        const handleMoviesScroll1 = () => {
-            setSessionValue(...SESSION_PATH, 'moviesScroll1', moviesNode1.scrollLeft);
+        const handleMoviesScroll = () => {
+            setSessionValue(...SESSION_PATH, 'moviesScroll', moviesNode.scrollLeft);
         };
 
-        const handleMoviesScroll2 = () => {
-            setSessionValue(...SESSION_PATH, 'moviesScroll2', moviesNode2.scrollLeft);
+        const handleShowsScroll = () => {
+            setSessionValue(...SESSION_PATH, 'showsScroll', showsNode.scrollLeft);
         };
 
-        const handleShowsScroll1 = () => {
-            setSessionValue(...SESSION_PATH, 'showsScroll1', showsNode1.scrollLeft);
-        };
-
-        const handleShowsScroll2 = () => {
-            setSessionValue(...SESSION_PATH, 'showsScroll2', showsNode2.scrollLeft);
-        };
-
-        moviesNode1.addEventListener('scroll', handleMoviesScroll1);
-        moviesNode2.addEventListener('scroll', handleMoviesScroll2);
-        showsNode1.addEventListener('scroll', handleShowsScroll1);
-        showsNode2.addEventListener('scroll', handleShowsScroll2);
+        moviesNode.addEventListener('scroll', handleMoviesScroll);
+        showsNode.addEventListener('scroll', handleShowsScroll);
 
         return () => {
-            moviesNode1.removeEventListener('scroll', handleMoviesScroll1);
-            moviesNode2.removeEventListener('scroll', handleMoviesScroll2);
-            showsNode1.removeEventListener('scroll', handleShowsScroll1);
-            showsNode2.removeEventListener('scroll', handleShowsScroll2);
+            moviesNode.removeEventListener('scroll', handleMoviesScroll);
+            showsNode.removeEventListener('scroll', handleShowsScroll);
         };
     }, []);
 
@@ -132,7 +112,7 @@ function MyListGrid({ userUID }) {
     const handleShowMoreShows = () => {
         setShowLimit(prevLimit => {
             const newLimit = prevLimit + 12;
-            setSessionValue(...SESSION_PATH, 'tLimit', newLimit);
+            setSessionValue(...SESSION_PATH, 'tvLimit', newLimit);
             return newLimit;
         });
     };
@@ -165,20 +145,21 @@ function MyListGrid({ userUID }) {
                     <i className="bi bi-bookmark-fill theme-color me-2"></i>
                     <b className="mb-0">My List</b>
                 </div>
-                {/* First Row of Movies */}
+
+                {/* My List Movies */}
                 <div className="position-relative custom-margin-y">
                     {(moviesList.filter(Boolean).length / 2) > 3 && (
                         <>
                             <button
                                 className="btn btn-dark custom-bg rounded-pill py-2 position-absolute start-0 translate-middle-y d-none d-md-block"
-                                onClick={() => scroll(moviesRef1, 'left')}
+                                onClick={() => scroll(moviesRef, 'left')}
                                 style={{ zIndex: 1, top: '50%', transform: 'translateY(-50%)' }}
                             >
                                 <i className="bi bi-chevron-left"></i>
                             </button>
                             <button
                                 className="btn btn-dark custom-bg rounded-pill py-2 position-absolute end-0 translate-middle-y d-none d-md-block"
-                                onClick={() => scroll(moviesRef1, 'right')}
+                                onClick={() => scroll(moviesRef, 'right')}
                                 style={{ zIndex: 1, top: '50%', transform: 'translateY(-50%)' }}
                             >
                                 <i className="bi bi-chevron-right"></i>
@@ -187,17 +168,12 @@ function MyListGrid({ userUID }) {
                     )}
 
                     <div
-                        ref={moviesRef1}
+                        ref={moviesRef}
                         className="d-flex custom-theme-radius-low overflow-auto scroll-hide custom-gap"
                         style={{ scrollSnapType: 'x mandatory' }}
                     >
-                        {(moviesList?.slice(0, Math.ceil(moviesList.length / 2)) || []).concat(
-                            Array.from({
-                                length: Math.max(
-                                    0,
-                                    6 - (moviesList?.slice(0, Math.ceil(moviesList.length / 2))?.length || 0)
-                                ),
-                            })
+                        {(moviesList || []).concat(
+                            Array.from({ length: Math.max(0, 6 - (moviesList?.length || 0)) })
                         ).map((movie, index) =>
                             movie ? (
                                 <Card
@@ -222,64 +198,6 @@ function MyListGrid({ userUID }) {
                     </div>
                 </div>
 
-                {/* Second Row of Movies */}
-                <div className="position-relative custom-margin-y">
-                    {(moviesList.filter(Boolean).length / 2) > 3 && (
-                        <>
-                            <button
-                                className="btn btn-dark custom-bg rounded-pill py-2 position-absolute start-0 translate-middle-y d-none d-md-block"
-                                onClick={() => scroll(moviesRef2, 'left')}
-                                style={{ zIndex: 1, top: '50%', transform: 'translateY(-50%)' }}
-                            >
-                                <i className="bi bi-chevron-left"></i>
-                            </button>
-                            <button
-                                className="btn btn-dark custom-bg rounded-pill py-2 position-absolute end-0 translate-middle-y d-none d-md-block"
-                                onClick={() => scroll(moviesRef2, 'right')}
-                                style={{ zIndex: 1, top: '50%', transform: 'translateY(-50%)' }}
-                            >
-                                <i className="bi bi-chevron-right"></i>
-                            </button>
-                        </>
-                    )}
-
-                    <div
-                        ref={moviesRef2}
-                        className="d-flex custom-theme-radius-low overflow-auto scroll-hide custom-gap"
-                        style={{ scrollSnapType: 'x mandatory' }}
-                    >
-                        {(moviesList?.slice(Math.ceil(moviesList.length / 2)) || [])
-                            .concat(
-                                Array.from({
-                                    length: Math.max(
-                                        0,
-                                        6 - (moviesList?.slice(Math.ceil(moviesList.length / 2))?.length || 0)
-                                    ),
-                                })
-                            ).map((movie, index) =>
-                                movie ? (
-                                    <Card
-                                        key={index}
-                                        media={movie}
-                                        type="movie"
-                                        path={location.pathname}
-                                        onRemove={refetch}
-                                        handleAlert={handleAlert}
-                                    />
-                                ) : (
-                                    <Card
-                                        key={`movie-skeleton-${index}`}
-                                        media={{ poster_path: null, vote_average: null }}
-                                        type="movie"
-                                        path="/"
-                                        isDeletable={false}
-                                        isSkeleton={true}
-                                    />
-                                )
-                            )}
-                    </div>
-                </div>
-
                 {moviesList.length === movieLimit && (
                     <div className="text-end mb-3">
                         <button
@@ -299,20 +217,20 @@ function MyListGrid({ userUID }) {
                     </div>
                 )}
 
-                {/* First Row of shows */}
+                {/* My List Shows */}
                 <div className="position-relative custom-margin-y">
                     {(showsList.filter(Boolean).length / 2) > 3 && (
                         <>
                             <button
                                 className="btn btn-dark custom-bg rounded-pill py-2 position-absolute start-0 translate-middle-y d-none d-md-block"
-                                onClick={() => scroll(showsRef1, 'left')}
+                                onClick={() => scroll(showsRef, 'left')}
                                 style={{ zIndex: 1, top: '50%', transform: 'translateY(-50%)' }}
                             >
                                 <i className="bi bi-chevron-left"></i>
                             </button>
                             <button
                                 className="btn btn-dark custom-bg rounded-pill py-2 position-absolute end-0 translate-middle-y d-none d-md-block"
-                                onClick={() => scroll(showsRef1, 'right')}
+                                onClick={() => scroll(showsRef, 'right')}
                                 style={{ zIndex: 1, top: '50%', transform: 'translateY(-50%)' }}
                             >
                                 <i className="bi bi-chevron-right"></i>
@@ -321,97 +239,33 @@ function MyListGrid({ userUID }) {
                     )}
 
                     <div
-                        ref={showsRef1}
+                        ref={showsRef}
                         className="d-flex custom-theme-radius-low overflow-auto scroll-hide custom-gap"
                         style={{ scrollSnapType: 'x mandatory' }}
                     >
-                        {(showsList?.slice(0, Math.ceil(showsList.length / 2)) || [])
-                            .concat(
-                                Array.from({
-                                    length: Math.max(
-                                        0,
-                                        6 - (showsList?.slice(0, Math.ceil(showsList.length / 2))?.length || 0)
-                                    ),
-                                })
-                            ).map((show, index) =>
-                                show ? (
-                                    <Card
-                                        key={index}
-                                        media={show}
-                                        type="tv"
-                                        path={location.pathname}
-                                        onRemove={refetch}
-                                        handleAlert={handleAlert}
-                                    />
-                                ) : (
-                                    <Card
-                                        key={`tv-skeleton-${index}`}
-                                        media={{ poster_path: null, vote_average: null }}
-                                        type="tv"
-                                        path="/"
-                                        isDeletable={false}
-                                        isSkeleton={true}
-                                    />
-                                )
-                            )}
-                    </div>
-                </div>
-
-                {/* Second Row of shows */}
-                <div className="position-relative custom-margin-y">
-                    {(showsList.filter(Boolean).length / 2) > 3 && (
-                        <>
-                            <button
-                                className="btn btn-dark custom-bg rounded-pill py-2 position-absolute start-0 translate-middle-y d-none d-md-block"
-                                onClick={() => scroll(showsRef2, 'left')}
-                                style={{ zIndex: 1, top: '50%', transform: 'translateY(-50%)' }}
-                            >
-                                <i className="bi bi-chevron-left"></i>
-                            </button>
-                            <button
-                                className="btn btn-dark custom-bg rounded-pill py-2 position-absolute end-0 translate-middle-y d-none d-md-block"
-                                onClick={() => scroll(showsRef2, 'right')}
-                                style={{ zIndex: 1, top: '50%', transform: 'translateY(-50%)' }}
-                            >
-                                <i className="bi bi-chevron-right"></i>
-                            </button>
-                        </>
-                    )}
-
-                    <div
-                        ref={showsRef2}
-                        className="d-flex custom-theme-radius-low overflow-auto scroll-hide custom-gap"
-                        style={{ scrollSnapType: 'x mandatory' }}
-                    >
-                        {(showsList?.slice(Math.ceil(showsList.length / 2)) || [])
-                            .concat(
-                                Array.from({
-                                    length: Math.max(
-                                        0,
-                                        6 - (showsList?.slice(Math.ceil(showsList.length / 2))?.length || 0)
-                                    ),
-                                })
-                            ).map((show, index) =>
-                                show ? (
-                                    <Card
-                                        key={index}
-                                        media={show}
-                                        type="tv"
-                                        path={location.pathname}
-                                        onRemove={refetch}
-                                        handleAlert={handleAlert}
-                                    />
-                                ) : (
-                                    <Card
-                                        key={`tv-skeleton-${index}`}
-                                        media={{ poster_path: null, vote_average: null }}
-                                        type="tv"
-                                        path="/"
-                                        isDeletable={false}
-                                        isSkeleton={true}
-                                    />
-                                )
-                            )}
+                        {(showsList || []).concat(
+                            Array.from({ length: Math.max(0, 6 - (showsList?.length || 0)) })
+                        ).map((show, index) =>
+                            show ? (
+                                <Card
+                                    key={index}
+                                    media={show}
+                                    type="tv"
+                                    path={location.pathname}
+                                    onRemove={refetch}
+                                    handleAlert={handleAlert}
+                                />
+                            ) : (
+                                <Card
+                                    key={`tv-skeleton-${index}`}
+                                    media={{ poster_path: null, vote_average: null }}
+                                    type="tv"
+                                    path="/"
+                                    isDeletable={false}
+                                    isSkeleton={true}
+                                />
+                            )
+                        )}
                     </div>
                 </div>
 

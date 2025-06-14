@@ -18,10 +18,8 @@ function SearchGrid({ searchQuery, setIsSearchLoading, setIsSearchLoaded, setHas
   const location = useLocation();
 
   // Scroll references for movies and shows (2 rows for each)
-  const moviesRef1 = useRef(null);
-  const moviesRef2 = useRef(null);
-  const showsRef1 = useRef(null);
-  const showsRef2 = useRef(null);
+  const movieRef = useRef(null);
+  const showsRef = useRef(null);
 
   // Loading handling
   useEffect(() => {
@@ -51,54 +49,36 @@ function SearchGrid({ searchQuery, setIsSearchLoading, setIsSearchLoaded, setHas
 
   // Load from sessionStorage on mount
   useEffect(() => {
-    const savedMoviesScroll1 = getSessionValue(...SESSION_PATH, 'moviesScroll1') || 0;
-    const savedMoviesScroll2 = getSessionValue(...SESSION_PATH, 'moviesScroll2') || 0;
-    const savedShowsScroll1 = getSessionValue(...SESSION_PATH, 'showsScroll1') || 0;
-    const savedShowsScroll2 = getSessionValue(...SESSION_PATH, 'showsScroll2') || 0;
+    const savedMoviesScroll = getSessionValue(...SESSION_PATH, 'moviesScroll') || 0;
+    const savedShowsScroll = getSessionValue(...SESSION_PATH, 'showsScroll') || 0;
 
     requestAnimationFrame(() => {
-      if (moviesRef1.current) moviesRef1.current.scrollTo({ left: savedMoviesScroll1, behavior: 'instant' });
-      if (moviesRef2.current) moviesRef2.current.scrollTo({ left: savedMoviesScroll2, behavior: 'instant' });
-      if (showsRef1.current) showsRef1.current.scrollTo({ left: savedShowsScroll1, behavior: 'instant' });
-      if (showsRef2.current) showsRef2.current.scrollTo({ left: savedShowsScroll2, behavior: 'instant' });
+      if (movieRef.current) movieRef.current.scrollTo({ left: savedMoviesScroll, behavior: 'instant' });
+      if (showsRef.current) showsRef.current.scrollTo({ left: savedShowsScroll, behavior: 'instant' });
     });
   }, [isLoading, isError]);
 
   // Save scroll positions for movies and shows
   useEffect(() => {
-    const moviesNode1 = moviesRef1.current;
-    const moviesNode2 = moviesRef2.current;
-    const showsNode1 = showsRef1.current;
-    const showsNode2 = showsRef2.current;
+    const moviesNode = movieRef.current;
+    const showsNode = showsRef.current;
 
-    if (!moviesNode1 || !moviesNode2 || !showsNode1 || !showsNode2) return;
+    if (!moviesNode || !showsNode) return;
 
-    const handleMoviesScroll1 = () => {
-      setSessionValue(...SESSION_PATH, 'moviesScroll1', moviesNode1.scrollLeft);
+    const handleMoviesScroll = () => {
+      setSessionValue(...SESSION_PATH, 'moviesScroll', moviesNode.scrollLeft);
     };
 
-    const handleMoviesScroll2 = () => {
-      setSessionValue(...SESSION_PATH, 'moviesScroll2', moviesNode2.scrollLeft);
+    const handleShowsScroll = () => {
+      setSessionValue(...SESSION_PATH, 'showsScroll', showsNode.scrollLeft);
     };
 
-    const handleShowsScroll1 = () => {
-      setSessionValue(...SESSION_PATH, 'showsScroll1', showsNode1.scrollLeft);
-    };
-
-    const handleShowsScroll2 = () => {
-      setSessionValue(...SESSION_PATH, 'showsScroll2', showsNode2.scrollLeft);
-    };
-
-    moviesNode1.addEventListener('scroll', handleMoviesScroll1);
-    moviesNode2.addEventListener('scroll', handleMoviesScroll2);
-    showsNode1.addEventListener('scroll', handleShowsScroll1);
-    showsNode2.addEventListener('scroll', handleShowsScroll2);
+    moviesNode.addEventListener('scroll', handleMoviesScroll);
+    showsNode.addEventListener('scroll', handleShowsScroll);
 
     return () => {
-      moviesNode1.removeEventListener('scroll', handleMoviesScroll1);
-      moviesNode2.removeEventListener('scroll', handleMoviesScroll2);
-      showsNode1.removeEventListener('scroll', handleShowsScroll1);
-      showsNode2.removeEventListener('scroll', handleShowsScroll2);
+      moviesNode.removeEventListener('scroll', handleMoviesScroll);
+      showsNode.removeEventListener('scroll', handleShowsScroll);
     };
   }, []);
 
@@ -118,21 +98,21 @@ function SearchGrid({ searchQuery, setIsSearchLoading, setIsSearchLoaded, setHas
         <b className="mb-0">Search Results</b>
       </div>
 
-      {/* First Movies Results */}
+      {/* Movies Results */}
       {(
         <div className="position-relative custom-margin-y">
           {searchQuery.trim() && (movies?.filter(Boolean).length / 2) > 3 && (
             <>
               <button
                 className="btn btn-dark custom-bg rounded-pill py-2 position-absolute start-0 translate-middle-y d-none d-md-block"
-                onClick={() => scroll(moviesRef1, 'left')}
+                onClick={() => scroll(movieRef, 'left')}
                 style={{ zIndex: 1, top: '50%', transform: 'translateY(-50%)' }}
               >
                 <i className="bi bi-chevron-left"></i>
               </button>
               <button
                 className="btn btn-dark custom-bg rounded-pill py-2 position-absolute end-0 translate-middle-y d-none d-md-block"
-                onClick={() => scroll(moviesRef1, 'right')}
+                onClick={() => scroll(movieRef, 'right')}
                 style={{ zIndex: 1, top: '50%', transform: 'translateY(-50%)' }}
               >
                 <i className="bi bi-chevron-right"></i>
@@ -140,18 +120,13 @@ function SearchGrid({ searchQuery, setIsSearchLoading, setIsSearchLoaded, setHas
             </>
           )}
           <div
-            ref={moviesRef1}
+            ref={movieRef}
             className="d-flex custom-theme-radius-low overflow-auto scroll-hide custom-gap"
             style={{ scrollSnapType: 'x mandatory' }}
           >
             {(searchQuery.trim()
-              ? (movies?.slice(0, Math.ceil(movies.length / 2)) || []).concat(
-                Array.from({
-                  length: Math.max(
-                    0,
-                    6 - (movies?.slice(0, Math.ceil(movies.length / 2))?.length || 0)
-                  ),
-                })
+              ? (movies || []).concat(
+                Array.from({ length: Math.max(0, 6 - (movies?.length || 0)) })
               )
               : Array.from({ length: 6 })
             ).map((movie, index) =>
@@ -172,76 +147,21 @@ function SearchGrid({ searchQuery, setIsSearchLoading, setIsSearchLoaded, setHas
         </div>
       )}
 
-      {/* Second Movies Results */}
-      {(
-        <div className="position-relative custom-margin-y">
-          {searchQuery.trim() && (movies?.filter(Boolean).length / 2) > 3 && (
-            <>
-              <button
-                className="btn btn-dark custom-bg rounded-pill py-2 position-absolute start-0 translate-middle-y d-none d-md-block"
-                onClick={() => scroll(moviesRef2, 'left')}
-                style={{ zIndex: 1, top: '50%', transform: 'translateY(-50%)' }}
-              >
-                <i className="bi bi-chevron-left"></i>
-              </button>
-              <button
-                className="btn btn-dark custom-bg rounded-pill py-2 position-absolute end-0 translate-middle-y d-none d-md-block"
-                onClick={() => scroll(moviesRef2, 'right')}
-                style={{ zIndex: 1, top: '50%', transform: 'translateY(-50%)' }}
-              >
-                <i className="bi bi-chevron-right"></i>
-              </button>
-            </>
-          )}
-          <div
-            ref={moviesRef2}
-            className="d-flex custom-theme-radius-low overflow-auto scroll-hide custom-gap"
-            style={{ scrollSnapType: 'x mandatory' }}
-          >
-            {(searchQuery.trim()
-              ? (movies?.slice(Math.ceil(movies.length / 2)) || [])
-                .concat(
-                  Array.from({
-                    length: Math.max(
-                      0,
-                      6 - (movies?.slice(Math.ceil(movies.length / 2))?.length || 0)
-                    ),
-                  })
-                )
-              : Array.from({ length: 6 }) // Fallback to 6 skeletons if query is empty
-            ).map((movie, index) =>
-              movie ? (
-                <Card key={index} media={movie} type="movie" path={location.pathname} />
-              ) : (
-                <Card
-                  key={`movie-skeleton-${index}`}
-                  media={{ poster_path: null, vote_average: null }}
-                  type="movie"
-                  path="/"
-                  isDeletable={false}
-                  isSkeleton={true}
-                />
-              )
-            )}
-          </div>
-        </div>
-      )}
-
-      {/* First shows Results */}
+      {/* Shows Results */}
       {(
         <div className="position-relative custom-margin-y">
           {searchQuery.trim() && (shows?.filter(Boolean).length / 2) > 3 && (
             <>
               <button
                 className="btn btn-dark custom-bg rounded-pill py-2 position-absolute start-0 translate-middle-y d-none d-md-block"
-                onClick={() => scroll(showsRef1, 'left')}
+                onClick={() => scroll(showsRef, 'left')}
                 style={{ zIndex: 1, top: '50%', transform: 'translateY(-50%)' }}
               >
                 <i className="bi bi-chevron-left"></i>
               </button>
               <button
                 className="btn btn-dark custom-bg rounded-pill py-2 position-absolute end-0 translate-middle-y d-none d-md-block"
-                onClick={() => scroll(showsRef1, 'right')}
+                onClick={() => scroll(showsRef, 'right')}
                 style={{ zIndex: 1, top: '50%', transform: 'translateY(-50%)' }}
               >
                 <i className="bi bi-chevron-right"></i>
@@ -249,72 +169,13 @@ function SearchGrid({ searchQuery, setIsSearchLoading, setIsSearchLoaded, setHas
             </>
           )}
           <div
-            ref={showsRef1}
+            ref={showsRef}
             className="d-flex custom-theme-radius-low overflow-auto scroll-hide custom-gap"
             style={{ scrollSnapType: 'x mandatory' }}
           >
             {(searchQuery.trim()
-              ? (shows?.slice(0, Math.ceil(shows.length / 2)) || []).concat(
-                Array.from({
-                  length: Math.max(
-                    0,
-                    6 - (shows?.slice(0, Math.ceil(shows.length / 2))?.length || 0)
-                  ),
-                })
-              )
-              : Array.from({ length: 6 })
-            ).map((show, index) =>
-              show ? (
-                <Card key={index} media={show} type="tv" path={location.pathname} />
-              ) : (
-                <Card
-                  key={`tv-skeleton-${index}`}
-                  media={{ poster_path: null, vote_average: null }}
-                  type="tv"
-                  path="/"
-                  isDeletable={false}
-                  isSkeleton={true}
-                />
-              )
-            )}
-          </div>
-        </div>
-      )}
-
-      {/* Second shows Results */}
-      {(
-        <div className="position-relative custom-margin-y">
-          {searchQuery.trim() && (shows?.filter(Boolean).length / 2) > 3 && (
-            <>
-              <button
-                className="btn btn-dark custom-bg rounded-pill py-2 position-absolute start-0 translate-middle-y d-none d-md-block"
-                onClick={() => scroll(showsRef2, 'left')}
-                style={{ zIndex: 1, top: '50%', transform: 'translateY(-50%)' }}
-              >
-                <i className="bi bi-chevron-left"></i>
-              </button>
-              <button
-                className="btn btn-dark custom-bg rounded-pill py-2 position-absolute end-0 translate-middle-y d-none d-md-block"
-                onClick={() => scroll(showsRef2, 'right')}
-                style={{ zIndex: 1, top: '50%', transform: 'translateY(-50%)' }}
-              >
-                <i className="bi bi-chevron-right"></i>
-              </button>
-            </>
-          )}
-          <div
-            ref={showsRef2}
-            className="d-flex custom-theme-radius-low overflow-auto scroll-hide custom-gap"
-            style={{ scrollSnapType: 'x mandatory' }}
-          >
-            {(searchQuery.trim()
-              ? (shows?.slice(Math.ceil(shows.length / 2)) || []).concat(
-                Array.from({
-                  length: Math.max(
-                    0,
-                    6 - (shows?.slice(Math.ceil(shows.length / 2))?.length || 0)
-                  ),
-                })
+              ? (shows || []).concat(
+                Array.from({ length: Math.max(0, 6 - (shows?.length || 0)) })
               )
               : Array.from({ length: 6 })
             ).map((show, index) =>
