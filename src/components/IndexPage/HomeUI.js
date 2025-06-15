@@ -363,20 +363,22 @@ function HomeUI({
         <div className="flex-row text-white w-100">
           {!showSearchBar ?
             <div className="container">
-              <div className="d-flex align-items-center">
+              <div className="d-flex align-items-center gap-2">
                 <button
-                  className={`btn btn-dark bd-callout-dark rounded-pill-l dynamic-ts ${activeGrid === 'trending' ? 'active' : ''}`}
+                  className={`btn bg-transparent rounded-pill text-white dynamic-ts 
+                  ${activeGrid === 'trending' ? 'btn-outline-primary border-2' : ''}`}
                   onClick={() => handleGridChange('trending')}
                 >
                   <i className="bi bi-fire theme-color me-2"></i>
-                  <b className="mb-0">Trending</b>
+                  <b>Trending</b>
                 </button>
                 <button
-                  className={`btn btn-dark bd-callout-dark rounded-pill-r dynamic-ts ${activeGrid === 'providers' ? 'active' : ''}`}
+                  className={`btn bg-transparent rounded-pill text-white dynamic-ts 
+                  ${activeGrid === 'providers' ? 'btn-outline-primary border-2' : ''}`}
                   onClick={() => handleGridChange('providers')}
                 >
                   <i className="bi bi-cast theme-color me-2"></i>
-                  <b className="mb-0">Providers</b>
+                  <b>Providers</b>
                 </button>
               </div>
 
@@ -393,10 +395,10 @@ function HomeUI({
               {/* SearchGrid Spacing for SearchBar.js */}
               <div className="divider" style={{ height: '8rem' }}></div>
               <div className="d-flex align-items-center">
-                <button className="btn btn-dark bd-callout-dark rounded-pill dynamic-ts">
+                <span className="dynamic-ts">
                   <i className="bi bi-search theme-color me-2"></i>
-                  <b className="mb-0">Search</b>
-                </button>
+                  <b>Search</b>
+                </span>
               </div>
 
               <SearchGrid searchQuery={triggerSearch} setIsSearchLoading={setIsSearchLoading} setIsSearchLoaded={setIsSearchLoaded} setHasSearchContent={setHasSearchContent} />

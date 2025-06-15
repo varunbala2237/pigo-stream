@@ -144,15 +144,17 @@ function MyListGrid({ userUID }) {
                 {/* MyListGrid Spacing */}
                 <div className="divider" style={{ height: '4rem' }}></div>
                 <div className="d-flex align-items-center">
-                    <button className="btn btn-dark bd-callout-dark rounded-pill dynamic-ts">
+                    <span className="dynamic-ts">
                         <i className="bi bi-bookmark-fill theme-color me-2"></i>
-                        <b className="mb-0">My List</b>
-                    </button>
+                        <b>My List</b>
+                    </span>
                 </div>
 
-                <div className="d-flex align-items-center dynamic-ts mt-5">
-                    <i className="bi bi-film me-2"></i>
-                    <b className="mb-0">My List Movies</b>
+                <div className="d-flex align-items-center mt-5">
+                    <span className="dynamic-ts">
+                        <i className="bi bi-film me-2"></i>
+                        <b>My List Movies</b>
+                    </span>
                 </div>
 
                 {/* My List Movies */}
@@ -219,9 +221,11 @@ function MyListGrid({ userUID }) {
                     </div>
                 )}
 
-                <div className="d-flex align-items-center dynamic-ts mt-5">
-                    <i className="bi bi-tv me-2"></i>
-                    <b className="mb-0">My List Shows</b>
+                <div className="d-flex align-items-center mt-5">
+                    <span className="dynamic-ts">
+                        <i className="bi bi-tv me-2"></i>
+                        <b>My List Shows</b>
+                    </span>
                 </div>
 
                 {/* My List Shows */}

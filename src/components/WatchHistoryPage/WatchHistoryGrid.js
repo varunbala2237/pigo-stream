@@ -160,10 +160,10 @@ function WatchHistoryGrid({ userUID }) {
                 <div className="divider" style={{ height: '4rem' }}></div>
                 <div className="d-flex justify-content-between align-items-center">
                     <div className="text-start">
-                        <button className="btn btn-dark bd-callout-dark rounded-pill dynamic-ts">
+                        <span className="dynamic-ts">
                             <i className="bi bi-clock-history theme-color me-2"></i>
-                            <b className="mb-0">Watch History</b>
-                        </button>
+                            <b>Watch History</b>
+                        </span>
                     </div>
                     <div className="text-end">
                         <button
@@ -178,9 +178,11 @@ function WatchHistoryGrid({ userUID }) {
                     </div>
                 </div>
 
-                <div className="d-flex align-items-center dynamic-ts mt-5">
-                    <i className="bi bi-film me-2"></i>
-                    <b className="mb-0">Watch History Movies</b>
+                <div className="d-flex align-items-center mt-5">
+                    <span className="dynamic-ts">
+                        <i className="bi bi-film me-2"></i>
+                        <b>Watch History Movies</b>
+                    </span>
                 </div>
 
                 {/* Watch History Movies */}
@@ -247,9 +249,11 @@ function WatchHistoryGrid({ userUID }) {
                     </div>
                 )}
 
-                <div className="d-flex align-items-center dynamic-ts mt-5">
-                    <i className="bi bi-tv me-2"></i>
-                    <b className="mb-0">Watch History Shows</b>
+                <div className="d-flex align-items-center mt-5">
+                    <span className="dynamic-ts">
+                        <i className="bi bi-tv me-2"></i>
+                        <b>Watch History Shows</b>
+                    </span>
                 </div>
 
                 {/* Watch History Shows */}
