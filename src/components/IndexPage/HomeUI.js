@@ -370,23 +370,21 @@ function HomeUI({
         <div className="flex-row text-white w-100">
           {!showSearchBar ?
             <div className="container">
-              <div className="d-flex w-100 justify-content-center align-items-center dynamic-ts">
-                <div className="d-flex custom-bg rounded-pill">
-                  <button
-                    className={`btn btn-dark bd-callout-dark rounded-pill-l ${activeGrid === 'trending' ? 'active' : ''}`}
-                    onClick={() => handleGridChange('trending')}
-                  >
-                    <i className="bi bi-fire theme-color me-2"></i>
-                    <b className="mb-0">Trending</b>
-                  </button>
-                  <button
-                    className={`btn btn-dark bd-callout-dark rounded-pill-r ${activeGrid === 'providers' ? 'active' : ''}`}
-                    onClick={() => handleGridChange('providers')}
-                  >
-                    <i className="bi bi-cast theme-color me-2"></i>
-                    <b className="mb-0">Providers</b>
-                  </button>
-                </div>
+              <div className="d-flex align-items-center">
+                <button
+                  className={`btn btn-dark bd-callout-dark rounded-pill-l dynamic-ts ${activeGrid === 'trending' ? 'active' : ''}`}
+                  onClick={() => handleGridChange('trending')}
+                >
+                  <i className="bi bi-fire theme-color me-2"></i>
+                  <b className="mb-0">Trending</b>
+                </button>
+                <button
+                  className={`btn btn-dark bd-callout-dark rounded-pill-r dynamic-ts ${activeGrid === 'providers' ? 'active' : ''}`}
+                  onClick={() => handleGridChange('providers')}
+                >
+                  <i className="bi bi-cast theme-color me-2"></i>
+                  <b className="mb-0">Providers</b>
+                </button>
               </div>
 
               {activeGrid === 'trending' && (
@@ -399,15 +397,13 @@ function HomeUI({
             </div>
             :
             <div className="container">
-              {/* SearchGrid Backspace for SearchBar.js */}
-              <div className="divider" style={{ height: '4rem' }}></div>
-              <div className="d-flex w-100 justify-content-center align-items-center dynamic-ts">
-                <div className="d-flex custom-bg rounded-pill">
-                  <button className="btn btn-dark bd-callout-dark rounded-pill">
-                    <i className="bi bi-search theme-color me-2"></i>
-                    <b className="mb-0">Search</b>
-                  </button>
-                </div>
+              {/* SearchGrid Spacing for SearchBar.js */}
+              <div className="divider" style={{ height: '8rem' }}></div>
+              <div className="d-flex align-items-center">
+                <button className="btn btn-dark bd-callout-dark rounded-pill dynamic-ts">
+                  <i className="bi bi-search theme-color me-2"></i>
+                  <b className="mb-0">Search</b>
+                </button>
               </div>
 
               <SearchGrid searchQuery={triggerSearch} setIsSearchLoading={setIsSearchLoading} setIsSearchLoaded={setIsSearchLoaded} setHasSearchContent={setHasSearchContent} />

@@ -155,32 +155,32 @@ function WatchHistoryGrid({ userUID }) {
             {/* Overlay spinner for loading state */}
             <OverlaySpinner visible={isLoading} />
 
-            <div className="container mt-4 text-white">
-                <div className="d-flex justify-content-between align-items-center my-2 m-2">
-                    <div className="text-start dynamic-ts">
-                        <i className="bi bi-clock-history theme-color me-2"></i>
-                        <b className="mb-0">Watch History</b>
+            <div className="container">
+                {/* WatchHistoryGrid Spacing */}
+                <div className="divider" style={{ height: '4rem' }}></div>
+                <div className="d-flex justify-content-between align-items-center">
+                    <div className="text-start">
+                        <button className="btn btn-dark bd-callout-dark rounded-pill dynamic-ts">
+                            <i className="bi bi-clock-history theme-color me-2"></i>
+                            <b className="mb-0">Watch History</b>
+                        </button>
                     </div>
                     <div className="text-end">
                         <button
                             type="button"
-                            className="btn btn-md d-none d-md-inline-block btn-danger bd-callout-danger rounded-pill border-0"
+                            className="btn btn-danger bd-callout-danger rounded-pill text-white dynamic-ts"
                             onClick={handleClearHistory}
                             disabled={isClearButtonDisabled}
                         >
                             <i className="bi bi-trash me-2"></i>
-                            Remove All
-                        </button>
-                        <button
-                            type="button"
-                            className="btn btn-sm d-md-none btn-danger bd-callout-danger rounded-pill border-0"
-                            onClick={handleClearHistory}
-                            disabled={isClearButtonDisabled}
-                        >
-                            <i className="bi bi-trash me-2"></i>
-                            Remove All
+                            Clear History
                         </button>
                     </div>
+                </div>
+
+                <div className="d-flex align-items-center dynamic-ts mt-5">
+                    <i className="bi bi-film me-2"></i>
+                    <b className="mb-0">Watch History Movies</b>
                 </div>
 
                 {/* Watch History Movies */}
@@ -253,6 +253,11 @@ function WatchHistoryGrid({ userUID }) {
                         </button>
                     </div>
                 )}
+
+                <div className="d-flex align-items-center dynamic-ts mt-5">
+                    <i className="bi bi-tv me-2"></i>
+                    <b className="mb-0">Watch History Shows</b>
+                </div>
 
                 {/* Watch History Shows */}
                 <div className="position-relative custom-margin-y">

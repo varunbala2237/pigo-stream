@@ -140,10 +140,19 @@ function MyListGrid({ userUID }) {
             {/* Overlay spinner for loading state */}
             <OverlaySpinner visible={isLoading} />
 
-            <div className="container mt-4 text-white">
-                <div className="d-flex align-items-center dynamic-ts m-2">
-                    <i className="bi bi-bookmark-fill theme-color me-2"></i>
-                    <b className="mb-0">My List</b>
+            <div className="container">
+                {/* MyListGrid Spacing */}
+                <div className="divider" style={{ height: '4rem' }}></div>
+                <div className="d-flex align-items-center">
+                    <button className="btn btn-dark bd-callout-dark rounded-pill dynamic-ts">
+                        <i className="bi bi-bookmark-fill theme-color me-2"></i>
+                        <b className="mb-0">My List</b>
+                    </button>
+                </div>
+
+                <div className="d-flex align-items-center dynamic-ts mt-5">
+                    <i className="bi bi-film me-2"></i>
+                    <b className="mb-0">My List Movies</b>
                 </div>
 
                 {/* My List Movies */}
@@ -216,6 +225,11 @@ function MyListGrid({ userUID }) {
                         </button>
                     </div>
                 )}
+
+                <div className="d-flex align-items-center dynamic-ts mt-5">
+                    <i className="bi bi-tv me-2"></i>
+                    <b className="mb-0">My List Shows</b>
+                </div>
 
                 {/* My List Shows */}
                 <div className="position-relative custom-margin-y">
