@@ -73,22 +73,6 @@ body {
   gap: 4px;
 }
 
-.vh-25 {
-  min-height: 25vh;
-}
-
-.vh-35 {
-  min-height: 35vh;
-}
-
-.vh-50 {
-  min-height: 50vh;
-}
-
-.vh-70 {
-  min-height: 70vh;
-}
-
 .vh-100 {
   min-height: 100vh;
 }

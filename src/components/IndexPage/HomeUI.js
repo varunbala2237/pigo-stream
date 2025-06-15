@@ -35,6 +35,9 @@ function HomeUI({
   const [searchQuery, setSearchQuery] = useState('');
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
+  // Grid Switcher
+  const [activeGrid, setActiveGrid] = useState('trending');
+
   // Error handling flags
   const [isTrendingLoading, setIsTrendingLoading] = useState(true);
   const [isProvidersLoading, setIsProvidersLoading] = useState(true);
@@ -65,6 +68,7 @@ function HomeUI({
   // Restoring page states
   useEffect(() => {
     const savedWelcomeMessage = getSessionValue('HomeUI', 'welcomeMessage');
+    const savedActiveGrid = getSessionValue('HomeUI', 'activeGrid');
     const savedShowSearchBar = getSessionValue('HomeUI', 'showSearchBar');
     const savedSearchQuery = getSessionValue('HomeUI', 'searchQuery') || '';
     const savedTriggerSearch = getSessionValue('HomeUI', 'triggerSearch') || '';
@@ -76,6 +80,10 @@ function HomeUI({
         setAlert((prev) => (prev.key === 'welcome' ? { message: '', type: '', key: '' } : prev));
         removeSessionValue('HomeUI', 'welcomeMessage');
       }, 5000);
+    }
+
+    if (savedActiveGrid) {
+      setActiveGrid(savedActiveGrid);
     }
 
     if (savedShowSearchBar !== null) {
@@ -131,7 +139,7 @@ function HomeUI({
         setIsPageLoading(false);
       }
     } else {
-      if (!isTrendingLoading && !isProvidersLoading) {
+      if (!isTrendingLoading || !isProvidersLoading) {
         setIsPageLoading(false);
       }
     }
@@ -189,6 +197,11 @@ function HomeUI({
       clearTimeout(hideTimer);
     };
   }, [hasTrendingContent, hasProvidersContent, hasSearchContent, searchQuery]);
+
+  const handleGridChange = (grid) => {
+    setActiveGrid(grid);
+    setSessionValue('HomeUI', 'activeGrid', grid);
+  };
 
   const handleSearchBar = () => {
     setShowSearchBar((prevState) => {
@@ -356,16 +369,49 @@ function HomeUI({
         {/* Main content area */}
         <div className="flex-row text-white w-100">
           {!showSearchBar ?
-            <>
-              <TrendingGrid setIsTrendingLoading={setIsTrendingLoading} setIsTrendingLoaded={setIsTrendingLoaded} setHasTrendingContent={setHasTrendingContent} />
-              <ProvidersGrid setIsProvidersLoading={setIsProvidersLoading} setIsProvidersLoaded={setIsProvidersLoaded} setHasProvidersContent={setHasProvidersContent} />
-            </>
+            <div className="container">
+              <div className="d-flex w-100 justify-content-center align-items-center dynamic-ts">
+                <div className="d-flex custom-bg rounded-pill">
+                  <button
+                    className={`btn btn-dark bd-callout-dark rounded-pill-l ${activeGrid === 'trending' ? 'active' : ''}`}
+                    onClick={() => handleGridChange('trending')}
+                  >
+                    <i className="bi bi-fire theme-color me-2"></i>
+                    <b className="mb-0">Trending</b>
+                  </button>
+                  <button
+                    className={`btn btn-dark bd-callout-dark rounded-pill-r ${activeGrid === 'providers' ? 'active' : ''}`}
+                    onClick={() => handleGridChange('providers')}
+                  >
+                    <i className="bi bi-cast theme-color me-2"></i>
+                    <b className="mb-0">Providers</b>
+                  </button>
+                </div>
+              </div>
+
+              {activeGrid === 'trending' && (
+                <TrendingGrid setIsTrendingLoading={setIsTrendingLoading} setIsTrendingLoaded={setIsTrendingLoaded} setHasTrendingContent={setHasTrendingContent} />
+              )}
+
+              {activeGrid === 'providers' && (
+                <ProvidersGrid setIsProvidersLoading={setIsProvidersLoading} setIsProvidersLoaded={setIsProvidersLoaded} setHasProvidersContent={setHasProvidersContent} />
+              )}
+            </div>
             :
-            <>
+            <div className="container">
               {/* SearchGrid Backspace for SearchBar.js */}
               <div className="divider" style={{ height: '4rem' }}></div>
+              <div className="d-flex w-100 justify-content-center align-items-center dynamic-ts">
+                <div className="d-flex custom-bg rounded-pill">
+                  <button className="btn btn-dark bd-callout-dark rounded-pill">
+                    <i className="bi bi-search theme-color me-2"></i>
+                    <b className="mb-0">Search</b>
+                  </button>
+                </div>
+              </div>
+
               <SearchGrid searchQuery={triggerSearch} setIsSearchLoading={setIsSearchLoading} setIsSearchLoaded={setIsSearchLoaded} setHasSearchContent={setHasSearchContent} />
-            </>}
+            </div>}
         </div>
 
         {/* Footer Backspace & Footer */}

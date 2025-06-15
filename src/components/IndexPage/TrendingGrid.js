@@ -93,11 +93,12 @@ function TrendingGrid({ setIsTrendingLoading, setIsTrendingLoaded, setHasTrendin
   };
 
   return (
-    <div className="container mt-4 text-white">
-      <div className="d-flex align-items-center dynamic-ts m-2">
-        <i className="bi bi-fire theme-color me-2"></i>
-        <b className="mb-0">Trending</b>
+    <>
+      <div className="d-flex align-items-center dynamic-ts mt-5">
+        <i className="bi bi-film me-2"></i>
+        <b className="mb-0">Trending Movies</b>
       </div>
+
       {/* Trending Movies Section */}
       {(
         <div className="position-relative custom-margin-y">
@@ -142,6 +143,11 @@ function TrendingGrid({ setIsTrendingLoading, setIsTrendingLoaded, setHasTrendin
         </div>
       )}
 
+      <div className="d-flex align-items-center dynamic-ts mt-5">
+        <i className="bi bi-tv me-2"></i>
+        <b className="mb-0">Trending Shows</b>
+      </div>
+
       {/* Trending shows Section */}
       {(
         <div className="position-relative custom-margin-y">
@@ -185,7 +191,7 @@ function TrendingGrid({ setIsTrendingLoading, setIsTrendingLoaded, setHasTrendin
           </div>
         </div>
       )}
-    </div>
+    </>
   );
 }
 

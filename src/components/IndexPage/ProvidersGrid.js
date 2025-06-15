@@ -24,11 +24,15 @@ const PROVIDERS = [
 const SESSION_PATH = ['HomeUI', 'Grids', 'ProvidersGrid'];
 
 function ProvidersGrid({ setIsProvidersLoading, setIsProvidersLoaded, setHasProvidersContent }) {
-    const [selectedProvider, setSelectedProvider] = useState(null);
+    const [selectedProvider, setSelectedProvider] = useState(PROVIDERS[0]);
+    const selectedProviderId = selectedProvider?.id ?? null;
+    const selectedRegion = PROVIDERS.find(p => p.id === selectedProviderId)?.region ?? null;
+
     const { movies, shows, isLoading, isError } = useFetchProviders(
-        selectedProvider,
-        PROVIDERS.find(p => p.id === selectedProvider)?.region
+        selectedProviderId,
+        selectedRegion
     );
+
     const location = useLocation();
 
     // Scroll references for movies and shows
@@ -129,13 +133,9 @@ function ProvidersGrid({ setIsProvidersLoading, setIsProvidersLoaded, setHasProv
     };
 
     return (
-        <div className="container mt-4 text-white">
-            <div className="d-flex align-items-center dynamic-ts m-2">
-                <i className="bi bi-cast theme-color me-2"></i>
-                <b className="mb-0">Providers</b>
-            </div>
+        <>
             {/* Providers Selection Section */}
-            <div className="position-relative custom-margin-y">
+            <div className="position-relative custom-margin-y mt-5">
                 {PROVIDERS.length > 4 && (
                     <>
                         <button
@@ -166,9 +166,11 @@ function ProvidersGrid({ setIsProvidersLoading, setIsProvidersLoaded, setHasProv
                                 `provider-card 
                                 bg-${provider.bg} 
                                 custom-margin-right custom-theme-radius-low d-flex justify-content-center align-items-center 
-                                ${selectedProvider === provider.id ? 'border border-2 border-primary' : ''}`
+                                ${selectedProvider.id === provider.id ? 'border border-2 border-primary' : ''}`
                             }
-                            onClick={() => setSelectedProvider(provider.id)}
+                            onClick={() =>
+                                setSelectedProvider(provider)
+                            }
                         >
                             <img
                                 src={provider.logo}
@@ -178,6 +180,11 @@ function ProvidersGrid({ setIsProvidersLoading, setIsProvidersLoaded, setHasProv
                         </div>
                     ))}
                 </div>
+            </div>
+
+            <div className="d-flex align-items-center dynamic-ts mt-5">
+                <i className="bi bi-film me-2"></i>
+                <b className="mb-0">{selectedProvider.name} Movies</b>
             </div>
 
             {/* Providers Movies Section */}
@@ -222,7 +229,12 @@ function ProvidersGrid({ setIsProvidersLoading, setIsProvidersLoaded, setHasProv
                 </div>
             </div>
 
-            {/* Providers shows Section */}
+            <div className="d-flex align-items-center dynamic-ts mt-5">
+                <i className="bi bi-tv me-2"></i>
+                <b className="mb-0">{selectedProvider.name} Shows</b>
+            </div>
+
+            {/* Providers Shows Section */}
             <div className="position-relative custom-margin-y">
                 {shows.filter(Boolean).length > 3 && (
                     <>
@@ -263,7 +275,7 @@ function ProvidersGrid({ setIsProvidersLoading, setIsProvidersLoaded, setHasProv
                         )}
                 </div>
             </div>
-        </div>
+        </>
     );
 }
 
