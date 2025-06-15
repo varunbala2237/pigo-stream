@@ -363,18 +363,18 @@ function HomeUI({
         <div className="flex-row text-white w-100">
           {!showSearchBar ?
             <div className="container">
-              <div className="d-flex align-items-center gap-2">
+              <div className="d-flex align-items-center">
                 <button
-                  className={`btn bg-transparent rounded-pill text-white dynamic-ts 
-                  ${activeGrid === 'trending' ? 'btn-outline-primary border-2' : ''}`}
+                  className={`btn bg-transparent text-white border-0 dynamic-ts 
+                  ${activeGrid === 'trending' ? '' : 'opacity-50'}`}
                   onClick={() => handleGridChange('trending')}
                 >
                   <i className="bi bi-fire theme-color me-2"></i>
                   <b>Trending</b>
                 </button>
                 <button
-                  className={`btn bg-transparent rounded-pill text-white dynamic-ts 
-                  ${activeGrid === 'providers' ? 'btn-outline-primary border-2' : ''}`}
+                  className={`btn bg-transparent text-white border-0 dynamic-ts 
+                  ${activeGrid === 'providers' ? '' : 'opacity-50'}`}
                   onClick={() => handleGridChange('providers')}
                 >
                   <i className="bi bi-cast theme-color me-2"></i>
