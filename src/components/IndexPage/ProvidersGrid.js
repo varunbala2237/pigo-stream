@@ -25,8 +25,8 @@ const SESSION_PATH = ['HomeUI', 'Grids', 'ProvidersGrid'];
 
 function ProvidersGrid({ setIsProvidersLoading, setIsProvidersLoaded, setHasProvidersContent }) {
     const [selectedProvider, setSelectedProvider] = useState(PROVIDERS[0]);
-    const selectedProviderId = selectedProvider?.id ?? null;
-    const selectedRegion = PROVIDERS.find(p => p.id === selectedProviderId)?.region ?? null;
+    const selectedProviderId = selectedProvider?.id;
+    const selectedRegion = PROVIDERS.find(p => p.id === selectedProviderId)?.region;
 
     const { movies, shows, isLoading, isError } = useFetchProviders(
         selectedProviderId,
@@ -159,7 +159,7 @@ function ProvidersGrid({ setIsProvidersLoading, setIsProvidersLoaded, setHasProv
                     className="d-flex custom-theme-radius-low overflow-auto scroll-hide"
                     style={{ scrollSnapType: 'x mandatory' }}
                 >
-                    {PROVIDERS.map((provider, index) => (
+                    {PROVIDERS.map((provider) => (
                         <div
                             key={provider.id}
                             className={
