@@ -347,18 +347,11 @@ function HomeUI({
                   </div>
                   <div className="dynamic-fs my-2">{mediaDesc}</div>
                   <button
-                    className="btn btn-dark btn-md d-none d-md-inline-block bd-callout-dark rounded-pill border-0 my-2"
+                    className="btn bg-transparent rounded-pill text-white border-0 dynamic-fs"
                     onClick={handlePlayMedia}
                   >
-                    <i className="bi bi-play-fill me-2"></i>
-                    <span>Watch Now</span>
-                  </button>
-                  <button
-                    className="btn btn-dark btn-sm d-md-none bd-callout-dark rounded-pill border-0 my-2"
-                    onClick={handlePlayMedia}
-                  >
-                    <i className="bi bi-play-fill me-2"></i>
-                    <span>Watch Now</span>
+                    <i className="bi bi-arrow-right me-2"></i>
+                    <span>View More</span>
                   </button>
                 </div>
               </div>

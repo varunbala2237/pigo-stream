@@ -58,22 +58,13 @@ function Header() {
 
           {location.pathname === "/play" && (
             <>
-              {/* Back button with navigation for small screens */}
+              {/* Back button with navigation */}
               <button
                 type="button"
-                className="btn btn-dark bd-callout-dark border-0 btn-sm d-md-none text-white rounded-pill dynamic-fs"
+                className="btn btn-dark bd-callout-dark text-white rounded-pill border-0 dynamic-fs"
                 onClick={() => navigate(-1)} // Navigate to the previous page
               >
-                <i className="bi bi-back me-2"></i>
-                Back
-              </button>
-              {/* Back button with navigation for large screens */}
-              <button
-                type="button"
-                className="btn btn-dark bd-callout-dark border-0 btn-md d-none d-md-inline-block text-white rounded-pill dynamic-fs"
-                onClick={() => navigate(-1)} // Navigate to the previous page
-              >
-                <i className="bi bi-back me-2"></i>
+                <i className="bi bi-arrow-left me-2"></i>
                 Back
               </button>
             </>
