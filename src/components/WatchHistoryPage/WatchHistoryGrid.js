@@ -186,7 +186,7 @@ function WatchHistoryGrid({ userUID }) {
                 </div>
 
                 {/* Watch History Movies */}
-                <div className="position-relative ">
+                <div className="position-relative my-2">
                     {(moviesHistory.filter(Boolean).length / 2) > 3 && (
                         <>
                             <button
@@ -257,7 +257,7 @@ function WatchHistoryGrid({ userUID }) {
                 </div>
 
                 {/* Watch History Shows */}
-                <div className="position-relative ">
+                <div className="position-relative my-2">
                     {(showsHistory.filter(Boolean).length / 2) > 3 && (
                         <>
                             <button

@@ -158,7 +158,7 @@ function MyListGrid({ userUID }) {
                 </div>
 
                 {/* My List Movies */}
-                <div className="position-relative ">
+                <div className="position-relative my-2">
                     {(moviesList.filter(Boolean).length / 2) > 3 && (
                         <>
                             <button
@@ -229,7 +229,7 @@ function MyListGrid({ userUID }) {
                 </div>
 
                 {/* My List Shows */}
-                <div className="position-relative ">
+                <div className="position-relative my-2">
                     {(showsList.filter(Boolean).length / 2) > 3 && (
                         <>
                             <button

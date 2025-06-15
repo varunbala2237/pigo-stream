@@ -101,7 +101,7 @@ function TrendingGrid({ setIsTrendingLoading, setIsTrendingLoaded, setHasTrendin
 
       {/* Trending Movies Section */}
       {(
-        <div className="position-relative ">
+        <div className="position-relative my-2">
           {movies.filter(Boolean).length > 3 && (
             <>
               <button
@@ -150,7 +150,7 @@ function TrendingGrid({ setIsTrendingLoading, setIsTrendingLoaded, setHasTrendin
 
       {/* Trending shows Section */}
       {(
-        <div className="position-relative ">
+        <div className="position-relative my-2">
           {shows.filter(Boolean).length > 3 && (
             <>
               <button

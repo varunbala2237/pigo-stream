@@ -136,7 +136,7 @@ function ProvidersGrid({ setIsProvidersLoading, setIsProvidersLoaded, setHasProv
     return (
         <>
             {/* Providers Selection Section */}
-            <div className="position-relative  mt-5">
+            <div className="position-relative my-2 mt-5">
                 {PROVIDERS.length > 4 && (
                     <>
                         <button
@@ -189,7 +189,7 @@ function ProvidersGrid({ setIsProvidersLoading, setIsProvidersLoaded, setHasProv
             </div>
 
             {/* Providers Movies Section */}
-            <div className="position-relative ">
+            <div className="position-relative my-2">
                 {movies.filter(Boolean).length > 3 && (
                     <>
                         <button
@@ -236,7 +236,7 @@ function ProvidersGrid({ setIsProvidersLoading, setIsProvidersLoaded, setHasProv
             </div>
 
             {/* Providers Shows Section */}
-            <div className="position-relative">
+            <div className="position-relative my-2">
                 {shows.filter(Boolean).length > 3 && (
                     <>
                         <button
