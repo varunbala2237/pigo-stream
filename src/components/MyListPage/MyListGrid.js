@@ -207,7 +207,7 @@ function MyListGrid({ userUID }) {
                     </div>
                 </div>
 
-                {moviesList.length >= movieLimit && (
+                {moviesList.length > movieLimit && (
                     <div className="text-end">
                         <button
                             className="btn bg-transparent dynamic-fs border-0 rounded-pill text-white"
@@ -276,7 +276,7 @@ function MyListGrid({ userUID }) {
                     </div>
                 </div>
 
-                {showsList.length >= showLimit && (
+                {showsList.length > showLimit && (
                     <div className="text-end">
                         <button
                             className="btn bg-transparent dynamic-fs border-0 rounded-pill text-white"

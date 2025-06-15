@@ -235,7 +235,7 @@ function WatchHistoryGrid({ userUID }) {
                     </div>
                 </div>
 
-                {moviesHistory.length >= movieLimit && (
+                {moviesHistory.length > movieLimit && (
                     <div className="text-end">
                         <button
                             className="btn bg-transparent dynamic-fs border-0 rounded-pill text-white"
@@ -304,7 +304,7 @@ function WatchHistoryGrid({ userUID }) {
                     </div>
                 </div>
 
-                {showsHistory.length >= showLimit && (
+                {showsHistory.length > showLimit && (
                     <div className="text-end">
                         <button
                             className="btn bg-transparent dynamic-fs border-0 rounded-pill text-white"

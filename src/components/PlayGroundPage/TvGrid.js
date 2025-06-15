@@ -189,7 +189,7 @@ function TvGrid({ id, type, mediaInfo, setBackgroundImage }) {
     setStorageValue(...TV_STORAGE_PATH, 'selectedServer', server);
   };
 
-  const handleShowMore = () => {
+  const handleViewMore = () => {
     setSliceIndex(prevSliceIndex => {
       const newIndex = prevSliceIndex + 12;
       setSessionValue(...TV_STORAGE_PATH, 'sliceIndex', newIndex);
@@ -285,22 +285,12 @@ function TvGrid({ id, type, mediaInfo, setBackgroundImage }) {
                   </div>
                   {cast.length > sliceIndex && (
                     <div className="text-end">
-                      {/* Button for medium and large screens */}
                       <button
-                        className="btn btn-dark bd-callout-dark dynamic-fs border-0 rounded-pill btn-md d-none d-md-inline-block"
-                        onClick={handleShowMore}
+                        className="btn bg-transparent dynamic-fs border-0 rounded-pill text-white"
+                        onClick={handleViewMore}
                       >
-                        <i className="bi bi-chevron-down text-white me-2"></i>
-                        <span className="text-white">Show More</span>
-                      </button>
-
-                      {/* Button for small screens */}
-                      <button
-                        className="btn btn-dark bd-callout-dark dynamic-fs border-0 rounded-pill btn-sm d-md-none"
-                        onClick={handleShowMore}
-                      >
-                        <i className="bi bi-chevron-down text-white me-2"></i>
-                        <span className="text-white">Show More</span>
+                        <i className="bi bi-arrow-right me-2"></i>
+                        View More
                       </button>
                     </div>
                   )}
