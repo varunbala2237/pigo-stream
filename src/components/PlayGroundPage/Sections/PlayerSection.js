@@ -245,7 +245,7 @@ function PlayerSection({
                   {mediaInfo.overview}
                 </div>
 
-                {mediaInfo.overview.length > 120 && (
+                {mediaInfo.overview.length > 280 && (
                   <div className="d-flex justify-content-end">
                     <button
                       className="btn d-none d-md-block dynamic-fs border-0 text-white"
