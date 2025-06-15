@@ -372,7 +372,10 @@ function HomeUI({
                   <i className="bi bi-fire theme-color me-2"></i>
                   <b>Trending</b>
                 </button>
+                
                 {/* Divider Line */}
+                <div className="border-start border-secondary mx-3 align-self-stretch"></div>
+
                 <button
                   className={`btn bg-transparent text-white border-0 dynamic-hs 
                   ${activeGrid === 'providers' ? '' : 'opacity-50'}`}
