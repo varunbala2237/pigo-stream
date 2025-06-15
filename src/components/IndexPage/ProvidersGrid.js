@@ -24,7 +24,11 @@ const PROVIDERS = [
 const SESSION_PATH = ['HomeUI', 'Grids', 'ProvidersGrid'];
 
 function ProvidersGrid({ setIsProvidersLoading, setIsProvidersLoaded, setHasProvidersContent }) {
-    const [selectedProvider, setSelectedProvider] = useState(PROVIDERS[0]);
+    // Restore the selected provider value
+    const [selectedProvider, setSelectedProvider] = useState(() => {
+        return getSessionValue(...SESSION_PATH, 'selectedProvider') ?? PROVIDERS[0];
+    });
+
     const selectedProviderId = selectedProvider?.id;
     const selectedRegion = PROVIDERS.find(p => p.id === selectedProviderId)?.region;
 
@@ -65,12 +69,6 @@ function ProvidersGrid({ setIsProvidersLoading, setIsProvidersLoaded, setHasProv
             setHasProvidersContent(hasContent);
         }
     }, [isLoading, isError, movies, shows, setHasProvidersContent]);
-
-    // Load selected provider from sessionStorage on mount
-    useEffect(() => {
-        const savedProvider = getSessionValue(...SESSION_PATH, 'selectedProvider');
-        setSelectedProvider(savedProvider ?? PROVIDERS[0]);
-    }, []);
 
     // Load from sessionStorage on mount
     useEffect(() => {
