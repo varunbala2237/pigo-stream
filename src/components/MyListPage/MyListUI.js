@@ -49,12 +49,10 @@ function MyListUI() {
         <Header />
 
         {/* MyListGrid */}
-        <div className="flex-row text-white w-100">
-          <MyListGrid userUID={userUID} />
-        </div>
+        <MyListGrid userUID={userUID} />
 
         {/* Footer Backspace */}
-        <div className="divider" style={{ height: '4rem' }}></div>
+        <div className="divider" style={{ height: '6rem' }}></div>
         {/* Footer */}
         <Footer />
       </div>

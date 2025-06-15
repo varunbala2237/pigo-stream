@@ -135,8 +135,12 @@ function ProvidersGrid({ setIsProvidersLoading, setIsProvidersLoaded, setHasProv
 
     return (
         <>
+            <div className="d-flex justify-content-start align-items-center dynamic-ts mt-5">
+                <b>Available Platforms</b>
+            </div>
+            
             {/* Providers Selection Section */}
-            <div className="position-relative my-2 mt-5">
+            <div className="position-relative my-2">
                 {PROVIDERS.length > 4 && (
                     <>
                         <button
@@ -183,9 +187,8 @@ function ProvidersGrid({ setIsProvidersLoading, setIsProvidersLoaded, setHasProv
                 </div>
             </div>
 
-            <div className="d-flex align-items-center dynamic-ts mt-5">
-                <i className="bi bi-film me-2"></i>
-                <b className="mb-0">{selectedProvider.name} Movies</b>
+            <div className="d-flex justify-content-start align-items-center dynamic-ts mt-5">
+                <b>{selectedProvider.name} Movies</b>
             </div>
 
             {/* Providers Movies Section */}
@@ -230,9 +233,8 @@ function ProvidersGrid({ setIsProvidersLoading, setIsProvidersLoaded, setHasProv
                 </div>
             </div>
 
-            <div className="d-flex align-items-center dynamic-ts mt-5">
-                <i className="bi bi-tv me-2"></i>
-                <b className="mb-0">{selectedProvider.name} Shows</b>
+            <div className="d-flex justify-content-start align-items-center dynamic-ts mt-5">
+                <b>{selectedProvider.name} Shows</b>
             </div>
 
             {/* Providers Shows Section */}

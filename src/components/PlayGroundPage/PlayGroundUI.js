@@ -73,7 +73,7 @@ function PlayGround() {
         />
 
         {/* Footer Backspace & Footer */}
-        <div className="divider" style={{ height: '4rem' }}></div>
+        <div className="divider" style={{ height: '6rem' }}></div>
         <Footer />
       </div>
     </div>

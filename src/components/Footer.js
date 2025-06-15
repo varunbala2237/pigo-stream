@@ -34,7 +34,6 @@ const Footer = ({ showSearchBar = null, handleSearchBar = null }) => {
           <li className="nav-item text-center mx-auto">
             <button
               className={`btn border-0 d-flex flex-column align-items-center justify-content-center text-decoration-none dynamic-ts`}
-              style={{ width: '3rem', height: '3rem' }}
               onClick={handleSearchBar}
             >
               <i className={`bi ${showSearchBar ? 'bi-x-lg text-white' : 'bi-search text-secondary'}`}></i>

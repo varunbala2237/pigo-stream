@@ -324,7 +324,7 @@ function HomeUI({
             </div>
           ) : (
             <div className="container justify-content-center" style={{ textAlign: 'start' }}>
-              <div className="d-flex flex-column text-white custom-theme-radius-low" style={{ padding: '5%' }}>
+              <div className="d-flex flex-column text-white custom-theme-radius-low">
                 <div className="d-flex align-items-center">
                   <b className="text-wrap dynamic-ts">{title}</b>
                   {/* Badge for Recommended or Popular */}
@@ -362,18 +362,19 @@ function HomeUI({
         {/* Main content area */}
         <div className="flex-row text-white w-100">
           {!showSearchBar ?
-            <div className="container">
-              <div className="d-flex align-items-center">
+            <div className="container my-5">
+              <div className="d-flex justify-content-start align-items-center">
                 <button
-                  className={`btn bg-transparent text-white border-0 dynamic-ts 
+                  className={`btn bg-transparent text-white border-0 dynamic-hs 
                   ${activeGrid === 'trending' ? '' : 'opacity-50'}`}
                   onClick={() => handleGridChange('trending')}
                 >
                   <i className="bi bi-fire theme-color me-2"></i>
                   <b>Trending</b>
                 </button>
+                {/* Divider Line */}
                 <button
-                  className={`btn bg-transparent text-white border-0 dynamic-ts 
+                  className={`btn bg-transparent text-white border-0 dynamic-hs 
                   ${activeGrid === 'providers' ? '' : 'opacity-50'}`}
                   onClick={() => handleGridChange('providers')}
                 >
@@ -391,11 +392,11 @@ function HomeUI({
               )}
             </div>
             :
-            <div className="container">
+            <div className="container my-5">
               {/* SearchGrid Spacing for SearchBar.js */}
-              <div className="divider" style={{ height: '8rem' }}></div>
-              <div className="d-flex align-items-center">
-                <span className="dynamic-ts">
+              <div className="divider" style={{ height: '3rem' }}></div>
+              <div className="d-flex justify-content-start align-items-center">
+                <span className="dynamic-hs">
                   <i className="bi bi-search theme-color me-2"></i>
                   <b>Search</b>
                 </span>
@@ -406,7 +407,7 @@ function HomeUI({
         </div>
 
         {/* Footer Backspace & Footer */}
-        <div className="divider" style={{ height: '4rem' }}></div>
+        <div className="divider" style={{ height: '6rem' }}></div>
         <Footer showSearchBar={showSearchBar} setShowSearchBar={setShowSearchBar} handleSearchBar={handleSearchBar} />
 
         {/* Connection Modal */}

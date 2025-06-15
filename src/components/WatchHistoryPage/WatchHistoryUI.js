@@ -49,12 +49,10 @@ function WatchHistoryUI() {
         <Header />
 
         {/* WatchHistoryGrid */}
-        <div className="flex-row text-white w-100">
-          <WatchHistoryGrid userUID={userUID} />
-        </div>
+        <WatchHistoryGrid userUID={userUID} />
 
         {/* Footer Backspace */}
-        <div className="divider" style={{ height: '4rem' }}></div>
+        <div className="divider" style={{ height: '6rem' }}></div>
         {/* Footer */}
         <Footer />
       </div>

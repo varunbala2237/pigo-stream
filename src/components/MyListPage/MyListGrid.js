@@ -136,23 +136,20 @@ function MyListGrid({ userUID }) {
     };
 
     return (
-        <>
+        <div className="d-flex flex-column justify-content-center align-items-center text-white p-0">
             {/* Overlay spinner for loading state */}
             <OverlaySpinner visible={isLoading} />
 
-            <div className="container">
-                {/* MyListGrid Spacing */}
-                <div className="divider" style={{ height: '4rem' }}></div>
-                <div className="d-flex align-items-center">
-                    <span className="dynamic-ts">
+            <div className="container mb-5 mt-4">
+                <div className="d-flex justify-content-start align-items-center">
+                    <span className="dynamic-hs">
                         <i className="bi bi-bookmark-fill theme-color me-2"></i>
                         <b>My List</b>
                     </span>
                 </div>
 
-                <div className="d-flex align-items-center mt-5">
+                <div className="d-flex justify-content-start align-items-center mt-5">
                     <span className="dynamic-ts">
-                        <i className="bi bi-film me-2"></i>
                         <b>My List Movies</b>
                     </span>
                 </div>
@@ -221,9 +218,8 @@ function MyListGrid({ userUID }) {
                     </div>
                 )}
 
-                <div className="d-flex align-items-center mt-5">
+                <div className="d-flex justify-content-start align-items-center mt-5">
                     <span className="dynamic-ts">
-                        <i className="bi bi-tv me-2"></i>
                         <b>My List Shows</b>
                     </span>
                 </div>
@@ -300,7 +296,7 @@ function MyListGrid({ userUID }) {
             {alert.message && (
                 <Alert message={alert.message} onClose={handleAlertDismiss} type={alert.type} />
             )}
-        </>
+        </div>
     );
 }
 
