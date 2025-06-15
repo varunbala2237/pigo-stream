@@ -102,7 +102,7 @@ function SearchGrid({ searchQuery, setIsSearchLoading, setIsSearchLoaded, setHas
 
       {/* Movies Results */}
       {(
-        <div className="position-relative custom-margin-y">
+        <div className="position-relative ">
           {searchQuery.trim() && (movies?.filter(Boolean).length / 2) > 3 && (
             <>
               <button
@@ -158,7 +158,7 @@ function SearchGrid({ searchQuery, setIsSearchLoading, setIsSearchLoaded, setHas
 
       {/* Shows Results */}
       {(
-        <div className="position-relative custom-margin-y">
+        <div className="position-relative ">
           {searchQuery.trim() && (shows?.filter(Boolean).length / 2) > 3 && (
             <>
               <button

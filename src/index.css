@@ -45,30 +45,6 @@ body {
 }
 
 /* Common & Custom heights and widths */
-.custom-margin-top {
-  margin-top: 4px;
-}
-
-.custom-margin-bottom {
-  margin-bottom: 4px;
-}
-
-.custom-margin-left {
-  margin-left: 4px;
-}
-
-.custom-margin-right {
-  margin-right: 4px;
-}
-
-.custom-margin-x {
-  margin: 0px 4px;
-}
-
-.custom-margin-y {
-  margin: 4px 0px;
-}
-
 .custom-gap {
   gap: 4px;
 }
