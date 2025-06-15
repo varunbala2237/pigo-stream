@@ -114,7 +114,7 @@ function WatchHistoryGrid({ userUID }) {
         }
     };
 
-    const handleShowMoreMovies = () => {
+    const handleViewMoreMovies = () => {
         setMovieLimit(prevLimit => {
             const newLimit = prevLimit + 12;
             setSessionValue(...SESSION_PATH, 'movieLimit', newLimit);
@@ -122,7 +122,7 @@ function WatchHistoryGrid({ userUID }) {
         });
     };
 
-    const handleShowMoreShows = () => {
+    const handleViewMoreShows = () => {
         setShowLimit(prevLimit => {
             const newLimit = prevLimit + 12;
             setSessionValue(...SESSION_PATH, 'showLimit', newLimit);
@@ -235,21 +235,14 @@ function WatchHistoryGrid({ userUID }) {
                     </div>
                 </div>
 
-                {moviesHistory.length === movieLimit && (
-                    <div className="text-end mb-3">
+                {moviesHistory.length >= movieLimit && (
+                    <div className="text-end">
                         <button
-                            className="btn btn-dark bd-callout-dark dynamic-fs border-0 rounded-pill btn-md d-none d-md-inline-block"
-                            onClick={handleShowMoreMovies}
+                            className="btn bg-transparent dynamic-fs border-0 rounded-pill text-white"
+                            onClick={handleViewMoreMovies}
                         >
-                            <i className="bi bi-chevron-right text-white me-2"></i>
-                            <span className="text-white">Show More</span>
-                        </button>
-                        <button
-                            className="btn btn-dark bd-callout-dark dynamic-fs border-0 rounded-pill btn-sm d-md-none"
-                            onClick={handleShowMoreMovies}
-                        >
-                            <i className="bi bi-chevron-right text-white me-2"></i>
-                            <span className="text-white">Show More</span>
+                            <i className="bi bi-arrow-right me-2"></i>
+                            View More
                         </button>
                     </div>
                 )}
@@ -311,21 +304,14 @@ function WatchHistoryGrid({ userUID }) {
                     </div>
                 </div>
 
-                {showsHistory.length === showLimit && (
-                    <div className="text-end mb-3">
+                {showsHistory.length >= showLimit && (
+                    <div className="text-end">
                         <button
-                            className="btn btn-dark bd-callout-dark dynamic-fs border-0 rounded-pill btn-md d-none d-md-inline-block"
-                            onClick={handleShowMoreShows}
+                            className="btn bg-transparent dynamic-fs border-0 rounded-pill text-white"
+                            onClick={handleViewMoreShows}
                         >
-                            <i className="bi bi-chevron-right text-white me-2"></i>
-                            <span className="text-white">Show More</span>
-                        </button>
-                        <button
-                            className="btn btn-dark bd-callout-dark dynamic-fs border-0 rounded-pill btn-sm d-md-none"
-                            onClick={handleShowMoreShows}
-                        >
-                            <i className="bi bi-chevron-right text-white me-2"></i>
-                            <span className="text-white">Show More</span>
+                            <i className="bi bi-arrow-right me-2"></i>
+                            View More
                         </button>
                     </div>
                 )}

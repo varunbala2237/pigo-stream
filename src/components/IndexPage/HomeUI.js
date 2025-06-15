@@ -351,7 +351,7 @@ function HomeUI({
                     onClick={handlePlayMedia}
                   >
                     <i className="bi bi-arrow-right me-2"></i>
-                    <span>View More</span>
+                    View More
                   </button>
                 </div>
               </div>
