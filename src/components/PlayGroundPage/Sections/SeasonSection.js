@@ -20,12 +20,12 @@ function SeasonSection({ seasons, selectedSeason, onSeasonChange }) {
               className={`btn btn-dark bd-callout-dark w-100 d-flex flex-column align-items-center justify-content-center text-white border-0 shadow-sm
                 ${selectedSeason === season.season_number ? 'active' : ''}`}
               onClick={() => onSeasonChange(season.season_number)}
-              title={`S${season.season_number}: ${season.name}`}
+              title={season.name}
               data-bs-toggle="tooltip"
               data-bs-placement="top"
             >
               <small className="text-truncate w-100 dynamic-ss">
-                S{season.season_number}: {season.name}
+                {season.name}
               </small>
             </button>
           </div>
