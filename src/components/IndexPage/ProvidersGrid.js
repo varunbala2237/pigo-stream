@@ -157,7 +157,7 @@ function ProvidersGrid({ setIsProvidersLoading, setIsProvidersLoaded, setHasProv
                 )}
                 <div
                     ref={providersRef}
-                    className="d-flex custom-theme-radius-low overflow-auto scroll-hide"
+                    className="d-flex custom-theme-radius-low overflow-auto scroll-hide gap-1"
                     style={{ scrollSnapType: 'x mandatory' }}
                 >
                     {PROVIDERS.map((provider) => (
@@ -166,7 +166,7 @@ function ProvidersGrid({ setIsProvidersLoading, setIsProvidersLoaded, setHasProv
                             className={
                                 `provider-card 
                                 bg-${provider.bg} 
-                                custom-margin-right custom-theme-radius-low d-flex justify-content-center align-items-center 
+                                custom-theme-radius-low d-flex justify-content-center align-items-center 
                                 ${selectedProvider.id === provider.id ? 'border border-2 border-primary' : ''}`
                             }
                             onClick={() =>
@@ -236,7 +236,7 @@ function ProvidersGrid({ setIsProvidersLoading, setIsProvidersLoaded, setHasProv
             </div>
 
             {/* Providers Shows Section */}
-            <div className="position-relative custom-margin-y">
+            <div className="position-relative">
                 {shows.filter(Boolean).length > 3 && (
                     <>
                         <button

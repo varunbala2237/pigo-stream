@@ -10,7 +10,7 @@ function EpisodeSection({
   return (
     <div
       ref={episodeScrollRef}
-      className="d-flex flex-column overflow-auto custom-theme-radius-low"
+      className="d-flex flex-column overflow-auto custom-theme-radius-low gap-1"
       style={{ maxHeight: '250px' }}
     >
       {episodes.length > 0 ? (
@@ -21,7 +21,7 @@ function EpisodeSection({
           return (
             <button
               key={episode.id}
-              className={`btn btn-dark bd-callout-dark w-100 text-start custom-margin-top custom-theme-radius-low text-white border-0 shadow-sm 
+              className={`btn btn-dark bd-callout-dark w-100 text-start custom-theme-radius-low text-white border-0 shadow-sm 
                 ${selectedEpisode === episode.episode_number
                   ? 'active'
                   : ''
@@ -29,7 +29,7 @@ function EpisodeSection({
               onClick={() => onEpisodeChange(episode.episode_number)}
               disabled={!aired}
             >
-              <div className={`d-flex flex-column text-wrap px-2 ${aired ? '' : 'text-black'}`}>
+              <div className={`d-flex flex-column text-wrap ${aired ? '' : 'text-black'}`}>
                 <div className="d-flex flex-row justify-content-between">
                   <span className="fw-bold dynamic-fs">
                     Episode {episode.episode_number}
