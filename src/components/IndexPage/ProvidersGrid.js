@@ -66,14 +66,17 @@ function ProvidersGrid({ setIsProvidersLoading, setIsProvidersLoaded, setHasProv
         }
     }, [isLoading, isError, movies, shows, setHasProvidersContent]);
 
-    // Load from sessionStorage on mount
+    // Load selected provider from sessionStorage on mount
     useEffect(() => {
         const savedProvider = getSessionValue(...SESSION_PATH, 'selectedProvider');
+        setSelectedProvider(savedProvider ?? PROVIDERS[0]);
+    }, []);
+
+    // Load from sessionStorage on mount
+    useEffect(() => {
         const savedProvidersScroll = getSessionValue(...SESSION_PATH, 'providersScroll') || 0;
         const savedMoviesScroll = getSessionValue(...SESSION_PATH, 'moviesScroll') || 0;
         const savedShowsScroll = getSessionValue(...SESSION_PATH, 'showsScroll') || 0;
-
-        setSelectedProvider(savedProvider ?? PROVIDERS[0].id);
 
         requestAnimationFrame(() => {
             if (providersRef.current) providersRef.current.scrollTo({ left: savedProvidersScroll, behavior: 'instant' });
