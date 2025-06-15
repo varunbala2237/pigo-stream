@@ -11,7 +11,7 @@ function EpisodeSection({
     <div
       ref={episodeScrollRef}
       className="d-flex flex-column overflow-auto custom-theme-radius-low gap-1"
-      style={{ maxHeight: '250px' }}
+      style={{ maxHeight: '242px' }} // Default fixed height
     >
       {episodes.length > 0 ? (
         episodes.map(episode => {

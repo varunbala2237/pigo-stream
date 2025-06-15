@@ -14,7 +14,7 @@ function ServerSection({
             <div className="row g-2">
                 {servers.length > 0 ? (
                     servers.map((server) => (
-                        <div key={server.server_name} className="d-flex col-6 col-sm-4 col-md-3 col-lg-2">
+                        <div key={server.server_name} className="d-flex col-3 col-md-2 col-lg-2">
                             <button
                                 className={`btn w-100 align-items-center justify-content-center text-white border-0 rounded-pill shadow-sm
                                     ${selectedServer.server_name === server.server_name
