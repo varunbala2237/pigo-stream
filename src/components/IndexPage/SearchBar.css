@@ -4,9 +4,10 @@
 .floating-search-wrapper {
   position: fixed;
   top: 1rem;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 90%;
+  left: 0;
+  right: 0;
+  padding: 0 1rem;
+  box-sizing: border-box;
   z-index: 1040 !important;
 }
 
@@ -23,6 +24,6 @@
   top: 100%;
   left: 0;
   right: 0;
-  max-width: 100%;
+  width: 100%;
   margin-top: 0;
 }

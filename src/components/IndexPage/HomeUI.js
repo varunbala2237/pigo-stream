@@ -278,7 +278,7 @@ function HomeUI({
   };
 
   return (
-    <div className="container-fluid d-flex flex-column justify-content-center align-items-center p-0">
+    <div className="d-flex flex-column justify-content-center align-items-center p-0">
       <div className="w-100">
         {/* Overlay spinner for loading state */}
         <OverlaySpinner visible={isPageLoading} />
