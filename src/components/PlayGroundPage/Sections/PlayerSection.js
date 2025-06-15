@@ -17,7 +17,6 @@ function PlayerSection({
   handleAddToList,
 }) {
   const [imageUrl, setImageUrl] = useState('');
-  const [showFullDesc, setShowFullDesc] = useState(false);
   const [inHistory, setInHistory] = useState(false);
   const { trailerLink, loading } = useFetchTrailer(id, type);
   const [showNote, setShowNote] = useState(false);
@@ -238,31 +237,9 @@ function PlayerSection({
                 </span><br />
               </p>
               <div className="text-wrap text-break dynamic-fs">
-                <div
-                  className={`${showFullDesc ? '' : 'text-clamp'}`}
-                  style={{ whiteSpace: 'pre-line' }}
-                >
+                <div style={{ whiteSpace: 'pre-line' }}>
                   {mediaInfo.overview}
                 </div>
-
-                {mediaInfo.overview.length > 280 && (
-                  <div className="d-flex justify-content-end">
-                    <button
-                      className="btn d-none d-md-block dynamic-fs border-0 text-white"
-                      onClick={() => setShowFullDesc(!showFullDesc)}
-                    >
-                      <i className={`bi bi-${showFullDesc ? 'chevron-up' : 'chevron-down'} me-2`}></i>
-                      {showFullDesc ? 'Show Less' : 'Show More'}
-                    </button>
-                    <button
-                      className="btn d-block d-md-none btn-sm dynamic-fs border-0 text-white"
-                      onClick={() => setShowFullDesc(!showFullDesc)}
-                    >
-                      <i className={`bi bi-${showFullDesc ? 'chevron-up' : 'chevron-down'} me-2`}></i>
-                      {showFullDesc ? 'Show Less' : 'Show More'}
-                    </button>
-                  </div>
-                )}
               </div>
             </div>
           </div>
