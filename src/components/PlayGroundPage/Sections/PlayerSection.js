@@ -210,16 +210,16 @@ function PlayerSection({
             </div>
           </div>
           <div className="section ms-3">
-            <h4 className="text-wrap dynamic-ts">{mediaInfo.title ? mediaInfo.title : mediaInfo.name}</h4>
-            <div className="align-items-start justify-content-start w-100">
-              <div className="rounded dynamic-fs">
+            <span className="text-wrap dynamic-ts">{mediaInfo.title ? mediaInfo.title : mediaInfo.name}</span>
+            <div className="w-100 align-items-start justify-content-start mb-2">
+              <div className="dynamic-fs">
                 <i className="bi bi-star-fill text-warning me-2"></i>
                 <span id="Rating" className="text-white">
                   {averageVote}
                 </span>
               </div>
             </div>
-            <div className="d-flex flex-column flex-wrap dynamic-fs mt-2">
+            <div className="d-flex flex-column flex-wrap dynamic-fs">
               <dl className="m-0">
                 <div className="mb-2">
                   <dt className="fw-bold">Release Date:</dt>
