@@ -140,7 +140,7 @@ function MovieGrid({ id, type, mediaInfo, setBackgroundImage }) {
                   )}
                 </div>
                 {cast.length > sliceIndex && (
-                  <div className="text-end">
+                  <div className="d-flex justify-content-end align-items-center">
                     <button
                       className="btn bg-transparent d-flex dynamic-fs border-0 rounded-pill text-white"
                       onClick={handleViewMore}
