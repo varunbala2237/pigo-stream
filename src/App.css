@@ -189,7 +189,7 @@
     width: 135px;
   }
 
-  .form-pad, .modal-pad {
+  .modal-pad {
     max-width: 100%;
   }
 
@@ -229,7 +229,7 @@
     width: 165px;
   }
 
-  .form-pad, .modal-pad {
+  .modal-pad {
     max-width: 70%;
   }
 
@@ -269,7 +269,7 @@
     width: 200px;
   }
 
-  .form-pad, .modal-pad {
+  .modal-pad {
     max-width: 40%;
   }
 
