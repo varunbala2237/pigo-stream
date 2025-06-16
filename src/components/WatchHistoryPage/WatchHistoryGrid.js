@@ -237,7 +237,7 @@ function WatchHistoryGrid({ userUID }) {
                 {moviesHistory.length > movieLimit && (
                     <div className="text-end">
                         <button
-                            className="btn bg-transparent dynamic-fs border-0 rounded-pill text-white"
+                            className="btn bg-transparent d-flex dynamic-fs border-0 rounded-pill text-white"
                             onClick={handleViewMoreMovies}
                         >
                             <i className="bi bi-arrow-right me-2"></i>
@@ -307,7 +307,7 @@ function WatchHistoryGrid({ userUID }) {
                 {showsHistory.length > showLimit && (
                     <div className="text-end">
                         <button
-                            className="btn bg-transparent dynamic-fs border-0 rounded-pill text-white"
+                            className="btn bg-transparent d-flex dynamic-fs border-0 rounded-pill text-white"
                             onClick={handleViewMoreShows}
                         >
                             <i className="bi bi-arrow-right me-2"></i>

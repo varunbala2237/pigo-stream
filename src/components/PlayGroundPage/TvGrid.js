@@ -285,7 +285,7 @@ function TvGrid({ id, type, mediaInfo, setBackgroundImage }) {
                 {cast.length > sliceIndex && (
                   <div className="text-end">
                     <button
-                      className="btn bg-transparent dynamic-fs border-0 rounded-pill text-white"
+                      className="btn bg-transparent d-flex dynamic-fs border-0 rounded-pill text-white"
                       onClick={handleViewMore}
                     >
                       <i className="bi bi-arrow-right me-2"></i>
