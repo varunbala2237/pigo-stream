@@ -271,7 +271,7 @@ function AuthUI() {
                 {/* Overlay spinner for loading state */}
                 <OverlaySpinner visible={isPageLoading} />
 
-                <div className="card form-pad w-100 custom-bg custom-theme-radius-low p-2">
+                <div className="card custom-bg custom-theme-radius-low p-2">
                     <div className="card-header d-flex justify-content-center align-items-center text-white">
                         <img src="favicon.ico" alt="PigoStream" width="48" height="48" />
                         <span className="dynamic-hs"><b>Pigo</b>Stream</span>

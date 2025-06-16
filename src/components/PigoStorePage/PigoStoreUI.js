@@ -102,7 +102,7 @@ const PigostoreUI = () => {
       {/* Overlay spinner for loading state */}
       <OverlaySpinner visible={isLoading} />
 
-      <div className="container form-pad custom-bg mx-4 custom-theme-radius-low">
+      <div className="container form-pad custom-bg custom-theme-radius-low p-2">
         <div className="section p-4">
           <div className="d-flex justify-content-between align-items-center">
             <div className="d-flex justify-content-center align-items-center text-center">
