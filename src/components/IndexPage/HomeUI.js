@@ -329,7 +329,7 @@ function HomeUI({
                   <b>{isRecommended ? 'Picked Just for You' : '#1 Most Watched'}</b>
                 </div>
                 <div className="d-flex justify-content-start align-items-center">
-                  <span className="text-wrap dynamic-ts">{title}</span>
+                  <h4 className="text-wrap dynamic-ts">{title}</h4>
                   <button className="btn bg-transparent border-0 text-white dynamic-fs" onClick={handlePlayMedia}>
                     <i className="bi bi-arrow-right me-2"></i>
                     View More
