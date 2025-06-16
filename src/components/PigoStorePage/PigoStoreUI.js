@@ -116,7 +116,7 @@ const PigostoreUI = () => {
               {/* Back button with navigation */}
               <button
                 type="button"
-                className="btn btn-dark bd-callout-dark border-0 text-white rounded-pill dynamic-fs"
+                className="btn btn-dark bd-callout-dark d-flex border-0 text-white rounded-pill dynamic-fs"
                 onClick={() => navigate(-1)} // Navigate to the previous page
               >
                 <i className="bi bi-arrow-left me-2"></i>
@@ -125,7 +125,7 @@ const PigostoreUI = () => {
             </div>
             <p className="text-white dynamic-fs">Install PigoPlayer for seamless streaming and access content without redirects.</p>
             <button
-              className="btn btn-primary rounded-pill dynamic-fs"
+              className="btn btn-primary d-flex rounded-pill dynamic-fs"
               onClick={handleDownload}
               disabled={isLoading || isError}
             >
