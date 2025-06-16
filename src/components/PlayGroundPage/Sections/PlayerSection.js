@@ -4,6 +4,7 @@ import useSaveWatchHistory from '../../../hooks/WatchHistoryPage/useSaveWatchHis
 import useFetchTrailer from '../../../hooks/PlayGroundPage/useFetchTrailer';
 import useAppVersion from '../../../hooks/PigoStorePage/useAppVersion';
 import { useNavigate } from 'react-router-dom';
+import OverviewSection from './OverviewSection';
 import openIframeWindow from "../../IframePage/openIframeWindow";
 
 function PlayerSection({
@@ -218,29 +219,41 @@ function PlayerSection({
                 </span>
               </div>
             </div>
-            <div className="d-flex flex-column flex-wrap mt-2">
-              <p className="dynamic-fs me-2">
-                <b>Release Date: </b>
-                {mediaInfo.release_date
-                  ? new Date(mediaInfo.release_date).toLocaleDateString()
-                  : new Date(mediaInfo.first_air_date).toLocaleDateString()}
-                <br />
-                <b>Director: </b>{director}<br />
-                <b>Genres: </b>
-                <span className="text-white">
-                  {genres?.map((genre, index) => (
-                    <React.Fragment key={index}>
-                      {genre.name}
-                      {index < genres.length - 1 && ", "}
-                    </React.Fragment>
-                  ))}
-                </span><br />
-              </p>
-              <div className="text-wrap text-break dynamic-fs">
-                <div style={{ whiteSpace: 'pre-line' }}>
-                  {mediaInfo.overview}
+            <div className="d-flex flex-column flex-wrap dynamic-fs mt-2">
+              <dl className="m-0">
+                <div className="mb-2">
+                  <dt className="fw-bold">Release Date:</dt>
+                  <dd className="mb-0">
+                    {mediaInfo.release_date
+                      ? new Date(mediaInfo.release_date).toLocaleDateString()
+                      : new Date(mediaInfo.first_air_date).toLocaleDateString()}
+                  </dd>
                 </div>
-              </div>
+
+                <div className="mb-2">
+                  <dt className="fw-bold">Director:</dt>
+                  <dd className="mb-0">{director}</dd>
+                </div>
+
+                <div className="mb-2">
+                  <dt className="fw-bold">Genres:</dt>
+                  <dd className="mb-0 text-white">
+                    {genres?.map((genre, index) => (
+                      <React.Fragment key={index}>
+                        {genre.name}
+                        {index < genres.length - 1 && ", "}
+                      </React.Fragment>
+                    ))}
+                  </dd>
+                </div>
+
+                <div className="mb-0">
+                  <dd className="text-start">
+                    <dt className="fw-bold">Overview:</dt>
+                    <OverviewSection text={mediaInfo.overview} />
+                  </dd>
+                </div>
+              </dl>
             </div>
           </div>
         </div>
