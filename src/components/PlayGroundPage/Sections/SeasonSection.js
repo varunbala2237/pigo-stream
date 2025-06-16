@@ -24,8 +24,10 @@ function SeasonSection({ seasons, selectedSeason, onSeasonChange }) {
         seasons.map((season) => (
           <div key={season.id} className="d-flex col-4 col-md-3 col-lg-2">
             <button
-              className={`btn btn-dark bd-callout-dark w-100 d-flex flex-column align-items-center justify-content-center text-white border-0 shadow-sm
-                ${selectedSeason === season.season_number ? 'active' : ''}`}
+              className={`btn btn-dark bd-callout-dark w-100 d-flex flex-column
+                justify-content-center align-items-center text-white border-0 shadow-sm
+                ${selectedSeason === season.season_number ? 'active' : ''}`
+              }
               onClick={() => onSeasonChange(season.season_number)}
               title={season.name}
               data-bs-toggle="tooltip"
