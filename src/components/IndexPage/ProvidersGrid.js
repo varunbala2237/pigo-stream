@@ -136,7 +136,7 @@ function ProvidersGrid({ setIsProvidersLoading, setIsProvidersLoaded, setHasProv
     return (
         <>
             <div className="d-flex justify-content-start align-items-center dynamic-ts mt-5">
-                <b>Available Platforms</b>
+                <b>Browse by Streaming Platform</b>
             </div>
             
             {/* Providers Selection Section */}

@@ -302,8 +302,8 @@ function HomeUI({
 
         {!showSearchBar && (
           !title ? (
-            <div className="container justify-content-center" style={{ textAlign: 'start' }}>
-              <div className="d-flex flex-column text-white custom-theme-radius-low" style={{ padding: '5%' }}>
+            <div className="container my-5" style={{ textAlign: 'start' }}>
+              <div className="d-flex flex-column text-white custom-theme-radius-low">
                 <div className="d-flex align-items-center mb-2">
                   <div className="hero-skeleton-title-bar bd-callout-dark"></div>
                   <div className="hero-skeleton-badge custom-theme-radius-low custom-bg ms-2"></div>
@@ -323,14 +323,17 @@ function HomeUI({
               </div>
             </div>
           ) : (
-            <div className="container justify-content-center" style={{ textAlign: 'start' }}>
+            <div className="container my-5" style={{ textAlign: 'start' }}>
               <div className="d-flex flex-column text-white custom-theme-radius-low">
-                <div className="d-flex align-items-center">
+                <div className="d-flex justify-content-start align-items-center dynamic-hs">
+                  <b>{isRecommended ? 'Picked Just for You' : '#1 Most Watched'}</b>
+                </div>
+                <div className="d-flex justify-content-start align-items-center">
                   <b className="text-wrap dynamic-ts">{title}</b>
-                  {/* Badge for Recommended or Popular */}
-                  <span className="badge bg-primary text-white rounded-pill ms-2">
-                    {isRecommended ? 'Recommended' : 'Popular'}
-                  </span>
+                  <button className="btn bg-transparent border-0 text-white dynamic-fs" onClick={handlePlayMedia}>
+                    <i className="bi bi-arrow-right me-2"></i>
+                    View More
+                  </button>
                 </div>
                 <div className="dynamic-fs text-white">
                   <div className="dynamic-fs my-2">
@@ -345,14 +348,7 @@ function HomeUI({
                     <i className="bi bi-star-fill"></i>
                     <span id="Rating"> {rating}</span>
                   </div>
-                  <div className="dynamic-fs my-2">{mediaDesc}</div>
-                  <button
-                    className="btn bg-transparent rounded-pill text-white border-0 dynamic-fs"
-                    onClick={handlePlayMedia}
-                  >
-                    <i className="bi bi-arrow-right me-2"></i>
-                    View More
-                  </button>
+                  <div className="dynamic-fs">{mediaDesc}</div>
                 </div>
               </div>
             </div>
@@ -362,7 +358,7 @@ function HomeUI({
         {/* Main content area */}
         <div className="flex-row text-white w-100">
           {!showSearchBar ?
-            <div className="container my-5">
+            <div className="container mb-5">
               <div className="d-flex justify-content-start align-items-center">
                 <button
                   className={`btn bg-transparent text-white border-0 dynamic-hs 
@@ -372,9 +368,9 @@ function HomeUI({
                   <i className="bi bi-fire theme-color me-2"></i>
                   <b>Trending</b>
                 </button>
-                
+
                 {/* Divider Line */}
-                <div className="border-start border-secondary mx-3 align-self-stretch"></div>
+                <div className="border-start border-secondary align-self-stretch"></div>
 
                 <button
                   className={`btn bg-transparent text-white border-0 dynamic-hs 
