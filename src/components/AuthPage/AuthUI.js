@@ -271,14 +271,14 @@ function AuthUI() {
                 {/* Overlay spinner for loading state */}
                 <OverlaySpinner visible={isPageLoading} />
 
-                <div className="card form-pad custom-bg custom-theme-radius-low px-4 w-100">
+                <div className="card form-pad w-100 custom-bg custom-theme-radius-low p-2">
                     <div className="card-header d-flex justify-content-center align-items-center text-white">
                         <img src="favicon.ico" alt="PigoStream" width="48" height="48" />
                         <span className="dynamic-hs"><b>Pigo</b>Stream</span>
                     </div>
                     <form onSubmit={isSignIn ? signInWithCredentials : signUpWithCredentials} className="text-white">
                         {!isSignIn && (
-                            <div className="mb-3 dynamic-ts">
+                            <div className="d-flex flex-column dynamic-ts">
                                 <label htmlFor="userName" className="form-label">Username</label>
                                 <input
                                     id="userName"
@@ -291,7 +291,7 @@ function AuthUI() {
                                 />
                             </div>
                         )}
-                        <div className="mb-3 dynamic-ts">
+                        <div className="d-flex flex-column dynamic-ts">
                             <label htmlFor="userEmail" className="form-label">E-mail address</label>
                             <input
                                 id="userEmail"
@@ -303,9 +303,9 @@ function AuthUI() {
                                 required
                             />
                         </div>
-                        <div className="mb-3 dynamic-ts">
+                        <div className="d-flex flex-column dynamic-ts">
                             <label htmlFor="password" className="form-label">Password</label>
-                            <div className="input-group custom-input-group mb-2">
+                            <div className="input-group custom-input-group">
                                 <input
                                     id="passwordInput"
                                     type={showPassword ? 'text' : 'password'}
@@ -336,11 +336,11 @@ function AuthUI() {
                             )}
                         </div>
                         <div className="d-grid dynamic-fs">
-                            <button type="submit" className="btn btn-success custom-theme-btn rounded-pill dynamic-fs mb-2" disabled={isSubmitting}>
+                            <button type="submit" className="btn btn-success custom-theme-btn rounded-pill dynamic-fs" disabled={isSubmitting}>
                                 {isSubmitting ? 'Loading...' : isSignIn ? 'Sign in' : 'Sign up'}
                             </button>
                             {showResendButton && (
-                                <div className="d-flex justify-content-end mb-2">
+                                <div className="d-flex justify-content-end">
                                     <button
                                         type="button"
                                         className="btn btn-transparent text-primary border-0 dynamic-fs"
@@ -351,8 +351,8 @@ function AuthUI() {
                                     </button>
                                 </div>
                             )}
-                            <p className="text-white mb-2 text-center">or</p>
-                            <button className="btn btn-primary rounded-pill dynamic-fs mb-2" onClick={signInWithGoogle}>
+                            <p className="text-white text-center">or</p>
+                            <button className="btn btn-primary rounded-pill dynamic-fs" onClick={signInWithGoogle}>
                                 <i className="bi bi-google me-2"></i>Sign in with Google
                             </button>
                         </div>
