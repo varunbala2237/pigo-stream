@@ -43,7 +43,6 @@ function PlayGround() {
   return (
     <div className="index-page">
       <Header />
-      <div className="container-fluid d-flex flex-column justify-content-center align-items-center p-0">
         <div
           className="background-image"
           style={{
@@ -76,7 +75,6 @@ function PlayGround() {
         <div className="divider" style={{ height: '6rem' }}></div>
         <Footer />
       </div>
-    </div>
   );
 }
 

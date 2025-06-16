@@ -213,91 +213,89 @@ function TvGrid({ id, type, mediaInfo, setBackgroundImage }) {
 
   return (
     <>
-      <div className="flex-row text-white custom-w-size-100">
-        <div className="row justify-content-center position-relative">
-          <div className="col-lg-8 col-md-10 col-sm-12">
-            <div className="container">
-              <PlayerSection mediaURL={mediaURL}
-                averageVote={averageVote}
-                director={director}
-                genres={genres}
-                mediaInfo={mediaInfo}
-                id={id}
-                type={type}
-                isInList={isInList}
-                handleAddToList={handleAddToList}
-                selectedEpisode={selectedEpisode}
-              />
+      <div className="d-flex flex-column justify-content-center align-items-center p-0">
+        <div className="flex-row text-white w-100">
+          <div className="container">
+            <PlayerSection mediaURL={mediaURL}
+              averageVote={averageVote}
+              director={director}
+              genres={genres}
+              mediaInfo={mediaInfo}
+              id={id}
+              type={type}
+              isInList={isInList}
+              handleAddToList={handleAddToList}
+              selectedEpisode={selectedEpisode}
+            />
 
-              {/* Server Section */}
-              <ServerSection
-                servers={servers}
-                selectedServer={selectedServer}
-                handleServerChange={handleServerChange}
-              />
+            {/* Server Section */}
+            <ServerSection
+              servers={servers}
+              selectedServer={selectedServer}
+              handleServerChange={handleServerChange}
+            />
 
-              {/* Seasons Section */}
-              <div className="container-fluid custom-bg custom-theme-radius-low w-100 p-2 my-2">
-                <div className="d-flex flex-row dynamic-ts my-2">
-                  <i className="bi bi-layers me-2"></i>
-                  Seasons
-                </div>
-
-                <SeasonSection
-                  seasons={seasons}
-                  selectedSeason={selectedSeason}
-                  onSeasonChange={handleSeasonChange}
-                />
-
-                {/* Episodes Section */}
-                <div className="d-flex flex-row dynamic-ts my-2 pt-2">
-                  <i className="bi bi-play-circle me-2"></i>
-                  Episodes
-                </div>
-
-                <EpisodeSection
-                  episodes={episodes}
-                  selectedEpisode={selectedEpisode}
-                  onEpisodeChange={handleEpisodeChange}
-                  isEpisodeAired={isEpisodeAired}
-                  isEpisodeAiredToday={isEpisodeAiredToday}
-                  episodeScrollRef={episodeScrollRef}
-                />
+            {/* Seasons Section */}
+            <div className="container-fluid custom-bg custom-theme-radius-low w-100 p-2 my-2">
+              <div className="d-flex flex-row dynamic-ts my-2">
+                <i className="bi bi-layers me-2"></i>
+                Seasons
               </div>
 
-              <div className="d-flex flex-column align-items-start custom-theme-radius-low my-2 w-100">
-                <div className="container py-2 text-white">
-                  <div className="d-flex flex-row dynamic-ts">
-                    <i className="bi bi-person-fill me-2"></i>
-                    Cast
-                  </div>
-                  <div className="row justify-content-center">
-                    {cast.length === 0 ? (
-                      // Show 4 dummy skeletal cards when no cast is found
-                      Array.from({ length: 4 }).map((_, index) => (
-                        <CastCard key={index} isSkeleton={true} />
-                      ))
-                    ) : (
-                      cast.slice(0, sliceIndex).map((actor, index) => (
-                        <CastCard key={actor.cast_id ?? `${actor.name}-${index}`} actor={actor} />
-                      ))
-                    )}
-                  </div>
-                  {cast.length > sliceIndex && (
-                    <div className="text-end">
-                      <button
-                        className="btn bg-transparent dynamic-fs border-0 rounded-pill text-white"
-                        onClick={handleViewMore}
-                      >
-                        <i className="bi bi-arrow-right me-2"></i>
-                        View More
-                      </button>
-                    </div>
+              <SeasonSection
+                seasons={seasons}
+                selectedSeason={selectedSeason}
+                onSeasonChange={handleSeasonChange}
+              />
+
+              {/* Episodes Section */}
+              <div className="d-flex flex-row dynamic-ts my-2 pt-2">
+                <i className="bi bi-play-circle me-2"></i>
+                Episodes
+              </div>
+
+              <EpisodeSection
+                episodes={episodes}
+                selectedEpisode={selectedEpisode}
+                onEpisodeChange={handleEpisodeChange}
+                isEpisodeAired={isEpisodeAired}
+                isEpisodeAiredToday={isEpisodeAiredToday}
+                episodeScrollRef={episodeScrollRef}
+              />
+            </div>
+
+            <div className="d-flex flex-column align-items-start custom-theme-radius-low my-2 w-100">
+              <div className="container py-2 text-white">
+                <div className="d-flex flex-row dynamic-ts">
+                  <i className="bi bi-person-fill me-2"></i>
+                  Cast
+                </div>
+                <div className="row justify-content-center">
+                  {cast.length === 0 ? (
+                    // Show 4 dummy skeletal cards when no cast is found
+                    Array.from({ length: 4 }).map((_, index) => (
+                      <CastCard key={index} isSkeleton={true} />
+                    ))
+                  ) : (
+                    cast.slice(0, sliceIndex).map((actor, index) => (
+                      <CastCard key={actor.cast_id ?? `${actor.name}-${index}`} actor={actor} />
+                    ))
                   )}
                 </div>
+                {cast.length > sliceIndex && (
+                  <div className="text-end">
+                    <button
+                      className="btn bg-transparent dynamic-fs border-0 rounded-pill text-white"
+                      onClick={handleViewMore}
+                    >
+                      <i className="bi bi-arrow-right me-2"></i>
+                      View More
+                    </button>
+                  </div>
+                )}
               </div>
-
             </div>
+
           </div>
         </div>
       </div>

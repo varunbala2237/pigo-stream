@@ -11,7 +11,7 @@ function CastCard({ actor, isSkeleton }) {
   // Skeleton version if actor is not provided
   if (isSkeleton) {
     return (
-      <div className="col-lg-3 col-md-4 col-5 text-center my-2">
+      <div className="col-lg-2 col-md-3 col-sm-4 col-4 text-center my-2">
         <a href="#cast" className="text-decoration-none">
           {/* Placeholder Circle */}
           <div className="d-flex justify-content-center mb-2">
@@ -32,7 +32,7 @@ function CastCard({ actor, isSkeleton }) {
     : 'https://cdn-icons-png.flaticon.com/512/149/149071.png';
 
   return (
-    <div key={actor.cast_id} className="col-lg-3 col-md-4 col-5 text-center my-2"> {/* Center text alignment */}
+    <div key={actor.cast_id} className="col-lg-2 col-md-3 col-sm-4 col-4 text-center my-2"> {/* Center text alignment */}
       <a href="#cast" onClick={() => searchActor(actor.name)} className="text-decoration-none">
         {/* Image Container */}
         <div className="d-flex justify-content-center mb-2">

@@ -27,7 +27,7 @@ function MovieGrid({ id, type, mediaInfo, setBackgroundImage }) {
   );
 
   // Fetch all available servers
-  const { servers  } = useFetchServers(id, type);
+  const { servers } = useFetchServers(id, type);
 
   const { addToList } = useSaveMyList();
   const { isInList, refetch } = useCheckMyList(id);
@@ -101,57 +101,55 @@ function MovieGrid({ id, type, mediaInfo, setBackgroundImage }) {
 
   return (
     <>
-      <div className="flex-row text-white custom-w-size-100">
-        <div className="row justify-content-center position-relative">
-          <div className="col-lg-8 col-md-10 col-sm-12">
-            <div className="container">
-              <PlayerSection mediaURL={mediaURL}
-                averageVote={averageVote}
-                director={director}
-                genres={genres}
-                mediaInfo={mediaInfo}
-                id={id}
-                type={type}
-                isInList={isInList}
-                handleAddToList={handleAddToList}
-              />
+      <div className="d-flex flex-column justify-content-center align-items-center p-0">
+        <div className="flex-row text-white w-100">
+          <div className="container">
+            <PlayerSection mediaURL={mediaURL}
+              averageVote={averageVote}
+              director={director}
+              genres={genres}
+              mediaInfo={mediaInfo}
+              id={id}
+              type={type}
+              isInList={isInList}
+              handleAddToList={handleAddToList}
+            />
 
-              {/* Server Section */}
-              <ServerSection
-                servers={servers}
-                selectedServer={selectedServer}
-                handleServerChange={handleServerChange}
-              />
+            {/* Server Section */}
+            <ServerSection
+              servers={servers}
+              selectedServer={selectedServer}
+              handleServerChange={handleServerChange}
+            />
 
-              <div className="d-flex flex-column align-items-start custom-theme-radius-low my-2 w-100">
-                <div className="container py-2 text-white">
-                  <div className="d-flex flex-row dynamic-ts">
-                    <i className="bi bi-person-fill me-2"></i>
-                    Cast
-                  </div>
-                  <div className="row justify-content-center">
-                    {cast.length === 0 ? (
-                      Array.from({ length: 4 }).map((_, index) => (
-                        <CastCard key={index} isSkeleton={true} />
-                      ))
-                    ) : (
-                      cast.slice(0, sliceIndex).map((actor, index) => (
-                        <CastCard key={actor.cast_id ?? `${actor.name}-${index}`} actor={actor} />
-                      ))
-                    )}
-                  </div>
-                  {cast.length > sliceIndex && (
-                    <div className="text-end">
-                      <button
-                        className="btn bg-transparent dynamic-fs border-0 rounded-pill text-white"
-                        onClick={handleViewMore}
-                      >
-                        <i className="bi bi-arrow-right me-2"></i>
-                        View More
-                      </button>
-                    </div>
+            <div className="d-flex flex-column align-items-start custom-theme-radius-low my-2 w-100">
+              <div className="container py-2 text-white">
+                <div className="d-flex flex-row dynamic-ts">
+                  <i className="bi bi-person-fill me-2"></i>
+                  Cast
+                </div>
+                <div className="row justify-content-center">
+                  {cast.length === 0 ? (
+                    Array.from({ length: 4 }).map((_, index) => (
+                      <CastCard key={index} isSkeleton={true} />
+                    ))
+                  ) : (
+                    cast.slice(0, sliceIndex).map((actor, index) => (
+                      <CastCard key={actor.cast_id ?? `${actor.name}-${index}`} actor={actor} />
+                    ))
                   )}
                 </div>
+                {cast.length > sliceIndex && (
+                  <div className="text-end">
+                    <button
+                      className="btn bg-transparent dynamic-fs border-0 rounded-pill text-white"
+                      onClick={handleViewMore}
+                    >
+                      <i className="bi bi-arrow-right me-2"></i>
+                      View More
+                    </button>
+                  </div>
+                )}
               </div>
             </div>
           </div>
