@@ -96,89 +96,91 @@ const PigostoreUI = () => {
   ];
 
   return (
-    <div className="vh-100 w-100 d-flex flex-column justify-content-center align-items-center"
+    <div className="d-flex flex-column vh-100 w-100"
       style={{ background: "linear-gradient(to bottom, #121229, #121229, black, black)" }}
     >
       {/* Overlay spinner for loading state */}
       <OverlaySpinner visible={isLoading} />
 
-      <div className="container form-pad custom-bg custom-theme-radius-low p-2">
-        <div className="section p-4">
-          <div className="d-flex justify-content-between align-items-center">
-            <div className="d-flex justify-content-center align-items-center text-center">
-              <p className="text-white me-2 dynamic-hs m-0"><b>Pigo</b>Player</p>
-              <span className="text-secondary align-self-center">
-                v{appVersion || "0.1.0"} {/* Display app version */}
-              </span>
-            </div>
+      <div className="container vh-100 d-flex bg-transparent justify-content-center align-items-center">
+        <div className="card custom-bg custom-theme-radius-low p-2">
+          <div className="section m-2">
+            <div className="d-flex justify-content-between align-items-center">
+              <div className="d-flex justify-content-center align-items-center text-center">
+                <p className="text-white me-2 dynamic-hs m-0"><b>Pigo</b>Player</p>
+                <span className="text-secondary align-self-center">
+                  v{appVersion || "0.1.0"} {/* Display app version */}
+                </span>
+              </div>
 
-            {/* Back button with navigation */}
+              {/* Back button with navigation */}
+              <button
+                type="button"
+                className="btn btn-dark bd-callout-dark border-0 text-white rounded-pill dynamic-fs"
+                onClick={() => navigate(-1)} // Navigate to the previous page
+              >
+                <i className="bi bi-arrow-left me-2"></i>
+                Back
+              </button>
+            </div>
+            <p className="text-white dynamic-fs">Install PigoPlayer for seamless streaming and access content without redirects.</p>
             <button
-              type="button"
-              className="btn btn-dark bd-callout-dark border-0 text-white rounded-pill dynamic-fs"
-              onClick={() => navigate(-1)} // Navigate to the previous page
+              className="btn btn-primary rounded-pill dynamic-fs"
+              onClick={handleDownload}
+              disabled={isLoading || isError}
             >
-              <i className="bi bi-arrow-left me-2"></i>
-              Back
+              <i className="bi bi-file-earmark-zip me-2"></i>
+              Download
             </button>
           </div>
-          <p className="text-white dynamic-fs">Install PigoPlayer for seamless streaming and access content without redirects.</p>
-          <button
-            className="btn btn-primary rounded-pill dynamic-fs"
-            onClick={handleDownload}
-            disabled={isLoading || isError}
-          >
-            <i className="bi bi-file-earmark-zip me-2"></i>
-            Download
-          </button>
-        </div>
 
-        {/* Horizontal Section with two columns for Supported Devices and Instructions */}
-        <div className="section p-4">
-          <div className="row">
-            {/* Devices Section */}
-            <div className="col-md-6">
-              <p className="text-white dynamic-ts">Detected Device</p>
-              <ul className="list-unstyled">
-                {supportedDevices.map((device, index) => {
-                  const isCurrentDevice = device.platform === currentPlatform;
-                  const isSupported = currentPlatform === "windows" || currentPlatform === "android";
+          {/* Horizontal Section with two columns for Supported Devices and Instructions */}
+          <div className="section m-2">
+            <div className="row">
+              {/* Devices Section */}
+              <div className="col-12 col-md-6 mb-3">
+                <p className="text-white dynamic-ts">Detected Device</p>
+                <ul className="list-unstyled">
+                  {supportedDevices.map((device, index) => {
+                    const isCurrentDevice = device.platform === currentPlatform;
+                    const isSupported = currentPlatform === "windows" || currentPlatform === "android";
 
-                  return (
-                    <li
-                      key={index}
-                      className={`d-flex align-items-center ${isCurrentDevice ? (isSupported ? "text-success" : "text-danger") : "text-secondary"}`
-                      }
-                    >
-                      {isCurrentDevice ? (
-                        isSupported ? (
-                          <i className="bi bi-check2-circle me-2"></i>
-                        ) : (
-                          <i className="bi bi-x-circle me-2"></i>
-                        )
-                      ) : (
-                        <i className="bi bi-circle me-2" style={{ opacity: 0.5 }}></i>
-                      )}
-                      <span
-                        className="dynamic-fs"
-                        style={{ opacity: isCurrentDevice ? 1 : 0.5 }}
+                    return (
+                      <li
+                        key={index}
+                        className={`d-flex align-items-center ${isCurrentDevice ? (isSupported ? "text-success" : "text-danger") : "text-secondary"}`
+                        }
                       >
-                        {device.name}
-                      </span>
-                    </li>
-                  );
-                })}
-              </ul>
-            </div>
+                        {isCurrentDevice ? (
+                          isSupported ? (
+                            <i className="bi bi-check2-circle me-2"></i>
+                          ) : (
+                            <i className="bi bi-x-circle me-2"></i>
+                          )
+                        ) : (
+                          <i className="bi bi-circle me-2" style={{ opacity: 0.5 }}></i>
+                        )}
+                        <span
+                          className="dynamic-fs"
+                          style={{ opacity: isCurrentDevice ? 1 : 0.5 }}
+                        >
+                          {device.name}
+                        </span>
+                      </li>
+                    );
+                  })}
+                </ul>
+              </div>
 
-            {/* Instructions Section */}
-            <div className="col-md-6">
-              <p className="text-white dynamic-ts">Instructions</p>
-              <ul className="text-white dynamic-fs">
-                <li>Click "Download" to get the .zip file.</li>
-                <li>Extract the file and run the installer.</li>
-                <li>If needed, disable antivirus or ignore warnings.</li>
-              </ul>
+              {/* Instructions Section */}
+              <div className="col-md-6">
+                <p className="text-white dynamic-ts">Instructions</p>
+                <ul className="text-white dynamic-fs">
+                  <li>Click "Download" to get the .zip file.</li>
+                  <li>Extract the file and run the installer.</li>
+                  <li>If needed, disable antivirus or ignore warnings.</li>
+                </ul>
+              </div>
             </div>
           </div>
         </div>
