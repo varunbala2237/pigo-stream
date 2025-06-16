@@ -278,7 +278,7 @@ function AuthUI() {
                     </div>
                     <form onSubmit={isSignIn ? signInWithCredentials : signUpWithCredentials} className="text-white">
                         {!isSignIn && (
-                            <div className="d-flex flex-column dynamic-ts">
+                            <div className="d-flex flex-column dynamic-ts mb-2">
                                 <label htmlFor="userName" className="form-label">Username</label>
                                 <input
                                     id="userName"
@@ -291,7 +291,7 @@ function AuthUI() {
                                 />
                             </div>
                         )}
-                        <div className="d-flex flex-column dynamic-ts">
+                        <div className="d-flex flex-column dynamic-ts mb-2">
                             <label htmlFor="userEmail" className="form-label">E-mail address</label>
                             <input
                                 id="userEmail"
@@ -303,7 +303,7 @@ function AuthUI() {
                                 required
                             />
                         </div>
-                        <div className="d-flex flex-column dynamic-ts">
+                        <div className="d-flex flex-column dynamic-ts mb-2">
                             <label htmlFor="password" className="form-label">Password</label>
                             <div className="input-group custom-input-group">
                                 <input
