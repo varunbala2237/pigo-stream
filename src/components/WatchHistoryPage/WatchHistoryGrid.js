@@ -166,7 +166,7 @@ function WatchHistoryGrid({ userUID }) {
                     <div className="text-end">
                         <button
                             type="button"
-                            className="btn bg-transparent rounded-pill text-danger border-0 dynamic-fs"
+                            className="btn bg-transparent d-flex rounded-pill text-danger border-0 dynamic-fs"
                             onClick={handleClearHistory}
                             disabled={isClearButtonDisabled}
                         >
