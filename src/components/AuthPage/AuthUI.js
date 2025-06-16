@@ -336,7 +336,10 @@ function AuthUI() {
                             )}
                         </div>
                         <div className="d-flex flex-column dynamic-fs m-2">
-                            <button type="submit" className="btn btn-success custom-theme-btn rounded-pill dynamic-fs" disabled={isSubmitting}>
+                            <button
+                                type="submit"
+                                className="btn btn-success custom-theme-btn d-flex justify-content-center rounded-pill dynamic-fs"
+                                disabled={isSubmitting}>
                                 {isSubmitting ? 'Loading...' : isSignIn ? 'Sign in' : 'Sign up'}
                             </button>
                             {showResendButton && (
@@ -352,7 +355,7 @@ function AuthUI() {
                                 </div>
                             )}
                             <p className="text-white text-center m-0">or</p>
-                            <button className="btn btn-primary rounded-pill dynamic-fs" onClick={signInWithGoogle}>
+                            <button className="btn btn-primary d-flex justify-content-center rounded-pill dynamic-fs" onClick={signInWithGoogle}>
                                 <i className="bi bi-google me-2"></i>Sign in with Google
                             </button>
                         </div>
