@@ -278,7 +278,7 @@ function AuthUI() {
                     </div>
                     <form onSubmit={isSignIn ? signInWithCredentials : signUpWithCredentials} className="text-white">
                         {!isSignIn && (
-                            <div className="d-flex flex-column dynamic-ts mb-2">
+                            <div className="d-flex flex-column dynamic-ts m-2">
                                 <label htmlFor="userName" className="form-label">Username</label>
                                 <input
                                     id="userName"
@@ -291,7 +291,7 @@ function AuthUI() {
                                 />
                             </div>
                         )}
-                        <div className="d-flex flex-column dynamic-ts mb-2">
+                        <div className="d-flex flex-column dynamic-ts m-2">
                             <label htmlFor="userEmail" className="form-label">E-mail address</label>
                             <input
                                 id="userEmail"
@@ -303,7 +303,7 @@ function AuthUI() {
                                 required
                             />
                         </div>
-                        <div className="d-flex flex-column dynamic-ts mb-2">
+                        <div className="d-flex flex-column dynamic-ts m-2">
                             <label htmlFor="password" className="form-label">Password</label>
                             <div className="input-group custom-input-group">
                                 <input
@@ -335,7 +335,7 @@ function AuthUI() {
                                 </div>
                             )}
                         </div>
-                        <div className="d-grid dynamic-fs">
+                        <div className="d-flex flex-column dynamic-fs m-2">
                             <button type="submit" className="btn btn-success custom-theme-btn rounded-pill dynamic-fs" disabled={isSubmitting}>
                                 {isSubmitting ? 'Loading...' : isSignIn ? 'Sign in' : 'Sign up'}
                             </button>
@@ -351,7 +351,7 @@ function AuthUI() {
                                     </button>
                                 </div>
                             )}
-                            <p className="text-white text-center">or</p>
+                            <p className="text-white text-center m-0">or</p>
                             <button className="btn btn-primary rounded-pill dynamic-fs" onClick={signInWithGoogle}>
                                 <i className="bi bi-google me-2"></i>Sign in with Google
                             </button>

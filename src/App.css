@@ -189,12 +189,8 @@
     width: 135px;
   }
 
-  .form-pad {
-    max-width: 80%;
-  }
-
-  .modal-pad {
-    max-width: 90%;
+  .form-pad, .modal-pad {
+    max-width: 100%;
   }
 
   .custom-cast-card-img {
@@ -233,11 +229,7 @@
     width: 165px;
   }
 
-  .form-pad {
-    max-width: 60%;
-  }
-
-  .modal-pad {
+  .form-pad, .modal-pad {
     max-width: 70%;
   }
 
@@ -277,11 +269,7 @@
     width: 200px;
   }
 
-  .form-pad {
-    max-width: 30%;
-  }
-
-  .modal-pad {
+  .form-pad, .modal-pad {
     max-width: 40%;
   }
 
