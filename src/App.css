@@ -206,6 +206,10 @@
     height: 200px;
   }
 
+  .episode-list {
+    max-height: 280px;
+  }
+
   .dynamic-hs {
     font-size: 1.2rem;
   }
@@ -246,6 +250,10 @@
     height: 250px;
   }
 
+  .episode-list {
+    max-height: 330px;
+  }
+
   .dynamic-hs {
     font-size: 1.5rem;
   }
@@ -284,6 +292,10 @@
 
   .custom-card-container {
     height: 300px;
+  }
+
+  .episode-list {
+    max-height: 305px;
   }
 
   .dynamic-hs {

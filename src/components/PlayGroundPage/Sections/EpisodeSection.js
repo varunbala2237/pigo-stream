@@ -10,8 +10,7 @@ function EpisodeSection({
   return (
     <div
       ref={episodeScrollRef}
-      className="d-flex flex-column overflow-auto custom-theme-radius-low gap-1"
-      style={{ maxHeight: '242px' }} // Default fixed height
+      className="d-flex flex-column episode-list overflow-auto custom-theme-radius-low gap-1"
     >
       {episodes.length > 0 ? (
         episodes.map(episode => {
@@ -37,7 +36,7 @@ function EpisodeSection({
                   </span>
                 </div>
                 <div className="d-flex flex-row justify-content-between">
-                  <small className="dynamic-ss">{episode.name}</small>
+                  <small className="text-truncate dynamic-ss">{episode.name}</small>
                   <small className="align-self-end dynamic-ss">
                     {new Date(episode.air_date).toLocaleDateString()}
                   </small>
