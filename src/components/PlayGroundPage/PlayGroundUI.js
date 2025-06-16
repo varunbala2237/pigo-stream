@@ -43,7 +43,7 @@ function PlayGround() {
   return (
     <div className="index-page">
       <Header />
-      <div className="container-fluid d-flex flex-column justify-content-center align-items-center">
+      <div className="container-fluid d-flex flex-column justify-content-center align-items-center p-0">
         <div
           className="background-image"
           style={{
