@@ -1,4 +1,7 @@
 // EpisodeSection.js
+import { useEffect } from 'react';
+import { Tooltip } from 'bootstrap';
+
 function EpisodeSection({
   episodes,
   selectedEpisode,
@@ -7,6 +10,22 @@ function EpisodeSection({
   isEpisodeAiredToday,
   episodeScrollRef
 }) {
+  useEffect(() => {
+    // Select all tooltip triggers
+    const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
+
+    // Dispose existing tooltips to avoid duplicates
+    tooltipTriggerList.forEach(el => {
+      const tooltipInstance = Tooltip.getInstance(el);
+      if (tooltipInstance) tooltipInstance.dispose();
+    });
+
+    // Reinitialize tooltips
+    tooltipTriggerList.forEach(el => {
+      new Tooltip(el);
+    });
+  }, [episodes]);
+
   return (
     <div
       ref={episodeScrollRef}
@@ -27,6 +46,9 @@ function EpisodeSection({
                 }`}
               onClick={() => onEpisodeChange(episode.episode_number)}
               disabled={!aired}
+              data-bs-toggle="tooltip"
+              data-bs-placement="top"
+              title={episode.name}
             >
               <div className={`d-flex flex-column text-wrap ${aired ? '' : 'text-black'}`}>
                 <div className="d-flex flex-row justify-content-between">
@@ -35,8 +57,13 @@ function EpisodeSection({
                     {airedToday && <span className="badge bg-primary text-white ms-2">New!</span>}
                   </span>
                 </div>
+
                 <div className="d-flex flex-row justify-content-between">
-                  <small className="text-truncate dynamic-ss">{episode.name}</small>
+                  {/* Tooltip applied here on episode name */}
+                  <small className="text-truncate dynamic-ss">
+                    {episode.name}
+                  </small>
+
                   <small className="align-self-end dynamic-ss">
                     {new Date(episode.air_date).toLocaleDateString()}
                   </small>

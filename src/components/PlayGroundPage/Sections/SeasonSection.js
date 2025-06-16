@@ -4,9 +4,16 @@ import { Tooltip } from 'bootstrap';
 
 function SeasonSection({ seasons, selectedSeason, onSeasonChange }) {
   useEffect(() => {
-    // Initialize Bootstrap tooltips
     const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
-    tooltipTriggerList.forEach((el) => {
+
+    // Dispose existing tooltips
+    tooltipTriggerList.forEach(el => {
+      const tooltipInstance = Tooltip.getInstance(el);
+      if (tooltipInstance) tooltipInstance.dispose();
+    });
+
+    // Reinitialize tooltips
+    tooltipTriggerList.forEach(el => {
       new Tooltip(el);
     });
   }, [seasons]);
