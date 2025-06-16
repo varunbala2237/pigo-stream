@@ -216,7 +216,7 @@ function TvGrid({ id, type, mediaInfo, setBackgroundImage }) {
       <div className="flex-row text-white custom-w-size-100">
         <div className="row justify-content-center position-relative">
           <div className="col-lg-8 col-md-10 col-sm-12">
-            <div className="container bg-transparent">
+            <div className="container">
               <PlayerSection mediaURL={mediaURL}
                 averageVote={averageVote}
                 director={director}
