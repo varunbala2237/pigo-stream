@@ -323,17 +323,13 @@ function HomeUI({
               </div>
             </div>
           ) : (
-            <div className="container my-5" style={{ textAlign: 'start' }}>
+            <div className="container my-5" style={{ textAlign: 'start' }} onClick={handlePlayMedia} role="button">
               <div className="d-flex flex-column text-white custom-theme-radius-low">
                 <div className="d-flex justify-content-start align-items-center dynamic-hs">
                   <b>{isRecommended ? 'Picked Just for You' : '#1 Most Watched'}</b>
                 </div>
                 <div className="d-flex justify-content-start align-items-center">
                   <span className="text-wrap dynamic-ts">{title}</span>
-                  <button className="btn bg-transparent d-flex border-0 text-white dynamic-fs" onClick={handlePlayMedia}>
-                    <i className="bi bi-arrow-right me-2"></i>
-                    View More
-                  </button>
                 </div>
                 <div className="dynamic-fs text-white">
                   <div className="dynamic-fs my-2">
