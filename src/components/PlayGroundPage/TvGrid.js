@@ -59,7 +59,7 @@ function TvGrid({ id, type, mediaInfo, setBackgroundImage }) {
       // Setup the backgroundImage
       setBackgroundImage(`https://image.tmdb.org/t/p/original${mediaInfo.backdrop_path}`);
     }
-  }, [mediaInfo, TV_STORAGE_PATH, setBackgroundImage]);
+  }, [mediaInfo, setBackgroundImage]);
 
   // Season initial management
   useEffect(() => {
