@@ -17,7 +17,7 @@ function EpisodeSection({
 
       <div
         ref={episodeScrollRef}
-        className="d-flex flex-row episode-list overflow-auto custom-theme-radius-low gap-1"
+        className="d-flex flex-row overflow-auto align-items-start custom-theme-radius-low gap-1"
       >
         {episodes.length > 0 ? (
           episodes.map(episode => {
@@ -43,7 +43,7 @@ function EpisodeSection({
                   }
                   className="card-img-top rounded-top"
                   alt={`empty`}
-                  style={{ aspectRatio: '16 / 9', objectFit: 'cover' }}
+                  style={{ objectFit: 'cover' }}
                 />
                 <div className={`card-body py-2 px-2 ${aired ? '' : 'text-black'}`}>
                   <div className="d-flex align-items-center dynamic-fs">
