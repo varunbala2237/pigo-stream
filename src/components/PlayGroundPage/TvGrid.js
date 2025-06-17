@@ -82,7 +82,7 @@ function TvGrid({ id, type, mediaInfo, setBackgroundImage }) {
         });
       });
     }
-  }, [TV_STORAGE_PATH]);
+  }, [TV_STORAGE_PATH, selectedSeason]);
 
   // Episode initial management
   useEffect(() => {
