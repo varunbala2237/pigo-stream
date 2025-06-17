@@ -17,7 +17,7 @@ function EpisodeSection({
 
       <div
         ref={episodeScrollRef}
-        className="d-flex flex-column episode-list overflow-auto custom-theme-radius-low gap-1"
+        className="d-flex flex-row episode-list overflow-auto custom-theme-radius-low gap-1"
       >
         {episodes.length > 0 ? (
           episodes.map(episode => {
@@ -25,35 +25,37 @@ function EpisodeSection({
             const airedToday = isEpisodeAiredToday(episode.air_date);
 
             return (
-              <button
+              <div
                 key={episode.id}
-                className={`btn btn-dark bd-callout-dark w-100 text-start custom-theme-radius-low text-white border-0 shadow-sm 
-                ${selectedEpisode === episode.episode_number
-                    ? 'active'
-                    : ''
-                  }`}
-                onClick={() => onEpisodeChange(episode.episode_number)}
-                disabled={!aired}
+                className={
+                  `card text-white border-0 shadow-sm 
+                  ${selectedEpisode === episode.episode_number ? 'bg-secondary' : 'bd-callout-dark'} custom-theme-radius-low`
+                }
+                style={{ minWidth: '160px', maxWidth: '160px', aspectRatio: '16 / 9', cursor: aired ? 'pointer' : 'not-allowed' }}
+                onClick={() => aired && onEpisodeChange(episode.episode_number)}
+                role="button"
               >
-                <div className={`d-flex flex-column text-wrap ${aired ? '' : 'text-black'}`}>
-                  <div className="d-flex flex-row justify-content-between">
-                    <span className="fw-bold dynamic-fs">
-                      Episode <span className="theme-color">{episode.episode_number}</span>
-                      {airedToday && <span className="badge bg-primary text-white ms-2">New!</span>}
-                    </span>
+                <img
+                  src={
+                    episode.still_path
+                      ? `https://image.tmdb.org/t/p/w185${episode.still_path}`
+                      : ''
+                  }
+                  className="card-img-top rounded-top"
+                  alt={`empty`}
+                  style={{ aspectRatio: '16 / 9', objectFit: 'cover' }}
+                />
+                <div className={`card-body py-2 px-2 ${aired ? '' : 'text-black'}`}>
+                  <div className="d-flex align-items-center dynamic-fs">
+                    <span className="fw-bold theme-color me-2">{episode.episode_number}</span>
+                    <span className="text-truncate flex-grow-1">{episode.name}</span>
                   </div>
-
-                  <div className="d-flex flex-row justify-content-between">
-                    <small className="text-truncate dynamic-ss">
-                      {episode.name}
-                    </small>
-
-                    <small className="align-self-end dynamic-ss">
-                      {new Date(episode.air_date).toLocaleDateString()}
-                    </small>
+                  <div className="d-flex justify-content-between align-items-center">
+                    <span className="dynamic-ss">{new Date(episode.air_date).toLocaleDateString()}</span>
+                    {airedToday && <span className="badge bg-primary ms-2">New!</span>}
                   </div>
                 </div>
-              </button>
+              </div>
             );
           })
         ) : (
