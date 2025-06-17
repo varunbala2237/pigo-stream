@@ -1,7 +1,4 @@
 // EpisodeSection.js
-import { useEffect } from 'react';
-import { Tooltip } from 'bootstrap';
-
 function EpisodeSection({
   episodes,
   selectedEpisode,
@@ -10,18 +7,6 @@ function EpisodeSection({
   isEpisodeAiredToday,
   episodeScrollRef
 }) {
-  useEffect(() => {
-    // Select all tooltip triggers
-    const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
-
-    // Dispose existing tooltips to avoid duplicates
-    tooltipTriggerList.forEach(el => {
-      const tooltipInstance = Tooltip.getInstance(el);
-      if (tooltipInstance) tooltipInstance.dispose();
-      if (el) new Tooltip(el);
-    });
-  }, [episodes]);
-
   return (
     <div className="container-fluid custom-bg custom-theme-radius-low w-100 p-2 my-2">
       {/* Episodes Section */}
@@ -49,9 +34,6 @@ function EpisodeSection({
                   }`}
                 onClick={() => onEpisodeChange(episode.episode_number)}
                 disabled={!aired}
-                data-bs-toggle="tooltip"
-                data-bs-placement="top"
-                title={episode.name}
               >
                 <div className={`d-flex flex-column text-wrap ${aired ? '' : 'text-black'}`}>
                   <div className="d-flex flex-row justify-content-between">
