@@ -42,7 +42,7 @@ function EpisodeSection({
                       : ''
                   }
                   className="custom-theme-radius-top-low"
-                  alt={`empty`}
+                  alt="empty"
                   style={{ objectFit: 'cover' }}
                 />
                 <div className={`card-body py-2 px-2 ${aired ? '' : 'text-black'}`}>
