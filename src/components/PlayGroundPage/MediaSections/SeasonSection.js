@@ -5,34 +5,6 @@ function SeasonSection({
   onSeasonChange,
   seasonScrollRef
 }) {
-  // Check if the season has aired
-  function isSeasonAired(airDateString) {
-    if (!airDateString) return false;
-
-    // Normalize both dates to midnight to avoid timezone issues
-    const airDate = new Date(airDateString);
-    const today = new Date();
-
-    airDate.setHours(0, 0, 0, 0);
-    today.setHours(0, 0, 0, 0);
-
-    return airDate <= today;
-  }
-
-  // Check if the season aired today
-  function isSeasonAiredToday(airDateString) {
-    if (!airDateString) return false;
-
-    const airDate = new Date(airDateString);
-    const today = new Date();
-
-    // Normalize both dates to midnight
-    airDate.setHours(0, 0, 0, 0);
-    today.setHours(0, 0, 0, 0);
-
-    return airDate.getTime() === today.getTime();
-  }
-
   // Handling scroll using buttons
   const scroll = (ref, direction) => {
     if (ref.current) {
@@ -77,8 +49,6 @@ function SeasonSection({
         >
           {seasons.length > 0 ? (
             seasons.map(season => {
-              const aired = isSeasonAired(season.air_date);
-              const airedToday = isSeasonAiredToday(season.air_date);
 
               return (
                 <div
@@ -87,8 +57,8 @@ function SeasonSection({
                     `card text-white border-0 shadow-sm custom-theme-radius-low
                     ${selectedSeason === season.season_number ? 'bg-secondary' : 'bd-callout-dark'}`
                   }
-                  style={{ minWidth: '160px', maxWidth: '160px', aspectRatio: '16 / 9', cursor: aired ? 'pointer' : 'not-allowed' }}
-                  onClick={() => aired && onSeasonChange(season.season_number)}
+                  style={{ minWidth: '160px', maxWidth: '160px', aspectRatio: '16 / 9' }}
+                  onClick={() => onSeasonChange(season.season_number)}
                   role="button"
                 >
                   <img
@@ -101,14 +71,10 @@ function SeasonSection({
                     alt="empty"
                     style={{ aspectRatio: '16 / 9', objectFit: 'cover' }}
                   />
-                  <div className={`card-body p-2 ${aired ? '' : 'text-secondary'}`}>
+                  <div className={`card-body p-2`}>
                     <div className="d-flex align-items-center dynamic-fs">
                       <span className="fw-bold theme-color me-2">{season.season_number}</span>
                       <span className="text-truncate flex-grow-1">{season.name}</span>
-                    </div>
-                    <div className="d-flex justify-content-between align-items-center">
-                      <span className="dynamic-ss">{new Date(season.air_date).toLocaleDateString()}</span>
-                      {airedToday && <span className="badge bg-primary ms-2">New!</span>}
                     </div>
                   </div>
                 </div>
