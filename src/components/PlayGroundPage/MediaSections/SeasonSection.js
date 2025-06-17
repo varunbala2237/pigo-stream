@@ -57,7 +57,7 @@ function SeasonSection({
                     `card text-white border-0 shadow-sm custom-theme-radius-low
                     ${selectedSeason === season.season_number ? 'bg-secondary' : 'bd-callout-dark'}`
                   }
-                  style={{ minWidth: '160px', maxWidth: '160px', aspectRatio: '16 / 9' }}
+                  style={{ minWidth: '160px', maxWidth: '160px' }}
                   onClick={() => onSeasonChange(season.season_number)}
                   role="button"
                 >
@@ -69,7 +69,7 @@ function SeasonSection({
                     }
                     className="custom-theme-radius-top-low"
                     alt="empty"
-                    style={{ aspectRatio: '2 / 3', objectFit: 'cover' }}
+                    style={{ height: '240px', objectFit: 'cover' }}
                   />
                   <div className={`card-body p-2`}>
                     <div className="d-flex align-items-center dynamic-fs">

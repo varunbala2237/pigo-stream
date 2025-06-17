@@ -87,7 +87,7 @@ function EpisodeSection({
                     `card text-white border-0 shadow-sm custom-theme-radius-low
                   ${selectedEpisode === episode.episode_number ? 'bg-secondary' : 'bd-callout-dark'}`
                   }
-                  style={{ minWidth: '160px', maxWidth: '160px', aspectRatio: '16 / 9', cursor: aired ? 'pointer' : 'not-allowed' }}
+                  style={{ minWidth: '160px', maxWidth: '160px', cursor: aired ? 'pointer' : 'not-allowed' }}
                   onClick={() => aired && onEpisodeChange(episode.episode_number)}
                   role="button"
                 >
@@ -99,7 +99,7 @@ function EpisodeSection({
                     }
                     className="custom-theme-radius-top-low"
                     alt="empty"
-                    style={{ aspectRatio: '16 / 9', objectFit: 'cover' }}
+                    style={{ height: '90px', objectFit: 'cover' }}
                   />
                   <div className={`card-body p-2 ${aired ? '' : 'text-secondary'}`}>
                     <div className="d-flex align-items-center dynamic-fs">
