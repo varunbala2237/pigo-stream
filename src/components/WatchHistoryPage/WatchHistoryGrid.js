@@ -184,7 +184,7 @@ function WatchHistoryGrid({ userUID }) {
 
                 {/* Watch History Movies */}
                 <div className="position-relative my-2">
-                    {(moviesHistory.filter(Boolean).length / 2) > 3 && (
+                    {moviesHistory.filter(Boolean) > 3 && (
                         <>
                             <button
                                 className="btn btn-dark custom-bg rounded-pill py-2 position-absolute start-0 translate-middle-y d-none d-md-block"
@@ -254,7 +254,7 @@ function WatchHistoryGrid({ userUID }) {
 
                 {/* Watch History Shows */}
                 <div className="position-relative my-2">
-                    {(showsHistory.filter(Boolean).length / 2) > 3 && (
+                    {showsHistory.filter(Boolean) > 3 && (
                         <>
                             <button
                                 className="btn btn-dark custom-bg rounded-pill py-2 position-absolute start-0 translate-middle-y d-none d-md-block"

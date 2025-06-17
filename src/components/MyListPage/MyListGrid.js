@@ -156,7 +156,7 @@ function MyListGrid({ userUID }) {
 
                 {/* My List Movies */}
                 <div className="position-relative my-2">
-                    {(moviesList.filter(Boolean).length / 2) > 3 && (
+                    {moviesList.filter(Boolean) > 3 && (
                         <>
                             <button
                                 className="btn btn-dark custom-bg rounded-pill py-2 position-absolute start-0 translate-middle-y d-none d-md-block"
@@ -226,7 +226,7 @@ function MyListGrid({ userUID }) {
 
                 {/* My List Shows */}
                 <div className="position-relative my-2">
-                    {(showsList.filter(Boolean).length / 2) > 3 && (
+                    {showsList.filter(Boolean) > 3 && (
                         <>
                             <button
                                 className="btn btn-dark custom-bg rounded-pill py-2 position-absolute start-0 translate-middle-y d-none d-md-block"
