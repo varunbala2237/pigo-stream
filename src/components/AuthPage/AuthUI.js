@@ -267,7 +267,6 @@ function AuthUI() {
     return (
         <div className="d-flex flex-column vh-100 w-100">
             <div className="container vh-100 d-flex bg-transparent justify-content-center align-items-center">
-
                 {/* Overlay spinner for loading state */}
                 <OverlaySpinner visible={isPageLoading} />
 
@@ -379,6 +378,8 @@ function AuthUI() {
                     </div>
                 </div>
             </div>
+
+            {/* No need for connection modal */}
 
             {/* Alert message handling */}
             {alertMessage && <Alert message={alertMessage} onClose={handleAlertDismiss} />}
