@@ -61,10 +61,7 @@ function TvGrid({ id, type, mediaInfo, setBackgroundImage }) {
 
       if (mediaInfo.seasons && mediaInfo.seasons.length > 0) {
         if (savedSelectedSeason) {
-          setSelectedSeason(savedSelectedSeason);
-        } else {
-          const defaultSeasonNumber = mediaInfo.seasons[0]?.season_number || 1;
-          setSelectedSeason(defaultSeasonNumber);
+          setSelectedSeason(savedSelectedSeason? savedSelectedSeason : mediaInfo.seasons[0]?.season_number);
         }
       }
 
@@ -94,10 +91,9 @@ function TvGrid({ id, type, mediaInfo, setBackgroundImage }) {
       const savedEpisode = currentSeasonState.episode;
       const savedScroll = currentSeasonState.scroll;
 
-      const fallbackEpisode = episodes.length > 0 ? episodes[0].episode_number : 1;
       const episodeToSet = episodes.find(ep => ep.episode_number === savedEpisode)
         ? savedEpisode
-        : fallbackEpisode;
+        : episodes[0]?.episode_number;
 
       if (episodeToSet) {
         setSelectedEpisode(episodeToSet);
