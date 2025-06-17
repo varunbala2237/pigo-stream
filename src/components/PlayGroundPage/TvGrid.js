@@ -13,8 +13,9 @@ import EpisodeSection from './MediaSections/EpisodeSection';
 import { getStorageValue, setStorageValue } from '../../utils/localStorageStates';
 import { getSessionValue, setSessionValue } from '../../utils/sessionStorageStates';
 
+const SELECTED_SEASON = 'selectedSeason';
+const SELECTED_SEASON_SCROLL = 'selectedSeasonScroll';
 const SEASON_STATE_KEY = 'seasonState';
-const SEASON_SCROLL_KEY = 'selectedSeasonScroll';
 
 function TvGrid({ id, type, mediaInfo, setBackgroundImage }) {
   const TV_STORAGE_PATH = React.useMemo(
@@ -55,8 +56,8 @@ function TvGrid({ id, type, mediaInfo, setBackgroundImage }) {
       );
       setDirector(director ? director.name : 'Unknown');
 
-      const savedSelectedSeason = getStorageValue(...TV_STORAGE_PATH, SEASON_STATE_KEY);
-      const savedSeasonScroll = getStorageValue(...TV_STORAGE_PATH, SEASON_SCROLL_KEY);
+      const savedSelectedSeason = getStorageValue(...TV_STORAGE_PATH, SELECTED_SEASON);
+      const savedSeasonScroll = getStorageValue(...TV_STORAGE_PATH, SELECTED_SEASON_SCROLL);
 
       if (mediaInfo.seasons && mediaInfo.seasons.length > 0) {
         if (savedSelectedSeason) {
@@ -144,10 +145,10 @@ function TvGrid({ id, type, mediaInfo, setBackgroundImage }) {
 
   const handleSeasonChange = (seasonNumber) => {
     setSelectedSeason(seasonNumber);
-    setStorageValue(...TV_STORAGE_PATH, SEASON_STATE_KEY, seasonNumber);
+    setStorageValue(...TV_STORAGE_PATH, SELECTED_SEASON, seasonNumber);
 
     const seasonRefNode = seasonScrollRef.current;
-    setStorageValue(...TV_STORAGE_PATH, SEASON_SCROLL_KEY, seasonRefNode);
+    setStorageValue(...TV_STORAGE_PATH, SELECTED_SEASON_SCROLL, seasonRefNode);
 
     // Try to load saved episode and scroll position
     const seasonState = getStorageValue(...TV_STORAGE_PATH, SEASON_STATE_KEY) || {};
