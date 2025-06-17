@@ -116,13 +116,12 @@ function PlayerSection({
         <div className="d-flex flex-row align-items-start custom-theme-radius-low w-100">
           <div className="section border-0">
             <img
-              className="img-fluid custom-theme-radius-low mb-3"
+              className="custom-theme-radius-low mb-3"
               src={imageUrl}
               alt="empty"
               style={{
-                width: '100%',
-                maxWidth: '300px',
-                height: 'auto',
+                width: '160px',
+                height: '240px',
                 objectFit: 'cover',
               }}
             />
