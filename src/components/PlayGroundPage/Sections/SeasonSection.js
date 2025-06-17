@@ -6,15 +6,11 @@ function SeasonSection({ seasons, selectedSeason, onSeasonChange }) {
   useEffect(() => {
     const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
 
-    // Dispose existing tooltips
+    // Dispose existing tooltips to avoid duplicates
     tooltipTriggerList.forEach(el => {
       const tooltipInstance = Tooltip.getInstance(el);
       if (tooltipInstance) tooltipInstance.dispose();
-    });
-
-    // Reinitialize tooltips
-    tooltipTriggerList.forEach(el => {
-      new Tooltip(el);
+      if (el) new Tooltip(el);
     });
   }, [seasons]);
 

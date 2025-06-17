@@ -18,11 +18,7 @@ function EpisodeSection({
     tooltipTriggerList.forEach(el => {
       const tooltipInstance = Tooltip.getInstance(el);
       if (tooltipInstance) tooltipInstance.dispose();
-    });
-
-    // Reinitialize tooltips
-    tooltipTriggerList.forEach(el => {
-      new Tooltip(el);
+      if (el) new Tooltip(el);
     });
   }, [episodes]);
 
