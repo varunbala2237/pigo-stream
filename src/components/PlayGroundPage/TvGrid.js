@@ -68,7 +68,7 @@ function TvGrid({ id, type, mediaInfo, setBackgroundImage }) {
         }
       }
 
-      const seasonRefNode = episodeScrollRef.current;
+      const seasonRefNode = seasonScrollRef.current;
       requestAnimationFrame(() => {
         if (seasonRefNode) {
           seasonRefNode.scrollTo({
