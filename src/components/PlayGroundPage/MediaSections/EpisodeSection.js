@@ -90,6 +90,7 @@ function EpisodeSection({
                   style={{ minWidth: '160px', maxWidth: '160px', cursor: aired ? 'pointer' : 'not-allowed' }}
                   onClick={() => aired && onEpisodeChange(episode.episode_number)}
                   role="button"
+                  title={episode.name}
                 >
                   <img
                     src={

@@ -60,6 +60,7 @@ function SeasonSection({
                   style={{ minWidth: '160px', maxWidth: '160px' }}
                   onClick={() => onSeasonChange(season.season_number)}
                   role="button"
+                  title={season.name}
                 >
                   <img
                     src={
