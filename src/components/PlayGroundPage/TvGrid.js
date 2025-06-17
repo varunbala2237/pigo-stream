@@ -72,7 +72,7 @@ function TvGrid({ id, type, mediaInfo, setBackgroundImage }) {
       requestAnimationFrame(() => {
         if (seasonRefNode) {
           seasonRefNode.scrollTo({
-            left: typeof savedScroll === 'number' ? savedSeasonScroll : 0,
+            left: typeof savedSeasonScroll === 'number' ? savedSeasonScroll : 0,
             behavior: 'instant'
           });
         }
