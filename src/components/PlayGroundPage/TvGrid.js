@@ -94,7 +94,7 @@ function TvGrid({ id, type, mediaInfo, setBackgroundImage }) {
       const savedEpisode = currentSeasonState.episode;
       const savedScroll = currentSeasonState.scroll;
 
-      const fallbackEpisode = episodes[0]?.episode_number;
+      const fallbackEpisode = episodes.length > 0 ? episodes[0].episode_number : 1;
       const episodeToSet = episodes.find(ep => ep.episode_number === savedEpisode)
         ? savedEpisode
         : fallbackEpisode;
