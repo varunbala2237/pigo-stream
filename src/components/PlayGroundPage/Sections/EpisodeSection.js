@@ -18,31 +18,32 @@ function EpisodeSection({
   };
 
   return (
-    <div className="position-relative my-2">
-      {episodes.filter(Boolean).length > 3 && (
-        <>
-          <button
-            className="btn btn-dark custom-bg rounded-pill py-2 position-absolute start-0 translate-middle-y d-none d-md-block"
-            onClick={() => scroll(episodeScrollRef, 'left')}
-            style={{ zIndex: 1, top: '50%', transform: 'translateY(-50%)' }}
-          >
-            <i className="bi bi-chevron-left"></i>
-          </button>
-          <button
-            className="btn btn-dark custom-bg rounded-pill py-2 position-absolute end-0 translate-middle-y d-none d-md-block"
-            onClick={() => scroll(episodeScrollRef, 'right')}
-            style={{ zIndex: 1, top: '50%', transform: 'translateY(-50%)' }}
-          >
-            <i className="bi bi-chevron-right"></i>
-          </button>
-        </>
-      )}
-      <div className="container-fluid custom-bg custom-theme-radius-low w-100 p-2 my-2">
-        {/* Episodes Section */}
-        <div className="d-flex flex-row dynamic-ts my-2">
-          <i className="bi bi-play-circle me-2"></i>
-          Episodes
-        </div>
+    <div className="container-fluid custom-bg custom-theme-radius-low w-100 p-2 my-2">
+      {/* Episodes Section */}
+      <div className="d-flex flex-row dynamic-ts my-2">
+        <i className="bi bi-play-circle me-2"></i>
+        Episodes
+      </div>
+
+      <div className="position-relative">
+        {episodes.filter(Boolean).length > 3 && (
+          <>
+            <button
+              className="btn btn-dark custom-bg rounded-pill py-2 position-absolute start-0 translate-middle-y d-none d-md-block"
+              onClick={() => scroll(episodeScrollRef, 'left')}
+              style={{ zIndex: 1, top: '50%', transform: 'translateY(-50%)' }}
+            >
+              <i className="bi bi-chevron-left"></i>
+            </button>
+            <button
+              className="btn btn-dark custom-bg rounded-pill py-2 position-absolute end-0 translate-middle-y d-none d-md-block"
+              onClick={() => scroll(episodeScrollRef, 'right')}
+              style={{ zIndex: 1, top: '50%', transform: 'translateY(-50%)' }}
+            >
+              <i className="bi bi-chevron-right"></i>
+            </button>
+          </>
+        )}
 
         <div
           ref={episodeScrollRef}
