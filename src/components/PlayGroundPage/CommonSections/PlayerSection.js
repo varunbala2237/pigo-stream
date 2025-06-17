@@ -49,7 +49,7 @@ function PlayerSection({
     setImageUrl(
       mediaInfo.poster_path
         ? `https://image.tmdb.org/t/p/w500${mediaInfo.poster_path}`
-        : 'https://icons.iconarchive.com/icons/blackvariant/button-ui-system-folders-alt/512/Movie-icon.png'
+        : 'https://placehold.co/200x300/212529/6c757d?text=?'
     );
   }, [mediaInfo.poster_path]);
 
