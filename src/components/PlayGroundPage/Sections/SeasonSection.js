@@ -24,7 +24,7 @@ function SeasonSection({ seasons, selectedSeason, onSeasonChange }) {
         <i className="bi bi-layers me-2"></i>
         Seasons
       </div>
-      
+
       <div className="d-flex row g-2">
         {seasons.length > 0 ? (
           seasons.map((season) => (
@@ -40,6 +40,9 @@ function SeasonSection({ seasons, selectedSeason, onSeasonChange }) {
                 data-bs-toggle="tooltip"
                 data-bs-placement="top"
               >
+                <small className="text-truncate w-100 theme-color dynamic-ss">
+                  {season.season_number}
+                </small>
                 <small className="text-truncate w-100 dynamic-ss">
                   {season.name}
                 </small>
