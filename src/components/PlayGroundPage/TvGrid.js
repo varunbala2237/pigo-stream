@@ -56,29 +56,29 @@ function TvGrid({ id, type, mediaInfo, setBackgroundImage }) {
       );
       setDirector(director ? director.name : 'Unknown');
 
-      const savedSelectedSeason = getStorageValue(...TV_STORAGE_PATH, SELECTED_SEASON);
-      const savedSeasonScroll = getStorageValue(...TV_STORAGE_PATH, SELECTED_SEASON_SCROLL);
-
-      if (mediaInfo.seasons && mediaInfo.seasons.length > 0) {
-        if (savedSelectedSeason) {
-          setSelectedSeason(savedSelectedSeason? savedSelectedSeason : mediaInfo.seasons[0]?.season_number);
-        }
-      }
-
-      const seasonRefNode = seasonScrollRef.current;
-      requestAnimationFrame(() => {
-        if (seasonRefNode) {
-          seasonRefNode.scrollTo({
-            left: typeof savedSeasonScroll === 'number' ? savedSeasonScroll : 0,
-            behavior: 'instant'
-          });
-        }
-      });
-
       // Setup the backgroundImage
       setBackgroundImage(`https://image.tmdb.org/t/p/original${mediaInfo.backdrop_path}`);
+
+      const savedSelectedSeason = getStorageValue(...TV_STORAGE_PATH, SELECTED_SEASON);
+      setSelectedSeason(
+        savedSelectedSeason ?? mediaInfo.seasons?.[1]?.season_number
+      );
     }
   }, [mediaInfo, TV_STORAGE_PATH, setBackgroundImage]);
+
+  useEffect(() => {
+    const savedSeasonScroll = getStorageValue(...TV_STORAGE_PATH, SELECTED_SEASON_SCROLL);
+
+    const seasonRefNode = seasonScrollRef.current;
+    requestAnimationFrame(() => {
+      if (seasonRefNode) {
+        seasonRefNode.scrollTo({
+          left: typeof savedSeasonScroll === 'number' ? savedSeasonScroll : 0,
+          behavior: 'instant'
+        });
+      }
+    });
+  }, [TV_STORAGE_PATH]);
 
   // Episode initial management
   useEffect(() => {
@@ -93,7 +93,7 @@ function TvGrid({ id, type, mediaInfo, setBackgroundImage }) {
 
       const episodeToSet = episodes.find(ep => ep.episode_number === savedEpisode)
         ? savedEpisode
-        : episodes[0]?.episode_number;
+        : episodes[1]?.episode_number;
 
       setSelectedEpisode(episodeToSet);
 
