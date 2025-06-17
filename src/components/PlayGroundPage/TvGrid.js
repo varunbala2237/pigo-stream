@@ -61,6 +61,7 @@ function TvGrid({ id, type, mediaInfo, setBackgroundImage }) {
     }
   }, [mediaInfo, TV_STORAGE_PATH, setBackgroundImage]);
 
+  // Season initial management
   useEffect(() => {
     const savedSelectedSeason = getStorageValue(...TV_STORAGE_PATH, SELECTED_SEASON);
     const savedSeasonScroll = getStorageValue(...TV_STORAGE_PATH, SELECTED_SEASON_SCROLL);
