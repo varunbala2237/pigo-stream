@@ -44,7 +44,6 @@ function EpisodeSection({
                   </div>
 
                   <div className="d-flex flex-row justify-content-between">
-                    {/* Tooltip applied here on episode name */}
                     <small className="text-truncate dynamic-ss">
                       {episode.name}
                     </small>
