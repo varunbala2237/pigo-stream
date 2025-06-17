@@ -56,6 +56,7 @@ function TvGrid({ id, type, mediaInfo, setBackgroundImage }) {
       setDirector(director ? director.name : 'Unknown');
 
       const savedSelectedSeason = getStorageValue(...TV_STORAGE_PATH, 'selectedSeason');
+      const savedSeasonScroll = getStorageValue(...TV_STORAGE_PATH, SEASON_SCROLL_KEY);
 
       if (mediaInfo.seasons && mediaInfo.seasons.length > 0) {
         if (savedSelectedSeason) {
@@ -66,23 +67,20 @@ function TvGrid({ id, type, mediaInfo, setBackgroundImage }) {
         }
       }
 
+      const seasonRefNode = episodeScrollRef.current;
+      requestAnimationFrame(() => {
+        if (seasonRefNode) {
+          seasonRefNode.scrollTo({
+            left: typeof savedScroll === 'number' ? savedSeasonScroll : 0,
+            behavior: 'instant'
+          });
+        }
+      });
+
       // Setup the backgroundImage
       setBackgroundImage(`https://image.tmdb.org/t/p/original${mediaInfo.backdrop_path}`);
     }
   }, [mediaInfo, TV_STORAGE_PATH, setBackgroundImage]);
-
-  // Season scroll state initial management
-  useEffect(() => {
-    const savedSeasonScroll = getStorageValue(...TV_STORAGE_PATH, SEASON_SCROLL_KEY);
-    if (seasonScrollRef.current && typeof savedSeasonScroll === 'number') {
-      requestAnimationFrame(() => {
-        seasonScrollRef.current.scrollTo({
-          left: savedSeasonScroll,
-          behavior: 'instant'
-        });
-      });
-    }
-  }, [TV_STORAGE_PATH, selectedSeason]);
 
   // Episode initial management
   useEffect(() => {
