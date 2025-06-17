@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'; // Import useNavigate
 import useAppVersion from '../../hooks/PigoStorePage/useAppVersion';
 import useDownloadApp from '../../hooks/PigoStorePage/useDownloadApp';
 import OverlaySpinner from '../../utils/OverlaySpinner';
+import ConnectionModal from '../../utils/ConnectionModal';
 import Alert from '../../utils/Alert';
 
 import { getSessionValue, setSessionValue } from '../../utils/sessionStorageStates';
@@ -185,6 +186,9 @@ const PigostoreUI = () => {
           </div>
         </div>
       </div>
+
+      {/* Connection Modal */}
+      {isError && <ConnectionModal show={isError} />}
 
       {/* Alert for successful removal */}
       {alertMessage && <Alert message={alertMessage} onClose={handleAlertDismiss} type="danger" />}
