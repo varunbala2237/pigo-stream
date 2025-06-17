@@ -185,34 +185,6 @@ function TvGrid({ id, type, mediaInfo, setBackgroundImage }) {
     setStorageValue(...TV_STORAGE_PATH, SEASON_STATE_KEY, seasonState);
   };
 
-  // Check if the episode has aired
-  function isEpisodeAired(airDateString) {
-    if (!airDateString) return false;
-
-    const airDate = new Date(airDateString);
-    const today = new Date();
-
-    // Normalize both dates to midnight to avoid timezone issues
-    airDate.setHours(0, 0, 0, 0);
-    today.setHours(0, 0, 0, 0);
-
-    return airDate <= today;
-  }
-
-  // Check if the episode aired today
-  function isEpisodeAiredToday(airDateString) {
-    if (!airDateString) return false;
-
-    const airDate = new Date(airDateString);
-    const today = new Date();
-
-    // Normalize both dates to midnight
-    airDate.setHours(0, 0, 0, 0);
-    today.setHours(0, 0, 0, 0);
-
-    return airDate.getTime() === today.getTime(); // Check if dates match
-  }
-
   const handleServerChange = (server) => {
     setSelectedServer(server);
     setStorageValue(...TV_STORAGE_PATH, 'selectedServer', server);
@@ -277,8 +249,6 @@ function TvGrid({ id, type, mediaInfo, setBackgroundImage }) {
               episodes={episodes}
               selectedEpisode={selectedEpisode}
               onEpisodeChange={handleEpisodeChange}
-              isEpisodeAired={isEpisodeAired}
-              isEpisodeAiredToday={isEpisodeAiredToday}
               episodeScrollRef={episodeScrollRef}
             />
 

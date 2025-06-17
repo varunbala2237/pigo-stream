@@ -3,10 +3,36 @@ function EpisodeSection({
   episodes,
   selectedEpisode,
   onEpisodeChange,
-  isEpisodeAired,
-  isEpisodeAiredToday,
   episodeScrollRef
 }) {
+  // Check if the episode has aired
+  function isEpisodeAired(airDateString) {
+    if (!airDateString) return false;
+
+    const airDate = new Date(airDateString);
+    const today = new Date();
+
+    // Normalize both dates to midnight to avoid timezone issues
+    airDate.setHours(0, 0, 0, 0);
+    today.setHours(0, 0, 0, 0);
+
+    return airDate <= today;
+  }
+
+  // Check if the episode aired today
+  function isEpisodeAiredToday(airDateString) {
+    if (!airDateString) return false;
+
+    const airDate = new Date(airDateString);
+    const today = new Date();
+
+    // Normalize both dates to midnight
+    airDate.setHours(0, 0, 0, 0);
+    today.setHours(0, 0, 0, 0);
+
+    return airDate.getTime() === today.getTime(); // Check if dates match
+  }
+
   // Handing scroll using buttons
   const scroll = (ref, direction) => {
     if (ref.current) {
