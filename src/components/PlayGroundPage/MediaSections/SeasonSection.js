@@ -65,11 +65,11 @@ function SeasonSection({
                     src={
                       season.poster_path
                         ? `https://image.tmdb.org/t/p/w185${season.poster_path}`
-                        : `https://placehold.co/160x90/212529/6c757d?text=?`
+                        : `https://placehold.co/200x300/212529/6c757d?text=?`
                     }
                     className="custom-theme-radius-top-low"
                     alt="empty"
-                    style={{ aspectRatio: '16 / 9', objectFit: 'cover' }}
+                    style={{ aspectRatio: '2 / 3', objectFit: 'cover' }}
                   />
                   <div className={`card-body p-2`}>
                     <div className="d-flex align-items-center dynamic-fs">
