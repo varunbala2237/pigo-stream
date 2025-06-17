@@ -25,7 +25,7 @@ function Card({ media, type, path, onRemove, handleAlert, isDeletable = true, is
   useEffect(() => {
     setImageUrl(media.poster_path
       ? `https://image.tmdb.org/t/p/w500${media.poster_path}`
-      : 'https://icons.iconarchive.com/icons/blackvariant/button-ui-system-folders-alt/512/Movie-icon.png');
+      : 'https://placehold.co/200x300/212529/6c757d?text=?');
   }, [media.poster_path]);
 
   useEffect(() => {

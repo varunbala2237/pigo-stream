@@ -39,7 +39,7 @@ function EpisodeSection({
                   src={
                     episode.still_path
                       ? `https://image.tmdb.org/t/p/w185${episode.still_path}`
-                      : 'https://placehold.co/600x400'
+                      : `https://placehold.co/160x90/212529/6c757d?text=?`
                   }
                   className="custom-theme-radius-top-low"
                   alt="empty"
