@@ -63,27 +63,25 @@ function TvGrid({ id, type, mediaInfo, setBackgroundImage }) {
 
   // Season initial management
   useEffect(() => {
-    if (seasonData) {
-      const savedSelectedSeason = getStorageValue(...TV_STORAGE_PATH, SELECTED_SEASON);
-      const savedSeasonScroll = getStorageValue(...TV_STORAGE_PATH, SELECTED_SEASON_SCROLL);
+    const savedSelectedSeason = getStorageValue(...TV_STORAGE_PATH, SELECTED_SEASON);
+    const savedSeasonScroll = getStorageValue(...TV_STORAGE_PATH, SELECTED_SEASON_SCROLL);
 
-      const seasonToSet = mediaInfo?.seasons.find(season => season.season_number === savedSelectedSeason)
-        ? savedSelectedSeason
-        : mediaInfo?.seasons[1]?.episode_number;
+    const seasonToSet = mediaInfo?.seasons.find(season => season.season_number === savedSelectedSeason)
+      ? savedSelectedSeason
+      : mediaInfo?.seasons[1]?.season_number;
 
-      setSelectedSeason(seasonToSet);
+    setSelectedSeason(seasonToSet);
 
-      const seasonRefNode = seasonScrollRef.current;
-      requestAnimationFrame(() => {
-        if (seasonRefNode) {
-          seasonRefNode.scrollTo({
-            left: typeof savedSeasonScroll === 'number' ? savedSeasonScroll : 0,
-            behavior: 'instant'
-          });
-        }
-      });
-    }
-  }, [seasonData, TV_STORAGE_PATH, mediaInfo.seasons]);
+    const seasonRefNode = seasonScrollRef.current;
+    requestAnimationFrame(() => {
+      if (seasonRefNode) {
+        seasonRefNode.scrollTo({
+          left: typeof savedSeasonScroll === 'number' ? savedSeasonScroll : 0,
+          behavior: 'instant'
+        });
+      }
+    });
+  }, [mediaInfo.seasons, TV_STORAGE_PATH]);
 
   // Episode initial management
   useEffect(() => {
