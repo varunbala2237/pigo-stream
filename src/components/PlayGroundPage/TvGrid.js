@@ -5,10 +5,10 @@ import useFetchSeason from '../../hooks/PlayGroundPage/useFetchSeason';
 import useFetchServers from '../../hooks/PlayGroundPage/useFetchServers';
 import useSaveMyList from '../../hooks/MyListPage/useSaveMyList';
 import useCheckMyList from '../../hooks/MyListPage/useCheckMyList';
-import PlayerSection from './CommonSections/PlayerSection';
+import InfoSection from './CommonSections/InfoSection';
 import ServerSection from './CommonSections/ServerSection';
-import SeasonSection from './MediaSections/SeasonSection';
-import EpisodeSection from './MediaSections/EpisodeSection';
+import SeasonSection from './RegularMediaSections/SeasonSection';
+import EpisodeSection from './RegularMediaSections/EpisodeSection';
 
 import { getStorageValue, setStorageValue } from '../../utils/localStorageStates';
 import { getSessionValue, setSessionValue } from '../../utils/sessionStorageStates';
@@ -210,7 +210,7 @@ function TvGrid({ id, type, mediaInfo, setBackgroundImage }) {
       <div className="d-flex flex-column justify-content-center align-items-center p-0">
         <div className="flex-row text-white w-100">
           <div className="container">
-            <PlayerSection mediaURL={mediaURL}
+            <InfoSection mediaURL={mediaURL}
               averageVote={averageVote}
               director={director}
               genres={genres}

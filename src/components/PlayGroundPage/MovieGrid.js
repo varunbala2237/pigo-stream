@@ -4,7 +4,7 @@ import CastCard from './CommonSections/CastCard';
 import useFetchServers from '../../hooks/PlayGroundPage/useFetchServers';
 import useSaveMyList from '../../hooks/MyListPage/useSaveMyList';
 import useCheckMyList from '../../hooks/MyListPage/useCheckMyList';
-import PlayerSection from './CommonSections/PlayerSection';
+import InfoSection from './CommonSections/InfoSection';
 import ServerSection from './CommonSections/ServerSection';
 
 import { getStorageValue, setStorageValue } from '../../utils/localStorageStates';
@@ -104,7 +104,7 @@ function MovieGrid({ id, type, mediaInfo, setBackgroundImage }) {
       <div className="d-flex flex-column justify-content-center align-items-center p-0">
         <div className="flex-row text-white w-100">
           <div className="container">
-            <PlayerSection mediaURL={mediaURL}
+            <InfoSection mediaURL={mediaURL}
               averageVote={averageVote}
               director={director}
               genres={genres}

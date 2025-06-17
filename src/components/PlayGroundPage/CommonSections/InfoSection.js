@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import OverviewSection from './OverviewSection';
 import openIframeWindow from "../../IframePage/openIframeWindow";
 
-function PlayerSection({
+function InfoSection({
   mediaURL,
   averageVote,
   director,
@@ -284,4 +284,4 @@ function PlayerSection({
   );
 }
 
-export default PlayerSection;
+export default InfoSection;
