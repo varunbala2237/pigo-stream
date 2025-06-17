@@ -28,8 +28,8 @@ function EpisodeSection({
               <div
                 key={episode.id}
                 className={
-                  `card text-white border-0 shadow-sm 
-                  ${selectedEpisode === episode.episode_number ? 'bg-secondary' : 'bd-callout-dark'} custom-theme-radius-low`
+                  `card text-white border-0 shadow-sm custom-theme-radius-low
+                  ${selectedEpisode === episode.episode_number ? 'bg-secondary' : 'bd-callout-dark'}`
                 }
                 style={{ minWidth: '160px', maxWidth: '160px', aspectRatio: '16 / 9', cursor: aired ? 'pointer' : 'not-allowed' }}
                 onClick={() => aired && onEpisodeChange(episode.episode_number)}
@@ -41,7 +41,6 @@ function EpisodeSection({
                       ? `https://image.tmdb.org/t/p/w185${episode.still_path}`
                       : ''
                   }
-                  className="card-img-top rounded-top"
                   alt={`empty`}
                   style={{ objectFit: 'cover' }}
                 />

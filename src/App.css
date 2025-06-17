@@ -135,7 +135,19 @@
   border-radius: 1rem !important;
 }
 
+.custom-theme-radius-top {
+  border-radius: 1rem 1rem 0px 0px !important;
+}
+
 .custom-theme-radius-bottom {
+  border-radius: 0px 0px 1rem 1rem !important;
+}
+
+.custom-theme-radius-top-low {
+  border-radius: 1rem 1rem 0px 0px !important;
+}
+
+.custom-theme-radius-bottom-low {
   border-radius: 0px 0px 1rem 1rem !important;
 }
 
