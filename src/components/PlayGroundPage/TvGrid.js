@@ -95,9 +95,7 @@ function TvGrid({ id, type, mediaInfo, setBackgroundImage }) {
         ? savedEpisode
         : episodes[0]?.episode_number;
 
-      if (episodeToSet) {
-        setSelectedEpisode(episodeToSet);
-      }
+      setSelectedEpisode(episodeToSet);
 
       const episodeRefNode = episodeScrollRef.current;
       requestAnimationFrame(() => {
