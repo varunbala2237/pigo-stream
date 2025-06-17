@@ -63,23 +63,27 @@ function TvGrid({ id, type, mediaInfo, setBackgroundImage }) {
 
   // Season initial management
   useEffect(() => {
-    const savedSelectedSeason = getStorageValue(...TV_STORAGE_PATH, SELECTED_SEASON);
-    const savedSeasonScroll = getStorageValue(...TV_STORAGE_PATH, SELECTED_SEASON_SCROLL);
+    if (seasonData) {
+      const savedSelectedSeason = getStorageValue(...TV_STORAGE_PATH, SELECTED_SEASON);
+      const savedSeasonScroll = getStorageValue(...TV_STORAGE_PATH, SELECTED_SEASON_SCROLL);
 
-    setSelectedSeason(
-      savedSelectedSeason ?? mediaInfo.seasons?.[1].season_number
-    );
+      const seasonToSet = mediaInfo?.seasons.find(season => season.season_number === savedSelectedSeason)
+        ? savedSelectedSeason
+        : mediaInfo?.seasons[1]?.episode_number;
 
-    const seasonRefNode = seasonScrollRef.current;
-    requestAnimationFrame(() => {
-      if (seasonRefNode) {
-        seasonRefNode.scrollTo({
-          left: typeof savedSeasonScroll === 'number' ? savedSeasonScroll : 0,
-          behavior: 'instant'
-        });
-      }
-    });
-  }, [TV_STORAGE_PATH, mediaInfo.seasons]);
+      setSelectedSeason(seasonToSet);
+
+      const seasonRefNode = seasonScrollRef.current;
+      requestAnimationFrame(() => {
+        if (seasonRefNode) {
+          seasonRefNode.scrollTo({
+            left: typeof savedSeasonScroll === 'number' ? savedSeasonScroll : 0,
+            behavior: 'instant'
+          });
+        }
+      });
+    }
+  }, [seasonData, TV_STORAGE_PATH, mediaInfo.seasons]);
 
   // Episode initial management
   useEffect(() => {
