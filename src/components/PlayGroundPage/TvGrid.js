@@ -91,7 +91,7 @@ function TvGrid({ id, type, mediaInfo, setBackgroundImage }) {
       requestAnimationFrame(() => {
         if (episodeRefNode) {
           episodeRefNode.scrollTo({
-            top: typeof savedScroll === 'number' ? savedScroll : 0,
+            left: typeof savedScroll === 'number' ? savedScroll : 0,
             behavior: 'instant'
           });
         }
@@ -155,7 +155,7 @@ function TvGrid({ id, type, mediaInfo, setBackgroundImage }) {
     seasonState[selectedSeason] = {
       ...(seasonState[selectedSeason] || {}),
       episode: episodeNumber,
-      scroll: episodeRefNode.scrollTop,
+      scroll: episodeRefNode.scrollLeft,
     };
     setStorageValue(...TV_STORAGE_PATH, SEASON_STATE_KEY, seasonState);
   };
