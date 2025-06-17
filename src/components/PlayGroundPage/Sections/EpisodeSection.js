@@ -60,7 +60,7 @@ function EpisodeSection({
                 <div className={`d-flex flex-column text-wrap ${aired ? '' : 'text-black'}`}>
                   <div className="d-flex flex-row justify-content-between">
                     <span className="fw-bold dynamic-fs">
-                      Episode {episode.episode_number}
+                      Episode <span className="theme-color">{episode.episode_number}</span>
                       {airedToday && <span className="badge bg-primary text-white ms-2">New!</span>}
                     </span>
                   </div>
