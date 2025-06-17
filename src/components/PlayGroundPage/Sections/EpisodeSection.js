@@ -43,9 +43,9 @@ function EpisodeSection({
                   }
                   className="custom-theme-radius-top-low"
                   alt="empty"
-                  style={{ objectFit: 'cover' }}
+                  style={{ aspectRatio: '16 / 9', objectFit: 'cover' }}
                 />
-                <div className={`card-body py-2 px-2 ${aired ? '' : 'text-black'}`}>
+                <div className={`card-body py-2 px-2 ${aired ? '' : 'text-secondary'}`}>
                   <div className="d-flex align-items-center dynamic-fs">
                     <span className="fw-bold theme-color me-2">{episode.episode_number}</span>
                     <span className="text-truncate flex-grow-1">{episode.name}</span>
