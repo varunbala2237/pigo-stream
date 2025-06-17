@@ -148,7 +148,7 @@ function TvGrid({ id, type, mediaInfo, setBackgroundImage }) {
     setSelectedSeason(seasonNumber);
 
     setStorageValue(...TV_STORAGE_PATH, SELECTED_SEASON, seasonNumber);
-    setStorageValue(...TV_STORAGE_PATH, SELECTED_SEASON_SCROLL, seasonRefNode.scrollLeft || 0);
+    setStorageValue(...TV_STORAGE_PATH, SELECTED_SEASON_SCROLL, seasonRefNode.scrollLeft);
 
     // Try to load saved episode and scroll position
     const seasonState = getStorageValue(...TV_STORAGE_PATH, SEASON_STATE_KEY) || {};
