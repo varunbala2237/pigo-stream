@@ -17,7 +17,7 @@ function EpisodeSection({
 
       <div
         ref={episodeScrollRef}
-        className="d-flex flex-row overflow-auto align-items-start custom-theme-radius-low gap-1"
+        className="d-flex flex-row overflow-auto scroll-hide align-items-start custom-theme-radius-low gap-1"
       >
         {episodes.length > 0 ? (
           episodes.map(episode => {
