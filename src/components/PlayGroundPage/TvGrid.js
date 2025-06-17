@@ -5,10 +5,10 @@ import useFetchSeason from '../../hooks/PlayGroundPage/useFetchSeason';
 import useFetchServers from '../../hooks/PlayGroundPage/useFetchServers';
 import useSaveMyList from '../../hooks/MyListPage/useSaveMyList';
 import useCheckMyList from '../../hooks/MyListPage/useCheckMyList';
-import PlayerSection from './Sections/PlayerSection';
-import ServerSection from './Sections/ServerSection';
-import SeasonSection from './Sections/SeasonSection';
-import EpisodeSection from './Sections/EpisodeSection';
+import PlayerSection from './CommonSections/PlayerSection';
+import ServerSection from './CommonSections/ServerSection';
+import SeasonSection from './MediaSections/SeasonSection';
+import EpisodeSection from './MediaSections/EpisodeSection';
 
 import { getStorageValue, setStorageValue } from '../../utils/localStorageStates';
 import { getSessionValue, setSessionValue } from '../../utils/sessionStorageStates';
