@@ -76,6 +76,7 @@ function TvGrid({ id, type, mediaInfo, setBackgroundImage }) {
       const seasonState = getStorageValue(...TV_STORAGE_PATH, SEASON_STATE_KEY) || {};
       const currentSeasonState = seasonState[selectedSeason] || {};
       const savedEpisode = currentSeasonState.episode;
+      const savedScroll = currentSeasonState.scroll;
 
       const fallbackEpisode = episodes[0]?.episode_number;
       const episodeToSet = episodes.find(ep => ep.episode_number === savedEpisode)
@@ -87,10 +88,13 @@ function TvGrid({ id, type, mediaInfo, setBackgroundImage }) {
       }
 
       const episodeRefNode = episodeScrollRef.current;
-      const savedScroll = currentSeasonState.scroll;
-
       requestAnimationFrame(() => {
-        if (episodeRefNode) episodeRefNode.scrollTo({ top: savedScroll, behavior: 'instant' });
+        if (episodeRefNode) {
+          episodeRefNode.scrollTo({
+            top: typeof savedScroll === 'number' ? savedScroll : 0,
+            behavior: 'instant'
+          });
+        }
       });
     }
   }, [seasonData, selectedSeason, TV_STORAGE_PATH]);
