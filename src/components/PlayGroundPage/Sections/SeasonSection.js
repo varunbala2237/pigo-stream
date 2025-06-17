@@ -4,6 +4,7 @@ import { Tooltip } from 'bootstrap';
 
 function SeasonSection({ seasons, selectedSeason, onSeasonChange }) {
   useEffect(() => {
+    // Select all tooltip triggers
     const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
 
     // Dispose existing tooltips to avoid duplicates
