@@ -7,7 +7,6 @@ import MovieGrid from './MovieGrid';
 import TvGrid from './TvGrid';
 import OverlaySpinner from '../../utils/OverlaySpinner';
 import ConnectionModal from '../../utils/ConnectionModal';
-import Footer from '../Footer';
 
 function PlayGround() {
   const location = useLocation();
@@ -70,9 +69,9 @@ function PlayGround() {
       {/* Connection Modal */}
       {isError && <ConnectionModal show={isError} />}
 
-      {/* Footer Backspace & Footer */}
+      {/* Footer Backspace & No Need for Footer */}
       <div className="divider" style={{ height: '6rem' }}></div>
-      <Footer />
+      
     </div>
   );
 }
