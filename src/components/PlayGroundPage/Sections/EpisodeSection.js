@@ -41,6 +41,7 @@ function EpisodeSection({
                       ? `https://image.tmdb.org/t/p/w185${episode.still_path}`
                       : ''
                   }
+                  className="custom-theme-radius-top-low"
                   alt={`empty`}
                   style={{ objectFit: 'cover' }}
                 />
