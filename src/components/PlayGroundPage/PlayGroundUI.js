@@ -69,9 +69,7 @@ function PlayGround() {
       {/* Connection Modal */}
       {isError && <ConnectionModal show={isError} />}
 
-      {/* Footer Backspace & No Need for Footer */}
-      <div className="divider" style={{ height: '6rem' }}></div>
-      
+      {/* No Need for Footer */}
     </div>
   );
 }
