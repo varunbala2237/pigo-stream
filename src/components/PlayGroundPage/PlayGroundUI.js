@@ -58,7 +58,7 @@ function PlayGround() {
       </div>
 
       {/* Grid Components */}
-      {mediaInfo != null &&
+      {mediaInfo != null && !isLoading && !isError &&
         <GridComponent
           id={id}
           type={type}
