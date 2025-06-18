@@ -128,7 +128,7 @@ const PigostoreUI = () => {
             <button
               className="btn btn-primary d-flex rounded-pill dynamic-fs"
               onClick={handleDownload}
-              disabled={isLoading || isError}
+              disabled={isDownloadLoading || isDownloadError}
             >
               <i className="bi bi-file-earmark-zip me-2"></i>
               Download
