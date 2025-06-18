@@ -245,6 +245,33 @@ function InfoSection({
                     ))}
                   </dd>
                 </div>
+
+                {mediaInfo.production_companies?.length > 0 && (
+                  <div className="mb-2">
+                    <dt className="fw-bold">Production Companies:</dt>
+                    <dd className="mb-0 text-white">
+                      {mediaInfo.production_companies.map((company, index) => (
+                        <React.Fragment key={index}>
+                          {company.name}
+                          {index < mediaInfo.production_companies.length - 1 && ", "}
+                        </React.Fragment>
+                      ))}
+                    </dd>
+                  </div>
+                )}
+
+                <div className="mb-2">
+                  <dt className="fw-bold">Languages:</dt>
+                  <dd className="mb-0 text-white">
+                    {mediaInfo.spoken_languages?.map((lang, index) => (
+                      <React.Fragment key={index}>
+                        {lang.english_name}
+                        {index < mediaInfo.spoken_languages.length - 1 && ", "}
+                      </React.Fragment>
+                    ))}
+                  </dd>
+                </div>
+
               </dl>
             </div>
           </div>
