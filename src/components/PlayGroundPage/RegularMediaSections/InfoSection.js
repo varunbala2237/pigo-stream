@@ -59,7 +59,6 @@ function InfoSection({
             />
 
             <div className="d-flex flex-column align-items-stretch justify-content-center">
-
               <div className="d-flex justify-content-between rounded-pill w-100 mb-2">
                 <div className="d-flex rounded-pill overflow-hidden border-0 w-100">
                   {/* Large and Small List Buttons*/}
