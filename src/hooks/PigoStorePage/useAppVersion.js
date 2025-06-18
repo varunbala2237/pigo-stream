@@ -23,7 +23,7 @@ const fetchWithRetry = async (url, options = {}, retries = 3, delay = 1000) => {
 
 // Custom hook for retrieving app version data
 const useAppVersion = (platform) => {
-  const [version, setVersion] = useState(null);
+  const [version, setVersion] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
