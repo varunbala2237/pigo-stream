@@ -73,7 +73,7 @@ const PigostoreUI = () => {
 
   useEffect(() => {
     if (!isDownloadLoading && isDownloadError && !downloadLink) {
-      setAlertMessage(`Sorry, downloading isn't available right now.`);
+      setAlertMessage(isDownloadError);
       const timer = setTimeout(() => {
         setAlertMessage('');
       }, 5000);
