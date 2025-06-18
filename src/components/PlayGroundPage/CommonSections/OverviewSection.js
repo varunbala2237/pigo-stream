@@ -9,10 +9,10 @@ function OverviewSection({ text }) {
 
   return (
     <div
-      className="text-wrap text-break text-start dyanmic-fs"
+      className="text-wrap text-break text-start"
       style={{ whiteSpace: "pre-line" }}
     >
-      {expanded || !isLong ? text : `${previewText}...`}
+      <span className="dynamic-fs">{expanded || !isLong ? text : `${previewText}...`}</span>
       {isLong && (
         <div className="mt-1">
           <button
