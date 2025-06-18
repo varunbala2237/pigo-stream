@@ -64,7 +64,7 @@ const PigostoreUI = () => {
   // Fetch the appVersion
   const { version: appVersion, loading: isLoading, error: isError } = useAppVersion(currentPlatform);
   // Fetch download link based on the detected platform
-  const { downloadLink } = useDownloadApp(currentPlatform);
+  const { downloadLink, loading: isDownloadLoading, error: isDownloadError } = useDownloadApp(currentPlatform);
 
   const handleDownload = async () => {
     if (!downloadLink) return;
@@ -72,7 +72,7 @@ const PigostoreUI = () => {
   };
 
   useEffect(() => {
-    if (!isLoading && !downloadLink) {
+    if (!isDownloadLoading && isDownloadError && !downloadLink) {
       setAlertMessage(`Sorry, downloading isn't available right now.`);
       const timer = setTimeout(() => {
         setAlertMessage('');
@@ -81,7 +81,7 @@ const PigostoreUI = () => {
     } else {
       setAlertMessage('');
     }
-  }, [isLoading, downloadLink]);
+  }, [isDownloadLoading, isDownloadError, downloadLink]);
 
   const handleAlertDismiss = () => {
     setAlertMessage('');
