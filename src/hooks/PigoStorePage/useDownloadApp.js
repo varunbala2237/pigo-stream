@@ -12,9 +12,6 @@ const useDownloadApp = (platform) => {
 
   useEffect(() => {
     const fetchDownloadLink = async () => {
-      setLoading(true);
-      setError(null); // Reset error state before new fetch
-
       try {
         const response = await fetch(`${BASE_URL}/pigo-stream/pigostore/download-app?platform=${platform}`);
         

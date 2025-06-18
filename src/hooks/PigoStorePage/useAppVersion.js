@@ -30,7 +30,7 @@ const useAppVersion = (platform) => {
   useEffect(() => {
     const fetchAppVersion = async () => {
       if (!platform) {
-        setError('Platform is required');
+        setError(true);
         setLoading(false);
         return;
       }
