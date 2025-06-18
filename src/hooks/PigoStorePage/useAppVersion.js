@@ -29,14 +29,7 @@ const useAppVersion = (platform) => {
 
   useEffect(() => {
     const fetchAppVersion = async () => {
-      if (!platform) {
-        setError(true);
-        setLoading(false);
-        return;
-      }
-
       const url = `${BASE_URL}/pigo-stream/pigostore/app-version?platform=${platform}`;
-
       try {
         const result = await fetchWithRetry(url);
         setVersion(result.version);
@@ -47,7 +40,12 @@ const useAppVersion = (platform) => {
       }
     };
 
-    fetchAppVersion();
+    if (platform) {
+      fetchAppVersion();
+    } else {
+      setLoading(false);
+      setError(true);
+    }
   }, [platform]);
 
   return { version, loading, error };
