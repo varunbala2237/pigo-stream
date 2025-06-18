@@ -102,26 +102,26 @@ function InfoSection({
               {/* Larger button for larger screen */}
               <button
                 className={
-                  `btn d-none d-md-block mb-2 d-flex justify-content-center border-0 nowrap rounded-pill 
+                  `btn d-none d-md-block mb-2 d-flex justify-content-center border-0 rounded-pill 
                   ${trailerLink ? 'btn-light' : 'btn-secondary'
                   }`}
                 onClick={() => trailerLink && window.open(trailerLink, '_blank')}
                 disabled={!trailerLink}
               >
                 <i className="bi bi-youtube text-danger me-2"></i>
-                <b>YouTube</b> Trailer
+                <span className="dynamic-fs">Trailer</span>
               </button>
               {/* Smaller button for smaller screen */}
               <button
                 className={
-                  `btn d-block d-md-none btn-sm mb-2 d-flex justify-content-center border-0 nowrap rounded-pill 
+                  `btn d-block d-md-none btn-sm mb-2 d-flex justify-content-center border-0 rounded-pill 
                   ${trailerLink ? 'btn-light' : 'btn-secondary'
                   }`}
                 onClick={() => trailerLink && window.open(trailerLink, '_blank')}
                 disabled={!trailerLink}
               >
                 <i className="bi bi-youtube text-danger me-2"></i>
-                <b>YouTube</b> Trailer
+                <span className="dynamic-fs">Trailer</span>
               </button>
             </div>
           </div>
