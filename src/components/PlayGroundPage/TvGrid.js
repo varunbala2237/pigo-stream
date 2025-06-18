@@ -265,7 +265,8 @@ function TvGrid({ id, type, mediaInfo, setBackgroundImage }) {
         </div>
       </div>
 
-      {/* Play Floating Action Button */}
+      {/* Backspace & Play Floating Action Button */}
+      <div className="divider" style={{ height: '3rem' }}></div>
       <PlayFab id={id} type={type} mediaURL={mediaURL} />
     </>
   );
