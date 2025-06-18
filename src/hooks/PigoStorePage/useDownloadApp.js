@@ -6,7 +6,7 @@ const BASE_URL = process.env.REACT_APP_SERVER_URL;
 
 // Custom hook to download the app
 const useDownloadApp = (platform) => {
-  const [downloadLink, setDownloadLink] = useState('');
+  const [downloadLink, setDownloadLink] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
@@ -20,7 +20,7 @@ const useDownloadApp = (platform) => {
         const data = await response.json();
         setDownloadLink(data.url);
       } catch (err) {
-        setError('Error');
+        setError(err.message);
       } finally {
         setLoading(false);
       }
