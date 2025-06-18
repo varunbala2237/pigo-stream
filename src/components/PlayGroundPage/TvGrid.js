@@ -205,7 +205,6 @@ function TvGrid({ id, type, mediaInfo, setBackgroundImage }) {
               mediaInfo={mediaInfo}
               isInList={isInList}
               handleAddToList={handleAddToList}
-              selectedEpisode={selectedEpisode}
             />
 
             {/* Server Section */}

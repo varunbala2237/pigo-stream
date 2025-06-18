@@ -4,7 +4,8 @@ import useFetchTrailer from '../../../hooks/PlayGroundPage/useFetchTrailer';
 import OverviewSection from '../CommonSections/OverviewSection';
 
 function InfoSection({
-  id, type,
+  id, 
+  type,
   mediaInfo,
   isInList,
   handleAddToList,
@@ -12,23 +13,26 @@ function InfoSection({
   const [imageUrl, setImageUrl] = useState('');
   const { trailerLink } = useFetchTrailer(id, type);
 
-  const director = mediaInfo.credits?.crew?.find(crewMember => crewMember.job === 'Director');
-  const { genres = [], vote_average, spoken_languages } = mediaInfo ? mediaInfo : {};
+  const poster_path = mediaInfo?.poster_path;
+  const title = mediaInfo?.title || mediaInfo?.name;
+  const release_date = mediaInfo?.release_date || mediaInfo?.first_air_date;
+  const director = mediaInfo?.credits?.crew?.find(crewMember => crewMember.job === 'Director')?.name || 'Unknown';
+  const { vote_average, genres = [], spoken_languages = [], production_companies = [] } = mediaInfo ? mediaInfo : {};
   const averageVote = vote_average ? vote_average.toFixed(1) : '0.0';
 
   useEffect(() => {
     setImageUrl(
-      mediaInfo.poster_path
-        ? `https://image.tmdb.org/t/p/w500${mediaInfo.poster_path}`
+      poster_path
+        ? `https://image.tmdb.org/t/p/w500${poster_path}`
         : 'https://placehold.co/200x300/212529/6c757d?text=?'
     );
-  }, [mediaInfo.poster_path]);
+  }, [poster_path]);
 
   const handleShare = () => {
     const currentURL = window.location.href;
     if (navigator.share) {
       navigator.share({
-        title: mediaInfo.title || mediaInfo.name,
+        title: title,
         url: currentURL,
       }).catch((err) => console.error('Error sharing:', err));
     } else {
@@ -119,7 +123,7 @@ function InfoSection({
             </div>
             <div className="d-flex flex-column flex-wrap dynamic-fs">
               <dl className="m-0">
-                <dt className="text-wrap dynamic-ts">{mediaInfo.title ? mediaInfo.title : mediaInfo.name}</dt>
+                <dt className="text-wrap dynamic-ts">{title}</dt>
                 <dd className="dynamic-fs">
                   <i className="bi bi-star-fill text-warning me-2"></i>
                   <span id="Rating" className="text-white">
@@ -132,9 +136,7 @@ function InfoSection({
                 <div className="mb-2">
                   <dt className="fw-bold">Release Date:</dt>
                   <dd className="mb-0">
-                    {mediaInfo.release_date
-                      ? new Date(mediaInfo.release_date).toLocaleDateString()
-                      : new Date(mediaInfo.first_air_date).toLocaleDateString()}
+                    {new Date(release_date).toLocaleDateString()}
                   </dd>
                 </div>
 
@@ -167,14 +169,14 @@ function InfoSection({
                   </dd>
                 </div>
 
-                {mediaInfo.production_companies?.length > 0 && (
+                {production_companies?.length > 0 && (
                   <div className="mb-0">
                     <dt className="fw-bold">Production Companies:</dt>
                     <dd className="mb-0 text-white">
-                      {mediaInfo.production_companies.map((company, index) => (
+                      {production_companies.map((company, index) => (
                         <React.Fragment key={index}>
                           {company.name}
-                          {index < mediaInfo.production_companies.length - 1 && ", "}
+                          {index < production_companies.length - 1 && ", "}
                         </React.Fragment>
                       ))}
                     </dd>
