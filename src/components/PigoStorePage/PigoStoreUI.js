@@ -81,7 +81,7 @@ const PigostoreUI = () => {
     } else {
       setAlertMessage('');
     }
-  }, [isLoading, isError, downloadLink]);
+  }, [isLoading, downloadLink]);
 
   const handleAlertDismiss = () => {
     setAlertMessage('');
