@@ -1,11 +1,7 @@
 // InfoSection.js
 import React, { useState, useEffect } from 'react';
-import useSaveWatchHistory from '../../../hooks/WatchHistoryPage/useSaveWatchHistory';
 import useFetchTrailer from '../../../hooks/PlayGroundPage/useFetchTrailer';
-import useAppVersion from '../../../hooks/PigoStorePage/useAppVersion';
-import { useNavigate } from 'react-router-dom';
 import OverviewSection from './OverviewSection';
-import openIframeWindow from "../../IframePage/openIframeWindow";
 
 function InfoSection({
   mediaURL,
@@ -19,32 +15,7 @@ function InfoSection({
   handleAddToList,
 }) {
   const [imageUrl, setImageUrl] = useState('');
-  const [inHistory, setInHistory] = useState(false);
-  const { trailerLink, loading } = useFetchTrailer(id, type);
-  const [showNote, setShowNote] = useState(false);
-  const navigate = useNavigate();
-
-  const detectPlatform = () => {
-    if (navigator.userAgentData) {
-      const platform = navigator.userAgentData.platform.toLowerCase();
-      if (platform.includes('windows')) return 'windows';
-      if (platform.includes('mac')) return 'macos';
-      if (platform.includes('linux')) return 'linux';
-      if (platform.includes('android')) return 'android';
-      if (platform.includes('ios')) return 'ios';
-    }
-
-    const userAgent = navigator.userAgent.toLowerCase();
-    if (userAgent.includes('win')) return 'windows';
-    if (userAgent.includes('mac')) return 'macos';
-    if (userAgent.includes('linux')) return 'linux';
-    if (/android/i.test(userAgent)) return 'android';
-    if (/iphone|ipad|ipod/i.test(userAgent)) return 'ios';
-    return 'unknown';
-  };
-
-  const platform = detectPlatform();
-  const { version: appVersion } = useAppVersion(platform);
+  const { trailerLink } = useFetchTrailer(id, type);
 
   useEffect(() => {
     setImageUrl(
@@ -53,47 +24,6 @@ function InfoSection({
         : 'https://placehold.co/200x300/212529/6c757d?text=?'
     );
   }, [mediaInfo.poster_path]);
-
-  // Add the Media to Watch History
-  const { addToHistory } = useSaveWatchHistory();
-
-  useEffect(() => {
-    let timer;
-    if (showNote) {
-      timer = setTimeout(() => setShowNote(false), 5000);
-    }
-    return () => clearTimeout(timer);
-  }, [showNote]);
-
-  if (loading) {
-    return (
-      null
-    );
-  }
-
-  const openPlayer = async (serverLink) => {
-    try {
-      if (!inHistory) {
-        setInHistory(true);
-        await addToHistory(id, type);
-      }
-
-      setShowNote(true);
-
-      let appURL;
-      if (platform === 'windows' || platform === 'android') {
-        appURL = `pigoplayer://open?url=${encodeURIComponent(serverLink)}&version=${appVersion}`;
-        window.location.href = appURL;
-      } else if (platform === "macos" || platform === "ios") {
-        openIframeWindow(serverLink);
-      } else {
-        // Return nothing
-        return;
-      }
-    } catch (error) {
-      console.error('Error opening app:', error);
-    }
-  };
 
   const handleShare = () => {
     const currentURL = window.location.href;
@@ -105,10 +35,6 @@ function InfoSection({
     } else {
       console.error('Web Share API not supported in this browser.');
     }
-  };
-
-  const redirectToStore = () => {
-    navigate('/pigostore');
   };
 
   return (
@@ -186,27 +112,6 @@ function InfoSection({
                 <i className="bi bi-play-fill text-white me-2"></i>
                 {"Trailer"}
               </button>
-
-              {/* Larger button for larger screen */}
-              <button
-                className="btn btn-dark d-none d-md-block justify-content-center border-0 text-white nowrap rounded-pill custom-bg"
-                onClick={() => {
-                  openPlayer(mediaURL);
-                }}
-              >
-                <i className="bi bi-play-fill theme-color me-2"></i>
-                Play
-              </button>
-              {/* Smaller button for smaller screen */}
-              <button
-                className="btn btn-dark d-block d-md-none btn-sm justify-content-center border-0 text-white nowrap rounded-pill custom-bg"
-                onClick={() => {
-                  openPlayer(mediaURL);
-                }}
-              >
-                <i className="bi bi-play-fill theme-color me-2"></i>
-                Play
-              </button>
             </div>
           </div>
           <div className="section ms-2">
@@ -275,29 +180,6 @@ function InfoSection({
           </div>
         </div>
       </div>
-      {
-        showNote && (
-          <div className="bd-callout-dark custom-theme-radius-low dynamic-fs text-white mt-3" style={{ padding: '1rem' }}>
-            {platform === 'windows' || platform === 'android' ? (
-              <>
-                <i className="bi bi-info-circle me-2"></i>
-                Don't have the player app?
-                <span className="link text-primary" onClick={redirectToStore}>
-                  <i className="bi bi-bag-check-fill mx-2"></i>Get it now
-                </span>
-              </>
-            ) : platform === 'macos' || platform === 'ios' ? (
-              <>
-                <i className="bi bi-info-circle me-2"></i>
-                This content may contain redirects and ads.
-                <span className="link text-warning"> For the best experience, open in fullscreen mode.</span>
-              </>
-            ) : (
-              <span className="link text-danger">Unsupported platform.</span>
-            )}
-          </div>
-        )
-      }
     </div>
   );
 }
