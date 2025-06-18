@@ -112,11 +112,11 @@ function InfoSection({
 
   return (
     <div className="d-flex flex-column custom-bg custom-theme-radius-low w-100 p-2">
-      <div className="d-flex flex-column flex-md-row align-items-start justify-content-between w-100">
+      <div className="d-flex flex-column align-items-start justify-content-between w-100">
         <div className="d-flex flex-row align-items-start custom-theme-radius-low w-100">
-          <div className="section border-0">
+          <div className="section">
             <img
-              className="custom-theme-radius-low mb-3"
+              className="custom-theme-radius-low mb-2"
               src={imageUrl}
               alt="empty"
               style={{
@@ -128,7 +128,7 @@ function InfoSection({
 
             <div className="d-flex flex-column align-items-stretch justify-content-center">
 
-              <div className="d-flex justify-content-between rounded-pill w-100 mb-3">
+              <div className="d-flex justify-content-between rounded-pill w-100 mb-2">
                 <div className="d-flex rounded-pill overflow-hidden border-0 w-100">
                   {/* Large and Small List Buttons*/}
                   <button
@@ -167,7 +167,7 @@ function InfoSection({
 
               {/* Larger button for larger screen */}
               <button
-                className={`btn d-none d-md-block mb-3 justify-content-center border-0 nowrap rounded-pill ${trailerLink ? 'btn-danger' : 'btn-secondary'
+                className={`btn d-none d-md-block mb-2 justify-content-center border-0 nowrap rounded-pill ${trailerLink ? 'btn-danger' : 'btn-secondary'
                   }`}
                 onClick={() => trailerLink && window.open(trailerLink, '_blank')}
                 disabled={!trailerLink}
@@ -177,7 +177,7 @@ function InfoSection({
               </button>
               {/* Smaller button for smaller screen */}
               <button
-                className={`btn d-block d-md-none btn-sm mb-3 justify-content-center border-0 nowrap rounded-pill ${trailerLink ? 'btn-danger' : 'btn-secondary'
+                className={`btn d-block d-md-none btn-sm mb-2 justify-content-center border-0 nowrap rounded-pill ${trailerLink ? 'btn-danger' : 'btn-secondary'
                   }`}
                 onClick={() => trailerLink && window.open(trailerLink, '_blank')}
                 disabled={!trailerLink}
@@ -208,7 +208,7 @@ function InfoSection({
               </button>
             </div>
           </div>
-          <div className="section ms-3">
+          <div className="section ms-2">
             <span className="text-wrap dynamic-ts">{mediaInfo.title ? mediaInfo.title : mediaInfo.name}</span>
             <div className="w-100 align-items-start justify-content-start mb-2">
               <div className="dynamic-fs">
@@ -245,15 +245,16 @@ function InfoSection({
                     ))}
                   </dd>
                 </div>
-
-                <div className="mb-0">
-                  <dd className="text-start">
-                    <dt className="fw-bold">Overview:</dt>
-                    <OverviewSection text={mediaInfo.overview} />
-                  </dd>
-                </div>
               </dl>
             </div>
+          </div>
+        </div>
+        <div className="d-flex flex-row align-items-start custom-theme-radius-low w-100">
+          <div className="section">
+            <dd className="text-start">
+              <dt className="fw-bold">Overview:</dt>
+              <OverviewSection text={mediaInfo.overview} />
+            </dd>
           </div>
         </div>
       </div>
