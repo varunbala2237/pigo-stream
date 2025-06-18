@@ -75,7 +75,7 @@ function PlayFab({ id, type, mediaURL }) {
     return (
         <button
             onClick={() => openPlayer(mediaURL)}
-            className="btn btn-dark bd-callout-dark d-flex justify-content-center align-items-center rounded-pill dynamic-fs shadow"
+            className="btn btn-dark bd-callout-dark d-flex justify-content-center align-items-center rounded-pill dynamic-ts shadow"
             style={{
                 position: 'fixed',
                 bottom: '1rem',
