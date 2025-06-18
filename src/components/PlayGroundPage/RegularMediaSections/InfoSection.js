@@ -18,7 +18,10 @@ function InfoSection({
   const vote_average = mediaInfo?.vote_average;
   const averageVote = vote_average ? vote_average.toFixed(1) : '0.0';
   const release_date = mediaInfo?.release_date || mediaInfo?.first_air_date;
-  const director = mediaInfo?.credits?.crew?.find(crewMember => crewMember.job === 'Director')?.name || 'Unknown';
+  const director =
+    mediaInfo?.credits?.crew?.find(c => c.job === 'Director')?.name ||
+    mediaInfo?.created_by?.[0]?.name ||
+    'Unknown';
   const { genres = [], spoken_languages = [], production_companies = [] } = mediaInfo ? mediaInfo : {};
   const overview = mediaInfo?.overview;
 
