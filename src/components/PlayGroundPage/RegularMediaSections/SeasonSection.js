@@ -18,7 +18,7 @@ function SeasonSection({
   return (
     <div className="container-fluid custom-bg custom-theme-radius-low w-100 p-2 my-2">
       {/* Seasons Section */}
-      <div className="d-flex flex-row dynamic-ts my-2">
+      <div className="d-flex flex-row dynamic-ts mb-2">
         <i className="bi bi-layers me-2"></i>
         Seasons
       </div>

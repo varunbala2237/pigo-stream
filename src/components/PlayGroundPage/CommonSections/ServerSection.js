@@ -7,7 +7,7 @@ function ServerSection({
     return (
 
         <div className="container-fluid custom-bg custom-theme-radius-low w-100 p-2 my-2">
-            <div className="d-flex flex-row dynamic-ts my-2">
+            <div className="d-flex flex-row dynamic-ts mb-2">
                 <i className="bi bi-hdd-network me-2"></i>
                 Servers
             </div>
