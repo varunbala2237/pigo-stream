@@ -58,7 +58,7 @@ const PigostoreUI = () => {
 
   useEffect(() => {
     const platform = detectPlatform();
-    setCurrentPlatform('ios'); // Set current platform based on detection
+    setCurrentPlatform(platform); // Set current platform based on detection
   }, []);
 
   // Fetch the appVersion
@@ -128,7 +128,7 @@ const PigostoreUI = () => {
             <button
               className="btn btn-primary d-flex rounded-pill dynamic-fs"
               onClick={handleDownload}
-              disabled={isDownloadLoading || isDownloadError}
+              disabled={!downloadLink}
             >
               <i className="bi bi-file-earmark-zip me-2"></i>
               Download
