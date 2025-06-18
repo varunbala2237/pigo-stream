@@ -18,14 +18,13 @@ const SELECTED_SEASON = 'selectedSeason';
 const SELECTED_SEASON_SCROLL = 'selectedSeasonScroll';
 const SEASON_STATE_KEY = 'seasonState';
 
-function TvGrid({ id, type, mediaInfo, setBackgroundImage }) {
+function TvGrid({ id, type, mediaInfo, mediaURL, setMediaURL, setBackgroundImage }) {
   const TV_STORAGE_PATH = React.useMemo(
     () => ['PlayGroundUI', 'Grids', 'TvGrid', `${id}`],
     [id]
   );
 
   // Initialize required useStates
-  const [mediaURL, setMediaURL] = useState('');
   const [cast, setCast] = useState([]);
   const [seasons, setSeasons] = useState([]);
   const [episodes, setEpisodes] = useState([]);
@@ -134,7 +133,7 @@ function TvGrid({ id, type, mediaInfo, setBackgroundImage }) {
         setMediaURL(server.server_link);
       }
     }
-  }, [selectedServer, servers]);
+  }, [selectedServer, servers, setMediaURL]);
 
   const handleSeasonChange = (seasonNumber) => {
     const seasonRefNode = seasonScrollRef.current;

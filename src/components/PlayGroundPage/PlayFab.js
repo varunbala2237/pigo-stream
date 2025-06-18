@@ -75,7 +75,7 @@ function PlayFab({ id, type, mediaURL }) {
     return (
         <button
             onClick={() => openPlayer(mediaURL)}
-            className="btn btn-dark bd-callout-dark justify-content-center align-items-center rounded-circle dynamic-ts shadow"
+            className="btn btn-dark bd-callout-dark d-flex justify-content-center align-items-center rounded-pill dynamic-fs shadow"
             style={{
                 position: 'fixed',
                 bottom: '1rem',
@@ -85,7 +85,8 @@ function PlayFab({ id, type, mediaURL }) {
             aria-label="Play"
             title="Play"
         >
-            <i className="bi bi-play-fill fs-4 theme-color"></i>
+            <i className="bi bi-play-fill theme-color me-2"></i>
+            <b>Pigo</b>Player
         </button>
     );
 }

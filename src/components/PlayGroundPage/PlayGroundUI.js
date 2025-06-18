@@ -14,6 +14,9 @@ function PlayGround() {
   const id = queryParams.get('id');
   const type = queryParams.get('type');
 
+  // Initialize mediaURL right here
+  const [mediaURL, setMediaURL] = useState('');
+
   // Retrive full tmdb metadata of the id and type
   const { data: mediaInfo, loading: isLoading, error: isError } = useFetchMediaInfo(id, type);
 
@@ -62,6 +65,8 @@ function PlayGround() {
           id={id}
           type={type}
           mediaInfo={mediaInfo}
+          mediaURL={mediaURL}
+          setMediaURL={setMediaURL}
           setBackgroundImage={setBackgroundImage}
         />
       }
@@ -70,6 +75,7 @@ function PlayGround() {
       {isError && <ConnectionModal show={isError} />}
 
       {/* No Need for Footer */}
+
     </div>
   );
 }
