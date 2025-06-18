@@ -120,9 +120,6 @@ function InfoSection({
             </div>
           </div>
           <div className="section ms-2">
-
-            <div className="w-100 align-items-start justify-content-start mb-2">
-            </div>
             <div className="d-flex flex-column flex-wrap dynamic-fs">
               <dl className="m-0">
                 <dt className="text-wrap dynamic-ts">{title}</dt>
