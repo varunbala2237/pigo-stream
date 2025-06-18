@@ -29,7 +29,7 @@ function TvGrid({ id, type, mediaInfo, setBackgroundImage }) {
   const [seasons, setSeasons] = useState([]);
   const [episodes, setEpisodes] = useState([]);
   const [selectedSeason, setSelectedSeason] = useState(1);
-  const [selectedEpisode, setSelectedEpisode] = useState(1);
+  const [selectedEpisode, setSelectedEpisode] = useState(0);
   const seasonScrollRef = useRef(null);
   const episodeScrollRef = useRef(null);
   const [selectedServer, setSelectedServer] = useState('');
@@ -91,7 +91,7 @@ function TvGrid({ id, type, mediaInfo, setBackgroundImage }) {
 
       const episodeToSet = episodes.find(ep => ep.episode_number === savedEpisode)
         ? savedEpisode
-        : episodes[1]?.episode_number;
+        : episodes[0]?.episode_number;
 
       setSelectedEpisode(episodeToSet);
 
@@ -149,8 +149,6 @@ function TvGrid({ id, type, mediaInfo, setBackgroundImage }) {
 
     if (seasonInfo?.episode) {
       setSelectedEpisode(seasonInfo.episode);
-    } else {
-      setSelectedEpisode(undefined); // Will be handled in useEffect on seasonData
     }
 
     // Scroll restoration could be done in another effect if needed
