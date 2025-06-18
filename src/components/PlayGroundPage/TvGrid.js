@@ -199,7 +199,8 @@ function TvGrid({ id, type, mediaInfo, setBackgroundImage }) {
     }
   };
 
-  const { genres, vote_average } = mediaInfo ? mediaInfo : {};
+  const { genres = [], vote_average, spoken_languages } = mediaInfo ? mediaInfo : {};
+  const languages = spoken_languages ? spoken_languages : 'Unknown';
   const averageVote = vote_average ? vote_average.toFixed(1) : '0.0';
 
   return (
@@ -211,6 +212,7 @@ function TvGrid({ id, type, mediaInfo, setBackgroundImage }) {
               averageVote={averageVote}
               director={director}
               genres={genres}
+              languages={languages}
               mediaInfo={mediaInfo}
               id={id}
               type={type}

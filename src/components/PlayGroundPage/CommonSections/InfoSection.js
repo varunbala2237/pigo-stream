@@ -1,4 +1,4 @@
-// PlayerSection.js
+// InfoSection.js
 import React, { useState, useEffect } from 'react';
 import useSaveWatchHistory from '../../../hooks/WatchHistoryPage/useSaveWatchHistory';
 import useFetchTrailer from '../../../hooks/PlayGroundPage/useFetchTrailer';
@@ -12,6 +12,7 @@ function InfoSection({
   averageVote,
   director,
   genres,
+  languages,
   mediaInfo,
   id, type,
   isInList,
@@ -253,10 +254,10 @@ function InfoSection({
                 <div className="mb-0">
                   <dt className="fw-bold">Languages:</dt>
                   <dd className="mb-0 text-white">
-                    {mediaInfo.spoken_languages?.map((lang, index) => (
+                    {languages?.map((lang, index) => (
                       <React.Fragment key={index}>
                         {lang.english_name}
-                        {index < mediaInfo.spoken_languages.length - 1 && ", "}
+                        {index < languages.length - 1 && ", "}
                       </React.Fragment>
                     ))}
                   </dd>
