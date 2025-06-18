@@ -329,7 +329,7 @@ function HomeUI({
                   <b>{isRecommended ? 'Picked Just for You' : '#1 Most Watched'}</b>
                 </div>
                 <div className="d-flex justify-content-start align-items-center">
-                  <span className="text-wrap dynamic-ts">{title}</span>
+                  <span className="text-wrap fw-bold dynamic-ts">{title}</span>
                 </div>
                 <div className="dynamic-fs text-white">
                   <div className="dynamic-fs my-2">

@@ -209,16 +209,20 @@ function InfoSection({
             </div>
           </div>
           <div className="section ms-2">
-            <span className="text-wrap dynamic-ts">{mediaInfo.title ? mediaInfo.title : mediaInfo.name}</span>
+
             <div className="w-100 align-items-start justify-content-start mb-2">
-              <div className="dynamic-fs">
-                <i className="bi bi-star-fill text-warning me-2"></i>
-                <span id="Rating" className="text-white">
-                  {averageVote}
-                </span>
-              </div>
             </div>
             <div className="d-flex flex-column flex-wrap dynamic-fs">
+              <dl className="m-0">
+                <dt className="text-wrap dynamic-ts">{mediaInfo.title ? mediaInfo.title : mediaInfo.name}</dt>
+                <dd className="dynamic-fs">
+                  <i className="bi bi-star-fill text-warning me-2"></i>
+                  <span id="Rating" className="text-white">
+                    {averageVote}
+                  </span>
+                </dd>
+              </dl>
+
               <dl className="m-0">
                 <div className="mb-2">
                   <dt className="fw-bold">Release Date:</dt>
@@ -260,7 +264,7 @@ function InfoSection({
                   </div>
                 )}
 
-                <div className="mb-2">
+                <div className="mb-0">
                   <dt className="fw-bold">Languages:</dt>
                   <dd className="mb-0 text-white">
                     {mediaInfo.spoken_languages?.map((lang, index) => (
