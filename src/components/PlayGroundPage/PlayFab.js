@@ -2,7 +2,6 @@
 import { useState } from 'react';
 import useAppVersion from '../../hooks/PigoStorePage/useAppVersion';
 import useSaveWatchHistory from '../../hooks/WatchHistoryPage/useSaveWatchHistory';
-import openIframeWindow from "../IframePage/openIframeWindow";
 import { useNavigate } from 'react-router-dom';
 
 function PlayFab({ id, type, mediaURL }) {
@@ -30,8 +29,6 @@ function PlayFab({ id, type, mediaURL }) {
 
     const platform = detectPlatform();
     const { version: appVersion } = useAppVersion(platform);
-
-    // Add the Media to Watch History
     const { addToHistory } = useSaveWatchHistory();
 
     const openPlayer = async (serverLink) => {
@@ -44,12 +41,27 @@ function PlayFab({ id, type, mediaURL }) {
             let appURL;
             if (platform === 'windows' || platform === 'android') {
                 appURL = `pigoplayer://open?url=${encodeURIComponent(serverLink)}&version=${appVersion}`;
+
+                let didBlur = false;
+
+                const timeout = setTimeout(() => {
+                    if (!didBlur) {
+                        redirectToStore();
+                    }
+                }, 2000); // 2-second timeout
+
                 window.location.href = appURL;
-            } else if (platform === "macos" || platform === "ios") {
-                openIframeWindow(serverLink);
+
+                window.addEventListener(
+                    'blur',
+                    () => {
+                        didBlur = true;
+                        clearTimeout(timeout);
+                    },
+                    { once: true }
+                );
             } else {
-                // Return nothing
-                return;
+                redirectToStore();
             }
         } catch (error) {
             console.error('Error opening app:', error);
