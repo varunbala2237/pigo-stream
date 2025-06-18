@@ -20,7 +20,9 @@ const useDownloadApp = (platform) => {
         const data = await response.json();
         setDownloadLink(data.url);
       } catch (err) {
-        setError(err.message);
+        setError(
+          err.message || `Sorry, downloading isn't available for ${platform || 'this platform'} right now.`
+        );
       } finally {
         setLoading(false);
       }
