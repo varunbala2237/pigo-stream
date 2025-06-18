@@ -1,10 +1,10 @@
 // MovieGrid.js
 import React, { useState, useEffect } from 'react';
-import CastCard from './CommonSections/CastCard';
+import CastCard from './RegularMediaSections/CastCard';
 import useFetchServers from '../../hooks/PlayGroundPage/useFetchServers';
 import useSaveMyList from '../../hooks/MyListPage/useSaveMyList';
 import useCheckMyList from '../../hooks/MyListPage/useCheckMyList';
-import InfoSection from './CommonSections/InfoSection';
+import InfoSection from './RegularMediaSections/InfoSection';
 import ServerSection from './CommonSections/ServerSection';
 
 import { getStorageValue, setStorageValue } from '../../utils/localStorageStates';
@@ -19,7 +19,6 @@ function MovieGrid({ id, type, mediaInfo, setBackgroundImage }) {
   // Initialize required useStates
   const [mediaURL, setMediaURL] = useState('');
   const [cast, setCast] = useState([]);
-  const [director, setDirector] = useState('');
   const [selectedServer, setSelectedServer] = useState('');
 
   const [sliceIndex, setSliceIndex] = useState(() =>
@@ -35,8 +34,6 @@ function MovieGrid({ id, type, mediaInfo, setBackgroundImage }) {
   useEffect(() => {
     if (mediaInfo) {
       setCast(mediaInfo.credits?.cast || []);
-      const director = mediaInfo.credits?.crew?.find(crewMember => crewMember.job === 'Director');
-      setDirector(director ? director.name : 'Unknown');
 
       // Setup the backgroundImage
       setBackgroundImage(`https://image.tmdb.org/t/p/original${mediaInfo.backdrop_path}`);
@@ -96,23 +93,15 @@ function MovieGrid({ id, type, mediaInfo, setBackgroundImage }) {
     }
   };
 
-  const { genres = [], vote_average, spoken_languages } = mediaInfo ? mediaInfo : {};
-  const languages = spoken_languages ? spoken_languages : 'Unknown';
-  const averageVote = vote_average ? vote_average.toFixed(1) : '0.0';
-
   return (
     <>
       <div className="d-flex flex-column justify-content-center align-items-center p-0">
         <div className="flex-row text-white w-100">
           <div className="container">
-            <InfoSection mediaURL={mediaURL}
-              averageVote={averageVote}
-              director={director}
-              genres={genres}
-              languages={languages}
-              mediaInfo={mediaInfo}
+            <InfoSection
               id={id}
               type={type}
+              mediaInfo={mediaInfo}
               isInList={isInList}
               handleAddToList={handleAddToList}
             />

@@ -1,21 +1,20 @@
 // InfoSection.js
 import React, { useState, useEffect } from 'react';
 import useFetchTrailer from '../../../hooks/PlayGroundPage/useFetchTrailer';
-import OverviewSection from './OverviewSection';
+import OverviewSection from '../CommonSections/OverviewSection';
 
 function InfoSection({
-  mediaURL,
-  averageVote,
-  director,
-  genres,
-  languages,
-  mediaInfo,
   id, type,
+  mediaInfo,
   isInList,
   handleAddToList,
 }) {
   const [imageUrl, setImageUrl] = useState('');
   const { trailerLink } = useFetchTrailer(id, type);
+
+  const director = mediaInfo.credits?.crew?.find(crewMember => crewMember.job === 'Director');
+  const { genres = [], vote_average, spoken_languages } = mediaInfo ? mediaInfo : {};
+  const averageVote = vote_average ? vote_average.toFixed(1) : '0.0';
 
   useEffect(() => {
     setImageUrl(
@@ -156,17 +155,31 @@ function InfoSection({
                   </dd>
                 </div>
 
-                <div className="mb-0">
+                <div className="mb-2">
                   <dt className="fw-bold">Languages:</dt>
                   <dd className="mb-0 text-white">
-                    {languages?.map((lang, index) => (
+                    {spoken_languages?.map((lang, index) => (
                       <React.Fragment key={index}>
                         {lang.english_name}
-                        {index < languages.length - 1 && ", "}
+                        {index < spoken_languages.length - 1 && ", "}
                       </React.Fragment>
                     ))}
                   </dd>
                 </div>
+
+                {mediaInfo.production_companies?.length > 0 && (
+                  <div className="mb-0">
+                    <dt className="fw-bold">Production Companies:</dt>
+                    <dd className="mb-0 text-white">
+                      {mediaInfo.production_companies.map((company, index) => (
+                        <React.Fragment key={index}>
+                          {company.name}
+                          {index < mediaInfo.production_companies.length - 1 && ", "}
+                        </React.Fragment>
+                      ))}
+                    </dd>
+                  </div>
+                )}
               </dl>
             </div>
           </div>
