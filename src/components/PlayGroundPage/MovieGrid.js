@@ -11,13 +11,14 @@ import PlayFab from './PlayFab';
 import { getStorageValue, setStorageValue } from '../../utils/localStorageStates';
 import { getSessionValue, setSessionValue } from '../../utils/sessionStorageStates';
 
-function MovieGrid({ id, type, mediaInfo, mediaURL, setMediaURL, setBackgroundImage }) {
+function MovieGrid({ id, type, mediaInfo, setBackgroundImage }) {
   const MOVIES_STORAGE_PATH = React.useMemo(
     () => ['PlayGroundUI', 'Grids', 'MovieGrid', `${id}`],
     [id]
   );
 
   // Initialize required useStates
+  const [mediaURL, setMediaURL] = useState('');
   const [cast, setCast] = useState([]);
   const [selectedServer, setSelectedServer] = useState('');
 
@@ -67,7 +68,7 @@ function MovieGrid({ id, type, mediaInfo, mediaURL, setMediaURL, setBackgroundIm
         setMediaURL(server.server_link);
       }
     }
-  }, [selectedServer, servers, setMediaURL]);
+  }, [selectedServer, servers]);
 
   const handleServerChange = (server) => {
     setSelectedServer(server);
