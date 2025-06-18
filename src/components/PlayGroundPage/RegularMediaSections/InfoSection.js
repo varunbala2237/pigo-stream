@@ -16,7 +16,7 @@ function InfoSection({
   const poster_path = mediaInfo?.poster_path;
   const title = mediaInfo?.title || mediaInfo?.name;
   const vote_average = mediaInfo?.vote_average;
-  const averageVote = typeof vote_average === 'number' ? vote_average.toFixed(1) : '0.0';
+  const averageVote = vote_average ? vote_average.toFixed(1) : '0.0';
   const release_date = mediaInfo?.release_date || mediaInfo?.first_air_date;
   const director = mediaInfo?.credits?.crew?.find(crewMember => crewMember.job === 'Director')?.name || 'Unknown';
   const { genres = [], spoken_languages = [], production_companies = [] } = mediaInfo ? mediaInfo : {};
