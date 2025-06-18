@@ -4,7 +4,7 @@ import useFetchTrailer from '../../../hooks/PlayGroundPage/useFetchTrailer';
 import OverviewSection from '../CommonSections/OverviewSection';
 
 function InfoSection({
-  id, 
+  id,
   type,
   mediaInfo,
   isInList,
@@ -15,10 +15,12 @@ function InfoSection({
 
   const poster_path = mediaInfo?.poster_path;
   const title = mediaInfo?.title || mediaInfo?.name;
+  const vote_average = mediaInfo?.vote_average;
+  const averageVote = typeof vote_average === 'number' ? vote_average.toFixed(1) : '0.0';
   const release_date = mediaInfo?.release_date || mediaInfo?.first_air_date;
   const director = mediaInfo?.credits?.crew?.find(crewMember => crewMember.job === 'Director')?.name || 'Unknown';
-  const { vote_average, genres = [], spoken_languages = [], production_companies = [] } = mediaInfo ? mediaInfo : {};
-  const averageVote = vote_average ? vote_average.toFixed(1) : '0.0';
+  const { genres = [], spoken_languages = [], production_companies = [] } = mediaInfo ? mediaInfo : {};
+  const overview = mediaInfo?.overview;
 
   useEffect(() => {
     setImageUrl(
@@ -190,7 +192,7 @@ function InfoSection({
           <div className="section">
             <dd className="text-start">
               <dt className="fw-bold">Overview:</dt>
-              <OverviewSection text={mediaInfo.overview} />
+              <OverviewSection text={overview} />
             </dd>
           </div>
         </div>
