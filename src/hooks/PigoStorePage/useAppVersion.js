@@ -24,11 +24,13 @@ const fetchWithRetry = async (url, options = {}, retries = 3, delay = 1000) => {
 // Custom hook for retrieving app version data
 const useAppVersion = (platform) => {
   const [version, setVersion] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
   useEffect(() => {
     const fetchAppVersion = async () => {
+      setLoading(true);
+
       const url = `${BASE_URL}/pigo-stream/pigostore/app-version?platform=${platform}`;
       try {
         const result = await fetchWithRetry(url);
@@ -43,8 +45,7 @@ const useAppVersion = (platform) => {
     if (platform) {
       fetchAppVersion();
     } else {
-      setLoading(false);
-      setError(true);
+      return;
     }
   }, [platform]);
 
