@@ -9,7 +9,7 @@ function OverviewSection({ text }) {
 
   return (
     <div
-      className="text-wrap text-break text-start"
+      className="text-wrap text-break text-start dyanmic-fs"
       style={{ whiteSpace: "pre-line" }}
     >
       {expanded || !isLong ? text : `${previewText}...`}
@@ -17,7 +17,7 @@ function OverviewSection({ text }) {
         <div className="mt-1">
           <button
             onClick={() => setExpanded(!expanded)}
-            className="btn btn-sm btn-link text-primary p-0"
+            className="btn btn-sm btn-link text-primary dynamic-fs p-0"
             style={{ textAlign: "left" }}
           >
             {expanded ? "Show Less" : "Read More"}

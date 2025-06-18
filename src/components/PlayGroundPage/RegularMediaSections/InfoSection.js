@@ -136,20 +136,20 @@ function InfoSection({
 
               <dl className="m-0">
                 <div className="mb-2">
-                  <dt className="fw-bold">Release Date:</dt>
-                  <dd className="mb-0">
+                  <dt className="fw-bold dynamic-fs">Release Date:</dt>
+                  <dd className="mb-0 dynamic-fs">
                     {new Date(release_date).toLocaleDateString()}
                   </dd>
                 </div>
 
                 <div className="mb-2">
-                  <dt className="fw-bold">Director:</dt>
-                  <dd className="mb-0">{director}</dd>
+                  <dt className="fw-bold dymamic-fs">Director:</dt>
+                  <dd className="mb-0 dynamic-fs">{director}</dd>
                 </div>
 
                 <div className="mb-2">
-                  <dt className="fw-bold">Genres:</dt>
-                  <dd className="mb-0 text-white">
+                  <dt className="fw-bold dynamic-fs">Genres:</dt>
+                  <dd className="mb-0 text-white dynamic-fs">
                     {genres?.map((genre, index) => (
                       <React.Fragment key={index}>
                         {genre.name}
@@ -160,8 +160,8 @@ function InfoSection({
                 </div>
 
                 <div className="mb-2">
-                  <dt className="fw-bold">Languages:</dt>
-                  <dd className="mb-0 text-white">
+                  <dt className="fw-bold dynamic-fs">Languages:</dt>
+                  <dd className="mb-0 text-white dynamic-fs">
                     {spoken_languages?.map((lang, index) => (
                       <React.Fragment key={index}>
                         {lang.english_name}
@@ -173,8 +173,8 @@ function InfoSection({
 
                 {production_companies?.length > 0 && (
                   <div className="mb-0">
-                    <dt className="fw-bold">Production Companies:</dt>
-                    <dd className="mb-0 text-white">
+                    <dt className="fw-bold dynamic-fs">Production Companies:</dt>
+                    <dd className="mb-0 text-white dynamic-fs">
                       {production_companies.map((company, index) => (
                         <React.Fragment key={index}>
                           {company.name}
@@ -191,7 +191,7 @@ function InfoSection({
         <div className="d-flex flex-row align-items-start custom-theme-radius-low w-100">
           <div className="section">
             <dd className="text-start">
-              <dt className="fw-bold">Overview:</dt>
+              <dt className="fw-bold dynamic-fs">Overview:</dt>
               <OverviewSection text={overview} />
             </dd>
           </div>
