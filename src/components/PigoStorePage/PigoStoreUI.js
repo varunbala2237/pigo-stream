@@ -58,7 +58,7 @@ const PigostoreUI = () => {
 
   useEffect(() => {
     const platform = detectPlatform();
-    setCurrentPlatform(platform); // Set current platform based on detection
+    setCurrentPlatform('ios'); // Set current platform based on detection
   }, []);
 
   // Fetch the appVersion
