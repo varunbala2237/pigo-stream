@@ -110,7 +110,7 @@ const PigostoreUI = () => {
               <div className="d-flex justify-content-center align-items-center text-center">
                 <p className="text-white me-2 dynamic-hs m-0"><b>Pigo</b>Player</p>
                 <span className="text-secondary align-self-center">
-                  v{appVersion || "0.1.0"} {/* Display app version */}
+                  {`v${appVersion}`} {/* Display app version */}
                 </span>
               </div>
 
