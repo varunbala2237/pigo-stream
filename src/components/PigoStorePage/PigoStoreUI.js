@@ -4,12 +4,10 @@ import useAppVersion from '../../hooks/PigoStorePage/useAppVersion';
 import useDownloadApp from '../../hooks/PigoStorePage/useDownloadApp';
 import OverlaySpinner from '../../utils/OverlaySpinner';
 import ConnectionModal from '../../utils/ConnectionModal';
-import Alert from '../../utils/Alert';
 
 import { getSessionValue, setSessionValue } from '../../utils/sessionStorageStates';
 
 const PigostoreUI = () => {
-  const [alertMessage, setAlertMessage] = useState(''); // State for alert message
   const [currentPlatform, setCurrentPlatform] = useState(''); // State for current platform
   const navigate = useNavigate(); // Initialize navigate
 
@@ -58,33 +56,17 @@ const PigostoreUI = () => {
 
   useEffect(() => {
     const platform = detectPlatform();
-    setCurrentPlatform(platform); // Set current platform based on detection
+    setCurrentPlatform('ios'); // Set current platform based on detection
   }, []);
 
   // Fetch the appVersion
   const { version: appVersion, loading: isLoading, error: isError } = useAppVersion(currentPlatform);
   // Fetch download link based on the detected platform
-  const { downloadLink, loading: isDownloadLoading, error: isDownloadError } = useDownloadApp(currentPlatform);
+  const { downloadLink } = useDownloadApp(currentPlatform);
 
   const handleDownload = async () => {
     if (!downloadLink) return;
     else window.location.href = downloadLink;
-  };
-
-  useEffect(() => {
-    if (!isDownloadLoading && isDownloadError && !downloadLink) {
-      setAlertMessage(isDownloadError);
-      const timer = setTimeout(() => {
-        setAlertMessage('');
-      }, 5000);
-      return () => clearTimeout(timer);
-    } else {
-      setAlertMessage('');
-    }
-  }, [isDownloadLoading, isDownloadError, downloadLink]);
-
-  const handleAlertDismiss = () => {
-    setAlertMessage('');
   };
 
   // List of supported devices with dynamic check
@@ -109,8 +91,8 @@ const PigostoreUI = () => {
             <div className="d-flex justify-content-between align-items-center">
               <div className="d-flex justify-content-center align-items-center text-center">
                 <p className="text-white me-2 dynamic-hs m-0"><b>Pigo</b>Player</p>
-                <span className="text-secondary align-self-center">
-                  {appVersion ? `v${appVersion}`: 'Not Available'} {/* Display app version */}
+                <span className="text-secondary align-self-center dynamic-fs">
+                  {appVersion ? `${appVersion}`: 'Not Available'} {/* Display app version */}
                 </span>
               </div>
 
@@ -189,9 +171,6 @@ const PigostoreUI = () => {
 
       {/* Connection Modal */}
       {isError && <ConnectionModal show={isError} />}
-
-      {/* Alert for successful removal */}
-      {alertMessage && <Alert message={alertMessage} onClose={handleAlertDismiss} type="danger" />}
     </div>
   );
 };
