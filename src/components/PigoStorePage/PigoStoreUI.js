@@ -62,9 +62,9 @@ const PigostoreUI = () => {
   }, []);
 
   // Fetch the appVersion
-  const { version: appVersion } = useAppVersion(currentPlatform);
+  const { version: appVersion, loading: isLoading, error: isError } = useAppVersion(currentPlatform);
   // Fetch download link based on the detected platform
-  const { downloadLink, loading: isLoading, error: isError } = useDownloadApp(currentPlatform);
+  const { downloadLink } = useDownloadApp(currentPlatform);
 
   const handleDownload = async () => {
     if (!downloadLink) return;
