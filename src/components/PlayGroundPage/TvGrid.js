@@ -9,6 +9,7 @@ import InfoSection from './RegularMediaSections/InfoSection';
 import ServerSection from './CommonSections/ServerSection';
 import SeasonSection from './RegularMediaSections/SeasonSection';
 import EpisodeSection from './RegularMediaSections/EpisodeSection';
+import PlayFab from './PlayFab';
 
 import { getStorageValue, setStorageValue } from '../../utils/localStorageStates';
 import { getSessionValue, setSessionValue } from '../../utils/sessionStorageStates';
@@ -263,6 +264,9 @@ function TvGrid({ id, type, mediaInfo, setBackgroundImage }) {
           </div>
         </div>
       </div>
+
+      {/* Play Floating Action Button */}
+      <PlayFab id={id} type={type} mediaURL={mediaURL} />
     </>
   );
 }

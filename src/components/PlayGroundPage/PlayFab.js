@@ -1,12 +1,13 @@
 // PlayFab.js
+import { useState } from 'react';
 import useAppVersion from '../../hooks/PigoStorePage/useAppVersion';
 import useSaveWatchHistory from '../../hooks/WatchHistoryPage/useSaveWatchHistory';
 import openIframeWindow from "../IframePage/openIframeWindow";
 import { useNavigate } from 'react-router-dom';
 
-function PlayFab() {
+function PlayFab({ id, type, mediaURL }) {
     const [inHistory, setInHistory] = useState(false);
-      const navigate = useNavigate();
+    const navigate = useNavigate();
 
     const detectPlatform = () => {
         if (navigator.userAgentData) {
@@ -60,7 +61,20 @@ function PlayFab() {
     };
 
     return (
-        null
+        <button
+            onClick={() => openPlayer(mediaURL)}
+            className="btn btn-dark bd-callout-dark justify-content-center align-items-center rounded-circle shadow"
+            style={{
+                position: 'fixed',
+                bottom: '1rem',
+                right: '1rem',
+                zIndex: 1020,
+            }}
+            aria-label="Play"
+            title="Play"
+        >
+            <i className="bi bi-play-fill fs-4 theme-color"></i>
+        </button>
     );
 }
 
