@@ -109,7 +109,7 @@ function InfoSection({
                 disabled={!trailerLink}
               >
                 <i className="bi bi-youtube text-danger me-2"></i>
-                {"Trailer"}
+                {"Watch Trailer"}
               </button>
               {/* Smaller button for smaller screen */}
               <button
@@ -121,7 +121,7 @@ function InfoSection({
                 disabled={!trailerLink}
               >
                 <i className="bi bi-youtube text-danger me-2"></i>
-                {"Trailer"}
+                {"Watch Trailer"}
               </button>
             </div>
           </div>
