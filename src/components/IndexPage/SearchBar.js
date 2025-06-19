@@ -1,5 +1,5 @@
 // SearchBar.js
-import React, { useEffect, useRef } from "react";
+import React from "react";
 import "./SearchBar.css";
 
 function SearchBar({
@@ -11,31 +11,9 @@ function SearchBar({
   handleRemoveSearchHistory,
   handleSearchSubmit,
   handleFocus,
+  inputRef,
   dropdownRef,
-  setIsDropdownOpen
 }) {
-  const inputRef = useRef(null);
-
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (
-        dropdownRef.current &&
-        !dropdownRef.current.contains(event.target) &&
-        !inputRef.current.contains(event.target)
-      ) {
-        setIsDropdownOpen(false);
-      }
-    };
-
-    document.addEventListener('mousedown', handleClickOutside);
-    document.addEventListener('touchstart', handleClickOutside);
-
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-      document.removeEventListener('touchstart', handleClickOutside);
-    };
-  }, [dropdownRef, setIsDropdownOpen]);
-  
   return (
     <div className="floating-search-wrapper">
       <div className="d-flex position-relative justify-content-center align-items-center shadow">
