@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom'; // Import useNavigate
 import useAppVersion from '../../hooks/PigoStorePage/useAppVersion';
 import useDownloadApp from '../../hooks/PigoStorePage/useDownloadApp';
 import OverlaySpinner from '../../utils/OverlaySpinner';
@@ -10,7 +9,6 @@ import PigoStoreFooter from './PigoStoreFooter';
 
 const PigostoreUI = () => {
   const [currentPlatform, setCurrentPlatform] = useState(''); // State for current platform
-  const navigate = useNavigate(); // Initialize navigate
 
   // Function to detect current platform
   const detectPlatform = () => {
@@ -96,16 +94,6 @@ const PigostoreUI = () => {
                   {appVersion ? `v${appVersion}` : 'vNot Available'} {/* Display app version */}
                 </span>
               </div>
-
-              {/* Back button with navigation */}
-              <button
-                type="button"
-                className="btn btn-dark bd-callout-dark d-flex border-0 text-white rounded-pill dynamic-fs"
-                onClick={() => navigate(-1)} // Navigate to the previous page
-              >
-                <i className="bi bi-arrow-left me-2"></i>
-                Back
-              </button>
             </div>
             <p className="text-white dynamic-fs">Install PigoPlayer for seamless streaming and access content without redirects.</p>
             <button
