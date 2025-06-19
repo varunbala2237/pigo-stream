@@ -1,13 +1,12 @@
 // Header.js
 import { useState, useEffect } from 'react';
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { auth, signOutWithAccount } from "../firebase/firebase-auth";
 
 import './Header.css';
 
 function Header() {
   const navigate = useNavigate();
-  const location = useLocation();
   const [userEmail, setUserEmail] = useState('');
   const [userPhotoURL, setUserPhotoURL] = useState('');
   const [userName, setUserName] = useState('');
@@ -55,20 +54,6 @@ function Header() {
               <span className="dynamic-hs"><b>Pigo</b>Stream</span>
             </div>
           </div>
-
-          {location.pathname === "/play" && (
-            <>
-              {/* Back button with navigation */}
-              <button
-                type="button"
-                className="btn btn-dark bd-callout-dark d-flex text-white rounded-pill border-0 dynamic-fs"
-                onClick={() => navigate(-1)} // Navigate to the previous page
-              >
-                <i className="bi bi-arrow-left me-2"></i>
-                Back
-              </button>
-            </>
-          )}
         </div>
       </nav>
 
