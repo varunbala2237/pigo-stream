@@ -29,8 +29,8 @@ function TvGrid({ id, type, mediaInfo, setBackgroundImage }) {
   const [cast, setCast] = useState([]);
   const [seasons, setSeasons] = useState([]);
   const [episodes, setEpisodes] = useState([]);
-  const [selectedSeason, setSelectedSeason] = useState(1);
-  const [selectedEpisode, setSelectedEpisode] = useState(0);
+  const [selectedSeason, setSelectedSeason] = useState(null);
+  const [selectedEpisode, setSelectedEpisode] = useState(null);
   const seasonScrollRef = useRef(null);
   const episodeScrollRef = useRef(null);
   const [selectedServer, setSelectedServer] = useState('');
@@ -62,9 +62,10 @@ function TvGrid({ id, type, mediaInfo, setBackgroundImage }) {
     const savedSelectedSeason = getStorageValue(...TV_STORAGE_PATH, SELECTED_SEASON);
     const savedSeasonScroll = getStorageValue(...TV_STORAGE_PATH, SELECTED_SEASON_SCROLL);
 
-    const seasonToSet = mediaInfo?.seasons.find(season => season.season_number === savedSelectedSeason)
-      ? savedSelectedSeason
-      : mediaInfo?.seasons[1]?.season_number;
+    const seasonToSet =
+      mediaInfo?.seasons.find(season => season.season_number === savedSelectedSeason)?.season_number ??
+      mediaInfo?.seasons.find(season => season.season_number === 1)?.season_number ??
+      mediaInfo?.seasons[0]?.season_number;
 
     setSelectedSeason(seasonToSet);
 
@@ -90,9 +91,9 @@ function TvGrid({ id, type, mediaInfo, setBackgroundImage }) {
       const savedEpisode = currentSeasonState.episode;
       const savedScroll = currentSeasonState.scroll;
 
-      const episodeToSet = episodes.find(ep => ep.episode_number === savedEpisode)
-        ? savedEpisode
-        : episodes[0]?.episode_number;
+      const episodeToSet =
+        episodes.find(ep => ep.episode_number === savedEpisode)?.episode_number ??
+        episodes[0]?.episode_number;
 
       setSelectedEpisode(episodeToSet);
 
