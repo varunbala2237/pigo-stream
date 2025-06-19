@@ -6,7 +6,7 @@ import useSaveMyList from '../../hooks/MyListPage/useSaveMyList';
 import useCheckMyList from '../../hooks/MyListPage/useCheckMyList';
 import InfoSection from './RegularMediaSections/InfoSection';
 import ServerSection from './CommonSections/ServerSection';
-import PlayFab from './PlayFab';
+import PlayGroundFooter from './PlayGroundFooter';
 
 import { getStorageValue, setStorageValue } from '../../utils/localStorageStates';
 import { getSessionValue, setSessionValue } from '../../utils/sessionStorageStates';
@@ -148,9 +148,9 @@ function MovieGrid({ id, type, mediaInfo, setBackgroundImage }) {
         </div>
       </div>
 
-      {/* Backspace & Play Floating Action Button */}
+      {/* Backspace & PlayGroundFooter */}
       <div className="divider" style={{ height: '3rem' }}></div>
-      <PlayFab id={id} type={type} mediaURL={mediaURL} />
+      <PlayGroundFooter id={id} type={type} mediaURL={mediaURL} />
     </>
   );
 }

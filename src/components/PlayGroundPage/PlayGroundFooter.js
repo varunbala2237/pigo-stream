@@ -1,11 +1,11 @@
-// PlayFab.js
+// PlayGroundFooter.js
 import { useState } from 'react';
 import useAppVersion from '../../hooks/PigoStorePage/useAppVersion';
 import useSaveWatchHistory from '../../hooks/WatchHistoryPage/useSaveWatchHistory';
 import { useNavigate } from 'react-router-dom';
 import '../Footer.css';
 
-function PlayFab({ id, type, mediaURL }) {
+function PlayGroundFooter({ id, type, mediaURL }) {
     const [inHistory, setInHistory] = useState(false);
     const navigate = useNavigate();
 
@@ -93,4 +93,4 @@ function PlayFab({ id, type, mediaURL }) {
     );
 }
 
-export default PlayFab;
+export default PlayGroundFooter;
