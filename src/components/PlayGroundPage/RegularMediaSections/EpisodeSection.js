@@ -108,7 +108,7 @@ function EpisodeSection({
                       <span className="text-truncate flex-grow-1">{episode.name}</span>
                     </div>
                     <div className="d-flex justify-content-between align-items-center">
-                      <span className="dynamic-ss">{new Date(episode.air_date).toLocaleDateString()}</span>
+                      <span className="dynamic-ss text-secondary">{new Date(episode.air_date).toLocaleDateString()}</span>
                       {airedToday && <span className="badge bg-primary ms-2">New!</span>}
                     </div>
                   </div>
