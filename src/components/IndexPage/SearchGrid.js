@@ -95,7 +95,7 @@ function SearchGrid({ searchQuery, setIsSearchLoading, setIsSearchLoaded, setHas
     <>
       <div className="d-flex justify-content-start align-items-center mt-5">
         <span className="dynamic-ts">
-          <b>Movies Results</b>
+          <b>Movie Results</b>
         </span>
       </div>
 
@@ -150,7 +150,7 @@ function SearchGrid({ searchQuery, setIsSearchLoading, setIsSearchLoaded, setHas
 
       <div className="d-flex justify-content-start align-items-center mt-5">
         <span className="dynamic-ts">
-          <b>Shows Results</b>
+          <b>Show Results</b>
         </span>
       </div>
 
