@@ -266,7 +266,7 @@ function TvGrid({ id, type, mediaInfo, setBackgroundImage }) {
       </div>
 
       {/* Backspace & PlayGroundFooter */}
-      <div className="divider" style={{ height: '3rem' }}></div>
+      <div className="divider" style={{ height: '6rem' }}></div>
       <PlayGroundFooter id={id} type={type} mediaURL={mediaURL} />
     </>
   );
