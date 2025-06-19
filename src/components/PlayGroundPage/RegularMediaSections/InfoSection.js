@@ -127,32 +127,33 @@ function InfoSection({
           </div>
           <div className="section ms-2">
             <div className="d-flex flex-column flex-wrap dynamic-fs">
-              <dl className="m-0">
+              <dl className="mb-2">
                 <dt className="text-wrap dynamic-ts">{title}</dt>
-                <dd className="dynamic-fs">
-                  <i className="bi bi-star-fill text-warning me-2"></i>
-                  <span id="Rating" className="text-white">
-                    {averageVote}
-                  </span>
-                </dd>
-              </dl>
-
-              <dl className="m-0">
-                <div className="mb-2">
-                  <dt className="fw-bold dynamic-fs">Release Date:</dt>
+                <div className="d-flex text-secondary">
                   <dd className="mb-0 dynamic-fs">
+                    <span className="me-2">Release Date:</span>
                     {new Date(release_date).toLocaleDateString()}
                   </dd>
                 </div>
+              </dl>
 
-                <div className="mb-2">
-                  <dt className="fw-bold dymamic-fs">Director:</dt>
-                  <dd className="mb-0 dynamic-fs">{director}</dd>
+              <dl className="m-0">
+                <div className="d-flex">
+                  <dt className="fw-bold dymamic-fs me-2">Director:</dt>
+                  <dd className="mb-0 text-secondary dynamic-fs">{director}</dd>
                 </div>
 
-                <div className="mb-2">
-                  <dt className="fw-bold dynamic-fs">Genres:</dt>
-                  <dd className="mb-0 text-white dynamic-fs">
+                <div className="d-flex">
+                  <dt className="fw-bold dymamic-fs me-2">Rating:</dt>
+                  <dd id="Rating" className="mb-0 text-secondary">
+                    <i className="bi bi-star-fill text-warning me-2" />
+                    {averageVote}
+                  </dd>
+                </div>
+
+                <div className="d-flex">
+                  <dt className="fw-bold dynamic-fs me-2">Genres:</dt>
+                  <dd className="mb-0 text-secondary dynamic-fs">
                     {genres?.map((genre, index) => (
                       <React.Fragment key={index}>
                         {genre.name}
@@ -162,9 +163,9 @@ function InfoSection({
                   </dd>
                 </div>
 
-                <div className="mb-2">
-                  <dt className="fw-bold dynamic-fs">Languages:</dt>
-                  <dd className="mb-0 text-white dynamic-fs">
+                <div className="d-flex">
+                  <dt className="fw-bold dynamic-fs me-2">Languages:</dt>
+                  <dd className="mb-0 text-secondary dynamic-fs">
                     {spoken_languages?.map((lang, index) => (
                       <React.Fragment key={index}>
                         {lang.english_name}
@@ -175,9 +176,9 @@ function InfoSection({
                 </div>
 
                 {production_companies?.length > 0 && (
-                  <div className="mb-0">
-                    <dt className="fw-bold dynamic-fs">Production Companies:</dt>
-                    <dd className="mb-0 text-white dynamic-fs">
+                  <div className="d-flex">
+                    <dt className="fw-bold dynamic-fs me-2">Production Companies:</dt>
+                    <dd className="mb-0 text-secondary dynamic-fs">
                       {production_companies.map((company, index) => (
                         <React.Fragment key={index}>
                           {company.name}

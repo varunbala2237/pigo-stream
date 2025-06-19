@@ -9,7 +9,7 @@ function OverviewSection({ text }) {
 
   return (
     <div
-      className="text-wrap text-break text-start"
+      className="text-wrap text-break text-start text-secondary"
       style={{ whiteSpace: "pre-line" }}
     >
       <span className="dynamic-fs">{expanded || !isLong ? text : `${previewText}...`}</span>
