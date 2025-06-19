@@ -1,10 +1,10 @@
 // MovieGrid.js
 import React, { useState, useEffect } from 'react';
-import CastCard from './RegularMediaSections/CastCard';
+import RegularCastCard from './RegularMediaSections/RegularCastCard';
 import useFetchServers from '../../hooks/PlayGroundPage/useFetchServers';
 import useSaveMyList from '../../hooks/MyListPage/useSaveMyList';
 import useCheckMyList from '../../hooks/MyListPage/useCheckMyList';
-import InfoSection from './RegularMediaSections/InfoSection';
+import RegularInfoSection from './RegularMediaSections/RegularInfoSection';
 import ServerSection from './CommonSections/ServerSection';
 import PlayGroundFooter from './PlayGroundFooter';
 
@@ -99,7 +99,7 @@ function MovieGrid({ id, type, mediaInfo, setBackgroundImage }) {
       <div className="d-flex flex-column justify-content-center align-items-center p-0">
         <div className="flex-row text-white w-100">
           <div className="container">
-            <InfoSection
+            <RegularInfoSection
               id={id}
               type={type}
               mediaInfo={mediaInfo}
@@ -123,11 +123,11 @@ function MovieGrid({ id, type, mediaInfo, setBackgroundImage }) {
                 <div className="row justify-content-center">
                   {cast.length === 0 ? (
                     Array.from({ length: 4 }).map((_, index) => (
-                      <CastCard key={index} isSkeleton={true} />
+                      <RegularCastCard key={index} isSkeleton={true} />
                     ))
                   ) : (
                     cast.slice(0, sliceIndex).map((actor, index) => (
-                      <CastCard key={actor.cast_id ?? `${actor.name}-${index}`} actor={actor} />
+                      <RegularCastCard key={actor.cast_id ?? `${actor.name}-${index}`} actor={actor} />
                     ))
                   )}
                 </div>

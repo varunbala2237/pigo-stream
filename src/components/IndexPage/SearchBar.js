@@ -1,5 +1,5 @@
 // SearchBar.js
-import React, { useEffect, useRef } from "react";
+import React from "react";
 import "./SearchBar.css";
 
 function SearchBar({
@@ -14,22 +14,11 @@ function SearchBar({
   containerRef,
   dropdownRef,
 }) {
-  // Use a ref to store the input element
-  const inputRef = useRef(null);
-
-  // Effect to focus the input field on initial render
-  useEffect(() => {
-    if (inputRef.current) {
-      inputRef.current.focus();
-    }
-  }, []);
-
   return (
     <div className="floating-search-wrapper">
       <div className="d-flex position-relative justify-content-center align-items-center shadow">
         <div ref={containerRef} className="search-bar input-group custom-input-group">
           <input
-            ref={inputRef}
             id="prompt"
             type="text"
             className="form-control custom-bg text-white dynamic-fs custom-textarea rounded-pill-l border-0"

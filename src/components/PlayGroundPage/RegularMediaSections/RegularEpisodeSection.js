@@ -1,5 +1,5 @@
-// EpisodeSection.js
-function EpisodeSection({
+// RegularEpisodeSection.js
+function RegularEpisodeSection({
   episodes,
   selectedEpisode,
   onEpisodeChange,
@@ -128,4 +128,4 @@ function EpisodeSection({
   );
 }
 
-export default EpisodeSection;
+export default RegularEpisodeSection;

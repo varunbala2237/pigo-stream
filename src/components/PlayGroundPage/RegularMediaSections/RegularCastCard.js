@@ -1,7 +1,7 @@
-// CastCard.js
-import './CastCard.css';
+// RegularCastCard.js
+import './RegularCastCard.css';
 
-function CastCard({ actor, isSkeleton }) {
+function RegularCastCard({ actor, isSkeleton }) {
   const searchActor = (name) => {
     const searchQuery = encodeURIComponent(name);
     const searchUrl = `https://www.google.com/search?q=${searchQuery}`;
@@ -55,4 +55,4 @@ function CastCard({ actor, isSkeleton }) {
   );
 }
 
-export default CastCard;
+export default RegularCastCard;

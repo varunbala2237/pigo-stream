@@ -1,14 +1,14 @@
 // TvGrid.js
 import React, { useState, useEffect, useRef } from 'react';
-import CastCard from './RegularMediaSections/CastCard';
+import RegularCastCard from './RegularMediaSections/RegularCastCard';
 import useFetchSeason from '../../hooks/PlayGroundPage/useFetchSeason';
 import useFetchServers from '../../hooks/PlayGroundPage/useFetchServers';
 import useSaveMyList from '../../hooks/MyListPage/useSaveMyList';
 import useCheckMyList from '../../hooks/MyListPage/useCheckMyList';
-import InfoSection from './RegularMediaSections/InfoSection';
+import RegularInfoSection from './RegularMediaSections/RegularInfoSection';
 import ServerSection from './CommonSections/ServerSection';
-import SeasonSection from './RegularMediaSections/SeasonSection';
-import EpisodeSection from './RegularMediaSections/EpisodeSection';
+import RegularSeasonSection from './RegularMediaSections/RegularSeasonSection';
+import RegularEpisodeSection from './RegularMediaSections/RegularEpisodeSection';
 import PlayGroundFooter from './PlayGroundFooter';
 
 import { getStorageValue, setStorageValue } from '../../utils/localStorageStates';
@@ -198,7 +198,7 @@ function TvGrid({ id, type, mediaInfo, setBackgroundImage }) {
       <div className="d-flex flex-column justify-content-center align-items-center p-0">
         <div className="flex-row text-white w-100">
           <div className="container">
-            <InfoSection
+            <RegularInfoSection
               id={id}
               type={type}
               mediaInfo={mediaInfo}
@@ -214,7 +214,7 @@ function TvGrid({ id, type, mediaInfo, setBackgroundImage }) {
             />
 
             {/* Seasons Section */}
-            <SeasonSection
+            <RegularSeasonSection
               seasons={seasons}
               selectedSeason={selectedSeason}
               onSeasonChange={handleSeasonChange}
@@ -222,7 +222,7 @@ function TvGrid({ id, type, mediaInfo, setBackgroundImage }) {
             />
 
             {/* Episodes Section */}
-            <EpisodeSection
+            <RegularEpisodeSection
               episodes={episodes}
               selectedEpisode={selectedEpisode}
               onEpisodeChange={handleEpisodeChange}
@@ -239,11 +239,11 @@ function TvGrid({ id, type, mediaInfo, setBackgroundImage }) {
                   {cast.length === 0 ? (
                     // Show 4 dummy skeletal cards when no cast is found
                     Array.from({ length: 4 }).map((_, index) => (
-                      <CastCard key={index} isSkeleton={true} />
+                      <RegularCastCard key={index} isSkeleton={true} />
                     ))
                   ) : (
                     cast.slice(0, sliceIndex).map((actor, index) => (
-                      <CastCard key={actor.cast_id ?? `${actor.name}-${index}`} actor={actor} />
+                      <RegularCastCard key={actor.cast_id ?? `${actor.name}-${index}`} actor={actor} />
                     ))
                   )}
                 </div>

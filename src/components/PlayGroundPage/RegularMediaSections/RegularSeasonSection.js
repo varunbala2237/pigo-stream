@@ -1,5 +1,5 @@
-// SeasonSection.js
-function SeasonSection({
+// RegularSeasonSection.js
+function RegularSeasonSection({
   seasons,
   selectedSeason,
   onSeasonChange,
@@ -90,4 +90,4 @@ function SeasonSection({
   );
 }
 
-export default SeasonSection;
+export default RegularSeasonSection;
