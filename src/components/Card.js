@@ -147,8 +147,8 @@ function Card({ media, type, path, onRemove, handleAlert, isDeletable = true, is
         <div className="card-overlay dynamic-size dynamic-fs px-1">
           <div className="d-flex justify-content-between align-items-center">
             <div className="rating-box rounded-pill text-start custom-bg px-2 py-1">
-              <i className="bi bi-star-fill text-warning"></i>
-              <span id="Rating" className="text-white"> {rating} </span>
+              <i className="bi bi-star-fill text-warning me-2"></i>
+              <span id="Rating" className="text-white">{rating}</span>
             </div>
             <div className="media-type-box rounded-circle text-end custom-bg px-2 py-1">
               {type === 'movie' ? (

@@ -335,15 +335,15 @@ function HomeUI({
                   <div className="dynamic-fs my-2 text-white">
                     <span className="me-2">
                       {mediaType === 'movie' ? (
-                        <span><i className="bi bi-film me-2" />Movie</span>
+                        <span><i className="bi bi-film me-2"></i>Movie</span>
                       ) : (
-                        <span><i className="bi bi-tv me-2" />Show</span>
+                        <span><i className="bi bi-tv me-2"></i>Show</span>
                       )}
                     </span>
                     <span className="me-2 text-secondary">|</span>
                     <span className="me-2">{year}</span>
                     <span className="me-2 text-secondary">|</span>
-                    <i className="bi bi-star-fill text-warning me-2" />
+                    <i className="bi bi-star-fill text-warning me-2"></i>
                     <span id="Rating">{rating}</span>
                   </div>
                   <div className="dynamic-fs text-secondary">{mediaDesc}</div>

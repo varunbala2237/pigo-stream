@@ -147,7 +147,7 @@ function InfoSection({
                 <div className="d-flex">
                   <dd className="dymamic-fs me-2">Rating:</dd>
                   <dd id="Rating" className="mb-0 text-secondary">
-                    <i className="bi bi-star-fill text-warning me-2" />
+                    <i className="bi bi-star-fill text-warning me-2"></i>
                     {averageVote}
                   </dd>
                 </div>
