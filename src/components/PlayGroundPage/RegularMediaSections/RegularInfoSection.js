@@ -144,6 +144,20 @@ function RegularInfoSection({
                   <dd className="mb-0 text-secondary dynamic-fs">{director}</dd>
                 </div>
 
+                {type === 'movie' && mediaInfo?.runtime && (
+                  <div className="d-flex">
+                    <dd className="dymamic-fs me-2">Runtime:</dd>
+                    <dd className="mb-0 text-secondary dynamic-fs">{mediaInfo.runtime} mins</dd>
+                  </div>
+                )}
+
+                {type === 'tv' && mediaInfo?.number_of_episodes && (
+                  <div className="d-flex">
+                    <dd className="dymamic-fs me-2">Total Episodes:</dd>
+                    <dd className="mb-0 text-secondary dynamic-fs">{mediaInfo.number_of_episodes}</dd>
+                  </div>
+                )}
+
                 <div className="d-flex">
                   <dd className="dymamic-fs me-2">Rating:</dd>
                   <dd id="Rating" className="mb-0 text-secondary">
