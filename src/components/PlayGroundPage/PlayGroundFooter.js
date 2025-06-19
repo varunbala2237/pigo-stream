@@ -77,6 +77,7 @@ function PlayGroundFooter({ id, type, mediaURL }) {
         <div className="footer-fixed bd-callout-dark w-100 position-fixed bottom-0 shadow">
             <ul className="nav h-100 w-100 d-flex justify-content-between align-items-center dynamic-fs">
 
+                {/* Play button to play content */}
                 <li className="nav-item text-center mx-auto">
                     <button
                         onClick={() => openPlayer(mediaURL)}
