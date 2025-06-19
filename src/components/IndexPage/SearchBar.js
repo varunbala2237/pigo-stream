@@ -11,13 +11,13 @@ function SearchBar({
   handleRemoveSearchHistory,
   handleSearchSubmit,
   handleFocus,
-  inputRef,
+  containerRef,
   dropdownRef,
 }) {
   return (
     <div className="floating-search-wrapper">
       <div className="d-flex position-relative justify-content-center align-items-center shadow">
-        <div ref={inputRef} className="search-bar input-group custom-input-group">
+        <div ref={containerRef} className="search-bar input-group custom-input-group">
           <input
             id="prompt"
             type="text"

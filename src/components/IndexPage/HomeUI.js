@@ -59,7 +59,7 @@ function HomeUI({
   const [alert, setAlert] = useState({ message: '', type: '', key: '' });
 
   const dropdownRef = useRef(null);
-  const inputRef = useRef(null);
+  const containerRef = useRef(null);
 
   const { searchHistory, refetch } = useFetchSearchHistory();
   const saveSearchHistory = useSaveSearchHistory();
@@ -117,7 +117,7 @@ function HomeUI({
       if (
         dropdownRef.current &&
         !dropdownRef.current.contains(event.target) &&
-        !inputRef.current.contains(event.target)
+        !containerRef.current.contains(event.target)
       ) {
         setIsDropdownOpen(false);
       }
@@ -293,7 +293,7 @@ function HomeUI({
             handleRemoveSearchHistory={handleRemoveSearchHistory}
             handleSearchSubmit={handleSearchSubmit}
             handleFocus={handleFocus}
-            inputRef={inputRef}
+            containerRef={containerRef}
             dropdownRef={dropdownRef}
           />
         ) : (
