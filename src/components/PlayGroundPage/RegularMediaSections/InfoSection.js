@@ -22,7 +22,7 @@ function InfoSection({
     mediaInfo?.credits?.crew?.find(c => c.job === 'Director')?.name ||
     mediaInfo?.created_by?.[0]?.name ||
     'Unknown';
-  const { genres = [], spoken_languages = [], production_companies = [] } = mediaInfo ? mediaInfo : {};
+  const { genres = [], spoken_languages = [] } = mediaInfo ? mediaInfo : {};
   const overview = mediaInfo?.overview;
 
   useEffect(() => {
@@ -174,20 +174,6 @@ function InfoSection({
                     ))}
                   </dd>
                 </div>
-
-                {production_companies?.length > 0 && (
-                  <div className="d-flex">
-                    <dt className="fw-bold dynamic-fs me-2">Production Companies:</dt>
-                    <dd className="mb-0 text-secondary dynamic-fs">
-                      {production_companies.map((company, index) => (
-                        <React.Fragment key={index}>
-                          {company.name}
-                          {index < production_companies.length - 1 && ", "}
-                        </React.Fragment>
-                      ))}
-                    </dd>
-                  </div>
-                )}
               </dl>
             </div>
           </div>
