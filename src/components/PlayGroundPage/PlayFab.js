@@ -3,6 +3,7 @@ import { useState } from 'react';
 import useAppVersion from '../../hooks/PigoStorePage/useAppVersion';
 import useSaveWatchHistory from '../../hooks/WatchHistoryPage/useSaveWatchHistory';
 import { useNavigate } from 'react-router-dom';
+import '../Footer.css';
 
 function PlayFab({ id, type, mediaURL }) {
     const [inHistory, setInHistory] = useState(false);
@@ -73,21 +74,22 @@ function PlayFab({ id, type, mediaURL }) {
     };
 
     return (
-        <button
-            onClick={() => openPlayer(mediaURL)}
-            className="btn btn-dark bd-callout-dark d-flex justify-content-center align-items-center rounded-pill dynamic-fs shadow"
-            style={{
-                position: 'fixed',
-                bottom: '1rem',
-                right: '1rem',
-                zIndex: 1020,
-            }}
-            aria-label="Play"
-            title="Play"
-        >
-            <i className="bi bi-play-fill theme-color me-2"></i>
-            Play
-        </button>
+        <div className="footer-fixed bd-callout-dark w-100 position-fixed bottom-0 shadow">
+            <ul className="nav h-100 w-100 d-flex justify-content-between align-items-center dynamic-fs">
+
+                <li className="nav-item text-center mx-auto">
+                    <button
+                        onClick={() => openPlayer(mediaURL)}
+                        className="btn border-0 d-flex flex-column align-items-center justify-content-center text-decoration-none dynamic-ts"
+                        aria-label="Play"
+                        title="Play"
+                    >
+                        <i className="bi bi-play-fill theme-color me-2"></i>
+                        <span className="text-white dynamic-ss">Play in <b>Pigo</b>Player</span>
+                    </button>
+                </li>
+            </ul>
+        </div>
     );
 }
 
