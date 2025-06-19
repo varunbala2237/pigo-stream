@@ -77,6 +77,9 @@ const PigostoreUI = () => {
     { name: 'iOS', platform: 'ios' },
   ];
 
+  // Get name for current platform
+  const platformName = supportedDevices.find(d => d.platform === currentPlatform)?.name || currentPlatform;
+
   return (
     <div className="d-flex flex-column vh-100 w-100"
       style={{ background: "linear-gradient(to bottom, #121229, #121229, black, black)" }}
@@ -91,7 +94,7 @@ const PigostoreUI = () => {
               <div className="d-flex justify-content-center align-items-center text-center">
                 <p className="text-white me-2 dynamic-hs m-0"><b>Pigo</b>Player</p>
                 <span className="text-secondary align-self-center dynamic-fs">
-                  {appVersion ? `${appVersion}` : 'Not Available'} {/* Display app version */}
+                  {appVersion !== "NA" ? `v${appVersion}` : `Not Available for ${platformName}`} {/* Display app version */}
                 </span>
               </div>
             </div>
