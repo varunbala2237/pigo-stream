@@ -127,24 +127,25 @@ function InfoSection({
           </div>
           <div className="section ms-2">
             <div className="d-flex flex-column flex-wrap dynamic-fs">
-              <dl className="mb-2">
+              <dl className="m-0">
                 <dt className="text-wrap dynamic-ts">{title}</dt>
-                <div className="d-flex text-secondary">
-                  <dd className="mb-0 dynamic-fs">
-                    <span className="me-2">Release Date:</span>
-                    {new Date(release_date).toLocaleDateString()}
-                  </dd>
-                </div>
               </dl>
 
-              <dl className="m-0">
+              <dl className="my-2">
                 <div className="d-flex">
-                  <dt className="fw-bold dymamic-fs me-2">Director:</dt>
+                  <dd className="dymamic-fs me-2">Release Date:</dd>
+                  <dd className="mb-0 dynamic-fs">
+                    <span className="text-secondary">{new Date(release_date).toLocaleDateString()}</span>
+                  </dd>
+                </div>
+
+                <div className="d-flex">
+                  <dd className="dymamic-fs me-2">Director:</dd>
                   <dd className="mb-0 text-secondary dynamic-fs">{director}</dd>
                 </div>
 
                 <div className="d-flex">
-                  <dt className="fw-bold dymamic-fs me-2">Rating:</dt>
+                  <dd className="dymamic-fs me-2">Rating:</dd>
                   <dd id="Rating" className="mb-0 text-secondary">
                     <i className="bi bi-star-fill text-warning me-2" />
                     {averageVote}
@@ -152,7 +153,7 @@ function InfoSection({
                 </div>
 
                 <div className="d-flex">
-                  <dt className="fw-bold dynamic-fs me-2">Genres:</dt>
+                  <dd className="dynamic-fs me-2">Genres:</dd>
                   <dd className="mb-0 text-secondary dynamic-fs">
                     {genres?.map((genre, index) => (
                       <React.Fragment key={index}>
@@ -164,7 +165,7 @@ function InfoSection({
                 </div>
 
                 <div className="d-flex">
-                  <dt className="fw-bold dynamic-fs me-2">Languages:</dt>
+                  <dd className="dynamic-fs me-2">Languages:</dd>
                   <dd className="mb-0 text-secondary dynamic-fs">
                     {spoken_languages?.map((lang, index) => (
                       <React.Fragment key={index}>
