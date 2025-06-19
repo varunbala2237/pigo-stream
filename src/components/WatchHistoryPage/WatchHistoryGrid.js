@@ -178,13 +178,13 @@ function WatchHistoryGrid({ userUID }) {
 
                 <div className="d-flex justify-content-start align-items-center mt-5">
                     <span className="dynamic-ts">
-                        <b>Watch History Movies</b>
+                        <b>Watch History: Movies</b>
                     </span>
                 </div>
 
-                {/* Watch History Movies */}
+                {/* Watch History: Movies */}
                 <div className="position-relative my-2">
-                    {moviesHistory.filter(Boolean) > 3 && (
+                    {moviesHistory.filter(Boolean).length > 3 && (
                         <>
                             <button
                                 className="btn btn-dark custom-bg rounded-pill py-2 position-absolute start-0 translate-middle-y d-none d-md-block"
@@ -248,13 +248,13 @@ function WatchHistoryGrid({ userUID }) {
 
                 <div className="d-flex justify-content-start align-items-center mt-5">
                     <span className="dynamic-ts">
-                        <b>Watch History Shows</b>
+                        <b>Watch History: Shows</b>
                     </span>
                 </div>
 
-                {/* Watch History Shows */}
+                {/* Watch History: Shows */}
                 <div className="position-relative my-2">
-                    {showsHistory.filter(Boolean) > 3 && (
+                    {showsHistory.filter(Boolean).length > 3 && (
                         <>
                             <button
                                 className="btn btn-dark custom-bg rounded-pill py-2 position-absolute start-0 translate-middle-y d-none d-md-block"

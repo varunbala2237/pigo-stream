@@ -95,14 +95,14 @@ function SearchGrid({ searchQuery, setIsSearchLoading, setIsSearchLoaded, setHas
     <>
       <div className="d-flex justify-content-start align-items-center mt-5">
         <span className="dynamic-ts">
-          <b>Movie Results</b>
+          <b>Search Results: Movies</b>
         </span>
       </div>
 
-      {/* Movies Results */}
+      {/* Search Results: Movies */}
       {(
         <div className="position-relative my-2">
-          {searchQuery.trim() && movies?.filter(Boolean) > 3 && (
+          {searchQuery.trim() && movies?.filter(Boolean).length > 3 && (
             <>
               <button
                 className="btn btn-dark custom-bg rounded-pill py-2 position-absolute start-0 translate-middle-y d-none d-md-block"
@@ -150,14 +150,14 @@ function SearchGrid({ searchQuery, setIsSearchLoading, setIsSearchLoaded, setHas
 
       <div className="d-flex justify-content-start align-items-center mt-5">
         <span className="dynamic-ts">
-          <b>Show Results</b>
+          <b>Search Results: Shows</b>
         </span>
       </div>
 
-      {/* Shows Results */}
+      {/* Search Results: Shows */}
       {(
         <div className="position-relative my-2">
-          {searchQuery.trim() && shows?.filter(Boolean) > 3 && (
+          {searchQuery.trim() && shows?.filter(Boolean).length > 3 && (
             <>
               <button
                 className="btn btn-dark custom-bg rounded-pill py-2 position-absolute start-0 translate-middle-y d-none d-md-block"

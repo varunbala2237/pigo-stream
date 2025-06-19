@@ -188,7 +188,7 @@ function ProvidersGrid({ setIsProvidersLoading, setIsProvidersLoaded, setHasProv
             </div>
 
             <div className="d-flex justify-content-start align-items-center dynamic-ts mt-5">
-                <b>{selectedProvider.name} Movies</b>
+                <b>{selectedProvider.name}: Movies</b>
             </div>
 
             {/* Providers Movies Section */}
@@ -234,7 +234,7 @@ function ProvidersGrid({ setIsProvidersLoading, setIsProvidersLoaded, setHasProv
             </div>
 
             <div className="d-flex justify-content-start align-items-center dynamic-ts mt-5">
-                <b>{selectedProvider.name} Shows</b>
+                <b>{selectedProvider.name}: Shows</b>
             </div>
 
             {/* Providers Shows Section */}

@@ -150,13 +150,13 @@ function MyListGrid({ userUID }) {
 
                 <div className="d-flex justify-content-start align-items-center mt-5">
                     <span className="dynamic-ts">
-                        <b>My List Movies</b>
+                        <b>My List: Movies</b>
                     </span>
                 </div>
 
-                {/* My List Movies */}
+                {/* My List: Movies */}
                 <div className="position-relative my-2">
-                    {moviesList.filter(Boolean) > 3 && (
+                    {moviesList.filter(Boolean).length > 3 && (
                         <>
                             <button
                                 className="btn btn-dark custom-bg rounded-pill py-2 position-absolute start-0 translate-middle-y d-none d-md-block"
@@ -220,13 +220,13 @@ function MyListGrid({ userUID }) {
 
                 <div className="d-flex justify-content-start align-items-center mt-5">
                     <span className="dynamic-ts">
-                        <b>My List Shows</b>
+                        <b>My List: Shows</b>
                     </span>
                 </div>
 
-                {/* My List Shows */}
+                {/* My List: Shows */}
                 <div className="position-relative my-2">
-                    {showsList.filter(Boolean) > 3 && (
+                    {showsList.filter(Boolean).length > 3 && (
                         <>
                             <button
                                 className="btn btn-dark custom-bg rounded-pill py-2 position-absolute start-0 translate-middle-y d-none d-md-block"
