@@ -6,6 +6,7 @@ import OverlaySpinner from '../../utils/OverlaySpinner';
 import ConnectionModal from '../../utils/ConnectionModal';
 
 import { getSessionValue, setSessionValue } from '../../utils/sessionStorageStates';
+import PigoStoreFooter from './PigoStoreFooter';
 
 const PigostoreUI = () => {
   const [currentPlatform, setCurrentPlatform] = useState(''); // State for current platform
@@ -92,7 +93,7 @@ const PigostoreUI = () => {
               <div className="d-flex justify-content-center align-items-center text-center">
                 <p className="text-white me-2 dynamic-hs m-0"><b>Pigo</b>Player</p>
                 <span className="text-secondary align-self-center dynamic-fs">
-                  {appVersion ? `v${appVersion}`: 'vNot Available'} {/* Display app version */}
+                  {appVersion ? `v${appVersion}` : 'vNot Available'} {/* Display app version */}
                 </span>
               </div>
 
@@ -168,6 +169,10 @@ const PigostoreUI = () => {
           </div>
         </div>
       </div>
+
+      {/* Backspace & PigoStoreFooter */}
+      <div className="divider" style={{ height: '6rem' }}></div>
+      <PigoStoreFooter />
 
       {/* Connection Modal */}
       {isError && <ConnectionModal show={isError} />}
