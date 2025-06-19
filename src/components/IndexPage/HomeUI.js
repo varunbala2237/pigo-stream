@@ -58,8 +58,8 @@ function HomeUI({
   // Alert messages
   const [alert, setAlert] = useState({ message: '', type: '', key: '' });
 
+  // Saved search history dropdown stuff
   const dropdownRef = useRef(null);
-  const inputRef = useRef(null);
 
   const { searchHistory, refetch } = useFetchSearchHistory();
   const saveSearchHistory = useSaveSearchHistory();
@@ -111,26 +111,6 @@ function HomeUI({
       window.removeEventListener('scroll', handlePageScroll);
     };
   }, [setShowSearchBar, setTriggerSearch]);
-
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (
-        dropdownRef.current &&
-        !dropdownRef.current.contains(event.target) &&
-        !inputRef.current.contains(event.target)
-      ) {
-        setIsDropdownOpen(false);
-      }
-    };
-
-    document.addEventListener('mousedown', handleClickOutside);
-    document.addEventListener('touchstart', handleClickOutside);
-
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-      document.removeEventListener('touchstart', handleClickOutside);
-    };
-  }, []);
 
   // Page loading state handling
   useEffect(() => {
@@ -293,8 +273,8 @@ function HomeUI({
             handleRemoveSearchHistory={handleRemoveSearchHistory}
             handleSearchSubmit={handleSearchSubmit}
             handleFocus={handleFocus}
-            inputRef={inputRef}
             dropdownRef={dropdownRef}
+            setIsDropdownOpen={setIsDropdownOpen}
           />
         ) : (
           <Header />
