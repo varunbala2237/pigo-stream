@@ -331,20 +331,22 @@ function HomeUI({
                 <div className="d-flex justify-content-start align-items-center">
                   <span className="text-wrap fw-bold dynamic-ts">{title}</span>
                 </div>
-                <div className="dynamic-fs text-white">
-                  <div className="dynamic-fs my-2">
+                <div className="dynamic-fs">
+                  <div className="dynamic-fs my-2 text-white">
                     <span className="me-2">
                       {mediaType === 'movie' ? (
-                        <i className="bi bi-film"></i>
+                        <span><i className="bi bi-film me-2" />Movie</span>
                       ) : (
-                        <i className="bi bi-tv"></i>
+                        <span><i className="bi bi-tv me-2" />Show</span>
                       )}
                     </span>
+                    <span className="me-2 text-secondary">|</span>
                     <span className="me-2">{year}</span>
-                    <i className="bi bi-star-fill"></i>
-                    <span id="Rating"> {rating}</span>
+                    <span className="me-2 text-secondary">|</span>
+                    <i className="bi bi-star-fill text-warning me-2" />
+                    <span id="Rating">{rating}</span>
                   </div>
-                  <div className="dynamic-fs">{mediaDesc}</div>
+                  <div className="dynamic-fs text-secondary">{mediaDesc}</div>
                 </div>
               </div>
             </div>
