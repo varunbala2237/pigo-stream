@@ -16,12 +16,13 @@ function PlayGround() {
   const type = queryParams.get('type');
 
   // Retrive full TMDB metadata of the id and type
-  const { data: mediaInfo, loading: isLoading, error: isError } = useFetchMediaInfo(id, type);
+  const { data: mediaInfo, loading: isMediaLoading, error: isMediaError } = useFetchMediaInfo(id, type);
 
   // Anime info via AniList if applicable
-  const { data: animeInfo, loading: animeLoading, error: animeError } = useFetchAnimeInfo(mediaInfo);
+  const { data: animeInfo, loading: isAnimeLoading, error: isAnimeError } = useFetchAnimeInfo(mediaInfo);
 
-  console.log(animeInfo);
+  const isLoading = isMediaLoading || isAnimeLoading;
+  const isError = isMediaError || isAnimeError;
 
   // Setup backgroundImage
   const [backgroundImage, setBackgroundImage] = useState('');
