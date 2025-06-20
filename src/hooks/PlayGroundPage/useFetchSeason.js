@@ -23,28 +23,30 @@ const fetchWithRetry = async (url, options = {}, retries = 3, delay = 1000) => {
 
 // Custom hook for retrieving season details
 const useFetchSeason = (id, seasonNumber) => {
-    const [seasonData, setSeasonData] = useState(null);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
+  const [seasonData, setSeasonData] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-    useEffect(() => {
-        const fetchSeasonData = async () => {
-            let url = `${BASE_URL}/pigo-stream/playground/season?id=${id}&seasonNumber=${seasonNumber}`;
+  useEffect(() => {
+    if (!id || seasonNumber === null || seasonNumber === undefined) return;
 
-            try {
-                const data = await fetchWithRetry(url);
-                setSeasonData(data);
-            } catch (error) {
-                setError(error.message);
-            } finally {
-                setLoading(false);
-            }
-        };
+    const fetchSeasonData = async () => {
+      const url = `${BASE_URL}/pigo-stream/playground/season?id=${id}&seasonNumber=${seasonNumber}`;
 
-        fetchSeasonData();
-    }, [id, seasonNumber]);
+      try {
+        const data = await fetchWithRetry(url);
+        setSeasonData(data);
+      } catch (error) {
+        setError(error.message);
+      } finally {
+        setLoading(false);
+      }
+    };
 
-    return { seasonData, loading, error };
+    fetchSeasonData();
+  }, [id, seasonNumber]);
+
+  return { seasonData, loading, error };
 };
 
 export default useFetchSeason;

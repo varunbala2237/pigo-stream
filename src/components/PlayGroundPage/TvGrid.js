@@ -40,7 +40,10 @@ function TvGrid({ id, type, mediaInfo, setBackgroundImage }) {
   );
 
   // Fetch all available seasons and servers
-  const { seasonData } = useFetchSeason(id, selectedSeason);
+  const { seasonData } = useFetchSeason(
+    id && selectedSeason !== null ? id : null,
+    selectedSeason !== null ? selectedSeason : null
+  );
   const { servers } = useFetchServers(id, type, selectedSeason, selectedEpisode);
 
   const { addToList } = useSaveMyList();
