@@ -28,8 +28,8 @@ export const extractChronologicalChain = (matchedMedia) => {
       ALLOWED_FORMATS.has(node.format)
     );
 
-  const all = [matchedMedia, ...related].filter(
-    item => ALLOWED_FORMATS.has(item.format)
+  const all = [matchedMedia, ...related].filter(item =>
+    ALLOWED_FORMATS.has(item.format)
   );
 
   return all.sort((a, b) => {

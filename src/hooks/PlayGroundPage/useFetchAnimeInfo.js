@@ -33,7 +33,7 @@ const useFetchAnimeInfo = (mediaInfo) => {
       const tmdbDate = mediaInfo.release_date || mediaInfo.first_air_date || '';
 
       if (!tmdbTitle || !tmdbDate) {
-        setError('Missing TMDB title or date');
+        setAnimeInfo(null);
         setLoading(false);
         return;
       }
@@ -84,10 +84,14 @@ const useFetchAnimeInfo = (mediaInfo) => {
 
         const candidates = result?.data?.Page?.media || [];
         const matched = matchAniMediaByTitleAndDate(candidates, tmdbTitle, tmdbDate);
-        if (!matched) throw new Error('No matching anime found');
 
-        const chain = extractChronologicalChain(matched);
-        setAnimeInfo(chain);
+        // Even if unmatched, we don't treat it as an error
+        if (!matched) {
+          setAnimeInfo(null);
+        } else {
+          const chain = extractChronologicalChain(matched);
+          setAnimeInfo(chain);
+        }
       } catch (err) {
         setError(err.message || 'Unknown error');
       } finally {
