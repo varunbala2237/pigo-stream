@@ -6,6 +6,7 @@ import useFetchAnimeInfo from '../../hooks/PlayGroundPage/useFetchAnimeInfo';
 import Header from '../Header';
 import MovieGrid from './MovieGrid';
 import TvGrid from './TvGrid';
+import AnimeGrid from './AnimeGrid';
 import OverlaySpinner from '../../utils/OverlaySpinner';
 import ConnectionModal from '../../utils/ConnectionModal';
 
@@ -64,14 +65,25 @@ function PlayGround() {
       </div>
 
       {/* Grid Components */}
-      {mediaInfo != null && !isLoading && !isError &&
+      {mediaInfo && animeInfo && !isLoading && !isError && (
+        <AnimeGrid
+          id={id}
+          type={type}
+          mediaInfo={mediaInfo}
+          animeInfo={animeInfo}
+          setBackgroundImage={setBackgroundImage}
+        />
+      )}
+
+      {/* Fallback: Render regular TMDB-based grid if anime not found */}
+      {mediaInfo && !animeInfo && !isLoading && !isError && (
         <GridComponent
           id={id}
           type={type}
           mediaInfo={mediaInfo}
           setBackgroundImage={setBackgroundImage}
         />
-      }
+      )}
 
       {/* Connection Modal */}
       {isError && <ConnectionModal show={isError} />}
