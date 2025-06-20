@@ -35,7 +35,7 @@ const useFetchAnimeInfo = (mediaInfo) => {
       const query = {
         query: `
           query ($search: String) {
-            Page(perPage: 10) {
+            Page(perPage: 50) {
               media(search: $search, type: ANIME) {
                 id
                 title {
