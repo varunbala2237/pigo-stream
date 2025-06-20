@@ -1,6 +1,6 @@
 // MovieGrid.js
 import React, { useState, useEffect } from 'react';
-import CastCard from './MediaSections/CastCard';
+import CastCard from './CommonSections/CastCard';
 import useFetchServers from '../../hooks/PlayGroundPage/useFetchServers';
 import useSaveMyList from '../../hooks/MyListPage/useSaveMyList';
 import useCheckMyList from '../../hooks/MyListPage/useCheckMyList';
