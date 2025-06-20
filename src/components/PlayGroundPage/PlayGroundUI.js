@@ -69,7 +69,7 @@ function PlayGround() {
       {/* Connection Modal */}
       {isError && <ConnectionModal show={isError} />}
 
-      {/* No Need for Footer */}
+      {/* Footer was evacuated to there corresponding grids */}
     </div>
   );
 }
