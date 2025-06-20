@@ -1,59 +1,51 @@
 // animeUtils.js
-export const validateTitleMatch = (tmdbTitle, englishTitle, romajiTitle) => {
-  if (!tmdbTitle || (!englishTitle && !romajiTitle)) return false;
+export const matchAniMediaByTitleAndDate = (mediaList, tmdbTitle, tmdbDateStr) => {
+  if (!tmdbTitle || !tmdbDateStr) return null;
 
-  const lowerTMDB = tmdbTitle.toLowerCase();
-  const titles = [englishTitle, romajiTitle].filter(Boolean).map(t => t.toLowerCase());
+  const tmdbDate = new Date(tmdbDateStr).toISOString().split('T')[0];
 
-  return titles.some(title => lowerTMDB.includes(title) || title.includes(lowerTMDB));
+  return mediaList.find(media => {
+    const aniDate = toFullDate(media.startDate);
+    return (
+      fuzzyMatch(tmdbTitle, media.title?.english, media.title?.romaji) &&
+      aniDate === tmdbDate
+    );
+  });
 };
 
-export const validateDateMatch = (tmdbDateStr, aniStartDate) => {
-  if (!tmdbDateStr || !aniStartDate) return false;
-
-  const tmdbDate = new Date(tmdbDateStr);
-  const { year, month, day } = aniStartDate;
-
-  if (!year) return false;
-
-  const isYearMatch = tmdbDate.getFullYear() === year;
-  const isMonthMatch = month ? tmdbDate.getMonth() + 1 === month : true;
-  const isDayMatch = day ? tmdbDate.getDate() === day : true;
-
-  return isYearMatch && isMonthMatch && isDayMatch;
-};
-
-export const extractRelatedMedia = (matchedMedia) => {
-  const base = formatEdge({ node: matchedMedia });
-
+export const extractChronologicalChain = (matchedMedia) => {
+  const base = matchedMedia;
   const related = matchedMedia.relations?.edges || [];
 
-  const sortByDate = (a, b) => {
-    if (!a.year || !b.year) return a.id - b.id;
-    if (a.year !== b.year) return a.year - b.year;
-    return (a.month || 1) - (b.month || 1);
-  };
+  const all = [
+    ...related
+      .filter(edge => edge.relationType === 'PREQUEL')
+      .map(edge => edge.node),
+    base,
+    ...related
+      .filter(edge => edge.relationType === 'SEQUEL')
+      .map(edge => edge.node),
+  ];
 
-  const prequels = related
-    .filter(rel => rel.relationType === 'PREQUEL')
-    .map(formatEdge)
-    .sort(sortByDate);
-
-  const sequels = related
-    .filter(rel => rel.relationType === 'SEQUEL')
-    .map(formatEdge)
-    .sort(sortByDate);
-
-  return [...prequels, base, ...sequels];
+  return all.sort((a, b) => {
+    const ad = new Date(toFullDate(a.startDate) || '9999-12-31');
+    const bd = new Date(toFullDate(b.startDate) || '9999-12-31');
+    return ad - bd;
+  });
 };
 
-const formatEdge = (edge) => {
-  const node = edge.node || edge;
-  return {
-    id: node.id,
-    name: node.title.english || node.title.romaji || 'Untitled',
-    type: node.format || 'UNKNOWN',
-    year: node.startDate?.year || null,
-    month: node.startDate?.month || null
-  };
+export const fuzzyMatch = (tmdb, eng, romaji) => {
+  const base = tmdb.toLowerCase();
+  return [eng, romaji]
+    .filter(Boolean)
+    .some(title => {
+      const t = title.toLowerCase();
+      return t.includes(base) || base.includes(t);
+    });
+};
+
+export const toFullDate = (startDate) => {
+  const { year, month, day } = startDate || {};
+  if (!year || !month || !day) return null;
+  return `${year.toString().padStart(4, '0')}-${month.toString().padStart(2, '0')}-${day.toString().padStart(2, '0')}`;
 };
