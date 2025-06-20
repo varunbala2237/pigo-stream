@@ -21,6 +21,8 @@ function PlayGround() {
   // Anime info via AniList if applicable
   const { data: animeInfo, loading: animeLoading, error: animeError } = useFetchAnimeInfo(mediaInfo);
 
+  console.log(animeInfo);
+
   // Setup backgroundImage
   const [backgroundImage, setBackgroundImage] = useState('');
 
