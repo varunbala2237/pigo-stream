@@ -18,15 +18,17 @@ function AnimeGrid({ id, type, mediaInfo, setBackgroundImage }) {
   const [mediaURL, setMediaURL] = useState('');
   const [cast, setCast] = useState([]);
 
-  // Demo
-  setMediaURL("https://example.com/");
-
   const [sliceIndex, setSliceIndex] = useState(() =>
     getSessionValue(...ANIME_STORAGE_PATH, 'sliceIndex') || 12
   );
 
   const { addToList } = useSaveMyList();
   const { isInList, refetch } = useCheckMyList(id);
+
+  // Demo
+  useEffect(() => {
+    setMediaURL("https://example.com/");
+  }, []);
 
   // Season initial management
   useEffect(() => {
@@ -69,6 +71,22 @@ function AnimeGrid({ id, type, mediaInfo, setBackgroundImage }) {
               isInList={isInList}
               handleAddToList={handleAddToList}
             />
+
+            <div className="container-fluid custom-bg custom-theme-radius-low w-100 p-2 my-2">
+              <div className="d-flex flex-row align-items-center">
+                <div className="d-flex flex-row dynamic-fs">
+                  <dl className="m-0">
+                    <dt>
+                      <i className="bi bi-cone-striped text-warning me-2"></i>
+                      Feature Under Development
+                    </dt>
+                    <dd className="mb-0">
+                      Anime panels with sub and dub support are coming soon. We appreciate your patience.
+                    </dd>
+                  </dl>
+                </div>
+              </div>
+            </div>
 
             <div className="d-flex flex-column align-items-start custom-theme-radius-low my-2 w-100">
               <div className="container py-2 text-white">
