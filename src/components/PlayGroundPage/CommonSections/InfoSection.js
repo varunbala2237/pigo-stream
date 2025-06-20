@@ -1,9 +1,9 @@
-// RegularInfoSection.js
+// InfoSection.js
 import React, { useState, useEffect } from 'react';
 import useFetchTrailer from '../../../hooks/PlayGroundPage/useFetchTrailer';
-import OverviewSection from '../CommonSections/OverviewSection';
+import OverviewSection from './OverviewSection';
 
-function RegularInfoSection({
+function InfoSection({
   id,
   type,
   mediaInfo,
@@ -206,4 +206,4 @@ function RegularInfoSection({
   );
 }
 
-export default RegularInfoSection;
+export default InfoSection;

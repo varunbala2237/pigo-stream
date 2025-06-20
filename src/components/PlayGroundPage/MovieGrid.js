@@ -4,7 +4,7 @@ import CastCard from './CommonSections/CastCard';
 import useFetchServers from '../../hooks/PlayGroundPage/useFetchServers';
 import useSaveMyList from '../../hooks/MyListPage/useSaveMyList';
 import useCheckMyList from '../../hooks/MyListPage/useCheckMyList';
-import RegularInfoSection from './MediaSections/RegularInfoSection';
+import InfoSection from './CommonSections/InfoSection';
 import ServerSection from './CommonSections/ServerSection';
 import PlayGroundFooter from './PlayGroundFooter';
 
@@ -99,7 +99,7 @@ function MovieGrid({ id, type, mediaInfo, setBackgroundImage }) {
       <div className="d-flex flex-column justify-content-center align-items-center p-0">
         <div className="flex-row text-white w-100">
           <div className="container">
-            <RegularInfoSection
+            <InfoSection
               id={id}
               type={type}
               mediaInfo={mediaInfo}
