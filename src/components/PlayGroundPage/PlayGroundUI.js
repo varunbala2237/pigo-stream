@@ -2,6 +2,7 @@
 import { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import useFetchMediaInfo from '../../hooks/PlayGroundPage/useFetchMediaInfo';
+import useFetchAnimeInfo from '../../hooks/PlayGroundPage/useFetchAnimeInfo';
 import Header from '../Header';
 import MovieGrid from './MovieGrid';
 import TvGrid from './TvGrid';
@@ -14,8 +15,11 @@ function PlayGround() {
   const id = queryParams.get('id');
   const type = queryParams.get('type');
 
-  // Retrive full tmdb metadata of the id and type
+  // Retrive full TMDB metadata of the id and type
   const { data: mediaInfo, loading: isLoading, error: isError } = useFetchMediaInfo(id, type);
+
+  // Anime info via AniList if applicable
+  const { data: animeInfo, loading: animeLoading, error: animeError } = useFetchAnimeInfo(mediaInfo);
 
   // Setup backgroundImage
   const [backgroundImage, setBackgroundImage] = useState('');
