@@ -12,21 +12,22 @@ export const matchAniMediaByTitleAndDate = (mediaList, tmdbTitle, tmdbDateStr) =
   });
 };
 
+const ALLOWED_FORMATS = new Set(['TV', 'MOVIE', 'OVA', 'ONA', 'SPECIAL']);
+
 export const extractChronologicalChain = (matchedMedia) => {
   if (!matchedMedia) return [];
 
   const base = matchedMedia;
-  const related = matchedMedia.relations?.edges || [];
+  const edges = matchedMedia.relations?.edges || [];
 
-  const prequels = related
-    .filter(edge => edge.relationType === 'PREQUEL')
+  const related = edges
+    .filter(edge =>
+      edge.node?.type === 'ANIME' &&
+      ALLOWED_FORMATS.has(edge.node?.format)
+    )
     .map(edge => edge.node);
 
-  const sequels = related
-    .filter(edge => edge.relationType === 'SEQUEL')
-    .map(edge => edge.node);
-
-  const all = [...prequels, base, ...sequels];
+  const all = [...related, base].filter(item => ALLOWED_FORMATS.has(item.format));
 
   return all.sort((a, b) => {
     const ad = new Date(toFullDate(a.startDate) || '9999-12-31');
@@ -36,12 +37,13 @@ export const extractChronologicalChain = (matchedMedia) => {
 };
 
 export const fuzzyMatch = (tmdb, eng, romaji) => {
-  const base = tmdb.toLowerCase();
+  const tmdbTokens = tmdb.toLowerCase().split(/[\s:.-]+/).filter(Boolean);
+
   return [eng, romaji]
     .filter(Boolean)
     .some(title => {
-      const t = title.toLowerCase();
-      return t.includes(base) || base.includes(t);
+      const titleLower = title.toLowerCase();
+      return tmdbTokens.some(token => titleLower.includes(token));
     });
 };
 
