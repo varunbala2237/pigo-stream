@@ -1,11 +1,11 @@
 // MovieGrid.js
 import React, { useState, useEffect } from 'react';
-import CastCard from './CommonSections/CastCard';
+import CastCard from './Sections/CastCard';
 import useFetchServers from '../../hooks/PlayGroundPage/useFetchServers';
 import useSaveMyList from '../../hooks/MyListPage/useSaveMyList';
 import useCheckMyList from '../../hooks/MyListPage/useCheckMyList';
-import InfoSection from './CommonSections/InfoSection';
-import ServerSection from './CommonSections/ServerSection';
+import InfoSection from './Sections/InfoSection';
+import ServerSection from './Sections/ServerSection';
 import PlayGroundFooter from './PlayGroundFooter';
 
 import { getStorageValue, setStorageValue } from '../../utils/localStorageStates';

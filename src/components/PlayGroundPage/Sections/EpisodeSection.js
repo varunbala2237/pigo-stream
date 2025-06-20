@@ -1,5 +1,5 @@
-// MediaEpisodeSection.js
-function MediaEpisodeSection({
+// EpisodeSection.js
+function EpisodeSection({
   episodes,
   selectedEpisode,
   onEpisodeChange,
@@ -128,4 +128,4 @@ function MediaEpisodeSection({
   );
 }
 
-export default MediaEpisodeSection;
+export default EpisodeSection;
