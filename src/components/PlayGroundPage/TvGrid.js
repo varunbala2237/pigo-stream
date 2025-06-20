@@ -7,8 +7,8 @@ import useSaveMyList from '../../hooks/MyListPage/useSaveMyList';
 import useCheckMyList from '../../hooks/MyListPage/useCheckMyList';
 import InfoSection from './CommonSections/InfoSection';
 import ServerSection from './CommonSections/ServerSection';
-import RegularSeasonSection from './MediaSections/RegularSeasonSection';
-import RegularEpisodeSection from './MediaSections/RegularEpisodeSection';
+import MediaSeasonSection from './MediaSections/MediaSeasonSection';
+import MediaEpisodeSection from './MediaSections/MediaEpisodeSection';
 import PlayGroundFooter from './PlayGroundFooter';
 
 import { getStorageValue, setStorageValue } from '../../utils/localStorageStates';
@@ -215,7 +215,7 @@ function TvGrid({ id, type, mediaInfo, setBackgroundImage }) {
             />
 
             {/* Seasons Section */}
-            <RegularSeasonSection
+            <MediaSeasonSection
               seasons={seasons}
               selectedSeason={selectedSeason}
               onSeasonChange={handleSeasonChange}
@@ -223,7 +223,7 @@ function TvGrid({ id, type, mediaInfo, setBackgroundImage }) {
             />
 
             {/* Episodes Section */}
-            <RegularEpisodeSection
+            <MediaEpisodeSection
               episodes={episodes}
               selectedEpisode={selectedEpisode}
               onEpisodeChange={handleEpisodeChange}

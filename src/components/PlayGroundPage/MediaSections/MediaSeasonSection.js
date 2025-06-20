@@ -1,5 +1,5 @@
-// RegularSeasonSection.js
-function RegularSeasonSection({
+// MediaSeasonSection.js
+function MediaSeasonSection({
   seasons,
   selectedSeason,
   onSeasonChange,
@@ -90,4 +90,4 @@ function RegularSeasonSection({
   );
 }
 
-export default RegularSeasonSection;
+export default MediaSeasonSection;
