@@ -1,3 +1,4 @@
+// useFetchAnimeInfo.js
 import { useState, useEffect } from 'react';
 import { matchAniMediaByTitleAndDate, extractChronologicalChain } from '../utils/animeUtils';
 
@@ -7,7 +8,7 @@ const fetchWithRetry = async (url, options = {}, retries = 3, delay = 1000) => {
   for (let i = 0; i < retries; i++) {
     try {
       const res = await fetch(url, options);
-      if (!res.ok) throw new Error('Fetch failed');
+      if (!res.ok) throw new Error(`Fetch failed: ${res.status}`);
       return await res.json();
     } catch (err) {
       if (i < retries - 1) await new Promise(r => setTimeout(r, delay));
@@ -31,51 +32,39 @@ const useFetchAnimeInfo = (mediaInfo) => {
       const tmdbTitle = mediaInfo.title || mediaInfo.name || '';
       const tmdbDate = mediaInfo.release_date || mediaInfo.first_air_date || '';
 
+      if (!tmdbTitle || !tmdbDate) {
+        setError('Missing TMDB title or date');
+        setLoading(false);
+        return;
+      }
+
       const query = {
         query: `
           query ($search: String) {
             Page(perPage: 50) {
               media(search: $search, type: ANIME) {
                 id
-                title {
-                  english
-                  romaji
-                }
-                startDate {
-                  year
-                  month
-                  day
-                }
+                title { english romaji }
+                startDate { year month day }
                 type
                 format
                 episodes
                 duration
                 description
-                coverImage {
-                  large
-                }
+                coverImage { large }
                 relations {
                   edges {
                     relationType(version: 2)
                     node {
                       id
-                      title {
-                        english
-                        romaji
-                      }
-                      startDate {
-                        year
-                        month
-                        day
-                      }
+                      title { english romaji }
+                      startDate { year month day }
                       type
                       format
                       episodes
                       duration
                       description
-                      coverImage {
-                        large
-                      }
+                      coverImage { large }
                     }
                   }
                 }
@@ -100,7 +89,7 @@ const useFetchAnimeInfo = (mediaInfo) => {
         const chain = extractChronologicalChain(matched);
         setAnimeInfo(chain);
       } catch (err) {
-        setError(err.message);
+        setError(err.message || 'Unknown error');
       } finally {
         setLoading(false);
       }
