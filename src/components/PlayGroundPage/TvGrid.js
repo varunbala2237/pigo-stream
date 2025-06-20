@@ -1,14 +1,14 @@
 // TvGrid.js
 import React, { useState, useEffect, useRef } from 'react';
-import RegularCastCard from './RegularMediaSections/RegularCastCard';
+import CastCard from './MediaSections/CastCard';
 import useFetchSeason from '../../hooks/PlayGroundPage/useFetchSeason';
 import useFetchServers from '../../hooks/PlayGroundPage/useFetchServers';
 import useSaveMyList from '../../hooks/MyListPage/useSaveMyList';
 import useCheckMyList from '../../hooks/MyListPage/useCheckMyList';
-import RegularInfoSection from './RegularMediaSections/RegularInfoSection';
+import RegularInfoSection from './MediaSections/RegularInfoSection';
 import ServerSection from './CommonSections/ServerSection';
-import RegularSeasonSection from './RegularMediaSections/RegularSeasonSection';
-import RegularEpisodeSection from './RegularMediaSections/RegularEpisodeSection';
+import RegularSeasonSection from './MediaSections/RegularSeasonSection';
+import RegularEpisodeSection from './MediaSections/RegularEpisodeSection';
 import PlayGroundFooter from './PlayGroundFooter';
 
 import { getStorageValue, setStorageValue } from '../../utils/localStorageStates';
@@ -240,11 +240,11 @@ function TvGrid({ id, type, mediaInfo, setBackgroundImage }) {
                   {cast.length === 0 ? (
                     // Show 4 dummy skeletal cards when no cast is found
                     Array.from({ length: 4 }).map((_, index) => (
-                      <RegularCastCard key={index} isSkeleton={true} />
+                      <CastCard key={index} isSkeleton={true} />
                     ))
                   ) : (
                     cast.slice(0, sliceIndex).map((actor, index) => (
-                      <RegularCastCard key={actor.cast_id ?? `${actor.name}-${index}`} actor={actor} />
+                      <CastCard key={actor.cast_id ?? `${actor.name}-${index}`} actor={actor} />
                     ))
                   )}
                 </div>
