@@ -1,4 +1,3 @@
-// animeUtils.js
 export const matchAniMediaByTitleAndDate = (mediaList, tmdbTitle, tmdbDateStr) => {
   if (!tmdbTitle || !tmdbDateStr) return null;
 
@@ -14,18 +13,20 @@ export const matchAniMediaByTitleAndDate = (mediaList, tmdbTitle, tmdbDateStr) =
 };
 
 export const extractChronologicalChain = (matchedMedia) => {
+  if (!matchedMedia) return [];
+
   const base = matchedMedia;
   const related = matchedMedia.relations?.edges || [];
 
-  const all = [
-    ...related
-      .filter(edge => edge.relationType === 'PREQUEL')
-      .map(edge => edge.node),
-    base,
-    ...related
-      .filter(edge => edge.relationType === 'SEQUEL')
-      .map(edge => edge.node),
-  ];
+  const prequels = related
+    .filter(edge => edge.relationType === 'PREQUEL')
+    .map(edge => edge.node);
+
+  const sequels = related
+    .filter(edge => edge.relationType === 'SEQUEL')
+    .map(edge => edge.node);
+
+  const all = [...prequels, base, ...sequels];
 
   return all.sort((a, b) => {
     const ad = new Date(toFullDate(a.startDate) || '9999-12-31');

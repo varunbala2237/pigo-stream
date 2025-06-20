@@ -1,4 +1,3 @@
-// useFetchAnimeInfo.js
 import { useState, useEffect } from 'react';
 import { matchAniMediaByTitleAndDate, extractChronologicalChain } from '../utils/animeUtils';
 
@@ -35,7 +34,7 @@ const useFetchAnimeInfo = (mediaInfo) => {
       const query = {
         query: `
           query ($search: String) {
-            Page(perPage: 10) {
+            Page(perPage: 50) {
               media(search: $search, type: ANIME) {
                 id
                 title {
@@ -95,12 +94,10 @@ const useFetchAnimeInfo = (mediaInfo) => {
         });
 
         const candidates = result?.data?.Page?.media || [];
-
         const matched = matchAniMediaByTitleAndDate(candidates, tmdbTitle, tmdbDate);
         if (!matched) throw new Error('No matching anime found');
 
         const chain = extractChronologicalChain(matched);
-
         setAnimeInfo(chain);
       } catch (err) {
         setError(err.message);
