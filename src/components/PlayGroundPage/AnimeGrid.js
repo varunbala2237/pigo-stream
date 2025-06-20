@@ -18,6 +18,9 @@ function AnimeGrid({ id, type, mediaInfo, setBackgroundImage }) {
   const [mediaURL, setMediaURL] = useState('');
   const [cast, setCast] = useState([]);
 
+  // Demo
+  setMediaURL("https://example.com/");
+
   const [sliceIndex, setSliceIndex] = useState(() =>
     getSessionValue(...ANIME_STORAGE_PATH, 'sliceIndex') || 12
   );
