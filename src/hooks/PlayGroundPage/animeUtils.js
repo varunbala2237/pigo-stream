@@ -1,3 +1,4 @@
+// animeUtils.js
 const ALLOWED_FORMATS = new Set(['TV', 'MOVIE', 'OVA', 'ONA', 'SPECIAL']);
 
 /**

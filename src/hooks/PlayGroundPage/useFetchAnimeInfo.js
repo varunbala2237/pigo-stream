@@ -1,3 +1,4 @@
+// useFetchAnimeInfo.js
 import { useState, useEffect } from 'react';
 import {
   matchAllRelatedAniMedia,
