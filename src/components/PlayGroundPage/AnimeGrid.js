@@ -37,7 +37,8 @@ function AnimeGrid({ id, type, mediaInfo, animeInfo, setMediaURL, setBackgroundI
     return matchedIndex !== -1 ? matchedIndex : 0;
   }, [mediaInfo, animeInfo]);
 
-  const selectedChain = animeInfo[initialChainIndex];
+  const [selectedChainIndex, setSelectedChainIndex] = useState(initialChainIndex);
+  const selectedChain = animeInfo[selectedChainIndex];
   const episodeCount = selectedChain?.episodes || 0;
   const [selectedEpisode, setSelectedEpisode] = useState(null);
 
@@ -45,7 +46,7 @@ function AnimeGrid({ id, type, mediaInfo, animeInfo, setMediaURL, setBackgroundI
     getSessionValue(...ANIME_STORAGE_PATH, 'sliceIndex') || 12
   );
 
-  const { servers } = useFetchServers(id, 'anime', initialChainIndex, selectedEpisode);
+  const { servers } = useFetchServers(id, 'anime', selectedChainIndex, selectedEpisode);
 
   const { addToList } = useSaveMyList();
   const { isInList, refetch } = useCheckMyList(id);
