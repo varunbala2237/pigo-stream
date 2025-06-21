@@ -32,26 +32,23 @@ function PlayGroundFooter({ id, type, mediaURL }) {
     const { version: appVersion } = useAppVersion(platform);
     const { addToHistory } = useSaveWatchHistory();
 
-    const openPlayer = async (serverLink) => {
+    const openPlayer = (serverLink) => {
         try {
-            if (!inHistory) {
-                setInHistory(true);
-                await addToHistory(id, type);
-            }
-
             let appURL;
+
             if (platform === 'windows' || platform === 'android') {
                 appURL = `pigoplayer://open?url=${encodeURIComponent(serverLink)}&version=${appVersion}`;
 
                 let didBlur = false;
 
+                // Trigger app launch immediately
+                window.location.href = appURL;
+
                 const timeout = setTimeout(() => {
                     if (!didBlur) {
                         redirectToStore();
                     }
-                }, 2000); // 2-second timeout
-
-                window.location.href = appURL;
+                }, 2000);
 
                 window.addEventListener(
                     'blur',
@@ -64,6 +61,15 @@ function PlayGroundFooter({ id, type, mediaURL }) {
             } else {
                 redirectToStore();
             }
+
+            // Async watch history logic after triggering navigation
+            if (!inHistory) {
+                setInHistory(true);
+                addToHistory(id, type).catch((err) => {
+                    console.error('Failed to save watch history:', err);
+                });
+            }
+
         } catch (error) {
             console.error('Error opening app:', error);
         }
