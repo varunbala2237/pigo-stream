@@ -1,6 +1,6 @@
 // useFetchAnimeInfo.js
 import { useState, useEffect } from 'react';
-import { matchAniMediaByTitleAndDate, extractChronologicalChain } from '../utils/animeUtils';
+import { matchAniMediaByTitleAndDate, extractChronologicalChain } from './animeUtils';
 
 const BASE_URL = process.env.REACT_APP_SERVER_URL;
 
