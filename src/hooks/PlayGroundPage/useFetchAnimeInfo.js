@@ -1,6 +1,8 @@
-// useFetchAnimeInfo.js
 import { useState, useEffect } from 'react';
-import { matchAniMediaByTitleAndDate, extractChronologicalChain } from './animeUtils';
+import {
+  matchAllRelatedAniMedia,
+  extractChronologicalChainRecursive
+} from './animeUtils';
 
 const BASE_URL = process.env.REACT_APP_SERVER_URL;
 
@@ -65,6 +67,22 @@ const useFetchAnimeInfo = (mediaInfo) => {
                       duration
                       description
                       coverImage { large }
+                      relations {
+                        edges {
+                          relationType(version: 2)
+                          node {
+                            id
+                            title { english romaji }
+                            startDate { year month day }
+                            type
+                            format
+                            episodes
+                            duration
+                            description
+                            coverImage { large }
+                          }
+                        }
+                      }
                     }
                   }
                 }
@@ -83,12 +101,12 @@ const useFetchAnimeInfo = (mediaInfo) => {
         });
 
         const candidates = result?.data?.Page?.media || [];
-        const matched = matchAniMediaByTitleAndDate(candidates, tmdbTitle, tmdbDate);
+        const matches = matchAllRelatedAniMedia(candidates, tmdbTitle, tmdbDate);
 
-        if (!matched) {
+        if (!matches.length) {
           setAnimeInfo(null);
         } else {
-          const chain = extractChronologicalChain(matched);
+          const chain = extractChronologicalChainRecursive(matches);
           setAnimeInfo(chain);
         }
       } catch (err) {

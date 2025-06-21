@@ -1,36 +1,28 @@
-// animeUtils.js
 const ALLOWED_FORMATS = new Set(['TV', 'MOVIE', 'OVA', 'ONA', 'SPECIAL']);
 
-export const matchAniMediaByTitleAndDate = (mediaList, tmdbTitle, tmdbDateStr) => {
-  if (!tmdbTitle || !tmdbDateStr || !Array.isArray(mediaList)) return null;
+/**
+ * Match *multiple* AniList media entries that resemble the TMDB title.
+ * Filter those that are likely in the same franchise (based on token match and partial title match).
+ */
+export const matchAllRelatedAniMedia = (mediaList, tmdbTitle, tmdbDateStr) => {
+  if (!tmdbTitle || !tmdbDateStr || !Array.isArray(mediaList)) return [];
 
-  const tmdbDate = new Date(tmdbDateStr).toISOString().split('T')[0];
-  const tmdbMonth = tmdbDate.slice(0, 7); // YYYY-MM
+  const tmdbTokens = new Set(tokenize(tmdbTitle));
+  const tmdbMonth = new Date(tmdbDateStr).toISOString().slice(0, 7); // YYYY-MM
 
-  const matched = mediaList.find(media => {
-    const aniDate = toFullDate(media.startDate);
-    return (
-      fuzzyMatch(tmdbTitle, media.title?.english, media.title?.romaji) &&
-      aniDate?.slice(0, 7) === tmdbMonth
-    );
-  });
-
-  if (matched) return matched;
-
-  // Fallback: if not found, loosen match (at least one token match and YYYY-MM)
-  return mediaList.find(media => {
-    const aniDate = toFullDate(media.startDate);
-    return (
-      looseTitleMatch(tmdbTitle, media.title?.english, media.title?.romaji) &&
-      aniDate?.slice(0, 7) === tmdbMonth
-    );
+  // First pass: title and partial date match
+  return mediaList.filter(media => {
+    const aniDate = toFullDate(media.startDate)?.slice(0, 7);
+    const titleMatch = looseTitleMatch(tmdbTitle, media.title?.english, media.title?.romaji);
+    const overlap = getTitleTokenOverlap(tmdbTokens, media.title?.english, media.title?.romaji);
+    return titleMatch && aniDate === tmdbMonth && overlap >= 0.4;
   });
 };
 
-export const extractChronologicalChain = (matchedMedia) => {
-  if (!matchedMedia) return [];
-
-  const edges = matchedMedia.relations?.edges || [];
+export const extractChronologicalChainRecursive = (mediaList) => {
+  const visited = new Set();
+  const queue = [...mediaList];
+  const collected = [];
 
   const validRelationTypes = new Set([
     'PREQUEL',
@@ -39,37 +31,51 @@ export const extractChronologicalChain = (matchedMedia) => {
     'SIDE_STORY',
     'ALTERNATIVE_VERSION',
     'COMPILATION',
-    'SUMMARY'
+    'SUMMARY',
+    'OTHER',
   ]);
 
-  const related = edges
-    .filter(edge =>
-      edge.node &&
-      edge.node.type === 'ANIME' &&
-      ALLOWED_FORMATS.has(edge.node.format) &&
-      validRelationTypes.has(edge.relationType)
-    )
-    .map(edge => edge.node);
+  while (queue.length > 0) {
+    const current = queue.shift();
+    if (!current || visited.has(current.id)) continue;
 
-  const all = [matchedMedia, ...related];
+    visited.add(current.id);
+    collected.push(current);
 
-  return all.sort((a, b) => {
+    const edges = current.relations?.edges || [];
+    for (const edge of edges) {
+      const node = edge.node;
+      if (
+        node &&
+        node.type === 'ANIME' &&
+        ALLOWED_FORMATS.has(node.format) &&
+        validRelationTypes.has(edge.relationType)
+      ) {
+        queue.push(node);
+      }
+    }
+  }
+
+  return collected.sort((a, b) => {
     const dateA = toFullDate(a.startDate);
     const dateB = toFullDate(b.startDate);
     return new Date(dateA || '9999-12-31') - new Date(dateB || '9999-12-31');
   });
 };
 
-export const fuzzyMatch = (tmdbTitle, eng, romaji) => {
-  const tmdbTokens = new Set(tokenize(tmdbTitle));
-  const candidates = [eng, romaji].filter(Boolean);
+const tokenize = (title = '') =>
+  title.toLowerCase().split(/[\s:.\-_/]+/).filter(Boolean);
 
-  return candidates.some(title => {
-    const aniTokens = new Set(tokenize(title));
-    const shared = [...tmdbTokens].filter(token => aniTokens.has(token));
-    const overlap = shared.length / tmdbTokens.size;
-    return overlap >= 0.6 || (tmdbTokens.size <= 2 && shared.length >= 1);
-  });
+const getTitleTokenOverlap = (tmdbTokens, eng, romaji) => {
+  const candidates = [eng, romaji].filter(Boolean);
+  return Math.max(
+    ...candidates.map(title => {
+      const aniTokens = new Set(tokenize(title));
+      const shared = [...tmdbTokens].filter(token => aniTokens.has(token));
+      return shared.length / tmdbTokens.size;
+    }),
+    0
+  );
 };
 
 export const looseTitleMatch = (tmdbTitle, eng, romaji) => {
@@ -79,13 +85,6 @@ export const looseTitleMatch = (tmdbTitle, eng, romaji) => {
     const aniTokens = tokenize(title);
     return tmdbTokens.some(token => aniTokens.includes(token));
   });
-};
-
-const tokenize = (title = '') => {
-  return title
-    .toLowerCase()
-    .split(/[\s:.\-_/]+/)
-    .filter(Boolean);
 };
 
 export const toFullDate = (startDate) => {
