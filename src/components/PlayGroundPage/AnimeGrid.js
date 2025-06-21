@@ -7,7 +7,7 @@ import InfoSection from './Sections/InfoSection';
 
 import { getSessionValue, setSessionValue } from '../../utils/sessionStorageStates';
 
-function AnimeGrid({ id, type, mediaInfo, setMediaURL, setBackgroundImage }) {
+function AnimeGrid({ id, type, mediaInfo, animeInfo, setMediaURL, setBackgroundImage }) {
   const ANIME_STORAGE_PATH = React.useMemo(
     () => ['PlayGroundUI', 'Grids', 'AnimeGrid', `${id}`],
     [id]
@@ -74,7 +74,7 @@ function AnimeGrid({ id, type, mediaInfo, setMediaURL, setBackgroundImage }) {
                       Feature Under Development
                     </dt>
                     <dd className="mb-0">
-                      Anime panels with sub and dub support are coming soon. We appreciate your patience.
+                      {animeInfo}
                     </dd>
                   </dl>
                 </div>
