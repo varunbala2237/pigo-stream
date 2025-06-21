@@ -75,6 +75,7 @@ function PlayGround() {
           type={type}
           mediaInfo={mediaInfo}
           animeInfo={animeInfo}
+          setMediaURL={setMediaURL}
           setBackgroundImage={setBackgroundImage}
         />
       )}
