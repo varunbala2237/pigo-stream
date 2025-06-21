@@ -6,19 +6,17 @@ import useSaveMyList from '../../hooks/MyListPage/useSaveMyList';
 import useCheckMyList from '../../hooks/MyListPage/useCheckMyList';
 import InfoSection from './Sections/InfoSection';
 import ServerSection from './Sections/ServerSection';
-import PlayGroundFooter from './PlayGroundFooter';
 
 import { getStorageValue, setStorageValue } from '../../utils/localStorageStates';
 import { getSessionValue, setSessionValue } from '../../utils/sessionStorageStates';
 
-function MovieGrid({ id, type, mediaInfo, setBackgroundImage }) {
+function MovieGrid({ id, type, mediaInfo, setMediaURL, setBackgroundImage }) {
   const MOVIES_STORAGE_PATH = React.useMemo(
     () => ['PlayGroundUI', 'Grids', 'MovieGrid', `${id}`],
     [id]
   );
 
   // Initialize required useStates
-  const [mediaURL, setMediaURL] = useState('');
   const [cast, setCast] = useState([]);
   const [selectedServer, setSelectedServer] = useState('');
 
@@ -68,7 +66,7 @@ function MovieGrid({ id, type, mediaInfo, setBackgroundImage }) {
         setMediaURL(server.server_link);
       }
     }
-  }, [selectedServer, servers]);
+  }, [selectedServer, servers, setMediaURL]);
 
   const handleServerChange = (server) => {
     setSelectedServer(server);
@@ -147,10 +145,6 @@ function MovieGrid({ id, type, mediaInfo, setBackgroundImage }) {
           </div>
         </div>
       </div>
-
-      {/* Backspace & PlayGroundFooter */}
-      <div className="divider" style={{ height: '6rem' }}></div>
-      <PlayGroundFooter id={id} type={type} mediaURL={mediaURL} />
     </>
   );
 }

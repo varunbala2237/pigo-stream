@@ -4,6 +4,7 @@ import { useLocation } from 'react-router-dom';
 import useFetchMediaInfo from '../../hooks/PlayGroundPage/useFetchMediaInfo';
 import useFetchAnimeInfo from '../../hooks/PlayGroundPage/useFetchAnimeInfo';
 import Header from '../Header';
+import PlayGroundFooter from './PlayGroundFooter';
 import MovieGrid from './MovieGrid';
 import TvGrid from './TvGrid';
 import AnimeGrid from './AnimeGrid';
@@ -15,6 +16,9 @@ function PlayGround() {
   const queryParams = new URLSearchParams(location.search);
   const id = queryParams.get('id');
   const type = queryParams.get('type');
+
+  // Media URL
+  const [mediaURL, setMediaURL] = useState('');
 
   // Retrive full TMDB metadata of the id and type
   const { data: mediaInfo, loading: isMediaLoading, error: isMediaError } = useFetchMediaInfo(id, type);
@@ -81,6 +85,8 @@ function PlayGround() {
           id={id}
           type={type}
           mediaInfo={mediaInfo}
+          mediaURL={mediaURL}
+          setMediaURL={setMediaURL}
           setBackgroundImage={setBackgroundImage}
         />
       )}
@@ -88,7 +94,9 @@ function PlayGround() {
       {/* Connection Modal */}
       {isError && <ConnectionModal show={isError} />}
 
-      {/* Footer was evacuated to there corresponding grids */}
+      {/* Backspace & PlayGroundFooter */}
+      <div className="divider" style={{ height: '6rem' }}></div>
+      <PlayGroundFooter id={id} type={type} mediaURL={mediaURL} />
     </div>
   );
 }

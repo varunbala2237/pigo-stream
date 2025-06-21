@@ -9,7 +9,6 @@ import InfoSection from './Sections/InfoSection';
 import ServerSection from './Sections/ServerSection';
 import SeasonSection from './Sections/SeasonSection';
 import EpisodeSection from './Sections/EpisodeSection';
-import PlayGroundFooter from './PlayGroundFooter';
 
 import { getStorageValue, setStorageValue } from '../../utils/localStorageStates';
 import { getSessionValue, setSessionValue } from '../../utils/sessionStorageStates';
@@ -18,14 +17,13 @@ const SELECTED_SEASON = 'selectedSeason';
 const SELECTED_SEASON_SCROLL = 'selectedSeasonScroll';
 const SEASON_STATE_KEY = 'seasonState';
 
-function TvGrid({ id, type, mediaInfo, setBackgroundImage }) {
+function TvGrid({ id, type, mediaInfo, setMediaURL, setBackgroundImage }) {
   const TV_STORAGE_PATH = React.useMemo(
     () => ['PlayGroundUI', 'Grids', 'TvGrid', `${id}`],
     [id]
   );
 
   // Initialize required useStates
-  const [mediaURL, setMediaURL] = useState('');
   const [cast, setCast] = useState([]);
   const [seasons, setSeasons] = useState([]);
   const [episodes, setEpisodes] = useState([]);
@@ -138,7 +136,7 @@ function TvGrid({ id, type, mediaInfo, setBackgroundImage }) {
         setMediaURL(server.server_link);
       }
     }
-  }, [selectedServer, servers]);
+  }, [selectedServer, servers, setMediaURL]);
 
   const handleSeasonChange = (seasonNumber) => {
     const seasonRefNode = seasonScrollRef.current;
@@ -268,10 +266,6 @@ function TvGrid({ id, type, mediaInfo, setBackgroundImage }) {
           </div>
         </div>
       </div>
-
-      {/* Backspace & PlayGroundFooter */}
-      <div className="divider" style={{ height: '6rem' }}></div>
-      <PlayGroundFooter id={id} type={type} mediaURL={mediaURL} />
     </>
   );
 }
