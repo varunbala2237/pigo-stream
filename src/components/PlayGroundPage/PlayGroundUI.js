@@ -85,7 +85,6 @@ function PlayGround() {
           id={id}
           type={type}
           mediaInfo={mediaInfo}
-          mediaURL={mediaURL}
           setMediaURL={setMediaURL}
           setBackgroundImage={setBackgroundImage}
         />
