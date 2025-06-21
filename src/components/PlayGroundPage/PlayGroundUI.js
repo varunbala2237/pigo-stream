@@ -17,7 +17,7 @@ function PlayGround() {
   const id = queryParams.get('id');
   const type = queryParams.get('type');
 
-  // Media URL
+  // Initialize Media URL
   const [mediaURL, setMediaURL] = useState('');
 
   // Retrive full TMDB metadata of the id and type
