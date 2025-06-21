@@ -4,18 +4,16 @@ import CastCard from './Sections/CastCard';
 import useSaveMyList from '../../hooks/MyListPage/useSaveMyList';
 import useCheckMyList from '../../hooks/MyListPage/useCheckMyList';
 import InfoSection from './Sections/InfoSection';
-import PlayGroundFooter from './PlayGroundFooter';
 
 import { getSessionValue, setSessionValue } from '../../utils/sessionStorageStates';
 
-function AnimeGrid({ id, type, mediaInfo, setBackgroundImage }) {
+function AnimeGrid({ id, type, mediaInfo, setMediaURL, setBackgroundImage }) {
   const ANIME_STORAGE_PATH = React.useMemo(
     () => ['PlayGroundUI', 'Grids', 'AnimeGrid', `${id}`],
     [id]
   );
 
   // Initialize required useStates
-  const [mediaURL, setMediaURL] = useState('');
   const [cast, setCast] = useState([]);
 
   const [sliceIndex, setSliceIndex] = useState(() =>
@@ -24,11 +22,6 @@ function AnimeGrid({ id, type, mediaInfo, setBackgroundImage }) {
 
   const { addToList } = useSaveMyList();
   const { isInList, refetch } = useCheckMyList(id);
-
-  // Demo
-  useEffect(() => {
-    setMediaURL("https://example.com/");
-  }, []);
 
   // Season initial management
   useEffect(() => {
@@ -123,10 +116,6 @@ function AnimeGrid({ id, type, mediaInfo, setBackgroundImage }) {
           </div>
         </div>
       </div>
-
-      {/* Backspace & PlayGroundFooter */}
-      <div className="divider" style={{ height: '6rem' }}></div>
-      <PlayGroundFooter id={id} type={type} mediaURL={mediaURL} />
     </>
   );
 }
