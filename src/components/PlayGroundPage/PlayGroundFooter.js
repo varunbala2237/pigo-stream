@@ -91,17 +91,19 @@ function PlayGroundFooter({ id, type, mediaURL }) {
                 </li>
 
                 {/* Play button to play content */}
-                <li className="nav-item text-center mx-auto">
-                    <button
-                        onClick={() => openPlayer(mediaURL)}
-                        className="btn border-0 d-flex flex-column align-items-center justify-content-center text-decoration-none dynamic-ts"
-                        aria-label="Play"
-                        title="Play"
-                    >
-                        <i className="bi bi-play-fill theme-color me-2"></i>
-                        <span className="text-white dynamic-ss">Play</span>
-                    </button>
-                </li>
+                {mediaURL && (
+                    <li className="nav-item text-center mx-auto">
+                        <button
+                            onClick={() => openPlayer(mediaURL)}
+                            className="btn border-0 d-flex flex-column align-items-center justify-content-center text-decoration-none dynamic-ts"
+                            aria-label="Play"
+                            title="Play"
+                        >
+                            <i className="bi bi-play-fill theme-color me-2"></i>
+                            <span className="text-white dynamic-ss">Play</span>
+                        </button>
+                    </li>
+                )}
             </ul>
         </div>
     );
