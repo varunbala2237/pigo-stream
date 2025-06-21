@@ -101,6 +101,7 @@ function AnimeGrid({ id, type, mediaInfo, animeInfo, setMediaURL, setBackgroundI
                       <i className="bi bi-cone-striped text-warning me-2"></i>
                       Work in Progress
                     </dt>
+                    <dd className="mb-0">Current Chain Index: {selectedChainIndex}</dd>
                     <dd className="mb-0">
                       {Array.isArray(animeInfo) && animeInfo.length > 0 ? (
                         <div className="d-flex flex-column gap-2">
