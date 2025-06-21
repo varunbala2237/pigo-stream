@@ -1,6 +1,6 @@
 // AnimeGrid.js
 import React, { useState, useEffect } from 'react';
-import CastCard from './Sections/CastCard';
+import CastCard from './CastCard';
 import useSaveMyList from '../../hooks/MyListPage/useSaveMyList';
 import useCheckMyList from '../../hooks/MyListPage/useCheckMyList';
 import InfoSection from './Sections/InfoSection';

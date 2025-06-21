@@ -1,6 +1,6 @@
 // TvGrid.js
 import React, { useState, useEffect, useRef } from 'react';
-import CastCard from './Sections/CastCard';
+import CastCard from './CastCard';
 import useFetchSeason from '../../hooks/PlayGroundPage/useFetchSeason';
 import useFetchServers from '../../hooks/PlayGroundPage/useFetchServers';
 import useSaveMyList from '../../hooks/MyListPage/useSaveMyList';
