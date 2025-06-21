@@ -85,7 +85,6 @@ const useFetchAnimeInfo = (mediaInfo) => {
         const candidates = result?.data?.Page?.media || [];
         const matched = matchAniMediaByTitleAndDate(candidates, tmdbTitle, tmdbDate);
 
-        // Even if unmatched, we don't treat it as an error
         if (!matched) {
           setAnimeInfo(null);
         } else {

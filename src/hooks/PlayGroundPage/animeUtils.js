@@ -5,12 +5,24 @@ export const matchAniMediaByTitleAndDate = (mediaList, tmdbTitle, tmdbDateStr) =
   if (!tmdbTitle || !tmdbDateStr || !Array.isArray(mediaList)) return null;
 
   const tmdbDate = new Date(tmdbDateStr).toISOString().split('T')[0];
+  const tmdbMonth = tmdbDate.slice(0, 7); // YYYY-MM
 
-  return mediaList.find(media => {
+  const matched = mediaList.find(media => {
     const aniDate = toFullDate(media.startDate);
     return (
       fuzzyMatch(tmdbTitle, media.title?.english, media.title?.romaji) &&
-      aniDate?.startsWith(tmdbDate.slice(0, 7)) // Match YYYY-MM
+      aniDate?.slice(0, 7) === tmdbMonth
+    );
+  });
+
+  if (matched) return matched;
+
+  // Fallback: if not found, loosen match (at least one token match and YYYY-MM)
+  return mediaList.find(media => {
+    const aniDate = toFullDate(media.startDate);
+    return (
+      looseTitleMatch(tmdbTitle, media.title?.english, media.title?.romaji) &&
+      aniDate?.slice(0, 7) === tmdbMonth
     );
   });
 };
@@ -56,7 +68,16 @@ export const fuzzyMatch = (tmdbTitle, eng, romaji) => {
     const aniTokens = new Set(tokenize(title));
     const shared = [...tmdbTokens].filter(token => aniTokens.has(token));
     const overlap = shared.length / tmdbTokens.size;
-    return overlap >= 0.6; // Require at least 60% token overlap
+    return overlap >= 0.6 || (tmdbTokens.size <= 2 && shared.length >= 1);
+  });
+};
+
+export const looseTitleMatch = (tmdbTitle, eng, romaji) => {
+  const tmdbTokens = tokenize(tmdbTitle);
+  const candidates = [eng, romaji].filter(Boolean);
+  return candidates.some(title => {
+    const aniTokens = tokenize(title);
+    return tmdbTokens.some(token => aniTokens.includes(token));
   });
 };
 
