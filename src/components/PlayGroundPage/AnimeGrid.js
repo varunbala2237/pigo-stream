@@ -1,6 +1,7 @@
 // AnimeGrid.js
 import React, { useState, useEffect } from 'react';
 import CastCard from './CastCard';
+import useFetchServers from '../../hooks/PlayGroundPage/useFetchServers';
 import useSaveMyList from '../../hooks/MyListPage/useSaveMyList';
 import useCheckMyList from '../../hooks/MyListPage/useCheckMyList';
 import InfoSection from './Sections/InfoSection';
@@ -15,10 +16,36 @@ function AnimeGrid({ id, type, mediaInfo, animeInfo, setMediaURL, setBackgroundI
 
   // Initialize required useStates
   const [cast, setCast] = useState([]);
+  // Compute the initial index based on matching full date
+  const initialChainIndex = React.useMemo(() => {
+    const mediaDateString = mediaInfo?.release_date || mediaInfo?.first_air_date;
+    if (!mediaDateString || !Array.isArray(animeInfo)) return 0;
+
+    const mediaDate = new Date(mediaDateString);
+    mediaDate.setHours(0, 0, 0, 0); // normalize
+
+    const matchedIndex = animeInfo.findIndex(entry => {
+      const { year, month, day } = entry?.startDate || {};
+      if (!year || !month || !day) return false;
+
+      const entryDate = new Date(year, month - 1, day);
+      entryDate.setHours(0, 0, 0, 0); // normalize
+
+      return entryDate.getTime() === mediaDate.getTime();
+    });
+
+    return matchedIndex !== -1 ? matchedIndex : 0;
+  }, [mediaInfo, animeInfo]);
+
+  const selectedChain = animeInfo[initialChainIndex];
+  const episodeCount = selectedChain?.episodes || 0;
+  const [selectedEpisode, setSelectedEpisode] = useState(null);
 
   const [sliceIndex, setSliceIndex] = useState(() =>
     getSessionValue(...ANIME_STORAGE_PATH, 'sliceIndex') || 12
   );
+
+  const { servers } = useFetchServers(id, 'anime', initialChainIndex, selectedEpisode);
 
   const { addToList } = useSaveMyList();
   const { isInList, refetch } = useCheckMyList(id);
