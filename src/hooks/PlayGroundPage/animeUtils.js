@@ -10,7 +10,7 @@ export const matchAniMediaByTitleAndDate = (mediaList, tmdbTitle, tmdbDateStr) =
     const aniDate = toFullDate(media.startDate);
     return (
       fuzzyMatch(tmdbTitle, media.title?.english, media.title?.romaji) &&
-      aniDate === tmdbDate
+      aniDate?.startsWith(tmdbDate.slice(0, 7)) // Match YYYY-MM
     );
   });
 };
@@ -20,17 +20,26 @@ export const extractChronologicalChain = (matchedMedia) => {
 
   const edges = matchedMedia.relations?.edges || [];
 
-  const related = edges
-    .map(edge => edge.node)
-    .filter(node =>
-      node &&
-      node.type === 'ANIME' &&
-      ALLOWED_FORMATS.has(node.format)
-    );
+  const validRelationTypes = new Set([
+    'PREQUEL',
+    'SEQUEL',
+    'PARENT',
+    'SIDE_STORY',
+    'ALTERNATIVE_VERSION',
+    'COMPILATION',
+    'SUMMARY'
+  ]);
 
-  const all = [matchedMedia, ...related].filter(item =>
-    ALLOWED_FORMATS.has(item.format)
-  );
+  const related = edges
+    .filter(edge =>
+      edge.node &&
+      edge.node.type === 'ANIME' &&
+      ALLOWED_FORMATS.has(edge.node.format) &&
+      validRelationTypes.has(edge.relationType)
+    )
+    .map(edge => edge.node);
+
+  const all = [matchedMedia, ...related];
 
   return all.sort((a, b) => {
     const dateA = toFullDate(a.startDate);
@@ -40,12 +49,15 @@ export const extractChronologicalChain = (matchedMedia) => {
 };
 
 export const fuzzyMatch = (tmdbTitle, eng, romaji) => {
-  const tmdbTokens = tokenize(tmdbTitle);
-  const compareTokens = [eng, romaji]
-    .filter(Boolean)
-    .flatMap(title => tokenize(title));
+  const tmdbTokens = new Set(tokenize(tmdbTitle));
+  const candidates = [eng, romaji].filter(Boolean);
 
-  return tmdbTokens.some(token => compareTokens.includes(token));
+  return candidates.some(title => {
+    const aniTokens = new Set(tokenize(title));
+    const shared = [...tmdbTokens].filter(token => aniTokens.has(token));
+    const overlap = shared.length / tmdbTokens.size;
+    return overlap >= 0.6; // Require at least 60% token overlap
+  });
 };
 
 const tokenize = (title = '') => {
