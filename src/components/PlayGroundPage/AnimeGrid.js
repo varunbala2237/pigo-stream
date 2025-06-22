@@ -49,9 +49,8 @@ function AnimeGrid({ id, type, mediaInfo, animeInfo, setMediaURL, setBackgroundI
   const animeId = selectedChain?.id ?? null;
 
   const chainScrollRef = useRef(null);
-  const episodeScrollRef = useRef(null);
 
-  const episodeCount = selectedChain?.episodes || 0;
+  const episodeCount = selectedChain?.episodes || 1;
   const [selectedEpisode, setSelectedEpisode] = useState(null);
 
   const [sliceIndex, setSliceIndex] = useState(() =>
@@ -141,6 +140,22 @@ function AnimeGrid({ id, type, mediaInfo, animeInfo, setMediaURL, setBackgroundI
                 handleServerChange={handleServerChange}
               />
             )}
+
+            <ChainPanel
+              animeInfo={animeInfo}
+              selectedChainIndex={selectedChainIndex}
+              onChainChange={(index) => {
+                setSelectedChainIndex(index);
+                setSelectedEpisode(null);
+              }}
+              chainScrollRef={chainScrollRef}
+            />
+
+            <EpisodePanel
+              episodeCount={episodeCount}
+              selectedEpisode={selectedEpisode}
+              onEpisodeChange={setSelectedEpisode}
+            />
 
             <div className="d-flex flex-column align-items-start custom-theme-radius-low my-2 w-100">
               <div className="container py-2 text-white">
