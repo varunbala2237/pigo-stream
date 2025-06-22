@@ -17,6 +17,8 @@ import './HomeUI.css';
 
 import { getSessionValue, setSessionValue, removeSessionValue } from '../../utils/sessionStorageStates';
 
+const SESSION_PATH = ['HomeUI'];
+
 function HomeUI({
   title,
   mediaId,
@@ -67,18 +69,18 @@ function HomeUI({
 
   // Restoring page states
   useEffect(() => {
-    const savedWelcomeMessage = getSessionValue('HomeUI', 'welcomeMessage');
-    const savedActiveGrid = getSessionValue('HomeUI', 'activeGrid');
-    const savedShowSearchBar = getSessionValue('HomeUI', 'showSearchBar');
-    const savedSearchQuery = getSessionValue('HomeUI', 'searchQuery') || '';
-    const savedTriggerSearch = getSessionValue('HomeUI', 'triggerSearch') || '';
-    const savedScrollPosition = getSessionValue('HomeUI', 'pageScrollState') || 0;
+    const savedWelcomeMessage = getSessionValue(...SESSION_PATH, 'welcomeMessage');
+    const savedActiveGrid = getSessionValue(...SESSION_PATH, 'activeGrid');
+    const savedShowSearchBar = getSessionValue(...SESSION_PATH, 'showSearchBar');
+    const savedSearchQuery = getSessionValue(...SESSION_PATH, 'searchQuery') || '';
+    const savedTriggerSearch = getSessionValue(...SESSION_PATH, 'triggerSearch') || '';
+    const savedScrollPosition = getSessionValue(...SESSION_PATH, 'pageScrollState') || 0;
 
     if (savedWelcomeMessage) {
       setAlert({ message: savedWelcomeMessage, type: 'success', key: 'welcome' });
       setTimeout(() => {
         setAlert((prev) => (prev.key === 'welcome' ? { message: '', type: '', key: '' } : prev));
-        removeSessionValue('HomeUI', 'welcomeMessage');
+        removeSessionValue(...SESSION_PATH, 'welcomeMessage');
       }, 5000);
     }
 
@@ -103,7 +105,7 @@ function HomeUI({
 
     const handlePageScroll = () => {
       const scrollPosition = window.scrollY;
-      setSessionValue('HomeUI', 'pageScrollState', scrollPosition);
+      setSessionValue(...SESSION_PATH, 'pageScrollState', scrollPosition);
     };
 
     window.addEventListener('scroll', handlePageScroll);
@@ -200,12 +202,12 @@ function HomeUI({
 
   const handleGridChange = (grid) => {
     setActiveGrid(grid);
-    setSessionValue('HomeUI', 'activeGrid', grid);
+    setSessionValue(...SESSION_PATH, 'activeGrid', grid);
   };
 
   const handleSearchBar = () => {
     setShowSearchBar((prevState) => {
-      setSessionValue('HomeUI', 'showSearchBar', (!prevState).toString());
+      setSessionValue(...SESSION_PATH, 'showSearchBar', (!prevState).toString());
       return !prevState;
     });
 
@@ -221,9 +223,9 @@ function HomeUI({
   const handleSearchInputChange = (e) => {
     const query = e.target.value;
     setSearchQuery(query);
-    setSessionValue('HomeUI', 'searchQuery', query);
+    setSessionValue(...SESSION_PATH, 'searchQuery', query);
     setTriggerSearch(query);
-    setSessionValue('HomeUI', 'triggerSearch', query);
+    setSessionValue(...SESSION_PATH, 'triggerSearch', query);
   };
 
   const handleSelectSearch = (query) => {
