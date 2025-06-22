@@ -50,7 +50,7 @@ function AnimeGrid({ id, type, mediaInfo, animeInfo, setMediaURL, setBackgroundI
 
   const chainScrollRef = useRef(null);
 
-  const episodeCount = selectedChain?.episodes || 1;
+  const episodeCount = selectedChain?.episodes || mediaInfo?.number_of_episodes || 1;
   const [selectedEpisode, setSelectedEpisode] = useState(null);
 
   const [sliceIndex, setSliceIndex] = useState(() =>
