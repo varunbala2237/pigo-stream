@@ -10,13 +10,13 @@ function EpisodePanel({ episodeCount, selectedEpisode, onEpisodeChange }) {
       </div>
       <div className="row g-2">
         {episodes.map((epNum) => (
-          <div key={epNum} className="col-4 col-md-3 col-lg-2">
+          <div key={epNum} className="col-3 col-md-2 col-lg-1">
             <button
-              className={`btn w-100 text-white border-0 rounded-pill shadow-sm 
-                ${selectedEpisode === epNum ? 'btn-primary bd-callout-primary active' : 'btn-dark bd-callout-dark'}`}
+              className={`btn btn-dark w-100 text-white border-0 custom-theme-radius-low shadow-sm 
+                ${selectedEpisode === epNum ? 'bg-secondary' : 'bd-callout-dark'}`}
               onClick={() => onEpisodeChange(epNum)}
             >
-              <span className="dynamic-ss">Episode {epNum}</span>
+              <span className="dynamic-ss">{epNum}</span>
             </button>
           </div>
         ))}
