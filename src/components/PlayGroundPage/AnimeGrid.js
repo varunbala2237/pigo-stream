@@ -5,6 +5,7 @@ import useFetchServers from '../../hooks/PlayGroundPage/useFetchServers';
 import useSaveMyList from '../../hooks/MyListPage/useSaveMyList';
 import useCheckMyList from '../../hooks/MyListPage/useCheckMyList';
 import InfoSection from './Sections/InfoSection';
+import ServerSection from './Sections/ServerSection';
 
 import { getSessionValue, setSessionValue } from '../../utils/sessionStorageStates';
 
@@ -16,7 +17,7 @@ function AnimeGrid({ id, type, mediaInfo, animeInfo, setMediaURL, setBackgroundI
 
   // Initialize required useStates
   const [cast, setCast] = useState([]);
-  
+
   // Compute the initial index based on matching full date
   const initialChainIndex = React.useMemo(() => {
     const mediaDateString = mediaInfo?.release_date || mediaInfo?.first_air_date;
@@ -92,6 +93,13 @@ function AnimeGrid({ id, type, mediaInfo, animeInfo, setMediaURL, setBackgroundI
               mediaInfo={mediaInfo}
               isInList={isInList}
               handleAddToList={handleAddToList}
+            />
+
+            {/* Server Section */}
+            <ServerSection
+              servers={servers}
+              selectedServer={selectedServer}
+              handleServerChange={handleServerChange}
             />
 
             <div className="d-flex flex-column align-items-start custom-theme-radius-low my-2 w-100">
