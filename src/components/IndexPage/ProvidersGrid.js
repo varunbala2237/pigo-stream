@@ -70,14 +70,32 @@ function ProvidersGrid({ setIsProvidersLoading, setIsProvidersLoaded, setHasProv
         }
     }, [isLoading, isError, movies, shows, setHasProvidersContent]);
 
+    // Auto-scroll to selected provider on mount
+    useEffect(() => {
+        requestAnimationFrame(() => {
+            const container = providersRef.current;
+            if (!container || !selectedProvider) return;
+
+            const providerIndex = PROVIDERS.findIndex(p => p.id === selectedProvider.id);
+            const providerCard = container.children[providerIndex];
+
+            if (providerCard) {
+                const cardLeft = providerCard.offsetLeft;
+                const cardWidth = providerCard.offsetWidth;
+                const containerWidth = container.clientWidth;
+
+                const scrollTo = cardLeft - (containerWidth / 2 - cardWidth / 2);
+                container.scrollTo({ left: scrollTo, behavior: 'instant' });
+            }
+        });
+    }, []);
+
     // Load from sessionStorage on mount
     useEffect(() => {
-        const savedProvidersScroll = getSessionValue(...SESSION_PATH, 'providersScroll') || 0;
         const savedMoviesScroll = getSessionValue(...SESSION_PATH, 'moviesScroll') || 0;
         const savedShowsScroll = getSessionValue(...SESSION_PATH, 'showsScroll') || 0;
 
         requestAnimationFrame(() => {
-            if (providersRef.current) providersRef.current.scrollTo({ left: savedProvidersScroll, behavior: 'instant' });
             if (moviesRef.current) moviesRef.current.scrollTo({ left: savedMoviesScroll, behavior: 'instant' });
             if (showsRef.current) showsRef.current.scrollTo({ left: savedShowsScroll, behavior: 'instant' });
         });
@@ -91,13 +109,6 @@ function ProvidersGrid({ setIsProvidersLoading, setIsProvidersLoaded, setHasProv
         if (selectedProvider !== null) {
             setSessionValue(...SESSION_PATH, 'selectedProvider', selectedProvider);
         }
-
-        const handleProvidersScroll = () => {
-            setSessionValue(...SESSION_PATH, 'providersScroll', providersNode.scrollLeft);
-        };
-
-        providersNode.addEventListener('scroll', handleProvidersScroll);
-        return () => providersNode.removeEventListener('scroll', handleProvidersScroll);
     }, [selectedProvider]);
 
     // Save scroll positions for movies and shows
@@ -138,7 +149,7 @@ function ProvidersGrid({ setIsProvidersLoading, setIsProvidersLoaded, setHasProv
             <div className="d-flex justify-content-start align-items-center dynamic-ts mt-5">
                 <b>Browse by Streaming Platform</b>
             </div>
-            
+
             {/* Providers Selection Section */}
             <div className="position-relative my-2">
                 {PROVIDERS.length > 4 && (
