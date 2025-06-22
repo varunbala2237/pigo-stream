@@ -20,9 +20,9 @@ function EpisodePanel({ episodeCount, selectedEpisode, onEpisodeChange, chainSto
 
   // Reset page when episode count or storage path changes
   useEffect(() => {
-    setPage(0);
-    setSessionValue(...stablePath, 'episodePage', 0);
-  }, [storageKey, safeEpisodeCount, stablePath]);
+    const savedPage = getSessionValue(...stablePath, 'episodePage') ?? 0;
+    setPage(savedPage);
+  }, [storageKey, stablePath]);
 
   // Persist page
   useEffect(() => {
