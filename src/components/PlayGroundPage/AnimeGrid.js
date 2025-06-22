@@ -111,6 +111,12 @@ function AnimeGrid({ id, type, mediaInfo, animeInfo, setMediaURL, setBackgroundI
     setStorageValue(...ANIME_STORAGE_PATH, 'selectedChainIndex', index);
   }
 
+  // Handle episode change
+  const handleEpisodeChange = (episode) => {
+    setSelectedEpisode(episode);
+    setSessionValue(...ANIME_STORAGE_PATH, 'chain', selectedChainIndex, 'selectedEpisode', episode);
+  };
+
   const handleViewMore = () => {
     setSliceIndex(prevSliceIndex => {
       const newIndex = prevSliceIndex + 12;
@@ -164,7 +170,7 @@ function AnimeGrid({ id, type, mediaInfo, animeInfo, setMediaURL, setBackgroundI
             <EpisodePanel
               episodeCount={episodeCount}
               selectedEpisode={selectedEpisode}
-              onEpisodeChange={setSelectedEpisode}
+              onEpisodeChange={handleEpisodeChange}
               chainStoragePath={[...ANIME_STORAGE_PATH, 'chain', selectedChainIndex]}
             />
 
