@@ -1,4 +1,7 @@
 // SeasonSection.js
+import Tippy from '@tippyjs/react';
+import 'tippy.js/dist/tippy.css';
+
 function SeasonSection({
   seasons,
   selectedSeason,
@@ -60,7 +63,6 @@ function SeasonSection({
                   style={{ minWidth: '160px', maxWidth: '160px' }}
                   onClick={() => onSeasonChange(season.season_number)}
                   role="button"
-                  title={season.name}
                 >
                   <img
                     src={
@@ -75,7 +77,17 @@ function SeasonSection({
                   <div className={`card-body p-2`}>
                     <div className="d-flex align-items-center dynamic-fs">
                       <span className="fw-bold theme-color me-2">{season.season_number}</span>
-                      <span className="text-truncate flex-grow-1">{season.name}</span>
+                      <Tippy
+                        content={season.name}
+                        placement="top"
+                        delay={[500, 0]}
+                        trigger="mouseenter focus click"
+                        interactive={true}
+                      >
+                        <span className="text-truncate flex-grow-1 d-inline-block" style={{ maxWidth: '100%' }}>
+                          {season.name}
+                        </span>
+                      </Tippy>
                     </div>
                   </div>
                 </div>
