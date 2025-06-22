@@ -57,7 +57,7 @@ function AnimeGrid({ id, type, mediaInfo, animeInfo, setMediaURL, setBackgroundI
     : (mediaInfo?.number_of_episodes > 0 ? mediaInfo.number_of_episodes : 1);
 
   const [selectedEpisode, setSelectedEpisode] = useState(() =>
-    getSessionValue(...ANIME_STORAGE_PATH, 'chain', selectedChainIndex, 'selectedEpisode') ?? null
+    getSessionValue(...ANIME_STORAGE_PATH, 'chain', selectedChainIndex, 'selectedEpisode') ?? 1
   );
 
   const [sliceIndex, setSliceIndex] = useState(() =>
@@ -110,7 +110,10 @@ function AnimeGrid({ id, type, mediaInfo, animeInfo, setMediaURL, setBackgroundI
   // Handle onChain change
   const onChainChange = (index) => {
     setSelectedChainIndex(index);
-    setSelectedEpisode(null);
+
+    const saved = getSessionValue(...ANIME_STORAGE_PATH, 'chain', index, 'selectedEpisode');
+    setSelectedEpisode(saved ?? 1); // fallback to 1 if nothing saved
+
     setStorageValue(...ANIME_STORAGE_PATH, 'selectedChainIndex', index);
   }
 
