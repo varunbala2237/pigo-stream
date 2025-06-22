@@ -6,6 +6,8 @@ import useSaveMyList from '../../hooks/MyListPage/useSaveMyList';
 import useCheckMyList from '../../hooks/MyListPage/useCheckMyList';
 import InfoSection from './Sections/InfoSection';
 import ServerSection from './Sections/ServerSection';
+import ChainPanel from './Panels/ChainPanel';
+import EpisodePanel from './Panels/EpisodePanel';
 
 import { getStorageValue, setStorageValue } from '../../utils/localStorageStates';
 import { getSessionValue, setSessionValue } from '../../utils/sessionStorageStates';
