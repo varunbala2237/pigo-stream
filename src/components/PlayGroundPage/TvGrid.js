@@ -14,7 +14,6 @@ import { getStorageValue, setStorageValue } from '../../utils/localStorageStates
 import { getSessionValue, setSessionValue } from '../../utils/sessionStorageStates';
 
 const SELECTED_SEASON = 'selectedSeason';
-const SELECTED_SEASON_SCROLL = 'selectedSeasonScroll';
 const SEASON_STATE_KEY = 'seasonState';
 
 function TvGrid({ id, type, mediaInfo, setMediaURL, setBackgroundImage }) {
@@ -61,7 +60,6 @@ function TvGrid({ id, type, mediaInfo, setMediaURL, setBackgroundImage }) {
   // Season initial management
   useEffect(() => {
     const savedSelectedSeason = getStorageValue(...TV_STORAGE_PATH, SELECTED_SEASON);
-    const savedSeasonScroll = getStorageValue(...TV_STORAGE_PATH, SELECTED_SEASON_SCROLL);
 
     const seasonToSet =
       mediaInfo?.seasons.find(season => season.season_number === savedSelectedSeason)?.season_number ??
@@ -69,16 +67,6 @@ function TvGrid({ id, type, mediaInfo, setMediaURL, setBackgroundImage }) {
       mediaInfo?.seasons[0]?.season_number;
 
     setSelectedSeason(seasonToSet);
-
-    const seasonRefNode = seasonScrollRef.current;
-    requestAnimationFrame(() => {
-      if (seasonRefNode) {
-        seasonRefNode.scrollTo({
-          left: typeof savedSeasonScroll === 'number' ? savedSeasonScroll : 0,
-          behavior: 'instant'
-        });
-      }
-    });
   }, [mediaInfo.seasons, TV_STORAGE_PATH]);
 
   // Episode initial management
@@ -90,23 +78,12 @@ function TvGrid({ id, type, mediaInfo, setMediaURL, setBackgroundImage }) {
       const seasonState = getStorageValue(...TV_STORAGE_PATH, SEASON_STATE_KEY) || {};
       const currentSeasonState = seasonState[selectedSeason] || {};
       const savedEpisode = currentSeasonState.episode;
-      const savedScroll = currentSeasonState.scroll;
 
       const episodeToSet =
         episodes.find(ep => ep.episode_number === savedEpisode)?.episode_number ??
         episodes[0]?.episode_number;
 
       setSelectedEpisode(episodeToSet);
-
-      const episodeRefNode = episodeScrollRef.current;
-      requestAnimationFrame(() => {
-        if (episodeRefNode) {
-          episodeRefNode.scrollTo({
-            left: typeof savedScroll === 'number' ? savedScroll : 0,
-            behavior: 'instant'
-          });
-        }
-      });
     }
   }, [seasonData, selectedSeason, TV_STORAGE_PATH]);
 
@@ -144,7 +121,6 @@ function TvGrid({ id, type, mediaInfo, setMediaURL, setBackgroundImage }) {
     setSelectedSeason(seasonNumber);
 
     setStorageValue(...TV_STORAGE_PATH, SELECTED_SEASON, seasonNumber);
-    setStorageValue(...TV_STORAGE_PATH, SELECTED_SEASON_SCROLL, seasonRefNode.scrollLeft);
 
     // Try to load saved episode and scroll position
     const seasonState = getStorageValue(...TV_STORAGE_PATH, SEASON_STATE_KEY) || {};
@@ -166,7 +142,6 @@ function TvGrid({ id, type, mediaInfo, setMediaURL, setBackgroundImage }) {
     seasonState[selectedSeason] = {
       ...(seasonState[selectedSeason] || {}),
       episode: episodeNumber,
-      scroll: episodeRefNode.scrollLeft,
     };
     setStorageValue(...TV_STORAGE_PATH, SEASON_STATE_KEY, seasonState);
   };

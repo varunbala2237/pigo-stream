@@ -1,4 +1,5 @@
 // SeasonSection.js
+import { useEffect } from 'react';
 import Tippy from '@tippyjs/react';
 import 'tippy.js/dist/tippy.css';
 
@@ -8,6 +9,17 @@ function SeasonSection({
   onSeasonChange,
   seasonScrollRef
 }) {
+  // Handling seasons scroll state
+  useEffect(() => {
+    if (seasonScrollRef.current) {
+      const items = seasonScrollRef.current.querySelectorAll('.card');
+      const selectedIndex = seasons.findIndex(s => s.season_number === selectedSeason);
+      if (selectedIndex >= 0 && items[selectedIndex]) {
+        items[selectedIndex].scrollIntoView({ behavior: 'instant', inline: 'center' });
+      }
+    }
+  }, [seasonScrollRef, selectedSeason, seasons]);
+
   // Handling scroll using buttons
   const scroll = (ref, direction) => {
     if (ref.current) {

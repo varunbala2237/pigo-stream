@@ -1,4 +1,5 @@
 // EpisodeSection.js
+import { useEffect } from 'react';
 import Tippy from '@tippyjs/react';
 import 'tippy.js/dist/tippy.css';
 
@@ -8,6 +9,17 @@ function EpisodeSection({
   onEpisodeChange,
   episodeScrollRef
 }) {
+  // Handling episode scroll state
+  useEffect(() => {
+    if (episodeScrollRef.current) {
+      const items = episodeScrollRef.current.querySelectorAll('.card');
+      const selectedIndex = episodes.findIndex(e => e.episode_number === selectedEpisode);
+      if (selectedIndex >= 0 && items[selectedIndex]) {
+        items[selectedIndex].scrollIntoView({ behavior: 'instant', inline: 'center' });
+      }
+    }
+  }, [episodeScrollRef, selectedEpisode, episodes]);
+
   // Check if the episode has aired
   function isEpisodeAired(airDateString) {
     if (!airDateString) return false;
