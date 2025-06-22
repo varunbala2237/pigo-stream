@@ -24,11 +24,11 @@ function TvGrid({ id, type, mediaInfo, setMediaURL, setBackgroundImage }) {
 
   // Initialize required useStates
   const [cast, setCast] = useState([]);
+  const [selectedServer, setSelectedServer] = useState(null);
   const [seasons, setSeasons] = useState([]);
   const [episodes, setEpisodes] = useState([]);
   const [selectedSeason, setSelectedSeason] = useState(null);
   const [selectedEpisode, setSelectedEpisode] = useState(null);
-  const [selectedServer, setSelectedServer] = useState(null);
 
   const seasonScrollRef = useRef(null);
   const episodeScrollRef = useRef(null);

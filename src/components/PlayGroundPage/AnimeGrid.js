@@ -40,10 +40,10 @@ function AnimeGrid({ id, type, mediaInfo, animeInfo, setMediaURL, setBackgroundI
     return matchedIndex !== -1 ? matchedIndex : 0;
   }, [mediaInfo, animeInfo]);
 
+  const [selectedServer, setSelectedServer] = useState(null);
   const [selectedChainIndex, setSelectedChainIndex] = useState(initialChainIndex);
   const episodeCount = selectedChain?.episodes || 0;
   const [selectedEpisode, setSelectedEpisode] = useState(null);
-    const [selectedServer, setSelectedServer] = useState(null);
 
   const chainScrollRef = useRef(null);
   const episodeScrollRef = useRef(null);
