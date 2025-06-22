@@ -16,6 +16,7 @@ function AnimeGrid({ id, type, mediaInfo, animeInfo, setMediaURL, setBackgroundI
 
   // Initialize required useStates
   const [cast, setCast] = useState([]);
+  
   // Compute the initial index based on matching full date
   const initialChainIndex = React.useMemo(() => {
     const mediaDateString = mediaInfo?.release_date || mediaInfo?.first_air_date;
@@ -92,48 +93,6 @@ function AnimeGrid({ id, type, mediaInfo, animeInfo, setMediaURL, setBackgroundI
               isInList={isInList}
               handleAddToList={handleAddToList}
             />
-
-            <div className="container-fluid custom-bg custom-theme-radius-low w-100 p-2 my-2">
-              <div className="d-flex flex-row align-items-center">
-                <div className="d-flex flex-row dynamic-fs">
-                  <dl className="m-0">
-                    <dt className="mb-2">
-                      <i className="bi bi-cone-striped text-warning me-2"></i>
-                      Work in Progress
-                    </dt>
-                    <dd className="mb-0">Current Chain Index: {selectedChainIndex}</dd>
-                    <dd className="mb-0">
-                      {Array.isArray(animeInfo) && animeInfo.length > 0 ? (
-                        <div className="d-flex flex-column gap-2">
-                          {animeInfo.map((item, idx) => (
-                            <div
-                              key={item.id || idx}
-                              className="p-2 border rounded bg-dark text-white"
-                              style={{ fontSize: '0.875rem' }}
-                            >
-                              <div><strong>ID:</strong> {item.id}</div>
-                              <div><strong>Title:</strong> {item.title?.english || item.title?.romaji || 'Untitled'}</div>
-                              <div className="d-flex flex-wrap gap-3">
-                                <div><strong>Format:</strong> {item.format}</div>
-                                <div><strong>Episodes:</strong> {item.episodes ?? 'N/A'}</div>
-                                <div>
-                                  <strong>Start Date:</strong>{' '}
-                                  {item.startDate?.year
-                                    ? `${item.startDate.year}-${String(item.startDate.month || '01').padStart(2, '0')}-${String(item.startDate.day || '01').padStart(2, '0')}`
-                                    : 'Unknown'}
-                                </div>
-                              </div>
-                            </div>
-                          ))}
-                        </div>
-                      ) : (
-                        <span className="text-secondary">No matching anime titles were found for this TMDB item.</span>
-                      )}
-                    </dd>
-                  </dl>
-                </div>
-              </div>
-            </div>
 
             <div className="d-flex flex-column align-items-start custom-theme-radius-low my-2 w-100">
               <div className="container py-2 text-white">
