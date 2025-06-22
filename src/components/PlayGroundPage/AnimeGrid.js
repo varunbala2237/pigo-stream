@@ -65,6 +65,22 @@ function AnimeGrid({ id, type, mediaInfo, animeInfo, setMediaURL, setBackgroundI
     }
   }, [mediaInfo, setBackgroundImage]);
 
+  // Load from localStorage on mount
+  useEffect(() => {
+    const savedSelectedServer = getStorageValue(...ANIME_STORAGE_PATH, 'selectedServer');
+
+    if (servers && servers.length > 0) {
+      if (
+        savedSelectedServer &&
+        servers.some(server => server.server_name === savedSelectedServer.server_name)
+      ) {
+        setSelectedServer(savedSelectedServer);
+      } else {
+        setSelectedServer(servers[0]);
+      }
+    }
+  }, [ANIME_STORAGE_PATH, servers]);
+
   // Retrieving selected server link
   useEffect(() => {
     if (servers && servers.length > 0) {
