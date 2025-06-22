@@ -1,5 +1,5 @@
 // ProvidersGrid.js
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, useLayoutEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import Card from '../Card';
 import useFetchProviders from '../../hooks/IndexPage/useFetchProviders';
@@ -71,23 +71,21 @@ function ProvidersGrid({ setIsProvidersLoading, setIsProvidersLoaded, setHasProv
     }, [isLoading, isError, movies, shows, setHasProvidersContent]);
 
     // Auto-scroll to selected provider on mount
-    useEffect(() => {
-        requestAnimationFrame(() => {
-            const container = providersRef.current;
-            if (!container || !selectedProvider) return;
+    useLayoutEffect(() => {
+        const container = providersRef.current;
+        if (!container || !selectedProvider) return;
 
-            const providerIndex = PROVIDERS.findIndex(p => p.id === selectedProvider.id);
-            const providerCard = container.children[providerIndex];
+        const providerIndex = PROVIDERS.findIndex(p => p.id === selectedProvider.id);
+        const providerCard = container.children[providerIndex];
 
-            if (providerCard) {
-                const cardLeft = providerCard.offsetLeft;
-                const cardWidth = providerCard.offsetWidth;
-                const containerWidth = container.clientWidth;
+        if (providerCard) {
+            const cardLeft = providerCard.offsetLeft;
+            const cardWidth = providerCard.offsetWidth;
+            const containerWidth = container.clientWidth;
 
-                const scrollTo = cardLeft - (containerWidth / 2 - cardWidth / 2);
-                container.scrollTo({ left: scrollTo, behavior: 'instant' });
-            }
-        });
+            const scrollTo = cardLeft - (containerWidth / 2 - cardWidth / 2);
+            container.scrollTo({ left: scrollTo, behavior: 'instant' });
+        }
     }, [selectedProvider]);
 
     // Load from sessionStorage on mount
