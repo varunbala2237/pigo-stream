@@ -42,29 +42,24 @@ function MovieGrid({ id, type, mediaInfo, setMediaURL, setBackgroundImage }) {
 
   // Load from localStorage on mount
   useEffect(() => {
-    const savedSelectedServer = getStorageValue(...MOVIES_STORAGE_PATH, 'selectedServer');
-
-    if (servers && servers.length > 0) {
-      if (
-        savedSelectedServer &&
-        servers.some(server => server.server_name === savedSelectedServer.server_name)
-      ) {
-        setSelectedServer(savedSelectedServer);
-      } else {
-        setSelectedServer(servers[0]);
-      }
+    if (!Array.isArray(servers) || servers.length === 0) {
+      setSelectedServer(null);
+      return;
     }
-  }, [MOVIES_STORAGE_PATH, servers, mediaInfo, type]);
+
+    const saved = getStorageValue(...MOVIES_STORAGE_PATH, 'selectedServer');
+    const matched = saved && servers.find(s => s.server_name === saved.server_name);
+
+    setSelectedServer(matched || servers[0]);
+  }, [MOVIES_STORAGE_PATH, servers]);
 
   // Retrieving selected server link
   useEffect(() => {
-    if (servers && servers.length > 0) {
-      const server = selectedServer
-        ? servers.find(server => server.server_name === selectedServer.server_name)
-        : servers[0];
-      if (server) {
-        setMediaURL(server.server_link);
-      }
+    if (!Array.isArray(servers) || servers.length === 0 || !selectedServer) return;
+
+    const current = servers.find(s => s.server_name === selectedServer.server_name);
+    if (current?.server_link) {
+      setMediaURL(current.server_link);
     }
   }, [selectedServer, servers, setMediaURL]);
 
@@ -106,11 +101,13 @@ function MovieGrid({ id, type, mediaInfo, setMediaURL, setBackgroundImage }) {
             />
 
             {/* Server Section */}
-            <ServerSection
-              servers={servers}
-              selectedServer={selectedServer}
-              handleServerChange={handleServerChange}
-            />
+            {Array.isArray(servers) && servers.length > 0 && selectedServer && (
+              <ServerSection
+                servers={servers}
+                selectedServer={selectedServer}
+                handleServerChange={handleServerChange}
+              />
+            )}
 
             <div className="d-flex flex-column align-items-start custom-theme-radius-low my-2 w-100">
               <div className="container py-2 text-white">
