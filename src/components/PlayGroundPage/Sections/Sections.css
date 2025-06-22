@@ -1,0 +1,23 @@
+/* Sections.css */
+.marquee-wrapper {
+  position: relative;
+  overflow: hidden;
+  white-space: nowrap;
+  width: 100%;
+  height: 1.2em;
+}
+
+.marquee-text {
+  position: absolute;
+  white-space: nowrap;
+  animation: marquee 6s linear infinite;
+}
+
+@keyframes marquee {
+  0% {
+    left: 100%;
+  }
+  100% {
+    left: -100%;
+  }
+}
