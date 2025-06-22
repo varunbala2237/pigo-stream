@@ -88,7 +88,7 @@ function ProvidersGrid({ setIsProvidersLoading, setIsProvidersLoaded, setHasProv
                 container.scrollTo({ left: scrollTo, behavior: 'instant' });
             }
         });
-    }, []);
+    }, [selectedProvider]);
 
     // Load from sessionStorage on mount
     useEffect(() => {
