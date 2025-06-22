@@ -1,6 +1,4 @@
 // EpisodeSection.js
-import './Sections.css';
-
 function EpisodeSection({
   episodes,
   selectedEpisode,
