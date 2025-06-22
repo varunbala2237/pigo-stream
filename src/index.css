@@ -35,13 +35,26 @@ body {
   color: #51a6f5;
 }
 
+.anime-theme-color {
+  color: #ff69b4;
+}
+
 .theme-bg {
   background-color: #51a6f5;
   transition: background-color 0.3s ease;
 }
 
+.anime-theme-bg {
+  background-color: #ff69b4;
+  transition: background-color 0.3s ease;
+}
+
 .theme-bg:hover {
   background-color: #3b8ed1;
+}
+
+.anime-theme-bg:hover {
+  background-color: #e0559e;
 }
 
 /* Common & Custom heights and widths */

@@ -79,7 +79,7 @@ function ChainPanel({ animeInfo, selectedChainIndex, onChainChange, chainScrollR
                                 />
                                 <div className={`card-body p-2`}>
                                     <div className="d-flex align-items-center dynamic-fs">
-                                        <span className="fw-bold theme-color me-2">{index}</span>
+                                        <span className="fw-bold anime-theme-color me-2">{index}</span>
                                         <Tippy
                                             content={displayTitle}
                                             placement="top"
