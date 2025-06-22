@@ -107,7 +107,13 @@ function EpisodeSection({
                   <div className={`card-body p-2 ${aired ? '' : 'text-secondary'}`}>
                     <div className="d-flex align-items-center dynamic-fs">
                       <span className="fw-bold theme-color me-2">{episode.episode_number}</span>
-                      <Tippy content={episode.name} placement="top" delay={[500, 0]}>
+                      <Tippy
+                        content={episode.name}
+                        placement="top"
+                        delay={[500, 0]}
+                        trigger="mouseenter focus click"
+                        interactive={true}
+                      >
                         <span className="text-truncate flex-grow-1 d-inline-block" style={{ maxWidth: '100%' }}>
                           {episode.name}
                         </span>
