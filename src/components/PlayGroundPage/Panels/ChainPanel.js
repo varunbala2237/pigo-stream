@@ -72,7 +72,7 @@ function ChainPanel({ animeInfo, selectedChainIndex, onChainChange, chainScrollR
                                 role="button"
                             >
                                 <img
-                                    src={coverImage?.medium || `https://placehold.co/160x230/212529/6c757d?text=?`}
+                                    src={coverImage?.large || `https://placehold.co/200x300/212529/6c757d?text=?`}
                                     className="custom-theme-radius-top-low"
                                     alt="empty"
                                     style={{ height: '230px', objectFit: 'cover' }}
