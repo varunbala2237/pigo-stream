@@ -1,24 +1,30 @@
 // EpisodePanel.js
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
+import { getSessionValue, setSessionValue } from '../../../utils/sessionStorageStates';
 
-function EpisodePanel({ episodeCount, selectedEpisode, onEpisodeChange }) {
+function EpisodePanel({ episodeCount, selectedEpisode, onEpisodeChange, chainStoragePath }) {
   const episodes = useMemo(() => Array.from({ length: episodeCount }, (_, i) => i + 1), [episodeCount]);
 
-  const [page, setPage] = useState(0); // 0-based index
-  const pageSize = 50;
+  const [page, setPage] = useState(() =>
+    getSessionValue(...chainStoragePath, 'episodePage') ?? 0
+  );
 
+  useEffect(() => {
+    setSessionValue(...chainStoragePath, 'episodePage', page);
+  }, [page, chainStoragePath]);
+
+  const pageSize = 50;
   const start = page * pageSize;
   const end = Math.min(start + pageSize, episodes.length);
   const currentEpisodes = episodes.slice(start, end);
-
   const totalPages = Math.ceil(episodes.length / pageSize);
 
   const handleNext = () => {
-    if (page < totalPages - 1) setPage(page + 1);
+    if (page < totalPages - 1) setPage(prev => prev + 1);
   };
 
   const handlePrev = () => {
-    if (page > 0) setPage(page - 1);
+    if (page > 0) setPage(prev => prev - 1);
   };
 
   return (
@@ -36,9 +42,7 @@ function EpisodePanel({ episodeCount, selectedEpisode, onEpisodeChange }) {
           >
             <i className="bi bi-chevron-left"></i>
           </button>
-          <span>
-            Page: {start + 1} - {end}
-          </span>
+          <span>Page: {start + 1} - {end}</span>
           <button
             className="btn btn-sm btn-dark border-0 rounded-pill px-2 py-1"
             onClick={handleNext}
