@@ -1,5 +1,5 @@
 // AnimeGrid.js
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import CastCard from './CastCard';
 import useFetchServers from '../../hooks/PlayGroundPage/useFetchServers';
 import useSaveMyList from '../../hooks/MyListPage/useSaveMyList';
@@ -44,6 +44,8 @@ function AnimeGrid({ id, type, mediaInfo, animeInfo, setMediaURL, setBackgroundI
   const selectedChain = animeInfo[selectedChainIndex];
   const episodeCount = selectedChain?.episodes || 0;
   const [selectedEpisode, setSelectedEpisode] = useState(null);
+  const chainScrollRef = useRef(null);
+  const episodeScrollRef = useRef(null);
   const [selectedServer, setSelectedServer] = useState(null);
 
   const [sliceIndex, setSliceIndex] = useState(() =>
