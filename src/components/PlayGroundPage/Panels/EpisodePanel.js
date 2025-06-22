@@ -76,6 +76,7 @@ function EpisodePanel({ episodeCount, selectedEpisode, onEpisodeChange, chainSto
               className={`btn btn-dark w-100 text-white border-0 custom-theme-radius-low shadow-sm 
                 ${selectedEpisode === epNum ? 'bg-secondary' : 'bd-callout-dark'}`}
               onClick={() => onEpisodeChange(epNum)}
+              aria-label={`Select episode ${epNum}`}
             >
               <span className="dynamic-ss">{epNum}</span>
             </button>
