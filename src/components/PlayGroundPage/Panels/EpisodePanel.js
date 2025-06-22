@@ -1,15 +1,56 @@
 // EpisodePanel.js
+import { useState, useMemo } from 'react';
+
 function EpisodePanel({ episodeCount, selectedEpisode, onEpisodeChange }) {
-  const episodes = Array.from({ length: episodeCount }, (_, i) => i + 1);
+  const episodes = useMemo(() => Array.from({ length: episodeCount }, (_, i) => i + 1), [episodeCount]);
+
+  const [page, setPage] = useState(0); // 0-based index
+  const pageSize = 50;
+
+  const start = page * pageSize;
+  const end = Math.min(start + pageSize, episodes.length);
+  const currentEpisodes = episodes.slice(start, end);
+
+  const totalPages = Math.ceil(episodes.length / pageSize);
+
+  const handleNext = () => {
+    if (page < totalPages - 1) setPage(page + 1);
+  };
+
+  const handlePrev = () => {
+    if (page > 0) setPage(page - 1);
+  };
 
   return (
     <div className="container-fluid custom-bg custom-theme-radius-low w-100 p-2 my-2">
-      <div className="d-flex flex-row dynamic-ts mb-2">
-        <i className="bi bi-play-circle me-2"></i>
-        Episodes
+      <div className="d-flex flex-row justify-content-between mb-2">
+        <div className="dynamic-ts">
+          <i className="bi bi-play-circle me-2"></i>
+          Episodes
+        </div>
+        <div className="dynamic-fs d-flex align-items-center gap-2">
+          <button
+            className="btn btn-sm btn-dark border-0 rounded-pill px-2 py-1"
+            onClick={handlePrev}
+            disabled={page === 0}
+          >
+            <i className="bi bi-chevron-left"></i>
+          </button>
+          <span>
+            Page: {start + 1} - {end}
+          </span>
+          <button
+            className="btn btn-sm btn-dark border-0 rounded-pill px-2 py-1"
+            onClick={handleNext}
+            disabled={page >= totalPages - 1}
+          >
+            <i className="bi bi-chevron-right"></i>
+          </button>
+        </div>
       </div>
+
       <div className="row g-2">
-        {episodes.map((epNum) => (
+        {currentEpisodes.map((epNum) => (
           <div key={epNum} className="col-3 col-md-2 col-lg-1">
             <button
               className={`btn btn-dark w-100 text-white border-0 custom-theme-radius-low shadow-sm 
