@@ -7,6 +7,7 @@ import useCheckMyList from '../../hooks/MyListPage/useCheckMyList';
 import InfoSection from './Sections/InfoSection';
 import ServerSection from './Sections/ServerSection';
 
+import { getStorageValue, setStorageValue } from '../../utils/localStorageStates';
 import { getSessionValue, setSessionValue } from '../../utils/sessionStorageStates';
 
 function AnimeGrid({ id, type, mediaInfo, animeInfo, setMediaURL, setBackgroundImage }) {
@@ -43,6 +44,7 @@ function AnimeGrid({ id, type, mediaInfo, animeInfo, setMediaURL, setBackgroundI
   const selectedChain = animeInfo[selectedChainIndex];
   const episodeCount = selectedChain?.episodes || 0;
   const [selectedEpisode, setSelectedEpisode] = useState(null);
+  const [selectedServer, setSelectedServer] = useState(null);
 
   const [sliceIndex, setSliceIndex] = useState(() =>
     getSessionValue(...ANIME_STORAGE_PATH, 'sliceIndex') || 12
@@ -62,6 +64,23 @@ function AnimeGrid({ id, type, mediaInfo, animeInfo, setMediaURL, setBackgroundI
       setBackgroundImage(`https://image.tmdb.org/t/p/original${mediaInfo.backdrop_path}`);
     }
   }, [mediaInfo, setBackgroundImage]);
+
+  // Retrieving selected server link
+  useEffect(() => {
+    if (servers && servers.length > 0) {
+      const server = selectedServer
+        ? servers.find(server => server.server_name === selectedServer.server_name)
+        : servers[0];
+      if (server) {
+        setMediaURL(server.server_link);
+      }
+    }
+  }, [selectedServer, servers, setMediaURL]);
+
+  const handleServerChange = (server) => {
+    setSelectedServer(server);
+    setStorageValue(...ANIME_STORAGE_PATH, 'selectedServer', server);
+  };
 
   const handleViewMore = () => {
     setSliceIndex(prevSliceIndex => {
