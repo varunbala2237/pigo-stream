@@ -1,4 +1,4 @@
-# 🎬 PigoStream
+# 🎬 PigoStream v2.0 Final
   
 🎉 Deployed project 🔗 [Visit PigoStream](https://pigostream-site.web.app/)
 
@@ -23,7 +23,8 @@ PigoStream is a full-stack streaming platform featuring:
 - Node.js/Express backend deployed on Render  
 - Firebase for authentication & real-time database  
 - Supabase PostgreSQL for session management  
-- TMDB API for movies and TV shows metadata  
+- TMDB API for movies and TV shows metadata
+- AniList integration for anime metadata by mapping TMDB titles and release dates  
 - Native Flutter Webview player for streaming content (Required for Android & Windows)
 
 ## 🛠️ Backend Service
