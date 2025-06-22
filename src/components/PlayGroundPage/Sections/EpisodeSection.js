@@ -1,4 +1,7 @@
 // EpisodeSection.js
+import Tippy from '@tippyjs/react';
+import 'tippy.js/dist/tippy.css';
+
 function EpisodeSection({
   episodes,
   selectedEpisode,
@@ -90,7 +93,6 @@ function EpisodeSection({
                   style={{ minWidth: '160px', maxWidth: '160px', cursor: aired ? 'pointer' : 'not-allowed' }}
                   onClick={() => aired && onEpisodeChange(episode.episode_number)}
                   role="button"
-                  title={episode.name}
                 >
                   <img
                     src={
@@ -105,7 +107,11 @@ function EpisodeSection({
                   <div className={`card-body p-2 ${aired ? '' : 'text-secondary'}`}>
                     <div className="d-flex align-items-center dynamic-fs">
                       <span className="fw-bold theme-color me-2">{episode.episode_number}</span>
-                      <span className="text-truncate flex-grow-1">{episode.name}</span>
+                      <Tippy content={episode.name} placement="top" delay={[500, 0]}>
+                        <span className="text-truncate flex-grow-1 d-inline-block" style={{ maxWidth: '100%' }}>
+                          {episode.name}
+                        </span>
+                      </Tippy>
                     </div>
                     <div className="d-flex justify-content-between align-items-center">
                       <span
