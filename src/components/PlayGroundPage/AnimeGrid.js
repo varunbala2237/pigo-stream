@@ -43,7 +43,9 @@ function AnimeGrid({ id, type, mediaInfo, animeInfo, setMediaURL, setBackgroundI
   }, [mediaInfo, animeInfo]);
 
   const [selectedServer, setSelectedServer] = useState(null);
-  const [selectedChainIndex, setSelectedChainIndex] = useState(initialChainIndex);
+  const [selectedChainIndex, setSelectedChainIndex] = useState(() =>
+    getStorageValue(...ANIME_STORAGE_PATH, 'selectedChainIndex') ?? initialChainIndex
+  );
 
   const selectedChain = animeInfo[selectedChainIndex];
   const animeId = selectedChain?.id ?? null;
@@ -100,6 +102,13 @@ function AnimeGrid({ id, type, mediaInfo, animeInfo, setMediaURL, setBackgroundI
     setStorageValue(...ANIME_STORAGE_PATH, 'selectedServer', server);
   };
 
+  // Handle onChain change
+  const onChainChange = (index) => {
+    setSelectedChainIndex(index);
+    setSelectedEpisode(null);
+    setStorageValue(...ANIME_STORAGE_PATH, 'selectedChainIndex', index);
+  }
+
   const handleViewMore = () => {
     setSliceIndex(prevSliceIndex => {
       const newIndex = prevSliceIndex + 12;
@@ -141,20 +150,20 @@ function AnimeGrid({ id, type, mediaInfo, animeInfo, setMediaURL, setBackgroundI
               />
             )}
 
+            {/* Chain Panel */}
             <ChainPanel
               animeInfo={animeInfo}
               selectedChainIndex={selectedChainIndex}
-              onChainChange={(index) => {
-                setSelectedChainIndex(index);
-                setSelectedEpisode(null);
-              }}
+              onChainChange={onChainChange}
               chainScrollRef={chainScrollRef}
             />
 
+            {/* Episode Panel */}
             <EpisodePanel
               episodeCount={episodeCount}
               selectedEpisode={selectedEpisode}
               onEpisodeChange={setSelectedEpisode}
+              chainStoragePath={[...ANIME_STORAGE_PATH, 'chain', selectedChainIndex]}
             />
 
             <div className="d-flex flex-column align-items-start custom-theme-radius-low my-2 w-100">
