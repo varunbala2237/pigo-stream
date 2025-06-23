@@ -7,7 +7,7 @@
 > This React application is built with react-scripts@5.0.1, which is the final and currently outdated version of Create React App (CRA).
 While it still works reliably for development and deployment, CRA is now in maintenance mode and not recommended for new projects.
 >
-> 🟡 If you're starting a new project or planning long-term development, consider migrating to more modern alternatives like:
+> If you're starting a new project or planning long-term development, consider migrating to more modern alternatives like:
 > - Vite — A fast, lightweight build tool and dev server for modern frontend apps
 > - Next.js — A powerful React framework with built-in SSR and API routes
 > - Remix — A full-stack web framework with focus on data and routing
