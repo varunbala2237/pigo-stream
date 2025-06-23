@@ -85,9 +85,15 @@ function AnimeGrid({ id, type, mediaInfo, animeInfo, setMediaURL, setBackgroundI
 
   const chainScrollRef = useRef(null);
 
-  const episodeCount = (selectedChain?.episodes > 0)
-    ? selectedChain.episodes
-    : (mediaInfo?.number_of_episodes > 0 ? mediaInfo.number_of_episodes : 1);
+  const episodeCount = (() => {
+    if (selectedChain?.episodes > 0) return selectedChain.episodes;
+
+    if (selectedChainIndex === initialChainIndex) {
+      return mediaInfo?.number_of_episodes > 0 ? mediaInfo.number_of_episodes : 1;
+    }
+
+    return 1;
+  })();
 
   const [selectedEpisode, setSelectedEpisode] = useState(() => {
     const fullState = getSessionValue(...ANIME_STORAGE_PATH, 'CHAIN_STATE') || {};
