@@ -8,8 +8,19 @@ function ChainPanel({ animeInfo, selectedChainIndex, onChainChange, chainScrollR
         if (chainScrollRef.current) {
             const items = chainScrollRef.current.querySelectorAll('.card');
             const selectedItem = items[selectedChainIndex];
+
             if (selectedItem) {
-                selectedItem.scrollIntoView({ behavior: 'instant', inline: 'center' });
+                const container = chainScrollRef.current;
+                const containerRect = container.getBoundingClientRect();
+                const itemRect = selectedItem.getBoundingClientRect();
+
+                const offset = itemRect.left - containerRect.left;
+                const scrollAdjustment = offset - (container.clientWidth / 2) + (itemRect.width / 2);
+
+                container.scrollBy({
+                    left: scrollAdjustment,
+                    behavior: 'instant',
+                });
             }
         }
     }, [chainScrollRef, selectedChainIndex]);
