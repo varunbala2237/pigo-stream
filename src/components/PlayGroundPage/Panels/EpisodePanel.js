@@ -1,33 +1,54 @@
 // EpisodePanel.js
-import { useState, useMemo, useEffect } from 'react';
+import { useState, useMemo, useEffect, useRef } from 'react';
 import { getSessionValue, setSessionValue } from '../../../utils/sessionStorageStates';
 
 function EpisodePanel({ episodeCount, selectedEpisode, onEpisodeChange, selectedChainPath }) {
   const safeEpisodeCount = Math.max(1, episodeCount || 1);
+  const pageSize = 50;
+  const chainKey = selectedChainPath.at(-1);
+  const stateKeyPath = selectedChainPath.slice(0, -1);
 
   const episodes = useMemo(
     () => Array.from({ length: safeEpisodeCount }, (_, i) => i + 1),
     [safeEpisodeCount]
   );
 
+  const maxPage = Math.floor((safeEpisodeCount - 1) / pageSize);
+
   const [page, setPage] = useState(() => {
-    const fullState = getSessionValue(...selectedChainPath.slice(0, -1), 'CHAIN_STATE') || {};
-    return fullState[selectedChainPath.at(-1)]?.pageState ?? 0;
+    const fullState = getSessionValue(...stateKeyPath, 'CHAIN_STATE') || {};
+    const storedPage = fullState[chainKey]?.pageState ?? 0;
+    return storedPage > maxPage ? 0 : storedPage;
   });
 
-  // Persist page
+  const previousChainKeyRef = useRef(chainKey);
+
+  // Reset page to 0 if changing to a shorter chain and current page is invalid
   useEffect(() => {
-    const fullState = getSessionValue(...selectedChainPath.slice(0, -1), 'CHAIN_STATE') || {};
-    const chainIndex = selectedChainPath.at(-1);
-    const current = fullState[chainIndex] || {};
-    fullState[chainIndex] = {
+    const fullState = getSessionValue(...stateKeyPath, 'CHAIN_STATE') || {};
+    const storedPage = fullState[chainKey]?.pageState ?? 0;
+    const safePage = storedPage > maxPage ? 0 : storedPage;
+
+    // Only run on actual chain switch
+    if (previousChainKeyRef.current !== chainKey) {
+      setPage(safePage);
+      previousChainKeyRef.current = chainKey;
+    }
+  }, [chainKey, maxPage, stateKeyPath]);
+
+  // Persist page on change
+  useEffect(() => {
+    const fullState = getSessionValue(...stateKeyPath, 'CHAIN_STATE') || {};
+    const current = fullState[chainKey] || {};
+
+    fullState[chainKey] = {
       ...current,
       pageState: page,
     };
-    setSessionValue(...selectedChainPath.slice(0, -1), 'CHAIN_STATE', fullState);
-  }, [page, selectedChainPath]);
 
-  const pageSize = 50;
+    setSessionValue(...stateKeyPath, 'CHAIN_STATE', fullState);
+  }, [page, chainKey, stateKeyPath]);
+
   const start = page * pageSize;
   const end = Math.min(start + pageSize, episodes.length);
   const currentEpisodes = episodes.slice(start, end);
