@@ -55,7 +55,7 @@ function AnimeGrid({ id, type, mediaInfo, animeInfo, setMediaURL, setBackgroundI
 
     if (matchedIndex !== -1) return matchedIndex;
 
-    // 3. Closest future/past date (optional)
+    // 3. Closest future/past date
     let closestIndex = -1;
     let smallestDiff = Infinity;
     animeInfo.forEach((entry, index) => {
