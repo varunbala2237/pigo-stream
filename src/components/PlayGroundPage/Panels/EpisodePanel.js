@@ -2,7 +2,7 @@
 import { useState, useMemo, useEffect } from 'react';
 import { getSessionValue, setSessionValue } from '../../../utils/sessionStorageStates';
 
-function EpisodePanel({ episodeCount, selectedEpisode, onEpisodeChange, chainStoragePath }) {
+function EpisodePanel({ episodeCount, selectedEpisode, onEpisodeChange, selectedChainPath }) {
   const safeEpisodeCount = Math.max(1, episodeCount || 1);
 
   const episodes = useMemo(
@@ -10,24 +10,14 @@ function EpisodePanel({ episodeCount, selectedEpisode, onEpisodeChange, chainSto
     [safeEpisodeCount]
   );
 
-  // Stable versions for effect deps
-  const storageKey = useMemo(() => chainStoragePath.join('-'), [chainStoragePath]);
-  const stablePath = useMemo(() => [...chainStoragePath], [chainStoragePath]);
-
   const [page, setPage] = useState(() =>
-    getSessionValue(...chainStoragePath, 'episodePage') ?? 0
+    getSessionValue(...selectedChainPath, 'episodePage') ?? 0
   );
-
-  // Reset page when episode count or storage path changes
-  useEffect(() => {
-    const savedPage = getSessionValue(...stablePath, 'episodePage') ?? 0;
-    setPage(savedPage);
-  }, [storageKey, stablePath]);
 
   // Persist page
   useEffect(() => {
-    setSessionValue(...stablePath, 'episodePage', page);
-  }, [page, stablePath]);
+    setSessionValue(...selectedChainPath, 'episodePage', page);
+  }, [page, selectedChainPath]);
 
   const pageSize = 50;
   const start = page * pageSize;

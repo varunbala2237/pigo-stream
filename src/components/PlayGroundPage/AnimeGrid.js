@@ -57,7 +57,7 @@ function AnimeGrid({ id, type, mediaInfo, animeInfo, setMediaURL, setBackgroundI
     : (mediaInfo?.number_of_episodes > 0 ? mediaInfo.number_of_episodes : 1);
 
   const [selectedEpisode, setSelectedEpisode] = useState(() =>
-    getSessionValue(...ANIME_STORAGE_PATH, 'chain', selectedChainIndex, 'selectedEpisode') ?? 1
+    getSessionValue(...ANIME_STORAGE_PATH, 'selectedChain', selectedChainIndex, 'selectedEpisode') ?? 1
   );
 
   const [sliceIndex, setSliceIndex] = useState(() =>
@@ -111,7 +111,7 @@ function AnimeGrid({ id, type, mediaInfo, animeInfo, setMediaURL, setBackgroundI
   const onChainChange = (index) => {
     setSelectedChainIndex(index);
 
-    const saved = getSessionValue(...ANIME_STORAGE_PATH, 'chain', index, 'selectedEpisode');
+    const saved = getSessionValue(...ANIME_STORAGE_PATH, 'selectedChain', index, 'selectedEpisode');
     setSelectedEpisode(saved ?? 1); // fallback to 1 if nothing saved
 
     setStorageValue(...ANIME_STORAGE_PATH, 'selectedChainIndex', index);
@@ -120,7 +120,7 @@ function AnimeGrid({ id, type, mediaInfo, animeInfo, setMediaURL, setBackgroundI
   // Handle episode change
   const handleEpisodeChange = (episode) => {
     setSelectedEpisode(episode);
-    setSessionValue(...ANIME_STORAGE_PATH, 'chain', selectedChainIndex, 'selectedEpisode', episode);
+    setSessionValue(...ANIME_STORAGE_PATH, 'selectedChain', selectedChainIndex, 'selectedEpisode', episode);
   };
 
   const handleViewMore = () => {
@@ -177,7 +177,7 @@ function AnimeGrid({ id, type, mediaInfo, animeInfo, setMediaURL, setBackgroundI
               episodeCount={episodeCount}
               selectedEpisode={selectedEpisode}
               onEpisodeChange={handleEpisodeChange}
-              chainStoragePath={[...ANIME_STORAGE_PATH, 'chain', selectedChainIndex]}
+              selectedChainPath={[...ANIME_STORAGE_PATH, 'selectedChain', selectedChainIndex]}
             />
 
             <div className="d-flex flex-column align-items-start custom-theme-radius-low my-2 w-100">
