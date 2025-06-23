@@ -15,7 +15,17 @@ function EpisodeSection({
       const items = episodeScrollRef.current.querySelectorAll('.card');
       const selectedIndex = episodes.findIndex(e => e.episode_number === selectedEpisode);
       if (selectedIndex >= 0 && items[selectedIndex]) {
-        items[selectedIndex].scrollIntoView({ behavior: 'instant', inline: 'center' });
+        const container = episodeScrollRef.current;
+        const containerRect = container.getBoundingClientRect();
+        const itemRect = items[selectedIndex].getBoundingClientRect();
+
+        const offset = itemRect.left - containerRect.left;
+        const scrollAdjustment = offset - (container.clientWidth / 2) + (itemRect.width / 2);
+
+        container.scrollBy({
+          left: scrollAdjustment,
+          behavior: 'instant',
+        });
       }
     }
   }, [episodeScrollRef, selectedEpisode, episodes]);

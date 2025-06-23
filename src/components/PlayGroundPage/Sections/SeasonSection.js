@@ -15,7 +15,17 @@ function SeasonSection({
       const items = seasonScrollRef.current.querySelectorAll('.card');
       const selectedIndex = seasons.findIndex(s => s.season_number === selectedSeason);
       if (selectedIndex >= 0 && items[selectedIndex]) {
-        items[selectedIndex].scrollIntoView({ behavior: 'instant', inline: 'center' });
+        const container = seasonScrollRef.current;
+        const containerRect = container.getBoundingClientRect();
+        const itemRect = items[selectedIndex].getBoundingClientRect();
+
+        const offset = itemRect.left - containerRect.left;
+        const scrollAdjustment = offset - (container.clientWidth / 2) + (itemRect.width / 2);
+
+        container.scrollBy({
+          left: scrollAdjustment,
+          behavior: 'instant',
+        });
       }
     }
   }, [seasonScrollRef, selectedSeason, seasons]);
