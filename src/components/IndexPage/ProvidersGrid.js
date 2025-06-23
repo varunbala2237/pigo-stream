@@ -79,12 +79,16 @@ function ProvidersGrid({ setIsProvidersLoading, setIsProvidersLoaded, setHasProv
         const providerCard = container.children[providerIndex];
 
         if (providerCard) {
-            const cardLeft = providerCard.offsetLeft;
-            const cardWidth = providerCard.offsetWidth;
-            const containerWidth = container.clientWidth;
+            const containerRect = container.getBoundingClientRect();
+            const cardRect = providerCard.getBoundingClientRect();
 
-            const scrollTo = cardLeft - (containerWidth / 2 - cardWidth / 2);
-            container.scrollTo({ left: scrollTo, behavior: 'instant' });
+            const offset = cardRect.left - containerRect.left;
+            const scrollAdjustment = offset - (container.clientWidth / 2) + (cardRect.width / 2);
+
+            container.scrollBy({
+                left: scrollAdjustment,
+                behavior: 'instant',
+            });
         }
     }, [selectedProvider]);
 
