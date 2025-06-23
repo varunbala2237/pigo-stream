@@ -1,6 +1,4 @@
-# 🎬 PigoStream v2.0 Final
-  
-🎉 Deployed project 🔗 [Visit PigoStream](https://pigostream-site.web.app/)
+# PigoStream v2.0 Final
 
 ## ⚠️ Important Notice
 
