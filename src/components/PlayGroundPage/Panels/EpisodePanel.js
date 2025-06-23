@@ -10,13 +10,21 @@ function EpisodePanel({ episodeCount, selectedEpisode, onEpisodeChange, selected
     [safeEpisodeCount]
   );
 
-  const [page, setPage] = useState(() =>
-    getSessionValue(...selectedChainPath, 'episodePage') ?? 0
-  );
+  const [page, setPage] = useState(() => {
+    const fullState = getSessionValue(...selectedChainPath.slice(0, -1), 'CHAIN_STATE') || {};
+    return fullState[selectedChainPath.at(-1)]?.pageState ?? 0;
+  });
 
   // Persist page
   useEffect(() => {
-    setSessionValue(...selectedChainPath, 'episodePage', page);
+    const fullState = getSessionValue(...selectedChainPath.slice(0, -1), 'CHAIN_STATE') || {};
+    const chainIndex = selectedChainPath.at(-1);
+    const current = fullState[chainIndex] || {};
+    fullState[chainIndex] = {
+      ...current,
+      pageState: page,
+    };
+    setSessionValue(...selectedChainPath.slice(0, -1), 'CHAIN_STATE', fullState);
   }, [page, selectedChainPath]);
 
   const pageSize = 50;

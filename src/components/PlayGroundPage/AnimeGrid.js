@@ -56,9 +56,10 @@ function AnimeGrid({ id, type, mediaInfo, animeInfo, setMediaURL, setBackgroundI
     ? selectedChain.episodes
     : (mediaInfo?.number_of_episodes > 0 ? mediaInfo.number_of_episodes : 1);
 
-  const [selectedEpisode, setSelectedEpisode] = useState(() =>
-    getSessionValue(...ANIME_STORAGE_PATH, 'selectedChain', selectedChainIndex, 'selectedEpisode') ?? 1
-  );
+  const [selectedEpisode, setSelectedEpisode] = useState(() => {
+    const fullState = getSessionValue(...ANIME_STORAGE_PATH, 'CHAIN_STATE') || {};
+    return fullState[selectedChainIndex]?.selectedEpisode ?? 1;
+  });
 
   const [sliceIndex, setSliceIndex] = useState(() =>
     getSessionValue(...ANIME_STORAGE_PATH, 'sliceIndex') || 12
@@ -111,16 +112,23 @@ function AnimeGrid({ id, type, mediaInfo, animeInfo, setMediaURL, setBackgroundI
   const onChainChange = (index) => {
     setSelectedChainIndex(index);
 
-    const saved = getSessionValue(...ANIME_STORAGE_PATH, 'selectedChain', index, 'selectedEpisode');
-    setSelectedEpisode(saved ?? 1); // fallback to 1 if nothing saved
+    const fullState = getSessionValue(...ANIME_STORAGE_PATH, 'CHAIN_STATE') || {};
+    const savedEpisode = fullState[index]?.selectedEpisode ?? 1;
+    setSelectedEpisode(savedEpisode);
 
     setStorageValue(...ANIME_STORAGE_PATH, 'selectedChainIndex', index);
-  }
+  };
 
   // Handle episode change
   const handleEpisodeChange = (episode) => {
     setSelectedEpisode(episode);
-    setSessionValue(...ANIME_STORAGE_PATH, 'selectedChain', selectedChainIndex, 'selectedEpisode', episode);
+    const fullState = getSessionValue(...ANIME_STORAGE_PATH, 'CHAIN_STATE') || {};
+    const current = fullState[selectedChainIndex] || {};
+    fullState[selectedChainIndex] = {
+      ...current,
+      selectedEpisode: episode,
+    };
+    setSessionValue(...ANIME_STORAGE_PATH, 'CHAIN_STATE', fullState);
   };
 
   const handleViewMore = () => {
