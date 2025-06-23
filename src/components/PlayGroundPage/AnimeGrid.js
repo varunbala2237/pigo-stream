@@ -27,19 +27,52 @@ function AnimeGrid({ id, type, mediaInfo, animeInfo, setMediaURL, setBackgroundI
     if (!mediaDateString || !Array.isArray(animeInfo)) return 0;
 
     const mediaDate = new Date(mediaDateString);
-    mediaDate.setHours(0, 0, 0, 0); // normalize
+    mediaDate.setHours(0, 0, 0, 0);
 
-    const matchedIndex = animeInfo.findIndex(entry => {
+    // 1. Exact match (year, month, day)
+    let matchedIndex = animeInfo.findIndex(entry => {
       const { year, month, day } = entry?.startDate || {};
       if (!year || !month || !day) return false;
 
       const entryDate = new Date(year, month - 1, day);
-      entryDate.setHours(0, 0, 0, 0); // normalize
+      entryDate.setHours(0, 0, 0, 0);
 
       return entryDate.getTime() === mediaDate.getTime();
     });
 
-    return matchedIndex !== -1 ? matchedIndex : 0;
+    if (matchedIndex !== -1) return matchedIndex;
+
+    // 2. Partial match (year, month only)
+    matchedIndex = animeInfo.findIndex(entry => {
+      const { year, month } = entry?.startDate || {};
+      if (!year || !month) return false;
+
+      return (
+        year === mediaDate.getFullYear() &&
+        month === mediaDate.getMonth() + 1
+      );
+    });
+
+    if (matchedIndex !== -1) return matchedIndex;
+
+    // 3. Closest future/past date (optional)
+    let closestIndex = -1;
+    let smallestDiff = Infinity;
+    animeInfo.forEach((entry, index) => {
+      const { year, month, day } = entry?.startDate || {};
+      if (!year || !month || !day) return;
+
+      const entryDate = new Date(year, month - 1, day);
+      entryDate.setHours(0, 0, 0, 0);
+
+      const diff = Math.abs(entryDate.getTime() - mediaDate.getTime());
+      if (diff < smallestDiff) {
+        smallestDiff = diff;
+        closestIndex = index;
+      }
+    });
+
+    return closestIndex !== -1 ? closestIndex : 0;
   }, [mediaInfo, animeInfo]);
 
   const [selectedServer, setSelectedServer] = useState(null);
