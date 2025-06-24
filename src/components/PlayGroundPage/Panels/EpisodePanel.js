@@ -2,7 +2,7 @@
 import { useState, useMemo, useEffect, useRef } from 'react';
 import { getSessionValue, setSessionValue } from '../../../utils/sessionStorageStates';
 
-function EpisodePanel({ episodeCount, selectedEpisode, onEpisodeChange, selectedRelationPath }) {
+function EpisodePanel({ episodeCount, selectedEpisode, onEpisodeChange, selectedRelationPath, page, setPage }) {
   const safeEpisodeCount = Math.max(1, episodeCount || 1);
   const pageSize = 50;
   const relationKey = selectedRelationPath.at(-1);
@@ -14,12 +14,6 @@ function EpisodePanel({ episodeCount, selectedEpisode, onEpisodeChange, selected
   );
 
   const maxPage = Math.floor((safeEpisodeCount - 1) / pageSize);
-
-  const [page, setPage] = useState(() => {
-    const fullState = getSessionValue(...stateKeyPath, 'RELATION_STATE') || {};
-    const storedPage = fullState[relationKey]?.pageState ?? 0;
-    return storedPage > maxPage ? 0 : storedPage;
-  });
 
   const previousRelationKeyRef = useRef(relationKey);
 
@@ -34,20 +28,7 @@ function EpisodePanel({ episodeCount, selectedEpisode, onEpisodeChange, selected
       setPage(safePage);
       previousRelationKeyRef.current = relationKey;
     }
-  }, [relationKey, maxPage, stateKeyPath]);
-
-  // Persist page on change
-  useEffect(() => {
-    const fullState = getSessionValue(...stateKeyPath, 'RELATION_STATE') || {};
-    const current = fullState[relationKey] || {};
-
-    fullState[relationKey] = {
-      ...current,
-      pageState: page,
-    };
-
-    setSessionValue(...stateKeyPath, 'RELATION_STATE', fullState);
-  }, [page, relationKey, stateKeyPath]);
+  }, [relationKey, maxPage, stateKeyPath, setPage]);
 
   const start = page * pageSize;
   const end = Math.min(start + pageSize, episodes.length);

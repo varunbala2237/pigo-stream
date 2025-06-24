@@ -100,6 +100,11 @@ function AnimeGrid({ id, type, mediaInfo, animeInfo, setMediaURL, setBackgroundI
     return fullState[selectedRelationIndex]?.selectedEpisode ?? 1;
   });
 
+  const [page, setPage] = useState(() => {
+    const fullState = getSessionValue(...ANIME_STORAGE_PATH, 'RELATION_STATE') || {};
+    return fullState[selectedRelationIndex]?.pageState ?? 0;
+  });
+
   const [sliceIndex, setSliceIndex] = useState(() =>
     getSessionValue(...ANIME_STORAGE_PATH, 'sliceIndex') || 12
   );
@@ -166,6 +171,7 @@ function AnimeGrid({ id, type, mediaInfo, animeInfo, setMediaURL, setBackgroundI
     fullState[selectedRelationIndex] = {
       ...current,
       selectedEpisode: episode,
+      pageState: page,
     };
     setSessionValue(...ANIME_STORAGE_PATH, 'RELATION_STATE', fullState);
   };
@@ -225,6 +231,8 @@ function AnimeGrid({ id, type, mediaInfo, animeInfo, setMediaURL, setBackgroundI
               selectedEpisode={selectedEpisode}
               onEpisodeChange={handleEpisodeChange}
               selectedRelationPath={[...ANIME_STORAGE_PATH, 'selectedRelation', selectedRelationIndex]}
+              page={page}
+              setPage={setPage}
             />
 
             <div className="d-flex flex-column align-items-start custom-theme-radius-low my-2 w-100">
