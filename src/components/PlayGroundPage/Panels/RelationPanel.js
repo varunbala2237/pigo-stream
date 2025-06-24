@@ -1,16 +1,16 @@
-// ChainPanel.js
+// RelationPanel.js
 import { useEffect } from 'react';
 import Tippy from '@tippyjs/react';
 import 'tippy.js/dist/tippy.css';
 
-function ChainPanel({ animeInfo, selectedChainIndex, onChainChange, chainScrollRef }) {
+function RelationPanel({ animeInfo, selectedRelationIndex, onRelationChange, relationScrollRef }) {
     useEffect(() => {
-        if (chainScrollRef.current) {
-            const items = chainScrollRef.current.querySelectorAll('.card');
-            const selectedItem = items[selectedChainIndex];
+        if (relationScrollRef.current) {
+            const items = relationScrollRef.current.querySelectorAll('.card');
+            const selectedItem = items[selectedRelationIndex];
 
             if (selectedItem) {
-                const container = chainScrollRef.current;
+                const container = relationScrollRef.current;
                 const containerRect = container.getBoundingClientRect();
                 const itemRect = selectedItem.getBoundingClientRect();
 
@@ -23,7 +23,7 @@ function ChainPanel({ animeInfo, selectedChainIndex, onChainChange, chainScrollR
                 });
             }
         }
-    }, [chainScrollRef, selectedChainIndex]);
+    }, [relationScrollRef, selectedRelationIndex]);
 
     const scroll = (ref, direction) => {
         if (ref.current) {
@@ -38,7 +38,7 @@ function ChainPanel({ animeInfo, selectedChainIndex, onChainChange, chainScrollR
         <div className="container-fluid custom-bg custom-theme-radius-low w-100 p-2 my-2">
             <div className="d-flex flex-row dynamic-ts mb-2">
                 <i className="bi bi-layers me-2"></i>
-                Anime Chain
+                Franchise
             </div>
 
             <div className="position-relative">
@@ -46,14 +46,14 @@ function ChainPanel({ animeInfo, selectedChainIndex, onChainChange, chainScrollR
                     <>
                         <button
                             className="btn btn-dark custom-bg rounded-pill py-2 position-absolute start-0 translate-middle-y d-none d-md-block"
-                            onClick={() => scroll(chainScrollRef, 'left')}
+                            onClick={() => scroll(relationScrollRef, 'left')}
                             style={{ zIndex: 1, top: '50%', transform: 'translateY(-50%)' }}
                         >
                             <i className="bi bi-chevron-left"></i>
                         </button>
                         <button
                             className="btn btn-dark custom-bg rounded-pill py-2 position-absolute end-0 translate-middle-y d-none d-md-block"
-                            onClick={() => scroll(chainScrollRef, 'right')}
+                            onClick={() => scroll(relationScrollRef, 'right')}
                             style={{ zIndex: 1, top: '50%', transform: 'translateY(-50%)' }}
                         >
                             <i className="bi bi-chevron-right"></i>
@@ -62,7 +62,7 @@ function ChainPanel({ animeInfo, selectedChainIndex, onChainChange, chainScrollR
                 )}
 
                 <div
-                    ref={chainScrollRef}
+                    ref={relationScrollRef}
                     className="d-flex flex-row overflow-auto scroll-hide align-items-start custom-theme-radius-low gap-1"
                 >
                     {animeInfo.map((entry, index) => {
@@ -76,10 +76,10 @@ function ChainPanel({ animeInfo, selectedChainIndex, onChainChange, chainScrollR
                                 key={entry.id}
                                 className={
                                     `card text-white border-0 shadow-sm custom-theme-radius-low 
-                                    ${selectedChainIndex === index ? 'bg-secondary' : 'bd-callout-dark'}`
+                                    ${selectedRelationIndex === index ? 'bg-secondary' : 'bd-callout-dark'}`
                                 }
                                 style={{ minWidth: '160px', maxWidth: '160px' }}
-                                onClick={() => onChainChange(index)}
+                                onClick={() => onRelationChange(index)}
                                 role="button"
                             >
                                 <img
@@ -105,7 +105,7 @@ function ChainPanel({ animeInfo, selectedChainIndex, onChainChange, chainScrollR
                                     </div>
                                     <div className={
                                         `d-flex justify-content-between align-items-center dynamic-ss
-                                        ${selectedChainIndex === index ? 'text-dark' : 'text-secondary'}`
+                                        ${selectedRelationIndex === index ? 'text-dark' : 'text-secondary'}`
                                     }>
                                         <span>{dateString}</span>
                                         <span>{format}</span>
@@ -120,4 +120,4 @@ function ChainPanel({ animeInfo, selectedChainIndex, onChainChange, chainScrollR
     );
 }
 
-export default ChainPanel;
+export default RelationPanel;

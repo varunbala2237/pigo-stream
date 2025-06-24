@@ -6,7 +6,7 @@ import useSaveMyList from '../../hooks/MyListPage/useSaveMyList';
 import useCheckMyList from '../../hooks/MyListPage/useCheckMyList';
 import InfoSection from './Sections/InfoSection';
 import ServerSection from './Sections/ServerSection';
-import ChainPanel from './Panels/ChainPanel';
+import RelationPanel from './Panels/RelationPanel';
 import EpisodePanel from './Panels/EpisodePanel';
 
 import { getStorageValue, setStorageValue } from '../../utils/localStorageStates';
@@ -22,7 +22,7 @@ function AnimeGrid({ id, type, mediaInfo, animeInfo, setMediaURL, setBackgroundI
   const [cast, setCast] = useState([]);
 
   // Compute the initial index based on matching full date
-  const initialChainIndex = React.useMemo(() => {
+  const initialRelationIndex = React.useMemo(() => {
     const mediaDateString = mediaInfo?.release_date || mediaInfo?.first_air_date;
     if (!mediaDateString || !Array.isArray(animeInfo)) return 0;
 
@@ -76,19 +76,19 @@ function AnimeGrid({ id, type, mediaInfo, animeInfo, setMediaURL, setBackgroundI
   }, [mediaInfo, animeInfo]);
 
   const [selectedServer, setSelectedServer] = useState(null);
-  const [selectedChainIndex, setSelectedChainIndex] = useState(() =>
-    getStorageValue(...ANIME_STORAGE_PATH, 'selectedChainIndex') ?? initialChainIndex
+  const [selectedRelationIndex, setSelectedRelationIndex] = useState(() =>
+    getStorageValue(...ANIME_STORAGE_PATH, 'selectedRelationIndex') ?? initialRelationIndex
   );
 
-  const selectedChain = animeInfo[selectedChainIndex];
-  const animeId = selectedChain?.id ?? null;
+  const selectedRelation = animeInfo[selectedRelationIndex];
+  const animeId = selectedRelation?.id ?? null;
 
-  const chainScrollRef = useRef(null);
+  const relationScrollRef = useRef(null);
 
   const episodeCount = (() => {
-    if (selectedChain?.episodes > 0) return selectedChain.episodes;
+    if (selectedRelation?.episodes > 0) return selectedRelation.episodes;
 
-    if (selectedChainIndex === initialChainIndex) {
+    if (selectedRelationIndex === initialRelationIndex) {
       return mediaInfo?.number_of_episodes > 0 ? mediaInfo.number_of_episodes : 1;
     }
 
@@ -96,15 +96,15 @@ function AnimeGrid({ id, type, mediaInfo, animeInfo, setMediaURL, setBackgroundI
   })();
 
   const [selectedEpisode, setSelectedEpisode] = useState(() => {
-    const fullState = getSessionValue(...ANIME_STORAGE_PATH, 'CHAIN_STATE') || {};
-    return fullState[selectedChainIndex]?.selectedEpisode ?? 1;
+    const fullState = getSessionValue(...ANIME_STORAGE_PATH, 'RELATION_STATE') || {};
+    return fullState[selectedRelationIndex]?.selectedEpisode ?? 1;
   });
 
   const [sliceIndex, setSliceIndex] = useState(() =>
     getSessionValue(...ANIME_STORAGE_PATH, 'sliceIndex') || 12
   );
 
-  const { servers } = useFetchServers(animeId, 'anime', selectedChainIndex, selectedEpisode);
+  const { servers } = useFetchServers(animeId, 'anime', selectedRelationIndex, selectedEpisode);
 
   const { addToList } = useSaveMyList();
   const { isInList, refetch } = useCheckMyList(id);
@@ -147,27 +147,27 @@ function AnimeGrid({ id, type, mediaInfo, animeInfo, setMediaURL, setBackgroundI
     setStorageValue(...ANIME_STORAGE_PATH, 'selectedServer', server);
   };
 
-  // Handle onChain change
-  const onChainChange = (index) => {
-    setSelectedChainIndex(index);
+  // Handle onRelation change
+  const onRelationChange = (index) => {
+    setSelectedRelationIndex(index);
 
-    const fullState = getSessionValue(...ANIME_STORAGE_PATH, 'CHAIN_STATE') || {};
+    const fullState = getSessionValue(...ANIME_STORAGE_PATH, 'RELATION_STATE') || {};
     const savedEpisode = fullState[index]?.selectedEpisode ?? 1;
     setSelectedEpisode(savedEpisode);
 
-    setStorageValue(...ANIME_STORAGE_PATH, 'selectedChainIndex', index);
+    setStorageValue(...ANIME_STORAGE_PATH, 'selectedRelationIndex', index);
   };
 
   // Handle episode change
   const handleEpisodeChange = (episode) => {
     setSelectedEpisode(episode);
-    const fullState = getSessionValue(...ANIME_STORAGE_PATH, 'CHAIN_STATE') || {};
-    const current = fullState[selectedChainIndex] || {};
-    fullState[selectedChainIndex] = {
+    const fullState = getSessionValue(...ANIME_STORAGE_PATH, 'RELATION_STATE') || {};
+    const current = fullState[selectedRelationIndex] || {};
+    fullState[selectedRelationIndex] = {
       ...current,
       selectedEpisode: episode,
     };
-    setSessionValue(...ANIME_STORAGE_PATH, 'CHAIN_STATE', fullState);
+    setSessionValue(...ANIME_STORAGE_PATH, 'RELATION_STATE', fullState);
   };
 
   const handleViewMore = () => {
@@ -211,12 +211,12 @@ function AnimeGrid({ id, type, mediaInfo, animeInfo, setMediaURL, setBackgroundI
               />
             )}
 
-            {/* Chain Panel */}
-            <ChainPanel
+            {/* Relation Panel */}
+            <RelationPanel
               animeInfo={animeInfo}
-              selectedChainIndex={selectedChainIndex}
-              onChainChange={onChainChange}
-              chainScrollRef={chainScrollRef}
+              selectedRelationIndex={selectedRelationIndex}
+              onRelationChange={onRelationChange}
+              relationScrollRef={relationScrollRef}
             />
 
             {/* Episode Panel */}
@@ -224,7 +224,7 @@ function AnimeGrid({ id, type, mediaInfo, animeInfo, setMediaURL, setBackgroundI
               episodeCount={episodeCount}
               selectedEpisode={selectedEpisode}
               onEpisodeChange={handleEpisodeChange}
-              selectedChainPath={[...ANIME_STORAGE_PATH, 'selectedChain', selectedChainIndex]}
+              selectedRelationPath={[...ANIME_STORAGE_PATH, 'selectedRelation', selectedRelationIndex]}
             />
 
             <div className="d-flex flex-column align-items-start custom-theme-radius-low my-2 w-100">

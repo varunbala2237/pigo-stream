@@ -2,7 +2,7 @@
 import { useState, useEffect } from 'react';
 import {
   matchAllRelatedAniMedia,
-  extractChronologicalChainRecursive
+  extractChronologicalRelationRecursive
 } from './animeUtils';
 
 const BASE_URL = process.env.REACT_APP_SERVER_URL;
@@ -107,8 +107,8 @@ const useFetchAnimeInfo = (mediaInfo) => {
         if (!matches.length) {
           setAnimeInfo(null);
         } else {
-          const chain = extractChronologicalChainRecursive(matches);
-          setAnimeInfo(chain);
+          const relations = extractChronologicalRelationRecursive(matches);
+          setAnimeInfo(relations);
         }
       } catch (err) {
         setError(err.message || 'Unknown error');

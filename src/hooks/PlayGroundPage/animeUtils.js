@@ -20,7 +20,7 @@ export const matchAllRelatedAniMedia = (mediaList, tmdbTitle, tmdbDateStr) => {
   });
 };
 
-export const extractChronologicalChainRecursive = (mediaList) => {
+export const extractChronologicalRelationRecursive = (mediaList) => {
   const visited = new Set();
   const queue = [...mediaList];
   const collected = [];

@@ -2,11 +2,11 @@
 import { useState, useMemo, useEffect, useRef } from 'react';
 import { getSessionValue, setSessionValue } from '../../../utils/sessionStorageStates';
 
-function EpisodePanel({ episodeCount, selectedEpisode, onEpisodeChange, selectedChainPath }) {
+function EpisodePanel({ episodeCount, selectedEpisode, onEpisodeChange, selectedRelationPath }) {
   const safeEpisodeCount = Math.max(1, episodeCount || 1);
   const pageSize = 50;
-  const chainKey = selectedChainPath.at(-1);
-  const stateKeyPath = selectedChainPath.slice(0, -1);
+  const relationKey = selectedRelationPath.at(-1);
+  const stateKeyPath = selectedRelationPath.slice(0, -1);
 
   const episodes = useMemo(
     () => Array.from({ length: safeEpisodeCount }, (_, i) => i + 1),
@@ -16,38 +16,38 @@ function EpisodePanel({ episodeCount, selectedEpisode, onEpisodeChange, selected
   const maxPage = Math.floor((safeEpisodeCount - 1) / pageSize);
 
   const [page, setPage] = useState(() => {
-    const fullState = getSessionValue(...stateKeyPath, 'CHAIN_STATE') || {};
-    const storedPage = fullState[chainKey]?.pageState ?? 0;
+    const fullState = getSessionValue(...stateKeyPath, 'RELATION_STATE') || {};
+    const storedPage = fullState[relationKey]?.pageState ?? 0;
     return storedPage > maxPage ? 0 : storedPage;
   });
 
-  const previousChainKeyRef = useRef(chainKey);
+  const previousRelationKeyRef = useRef(relationKey);
 
-  // Reset page to 0 if changing to a shorter chain and current page is invalid
+  // Reset page to 0 if changing to a shorter relation and current page is invalid
   useEffect(() => {
-    const fullState = getSessionValue(...stateKeyPath, 'CHAIN_STATE') || {};
-    const storedPage = fullState[chainKey]?.pageState ?? 0;
+    const fullState = getSessionValue(...stateKeyPath, 'RELATION_STATE') || {};
+    const storedPage = fullState[relationKey]?.pageState ?? 0;
     const safePage = storedPage > maxPage ? 0 : storedPage;
 
-    // Only run on actual chain switch
-    if (previousChainKeyRef.current !== chainKey) {
+    // Only run on actual relation switch
+    if (previousRelationKeyRef.current !== relationKey) {
       setPage(safePage);
-      previousChainKeyRef.current = chainKey;
+      previousRelationKeyRef.current = relationKey;
     }
-  }, [chainKey, maxPage, stateKeyPath]);
+  }, [relationKey, maxPage, stateKeyPath]);
 
   // Persist page on change
   useEffect(() => {
-    const fullState = getSessionValue(...stateKeyPath, 'CHAIN_STATE') || {};
-    const current = fullState[chainKey] || {};
+    const fullState = getSessionValue(...stateKeyPath, 'RELATION_STATE') || {};
+    const current = fullState[relationKey] || {};
 
-    fullState[chainKey] = {
+    fullState[relationKey] = {
       ...current,
       pageState: page,
     };
 
-    setSessionValue(...stateKeyPath, 'CHAIN_STATE', fullState);
-  }, [page, chainKey, stateKeyPath]);
+    setSessionValue(...stateKeyPath, 'RELATION_STATE', fullState);
+  }, [page, relationKey, stateKeyPath]);
 
   const start = page * pageSize;
   const end = Math.min(start + pageSize, episodes.length);
