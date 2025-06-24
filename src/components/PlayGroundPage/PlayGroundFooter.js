@@ -1,5 +1,5 @@
 // PlayGroundFooter.js
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import useAppVersion from '../../hooks/PigoStorePage/useAppVersion';
 import useSaveWatchHistory from '../../hooks/WatchHistoryPage/useSaveWatchHistory';
 import { useNavigate } from 'react-router-dom';
@@ -7,6 +7,8 @@ import '../Footer.css';
 
 function PlayGroundFooter({ id, type, mediaURL }) {
     const [inHistory, setInHistory] = useState(false);
+    const [isLaunching, setIsLaunching] = useState(false);
+    const launchInProgress = useRef(false);
     const navigate = useNavigate();
 
     const detectPlatform = () => {
@@ -33,36 +35,43 @@ function PlayGroundFooter({ id, type, mediaURL }) {
     const { addToHistory } = useSaveWatchHistory();
 
     const openPlayer = (serverLink) => {
+        if (launchInProgress.current) return;
+        launchInProgress.current = true;
+        setIsLaunching(true); // trigger re-render and disable button
+
         try {
             let appURL;
 
             if (platform === 'windows' || platform === 'android') {
                 appURL = `pigoplayer://open?url=${encodeURIComponent(serverLink)}&version=${appVersion}`;
-
                 let didBlur = false;
 
-                // Trigger app launch immediately
                 window.location.href = appURL;
 
                 const timeout = setTimeout(() => {
                     if (!didBlur) {
+                        launchInProgress.current = false;
+                        setIsLaunching(false);
                         redirectToStore();
                     }
-                }, 2000);
+                }, 3000);
 
                 window.addEventListener(
                     'blur',
                     () => {
                         didBlur = true;
                         clearTimeout(timeout);
+                        launchInProgress.current = false;
+                        setIsLaunching(false);
                     },
                     { once: true }
                 );
             } else {
+                launchInProgress.current = false;
+                setIsLaunching(false);
                 redirectToStore();
             }
 
-            // Async watch history logic after triggering navigation
             if (!inHistory) {
                 setInHistory(true);
                 addToHistory(id, type).catch((err) => {
@@ -71,6 +80,8 @@ function PlayGroundFooter({ id, type, mediaURL }) {
             }
 
         } catch (error) {
+            launchInProgress.current = false;
+            setIsLaunching(false);
             console.error('Error opening app:', error);
         }
     };
@@ -101,6 +112,7 @@ function PlayGroundFooter({ id, type, mediaURL }) {
                     <li className="nav-item text-center mx-auto">
                         <button
                             onClick={() => openPlayer(mediaURL)}
+                            disabled={isLaunching}
                             className="btn border-0 d-flex flex-column align-items-center justify-content-center text-decoration-none dynamic-ts"
                             aria-label="Play"
                             title="Play"
