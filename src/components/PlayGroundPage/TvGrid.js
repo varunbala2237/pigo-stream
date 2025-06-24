@@ -45,7 +45,7 @@ function TvGrid({ id, type, mediaInfo, setMediaURL, setBackgroundImage }) {
   const { servers } = useFetchServers(id, type, selectedSeason, selectedEpisode);
 
   const { addToList } = useSaveMyList();
-  const { isInList, refetch } = useCheckMyList(id);
+  const { isInList, loading: isListLoading, refetch } = useCheckMyList(id);
 
   // Season initial management
   useEffect(() => {
@@ -176,6 +176,7 @@ function TvGrid({ id, type, mediaInfo, setMediaURL, setBackgroundImage }) {
               type={type}
               mediaInfo={mediaInfo}
               isInList={isInList}
+              isListLoading={isListLoading}
               handleAddToList={handleAddToList}
             />
 

@@ -112,7 +112,7 @@ function AnimeGrid({ id, type, mediaInfo, animeInfo, setMediaURL, setBackgroundI
   const { servers } = useFetchServers(animeId, 'anime', selectedRelationIndex, selectedEpisode);
 
   const { addToList } = useSaveMyList();
-  const { isInList, refetch } = useCheckMyList(id);
+  const { isInList, loading: isListLoading, refetch } = useCheckMyList(id);
 
   // Season initial management
   useEffect(() => {
@@ -203,6 +203,7 @@ function AnimeGrid({ id, type, mediaInfo, animeInfo, setMediaURL, setBackgroundI
               type={type}
               mediaInfo={mediaInfo}
               isInList={isInList}
+              isListLoading={isListLoading}
               handleAddToList={handleAddToList}
             />
 

@@ -28,7 +28,7 @@ function MovieGrid({ id, type, mediaInfo, setMediaURL, setBackgroundImage }) {
   const { servers } = useFetchServers(id, type);
 
   const { addToList } = useSaveMyList();
-  const { isInList, refetch } = useCheckMyList(id);
+  const { isInList, loading: isListLoading, refetch } = useCheckMyList(id);
 
   useEffect(() => {
     if (mediaInfo) {
@@ -97,6 +97,7 @@ function MovieGrid({ id, type, mediaInfo, setMediaURL, setBackgroundImage }) {
               type={type}
               mediaInfo={mediaInfo}
               isInList={isInList}
+              isListLoading={isListLoading}
               handleAddToList={handleAddToList}
             />
 

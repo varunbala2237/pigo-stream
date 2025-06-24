@@ -8,6 +8,7 @@ function InfoSection({
   type,
   mediaInfo,
   isInList,
+  isListLoading,
   handleAddToList,
 }) {
   const [imageUrl, setImageUrl] = useState('');
@@ -69,14 +70,22 @@ function InfoSection({
                     className="btn btn-dark d-none d-md-block rounded-pill-l border-0 text-white custom-bg flex-grow-1"
                     onClick={handleAddToList}
                   >
-                    <i className={`bi-${isInList ? 'bookmark-fill theme-color' : 'bookmark'}`}></i>
+                    {isListLoading ? (
+                      <span className="spinner-border spinner-border-sm text-light" />
+                    ) : (
+                      <i className={`bi-${isInList ? 'bookmark-fill theme-color' : 'bookmark'}`}></i>
+                    )}
                   </button>
 
                   <button
                     className="btn btn-dark d-block d-md-none btn-sm rounded-pill-l border-0 text-white custom-bg flex-grow-1"
                     onClick={handleAddToList}
                   >
-                    <i className={`bi-${isInList ? 'bookmark-fill theme-color' : 'bookmark'}`}></i>
+                    {isListLoading ? (
+                      <span className="spinner-border spinner-border-sm text-light" />
+                    ) : (
+                      <i className={`bi-${isInList ? 'bookmark-fill theme-color' : 'bookmark'}`}></i>
+                    )}
                   </button>
 
                   {/* Divider Line */}
