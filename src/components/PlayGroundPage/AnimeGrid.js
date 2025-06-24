@@ -12,14 +12,6 @@ import EpisodePanel from './Panels/EpisodePanel';
 import { getStorageValue, setStorageValue } from '../../utils/localStorageStates';
 import { getSessionValue, setSessionValue } from '../../utils/sessionStorageStates';
 
-function getRelationState(animeIdPath) {
-  return getStorageValue(...animeIdPath, 'RELATION_STATE') || {};
-}
-
-function setRelationState(animeIdPath, state) {
-  setStorageValue(...animeIdPath, 'RELATION_STATE', state);
-}
-
 function AnimeGrid({ id, type, mediaInfo, animeInfo, setMediaURL, setBackgroundImage }) {
   const ANIME_STORAGE_PATH = React.useMemo(
     () => ['PlayGroundUI', 'Grids', 'AnimeGrid', `${id}`],
@@ -104,12 +96,12 @@ function AnimeGrid({ id, type, mediaInfo, animeInfo, setMediaURL, setBackgroundI
   })();
 
   const [selectedEpisode, setSelectedEpisode] = useState(() => {
-    const state = getRelationState(ANIME_STORAGE_PATH);
+    const state = getStorageValue(...ANIME_STORAGE_PATH, 'RELATION_STATE') || {};
     return state[selectedRelationIndex]?.selectedEpisode ?? 1;
   });
 
   const [page, setPage] = useState(() => {
-    const state = getRelationState(ANIME_STORAGE_PATH);
+    const state = getStorageValue(...ANIME_STORAGE_PATH, 'RELATION_STATE') || {};
     return state[selectedRelationIndex]?.pageState ?? 0;
   });
 
@@ -163,7 +155,7 @@ function AnimeGrid({ id, type, mediaInfo, animeInfo, setMediaURL, setBackgroundI
   // Handle onRelation change
   const handleRelationChange = (index) => {
     setSelectedRelationIndex(index);
-    const state = getRelationState(ANIME_STORAGE_PATH);
+    const state = getStorageValue(...ANIME_STORAGE_PATH, 'RELATION_STATE') || {};
     const savedEpisode = state[index]?.selectedEpisode ?? 1;
     setSelectedEpisode(savedEpisode);
     setStorageValue(...ANIME_STORAGE_PATH, 'selectedRelationIndex', index);
@@ -172,14 +164,14 @@ function AnimeGrid({ id, type, mediaInfo, animeInfo, setMediaURL, setBackgroundI
   // Handle episode change
   const handleEpisodeChange = (episode) => {
     setSelectedEpisode(episode);
-    const state = getRelationState(ANIME_STORAGE_PATH);
+    const state = getStorageValue(...ANIME_STORAGE_PATH, 'RELATION_STATE') || {};
     const current = state[selectedRelationIndex] || {};
     state[selectedRelationIndex] = {
       ...current,
       selectedEpisode: episode,
       pageState: page
     };
-    setRelationState(ANIME_STORAGE_PATH, state);
+    setStorageValue(...ANIME_STORAGE_PATH, 'RELATION_STATE', state);
   };
 
   const handleViewMore = () => {
