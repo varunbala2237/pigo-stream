@@ -1,6 +1,6 @@
 // EpisodePanel.js
 import { useMemo, useEffect, useRef } from 'react';
-import { getSessionValue } from '../../../utils/sessionStorageStates';
+import { getStorageValue } from '../../../utils/localStorageStates';
 
 function EpisodePanel({ episodeCount, selectedEpisode, onEpisodeChange, selectedRelationPath, page, setPage }) {
   const safeEpisodeCount = Math.max(1, episodeCount || 1);
@@ -19,7 +19,7 @@ function EpisodePanel({ episodeCount, selectedEpisode, onEpisodeChange, selected
 
   // Reset page to 0 if changing to a shorter relation and current page is invalid
   useEffect(() => {
-    const fullState = getSessionValue(...stateKeyPath, 'RELATION_STATE') || {};
+    const fullState = getStorageValue(...stateKeyPath, 'RELATION_STATE') || {};
     const storedPage = fullState[relationKey]?.pageState ?? 0;
     const safePage = storedPage > maxPage ? 0 : storedPage;
 

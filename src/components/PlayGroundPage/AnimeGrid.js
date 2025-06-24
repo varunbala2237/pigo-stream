@@ -13,11 +13,11 @@ import { getStorageValue, setStorageValue } from '../../utils/localStorageStates
 import { getSessionValue, setSessionValue } from '../../utils/sessionStorageStates';
 
 function getRelationState(animeIdPath) {
-  return getSessionValue(...animeIdPath, 'RELATION_STATE') || {};
+  return getStorageValue(...animeIdPath, 'RELATION_STATE') || {};
 }
 
 function setRelationState(animeIdPath, state) {
-  setSessionValue(...animeIdPath, 'RELATION_STATE', state);
+  setStorageValue(...animeIdPath, 'RELATION_STATE', state);
 }
 
 function AnimeGrid({ id, type, mediaInfo, animeInfo, setMediaURL, setBackgroundImage }) {
