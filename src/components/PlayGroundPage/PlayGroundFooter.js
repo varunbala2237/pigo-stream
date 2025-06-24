@@ -105,7 +105,7 @@ function PlayGroundFooter({ id, type, mediaURL }) {
                             aria-label="Play"
                             title="Play"
                         >
-                            <i className="bi bi-play-fill theme-color me-2"></i>
+                            <i className="bi bi-play-circle theme-color me-2"></i>
                             <span className="text-white dynamic-ss">Play</span>
                         </button>
                     </li>
