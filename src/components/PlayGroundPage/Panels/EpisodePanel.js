@@ -23,12 +23,24 @@ function EpisodePanel({ episodeCount, selectedEpisode, onEpisodeChange, selected
     const storedPage = fullState[relationKey]?.pageState ?? 0;
     const safePage = storedPage > maxPage ? 0 : storedPage;
 
-    // Only run on actual relation switch
-    if (previousRelationKeyRef.current !== relationKey) {
-      setPage(safePage);
+    const relationChanged = previousRelationKeyRef.current !== relationKey;
+    const firstMount = previousRelationKeyRef.current === null;
+
+    const selectedPage = Math.floor((selectedEpisode - 1) / pageSize);
+
+    if (relationChanged || firstMount) {
+      const pageToSet = selectedPage !== safePage ? selectedPage : safePage;
+      setPage(pageToSet);
       previousRelationKeyRef.current = relationKey;
     }
-  }, [relationKey, maxPage, stateKeyPath, setPage]);
+  }, [
+    relationKey,
+    maxPage,
+    stateKeyPath,
+    selectedEpisode,
+    pageSize,
+    setPage,
+  ]);
 
   const start = page * pageSize;
   const end = Math.min(start + pageSize, episodes.length);
