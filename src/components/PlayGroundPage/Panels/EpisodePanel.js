@@ -1,5 +1,5 @@
 // EpisodePanel.js
-import { useState, useMemo, useEffect, useRef } from 'react';
+import { useMemo, useEffect, useRef } from 'react';
 import { getSessionValue, setSessionValue } from '../../../utils/sessionStorageStates';
 
 function EpisodePanel({ episodeCount, selectedEpisode, onEpisodeChange, selectedRelationPath, page, setPage }) {
@@ -16,6 +16,17 @@ function EpisodePanel({ episodeCount, selectedEpisode, onEpisodeChange, selected
   const maxPage = Math.floor((safeEpisodeCount - 1) / pageSize);
 
   const previousRelationKeyRef = useRef(relationKey);
+
+  function persistPageState(newPage) {
+    const fullState = getSessionValue(...stateKeyPath, 'RELATION_STATE') || {};
+    const current = fullState[relationKey] || {};
+    fullState[relationKey] = {
+      ...current,
+      pageState: newPage,
+    };
+    setSessionValue(...stateKeyPath, 'RELATION_STATE', fullState);
+    setPage(newPage);
+  }
 
   // Reset page to 0 if changing to a shorter relation and current page is invalid
   useEffect(() => {
@@ -36,11 +47,15 @@ function EpisodePanel({ episodeCount, selectedEpisode, onEpisodeChange, selected
   const totalPages = Math.ceil(episodes.length / pageSize);
 
   const handleNext = () => {
-    if (page < totalPages - 1) setPage(prev => prev + 1);
+    if (page < totalPages - 1) {
+      persistPageState(page + 1);
+    }
   };
 
   const handlePrev = () => {
-    if (page > 0) setPage(prev => prev - 1);
+    if (page > 0) {
+      persistPageState(page - 1);
+    }
   };
 
   return (
