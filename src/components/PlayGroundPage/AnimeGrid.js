@@ -161,7 +161,7 @@ function AnimeGrid({ id, type, mediaInfo, animeInfo, setMediaURL, setBackgroundI
   };
 
   // Handle onRelation change
-  const onRelationChange = (index) => {
+  const handleRelationChange = (index) => {
     setSelectedRelationIndex(index);
     const state = getRelationState(ANIME_STORAGE_PATH);
     const savedEpisode = state[index]?.selectedEpisode ?? 1;
@@ -227,7 +227,7 @@ function AnimeGrid({ id, type, mediaInfo, animeInfo, setMediaURL, setBackgroundI
             <RelationPanel
               animeInfo={animeInfo}
               selectedRelationIndex={selectedRelationIndex}
-              onRelationChange={onRelationChange}
+              onRelationChange={handleRelationChange}
               relationScrollRef={relationScrollRef}
             />
 
