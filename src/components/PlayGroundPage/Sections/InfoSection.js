@@ -69,6 +69,7 @@ function InfoSection({
                   <button
                     className="btn btn-dark d-none d-md-block rounded-pill-l border-0 text-white custom-bg flex-grow-1"
                     onClick={handleAddToList}
+                    disabled={isListLoading}
                   >
                     {isListLoading ? (
                       <span className="spinner-border spinner-border-sm text-light" />
@@ -80,6 +81,7 @@ function InfoSection({
                   <button
                     className="btn btn-dark d-block d-md-none btn-sm rounded-pill-l border-0 text-white custom-bg flex-grow-1"
                     onClick={handleAddToList}
+                    disabled={isListLoading}
                   >
                     {isListLoading ? (
                       <span className="spinner-border spinner-border-sm text-light" />
