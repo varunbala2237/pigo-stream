@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import useRemoveWatchHistory from '../hooks/WatchHistoryPage/useRemoveWatchHistory';
 import useRemoveFromMyList from '../hooks/MyListPage/useRemoveMyList';
 
-import './Card.css';
+import './Card.module.css';
 
 function Card({ media, type, path, onRemove, handleAlert, isDeletable = true, isSkeleton = false }) {
   const [imageUrl, setImageUrl] = useState('');

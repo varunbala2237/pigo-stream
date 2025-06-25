@@ -3,7 +3,7 @@ import { useState, useRef } from 'react';
 import useAppVersion from '../../hooks/PigoStorePage/useAppVersion';
 import useSaveWatchHistory from '../../hooks/WatchHistoryPage/useSaveWatchHistory';
 import { useNavigate } from 'react-router-dom';
-import '../Footer.css';
+import '../Footer.module.css';
 
 function PlayGroundFooter({ id, type, mediaURL }) {
     const [inHistory, setInHistory] = useState(false);

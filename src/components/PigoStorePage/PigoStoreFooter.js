@@ -1,6 +1,6 @@
 // PigoStoreFooter.js
 import { useNavigate } from 'react-router-dom';
-import '../Footer.css';
+import '../Footer.module.css';
 
 function PigoStoreFooter() {
     const navigate = useNavigate();

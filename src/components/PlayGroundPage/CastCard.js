@@ -1,5 +1,5 @@
 // CastCard.js
-import './CastCard.css';
+import './CastCard.module.css';
 
 function CastCard({ actor, isSkeleton }) {
   const searchActor = (name) => {
