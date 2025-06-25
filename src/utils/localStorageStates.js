@@ -1,5 +1,5 @@
 // localStorageStates.js
-const STORAGE_KEY = 'default_key';
+const STORAGE_KEY = 'PigoStream.Local';
 
 function getStorageObject() {
   try {
@@ -74,5 +74,5 @@ export function removeStorageValue(...path) {
 // Completely removes all application state stored under the default localStorage key.
 // Use this when a full cleanup is required, such as during user sign-out.
 export function clearStorageState() {
-  localStorage.removeItem('default_key');
+  localStorage.removeItem('PigoStream.Local');
 }

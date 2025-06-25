@@ -1,5 +1,5 @@
 // sessionStorageStates.js
-const SESSION_KEY = 'default_key';
+const SESSION_KEY = 'PigoStream.Session';
 
 function getSessionObject() {
   return JSON.parse(sessionStorage.getItem(SESSION_KEY)) || {};
@@ -65,5 +65,5 @@ export function removeSessionValue(...path) {
 // Completely removes all application state stored under the default sessionStorage key.
 // Use this for full session cleanup, typically during user sign-out or session expiration.
 export function clearSessionState() {
-  sessionStorage.removeItem('default_key');
+  sessionStorage.removeItem('PigoStream.Session');
 }
