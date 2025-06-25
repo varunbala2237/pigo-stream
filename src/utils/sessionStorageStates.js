@@ -1,17 +1,12 @@
 // sessionStorageStates.js
-import { auth } from '../firebase/firebase-auth';
-
-function getSessionKey() {
-  const user = auth.currentUser;
-  return user ? `user_${user.uid}` : 'default_key';
-}
+const SESSION_KEY = 'default_key';
 
 function getSessionObject() {
-  return JSON.parse(sessionStorage.getItem(getSessionKey())) || {};
+  return JSON.parse(sessionStorage.getItem(SESSION_KEY)) || {};
 }
 
 function setSessionObject(obj) {
-  sessionStorage.setItem(getSessionKey(), JSON.stringify(obj));
+  sessionStorage.setItem(SESSION_KEY, JSON.stringify(obj));
 }
 
 // Store all states from sessionStorage
