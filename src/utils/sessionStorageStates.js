@@ -61,3 +61,9 @@ export function removeSessionValue(...path) {
     setSessionObject(obj);
   }
 }
+
+// Completely removes all application state stored under the default sessionStorage key.
+// Use this for full session cleanup, typically during user sign-out or session expiration.
+export function clearSessionState() {
+  sessionStorage.removeItem('default_key');
+}
