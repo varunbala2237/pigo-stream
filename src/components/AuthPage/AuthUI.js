@@ -26,7 +26,8 @@ function AuthUI() {
     const [isSignIn, setIsSignIn] = useState(true);
     const [showResendButton, setShowResendButton] = useState(false);
     const [resendCooldown, setResendCooldown] = useState(0);
-    const [isSubmitting, setIsSubmitting] = useState(false);
+    const [isCredentialProcessing, setIsCredentialProcessing] = useState(false);
+    const [isGoogleProcessing, setIsGoogleProcessing] = useState(false);
     const [alertMessage, setAlertMessage] = useState('');
     const [isPageLoading, setIsPageLoading] = useState(true);
 
@@ -136,7 +137,7 @@ function AuthUI() {
 
     const signInWithCredentials = async (event) => {
         event.preventDefault();
-        setIsSubmitting(true);
+        setIsCredentialProcessing(true);
 
         try {
             const userCredential = await signInWithEmailAndPassword(auth, email, password);
@@ -157,7 +158,7 @@ function AuthUI() {
             setAlertMessage(error.message);
             setTimeout(() => setAlertMessage(''), 5000);
         } finally {
-            setIsSubmitting(false);
+            setIsCredentialProcessing(false);
         }
     };
 
@@ -180,7 +181,7 @@ function AuthUI() {
 
     const signUpWithCredentials = async (event) => {
         event.preventDefault();
-        setIsSubmitting(true);
+        setIsCredentialProcessing(true);
 
         try {
             const userCredential = await createUserWithEmailAndPassword(auth, email, password);
@@ -203,7 +204,7 @@ function AuthUI() {
             setAlertMessage(error.message);
             setTimeout(() => setAlertMessage(''), 5000);
         } finally {
-            setIsSubmitting(false);
+            setIsCredentialProcessing(false);
         }
     };
 
@@ -233,6 +234,7 @@ function AuthUI() {
     const googleProvider = new GoogleAuthProvider();
     const signInWithGoogle = async (event) => {
         event.preventDefault();
+        setIsGoogleProcessing(true);
         try {
             const userCredential = await signInWithPopup(auth, googleProvider);
             const { user } = userCredential;
@@ -247,6 +249,8 @@ function AuthUI() {
         } catch (error) {
             setAlertMessage(error.message);
             setTimeout(() => setAlertMessage(''), 5000);
+        } finally {
+            setIsGoogleProcessing(false);
         }
     };
 
@@ -338,8 +342,8 @@ function AuthUI() {
                             <button
                                 type="submit"
                                 className="btn btn-success custom-theme-btn d-flex justify-content-center rounded-pill dynamic-fs"
-                                disabled={isSubmitting}>
-                                {isSubmitting ? 'Loading...' : isSignIn ? 'Sign in' : 'Sign up'}
+                                disabled={isCredentialProcessing}>
+                                {isSignIn ? 'Sign in' : 'Sign up'}
                             </button>
                             {showResendButton && (
                                 <div className="d-flex justify-content-end">
@@ -354,7 +358,11 @@ function AuthUI() {
                                 </div>
                             )}
                             <p className="text-white text-center m-0">or</p>
-                            <button className="btn btn-primary d-flex justify-content-center rounded-pill dynamic-fs" onClick={signInWithGoogle}>
+                            <button
+                                className="btn btn-primary d-flex justify-content-center rounded-pill dynamic-fs"
+                                onClick={signInWithGoogle}
+                                disabled={isGoogleProcessing}
+                            >
                                 <i className="bi bi-google me-2"></i>Sign in with Google
                             </button>
                         </div>
