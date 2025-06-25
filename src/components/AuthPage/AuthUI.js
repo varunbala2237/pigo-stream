@@ -135,6 +135,7 @@ function AuthUI() {
         }
     }, [resendCooldown]);
 
+    // User sign-in handler
     const signInWithCredentials = async (event) => {
         event.preventDefault();
         setIsCredentialProcessing(true);
@@ -179,9 +180,30 @@ function AuthUI() {
         }
     };
 
+    // User sign-up handler
     const signUpWithCredentials = async (event) => {
         event.preventDefault();
         setIsCredentialProcessing(true);
+
+        const emailParts = email.split('@');
+        if (emailParts.length !== 2 || !emailParts[1]) {
+            setAlertMessage("Invalid email format.");
+            setTimeout(() => setAlertMessage(''), 5000);
+            setIsCredentialProcessing(false);
+            return;
+        }
+
+        const allowedDomains = [
+            'gmail.com', 'outlook.com', 'hotmail.com', 'yahoo.com', 'icloud.com', 'protonmail.com'
+        ];
+
+        const emailDomain = emailParts[1].toLowerCase();
+        if (!allowedDomains.includes(emailDomain)) {
+            setAlertMessage("Unsupported email provider. Use Gmail, Outlook, Yahoo, etc.");
+            setTimeout(() => setAlertMessage(''), 5000);
+            setIsCredentialProcessing(false);
+            return;
+        }
 
         try {
             const userCredential = await createUserWithEmailAndPassword(auth, email, password);
