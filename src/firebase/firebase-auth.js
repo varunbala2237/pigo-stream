@@ -2,13 +2,17 @@
 import { signOut } from "firebase/auth";
 import { auth } from "./firebase-config";
 
-// Function to sign out with Google
+import { clearStorageState } from '../utils/localStorageStates';
+import { clearSessionState } from '../utils/sessionStorageStates';
+
+// Signs out the current user and clears all persisted storage states.
 const signOutWithAccount = async () => {
   try {
     await signOut(auth);
-    // Redirect or do something after successful sign-out
+    clearStorageState();   // Remove all localStorage app state
+    clearSessionState();   // Remove all sessionStorage app state
   } catch (error) {
-    console.error(error.message);
+    console.error('Sign-out failed:', error.message);
   }
 };
 
