@@ -4,7 +4,7 @@ import useGenreRecommendations from '../../hooks/IndexPage/useGenreRecommendatio
 import useFetchMediaDetails from '../../hooks/IndexPage/useFetchMediaDetails';
 import useFetchMedia from '../../hooks/IndexPage/useFetchMedia';
 import HomeUI from './HomeUI';
-import './IndexUI.module.css';
+import './IndexUI.css';
 
 const IndexUI = () => {
   const { selectedItemId } = useGenreRecommendations();

@@ -13,7 +13,7 @@ import useRemoveSearchHistory from '../../hooks/IndexPage/useRemoveSearchHistory
 import OverlaySpinner from '../../utils/OverlaySpinner';
 import ConnectionModal from '../../utils/ConnectionModal';
 import Alert from '../../utils/Alert';
-import './HomeUI.module.css';
+import './HomeUI.css';
 
 import { getSessionValue, setSessionValue, removeSessionValue } from '../../utils/sessionStorageStates';
 

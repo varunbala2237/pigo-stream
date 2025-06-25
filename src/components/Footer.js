@@ -1,6 +1,6 @@
 // Footer.js
 import { Link, useLocation } from 'react-router-dom';
-import './Footer.module.css';
+import './Footer.css';
 
 const Footer = ({ showSearchBar = null, handleSearchBar = null }) => {
   const location = useLocation();
