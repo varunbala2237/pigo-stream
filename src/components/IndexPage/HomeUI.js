@@ -38,9 +38,7 @@ function HomeUI({
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   // Grid Switcher
-  const [activeGrid, setActiveGrid] = useState(() =>
-    getSessionValue(...SESSION_PATH, 'activeGrid') || 'trending'
-  );
+  const [activeGrid, setActiveGrid] = useState('trending'); // default fallback
 
   // Error handling flags
   const [isTrendingLoading, setIsTrendingLoading] = useState(true);
@@ -72,6 +70,7 @@ function HomeUI({
   // Restoring page states
   useEffect(() => {
     const savedWelcomeMessage = getSessionValue(...SESSION_PATH, 'welcomeMessage');
+    const savedActiveGrid = getSessionValue(...SESSION_PATH, 'activeGrid');
     const savedShowSearchBar = getSessionValue(...SESSION_PATH, 'showSearchBar');
     const savedSearchQuery = getSessionValue(...SESSION_PATH, 'searchQuery') || '';
     const savedTriggerSearch = getSessionValue(...SESSION_PATH, 'triggerSearch') || '';
@@ -83,6 +82,10 @@ function HomeUI({
         setAlert((prev) => (prev.key === 'welcome' ? { message: '', type: '', key: '' } : prev));
         removeSessionValue(...SESSION_PATH, 'welcomeMessage');
       }, 5000);
+    }
+
+    if (savedActiveGrid) {
+      setActiveGrid(savedActiveGrid);
     }
 
     if (savedShowSearchBar !== null) {
