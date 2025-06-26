@@ -65,7 +65,7 @@ The backend is a Node.js/Express.js server responsible for:
 
 ## 🔁 GitHub Actions & Automated Workflows
 
-This server is supported by multiple GitHub Actions to automate key tasks and ensure backend stability.
+Using GitHub Actions to automate key tasks and ensure backend stability.
 
 ### ✅ Active Workflows
 
