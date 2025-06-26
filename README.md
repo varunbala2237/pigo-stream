@@ -63,7 +63,7 @@ The backend is a Node.js/Express.js server responsible for:
    - Set your environment variables in Render’s dashboard.  
    - Render will automatically build and deploy your backend server.
 
-## 🛠️ GitHub Actions & Automated Workflows
+## 🔁 GitHub Actions & Automated Workflows
 
 This server is supported by multiple GitHub Actions to automate key tasks and ensure backend stability.
 
