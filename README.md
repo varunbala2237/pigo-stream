@@ -78,17 +78,6 @@ This server is supported by multiple GitHub Actions to automate key tasks and en
 - **Scheduled**:
   - `Keep Server Alive`: every ~7 minutes
   
-- **Manual**:
-  - All workflows can be manually triggered via the GitHub Actions UI if immediate execution is needed
-
-### 🔍 Benefits
-
-- Prevents free-tier server cold starts
-- Keeps user and auth records clean
-- Ensures recommendation logic is fresh
-- Automates monthly cleanup tasks to maintain optimal performance
-- Reduces manual admin work and human error
-
 > All workflows are defined under `.github/workflows/`.
 
 ## 🧱 Full Project Stack
