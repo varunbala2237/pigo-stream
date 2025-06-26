@@ -76,7 +76,7 @@ This server is supported by multiple GitHub Actions to automate key tasks and en
 ### ⏲️ Execution Strategy
 
 - **Scheduled**:
-  - `Keep Server Alive`: every ~10 minutes
+  - `Keep Server Alive`: every ~7 minutes
   
 - **Manual**:
   - All workflows can be manually triggered via the GitHub Actions UI if immediate execution is needed
