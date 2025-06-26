@@ -63,6 +63,34 @@ The backend is a Node.js/Express.js server responsible for:
    - Set your environment variables in Render’s dashboard.  
    - Render will automatically build and deploy your backend server.
 
+## 🛠️ GitHub Actions & Automated Workflows
+
+This server is supported by multiple GitHub Actions to automate key tasks and ensure backend stability.
+
+### ✅ Active Workflows
+
+| Workflow Name                              | Purpose                                                                 |
+|--------------------------------------------|-------------------------------------------------------------------------|
+| **Keep Server Alive**                     | Periodically pings the live server to prevent cold starts.              |
+
+### ⏲️ Execution Strategy
+
+- **Scheduled**:
+  - `Keep Server Alive`: every ~10 minutes
+  
+- **Manual**:
+  - All workflows can be manually triggered via the GitHub Actions UI if immediate execution is needed
+
+### 🔍 Benefits
+
+- Prevents free-tier server cold starts
+- Keeps user and auth records clean
+- Ensures recommendation logic is fresh
+- Automates monthly cleanup tasks to maintain optimal performance
+- Reduces manual admin work and human error
+
+> All workflows are defined under `.github/workflows/`.
+
 ## 🧱 Full Project Stack
 
 - 📺 React frontend hosted on [Firebase](https://firebase.google.com/)  
