@@ -12,6 +12,6 @@ jobs:
     steps:
       - name: Ping server
         run: |
-          curl -m 60 \
+          curl --connect-timeout 30 --max-time 120 \
             -H "x-github-internal: ${{ secrets.X_GITHUB_INTERNAL }}" \
-            "${{ secrets.SERVER_URL }}/health"
+            "${{ secrets.SERVER_URL }}/health" || echo "Server slow or unreachable, but continuing."
