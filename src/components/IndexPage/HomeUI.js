@@ -325,7 +325,7 @@ function HomeUI({
               </div>
             </div>
           ) : (
-            <div className="container my-5" style={{ textAlign: 'start' }} onClick={handlePlayMedia} role="button">
+            <div className="container my-5" style={{ textAlign: 'start' }}>
               <div className="d-flex flex-column text-white custom-theme-radius-low">
                 <div className="d-flex justify-content-start align-items-center dynamic-hs">
                   <b>{isRecommended ? 'Picked Just for You' : '#1 Most Watched'}</b>
@@ -349,6 +349,13 @@ function HomeUI({
                     <span id="Rating">{rating}</span>
                   </div>
                   <div className="dynamic-fs text-secondary">{mediaDesc}</div>
+                  <button
+                    className="btn bg-transparent d-flex dynamic-fs border-0 rounded-pill text-white"
+                    onClick={handlePlayMedia}
+                  >
+                    <i className="bi bi-arrow-right me-2"></i>
+                    View More
+                  </button>
                 </div>
               </div>
             </div>
