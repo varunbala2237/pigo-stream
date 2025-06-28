@@ -349,13 +349,15 @@ function HomeUI({
                     <span id="Rating">{rating}</span>
                   </div>
                   <div className="dynamic-fs text-secondary">{mediaDesc}</div>
-                  <button
-                    className="btn bg-transparent d-flex dynamic-fs border-0 rounded-pill text-white"
-                    onClick={handlePlayMedia}
-                  >
-                    <i className="bi bi-arrow-right me-2"></i>
-                    View More
-                  </button>
+                  <div className="d-flex justify-content-end">
+                    <button
+                      className="btn bg-transparent d-flex dynamic-fs border-0 rounded-pill text-white"
+                      onClick={handlePlayMedia}
+                    >
+                      <i className="bi bi-arrow-right me-2"></i>
+                      View More
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
