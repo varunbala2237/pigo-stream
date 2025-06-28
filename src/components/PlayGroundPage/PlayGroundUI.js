@@ -1,17 +1,22 @@
 // PlayGroundUI.js
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import useFetchMediaInfo from '../../hooks/PlayGroundPage/useFetchMediaInfo';
 import useFetchAnimeInfo from '../../hooks/PlayGroundPage/useFetchAnimeInfo';
 import Header from '../Header';
 import PlayGroundFooter from './PlayGroundFooter';
+import ReCaptchaGrid from './ReCapthaGrid';
 import MovieGrid from './MovieGrid';
 import TvGrid from './TvGrid';
 import AnimeGrid from './AnimeGrid';
 import OverlaySpinner from '../../utils/OverlaySpinner';
 import ConnectionModal from '../../utils/ConnectionModal';
 
+import { getStorageValue } from '../../utils/localStorageStates';
+
 function PlayGround() {
+  const MOVIES_STORAGE_PATH = React.useMemo(() => ['PlayGroundUI'], []);
+
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const id = queryParams.get('id');
@@ -31,6 +36,8 @@ function PlayGround() {
 
   // Setup backgroundImage
   const [backgroundImage, setBackgroundImage] = useState('');
+
+  const isCaptchaVerified = getStorageValue(...MOVIES_STORAGE_PATH, 'recaptchaVerified') === true;
 
   useEffect(() => {
     // Initial scroll to top
@@ -69,26 +76,31 @@ function PlayGround() {
       </div>
 
       {/* Grid Components */}
-      {mediaInfo && animeInfo && !isLoading && !isError && (
-        <AnimeGrid
-          id={id}
-          type={type}
-          mediaInfo={mediaInfo}
-          animeInfo={animeInfo}
-          setMediaURL={setMediaURL}
-          setBackgroundImage={setBackgroundImage}
-        />
-      )}
+      {!isCaptchaVerified ? (
+        <ReCaptchaGrid />
+      ) : (
+        <>
+          {mediaInfo && animeInfo && !isLoading && !isError && (
+            <AnimeGrid
+              id={id}
+              type={type}
+              mediaInfo={mediaInfo}
+              animeInfo={animeInfo}
+              setMediaURL={setMediaURL}
+              setBackgroundImage={setBackgroundImage}
+            />
+          )}
 
-      {/* Fallback: Render regular TMDB-based grid if anime not found */}
-      {mediaInfo && !animeInfo && !isLoading && !isError && (
-        <GridComponent
-          id={id}
-          type={type}
-          mediaInfo={mediaInfo}
-          setMediaURL={setMediaURL}
-          setBackgroundImage={setBackgroundImage}
-        />
+          {mediaInfo && !animeInfo && !isLoading && !isError && (
+            <GridComponent
+              id={id}
+              type={type}
+              mediaInfo={mediaInfo}
+              setMediaURL={setMediaURL}
+              setBackgroundImage={setBackgroundImage}
+            />
+          )}
+        </>
       )}
 
       {/* Connection Modal */}
