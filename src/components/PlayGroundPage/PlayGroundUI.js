@@ -31,6 +31,9 @@ function PlayGround() {
   const isLoading = isMediaLoading || isAnimeLoading;
   const isError = isMediaError || isAnimeError;
 
+  // inside PlayGround component
+  const [showPlayer, setShowPlayer] = useState(false);
+
   // Setup backgroundImage
   const [backgroundImage, setBackgroundImage] = useState('');
 
@@ -92,6 +95,7 @@ function PlayGround() {
               id={id}
               type={type}
               mediaInfo={mediaInfo}
+              showPlayer={showPlayer}
               setBackgroundImage={setBackgroundImage}
             />
           )}
@@ -103,7 +107,7 @@ function PlayGround() {
 
       {/* Backspace & PlayGroundFooter */}
       <div className="divider" style={{ height: '6rem' }}></div>
-      <PlayGroundFooter id={id} type={type} />
+      <PlayGroundFooter id={id} type={type} showPlayer={showPlayer} setShowPlayer={setShowPlayer} />
     </div>
   );
 }

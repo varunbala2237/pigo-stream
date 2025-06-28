@@ -5,7 +5,7 @@ import useSaveWatchHistory from '../../hooks/WatchHistoryPage/useSaveWatchHistor
 import { useNavigate } from 'react-router-dom';
 import '../Footer.css';
 
-function PlayGroundFooter({ id, type, mediaURL }) {
+function PlayGroundFooter({ id, type, mediaURL, showPlayer, setShowPlayer }) {
     const [inHistory, setInHistory] = useState(false);
     const [isLaunching, setIsLaunching] = useState(false);
     const launchInProgress = useRef(false);
@@ -104,6 +104,16 @@ function PlayGroundFooter({ id, type, mediaURL }) {
                     >
                         <i className="bi bi-arrow-left text-white me-2"></i>
                         <span className="text-white dynamic-ss">Back</span>
+                    </button>
+                </li>
+
+                <li className="nav-item text-center mx-auto">
+                    <button
+                        onClick={() => setShowPlayer(prev => !prev)}
+                        className="btn border-0 d-flex flex-column align-items-center justify-content-center text-decoration-none dynamic-ts"
+                    >
+                        <i className={`bi bi-${showPlayer ? 'info-circle' : 'play-circle'} theme-color me-2`}></i>
+                        <span className="text-white dynamic-ss">{showPlayer ? 'Info' : 'Watch'}</span>
                     </button>
                 </li>
 
