@@ -93,11 +93,9 @@ function MovieGrid({ id, type, mediaInfo, showPlayer, setBackgroundImage }) {
       <div className="d-flex flex-column justify-content-center align-items-center p-0">
         <div className="flex-row text-white w-100">
           <div className="container">
-
             {/* Switch Between Info and Player */}
             {showPlayer ? (
               <PlayerSection
-                id={id}
                 type={type}
                 mediaInfo={mediaInfo}
               />

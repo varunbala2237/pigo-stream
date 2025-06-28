@@ -5,6 +5,7 @@ import useFetchServers from '../../hooks/PlayGroundPage/useFetchServers';
 import useSaveMyList from '../../hooks/MyListPage/useSaveMyList';
 import useCheckMyList from '../../hooks/MyListPage/useCheckMyList';
 import InfoSection from './Sections/InfoSection';
+import PlayerSection from './Sections/PlayerSection';
 import ServerSection from './Sections/ServerSection';
 import RelationPanel from './Panels/RelationPanel';
 import EpisodePanel from './Panels/EpisodePanel';
@@ -12,7 +13,7 @@ import EpisodePanel from './Panels/EpisodePanel';
 import { getStorageValue, setStorageValue } from '../../utils/localStorageStates';
 import { getSessionValue, setSessionValue } from '../../utils/sessionStorageStates';
 
-function AnimeGrid({ id, type, mediaInfo, animeInfo, setBackgroundImage }) {
+function AnimeGrid({ id, type, mediaInfo, animeInfo, showPlayer, setBackgroundImage }) {
   const ANIME_STORAGE_PATH = React.useMemo(
     () => ['PlayGroundUI', 'Grids', 'AnimeGrid', `${id}`],
     [id]
@@ -198,14 +199,24 @@ function AnimeGrid({ id, type, mediaInfo, animeInfo, setBackgroundImage }) {
       <div className="d-flex flex-column justify-content-center align-items-center p-0">
         <div className="flex-row text-white w-100">
           <div className="container">
-            <InfoSection
-              id={id}
-              type={type}
-              mediaInfo={mediaInfo}
-              isInList={isInList}
-              isListLoading={isListLoading}
-              handleAddToList={handleAddToList}
-            />
+            {/* Switch Between Info and Player */}
+            {showPlayer ? (
+              <PlayerSection
+                type={"anime"}
+                mediaInfo={mediaInfo}
+                selectedSeason={selectedRelationIndex}
+                selectedEpisode={selectedEpisode}
+              />
+            ) : (
+              <InfoSection
+                id={id}
+                type={type}
+                mediaInfo={mediaInfo}
+                isInList={isInList}
+                isListLoading={isListLoading}
+                handleAddToList={handleAddToList}
+              />
+            )}
 
             {/* Server Section */}
             {Array.isArray(servers) && servers.length > 0 && selectedServer && (
