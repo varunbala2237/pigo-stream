@@ -12,7 +12,7 @@ import EpisodePanel from './Panels/EpisodePanel';
 import { getStorageValue, setStorageValue } from '../../utils/localStorageStates';
 import { getSessionValue, setSessionValue } from '../../utils/sessionStorageStates';
 
-function AnimeGrid({ id, type, mediaInfo, animeInfo, setMediaURL, setBackgroundImage }) {
+function AnimeGrid({ id, type, mediaInfo, animeInfo, setBackgroundImage }) {
   const ANIME_STORAGE_PATH = React.useMemo(
     () => ['PlayGroundUI', 'Grids', 'AnimeGrid', `${id}`],
     [id]
@@ -143,9 +143,9 @@ function AnimeGrid({ id, type, mediaInfo, animeInfo, setMediaURL, setBackgroundI
 
     const current = servers.find(s => s.server_name === selectedServer.server_name);
     if (current?.server_link) {
-      setMediaURL(current.server_link);
+      // setMediaURL(current.server_link);
     }
-  }, [selectedServer, servers, setMediaURL]);
+  }, [selectedServer, servers]);
 
   const handleServerChange = (server) => {
     setSelectedServer(server);

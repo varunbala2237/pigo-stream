@@ -16,7 +16,7 @@ import { getSessionValue, setSessionValue } from '../../utils/sessionStorageStat
 const SELECTED_SEASON = 'selectedSeason';
 const SEASON_STATE_KEY = 'seasonState';
 
-function TvGrid({ id, type, mediaInfo, setMediaURL, setBackgroundImage }) {
+function TvGrid({ id, type, mediaInfo, setBackgroundImage }) {
   const TV_STORAGE_PATH = React.useMemo(
     () => ['PlayGroundUI', 'Grids', 'TvGrid', `${id}`],
     [id]
@@ -107,9 +107,9 @@ function TvGrid({ id, type, mediaInfo, setMediaURL, setBackgroundImage }) {
 
     const current = servers.find(s => s.server_name === selectedServer.server_name);
     if (current?.server_link) {
-      setMediaURL(current.server_link);
+      // setMediaURL(current.server_link);
     }
-  }, [selectedServer, servers, setMediaURL]);
+  }, [selectedServer, servers]);
 
   const handleSeasonChange = (seasonNumber) => {
     const seasonRefNode = seasonScrollRef.current;

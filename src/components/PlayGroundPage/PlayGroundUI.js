@@ -22,9 +22,6 @@ function PlayGround() {
   const id = queryParams.get('id');
   const type = queryParams.get('type');
 
-  // Initialize Media URL
-  const [mediaURL, setMediaURL] = useState(null);
-
   // Retrive full TMDB metadata of the id and type
   const { data: mediaInfo, loading: isMediaLoading, error: isMediaError } = useFetchMediaInfo(id, type);
 
@@ -86,7 +83,6 @@ function PlayGround() {
               type={type}
               mediaInfo={mediaInfo}
               animeInfo={animeInfo}
-              setMediaURL={setMediaURL}
               setBackgroundImage={setBackgroundImage}
             />
           )}
@@ -96,7 +92,6 @@ function PlayGround() {
               id={id}
               type={type}
               mediaInfo={mediaInfo}
-              setMediaURL={setMediaURL}
               setBackgroundImage={setBackgroundImage}
             />
           )}
@@ -108,7 +103,7 @@ function PlayGround() {
 
       {/* Backspace & PlayGroundFooter */}
       <div className="divider" style={{ height: '6rem' }}></div>
-      <PlayGroundFooter id={id} type={type} mediaURL={mediaURL} />
+      <PlayGroundFooter id={id} type={type} />
     </div>
   );
 }

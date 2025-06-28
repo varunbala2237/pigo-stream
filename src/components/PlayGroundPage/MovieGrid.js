@@ -10,7 +10,7 @@ import ServerSection from './Sections/ServerSection';
 import { getStorageValue, setStorageValue } from '../../utils/localStorageStates';
 import { getSessionValue, setSessionValue } from '../../utils/sessionStorageStates';
 
-function MovieGrid({ id, type, mediaInfo, setMediaURL, setBackgroundImage }) {
+function MovieGrid({ id, type, mediaInfo, setBackgroundImage }) {
   const MOVIES_STORAGE_PATH = React.useMemo(
     () => ['PlayGroundUI', 'Grids', 'MovieGrid', `${id}`],
     [id]
@@ -59,9 +59,9 @@ function MovieGrid({ id, type, mediaInfo, setMediaURL, setBackgroundImage }) {
 
     const current = servers.find(s => s.server_name === selectedServer.server_name);
     if (current?.server_link) {
-      setMediaURL(current.server_link);
+      // setMediaURL(current.server_link);
     }
-  }, [selectedServer, servers, setMediaURL]);
+  }, [selectedServer, servers]);
 
   const handleServerChange = (server) => {
     setSelectedServer(server);
