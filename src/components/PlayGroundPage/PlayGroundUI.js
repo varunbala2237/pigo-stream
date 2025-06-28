@@ -5,7 +5,7 @@ import useFetchMediaInfo from '../../hooks/PlayGroundPage/useFetchMediaInfo';
 import useFetchAnimeInfo from '../../hooks/PlayGroundPage/useFetchAnimeInfo';
 import Header from '../Header';
 import PlayGroundFooter from './PlayGroundFooter';
-import ReCaptchaGrid from './ReCaptchaGrid';
+import ReCaptcha from './ReCaptcha';
 import MovieGrid from './MovieGrid';
 import TvGrid from './TvGrid';
 import AnimeGrid from './AnimeGrid';
@@ -77,7 +77,7 @@ function PlayGround() {
 
       {/* Grid Components */}
       {!isCaptchaVerified ? (
-        <ReCaptchaGrid storagePath={STORAGE_PATH} />
+        <ReCaptcha storagePath={STORAGE_PATH} />
       ) : (
         <>
           {mediaInfo && animeInfo && !isLoading && !isError && (

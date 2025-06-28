@@ -1,11 +1,11 @@
-// ReCaptchaGrid.js
+// ReCaptcha.js
 import ReCAPTCHA from 'react-google-recaptcha';
 
 import { setStorageValue } from '../../utils/localStorageStates';
 
 const RECAPTCHA_SITE_KEY = process.env.REACT_APP_RECAPTCHA_SITE_KEY;
 
-function ReCaptchaGrid({ storagePath }) {
+function ReCaptcha({ storagePath }) {
     const handleCaptchaSuccess = (token) => {
         if (token) {
             setStorageValue(...storagePath, 'recaptchaVerified', true);
@@ -37,4 +37,4 @@ function ReCaptchaGrid({ storagePath }) {
     );
 }
 
-export default ReCaptchaGrid;
+export default ReCaptcha;
