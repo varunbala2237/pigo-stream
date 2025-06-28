@@ -107,6 +107,7 @@ function PlayGroundFooter({ id, type, mediaURL, showPlayer, setShowPlayer }) {
                     </button>
                 </li>
 
+                {/* Switch button between info and player */}
                 <li className="nav-item text-center mx-auto">
                     <button
                         onClick={() => setShowPlayer(prev => !prev)}
