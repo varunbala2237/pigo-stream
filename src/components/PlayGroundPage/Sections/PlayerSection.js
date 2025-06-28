@@ -16,6 +16,7 @@ function PlayerSection() {
                         className="w-100 h-100 bd-callout-dark"
                         controls
                         autoPlay
+                        src="https://www.w3schools.com/html/mov_bbb.mp4"
                         style={{
                             objectFit: 'contain',
                         }}
