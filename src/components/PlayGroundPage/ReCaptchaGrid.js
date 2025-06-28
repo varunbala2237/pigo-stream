@@ -15,20 +15,25 @@ function ReCaptchaGrid({ storagePath }) {
     };
 
     return (
-        <div className="d-flex flex-column justify-content-center align-items-center vh-100 text-white">
-            <div className="container text-center">
-                <span className="dynamic-hs">Please complete reCAPTCHA to continue</span>
-                <p className="dynamic-fs">Verification is required to unlock media content.</p>
+        <>
+            {/* Backspace */}
+            <div className="divider" style={{ height: '6rem' }}></div>
 
-                <div className="d-flex justify-content-center">
-                    <ReCAPTCHA
-                        sitekey={RECAPTCHA_SITE_KEY}
-                        onChange={handleCaptchaSuccess}
-                        theme="dark"
-                    />
+            <div className="d-flex flex-column justify-content-center align-items-center text-white">
+                <div className="container text-center">
+                    <p className="dynamic-hs">Please complete reCAPTCHA to continue</p>
+                    <p className="dynamic-fs">Verification is required to unlock media content.</p>
+
+                    <div className="d-flex justify-content-center">
+                        <ReCAPTCHA
+                            sitekey={RECAPTCHA_SITE_KEY}
+                            onChange={handleCaptchaSuccess}
+                            theme="dark"
+                        />
+                    </div>
                 </div>
             </div>
-        </div>
+        </>
     );
 }
 
