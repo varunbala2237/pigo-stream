@@ -1,11 +1,11 @@
 // PlayGroundUI.js
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import useFetchMediaInfo from '../../hooks/PlayGroundPage/useFetchMediaInfo';
 import useFetchAnimeInfo from '../../hooks/PlayGroundPage/useFetchAnimeInfo';
 import Header from '../Header';
 import PlayGroundFooter from './PlayGroundFooter';
-import ReCaptchaGrid from './ReCapthaGrid';
+import ReCaptchaGrid from './ReCaptchaGrid';
 import MovieGrid from './MovieGrid';
 import TvGrid from './TvGrid';
 import AnimeGrid from './AnimeGrid';
@@ -15,7 +15,7 @@ import ConnectionModal from '../../utils/ConnectionModal';
 import { getStorageValue } from '../../utils/localStorageStates';
 
 function PlayGround() {
-  const MOVIES_STORAGE_PATH = React.useMemo(() => ['PlayGroundUI'], []);
+  const STORAGE_PATH = ['PlayGroundUI'];
 
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
@@ -37,7 +37,7 @@ function PlayGround() {
   // Setup backgroundImage
   const [backgroundImage, setBackgroundImage] = useState('');
 
-  const isCaptchaVerified = getStorageValue(...MOVIES_STORAGE_PATH, 'recaptchaVerified') === true;
+  const isCaptchaVerified = getStorageValue(...STORAGE_PATH, 'recaptchaVerified') === true;
 
   useEffect(() => {
     // Initial scroll to top
@@ -77,7 +77,7 @@ function PlayGround() {
 
       {/* Grid Components */}
       {!isCaptchaVerified ? (
-        <ReCaptchaGrid />
+        <ReCaptchaGrid storagePath={STORAGE_PATH} />
       ) : (
         <>
           {mediaInfo && animeInfo && !isLoading && !isError && (
