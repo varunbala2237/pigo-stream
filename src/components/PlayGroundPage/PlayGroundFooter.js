@@ -113,7 +113,7 @@ function PlayGroundFooter({ id, type, mediaURL, showPlayer, setShowPlayer }) {
                         className="btn border-0 d-flex flex-column align-items-center justify-content-center text-decoration-none dynamic-ts"
                     >
                         <i className={`bi bi-${showPlayer ? 'info-circle' : 'play-circle'} theme-color me-2`}></i>
-                        <span className="text-white dynamic-ss">{showPlayer ? 'Info' : 'Watch'}</span>
+                        <span className="text-white dynamic-ss">{showPlayer ? 'Show Info' : 'Watch Now'}</span>
                     </button>
                 </li>
 
