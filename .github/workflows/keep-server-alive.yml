@@ -14,4 +14,4 @@ jobs:
         run: |
           curl --connect-timeout 30 --max-time 120 \
             -H "x-github-internal: ${{ secrets.X_GITHUB_INTERNAL }}" \
-            "${{ secrets.SERVER_URL }}/health" || echo "Server slow or unreachable, but continuing."
+            "${{ secrets.SERVER_URL }}/health" || true
