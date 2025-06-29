@@ -4,8 +4,7 @@ import { useState, useEffect } from 'react';
 const BASE_URL = process.env.REACT_APP_SERVER_URL;
 
 const useFetchStream = (selectedServer) => {
-  const [stream_link, setStreamLink] = useState(null);
-  const [headers, setHeaders] = useState(null);
+  const [stream, setStream] = useState({ stream_link: null, stream_headers: null });
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -23,8 +22,7 @@ const useFetchStream = (selectedServer) => {
     const fetchStream = async () => {
       setLoading(true);
       setError(null);
-      setStreamLink(null);
-      setHeaders(null);
+      setStream({ stream_link: null, stream_headers: null });
 
       try {
         const response = await fetch(
@@ -36,8 +34,10 @@ const useFetchStream = (selectedServer) => {
         const data = await response.json();
 
         if (response.ok && data?.stream_link) {
-          setStreamLink(data.stream_link);
-          setHeaders(data.headers || null);  // Contains referer and user-agent
+          setStream({
+            stream_link: data.stream_link,
+            stream_headers: data.stream_headers || null,
+          });
         } else {
           throw new Error(data?.error || 'Failed to extract stream');
         }
@@ -51,7 +51,7 @@ const useFetchStream = (selectedServer) => {
     fetchStream();
   }, [selectedServer]);
 
-  return { stream_link, headers, loading, error };
+  return { stream, loading, error };
 };
 
 export default useFetchStream;

@@ -10,6 +10,7 @@ import ServerSection from './Sections/ServerSection';
 
 import { getStorageValue, setStorageValue } from '../../utils/localStorageStates';
 import { getSessionValue, setSessionValue } from '../../utils/sessionStorageStates';
+import useFetchStream from '../../hooks/PlayGroundPage/useFetchStream';
 
 function MovieGrid({ id, type, mediaInfo, showPlayer, setBackgroundImage }) {
   const MOVIES_STORAGE_PATH = React.useMemo(
@@ -26,7 +27,10 @@ function MovieGrid({ id, type, mediaInfo, showPlayer, setBackgroundImage }) {
   );
 
   // Fetch all available servers
-  const { servers } = useFetchServers(id, type);
+  const { servers, loading: loadingServers } = useFetchServers(id, type);
+
+  // Fetch the playable stream
+  const { stream, loading: loadingStream } = useFetchStream(selectedServer);
 
   const { addToList } = useSaveMyList();
   const { isInList, loading: isListLoading, refetch } = useCheckMyList(id);
