@@ -200,22 +200,27 @@ function AnimeGrid({ id, type, mediaInfo, animeInfo, setBackgroundImage }) {
       <div className="d-flex flex-column justify-content-center align-items-center p-0">
         <div className="flex-row text-white w-100">
           <div className="container">
-            <div className="d-flex w-100">
-              <div
+            <div className="d-flex justify-content-start align-items-center my-2">
+              <button
+                className={`btn bg-transparent text-white border-0 dynamic-hs 
+                  ${activeTab === 'info' ? '' : 'opacity-50'}`}
                 onClick={() => handleTabChange('info')}
-                className={`text-center flex-fill cursor-pointer dynamic-ts py-2
-                  ${activeTab === 'info' ? 'border-bottom border-4 border-primary text-primary' : 'text-white-50'}`}
               >
-                <span><i className="bi bi-list me-2"></i>Info</span>
-              </div>
+                <i className="bi bi-list theme-color me-2"></i>
+                <b>Info</b>
+              </button>
 
-              <div
+              {/* Divider Line */}
+              <div className="border-start border-secondary align-self-stretch"></div>
+
+              <button
+                className={`btn bg-transparent text-white border-0 dynamic-hs 
+                  ${activeTab === 'player' ? '' : 'opacity-50'}`}
                 onClick={() => handleTabChange('player')}
-                className={`text-center flex-fill cursor-pointer dynamic-ts py-2
-                  ${activeTab === 'player' ? 'border-bottom border-4 border-primary text-primary' : 'text-white-50'}`}
               >
-                <span><i className="bi bi-file-earmark-play me-2"></i>Player</span>
-              </div>
+                <i className="bi bi-file-earmark-play theme-color me-2"></i>
+                <b>Player</b>
+              </button>
             </div>
 
             {activeTab === 'info' && (

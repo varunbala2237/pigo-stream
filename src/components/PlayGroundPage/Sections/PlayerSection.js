@@ -16,7 +16,7 @@ function PlayerSection({ depsReady, selectedServer }) {
     const shouldOverlay = loadingStream || error;
 
     return (
-        <div className="d-flex justify-content-center w-100 mt-2">
+        <div className="d-flex justify-content-center w-100">
             <div className="d-flex justify-content-center custom-bg custom-theme-radius-low p-2 player-container">
                 <div className="position-relative custom-theme-radius-low player">
                     {shouldOverlay && (

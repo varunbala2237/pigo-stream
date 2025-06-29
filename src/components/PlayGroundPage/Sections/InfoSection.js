@@ -47,7 +47,7 @@ function InfoSection({
   };
 
   return (
-    <div className="d-flex flex-column custom-bg custom-theme-radius-low w-100 p-2 mt-2">
+    <div className="d-flex flex-column custom-bg custom-theme-radius-low w-100 p-2">
       <div className="d-flex flex-column align-items-start justify-content-between w-100">
         <div className="d-flex flex-row align-items-start custom-theme-radius-low w-100">
           <div className="section">
