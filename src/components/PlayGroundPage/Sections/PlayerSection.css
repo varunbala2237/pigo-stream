@@ -3,8 +3,3 @@
   width: fit-content;
   width: 100%;
 }
-
-.player-container > .player {
-  width: 100%;
-  aspect-ratio: 16 / 9;
-}

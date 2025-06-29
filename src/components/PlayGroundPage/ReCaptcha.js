@@ -16,7 +16,7 @@ function ReCaptcha({ storagePath }) {
 
     return (
         <>
-            {/* Backspace */}
+            {/* Backspace & reCAPTCHA*/}
             <div className="divider" style={{ height: '6rem' }}></div>
 
             <div className="d-flex flex-column justify-content-center align-items-center text-white">
