@@ -23,7 +23,7 @@ function PlayerSection({ type, mediaInfo, selectedSeason, selectedEpisode }) {
                     className="position-relative bg-callout-dark custom-theme-radius-low player"
                 >
                     <video
-                        className="w-100 h-100 bd-callout-dark"
+                        className="w-100 h-100 bd-callout-dark custom-theme-radius-low"
                         controls
                         autoPlay
                         src="https://www.w3schools.com/html/mov_bbb.mp4"
