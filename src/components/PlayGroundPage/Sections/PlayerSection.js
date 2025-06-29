@@ -28,7 +28,6 @@ function PlayerSection({ depsReady, selectedServer }) {
                                 </>
                             ) : (
                                 <>
-                                    <i className="bi bi-cone-striped dynamic-ts text-warning mb-2"></i>
                                     <span className="dynamic-fs">{error}</span>
                                 </>
                             )}
