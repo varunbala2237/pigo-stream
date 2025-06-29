@@ -10,7 +10,6 @@ import IndexUI from './components/IndexPage/IndexUI';
 import PlayGroundUI from './components/PlayGroundPage/PlayGroundUI';
 import WatchHistoryUI from './components/WatchHistoryPage/WatchHistoryUI';
 import MyListUI from './components/MyListPage/MyListUI';
-import PigoStoreUI from './components/PigoStorePage/PigoStoreUI';
 
 const router = createBrowserRouter(
   [
@@ -19,7 +18,6 @@ const router = createBrowserRouter(
     { path: '/play', element: <PlayGroundUI /> },
     { path: '/watch-history', element: <WatchHistoryUI /> },
     { path: '/my-list', element: <MyListUI /> },
-    { path: '/pigostore', element: <PigoStoreUI /> },
   ],
   {
     future: {

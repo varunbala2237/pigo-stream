@@ -13,7 +13,7 @@ import EpisodePanel from './Panels/EpisodePanel';
 import { getStorageValue, setStorageValue } from '../../utils/localStorageStates';
 import { getSessionValue, setSessionValue } from '../../utils/sessionStorageStates';
 
-function AnimeGrid({ id, type, mediaInfo, animeInfo, showPlayer, setBackgroundImage }) {
+function AnimeGrid({ id, type, mediaInfo, animeInfo, setBackgroundImage }) {
   const ANIME_STORAGE_PATH = React.useMemo(
     () => ['PlayGroundUI', 'Grids', 'AnimeGrid', `${id}`],
     [id]
@@ -111,8 +111,7 @@ function AnimeGrid({ id, type, mediaInfo, animeInfo, showPlayer, setBackgroundIm
   );
 
   // Fetch all available servers
-  const { servers, loading: loadingServers } = useFetchServers(animeId, 'anime', selectedRelationIndex, selectedEpisode);
-  const depsReady = !loadingServers && selectedServer;
+  const { servers } = useFetchServers(animeId, 'anime', selectedRelationIndex, selectedEpisode);
 
   const { addToList } = useSaveMyList();
   const { isInList, loading: isListLoading, refetch } = useCheckMyList(id);
@@ -191,26 +190,18 @@ function AnimeGrid({ id, type, mediaInfo, animeInfo, showPlayer, setBackgroundIm
       <div className="d-flex flex-column justify-content-center align-items-center p-0">
         <div className="flex-row text-white w-100">
           <div className="container">
-            {/* Switch Between Info and Player */}
-            {showPlayer ? (
-              <PlayerSection
-                type={"anime"}
-                mediaInfo={mediaInfo}
-                selectedSeason={selectedRelationIndex}
-                selectedEpisode={selectedEpisode}
-                depsReady={depsReady}
-                selectedServer={selectedServer}
-              />
-            ) : (
-              <InfoSection
-                id={id}
-                type={type}
-                mediaInfo={mediaInfo}
-                isInList={isInList}
-                isListLoading={isListLoading}
-                handleAddToList={handleAddToList}
-              />
-            )}
+            {/* Info Section */}
+            <InfoSection
+              id={id}
+              type={type}
+              mediaInfo={mediaInfo}
+              isInList={isInList}
+              isListLoading={isListLoading}
+              handleAddToList={handleAddToList}
+            />
+
+            {/* Player Section */}
+            <PlayerSection />
 
             {/* Server Section */}
             {Array.isArray(servers) && servers.length > 0 && selectedServer && (

@@ -11,7 +11,7 @@ import ServerSection from './Sections/ServerSection';
 import { getStorageValue, setStorageValue } from '../../utils/localStorageStates';
 import { getSessionValue, setSessionValue } from '../../utils/sessionStorageStates';
 
-function MovieGrid({ id, type, mediaInfo, showPlayer, setBackgroundImage }) {
+function MovieGrid({ id, type, mediaInfo, setBackgroundImage }) {
   const MOVIES_STORAGE_PATH = React.useMemo(
     () => ['PlayGroundUI', 'Grids', 'MovieGrid', `${id}`],
     [id]
@@ -26,8 +26,7 @@ function MovieGrid({ id, type, mediaInfo, showPlayer, setBackgroundImage }) {
   );
 
   // Fetch all available servers
-  const { servers, loading: loadingServers } = useFetchServers(id, type);
-  const depsReady = !loadingServers && selectedServer;
+  const { servers } = useFetchServers(id, type);
 
   const { addToList } = useSaveMyList();
   const { isInList, loading: isListLoading, refetch } = useCheckMyList(id);
@@ -84,24 +83,18 @@ function MovieGrid({ id, type, mediaInfo, showPlayer, setBackgroundImage }) {
       <div className="d-flex flex-column justify-content-center align-items-center p-0">
         <div className="flex-row text-white w-100">
           <div className="container">
-            {/* Switch Between Info and Player */}
-            {showPlayer ? (
-              <PlayerSection
-                type={type}
-                mediaInfo={mediaInfo}
-                depsReady={depsReady}
-                selectedServer={selectedServer}
-              />
-            ) : (
-              <InfoSection
-                id={id}
-                type={type}
-                mediaInfo={mediaInfo}
-                isInList={isInList}
-                isListLoading={isListLoading}
-                handleAddToList={handleAddToList}
-              />
-            )}
+            {/* Info Section */}
+            <InfoSection
+              id={id}
+              type={type}
+              mediaInfo={mediaInfo}
+              isInList={isInList}
+              isListLoading={isListLoading}
+              handleAddToList={handleAddToList}
+            />
+
+            {/* Player Section */}
+            <PlayerSection />
 
             {/* Server Section */}
             {Array.isArray(servers) && servers.length > 0 && selectedServer && (
