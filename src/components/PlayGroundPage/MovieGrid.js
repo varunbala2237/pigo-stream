@@ -18,9 +18,12 @@ function MovieGrid({ id, type, mediaInfo, setBackgroundImage }) {
   );
 
   // Initialize required useStates
-  const [activeTab, setActiveTab] = useState('info'); // or 'player'
   const [cast, setCast] = useState([]);
   const [selectedServer, setSelectedServer] = useState(null);
+
+  const [activeTab, setActiveTab] = useState(() =>
+    getSessionValue(...MOVIES_STORAGE_PATH, 'activeTab') || 'info'
+  );
 
   const [sliceIndex, setSliceIndex] = useState(() =>
     getSessionValue(...MOVIES_STORAGE_PATH, 'sliceIndex') || 12
@@ -56,6 +59,11 @@ function MovieGrid({ id, type, mediaInfo, setBackgroundImage }) {
     setSelectedServer(matched || servers[0]);
   }, [MOVIES_STORAGE_PATH, servers]);
 
+  const handleTabChange = (tab) => {
+    setActiveTab(tab);
+    setSessionValue(...MOVIES_STORAGE_PATH, 'activeTab', tab);
+  };
+
   const handleServerChange = (server) => {
     setSelectedServer(server);
     setStorageValue(...MOVIES_STORAGE_PATH, 'selectedServer', server);
@@ -87,23 +95,19 @@ function MovieGrid({ id, type, mediaInfo, setBackgroundImage }) {
           <div className="container">
             <div className="d-flex w-100">
               <div
-                onClick={() => setActiveTab('info')}
-                className={
-                  `text-center flex-fill cursor-pointer dynamic-ts py-2
-                  ${activeTab === 'info' ? 'border-bottom border-4 border-primary text-primary' : 'text-white-50'}`
-                }
+                onClick={() => handleTabChange('info')}
+                className={`text-center flex-fill cursor-pointer dynamic-ts py-2
+                  ${activeTab === 'info' ? 'border-bottom border-4 border-primary text-primary' : 'text-white-50'}`}
               >
-                Info
+                <span><i className="bi bi-list me-2"></i>Info</span>
               </div>
 
               <div
-                onClick={() => setActiveTab('player')}
-                className={
-                  `text-center flex-fill cursor-pointer dynamic-ts py-2
-                  ${activeTab === 'player' ? 'border-bottom border-4 border-primary text-primary' : 'text-white-50'}`
-                }
+                onClick={() => handleTabChange('player')}
+                className={`text-center flex-fill cursor-pointer dynamic-ts py-2
+                  ${activeTab === 'player' ? 'border-bottom border-4 border-primary text-primary' : 'text-white-50'}`}
               >
-                Player
+                <span><i className="bi bi-file-earmark-play me-2"></i>Player</span>
               </div>
             </div>
 

@@ -34,6 +34,10 @@ function TvGrid({ id, type, mediaInfo, setBackgroundImage }) {
   const seasonScrollRef = useRef(null);
   const episodeScrollRef = useRef(null);
 
+  const [activeTab, setActiveTab] = useState(() =>
+    getSessionValue(...TV_STORAGE_PATH, 'activeTab') || 'info'
+  );
+
   const [sliceIndex, setSliceIndex] = useState(() =>
     getSessionValue(...TV_STORAGE_PATH, 'sliceIndex') || 12
   );
@@ -136,6 +140,11 @@ function TvGrid({ id, type, mediaInfo, setBackgroundImage }) {
     setStorageValue(...TV_STORAGE_PATH, SEASON_STATE_KEY, seasonState);
   };
 
+  const handleTabChange = (tab) => {
+    setActiveTab(tab);
+    setSessionValue(...TV_STORAGE_PATH, 'activeTab', tab);
+  };
+
   const handleServerChange = (server) => {
     setSelectedServer(server);
     setStorageValue(...TV_STORAGE_PATH, 'selectedServer', server);
@@ -165,21 +174,41 @@ function TvGrid({ id, type, mediaInfo, setBackgroundImage }) {
       <div className="d-flex flex-column justify-content-center align-items-center p-0">
         <div className="flex-row text-white w-100">
           <div className="container">
-            {/* Info Section */}
-            <InfoSection
-              id={id}
-              type={type}
-              mediaInfo={mediaInfo}
-              isInList={isInList}
-              isListLoading={isListLoading}
-              handleAddToList={handleAddToList}
-            />
+            <div className="d-flex w-100">
+              <div
+                onClick={() => handleTabChange('info')}
+                className={`text-center flex-fill cursor-pointer dynamic-ts py-2
+                  ${activeTab === 'info' ? 'border-bottom border-4 border-primary text-primary' : 'text-white-50'}`}
+              >
+                <span><i className="bi bi-list me-2"></i>Info</span>
+              </div>
 
-            {/* Player Section */}
-            <PlayerSection
-              depsReady={depsReady}
-              selectedServer={selectedServer}
-            />
+              <div
+                onClick={() => handleTabChange('player')}
+                className={`text-center flex-fill cursor-pointer dynamic-ts py-2
+                  ${activeTab === 'player' ? 'border-bottom border-4 border-primary text-primary' : 'text-white-50'}`}
+              >
+                <span><i className="bi bi-file-earmark-play me-2"></i>Player</span>
+              </div>
+            </div>
+
+            {activeTab === 'info' && (
+              <InfoSection
+                id={id}
+                type={type}
+                mediaInfo={mediaInfo}
+                isInList={isInList}
+                isListLoading={isListLoading}
+                handleAddToList={handleAddToList}
+              />
+            )}
+
+            {activeTab === 'player' && (
+              <PlayerSection
+                depsReady={depsReady}
+                selectedServer={selectedServer}
+              />
+            )}
 
             {/* Server Section */}
             {Array.isArray(servers) && servers.length > 0 && selectedServer && (
