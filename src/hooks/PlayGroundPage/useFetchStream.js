@@ -3,12 +3,14 @@ import { useState, useEffect } from 'react';
 
 const BASE_URL = process.env.REACT_APP_SERVER_URL;
 
-const useFetchStream = (selectedServer) => {
+const useFetchStream = (selectedServer, depsReady = false) => {
   const [stream, setStream] = useState({ stream_link: null, stream_headers: null });
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
+    if (!depsReady) return;
+
     if (
       !selectedServer ||
       !selectedServer.server_link ||
@@ -49,7 +51,7 @@ const useFetchStream = (selectedServer) => {
     };
 
     fetchStream();
-  }, [selectedServer]);
+  }, [selectedServer, depsReady]);
 
   return { stream, loading, error };
 };

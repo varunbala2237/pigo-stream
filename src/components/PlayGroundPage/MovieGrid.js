@@ -29,8 +29,9 @@ function MovieGrid({ id, type, mediaInfo, showPlayer, setBackgroundImage }) {
   // Fetch all available servers
   const { servers, loading: loadingServers } = useFetchServers(id, type);
 
-  // Fetch the playable stream
-  const { stream, loading: loadingStream } = useFetchStream(selectedServer);
+  // Fetch selected server stream
+  const depsReady = !loadingServers && selectedServer;
+  const { stream, loading: loadingStream } = useFetchStream(selectedServer, depsReady);
 
   const { addToList } = useSaveMyList();
   const { isInList, loading: isListLoading, refetch } = useCheckMyList(id);
