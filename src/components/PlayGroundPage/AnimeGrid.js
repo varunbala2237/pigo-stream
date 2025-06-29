@@ -111,7 +111,8 @@ function AnimeGrid({ id, type, mediaInfo, animeInfo, setBackgroundImage }) {
   );
 
   // Fetch all available servers
-  const { servers } = useFetchServers(animeId, 'anime', selectedRelationIndex, selectedEpisode);
+  const { servers, loading: loadingServers } = useFetchServers(animeId, 'anime', selectedRelationIndex, selectedEpisode);
+  const depsReady = !loadingServers && selectedServer;
 
   const { addToList } = useSaveMyList();
   const { isInList, loading: isListLoading, refetch } = useCheckMyList(id);
@@ -201,7 +202,10 @@ function AnimeGrid({ id, type, mediaInfo, animeInfo, setBackgroundImage }) {
             />
 
             {/* Player Section */}
-            <PlayerSection />
+            <PlayerSection
+              depsReady={depsReady}
+              selectedServer={selectedServer}
+            />
 
             {/* Server Section */}
             {Array.isArray(servers) && servers.length > 0 && selectedServer && (

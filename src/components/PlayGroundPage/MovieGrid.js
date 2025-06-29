@@ -26,7 +26,8 @@ function MovieGrid({ id, type, mediaInfo, setBackgroundImage }) {
   );
 
   // Fetch all available servers
-  const { servers } = useFetchServers(id, type);
+  const { servers, loading: loadingServers } = useFetchServers(id, type);
+  const depsReady = !loadingServers && selectedServer;
 
   const { addToList } = useSaveMyList();
   const { isInList, loading: isListLoading, refetch } = useCheckMyList(id);
@@ -94,7 +95,10 @@ function MovieGrid({ id, type, mediaInfo, setBackgroundImage }) {
             />
 
             {/* Player Section */}
-            <PlayerSection />
+            <PlayerSection
+              depsReady={depsReady}
+              selectedServer={selectedServer}
+            />
 
             {/* Server Section */}
             {Array.isArray(servers) && servers.length > 0 && selectedServer && (
