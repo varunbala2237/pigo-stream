@@ -1,12 +1,18 @@
 // PlayerSection.js
+import { useRef } from 'react';
 import useFetchStream from '../../../hooks/PlayGroundPage/useFetchStream';
+import useLoadStream from '../../../hooks/PlayGroundPage/useLoadStream';
 import './PlayerSection.css';
 
 function PlayerSection({ type, mediaInfo, selectedSeason, selectedEpisode, depsReady, selectedServer }) {
+    const videoRef = useRef(null);
     const title = mediaInfo?.title || mediaInfo?.name;
 
     // Fetch stream from selectedServer
     const { stream, loading: loadingStream } = useFetchStream(selectedServer, depsReady);
+
+    // Load stream from hook
+    useLoadStream({ videoRef, stream, depsReady });
 
     return (
         <div className="d-flex justify-content-center w-100">
@@ -27,10 +33,10 @@ function PlayerSection({ type, mediaInfo, selectedSeason, selectedEpisode, depsR
                     className="position-relative bg-callout-dark custom-theme-radius-low player"
                 >
                     <video
+                        ref={videoRef}
                         className="w-100 h-100 bd-callout-dark custom-theme-radius-low"
                         controls
                         autoPlay
-                        src="https://www.w3schools.com/html/mov_bbb.mp4"
                         style={{
                             aspectRatio: '16 / 9',
                             objectFit: 'contain',
