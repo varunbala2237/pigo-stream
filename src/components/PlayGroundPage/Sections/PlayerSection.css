@@ -1,12 +1,10 @@
 /* PlayerSection.css */
 .player-container {
-  width: fit-content;
-  max-width: 100%;
+  width: 100%;
 }
 
-.player-container > .player {
+.player {
   width: 768px;
-  max-width: 100%;
   aspect-ratio: 16 / 9;
 }
 

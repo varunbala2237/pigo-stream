@@ -16,9 +16,9 @@ function PlayerSection({ depsReady, selectedServer }) {
     const shouldOverlay = loadingStream || error;
 
     return (
-        <div className="d-flex justify-content-center w-100">
-            <div className="custom-bg custom-theme-radius-low p-2 player-container">
-                <div className="position-relative bg-callout-dark custom-theme-radius-low player">
+        <div className="d-flex justify-content-center w-100 mt-2">
+            <div className="d-flex justify-content-center custom-bg custom-theme-radius-low p-2 player-container">
+                <div className="position-relative custom-theme-radius-low player">
                     {shouldOverlay && (
                         <div className="stream-overlay d-flex flex-column justify-content-center align-items-center custom-theme-radius-low text-center text-white">
                             {!error ? (
@@ -35,14 +35,9 @@ function PlayerSection({ depsReady, selectedServer }) {
                     )}
                     <video
                         ref={videoRef}
-                        className="w-100 h-100 bd-callout-dark custom-theme-radius-low"
+                        className="w-100 h-100 custom-theme-radius-low"
                         controls
                         autoPlay
-                        style={{
-                            aspectRatio: '16 / 9',
-                            objectFit: 'contain',
-                            display: 'block',
-                        }}
                     />
                 </div>
             </div>
