@@ -18,6 +18,7 @@ function MovieGrid({ id, type, mediaInfo, setBackgroundImage }) {
   );
 
   // Initialize required useStates
+  const [activeTab, setActiveTab] = useState('info'); // or 'player'
   const [cast, setCast] = useState([]);
   const [selectedServer, setSelectedServer] = useState(null);
 
@@ -84,21 +85,45 @@ function MovieGrid({ id, type, mediaInfo, setBackgroundImage }) {
       <div className="d-flex flex-column justify-content-center align-items-center p-0">
         <div className="flex-row text-white w-100">
           <div className="container">
-            {/* Info Section */}
-            <InfoSection
-              id={id}
-              type={type}
-              mediaInfo={mediaInfo}
-              isInList={isInList}
-              isListLoading={isListLoading}
-              handleAddToList={handleAddToList}
-            />
+            <div className="d-flex w-100">
+              <div
+                onClick={() => setActiveTab('info')}
+                className={
+                  `text-center flex-fill cursor-pointer dynamic-ts py-2
+                  ${activeTab === 'info' ? 'border-bottom border-4 border-primary text-primary' : 'text-white-50'}`
+                }
+              >
+                Info
+              </div>
 
-            {/* Player Section */}
-            <PlayerSection
-              depsReady={depsReady}
-              selectedServer={selectedServer}
-            />
+              <div
+                onClick={() => setActiveTab('player')}
+                className={
+                  `text-center flex-fill cursor-pointer dynamic-ts py-2
+                  ${activeTab === 'player' ? 'border-bottom border-4 border-primary text-primary' : 'text-white-50'}`
+                }
+              >
+                Player
+              </div>
+            </div>
+
+            {activeTab === 'info' && (
+              <InfoSection
+                id={id}
+                type={type}
+                mediaInfo={mediaInfo}
+                isInList={isInList}
+                isListLoading={isListLoading}
+                handleAddToList={handleAddToList}
+              />
+            )}
+
+            {activeTab === 'player' && (
+              <PlayerSection
+                depsReady={depsReady}
+                selectedServer={selectedServer}
+              />
+            )}
 
             {/* Server Section */}
             {Array.isArray(servers) && servers.length > 0 && selectedServer && (
