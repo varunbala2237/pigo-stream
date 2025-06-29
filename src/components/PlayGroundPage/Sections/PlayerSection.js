@@ -1,8 +1,12 @@
 // PlayerSection.js
+import useFetchStream from '../../../hooks/PlayGroundPage/useFetchStream';
 import './PlayerSection.css';
 
-function PlayerSection({ type, mediaInfo, selectedSeason, selectedEpisode }) {
+function PlayerSection({ type, mediaInfo, selectedSeason, selectedEpisode, depsReady, selectedServer }) {
     const title = mediaInfo?.title || mediaInfo?.name;
+
+    // Fetch stream from selectedServer
+    const { stream, loading: loadingStream } = useFetchStream(selectedServer, depsReady);
 
     return (
         <div className="d-flex justify-content-center w-100">
