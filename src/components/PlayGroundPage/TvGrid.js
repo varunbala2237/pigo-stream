@@ -43,7 +43,10 @@ function TvGrid({ id, type, mediaInfo, showPlayer, setBackgroundImage }) {
     id && selectedSeason !== null ? id : null,
     selectedSeason !== null ? selectedSeason : null
   );
-  const { servers } = useFetchServers(id, type, selectedSeason, selectedEpisode);
+
+  // Fetch all available servers
+  const { servers, loading: loadingServers } = useFetchServers(id, type, selectedSeason, selectedEpisode);
+  const depsReady = !loadingServers && selectedServer;
 
   const { addToList } = useSaveMyList();
   const { isInList, loading: isListLoading, refetch } = useCheckMyList(id);
@@ -101,16 +104,6 @@ function TvGrid({ id, type, mediaInfo, showPlayer, setBackgroundImage }) {
 
     setSelectedServer(matched || servers[0]);
   }, [TV_STORAGE_PATH, servers]);
-
-  // Retrieving selected server link
-  useEffect(() => {
-    if (!Array.isArray(servers) || servers.length === 0 || !selectedServer) return;
-
-    const current = servers.find(s => s.server_name === selectedServer.server_name);
-    if (current?.server_link) {
-      // setMediaURL(current.server_link);
-    }
-  }, [selectedServer, servers]);
 
   const handleSeasonChange = (seasonNumber) => {
     const seasonRefNode = seasonScrollRef.current;
@@ -171,7 +164,7 @@ function TvGrid({ id, type, mediaInfo, showPlayer, setBackgroundImage }) {
     <>
       <div className="d-flex flex-column justify-content-center align-items-center p-0">
         <div className="flex-row text-white w-100">
-          <div className="container">       
+          <div className="container">
             {/* Switch Between Info and Player */}
             {showPlayer ? (
               <PlayerSection
@@ -179,6 +172,8 @@ function TvGrid({ id, type, mediaInfo, showPlayer, setBackgroundImage }) {
                 mediaInfo={mediaInfo}
                 selectedSeason={selectedSeason}
                 selectedEpisode={selectedEpisode}
+                depsReady={depsReady}
+                selectedServer={selectedServer}
               />
             ) : (
               <InfoSection

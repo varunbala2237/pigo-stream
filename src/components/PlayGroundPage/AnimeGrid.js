@@ -110,7 +110,9 @@ function AnimeGrid({ id, type, mediaInfo, animeInfo, showPlayer, setBackgroundIm
     getSessionValue(...ANIME_STORAGE_PATH, 'sliceIndex') || 12
   );
 
-  const { servers } = useFetchServers(animeId, 'anime', selectedRelationIndex, selectedEpisode);
+  // Fetch all available servers
+  const { servers, loading: loadingServers } = useFetchServers(animeId, 'anime', selectedRelationIndex, selectedEpisode);
+  const depsReady = !loadingServers && selectedServer;
 
   const { addToList } = useSaveMyList();
   const { isInList, loading: isListLoading, refetch } = useCheckMyList(id);
@@ -137,16 +139,6 @@ function AnimeGrid({ id, type, mediaInfo, animeInfo, showPlayer, setBackgroundIm
 
     setSelectedServer(matched || servers[0]);
   }, [ANIME_STORAGE_PATH, servers]);
-
-  // Retrieving selected server link
-  useEffect(() => {
-    if (!Array.isArray(servers) || servers.length === 0 || !selectedServer) return;
-
-    const current = servers.find(s => s.server_name === selectedServer.server_name);
-    if (current?.server_link) {
-      // setMediaURL(current.server_link);
-    }
-  }, [selectedServer, servers]);
 
   const handleServerChange = (server) => {
     setSelectedServer(server);
@@ -206,6 +198,8 @@ function AnimeGrid({ id, type, mediaInfo, animeInfo, showPlayer, setBackgroundIm
                 mediaInfo={mediaInfo}
                 selectedSeason={selectedRelationIndex}
                 selectedEpisode={selectedEpisode}
+                depsReady={depsReady}
+                selectedServer={selectedServer}
               />
             ) : (
               <InfoSection

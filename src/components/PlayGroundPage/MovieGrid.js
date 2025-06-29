@@ -55,16 +55,6 @@ function MovieGrid({ id, type, mediaInfo, showPlayer, setBackgroundImage }) {
     setSelectedServer(matched || servers[0]);
   }, [MOVIES_STORAGE_PATH, servers]);
 
-  // Retrieving selected server link
-  useEffect(() => {
-    if (!Array.isArray(servers) || servers.length === 0 || !selectedServer) return;
-
-    const current = servers.find(s => s.server_name === selectedServer.server_name);
-    if (current?.server_link) {
-      // setMediaURL(current.server_link);
-    }
-  }, [selectedServer, servers]);
-
   const handleServerChange = (server) => {
     setSelectedServer(server);
     setStorageValue(...MOVIES_STORAGE_PATH, 'selectedServer', server);
