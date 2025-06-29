@@ -33,10 +33,10 @@ function PlayerSection({ type, mediaInfo, selectedSeason, selectedEpisode, depsR
                 </div>
                 <div className="position-relative bg-callout-dark custom-theme-radius-low player">
                     {shouldOverlay && (
-                        <div className="stream-overlay d-flex flex-column justify-content-center align-items-center text-center text-white">
+                        <div className="stream-overlay d-flex flex-column justify-content-center align-items-center custom-theme-radius-low text-center text-white">
                             {!error ? (
                                 <>
-                                    <div className="spinner-border text-light mb-2" role="status" />
+                                    <div className="spinner-border mb-2" role="status" />
                                     <span className="dynamic-fs">Fetching stream...</span>
                                 </>
                             ) : (
