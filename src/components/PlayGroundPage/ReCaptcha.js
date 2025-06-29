@@ -20,16 +20,22 @@ function ReCaptcha({ storagePath }) {
             <div className="divider" style={{ height: '6rem' }}></div>
 
             <div className="d-flex flex-column justify-content-center align-items-center text-white">
-                <div className="container text-center">
-                    <p className="dynamic-hs">Please complete reCAPTCHA to continue</p>
-                    <p className="dynamic-fs">Verification is required to unlock media content.</p>
-
-                    <div className="d-flex justify-content-center">
+                <div className="container">
+                    <div className="d-flex flex-column justify-content-center align-items-center custom-theme-radius-low custom-bg p-2">
+                        <p className="dynamic-hs">Please complete reCAPTCHA to continue</p>
+                        <p className="dynamic-fs">Verification is required to unlock media content.</p>
                         <ReCAPTCHA
                             sitekey={RECAPTCHA_SITE_KEY}
                             onChange={handleCaptchaSuccess}
                             theme="dark"
                         />
+                        <div className="text-left mt-5">
+                            <ul className="dynamic-fs text-white">
+                                <li>reCAPTCHA is required only once per login session.</li>
+                                <li>Your verification ensures secure access to media content.</li>
+                                <li>Your session will remain verified until you sign out or clear your browser data.</li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
