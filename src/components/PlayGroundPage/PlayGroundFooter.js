@@ -1,30 +1,9 @@
 // PlayGroundFooter.js
-//import { useState } from 'react';
-// import useSaveWatchHistory from '../../hooks/WatchHistoryPage/useSaveWatchHistory';
 import { useNavigate } from 'react-router-dom';
 import '../Footer.css';
 
 function PlayGroundFooter({ id, type }) {
-    // const [inHistory, setInHistory] = useState(false);
     const navigate = useNavigate();
-
-    // const platform = detectPlatform();
-    // const { addToHistory } = useSaveWatchHistory();
-
-    /*const HandleAddToHistory = () => {
-
-        try {
-            if (!inHistory) {
-                setInHistory(true);
-                addToHistory(id, type).catch((err) => {
-                    console.error('Failed to save watch history:', err);
-                });
-            }
-
-        } catch (error) {
-            console.error('Error adding to history:', error);
-        }
-    };*/
 
     return (
         <div className="footer-fixed bd-callout-dark w-100 position-fixed bottom-0 shadow">

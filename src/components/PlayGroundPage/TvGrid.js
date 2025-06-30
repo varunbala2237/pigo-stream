@@ -24,6 +24,7 @@ function TvGrid({ id, type, mediaInfo, setBackgroundImage }) {
   );
 
   // Initialize required useStates
+  const [inHistory, setInHistory] = useState(false);
   const [cast, setCast] = useState([]);
   const [selectedServer, setSelectedServer] = useState(null);
   const [seasons, setSeasons] = useState([]);
@@ -210,8 +211,12 @@ function TvGrid({ id, type, mediaInfo, setBackgroundImage }) {
 
             {activeTab === 'player' && (
               <PlayerSection
+                id={id}
+                type={type}
                 depsReady={depsReady}
                 selectedServer={selectedServer}
+                inHistory={inHistory}
+                setInHistory={setInHistory}
               />
             )}
 

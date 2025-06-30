@@ -20,6 +20,7 @@ function AnimeGrid({ id, type, mediaInfo, animeInfo, setBackgroundImage }) {
   );
 
   // Initialize required useStates
+  const [inHistory, setInHistory] = useState(false);
   const [cast, setCast] = useState([]);
 
   // Compute the initial index based on matching full date
@@ -236,8 +237,12 @@ function AnimeGrid({ id, type, mediaInfo, animeInfo, setBackgroundImage }) {
 
             {activeTab === 'player' && (
               <PlayerSection
+                id={id}
+                type={type}
                 depsReady={depsReady}
                 selectedServer={selectedServer}
+                inHistory={inHistory}
+                setInHistory={setInHistory}
               />
             )}
 
