@@ -30,6 +30,7 @@ function PlayerSection({ id, type, depsReady, selectedServer, inHistory, setInHi
                             className="w-100 h-100 custom-theme-radius-low border-0"
                             frameBorder="0"
                             allowFullScreen
+                            allow="autoplay; encrypted-media; fullscreen; picture-in-picture"
                             onLoad={handleAddToHistory}
                         />
                     ) : (
