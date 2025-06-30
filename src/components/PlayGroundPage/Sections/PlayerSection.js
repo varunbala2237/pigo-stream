@@ -25,12 +25,12 @@ function PlayerSection({ id, type, depsReady, selectedServer, inHistory, setInHi
                 <div className="position-relative custom-theme-radius-low player">
                     {depsReady ? (
                         <iframe
+                            title="Video Stream"
                             src={selectedServer?.server_link}
+                            className="w-100 h-100 custom-theme-radius-low border-0"
                             frameBorder="0"
                             allowFullScreen
-                            className="w-100 h-100 custom-theme-radius-low border-0"
                             onLoad={handleAddToHistory}
-                            title="Video Stream"
                         />
                     ) : (
                         <div className="stream-overlay d-flex flex-column justify-content-center align-items-center custom-theme-radius-low text-center text-white">
