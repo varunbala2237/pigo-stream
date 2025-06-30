@@ -26,8 +26,6 @@ function PlayerSection({ id, type, depsReady, selectedServer, inHistory, setInHi
                     {depsReady ? (
                         <iframe
                             src={selectedServer?.server_link}
-                            allowFullScreen
-                            allow="autoplay; encrypted-media"
                             className="w-100 h-100 custom-theme-radius-low border-0"
                             onLoad={handleAddToHistory}
                             title="Video Stream"

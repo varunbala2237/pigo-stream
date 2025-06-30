@@ -4,7 +4,7 @@ import { useLocation } from 'react-router-dom';
 import useFetchMediaInfo from '../../hooks/PlayGroundPage/useFetchMediaInfo';
 import useFetchAnimeInfo from '../../hooks/PlayGroundPage/useFetchAnimeInfo';
 import Header from '../Header';
-import PlayGroundFooter from './PlayGroundFooter';
+import Footer from '../Footer';
 import ReCaptcha from './ReCaptcha';
 import MovieGrid from './MovieGrid';
 import TvGrid from './TvGrid';
@@ -101,9 +101,10 @@ function PlayGround() {
       {/* Connection Modal */}
       {isError && <ConnectionModal show={isError} />}
 
-      {/* Backspace & PlayGroundFooter */}
+      {/* Footer Backspace */}
       <div className="divider" style={{ height: '6rem' }}></div>
-      <PlayGroundFooter id={id} type={type} />
+      {/* Footer */}
+      <Footer />
     </div>
   );
 }
