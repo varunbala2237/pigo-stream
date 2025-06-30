@@ -22,7 +22,7 @@ function PlayerSection({ id, type, depsReady, selectedServer, inHistory, setInHi
     return (
         <div className="d-flex justify-content-center w-100">
             <div className="d-flex justify-content-center custom-bg custom-theme-radius-low p-2 player-container">
-                <div className="position-relative custom-theme-radius-low player">
+                <div className="position-relative overflow-hidden custom-theme-radius-low player">
                     {depsReady ? (
                         <iframe
                             title="Video Stream"
