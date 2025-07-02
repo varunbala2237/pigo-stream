@@ -63,7 +63,7 @@ const IndexUI = () => {
           backgroundImage: shouldHideBackground
             ? 'none' // Hide background when search is active or query exists
             : backgroundImage
-              ? `linear-gradient(to bottom, rgba(0, 0, 0, 0), rgb(0, 0, 0)), url(${backgroundImage})`
+              ? `linear-gradient(to bottom, rgba(18, 18, 18, 0), #121212), url(${backgroundImage})`
               : 'none',
         }}
       >
@@ -74,8 +74,10 @@ const IndexUI = () => {
             style={{
               top: 0,
               left: 0,
-              background: 'rgba(0, 0, 0, 0.4)',
+              background: 'rgba(18, 18, 18, 0.5)',
               zIndex: 1,
+              backdropFilter: 'blur(4px)',
+              WebkitBackdropFilter: 'blur(4px)',
             }}
           ></div>
         )}
