@@ -177,29 +177,25 @@ function WatchHistoryGrid({ userUID }) {
                 </div>
 
                 <div className="d-flex justify-content-start align-items-center border-start border-4 theme-border-color dynamic-ts ps-2 mt-5">
-                        <b>Watch History: Movies</b>
+                    <b>Watch History: Movies</b>
                 </div>
 
                 {/* Watch History: Movies */}
                 <div className="position-relative my-2">
-                    {moviesHistory.filter(Boolean).length > 3 && (
-                        <>
-                            <button
-                                className="btn btn-dark custom-bg rounded-pill py-2 position-absolute start-0 translate-middle-y d-none d-md-block"
-                                onClick={() => scroll(moviesRef, 'left')}
-                                style={{ zIndex: 1, top: '50%', transform: 'translateY(-50%)' }}
-                            >
-                                <i className="bi bi-chevron-left"></i>
-                            </button>
-                            <button
-                                className="btn btn-dark custom-bg rounded-pill py-2 position-absolute end-0 translate-middle-y d-none d-md-block"
-                                onClick={() => scroll(moviesRef, 'right')}
-                                style={{ zIndex: 1, top: '50%', transform: 'translateY(-50%)' }}
-                            >
-                                <i className="bi bi-chevron-right"></i>
-                            </button>
-                        </>
-                    )}
+                    <button
+                        className="btn btn-dark custom-bg rounded-pill py-2 position-absolute start-0 translate-middle-y"
+                        onClick={() => scroll(moviesRef, 'left')}
+                        style={{ zIndex: 1, top: '50%', transform: 'translateY(-50%)' }}
+                    >
+                        <i className="bi bi-chevron-left"></i>
+                    </button>
+                    <button
+                        className="btn btn-dark custom-bg rounded-pill py-2 position-absolute end-0 translate-middle-y"
+                        onClick={() => scroll(moviesRef, 'right')}
+                        style={{ zIndex: 1, top: '50%', transform: 'translateY(-50%)' }}
+                    >
+                        <i className="bi bi-chevron-right"></i>
+                    </button>
 
                     <div
                         ref={moviesRef}
@@ -245,29 +241,25 @@ function WatchHistoryGrid({ userUID }) {
                 )}
 
                 <div className="d-flex justify-content-start align-items-center border-start border-4 theme-border-color dynamic-ts ps-2 mt-5">
-                        <b>Watch History: Shows</b>
+                    <b>Watch History: Shows</b>
                 </div>
 
                 {/* Watch History: Shows */}
                 <div className="position-relative my-2">
-                    {showsHistory.filter(Boolean).length > 3 && (
-                        <>
-                            <button
-                                className="btn btn-dark custom-bg rounded-pill py-2 position-absolute start-0 translate-middle-y d-none d-md-block"
-                                onClick={() => scroll(showsRef, 'left')}
-                                style={{ zIndex: 1, top: '50%', transform: 'translateY(-50%)' }}
-                            >
-                                <i className="bi bi-chevron-left"></i>
-                            </button>
-                            <button
-                                className="btn btn-dark custom-bg rounded-pill py-2 position-absolute end-0 translate-middle-y d-none d-md-block"
-                                onClick={() => scroll(showsRef, 'right')}
-                                style={{ zIndex: 1, top: '50%', transform: 'translateY(-50%)' }}
-                            >
-                                <i className="bi bi-chevron-right"></i>
-                            </button>
-                        </>
-                    )}
+                    <button
+                        className="btn btn-dark custom-bg rounded-pill py-2 position-absolute start-0 translate-middle-y"
+                        onClick={() => scroll(showsRef, 'left')}
+                        style={{ zIndex: 1, top: '50%', transform: 'translateY(-50%)' }}
+                    >
+                        <i className="bi bi-chevron-left"></i>
+                    </button>
+                    <button
+                        className="btn btn-dark custom-bg rounded-pill py-2 position-absolute end-0 translate-middle-y"
+                        onClick={() => scroll(showsRef, 'right')}
+                        style={{ zIndex: 1, top: '50%', transform: 'translateY(-50%)' }}
+                    >
+                        <i className="bi bi-chevron-right"></i>
+                    </button>
 
                     <div
                         ref={showsRef}

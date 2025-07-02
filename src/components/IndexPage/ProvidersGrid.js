@@ -154,24 +154,21 @@ function ProvidersGrid({ setIsProvidersLoading, setIsProvidersLoaded, setHasProv
 
             {/* Providers Selection Section */}
             <div className="position-relative my-2">
-                {PROVIDERS.length > 4 && (
-                    <>
-                        <button
-                            className="btn btn-dark custom-bg rounded-pill py-2 position-absolute start-0 translate-middle-y d-none d-md-block"
-                            onClick={() => scroll(providersRef, 'left')}
-                            style={{ zIndex: 1, top: '50%', transform: 'translateY(-50%)' }}
-                        >
-                            <i className="bi bi-chevron-left"></i>
-                        </button>
-                        <button
-                            className="btn btn-dark custom-bg rounded-pill py-2 position-absolute end-0 translate-middle-y d-none d-md-block"
-                            onClick={() => scroll(providersRef, 'right')}
-                            style={{ zIndex: 1, top: '50%', transform: 'translateY(-50%)' }}
-                        >
-                            <i className="bi bi-chevron-right"></i>
-                        </button>
-                    </>
-                )}
+                <button
+                    className="btn btn-dark custom-bg rounded-pill py-2 position-absolute start-0 translate-middle-y"
+                    onClick={() => scroll(providersRef, 'left')}
+                    style={{ zIndex: 1, top: '50%', transform: 'translateY(-50%)' }}
+                >
+                    <i className="bi bi-chevron-left"></i>
+                </button>
+                <button
+                    className="btn btn-dark custom-bg rounded-pill py-2 position-absolute end-0 translate-middle-y"
+                    onClick={() => scroll(providersRef, 'right')}
+                    style={{ zIndex: 1, top: '50%', transform: 'translateY(-50%)' }}
+                >
+                    <i className="bi bi-chevron-right"></i>
+                </button>
+
                 <div
                     ref={providersRef}
                     className="d-flex custom-theme-radius-low overflow-auto scroll-hide custom-gap"
@@ -206,24 +203,21 @@ function ProvidersGrid({ setIsProvidersLoading, setIsProvidersLoaded, setHasProv
 
             {/* Providers Movies Section */}
             <div className="position-relative my-2">
-                {movies.filter(Boolean).length > 3 && (
-                    <>
-                        <button
-                            className="btn btn-dark custom-bg rounded-pill py-2 position-absolute start-0 translate-middle-y d-none d-md-block"
-                            onClick={() => scroll(moviesRef, 'left')}
-                            style={{ zIndex: 1, top: '50%', transform: 'translateY(-50%)' }}
-                        >
-                            <i className="bi bi-chevron-left"></i>
-                        </button>
-                        <button
-                            className="btn btn-dark custom-bg rounded-pill py-2 position-absolute end-0 translate-middle-y d-none d-md-block"
-                            onClick={() => scroll(moviesRef, 'right')}
-                            style={{ zIndex: 1, top: '50%', transform: 'translateY(-50%)' }}
-                        >
-                            <i className="bi bi-chevron-right"></i>
-                        </button>
-                    </>
-                )}
+                <button
+                    className="btn btn-dark custom-bg rounded-pill py-2 position-absolute start-0 translate-middle-y"
+                    onClick={() => scroll(moviesRef, 'left')}
+                    style={{ zIndex: 1, top: '50%', transform: 'translateY(-50%)' }}
+                >
+                    <i className="bi bi-chevron-left"></i>
+                </button>
+                <button
+                    className="btn btn-dark custom-bg rounded-pill py-2 position-absolute end-0 translate-middle-y"
+                    onClick={() => scroll(moviesRef, 'right')}
+                    style={{ zIndex: 1, top: '50%', transform: 'translateY(-50%)' }}
+                >
+                    <i className="bi bi-chevron-right"></i>
+                </button>
+
                 <div ref={moviesRef} className="d-flex custom-theme-radius-low overflow-auto scroll-hide custom-gap" style={{ scrollSnapType: 'x mandatory' }}>
                     {(
                         !isLoading && !isError && movies?.length > 0 ? movies : []
@@ -252,24 +246,21 @@ function ProvidersGrid({ setIsProvidersLoading, setIsProvidersLoaded, setHasProv
 
             {/* Providers Shows Section */}
             <div className="position-relative my-2">
-                {shows.filter(Boolean).length > 3 && (
-                    <>
-                        <button
-                            className="btn btn-dark custom-bg rounded-pill py-2 position-absolute start-0 translate-middle-y d-none d-md-block"
-                            onClick={() => scroll(showsRef, 'left')}
-                            style={{ zIndex: 1, top: '50%', transform: 'translateY(-50%)' }}
-                        >
-                            <i className="bi bi-chevron-left"></i>
-                        </button>
-                        <button
-                            className="btn btn-dark custom-bg rounded-pill py-2 position-absolute end-0 translate-middle-y d-none d-md-block"
-                            onClick={() => scroll(showsRef, 'right')}
-                            style={{ zIndex: 1, top: '50%', transform: 'translateY(-50%)' }}
-                        >
-                            <i className="bi bi-chevron-right"></i>
-                        </button>
-                    </>
-                )}
+                <button
+                    className="btn btn-dark custom-bg rounded-pill py-2 position-absolute start-0 translate-middle-y"
+                    onClick={() => scroll(showsRef, 'left')}
+                    style={{ zIndex: 1, top: '50%', transform: 'translateY(-50%)' }}
+                >
+                    <i className="bi bi-chevron-left"></i>
+                </button>
+                <button
+                    className="btn btn-dark custom-bg rounded-pill py-2 position-absolute end-0 translate-middle-y"
+                    onClick={() => scroll(showsRef, 'right')}
+                    style={{ zIndex: 1, top: '50%', transform: 'translateY(-50%)' }}
+                >
+                    <i className="bi bi-chevron-right"></i>
+                </button>
+
                 <div ref={showsRef} className="d-flex custom-theme-radius-low overflow-auto scroll-hide custom-gap" style={{ scrollSnapType: 'x mandatory' }}>
                     {(
                         !isLoading && !isError && shows?.length > 0 ? shows : []

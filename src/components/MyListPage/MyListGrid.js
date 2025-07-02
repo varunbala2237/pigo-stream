@@ -149,29 +149,25 @@ function MyListGrid({ userUID }) {
                 </div>
 
                 <div className="d-flex justify-content-start align-items-center border-start border-4 theme-border-color dynamic-ts ps-2 mt-5">
-                        <b>My List: Movies</b>
+                    <b>My List: Movies</b>
                 </div>
 
                 {/* My List: Movies */}
                 <div className="position-relative my-2">
-                    {moviesList.filter(Boolean).length > 3 && (
-                        <>
-                            <button
-                                className="btn btn-dark custom-bg rounded-pill py-2 position-absolute start-0 translate-middle-y d-none d-md-block"
-                                onClick={() => scroll(moviesRef, 'left')}
-                                style={{ zIndex: 1, top: '50%', transform: 'translateY(-50%)' }}
-                            >
-                                <i className="bi bi-chevron-left"></i>
-                            </button>
-                            <button
-                                className="btn btn-dark custom-bg rounded-pill py-2 position-absolute end-0 translate-middle-y d-none d-md-block"
-                                onClick={() => scroll(moviesRef, 'right')}
-                                style={{ zIndex: 1, top: '50%', transform: 'translateY(-50%)' }}
-                            >
-                                <i className="bi bi-chevron-right"></i>
-                            </button>
-                        </>
-                    )}
+                    <button
+                        className="btn btn-dark custom-bg rounded-pill py-2 position-absolute start-0 translate-middle-y"
+                        onClick={() => scroll(moviesRef, 'left')}
+                        style={{ zIndex: 1, top: '50%', transform: 'translateY(-50%)' }}
+                    >
+                        <i className="bi bi-chevron-left"></i>
+                    </button>
+                    <button
+                        className="btn btn-dark custom-bg rounded-pill py-2 position-absolute end-0 translate-middle-y"
+                        onClick={() => scroll(moviesRef, 'right')}
+                        style={{ zIndex: 1, top: '50%', transform: 'translateY(-50%)' }}
+                    >
+                        <i className="bi bi-chevron-right"></i>
+                    </button>
 
                     <div
                         ref={moviesRef}
@@ -217,29 +213,25 @@ function MyListGrid({ userUID }) {
                 )}
 
                 <div className="d-flex justify-content-start align-items-center border-start border-4 theme-border-color dynamic-ts ps-2 mt-5">
-                        <b>My List: Shows</b>
+                    <b>My List: Shows</b>
                 </div>
 
                 {/* My List: Shows */}
                 <div className="position-relative my-2">
-                    {showsList.filter(Boolean).length > 3 && (
-                        <>
-                            <button
-                                className="btn btn-dark custom-bg rounded-pill py-2 position-absolute start-0 translate-middle-y d-none d-md-block"
-                                onClick={() => scroll(showsRef, 'left')}
-                                style={{ zIndex: 1, top: '50%', transform: 'translateY(-50%)' }}
-                            >
-                                <i className="bi bi-chevron-left"></i>
-                            </button>
-                            <button
-                                className="btn btn-dark custom-bg rounded-pill py-2 position-absolute end-0 translate-middle-y d-none d-md-block"
-                                onClick={() => scroll(showsRef, 'right')}
-                                style={{ zIndex: 1, top: '50%', transform: 'translateY(-50%)' }}
-                            >
-                                <i className="bi bi-chevron-right"></i>
-                            </button>
-                        </>
-                    )}
+                    <button
+                        className="btn btn-dark custom-bg rounded-pill py-2 position-absolute start-0 translate-middle-y"
+                        onClick={() => scroll(showsRef, 'left')}
+                        style={{ zIndex: 1, top: '50%', transform: 'translateY(-50%)' }}
+                    >
+                        <i className="bi bi-chevron-left"></i>
+                    </button>
+                    <button
+                        className="btn btn-dark custom-bg rounded-pill py-2 position-absolute end-0 translate-middle-y"
+                        onClick={() => scroll(showsRef, 'right')}
+                        style={{ zIndex: 1, top: '50%', transform: 'translateY(-50%)' }}
+                    >
+                        <i className="bi bi-chevron-right"></i>
+                    </button>
 
                     <div
                         ref={showsRef}

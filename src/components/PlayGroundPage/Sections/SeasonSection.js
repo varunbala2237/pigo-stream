@@ -49,24 +49,20 @@ function SeasonSection({
       </div>
 
       <div className="position-relative">
-        {seasons.filter(Boolean).length > 3 && (
-          <>
-            <button
-              className="btn btn-dark custom-bg rounded-pill py-2 position-absolute start-0 translate-middle-y d-none d-md-block"
-              onClick={() => scroll(seasonScrollRef, 'left')}
-              style={{ zIndex: 1, top: '50%', transform: 'translateY(-50%)' }}
-            >
-              <i className="bi bi-chevron-left"></i>
-            </button>
-            <button
-              className="btn btn-dark custom-bg rounded-pill py-2 position-absolute end-0 translate-middle-y d-none d-md-block"
-              onClick={() => scroll(seasonScrollRef, 'right')}
-              style={{ zIndex: 1, top: '50%', transform: 'translateY(-50%)' }}
-            >
-              <i className="bi bi-chevron-right"></i>
-            </button>
-          </>
-        )}
+        <button
+          className="btn btn-dark custom-bg rounded-pill py-2 position-absolute start-0 translate-middle-y"
+          onClick={() => scroll(seasonScrollRef, 'left')}
+          style={{ zIndex: 1, top: '50%', transform: 'translateY(-50%)' }}
+        >
+          <i className="bi bi-chevron-left"></i>
+        </button>
+        <button
+          className="btn btn-dark custom-bg rounded-pill py-2 position-absolute end-0 translate-middle-y"
+          onClick={() => scroll(seasonScrollRef, 'right')}
+          style={{ zIndex: 1, top: '50%', transform: 'translateY(-50%)' }}
+        >
+          <i className="bi bi-chevron-right"></i>
+        </button>
 
         <div
           ref={seasonScrollRef}

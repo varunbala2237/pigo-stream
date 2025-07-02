@@ -51,7 +51,6 @@ function TvGrid({ id, type, mediaInfo, setBackgroundImage }) {
 
   // Fetch all available servers
   const { servers, loading: loadingServers } = useFetchServers(id, type, selectedSeason, selectedEpisode);
-  const depsReady = !loadingServers && selectedServer;
 
   const { addToList } = useSaveMyList();
   const { isInList, loading: isListLoading, refetch } = useCheckMyList(id);
@@ -213,7 +212,7 @@ function TvGrid({ id, type, mediaInfo, setBackgroundImage }) {
               <PlayerSection
                 id={id}
                 type={type}
-                depsReady={depsReady}
+                loadingServers={loadingServers}
                 selectedServer={selectedServer}
                 inHistory={inHistory}
                 setInHistory={setInHistory}
@@ -247,8 +246,7 @@ function TvGrid({ id, type, mediaInfo, setBackgroundImage }) {
 
             <div className="d-flex flex-column align-items-start custom-theme-radius-low my-2 w-100">
               <div className="container py-2 text-white">
-                <div className="d-flex flex-row dynamic-ts">
-                  <i className="bi bi-person-fill me-2"></i>
+                <div className="d-flex flex-row border-start border-4 theme-border-color dynamic-ts ps-2">
                   Cast
                 </div>
                 <div className="row justify-content-center">

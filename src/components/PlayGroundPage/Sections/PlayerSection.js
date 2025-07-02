@@ -2,7 +2,7 @@
 import useSaveWatchHistory from '../../../hooks/WatchHistoryPage/useSaveWatchHistory';
 import './PlayerSection.css';
 
-function PlayerSection({ id, type, depsReady, selectedServer, inHistory, setInHistory }) {
+function PlayerSection({ id, type, loadingServers, selectedServer, inHistory, setInHistory }) {
     const { addToHistory } = useSaveWatchHistory();
 
     // Handling add to history
@@ -23,7 +23,7 @@ function PlayerSection({ id, type, depsReady, selectedServer, inHistory, setInHi
         <div className="d-flex justify-content-center w-100">
             <div className="d-flex justify-content-center custom-bg custom-theme-radius-low p-2 player-container">
                 <div className="position-relative overflow-hidden custom-theme-radius-low player">
-                    {depsReady ? (
+                    {!loadingServers ? (
                         <iframe
                             title="Video Stream"
                             src={selectedServer?.server_link}

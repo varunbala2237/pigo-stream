@@ -77,24 +77,20 @@ function EpisodeSection({
       </div>
 
       <div className="position-relative">
-        {episodes.filter(Boolean).length > 3 && (
-          <>
-            <button
-              className="btn btn-dark custom-bg rounded-pill py-2 position-absolute start-0 translate-middle-y d-none d-md-block"
-              onClick={() => scroll(episodeScrollRef, 'left')}
-              style={{ zIndex: 1, top: '50%', transform: 'translateY(-50%)' }}
-            >
-              <i className="bi bi-chevron-left"></i>
-            </button>
-            <button
-              className="btn btn-dark custom-bg rounded-pill py-2 position-absolute end-0 translate-middle-y d-none d-md-block"
-              onClick={() => scroll(episodeScrollRef, 'right')}
-              style={{ zIndex: 1, top: '50%', transform: 'translateY(-50%)' }}
-            >
-              <i className="bi bi-chevron-right"></i>
-            </button>
-          </>
-        )}
+        <button
+          className="btn btn-dark custom-bg rounded-pill py-2 position-absolute start-0 translate-middle-y"
+          onClick={() => scroll(episodeScrollRef, 'left')}
+          style={{ zIndex: 1, top: '50%', transform: 'translateY(-50%)' }}
+        >
+          <i className="bi bi-chevron-left"></i>
+        </button>
+        <button
+          className="btn btn-dark custom-bg rounded-pill py-2 position-absolute end-0 translate-middle-y"
+          onClick={() => scroll(episodeScrollRef, 'right')}
+          style={{ zIndex: 1, top: '50%', transform: 'translateY(-50%)' }}
+        >
+          <i className="bi bi-chevron-right"></i>
+        </button>
 
         <div
           ref={episodeScrollRef}

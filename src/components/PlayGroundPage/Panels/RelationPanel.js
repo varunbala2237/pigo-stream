@@ -42,24 +42,20 @@ function RelationPanel({ animeInfo, selectedRelationIndex, onRelationChange, rel
             </div>
 
             <div className="position-relative">
-                {animeInfo.length > 3 && (
-                    <>
-                        <button
-                            className="btn btn-dark custom-bg rounded-pill py-2 position-absolute start-0 translate-middle-y d-none d-md-block"
-                            onClick={() => scroll(relationScrollRef, 'left')}
-                            style={{ zIndex: 1, top: '50%', transform: 'translateY(-50%)' }}
-                        >
-                            <i className="bi bi-chevron-left"></i>
-                        </button>
-                        <button
-                            className="btn btn-dark custom-bg rounded-pill py-2 position-absolute end-0 translate-middle-y d-none d-md-block"
-                            onClick={() => scroll(relationScrollRef, 'right')}
-                            style={{ zIndex: 1, top: '50%', transform: 'translateY(-50%)' }}
-                        >
-                            <i className="bi bi-chevron-right"></i>
-                        </button>
-                    </>
-                )}
+                <button
+                    className="btn btn-dark custom-bg rounded-pill py-2 position-absolute start-0 translate-middle-y"
+                    onClick={() => scroll(relationScrollRef, 'left')}
+                    style={{ zIndex: 1, top: '50%', transform: 'translateY(-50%)' }}
+                >
+                    <i className="bi bi-chevron-left"></i>
+                </button>
+                <button
+                    className="btn btn-dark custom-bg rounded-pill py-2 position-absolute end-0 translate-middle-y"
+                    onClick={() => scroll(relationScrollRef, 'right')}
+                    style={{ zIndex: 1, top: '50%', transform: 'translateY(-50%)' }}
+                >
+                    <i className="bi bi-chevron-right"></i>
+                </button>
 
                 <div
                     ref={relationScrollRef}

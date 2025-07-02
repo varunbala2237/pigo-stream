@@ -94,30 +94,27 @@ function SearchGrid({ searchQuery, setIsSearchLoading, setIsSearchLoaded, setHas
   return (
     <>
       <div className="d-flex justify-content-start align-items-center border-start border-4 theme-border-color dynamic-ts ps-2 mt-5">
-          <b>Search Results: Movies</b>
+        <b>Search Results: Movies</b>
       </div>
 
       {/* Search Results: Movies */}
       {(
         <div className="position-relative my-2">
-          {searchQuery.trim() && movies?.filter(Boolean).length > 3 && (
-            <>
-              <button
-                className="btn btn-dark custom-bg rounded-pill py-2 position-absolute start-0 translate-middle-y d-none d-md-block"
-                onClick={() => scroll(movieRef, 'left')}
-                style={{ zIndex: 1, top: '50%', transform: 'translateY(-50%)' }}
-              >
-                <i className="bi bi-chevron-left"></i>
-              </button>
-              <button
-                className="btn btn-dark custom-bg rounded-pill py-2 position-absolute end-0 translate-middle-y d-none d-md-block"
-                onClick={() => scroll(movieRef, 'right')}
-                style={{ zIndex: 1, top: '50%', transform: 'translateY(-50%)' }}
-              >
-                <i className="bi bi-chevron-right"></i>
-              </button>
-            </>
-          )}
+          <button
+            className="btn btn-dark custom-bg rounded-pill py-2 position-absolute start-0 translate-middle-y"
+            onClick={() => scroll(movieRef, 'left')}
+            style={{ zIndex: 1, top: '50%', transform: 'translateY(-50%)' }}
+          >
+            <i className="bi bi-chevron-left"></i>
+          </button>
+          <button
+            className="btn btn-dark custom-bg rounded-pill py-2 position-absolute end-0 translate-middle-y"
+            onClick={() => scroll(movieRef, 'right')}
+            style={{ zIndex: 1, top: '50%', transform: 'translateY(-50%)' }}
+          >
+            <i className="bi bi-chevron-right"></i>
+          </button>
+
           <div
             ref={movieRef}
             className="d-flex custom-theme-radius-low overflow-auto scroll-hide custom-gap"
@@ -147,30 +144,27 @@ function SearchGrid({ searchQuery, setIsSearchLoading, setIsSearchLoaded, setHas
       )}
 
       <div className="d-flex justify-content-start align-items-center border-start border-4 theme-border-color dynamic-ts ps-2 mt-5">
-          <b>Search Results: Shows</b>
+        <b>Search Results: Shows</b>
       </div>
 
       {/* Search Results: Shows */}
       {(
         <div className="position-relative my-2">
-          {searchQuery.trim() && shows?.filter(Boolean).length > 3 && (
-            <>
-              <button
-                className="btn btn-dark custom-bg rounded-pill py-2 position-absolute start-0 translate-middle-y d-none d-md-block"
-                onClick={() => scroll(showsRef, 'left')}
-                style={{ zIndex: 1, top: '50%', transform: 'translateY(-50%)' }}
-              >
-                <i className="bi bi-chevron-left"></i>
-              </button>
-              <button
-                className="btn btn-dark custom-bg rounded-pill py-2 position-absolute end-0 translate-middle-y d-none d-md-block"
-                onClick={() => scroll(showsRef, 'right')}
-                style={{ zIndex: 1, top: '50%', transform: 'translateY(-50%)' }}
-              >
-                <i className="bi bi-chevron-right"></i>
-              </button>
-            </>
-          )}
+          <button
+            className="btn btn-dark custom-bg rounded-pill py-2 position-absolute start-0 translate-middle-y"
+            onClick={() => scroll(showsRef, 'left')}
+            style={{ zIndex: 1, top: '50%', transform: 'translateY(-50%)' }}
+          >
+            <i className="bi bi-chevron-left"></i>
+          </button>
+          <button
+            className="btn btn-dark custom-bg rounded-pill py-2 position-absolute end-0 translate-middle-y"
+            onClick={() => scroll(showsRef, 'right')}
+            style={{ zIndex: 1, top: '50%', transform: 'translateY(-50%)' }}
+          >
+            <i className="bi bi-chevron-right"></i>
+          </button>
+
           <div
             ref={showsRef}
             className="d-flex custom-theme-radius-low overflow-auto scroll-hide custom-gap"
