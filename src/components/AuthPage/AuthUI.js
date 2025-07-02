@@ -14,6 +14,7 @@ import {
 import useCreateUser from '../../hooks/AuthPage/useCreateUser';
 import OverlaySpinner from '../../utils/OverlaySpinner';
 import Alert from '../../utils/Alert';
+import './AuthUI.css';
 
 import { getSessionValue, setSessionValue } from '../../utils/sessionStorageStates';
 
@@ -296,10 +297,12 @@ function AuthUI() {
                 {/* Overlay spinner for loading state */}
                 <OverlaySpinner visible={isPageLoading} />
 
-                <div className="card custom-bg custom-theme-radius-low p-2">
-                    <div className="card-header d-flex justify-content-center align-items-center text-white">
-                        <img src="favicon.ico" alt="PigoStream" width="48" height="48" />
-                        <span className="dynamic-hs"><b>Pigo</b>Stream</span>
+                <div className="card custom-bg custom-theme-radius-low p-4">
+                    <div className="card-header d-flex justify-content-center align-items-center border-0 text-white">
+                        <div className="auth-branding">
+                            <img src="favicon.ico" alt="PigoStream" className="auth-logo" />
+                            <span className="auth-name dynamic-hs"><b>Pigo</b>Stream</span>
+                        </div>
                     </div>
                     <form onSubmit={isSignIn ? signInWithCredentials : signUpWithCredentials} className="text-white">
                         {!isSignIn && (
