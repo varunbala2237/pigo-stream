@@ -206,14 +206,12 @@ function InfoSection({
         </div>
         <div className="d-flex flex-row align-items-start custom-theme-radius-low w-100">
           <div className="section">
-            <div className="section">
               <dl className="text-start">
                 <dt className="fw-bold dynamic-fs">Overview:</dt>
                 <dd>
                   <OverviewSection text={overview} />
                 </dd>
               </dl>
-            </div>
           </div>
         </div>
       </div>

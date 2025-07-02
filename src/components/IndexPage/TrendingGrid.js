@@ -94,7 +94,7 @@ function TrendingGrid({ setIsTrendingLoading, setIsTrendingLoaded, setHasTrendin
 
   return (
     <>
-      <div className="d-flex justify-content-start align-items-center dynamic-ts mt-5">
+      <div className="d-flex justify-content-start align-items-center border-start border-4 theme-border-color dynamic-ts ps-2 mt-5">
         <b>Trending: Movies</b>
       </div>
 
@@ -142,7 +142,7 @@ function TrendingGrid({ setIsTrendingLoading, setIsTrendingLoaded, setHasTrendin
         </div>
       )}
 
-      <div className="d-flex justify-content-start align-items-center dynamic-ts mt-5">
+      <div className="d-flex justify-content-start align-items-center border-start border-4 theme-border-color dynamic-ts ps-2 mt-5">
         <b>Trending: Shows</b>
       </div>
 

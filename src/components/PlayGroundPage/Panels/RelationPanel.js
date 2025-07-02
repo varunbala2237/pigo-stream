@@ -63,7 +63,7 @@ function RelationPanel({ animeInfo, selectedRelationIndex, onRelationChange, rel
 
                 <div
                     ref={relationScrollRef}
-                    className="d-flex flex-row overflow-auto scroll-hide align-items-start custom-theme-radius-low gap-1"
+                    className="d-flex flex-row overflow-auto scroll-hide align-items-start custom-theme-radius-low gap-2"
                 >
                     {animeInfo.map((entry, index) => {
                         const { title, coverImage, startDate, format } = entry;

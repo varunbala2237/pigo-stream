@@ -148,10 +148,8 @@ function MyListGrid({ userUID }) {
                     </span>
                 </div>
 
-                <div className="d-flex justify-content-start align-items-center mt-5">
-                    <span className="dynamic-ts">
+                <div className="d-flex justify-content-start align-items-center border-start border-4 theme-border-color dynamic-ts ps-2 mt-5">
                         <b>My List: Movies</b>
-                    </span>
                 </div>
 
                 {/* My List: Movies */}
@@ -218,10 +216,8 @@ function MyListGrid({ userUID }) {
                     </div>
                 )}
 
-                <div className="d-flex justify-content-start align-items-center mt-5">
-                    <span className="dynamic-ts">
+                <div className="d-flex justify-content-start align-items-center border-start border-4 theme-border-color dynamic-ts ps-2 mt-5">
                         <b>My List: Shows</b>
-                    </span>
                 </div>
 
                 {/* My List: Shows */}

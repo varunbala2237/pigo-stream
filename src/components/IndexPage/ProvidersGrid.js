@@ -148,7 +148,7 @@ function ProvidersGrid({ setIsProvidersLoading, setIsProvidersLoaded, setHasProv
 
     return (
         <>
-            <div className="d-flex justify-content-start align-items-center dynamic-ts mt-5">
+            <div className="d-flex justify-content-start align-items-center border-start border-4 theme-border-color dynamic-ts ps-2 mt-5">
                 <b>Browse by Streaming Platform</b>
             </div>
 
@@ -174,7 +174,7 @@ function ProvidersGrid({ setIsProvidersLoading, setIsProvidersLoaded, setHasProv
                 )}
                 <div
                     ref={providersRef}
-                    className="d-flex custom-theme-radius-low overflow-auto scroll-hide gap-1"
+                    className="d-flex custom-theme-radius-low overflow-auto scroll-hide custom-gap"
                     style={{ scrollSnapType: 'x mandatory' }}
                 >
                     {PROVIDERS.map((provider) => (
@@ -200,7 +200,7 @@ function ProvidersGrid({ setIsProvidersLoading, setIsProvidersLoaded, setHasProv
                 </div>
             </div>
 
-            <div className="d-flex justify-content-start align-items-center dynamic-ts mt-5">
+            <div className="d-flex justify-content-start align-items-center border-start border-4 theme-border-color dynamic-ts ps-2 mt-5">
                 <b>{selectedProvider.name}: Movies</b>
             </div>
 
@@ -246,7 +246,7 @@ function ProvidersGrid({ setIsProvidersLoading, setIsProvidersLoaded, setHasProv
                 </div>
             </div>
 
-            <div className="d-flex justify-content-start align-items-center dynamic-ts mt-5">
+            <div className="d-flex justify-content-start align-items-center border-start border-4 theme-border-color dynamic-ts ps-2 mt-5">
                 <b>{selectedProvider.name}: Shows</b>
             </div>
 

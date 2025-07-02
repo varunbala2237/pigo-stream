@@ -176,10 +176,8 @@ function WatchHistoryGrid({ userUID }) {
                     </div>
                 </div>
 
-                <div className="d-flex justify-content-start align-items-center mt-5">
-                    <span className="dynamic-ts">
+                <div className="d-flex justify-content-start align-items-center border-start border-4 theme-border-color dynamic-ts ps-2 mt-5">
                         <b>Watch History: Movies</b>
-                    </span>
                 </div>
 
                 {/* Watch History: Movies */}
@@ -246,10 +244,8 @@ function WatchHistoryGrid({ userUID }) {
                     </div>
                 )}
 
-                <div className="d-flex justify-content-start align-items-center mt-5">
-                    <span className="dynamic-ts">
+                <div className="d-flex justify-content-start align-items-center border-start border-4 theme-border-color dynamic-ts ps-2 mt-5">
                         <b>Watch History: Shows</b>
-                    </span>
                 </div>
 
                 {/* Watch History: Shows */}

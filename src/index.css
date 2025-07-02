@@ -2,6 +2,8 @@
 :root {
   /* Main Font Styles */
   --main-font: "Inter", "Helvetica Neue", Arial, sans-serif;
+  --theme-color: #51a6f5;
+  --anime-theme-color: #ff69b4;
 }
 
 body {
@@ -32,34 +34,20 @@ body {
 
 /* Common & Custom colors */
 .theme-color {
-  color: #51a6f5;
+  color: var(--theme-color) !important;
 }
 
 .anime-theme-color {
-  color: #ff69b4;
+  color: var(--anime-theme-color) !important;
 }
 
-.theme-bg {
-  background-color: #51a6f5;
-  transition: background-color 0.3s ease;
-}
-
-.anime-theme-bg {
-  background-color: #ff69b4;
-  transition: background-color 0.3s ease;
-}
-
-.theme-bg:hover {
-  background-color: #3b8ed1;
-}
-
-.anime-theme-bg:hover {
-  background-color: #e0559e;
+.theme-border-color {
+  border-left-color: var(--theme-color) !important;
 }
 
 /* Common & Custom heights and widths */
 .custom-gap {
-  gap: 4px;
+  gap: 1rem;
 }
 
 .vh-100 {

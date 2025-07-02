@@ -93,10 +93,8 @@ function SearchGrid({ searchQuery, setIsSearchLoading, setIsSearchLoaded, setHas
 
   return (
     <>
-      <div className="d-flex justify-content-start align-items-center mt-5">
-        <span className="dynamic-ts">
+      <div className="d-flex justify-content-start align-items-center border-start border-4 theme-border-color dynamic-ts ps-2 mt-5">
           <b>Search Results: Movies</b>
-        </span>
       </div>
 
       {/* Search Results: Movies */}
@@ -148,10 +146,8 @@ function SearchGrid({ searchQuery, setIsSearchLoading, setIsSearchLoaded, setHas
         </div>
       )}
 
-      <div className="d-flex justify-content-start align-items-center mt-5">
-        <span className="dynamic-ts">
+      <div className="d-flex justify-content-start align-items-center border-start border-4 theme-border-color dynamic-ts ps-2 mt-5">
           <b>Search Results: Shows</b>
-        </span>
       </div>
 
       {/* Search Results: Shows */}

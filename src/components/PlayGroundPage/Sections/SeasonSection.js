@@ -70,7 +70,7 @@ function SeasonSection({
 
         <div
           ref={seasonScrollRef}
-          className="d-flex flex-row overflow-auto scroll-hide align-items-start custom-theme-radius-low gap-1"
+          className="d-flex flex-row overflow-auto scroll-hide align-items-start custom-theme-radius-low gap-2"
         >
           {seasons.length > 0 ? (
             seasons.map(season => {

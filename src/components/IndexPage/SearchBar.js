@@ -22,7 +22,7 @@ function SearchBar({
             id="prompt"
             type="text"
             className="form-control custom-bg text-white dynamic-fs custom-textarea rounded-pill-l border-0"
-            placeholder="Type here..."
+            placeholder="Search movies, shows, or keywords..."
             value={searchQuery}
             onChange={handleSearchInputChange}
             onFocus={handleFocus}
@@ -36,6 +36,7 @@ function SearchBar({
             >
               {searchHistory.length === 0 ? (
                 <li className="dropdown-item text-white bg-transparent text-nowrap text-truncate dynamic-fs">
+                  <i className="bi bi-clock-history text-white mx-3"></i>
                   No search history.
                 </li>
               ) : (
