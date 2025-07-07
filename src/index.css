@@ -45,6 +45,10 @@ body {
   border-left-color: var(--theme-color) !important;
 }
 
+.anime-theme-border-color {
+  border-left-color: var(--anime-theme-color) !important;
+}
+
 /* Common & Custom heights and widths */
 .custom-gap {
   gap: 1rem;
