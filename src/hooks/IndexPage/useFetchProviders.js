@@ -25,14 +25,14 @@ const fetchWithRetry = async (url, options = {}, retries = 3, delay = 1000) => {
 const useFetchProviders = (providerId, region) => {
   const [movies, setMovies] = useState([]);
   const [shows, setShows] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const [isError, setIsError] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     if (!providerId) return;
 
     const fetchData = async () => {
-      setIsLoading(true);
+      setLoading(true);
       try {
         const [movieRes, showRes] = await Promise.all([
           fetchWithRetry(`${BASE_URL}/pigo-stream/index/media/movie/by-provider?provider=${providerId}&region=${region}`),
@@ -40,18 +40,18 @@ const useFetchProviders = (providerId, region) => {
         ]);
         setMovies(movieRes.results || []);
         setShows(showRes.results || []);
-        setIsError(null);
+        setError(null);
       } catch (err) {
-        setIsError(err.message || 'Failed to fetch');
+        setError(err.message || 'Failed to fetch data.');
       } finally {
-        setIsLoading(false);
+        setLoading(false);
       }
     };
 
     fetchData();
   }, [providerId, region]);
 
-  return { movies, shows, isLoading, isError };
+  return { movies, shows, loading, error };
 };
 
 export default useFetchProviders;

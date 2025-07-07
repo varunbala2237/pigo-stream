@@ -306,7 +306,7 @@ function WatchHistoryGrid({ userUID }) {
             </div>
 
             {/* Connection Modal */}
-            {showConnectionModal && <ConnectionModal show={showConnectionModal} />}
+            {showConnectionModal && <ConnectionModal error={isError} />}
 
             {/* Alert Message */}
             {alert.message && (

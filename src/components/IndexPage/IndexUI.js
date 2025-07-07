@@ -8,8 +8,10 @@ import './IndexUI.css';
 
 const IndexUI = () => {
   const { selectedItemId } = useGenreRecommendations();
-  const { data: recommendedMedia, loading: loadingRecommendedMedia } = useFetchMediaDetails(selectedItemId);
-  const { data: popularMovies, loading: loadingPopularMovies } = useFetchMedia('popular', 'movie');
+  const { data: recommendedMedia, loading: loadingRecommendedMedia, error: errorRecommendedMedia } = useFetchMediaDetails(selectedItemId);
+  const { data: popularMovies, loading: loadingPopularMovies, error: errorPopularMovies } = useFetchMedia('popular', 'movie');
+
+  const isError = errorRecommendedMedia || errorPopularMovies;
 
   const [backgroundImage, setBackgroundImage] = useState(null);
   const [isRecommended, setIsRecommended] = useState(false);
@@ -96,6 +98,7 @@ const IndexUI = () => {
         triggerSearch={triggerSearch}
         setTriggerSearch={setTriggerSearch}
         isRecommended={isRecommended}
+        isIndexError={isError}
       />
     </div>
   );

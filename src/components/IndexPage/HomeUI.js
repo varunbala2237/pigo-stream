@@ -31,6 +31,7 @@ function HomeUI({
   triggerSearch,
   setTriggerSearch,
   isRecommended,
+  isIndexError,
 }) {
   const navigate = useNavigate();
 
@@ -47,10 +48,12 @@ function HomeUI({
   const [isPageLoading, setIsPageLoading] = useState(true);
 
   // Error handling flags
-  const [isTrendingLoaded, setIsTrendingLoaded] = useState(true);
-  const [isProvidersLoaded, setIsProvidersLoaded] = useState(true);
-  const [isSearchLoaded, setIsSearchLoaded] = useState(true);
+  const [isTrendingError, setIsTrendingError] = useState(false);
+  const [isProvidersError, setIsProvidersError] = useState(false);
+  const [isSearchError, setIsSearchError] = useState(false);
   const [showConnectionModal, setShowConnectionModal] = useState(false);
+
+  const isError = isIndexError || isTrendingError || isProvidersError || isSearchError;
 
   // No content handling flags
   const [hasTrendingContent, setHasTrendingContent] = useState(true);
@@ -149,10 +152,10 @@ function HomeUI({
 
   // Connection modal handling
   useEffect(() => {
-    if (!isTrendingLoaded || !isProvidersLoaded || !isSearchLoaded) {
+    if (isIndexError || isTrendingError || isProvidersError || isSearchError) {
       setShowConnectionModal(true);
     }
-  }, [isTrendingLoaded, isProvidersLoaded, isSearchLoaded]);
+  }, [isIndexError, isTrendingError, isProvidersError, isSearchError]);
 
   // Function to handle alert message updates
   const handleAlertMessage = (hasTrendingContent, hasProvidersContent, hasSearchContent, searchQuery) => {
@@ -392,11 +395,11 @@ function HomeUI({
               </div>
 
               {activeGrid === 'trending' && (
-                <TrendingGrid setIsTrendingLoading={setIsTrendingLoading} setIsTrendingLoaded={setIsTrendingLoaded} setHasTrendingContent={setHasTrendingContent} />
+                <TrendingGrid setIsTrendingLoading={setIsTrendingLoading} setIsTrendingError={setIsTrendingError} setHasTrendingContent={setHasTrendingContent} />
               )}
 
               {activeGrid === 'providers' && (
-                <ProvidersGrid setIsProvidersLoading={setIsProvidersLoading} setIsProvidersLoaded={setIsProvidersLoaded} setHasProvidersContent={setHasProvidersContent} />
+                <ProvidersGrid setIsProvidersLoading={setIsProvidersLoading} setIsProvidersError={setIsProvidersError} setHasProvidersContent={setHasProvidersContent} />
               )}
             </div>
             :
@@ -410,7 +413,7 @@ function HomeUI({
                 </span>
               </div>
 
-              <SearchGrid searchQuery={triggerSearch} setIsSearchLoading={setIsSearchLoading} setIsSearchLoaded={setIsSearchLoaded} setHasSearchContent={setHasSearchContent} />
+              <SearchGrid searchQuery={triggerSearch} setIsSearchLoading={setIsSearchLoading} setIsSearchError={setIsSearchError} setHasSearchContent={setHasSearchContent} />
             </div>}
         </div>
 
@@ -419,7 +422,7 @@ function HomeUI({
         <Footer showSearchBar={showSearchBar} setShowSearchBar={setShowSearchBar} handleSearchBar={handleSearchBar} />
 
         {/* Connection Modal */}
-        {showConnectionModal && <ConnectionModal show={showConnectionModal} />}
+        {showConnectionModal && <ConnectionModal error={isError} />}
 
         {/* Alert Message */}
         {alert.message && (

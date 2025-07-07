@@ -101,7 +101,7 @@ function PlayGround() {
       )}
 
       {/* Connection Modal */}
-      {isError && <ConnectionModal show={isError} />}
+      {isError && <ConnectionModal error={isError} />}
 
       {/* Footer Backspace */}
       <div className="divider" style={{ height: '6rem' }}></div>

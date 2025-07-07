@@ -8,7 +8,7 @@ import { getSessionValue, setSessionValue } from '../../utils/sessionStorageStat
 
 const SESSION_PATH = ['HomeUI', 'Grids', 'SearchGrid'];
 
-function SearchGrid({ searchQuery, setIsSearchLoading, setIsSearchLoaded, setHasSearchContent }) {
+function SearchGrid({ searchQuery, setIsSearchLoading, setIsSearchError, setHasSearchContent }) {
   // Fetch data from useSearch
   const { data: movies, loading: moviesLoading, error: moviesError } = useFetchSearch('movie', searchQuery);
   const { data: shows, loading: showsLoading, error: showsError } = useFetchSearch('tv', searchQuery);
@@ -33,11 +33,9 @@ function SearchGrid({ searchQuery, setIsSearchLoading, setIsSearchLoaded, setHas
   // Error handling
   useEffect(() => {
     if (isError) {
-      setIsSearchLoaded(false);
-    } else {
-      setIsSearchLoaded(true);
+      setIsSearchError(isError);
     }
-  }, [isError, setIsSearchLoaded]);
+  }, [isError, setIsSearchError]);
 
   // No content handling
   useEffect(() => {
