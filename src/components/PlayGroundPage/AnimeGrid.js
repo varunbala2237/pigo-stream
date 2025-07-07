@@ -275,7 +275,7 @@ function AnimeGrid({ id, type, mediaInfo, animeInfo, setBackgroundImage }) {
             <div className="d-flex flex-column align-items-start custom-theme-radius-low my-2 w-100">
               <div className="container py-2 text-white">
                 <div className="d-flex flex-row border-start border-4 theme-border-color dynamic-ts ps-2">
-                  Cast
+                  <b>Cast</b>
                 </div>
                 <div className="row justify-content-center">
                   {cast.length === 0 ? (
