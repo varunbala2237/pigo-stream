@@ -354,7 +354,7 @@ function HomeUI({
                   <div className="dynamic-fs text-secondary">{mediaDesc}</div>
                   <div className="d-flex justify-content-start mt-2">
                     <button
-                      className="btn btn-primary theme-bg d-flex dynamic-fs border-0 rounded-pill text-white"
+                      className="btn btn-dark bd-callout-dark d-flex dynamic-fs border-0 rounded-pill text-white"
                       onClick={handlePlayMedia}
                     >
                       <i className="bi bi-play me-2"></i>
