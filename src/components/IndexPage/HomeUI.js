@@ -192,15 +192,15 @@ const HomeUI = ({
               </div>
               <div className="dynamic-fs">
                 <div className="dynamic-fs d-flex my-2 text-white gap-2">
-                  <span className="custom-bg rounded-pill px-2 py-1">
+                  <span className="bd-callout-dark rounded-pill px-2 py-1">
                     {mediaType === 'movie' ? (
                       <span><i className="bi bi-film me-2"></i>Movie</span>
                     ) : (
                       <span><i className="bi bi-tv me-2"></i>Show</span>
                     )}
                   </span>
-                  <span className="custom-bg rounded-pill px-2 py-1">{year}</span>
-                  <div className="custom-bg rounded-pill px-2 py-1">
+                  <span className="bd-callout-dark rounded-pill px-2 py-1">{year}</span>
+                  <div className="bd-callout-dark rounded-pill px-2 py-1">
                     <i className="bi bi-star-fill text-warning me-2"></i>
                     <span id="Rating">{rating}</span>
                   </div>

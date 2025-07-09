@@ -363,7 +363,7 @@ const AuthUI = () => {
                         <div className="d-flex flex-column dynamic-fs m-2">
                             <button
                                 type="submit"
-                                className="btn btn-light bd-callout-light d-flex justify-content-center rounded-pill dynamic-fs"
+                                className="btn btn-light d-flex justify-content-center rounded-pill border-0 dynamic-fs"
                                 disabled={isCredentialProcessing}>
                                 {isSignIn ? 'Sign in' : 'Sign up'}
                             </button>
@@ -381,7 +381,7 @@ const AuthUI = () => {
                             )}
                             <p className="text-white text-center m-0">or</p>
                             <button
-                                className="btn btn-primary d-flex justify-content-center rounded-pill dynamic-fs"
+                                className="btn btn-primary d-flex justify-content-center rounded-pill border-0 dynamic-fs"
                                 onClick={signInWithGoogle}
                                 disabled={isGoogleProcessing}
                             >

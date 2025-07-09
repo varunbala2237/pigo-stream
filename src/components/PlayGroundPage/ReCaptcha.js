@@ -22,7 +22,7 @@ const ReCaptcha = ({ storagePath }) => {
             <div className="d-flex flex-column justify-content-center align-items-center text-white">
                 <div className="container">
                     <div className="d-flex flex-column justify-content-center align-items-center p-2">
-                        <p className="dynamic-hs">Please complete reCAPTCHA to continue</p>
+                        <p className="dynamic-hs fw-bold">Verify that you are human</p>
                         <p className="dynamic-fs">Verification is required to unlock media content.</p>
                         <ReCAPTCHA
                             sitekey={RECAPTCHA_SITE_KEY}
