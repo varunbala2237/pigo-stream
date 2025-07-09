@@ -60,7 +60,7 @@ const InfoSection = ({
     for (const key in genreClassMap) {
       if (normalized.includes(key)) return genreClassMap[key];
     }
-    return 'text-white'; // Default
+    return 'text-secondary'; // Default
   }
 
   const handleGenreClick = (genreName) => {

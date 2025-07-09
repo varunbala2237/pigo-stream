@@ -191,7 +191,15 @@ const HomeUI = ({
                 <span className="text-wrap fw-bold dynamic-ts">{title}</span>
               </div>
               <div className="dynamic-fs">
-                <div className="dynamic-fs d-flex my-2 text-white gap-2">
+                <div className="dynamic-fs d-flex my-2 text-secondary gap-2">
+                  <span className="bd-callout-dark rounded-pill px-2 py-1">
+                    <i className="bi bi-calendar2 me-2"></i>
+                    <span id="Year">{year}</span>
+                  </span>
+                  <div className="bd-callout-dark rounded-pill px-2 py-1">
+                    <i className="bi bi-star-fill text-warning me-2"></i>
+                    <span id="Rating">{rating}</span>
+                  </div>
                   <span className="bd-callout-dark rounded-pill px-2 py-1">
                     {mediaType === 'movie' ? (
                       <span><i className="bi bi-film me-2"></i>Movie</span>
@@ -199,11 +207,6 @@ const HomeUI = ({
                       <span><i className="bi bi-tv me-2"></i>Show</span>
                     )}
                   </span>
-                  <span className="bd-callout-dark rounded-pill px-2 py-1">{year}</span>
-                  <div className="bd-callout-dark rounded-pill px-2 py-1">
-                    <i className="bi bi-star-fill text-warning me-2"></i>
-                    <span id="Rating">{rating}</span>
-                  </div>
                 </div>
                 <div className="dynamic-fs text-secondary">{mediaDesc}</div>
                 <div className="d-flex justify-content-start mt-2">

@@ -141,16 +141,16 @@ const Card = ({ media, type, path, onRemove, handleAlert, isDeletable = true, is
         onMouseDown={(e) => e.button === 0 && setTimeout(() => handleLongClick(e), 700)}
       >
         <img src={imageUrl} alt="poster" className="custom-card-img rounded-top" />
-        <div className="card-body p-2 d-flex justify-content-between align-items-center">
+        <div className="card-body p-2 d-flex justify-content-between align-items-center text-secondary">
           <div>
             <i className="bi bi-star-fill text-warning me-1"></i>
-            <span className="text-secondary">{rating}</span>
+            <span>{rating}</span>
           </div>
           <div>
             {type === 'movie' ? (
-              <i className="bi bi-film text-secondary"></i>
+              <span><i className="bi bi-film me-2"></i>Movie</span>
             ) : (
-              <i className="bi bi-tv text-secondary"></i>
+              <span><i className="bi bi-tv me-2"></i>Show</span>
             )}
           </div>
         </div>
