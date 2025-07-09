@@ -1,4 +1,4 @@
-# PigoStream v0.2.0 Final
+# PigoStream v0.2.2 Final
 
 ## ⚠️ Important Notice
 
