@@ -338,15 +338,15 @@ function HomeUI({
                 </div>
                 <div className="dynamic-fs">
                   <div className="dynamic-fs d-flex my-2 text-secondary">
-                    <span className="custom-bg rounded-pill py-2 px-3 me-2">
+                    <span className="custom-bg rounded-pill px-2 py-1 me-2">
                       {mediaType === 'movie' ? (
-                        <i className="bi bi-film"></i>
+                        <span><i className="bi bi-film me-2"></i>Movie</span>
                       ) : (
-                        <i className="bi bi-tv"></i>
+                        <span><i className="bi bi-tv me-2"></i>Show</span>
                       )}
                     </span>
-                    <span className="custom-bg rounded-pill py-2 px-3 me-2">{year}</span>
-                    <div className="custom-bg rounded-pill py-2 px-3">
+                    <span className="custom-bg rounded-pill px-2 py-1 me-2">{year}</span>
+                    <div className="custom-bg rounded-pill px-2 py-1">
                       <i className="bi bi-star-fill text-warning me-2"></i>
                       <span id="Rating">{rating}</span>
                     </div>

@@ -114,7 +114,7 @@ function InfoSection({
               {/* Larger button for larger screen */}
               <button
                 className={
-                  `btn d-none d-md-block mb-2 d-flex justify-content-center border-0 rounded-pill 
+                  `btn d-none d-md-block d-flex justify-content-center border-0 rounded-pill 
                   ${trailerLink ? 'btn-light' : 'btn-secondary'
                   }`}
                 onClick={() => trailerLink && window.open(trailerLink, '_blank')}
@@ -126,7 +126,7 @@ function InfoSection({
               {/* Smaller button for smaller screen */}
               <button
                 className={
-                  `btn d-block d-md-none btn-sm mb-2 d-flex justify-content-center border-0 rounded-pill 
+                  `btn d-block d-md-none btn-sm d-flex justify-content-center border-0 rounded-pill 
                   ${trailerLink ? 'btn-light' : 'btn-secondary'
                   }`}
                 onClick={() => trailerLink && window.open(trailerLink, '_blank')}
@@ -137,11 +137,18 @@ function InfoSection({
               </button>
             </div>
           </div>
-          <div className="section ms-2">
+          <div className="section ms-3">
             <div className="d-flex flex-column flex-wrap dynamic-fs">
               <dl className="m-0">
                 <dt className="text-wrap dynamic-ts">{title}</dt>
               </dl>
+
+              <div className="d-flex">
+                <div className="custom-bg rounded-pill px-2 py-1">
+                  <i className="bi bi-star-fill text-warning me-2"></i>
+                  <span id="Rating">{averageVote}</span>
+                </div>
+              </div>
 
               <dl className="my-2">
                 <div className="d-flex">
@@ -171,14 +178,6 @@ function InfoSection({
                 )}
 
                 <div className="d-flex">
-                  <dd className="dymamic-fs me-2">Rating:</dd>
-                  <dd id="Rating" className="mb-0 text-secondary">
-                    <i className="bi bi-star-fill text-warning me-2"></i>
-                    {averageVote}
-                  </dd>
-                </div>
-
-                <div className="d-flex">
                   <dd className="dynamic-fs me-2">Genres:</dd>
                   <dd className="mb-0 text-secondary dynamic-fs">
                     {genres?.map((genre, index) => (
@@ -201,18 +200,14 @@ function InfoSection({
                     ))}
                   </dd>
                 </div>
+
+                <div className="d-flex">
+                  <dd>
+                    <OverviewSection text={overview} />
+                  </dd>
+                </div>
               </dl>
             </div>
-          </div>
-        </div>
-        <div className="d-flex flex-row align-items-start custom-theme-radius-low w-100">
-          <div className="section">
-              <dl className="text-start">
-                <dt className="fw-bold dynamic-fs">Overview:</dt>
-                <dd>
-                  <OverviewSection text={overview} />
-                </dd>
-              </dl>
           </div>
         </div>
       </div>
