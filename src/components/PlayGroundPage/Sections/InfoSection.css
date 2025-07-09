@@ -1,0 +1,76 @@
+/* InfoSection.css */
+
+/* Language Pill */
+.language-pill {
+  background-color: rgba(0, 84, 153, 0.6);
+  color: #d0e7ff;
+}
+
+/* Genre Pills – Text Color Only (Optimized for Dark Backgrounds) */
+.genre-action {
+  color: #ff6b6b; /* bright red */
+}
+
+.genre-adventure {
+  color: #ffc107; /* rich amber */
+}
+
+.genre-animation {
+  color: #00cfff; /* vibrant aqua */
+}
+
+.genre-comedy {
+  color: #f4d35e; /* soft yellow */
+}
+
+.genre-crime {
+  color: #b0bec5; /* light steel */
+}
+
+.genre-documentary {
+  color: #4dd0e1; /* cyan light */
+}
+
+.genre-drama {
+  color: #ef9a9a; /* soft rose */
+}
+
+.genre-fantasy {
+  color: #d1c4e9; /* lavender */
+}
+
+.genre-history {
+  color: #ffab91; /* peach */
+}
+
+.genre-horror {
+  color: #ff8a80; /* light red */
+}
+
+.genre-music {
+  color: #b39ddb; /* light purple */
+}
+
+.genre-mystery {
+  color: #90caf9; /* light blue */
+}
+
+.genre-romance {
+  color: #f48fb1; /* light pink */
+}
+
+.genre-science-fiction {
+  color: #80d8ff; /* sky blue */
+}
+
+.genre-thriller {
+  color: #ff5252; /* strong pink-red */
+}
+
+.genre-war {
+  color: #dcedc8; /* light olive green */
+}
+
+.genre-western {
+  color: #ffccbc; /* soft brown */
+}

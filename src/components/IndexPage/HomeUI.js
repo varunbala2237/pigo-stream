@@ -337,7 +337,7 @@ function HomeUI({
                   <span className="text-wrap fw-bold dynamic-ts">{title}</span>
                 </div>
                 <div className="dynamic-fs">
-                  <div className="dynamic-fs d-flex my-2 text-secondary gap-2">
+                  <div className="dynamic-fs d-flex my-2 text-white gap-2">
                     <span className="custom-bg rounded-pill px-2 py-1">
                       {mediaType === 'movie' ? (
                         <span><i className="bi bi-film me-2"></i>Movie</span>
