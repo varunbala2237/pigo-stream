@@ -101,7 +101,7 @@ function MyListGrid({ userUID }) {
         };
     }, [moviesList, showsList, isLoading, isError]);
 
-    const handleViewMoreMovies = () => {
+    const handleSeeMoreMovies = () => {
         setMovieLimit(prevLimit => {
             const newLimit = prevLimit + 12;
             setSessionValue(...SESSION_PATH, 'movieLimit', newLimit);
@@ -109,7 +109,7 @@ function MyListGrid({ userUID }) {
         });
     };
 
-    const handleViewMoreShows = () => {
+    const handleSeeMoreShows = () => {
         setShowLimit(prevLimit => {
             const newLimit = prevLimit + 12;
             setSessionValue(...SESSION_PATH, 'tvLimit', newLimit);
@@ -203,11 +203,11 @@ function MyListGrid({ userUID }) {
                 {moviesList.length > movieLimit && (
                     <div className="d-flex justify-content-end align-items-center">
                         <button
-                            className="btn bg-transparent d-flex dynamic-fs border-0 rounded-pill text-white"
-                            onClick={handleViewMoreMovies}
+                            className="btn btn-dark bd-callout-dark d-flex dynamic-fs border-0 rounded-pill text-white"
+                            onClick={handleSeeMoreMovies}
                         >
-                            <i className="bi bi-arrow-right me-2"></i>
-                            View More
+                            <i className="bi bi-caret-right-fill me-2"></i>
+                            See More
                         </button>
                     </div>
                 )}
@@ -267,11 +267,11 @@ function MyListGrid({ userUID }) {
                 {showsList.length > showLimit && (
                     <div className="d-flex justify-content-end align-items-center">
                         <button
-                            className="btn bg-transparent d-flex dynamic-fs border-0 rounded-pill text-white"
-                            onClick={handleViewMoreShows}
+                            className="btn btn-dark bd-callout-dark d-flex dynamic-fs border-0 rounded-pill text-white"
+                            onClick={handleSeeMoreShows}
                         >
-                            <i className="bi bi-arrow-right me-2"></i>
-                            View More
+                            <i className="bi bi-caret-right-fill me-2"></i>
+                            See More
                         </button>
                     </div>
                 )}
