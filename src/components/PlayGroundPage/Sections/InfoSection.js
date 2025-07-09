@@ -36,7 +36,7 @@ function InfoSection({
   }, [poster_path]);
 
   const handleGenreClick = (genreName) => {
-    const searchQuery = `"${title}" similar "${genreName}" movies or shows`;
+    const searchQuery = `"${title}" similar ${genreName} movies or shows`;
     window.open(`https://www.google.com/search?q=${encodeURIComponent(searchQuery)}`, '_blank');
   };
 
@@ -200,7 +200,7 @@ function InfoSection({
                     {genres?.map((genre, index) => (
                       <span
                         key={index}
-                        className={`custom-bg rounded-pill px-2 py-1 ${isAnime ? "anime-theme-color" : "theme-color"}`}
+                        className={`custom-bg rounded-pill px-2 py-1 text-secondary`}
                         onClick={() => handleGenreClick(genre.name)}
                       >
                         #{genre.name}
