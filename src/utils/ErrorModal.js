@@ -1,8 +1,8 @@
-// ConnectionModal.js
+// ErrorModal.js
 import { useRef } from 'react';
-import './ConnectionModal.css';
+import './ErrorModal.css';
 
-function ConnectionModal({ error }) {
+function ErrorModal({ error }) {
   // Ref to track outside clicks
   const modalRef = useRef();
 
@@ -11,7 +11,7 @@ function ConnectionModal({ error }) {
       {/* Backdrop */}
       <div className="modal-backdrop fade show"></div>
 
-      {/* Connection Error Modal */}
+      {/* Error Modal */}
       <div className="modal fade zoom-in-out show d-block" tabIndex="-1">
         <div className="modal-dialog modal-dialog-centered mx-auto border-0 modal-pad">
           <div ref={modalRef} className="modal-content dynamic-fs bd-callout-dark custom-theme-radius-low text-white border-0">
@@ -40,4 +40,4 @@ function ConnectionModal({ error }) {
   );
 }
 
-export default ConnectionModal;
+export default ErrorModal;

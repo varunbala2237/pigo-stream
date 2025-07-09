@@ -5,7 +5,7 @@ import Card from '../Card';
 import useFetchWatchHistory from '../../hooks/WatchHistoryPage/useFetchWatchHistory';
 import useClearWatchHistory from '../../hooks/WatchHistoryPage/useClearWatchHistory';
 import OverlaySpinner from '../../utils/OverlaySpinner';
-import ConnectionModal from '../../utils/ConnectionModal';
+import ErrorModal from '../../utils/ErrorModal';
 import Alert from '../../utils/Alert';
 
 import { getSessionValue, setSessionValue } from '../../utils/sessionStorageStates';
@@ -18,8 +18,8 @@ function WatchHistoryGrid({ userUID }) {
     const { data: { moviesHistory = [], showsHistory = [] } = {}, loading: isLoading, error: isError, refetch } = useFetchWatchHistory(userUID, movieLimit, showLimit);
     const { clearHistory } = useClearWatchHistory();
 
-    // Connection modal state
-    const [showConnectionModal, setShowConnectionModal] = useState(false);
+    // Error Modal state
+    const [showErrorModal, setShowErrorModal] = useState(false);
 
     // Alert messages
     const [alert, setAlert] = useState({ message: '', type: '', key: '' });
@@ -71,12 +71,12 @@ function WatchHistoryGrid({ userUID }) {
         };
     }, []);
 
-    // Connection modal handling
+    // Error Modal handling
     useEffect(() => {
         if (isError) {
-            setShowConnectionModal(true);
+            setShowErrorModal(true);
         } else {
-            setShowConnectionModal(false);
+            setShowErrorModal(false);
         }
     }, [isError]);
 
@@ -305,8 +305,8 @@ function WatchHistoryGrid({ userUID }) {
                 )}
             </div>
 
-            {/* Connection Modal */}
-            {showConnectionModal && <ConnectionModal error={isError} />}
+            {/* Error Modal */}
+            {showErrorModal && <ErrorModal error={isError} />}
 
             {/* Alert Message */}
             {alert.message && (

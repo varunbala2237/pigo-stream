@@ -11,7 +11,7 @@ import useSaveSearchHistory from '../../hooks/IndexPage/useSaveSearchHistory';
 import useFetchSearchHistory from '../../hooks/IndexPage/useFetchSearchHistory';
 import useRemoveSearchHistory from '../../hooks/IndexPage/useRemoveSearchHistory';
 import OverlaySpinner from '../../utils/OverlaySpinner';
-import ConnectionModal from '../../utils/ConnectionModal';
+import ErrorModal from '../../utils/ErrorModal';
 import Alert from '../../utils/Alert';
 import './HomeUI.css';
 
@@ -51,7 +51,7 @@ function HomeUI({
   const [isTrendingError, setIsTrendingError] = useState(false);
   const [isProvidersError, setIsProvidersError] = useState(false);
   const [isSearchError, setIsSearchError] = useState(false);
-  const [showConnectionModal, setShowConnectionModal] = useState(false);
+  const [showErrorModal, setShowErrorModal] = useState(false);
 
   const isError = isIndexError || isTrendingError || isProvidersError || isSearchError;
 
@@ -150,10 +150,10 @@ function HomeUI({
     }
   }, [showSearchBar, isTrendingLoading, isProvidersLoading, isSearchLoading]);
 
-  // Connection modal handling
+  // Error Modal handling
   useEffect(() => {
     if (isIndexError || isTrendingError || isProvidersError || isSearchError) {
-      setShowConnectionModal(true);
+      setShowErrorModal(true);
     }
   }, [isIndexError, isTrendingError, isProvidersError, isSearchError]);
 
@@ -421,8 +421,8 @@ function HomeUI({
         <div className="divider" style={{ height: '6rem' }}></div>
         <Footer showSearchBar={showSearchBar} setShowSearchBar={setShowSearchBar} handleSearchBar={handleSearchBar} />
 
-        {/* Connection Modal */}
-        {showConnectionModal && <ConnectionModal error={isError} />}
+        {/* Error Modal */}
+        {showErrorModal && <ErrorModal error={isError} />}
 
         {/* Alert Message */}
         {alert.message && (

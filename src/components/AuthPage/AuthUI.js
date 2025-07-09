@@ -409,7 +409,7 @@ function AuthUI() {
                 </div>
             </div>
 
-            {/* No Need for Connection Modal */}
+            {/* No Need for Error Modal */}
 
             {/* Alert message handling */}
             {alertMessage && <Alert message={alertMessage} onClose={handleAlertDismiss} />}

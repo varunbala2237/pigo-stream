@@ -98,22 +98,7 @@ function TrendingGrid({ setIsTrendingLoading, setIsTrendingError, setHasTrending
 
       {/* Trending Movies Section */}
       {(
-        <div className="position-relative my-2">
-          <button
-            className="btn btn-dark custom-bg rounded-pill py-2 position-absolute start-0 translate-middle-y"
-            onClick={() => scroll(moviesRef, 'left')}
-            style={{ zIndex: 1, top: '50%', transform: 'translateY(-50%)' }}
-          >
-            <i className="bi bi-chevron-left"></i>
-          </button>
-          <button
-            className="btn btn-dark custom-bg rounded-pill py-2 position-absolute end-0 translate-middle-y"
-            onClick={() => scroll(moviesRef, 'right')}
-            style={{ zIndex: 1, top: '50%', transform: 'translateY(-50%)' }}
-          >
-            <i className="bi bi-chevron-right"></i>
-          </button>
-
+        <div className="d-flex my-2 align-items-stretch" style={{ height: '280px' }}>
           <div ref={moviesRef} className="d-flex custom-theme-radius-low overflow-auto scroll-hide custom-gap" style={{ scrollSnapType: 'x mandatory' }}>
             {(
               !isLoading && !isError && movies?.length > 0 ? movies : []
@@ -134,6 +119,22 @@ function TrendingGrid({ setIsTrendingLoading, setIsTrendingError, setHasTrending
                 )
               )}
           </div>
+
+          {/* Vertical scroll buttons */}
+          <div className="d-flex flex-column ms-2" style={{ height: '100%' }}>
+            <button
+              className="btn btn-dark bd-callout-dark flex-fill py-2"
+              onClick={() => scroll(moviesRef, 'left')}
+            >
+              <i className="bi bi-chevron-left"></i>
+            </button>
+            <button
+              className="btn btn-dark bd-callout-dark flex-fill py-2 mt-2"
+              onClick={() => scroll(moviesRef, 'right')}
+            >
+              <i className="bi bi-chevron-right"></i>
+            </button>
+          </div>
         </div>
       )}
 
@@ -143,22 +144,7 @@ function TrendingGrid({ setIsTrendingLoading, setIsTrendingError, setHasTrending
 
       {/* Trending Shows Section */}
       {(
-        <div className="position-relative my-2">
-          <button
-            className="btn btn-dark custom-bg rounded-pill py-2 position-absolute start-0 translate-middle-y"
-            onClick={() => scroll(showsRef, 'left')}
-            style={{ zIndex: 1, top: '50%', transform: 'translateY(-50%)' }}
-          >
-            <i className="bi bi-chevron-left"></i>
-          </button>
-          <button
-            className="btn btn-dark custom-bg rounded-pill py-2 position-absolute end-0 translate-middle-y"
-            onClick={() => scroll(showsRef, 'right')}
-            style={{ zIndex: 1, top: '50%', transform: 'translateY(-50%)' }}
-          >
-            <i className="bi bi-chevron-right"></i>
-          </button>
-
+        <div className="d-flex my-2 align-items-stretch" style={{ height: '280px' }}>
           <div ref={showsRef} className="d-flex custom-theme-radius-low overflow-auto scroll-hide custom-gap" style={{ scrollSnapType: 'x mandatory' }}>
             {(
               !isLoading && !isError && shows?.length > 0 ? shows : []
@@ -178,6 +164,22 @@ function TrendingGrid({ setIsTrendingLoading, setIsTrendingError, setHasTrending
                   />
                 )
               )}
+          </div>
+
+          {/* Vertical scroll buttons */}
+          <div className="d-flex flex-column ms-2" style={{ height: '100%' }}>
+            <button
+              className="btn btn-dark bd-callout-dark flex-fill py-2"
+              onClick={() => scroll(showsRef, 'left')}
+            >
+              <i className="bi bi-chevron-left"></i>
+            </button>
+            <button
+              className="btn btn-dark bd-callout-dark flex-fill py-2 mt-2"
+              onClick={() => scroll(showsRef, 'right')}
+            >
+              <i className="bi bi-chevron-right"></i>
+            </button>
           </div>
         </div>
       )}

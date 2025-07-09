@@ -4,7 +4,7 @@ import { useLocation } from 'react-router-dom';
 import Card from '../Card';
 import useFetchMyList from '../../hooks/MyListPage/useFetchMyList';
 import OverlaySpinner from '../../utils/OverlaySpinner';
-import ConnectionModal from '../../utils/ConnectionModal';
+import ErrorModal from '../../utils/ErrorModal';
 import Alert from '../../utils/Alert';
 
 import { getSessionValue, setSessionValue } from '../../utils/sessionStorageStates';
@@ -17,8 +17,8 @@ function MyListGrid({ userUID }) {
     const [showLimit, setShowLimit] = useState(12);
     const { data: { moviesList = [], showsList = [] } = {}, loading: isLoading, error: isError, refetch } = useFetchMyList(userUID, movieLimit, showLimit);
 
-    // Connection modal state
-    const [showConnectionModal, setShowConnectionModal] = useState(false);
+    // Error Modal state
+    const [showErrorModal, setShowErrorModal] = useState(false);
 
     // Alert messages
     const [alert, setAlert] = useState({ message: '', type: '', key: '' });
@@ -68,12 +68,12 @@ function MyListGrid({ userUID }) {
         };
     }, []);
 
-    // Connection modal handling
+    // Error Modal handling
     useEffect(() => {
         if (isError) {
-            setShowConnectionModal(true);
+            setShowErrorModal(true);
         } else {
-            setShowConnectionModal(false);
+            setShowErrorModal(false);
         }
     }, [isError]);
 
@@ -277,8 +277,8 @@ function MyListGrid({ userUID }) {
                 )}
             </div>
 
-            {/* Connection Modal */}
-            {showConnectionModal && <ConnectionModal error={isError} />}
+            {/* Error Modal */}
+            {showErrorModal && <ErrorModal error={isError} />}
 
             {/* Alert Message */}
             {alert.message && (

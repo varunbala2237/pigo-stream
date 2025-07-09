@@ -10,7 +10,7 @@ import MovieGrid from './MovieGrid';
 import TvGrid from './TvGrid';
 import AnimeGrid from './AnimeGrid';
 import OverlaySpinner from '../../utils/OverlaySpinner';
-import ConnectionModal from '../../utils/ConnectionModal';
+import ErrorModal from '../../utils/ErrorModal';
 
 import { getStorageValue } from '../../utils/localStorageStates';
 
@@ -98,8 +98,8 @@ function PlayGround() {
         </>
       )}
 
-      {/* Connection Modal */}
-      {isError && <ConnectionModal error={isError} />}
+      {/* Error Modal */}
+      {isError && <ErrorModal error={isError} />}
 
       {/* Footer Backspace */}
       <div className="divider" style={{ height: '6rem' }}></div>
