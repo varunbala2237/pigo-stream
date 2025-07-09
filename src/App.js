@@ -7,6 +7,7 @@ import {
 
 import AuthUI from './components/AuthPage/AuthUI';
 import IndexUI from './components/IndexPage/IndexUI';
+import SearchUI from './components/SearchPage/SearchUI';
 import PlayGroundUI from './components/PlayGroundPage/PlayGroundUI';
 import WatchHistoryUI from './components/WatchHistoryPage/WatchHistoryUI';
 import MyListUI from './components/MyListPage/MyListUI';
@@ -16,6 +17,7 @@ const router = createBrowserRouter(
   [
     { path: '/', element: <AuthUI /> },
     { path: '/index', element: <IndexUI /> },
+    { path: '/search', element: <SearchUI /> },
     { path: '/play', element: <PlayGroundUI /> },
     { path: '/watch-history', element: <WatchHistoryUI /> },
     { path: '/my-list', element: <MyListUI /> },

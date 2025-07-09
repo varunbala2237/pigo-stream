@@ -206,7 +206,7 @@ function AnimeGrid({ id, type, mediaInfo, animeInfo, setBackgroundImage }) {
                   ${activeTab === 'info' ? '' : 'opacity-50'}`}
                 onClick={() => handleTabChange('info')}
               >
-                <i className="bi bi-list me-2"></i>
+                <i className="bi bi-list anime-theme-color me-2"></i>
                 <b>Info</b>
               </button>
 
@@ -218,7 +218,7 @@ function AnimeGrid({ id, type, mediaInfo, animeInfo, setBackgroundImage }) {
                   ${activeTab === 'player' ? '' : 'opacity-50'}`}
                 onClick={() => handleTabChange('player')}
               >
-                <i className="bi bi-file-earmark-play me-2"></i>
+                <i className="bi bi-file-earmark-play anime-theme-color me-2"></i>
                 <b>Player</b>
               </button>
             </div>

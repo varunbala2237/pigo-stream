@@ -6,7 +6,7 @@ import useFetchMedia from '../../hooks/IndexPage/useFetchMedia';
 import HomeUI from './HomeUI';
 import './IndexUI.css';
 
-const IndexUI = () => {
+function IndexUI() {
   const { selectedItemId } = useGenreRecommendations();
   const { data: recommendedMedia, loading: loadingRecommendedMedia, error: errorRecommendedMedia } = useFetchMediaDetails(selectedItemId);
   const { data: popularMovies, loading: loadingPopularMovies, error: errorPopularMovies } = useFetchMedia('popular', 'movie');
@@ -34,12 +34,6 @@ const IndexUI = () => {
       setIsRecommended(false);
     }
   }, [recommendedMedia, popularMovies, loadingRecommendedMedia, loadingPopularMovies]);
-
-  useEffect(() => {
-    // Save state to localStorage whenever it changes
-    localStorage.setItem('showSearchBar', JSON.stringify(showSearchBar));
-    localStorage.setItem('triggerSearch', triggerSearch);
-  }, [showSearchBar, triggerSearch]);
 
   // Extract details for movie or show from either recommendation or popular movie
   const mediaDetails = recommendedMedia || (popularMovies.length > 0 ? popularMovies[0] : {});
