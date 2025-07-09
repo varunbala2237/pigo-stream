@@ -17,10 +17,11 @@ function OverviewSection({ text }) {
         <div className="mt-1">
           <button
             onClick={() => setExpanded(!expanded)}
-            className="btn btn-sm btn-link text-primary dynamic-fs p-0"
+            className="btn btn-sm btn-dark rounded-pill text-white dynamic-fs text-decoration-none"
             style={{ textAlign: "left" }}
           >
-            {expanded ? "Show Less" : "Read More"}
+            <i className={`bi bi-caret-${expanded ? "up" : "down"}-fill me-2`}></i>
+            {expanded ? "Read Less" : "Read More"}
           </button>
         </div>
       )}

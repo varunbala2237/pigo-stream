@@ -35,6 +35,11 @@ function InfoSection({
     );
   }, [poster_path]);
 
+  const handleGenreClick = (genreName) => {
+    const searchQuery = `"${title}" similar movies or shows with ${genreName}`;
+    window.open(`https://www.google.com/search?q=${encodeURIComponent(searchQuery)}`, '_blank');
+  };
+
   const handleShare = () => {
     const currentURL = window.location.href;
     if (navigator.share) {
@@ -143,18 +148,19 @@ function InfoSection({
                 <dt className="text-wrap dynamic-ts">{title}</dt>
               </dl>
 
-              <div className="d-flex">
-                <div className="custom-bg rounded-pill px-2 py-1">
-                  <i className="bi bi-star-fill text-warning me-2"></i>
-                  <span id="Rating">{averageVote}</span>
-                </div>
-              </div>
-
               <dl className="my-2">
                 <div className="d-flex">
                   <dd className="dymamic-fs me-2">Release Date:</dd>
                   <dd className="mb-0 dynamic-fs">
                     <span className="text-secondary">{new Date(release_date).toLocaleDateString()}</span>
+                  </dd>
+                </div>
+
+                <div className="d-flex">
+                  <dd className="dymamic-fs me-2">Rating:</dd>
+                  <dd className="mb-0 dynamic-fs">
+                    <i className="bi bi-star-fill text-warning me-2"></i>
+                    <span id="Rating" className="text-secondary">{averageVote}</span>
                   </dd>
                 </div>
 
@@ -178,18 +184,6 @@ function InfoSection({
                 )}
 
                 <div className="d-flex">
-                  <dd className="dynamic-fs me-2">Genres:</dd>
-                  <dd className="mb-0 text-secondary dynamic-fs">
-                    {genres?.map((genre, index) => (
-                      <React.Fragment key={index}>
-                        {genre.name}
-                        {index < genres.length - 1 && ", "}
-                      </React.Fragment>
-                    ))}
-                  </dd>
-                </div>
-
-                <div className="d-flex">
                   <dd className="dynamic-fs me-2">Languages:</dd>
                   <dd className="mb-0 text-secondary dynamic-fs">
                     {spoken_languages?.map((lang, index) => (
@@ -197,6 +191,20 @@ function InfoSection({
                         {lang.english_name}
                         {index < spoken_languages.length - 1 && ", "}
                       </React.Fragment>
+                    ))}
+                  </dd>
+                </div>
+
+                <div className="d-flex align-items-center flex-wrap mb-2">
+                  <dd className="mb-0 d-flex flex-wrap gap-1">
+                    {genres?.map((genre, index) => (
+                      <span
+                        key={index}
+                        className={`custom-bg rounded-pill px-2 py-1 ${isAnime ? "anime-theme-color" : "theme-color"}`}
+                        onClick={() => handleGenreClick(genre.name)}
+                      >
+                        #{genre.name}
+                      </span>
                     ))}
                   </dd>
                 </div>
