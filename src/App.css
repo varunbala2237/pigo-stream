@@ -70,18 +70,6 @@
   border-radius: 0px 50rem 50rem 0px !important;
 }
 
-.custom-card-img {
-  width: 100%;
-  aspect-ratio: 2 / 3;
-  object-fit: cover;
-  overflow: hidden;
-}
-
-.custom-card-container {
-  height: 100%;
-  aspect-ratio: 2 / 3;
-}
-
 .custom-dropdown {
   max-height: 400px;
   max-width: 250px;
@@ -210,10 +198,6 @@
     width: 70px;
   }
 
-  .custom-card-container {
-    height: 200px;
-  }
-
   .dynamic-hs {
     font-size: 1.2rem;
   }
@@ -246,10 +230,6 @@
     width: 80px;
   }
 
-  .custom-card-container {
-    height: 250px;
-  }
-
   .dynamic-hs {
     font-size: 1.5rem;
   }
@@ -280,10 +260,6 @@
   .custom-cast-card-img {
     height: 90px;
     width: 90px;
-  }
-
-  .custom-card-container {
-    height: 300px;
   }
 
   .dynamic-hs {

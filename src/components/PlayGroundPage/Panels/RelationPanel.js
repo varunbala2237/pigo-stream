@@ -82,7 +82,7 @@ function RelationPanel({ animeInfo, selectedRelationIndex, onRelationChange, rel
                                     src={coverImage?.large || `https://placehold.co/200x300/212529/6c757d?text=?`}
                                     className="custom-theme-radius-top-low"
                                     alt="empty"
-                                    style={{ height: '230px', objectFit: 'cover' }}
+                                    style={{ height: '240px', objectFit: 'cover' }}
                                 />
                                 <div className={`card-body p-2`}>
                                     <div className="d-flex align-items-center dynamic-fs">

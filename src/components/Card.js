@@ -113,109 +113,96 @@ function Card({ media, type, path, onRemove, handleAlert, isDeletable = true, is
   // Extracting rating
   const rating = media.vote_average ? media.vote_average.toFixed(1) : '0.0';
 
-  if (isSkeleton) {
-    return (
-      <div className="custom-card-container">
-        <div className="card bg-transparent border-0 position-relative custom-theme-radius-low skeleton-card">
-          <div className="card-skeleton-image custom-theme-radius-low custom-bg"></div>
-          <div className="card-overlay dynamic-size dynamic-fs px-1">
-            <div className="d-flex justify-content-between align-items-center">
-              <div className="rating-box text-start card-skeleton-bar rounded-pill custom-bg"></div>
-              <div className="media-type-box text-end card-skeleton-bar rounded-pill custom-bg"></div>
-            </div>
-          </div>
-        </div>
-      </div>
-    );
-  }
-
   return (
     <div className="custom-card-container">
       <div
-        className="card bg-transparent border-0 position-relative custom-theme-radius-low"
+        className="card custom-bg text-white border-0 shadow-sm"
+        style={{ width: '160px', cursor: isRemove ? 'default' : 'pointer' }}
         onClick={handlePlayMedia}
         onContextMenu={handleRightClick}
         onMouseDown={(e) => e.button === 0 && setTimeout(() => handleLongClick(e), 700)}
-        style={{ cursor: isRemove ? 'default' : 'pointer', overflow: 'hidden' }}
       >
-        <img
-          className="custom-card-img"
-          src={imageUrl}
-          alt='empty'
-        />
-        {/* Overlay Container */}
-        <div className="card-overlay dynamic-size dynamic-fs px-1">
-          <div className="d-flex justify-content-between align-items-center">
-            <div className="rating-box rounded-pill text-start custom-bg px-2 py-1">
-              <i className="bi bi-star-fill text-warning me-2"></i>
-              <span id="Rating" className="text-white">{rating}</span>
+        <img src={imageUrl} alt="poster" className="custom-card-img rounded-top" />
+        <div className="card-body py-2 px-2 d-flex justify-content-between align-items-center">
+          {isSkeleton ? (
+            <div className="bg-dark py-2 px-3 rounded-pill"></div>
+          ) : (
+            <div>
+              <i className="bi bi-star-fill text-warning me-1"></i>
+              <span>{rating}</span>
             </div>
-            <div className="media-type-box rounded-circle text-end custom-bg px-2 py-1">
+          )}
+          {isSkeleton ? (
+            <div className="bg-dark py-2 px-3 rounded-pill"></div>
+          ) : (
+            <div>
               {type === 'movie' ? (
-                <i className="bi bi-film text-white"></i>
+                <i className="bi bi-film text-light"></i>
               ) : (
-                <i className="bi bi-tv text-white"></i>
+                <i className="bi bi-tv text-light"></i>
               )}
             </div>
-          </div>
+          )}
         </div>
       </div>
 
       {/* Confirmation Modal */}
-      {showModal && (
-        <>
-          {/* Backdrop */}
-          <div className={`modal-backdrop fade ${modalVisible ? 'show' : ''}`}></div>
+      {
+        showModal && (
+          <>
+            {/* Backdrop */}
+            <div className={`modal-backdrop fade ${modalVisible ? 'show' : ''}`}></div>
 
-          {/* Confirmation Modal */}
-          <div className={`modal fade zoom-in-out ${modalVisible ? 'show' : ''} d-block`} tabIndex="-1">
-            <div className="modal-dialog modal-dialog-centered mx-auto border-0 modal-pad">
-              <div ref={modalRef} className="modal-content dynamic-fs bd-callout-dark custom-theme-radius-low text-white border-0">
-                <div className="modal-body justify-content-center text-center border-0">
-                  <span className="dynamic-fs">
-                    Are you sure you want to remove <strong>"{media.title || media.name || 'this item'}"</strong> from {path === '/watch-history' ? 'Watch History' : 'My List'}?
-                  </span>
-                </div>
-                <div className="d-flex justify-content-between w-100 my-2">
-                  <div className="text-start text-center w-50">
-                    <button
-                      type="button"
-                      className="btn btn-light rounded-pill btn-md d-none d-md-inline-block dynamic-fs m-1"
-                      onClick={() => { setModalVisible(false); setTimeout(() => setShowModal(false), 200); }}
-                    >
-                      <i className="bi bi-x-lg me-2 text-black"></i>
-                      <span className="text-black">Cancel</span>
-                    </button>
-                    <button
-                      type="button"
-                      className="btn btn-light rounded-pill btn-sm d-md-none dynamic-fs m-1"
-                      onClick={() => { setModalVisible(false); setTimeout(() => setShowModal(false), 200); }}
-                    >
-                      <i className="bi bi-x-lg me-2 text-black"></i>
-                      <span className="text-black">Cancel</span>
-                    </button>
+            {/* Confirmation Modal */}
+            <div className={`modal fade zoom-in-out ${modalVisible ? 'show' : ''} d-block`} tabIndex="-1">
+              <div className="modal-dialog modal-dialog-centered mx-auto border-0 modal-pad">
+                <div ref={modalRef} className="modal-content dynamic-fs bd-callout-dark custom-theme-radius-low text-white border-0">
+                  <div className="modal-body justify-content-center text-center border-0">
+                    <span className="dynamic-fs">
+                      Are you sure you want to remove <strong>"{media.title || media.name || 'this item'}"</strong> from {path === '/watch-history' ? 'Watch History' : 'My List'}?
+                    </span>
                   </div>
+                  <div className="d-flex justify-content-between w-100 my-2">
+                    <div className="text-start text-center w-50">
+                      <button
+                        type="button"
+                        className="btn btn-light rounded-pill btn-md d-none d-md-inline-block dynamic-fs m-1"
+                        onClick={() => { setModalVisible(false); setTimeout(() => setShowModal(false), 200); }}
+                      >
+                        <i className="bi bi-x-lg me-2 text-black"></i>
+                        <span className="text-black">Cancel</span>
+                      </button>
+                      <button
+                        type="button"
+                        className="btn btn-light rounded-pill btn-sm d-md-none dynamic-fs m-1"
+                        onClick={() => { setModalVisible(false); setTimeout(() => setShowModal(false), 200); }}
+                      >
+                        <i className="bi bi-x-lg me-2 text-black"></i>
+                        <span className="text-black">Cancel</span>
+                      </button>
+                    </div>
 
-                  <div className="text-end text-center w-50">
-                    <button type="button" className="btn btn-danger rounded-pill btn-md d-none d-md-inline-block dynamic-fs m-1"
-                      onClick={handleRemove}
-                    >
-                      <i className="bi bi-trash me-2 text-white"></i>
-                      <span className="text-white">Remove</span>
-                    </button>
-                    <button type="button" className="btn btn-danger rounded-pill btn-sm d-md-none dynamic-fs m-1"
-                      onClick={handleRemove}
-                    >
-                      <i className="bi bi-trash me-2 text-white"></i>
-                      <span className="text-white">Remove</span>
-                    </button>
+                    <div className="text-end text-center w-50">
+                      <button type="button" className="btn btn-danger rounded-pill btn-md d-none d-md-inline-block dynamic-fs m-1"
+                        onClick={handleRemove}
+                      >
+                        <i className="bi bi-trash me-2 text-white"></i>
+                        <span className="text-white">Remove</span>
+                      </button>
+                      <button type="button" className="btn btn-danger rounded-pill btn-sm d-md-none dynamic-fs m-1"
+                        onClick={handleRemove}
+                      >
+                        <i className="bi bi-trash me-2 text-white"></i>
+                        <span className="text-white">Remove</span>
+                      </button>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
-        </>
-      )}
+          </>
+        )
+      }
     </div>
   );
 }
