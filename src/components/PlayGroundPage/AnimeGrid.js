@@ -227,6 +227,7 @@ function AnimeGrid({ id, type, mediaInfo, animeInfo, setBackgroundImage }) {
               <InfoSection
                 id={id}
                 type={type}
+                isAnime={true}
                 mediaInfo={mediaInfo}
                 isInList={isInList}
                 isListLoading={isListLoading}

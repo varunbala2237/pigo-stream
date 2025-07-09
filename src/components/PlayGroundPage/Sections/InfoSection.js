@@ -6,6 +6,7 @@ import OverviewSection from './OverviewSection';
 function InfoSection({
   id,
   type,
+  isAnime,
   mediaInfo,
   isInList,
   isListLoading,
@@ -74,7 +75,7 @@ function InfoSection({
                     {isListLoading ? (
                       <span className="spinner-border spinner-border-sm text-light" />
                     ) : (
-                      <i className={`bi-${isInList ? 'bookmark-fill theme-color' : 'bookmark'}`}></i>
+                      <i className={`bi-${isInList ? `bookmark-fill ${isAnime ? 'anime-theme-color' : 'theme-color'}` : 'bookmark'}`}></i>
                     )}
                   </button>
 
@@ -86,7 +87,7 @@ function InfoSection({
                     {isListLoading ? (
                       <span className="spinner-border spinner-border-sm text-light" />
                     ) : (
-                      <i className={`bi-${isInList ? 'bookmark-fill theme-color' : 'bookmark'}`}></i>
+                      <i className={`bi-${isInList ? `bookmark-fill ${isAnime ? 'anime-theme-color' : 'theme-color'}` : 'bookmark'}`}></i>
                     )}
                   </button>
 
