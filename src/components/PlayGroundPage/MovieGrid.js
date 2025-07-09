@@ -99,7 +99,7 @@ function MovieGrid({ id, type, mediaInfo, setBackgroundImage }) {
                   ${activeTab === 'info' ? '' : 'opacity-50'}`}
                 onClick={() => handleTabChange('info')}
               >
-                <i className="bi bi-list theme-color me-2"></i>
+                <i className="bi bi-list me-2"></i>
                 <b>Info</b>
               </button>
 
@@ -111,7 +111,7 @@ function MovieGrid({ id, type, mediaInfo, setBackgroundImage }) {
                   ${activeTab === 'player' ? '' : 'opacity-50'}`}
                 onClick={() => handleTabChange('player')}
               >
-                <i className="bi bi-file-earmark-play theme-color me-2"></i>
+                <i className="bi bi-file-earmark-play me-2"></i>
                 <b>Player</b>
               </button>
             </div>
