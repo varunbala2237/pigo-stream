@@ -200,11 +200,11 @@ const HomeUI = ({
                     <i className="bi bi-star-fill text-warning me-2"></i>
                     <span id="Rating">{rating}</span>
                   </div>
-                  <span className="bd-callout-dark rounded-pill px-2 py-1">
+                  <span className="bd-callout-dark rounded-circle px-2 py-1">
                     {mediaType === 'movie' ? (
-                      <span><i className="bi bi-film me-2"></i>Movie</span>
+                      <i className="bi bi-film"></i>
                     ) : (
-                      <span><i className="bi bi-tv me-2"></i>Show</span>
+                      <i className="bi bi-tv"></i>
                     )}
                   </span>
                 </div>

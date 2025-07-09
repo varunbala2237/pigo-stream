@@ -124,7 +124,7 @@ const Card = ({ media, type, path, onRemove, handleAlert, isDeletable = true, is
           />
           <div className="card-body p-2 d-flex justify-content-between align-items-center">
             <div className="bg-dark py-2 px-3 rounded-pill"></div>
-            <div className="bg-dark py-2 px-3 rounded-pill"></div>
+            <div className="bg-dark p-2 rounded-circle"></div>
           </div>
         </div>
       </div>
@@ -148,9 +148,9 @@ const Card = ({ media, type, path, onRemove, handleAlert, isDeletable = true, is
           </div>
           <div>
             {type === 'movie' ? (
-              <span><i className="bi bi-film me-2"></i>Movie</span>
+              <i className="bi bi-film me-2"></i>
             ) : (
-              <span><i className="bi bi-tv me-2"></i>Show</span>
+              <i className="bi bi-tv me-2"></i>
             )}
           </div>
         </div>
