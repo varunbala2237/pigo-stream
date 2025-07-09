@@ -14,7 +14,6 @@ import {
 import useCreateUser from '../../hooks/AuthPage/useCreateUser';
 import OverlaySpinner from '../../utils/OverlaySpinner';
 import Alert from '../../utils/Alert';
-import './AuthUI.css';
 
 import { getSessionValue, setSessionValue } from '../../utils/sessionStorageStates';
 
@@ -299,10 +298,8 @@ function AuthUI() {
 
                 <div className="card custom-bg custom-theme-radius-low p-4">
                     <div className="card-header d-flex justify-content-center align-items-center border-0 text-white">
-                        <div className="auth-branding">
-                            <img src="favicon.ico" alt="PigoStream" className="auth-logo" />
-                            <span className="auth-name dynamic-hs"><b>Pigo</b>Stream</span>
-                        </div>
+                        <img src="favicon.ico" alt="PigoStream" className="auth-logo" />
+                        <span className="dynamic-hs"><b>Pigo</b>Stream</span>
                     </div>
                     <form onSubmit={isSignIn ? signInWithCredentials : signUpWithCredentials} className="text-white">
                         {!isSignIn && (
@@ -366,7 +363,7 @@ function AuthUI() {
                         <div className="d-flex flex-column dynamic-fs m-2">
                             <button
                                 type="submit"
-                                className="btn btn-success custom-theme-btn d-flex justify-content-center rounded-pill dynamic-fs"
+                                className="btn btn-light bd-callout-light d-flex justify-content-center rounded-pill dynamic-fs"
                                 disabled={isCredentialProcessing}>
                                 {isSignIn ? 'Sign in' : 'Sign up'}
                             </button>

@@ -41,6 +41,14 @@ body {
   color: var(--anime-theme-color) !important;
 }
 
+.theme-bg {
+  background-color: var(--theme-color) !important;
+}
+
+.anime-theme-bg {
+  background-color: var(--anime-theme-color) !important;
+}
+
 .theme-border-color {
   border-left-color: var(--theme-color) !important;
 }

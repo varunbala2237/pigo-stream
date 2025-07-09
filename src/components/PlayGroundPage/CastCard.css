@@ -15,3 +15,9 @@
 .cast-skeleton-bar:last-child {
     width: 50%;
 }
+
+/* Original Card styles */
+.custom-cast-card-img {
+    height: 70px;
+    width: 70px;
+}

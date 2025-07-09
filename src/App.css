@@ -70,33 +70,6 @@
   border-radius: 0px 50rem 50rem 0px !important;
 }
 
-.custom-dropdown {
-  max-height: 400px;
-  max-width: 250px;
-}
-
-.custom-dropdown-menu {
-  margin: 0 !important;
-  padding: 0 !important;
-}
-
-.custom-dropdown-menu li {
-  margin: 0 !important;
-  padding: 0 !important;
-}
-
-.custom-filters {
-  align-items: center;
-  display: flex;
-  flex-shrink: 0;
-  gap: 0.5rem;
-}
-
-.custom-icon-size {
-  height: 50px;
-  width: 50px;
-}
-
 .custom-input-group {
   flex: 1;
   width: 100%;
@@ -108,15 +81,6 @@
 
 .custom-input-group .form-control {
   flex: 1;
-}
-
-.custom-theme-btn {
-  background-color: #88ab33;
-  border: none;
-}
-
-.custom-theme-color {
-  background-color: #88ab33;
 }
 
 .custom-theme-radius {
@@ -147,11 +111,6 @@
   border-radius: 0px 0px .5rem 0px !important;
 }
 
-.spinner-size-2 {
-  height: 2rem;
-  width: 2rem;
-}
-
 .spinner-size-3 {
   height: 3rem;
   width: 3rem;
@@ -173,6 +132,7 @@
   flex: 0 0 auto;
   cursor: pointer;
   height: auto;
+  width: 160px;
   aspect-ratio: 3 / 2;
   overflow: hidden;
 }
@@ -185,17 +145,8 @@
 
 /* For phones with a maximum width of 767px */
 @media (max-width: 767px) {
-  .provider-card {
-    width: 135px;
-  }
-
   .modal-pad {
     max-width: 100%;
-  }
-
-  .custom-cast-card-img {
-    height: 70px;
-    width: 70px;
   }
 
   .dynamic-hs {
@@ -217,17 +168,8 @@
 
 /* For iPads and tablets with a width of 768px to 1199px */
 @media (min-width: 768px) and (max-width: 1199px) {
-  .provider-card {
-    width: 165px;
-  }
-
   .modal-pad {
     max-width: 70%;
-  }
-
-  .custom-cast-card-img {
-    height: 80px;
-    width: 80px;
   }
 
   .dynamic-hs {
@@ -249,17 +191,8 @@
 
 /* For laptops and desktops with a width of 1200px and above */
 @media (min-width: 1200px) {
-  .provider-card {
-    width: 200px;
-  }
-
   .modal-pad {
     max-width: 40%;
-  }
-
-  .custom-cast-card-img {
-    height: 90px;
-    width: 90px;
   }
 
   .dynamic-hs {

@@ -68,8 +68,6 @@ function PlayGround() {
             left: 0,
             background: 'rgba(18, 18, 18, 0.5)',
             zIndex: 1,
-            backdropFilter: 'blur(4px)',
-            WebkitBackdropFilter: 'blur(4px)',
           }}
         ></div>
       </div>

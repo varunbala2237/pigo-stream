@@ -63,7 +63,7 @@ function Card({ media, type, path, onRemove, handleAlert, isDeletable = true, is
   }, [showModal]);
 
   const handlePlayMedia = async () => {
-    if (!isRemove) {
+    if (!isSkeleton || isRemove) {
       navigate(`/play?id=${media.id}&type=${type}`);
     }
   };
@@ -117,32 +117,28 @@ function Card({ media, type, path, onRemove, handleAlert, isDeletable = true, is
     <div className="custom-card-container">
       <div
         className="card custom-bg text-white border-0 shadow-sm"
-        style={{ width: '160px', cursor: isRemove ? 'default' : 'pointer' }}
+        style={{ width: '160px', cursor: !isSkeleton || isRemove ? 'default' : 'pointer' }}
         onClick={handlePlayMedia}
         onContextMenu={handleRightClick}
         onMouseDown={(e) => e.button === 0 && setTimeout(() => handleLongClick(e), 700)}
       >
         <img src={imageUrl} alt="poster" className="custom-card-img rounded-top" />
-        <div className="card-body py-2 px-2 d-flex justify-content-between align-items-center">
+        <div className="card-body p-2 d-flex justify-content-between align-items-center">
           {isSkeleton ? (
             <div className="bg-dark py-2 px-3 rounded-pill"></div>
           ) : (
             <div>
               <i className="bi bi-star-fill text-warning me-1"></i>
-              <span>{rating}</span>
+              <span className="text-secondary">{rating}</span>
             </div>
           )}
-          {isSkeleton ? (
-            <div className="bg-dark py-2 px-3 rounded-pill"></div>
-          ) : (
-            <div>
-              {type === 'movie' ? (
-                <i className="bi bi-film text-light"></i>
-              ) : (
-                <i className="bi bi-tv text-light"></i>
-              )}
-            </div>
-          )}
+          <div>
+            {type === 'movie' ? (
+              <i className="bi bi-film text-secondary"></i>
+            ) : (
+              <i className="bi bi-tv text-secondary"></i>
+            )}
+          </div>
         </div>
       </div>
 
