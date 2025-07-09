@@ -3,7 +3,6 @@ import { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import useRemoveWatchHistory from '../hooks/WatchHistoryPage/useRemoveWatchHistory';
 import useRemoveFromMyList from '../hooks/MyListPage/useRemoveMyList';
-
 import './Card.css';
 
 function Card({ media, type, path, onRemove, handleAlert, isDeletable = true, isSkeleton = false }) {
@@ -113,6 +112,25 @@ function Card({ media, type, path, onRemove, handleAlert, isDeletable = true, is
   // Extracting rating
   const rating = media.vote_average ? media.vote_average.toFixed(1) : '0.0';
 
+  if (isSkeleton) {
+    return (
+      <div className="custom-card-container">
+        <div
+          className="card custom-bg text-white border-0 shadow-sm"
+          style={{ width: '160px', height: '280px' }}
+        >
+          <div
+            className="custom-card-img rounded-top skeleton-bg"
+          />
+          <div className="card-body p-2 d-flex justify-content-between align-items-center">
+            <div className="bg-dark py-2 px-3 rounded-pill"></div>
+            <div className="bg-dark py-2 px-3 rounded-pill"></div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="custom-card-container">
       <div
@@ -124,14 +142,10 @@ function Card({ media, type, path, onRemove, handleAlert, isDeletable = true, is
       >
         <img src={imageUrl} alt="poster" className="custom-card-img rounded-top" />
         <div className="card-body p-2 d-flex justify-content-between align-items-center">
-          {isSkeleton ? (
-            <div className="bg-dark py-2 px-3 rounded-pill"></div>
-          ) : (
-            <div>
-              <i className="bi bi-star-fill text-warning me-1"></i>
-              <span className="text-secondary">{rating}</span>
-            </div>
-          )}
+          <div>
+            <i className="bi bi-star-fill text-warning me-1"></i>
+            <span className="text-secondary">{rating}</span>
+          </div>
           <div>
             {type === 'movie' ? (
               <i className="bi bi-film text-secondary"></i>
