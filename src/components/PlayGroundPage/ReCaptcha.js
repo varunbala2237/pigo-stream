@@ -5,7 +5,7 @@ import { setStorageValue } from '../../utils/localStorageStates';
 
 const RECAPTCHA_SITE_KEY = process.env.REACT_APP_RECAPTCHA_SITE_KEY;
 
-function ReCaptcha({ storagePath }) {
+const ReCaptcha = ({ storagePath }) => {
     const handleCaptchaSuccess = (token) => {
         if (token) {
             setStorageValue(...storagePath, 'recaptchaVerified', true);

@@ -3,12 +3,12 @@ import { useEffect } from 'react';
 import Tippy from '@tippyjs/react';
 import 'tippy.js/dist/tippy.css';
 
-function SeasonSection({
+const SeasonSection = ({
   seasons,
   selectedSeason,
   onSeasonChange,
   seasonScrollRef
-}) {
+}) => {
   // Handling seasons scroll state
   useEffect(() => {
     if (seasonScrollRef.current) {

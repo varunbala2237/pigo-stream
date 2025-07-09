@@ -6,7 +6,7 @@ import useFetchMedia from '../../hooks/IndexPage/useFetchMedia';
 import HomeUI from './HomeUI';
 import './IndexUI.css';
 
-function IndexUI() {
+const IndexUI = () => {
   const { selectedItemId } = useGenreRecommendations();
   const { data: recommendedMedia, loading: loadingRecommendedMedia, error: errorRecommendedMedia } = useFetchMediaDetails(selectedItemId);
   const { data: popularMovies, loading: loadingPopularMovies, error: errorPopularMovies } = useFetchMedia('popular', 'movie');
@@ -15,8 +15,6 @@ function IndexUI() {
 
   const [backgroundImage, setBackgroundImage] = useState(null);
   const [isRecommended, setIsRecommended] = useState(false);
-  const [showSearchBar, setShowSearchBar] = useState(false);
-  const [triggerSearch, setTriggerSearch] = useState('');
 
   useEffect(() => {
     const getImagePath = (media) => {
@@ -48,33 +46,25 @@ function IndexUI() {
       ? new Date(mediaDetails.first_air_date).getFullYear()
       : 'N/A';
 
-  const shouldHideBackground = showSearchBar || triggerSearch.trim() !== '';
-
   return (
     <div className="index-page">
       <div
         className="background-image"
         style={{
-          background: shouldHideBackground ? 'transparent' : undefined,
-          backgroundImage: shouldHideBackground
-            ? 'none' // Hide background when search is active or query exists
-            : backgroundImage
-              ? `linear-gradient(to bottom, rgba(18, 18, 18, 0), #121212), url(${backgroundImage})`
-              : 'none',
+          backgroundImage: backgroundImage
+            ? `linear-gradient(to bottom, rgba(18, 18, 18, 0), #121212), url(${backgroundImage})`
+            : 'none',
         }}
       >
-        {/* Dark Overlay */}
-        {!shouldHideBackground && (
-          <div
-            className="position-absolute w-100 h-100"
-            style={{
-              top: 0,
-              left: 0,
-              background: 'rgba(18, 18, 18, 0.5)',
-              zIndex: 1,
-            }}
-          ></div>
-        )}
+        <div
+          className="position-absolute w-100 h-100"
+          style={{
+            top: 0,
+            left: 0,
+            background: 'rgba(18, 18, 18, 0.5)',
+            zIndex: 1,
+          }}
+        ></div>
       </div>
 
       {/* HomeUI */}
@@ -85,10 +75,6 @@ function IndexUI() {
         mediaDesc={mediaDesc}
         rating={rating}
         year={year}
-        showSearchBar={showSearchBar}
-        setShowSearchBar={setShowSearchBar}
-        triggerSearch={triggerSearch}
-        setTriggerSearch={setTriggerSearch}
         isRecommended={isRecommended}
         isIndexError={isError}
       />

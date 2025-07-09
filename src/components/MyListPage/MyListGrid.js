@@ -11,7 +11,7 @@ import { getSessionValue, setSessionValue } from '../../utils/sessionStorageStat
 
 const SESSION_PATH = ['MyListUI', 'Grids', 'MyListGrid'];
 
-function MyListGrid({ userUID }) {
+const MyListGrid = ({ userUID }) => {
     const location = useLocation();
     const [movieLimit, setMovieLimit] = useState(12);
     const [showLimit, setShowLimit] = useState(12);

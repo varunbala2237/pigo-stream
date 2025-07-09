@@ -1,7 +1,7 @@
 // OverviewSection.js
 import { useState } from "react";
 
-function OverviewSection({ text }) {
+const OverviewSection = ({ text }) => {
   const [expanded, setExpanded] = useState(false);
   const previewLength = 250;
   const isLong = text.length > previewLength;

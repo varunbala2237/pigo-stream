@@ -5,7 +5,7 @@ import { auth, signOutWithAccount } from "../firebase/firebase-auth";
 
 import './Header.css';
 
-function Header() {
+const Header = () => {
   const navigate = useNavigate();
   const [userEmail, setUserEmail] = useState('');
   const [userPhotoURL, setUserPhotoURL] = useState('');

@@ -17,7 +17,7 @@ import Alert from '../../utils/Alert';
 
 import { getSessionValue, setSessionValue } from '../../utils/sessionStorageStates';
 
-function AuthUI() {
+const AuthUI = () => {
     const navigate = useNavigate();
     const [userName, setUserName] = useState('');
     const [email, setEmail] = useState('');

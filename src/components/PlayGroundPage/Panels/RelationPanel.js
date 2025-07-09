@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import Tippy from '@tippyjs/react';
 import 'tippy.js/dist/tippy.css';
 
-function RelationPanel({ animeInfo, selectedRelationIndex, onRelationChange, relationScrollRef }) {
+const RelationPanel = ({ animeInfo, selectedRelationIndex, onRelationChange, relationScrollRef }) => {
     useEffect(() => {
         if (relationScrollRef.current) {
             const items = relationScrollRef.current.querySelectorAll('.card');
@@ -41,7 +41,7 @@ function RelationPanel({ animeInfo, selectedRelationIndex, onRelationChange, rel
                 Related Anime
             </div>
 
-            <div className="d-flex justify-content-between align-items-stretch" style={{ height: '300px' }}>
+            <div className="d-flex justify-content-between align-items-stretch" style={{ height: '302px' }}>
                 <div
                     ref={relationScrollRef}
                     className="d-flex flex-row overflow-auto scroll-hide align-items-start custom-theme-radius-low gap-2"
@@ -71,7 +71,7 @@ function RelationPanel({ animeInfo, selectedRelationIndex, onRelationChange, rel
                                 />
                                 <div className={`card-body p-2`}>
                                     <div className="d-flex align-items-center dynamic-fs">
-                                        <span className="fw-bold anime-theme-color me-2">{index}</span>
+                                        <span className="fw-bold theme-color me-2">{index}</span>
                                         <Tippy
                                             content={displayTitle}
                                             placement="top"

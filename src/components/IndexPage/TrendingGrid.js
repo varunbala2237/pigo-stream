@@ -8,7 +8,7 @@ import { getSessionValue, setSessionValue } from '../../utils/sessionStorageStat
 
 const SESSION_PATH = ['HomeUI', 'Grids', 'TrendingGrid'];
 
-function TrendingGrid({ setIsTrendingLoading, setIsTrendingError, setHasTrendingContent }) {
+const TrendingGrid = ({ setIsTrendingLoading, setIsTrendingError, setHasTrendingContent }) => {
   const { data: movies, loading: isLoadingMovies, error: isErrorMovies } = useFetchMedia('trending', 'movie');
   const { data: shows, loading: isLoadingShows, error: isErrorShows } = useFetchMedia('trending', 'tv');
 

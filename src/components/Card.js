@@ -5,7 +5,7 @@ import useRemoveWatchHistory from '../hooks/WatchHistoryPage/useRemoveWatchHisto
 import useRemoveFromMyList from '../hooks/MyListPage/useRemoveMyList';
 import './Card.css';
 
-function Card({ media, type, path, onRemove, handleAlert, isDeletable = true, isSkeleton = false }) {
+const Card = ({ media, type, path, onRemove, handleAlert, isDeletable = true, isSkeleton = false }) => {
   const [imageUrl, setImageUrl] = useState('');
   const [showModal, setShowModal] = useState(false);
   const [isRemove, setIsRemove] = useState(false);

@@ -12,7 +12,7 @@ import { getSessionValue, setSessionValue } from '../../utils/sessionStorageStat
 
 const SESSION_PATH = ['WatchHistoryUI', 'Grids', 'WatchHistoryGrid'];
 
-function WatchHistoryGrid({ userUID }) {
+const WatchHistoryGrid = ({ userUID }) => {
     const [movieLimit, setMovieLimit] = useState(12);
     const [showLimit, setShowLimit] = useState(12);
     const { data: { moviesHistory = [], showsHistory = [] } = {}, loading: isLoading, error: isError, refetch } = useFetchWatchHistory(userUID, movieLimit, showLimit);

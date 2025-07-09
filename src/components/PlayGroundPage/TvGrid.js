@@ -17,7 +17,7 @@ import { getSessionValue, setSessionValue } from '../../utils/sessionStorageStat
 const SELECTED_SEASON = 'selectedSeason';
 const SEASON_STATE_KEY = 'seasonState';
 
-function TvGrid({ id, type, mediaInfo, setBackgroundImage }) {
+const TvGrid = ({ id, type, mediaInfo, setBackgroundImage }) => {
   const TV_STORAGE_PATH = React.useMemo(
     () => ['PlayGroundUI', 'Grids', 'TvGrid', `${id}`],
     [id]

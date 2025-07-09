@@ -2,7 +2,7 @@
 import { useRef } from 'react';
 import './ErrorModal.css';
 
-function ErrorModal({ error }) {
+const ErrorModal = ({ error }) => {
   // Ref to track outside clicks
   const modalRef = useRef();
 

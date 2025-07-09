@@ -14,7 +14,7 @@ import ErrorModal from '../../utils/ErrorModal';
 
 import { getStorageValue } from '../../utils/localStorageStates';
 
-function PlayGround() {
+const PlayGround = () => {
   const STORAGE_PATH = ['PlayGroundUI'];
 
   const location = useLocation();

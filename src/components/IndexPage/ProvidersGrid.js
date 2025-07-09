@@ -23,7 +23,7 @@ const PROVIDERS = [
 
 const SESSION_PATH = ['HomeUI', 'Grids', 'ProvidersGrid'];
 
-function ProvidersGrid({ setIsProvidersLoading, setIsProvidersError, setHasProvidersContent }) {
+const ProvidersGrid = ({ setIsProvidersLoading, setIsProvidersError, setHasProvidersContent }) => {
     // Restore the selected provider value
     const [selectedProvider, setSelectedProvider] = useState(() => {
         return getSessionValue(...SESSION_PATH, 'selectedProvider') ?? PROVIDERS[0];

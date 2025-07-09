@@ -7,7 +7,7 @@ import Footer from '../Footer';
 
 import { getSessionValue, setSessionValue } from '../../utils/sessionStorageStates';
 
-function WatchHistoryUI() {
+const WatchHistoryUI = () => {
   const [userUID, setUserUID] = useState(null);
 
   useEffect(() => {

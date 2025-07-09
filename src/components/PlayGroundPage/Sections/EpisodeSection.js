@@ -3,12 +3,12 @@ import { useEffect } from 'react';
 import Tippy from '@tippyjs/react';
 import 'tippy.js/dist/tippy.css';
 
-function EpisodeSection({
+const EpisodeSection = ({
   episodes,
   selectedEpisode,
   onEpisodeChange,
   episodeScrollRef
-}) {
+}) => {
   // Handling episode scroll state
   useEffect(() => {
     if (episodeScrollRef.current) {
@@ -76,7 +76,7 @@ function EpisodeSection({
         Episodes
       </div>
 
-      <div className="d-flex justify-content-between align-items-stretch" style={{ height: '150px' }}>
+      <div className="d-flex justify-content-between align-items-stretch" style={{ height: '152px' }}>
         <div
           ref={episodeScrollRef}
           className="d-flex flex-row overflow-auto scroll-hide align-items-start custom-theme-radius-low gap-2"

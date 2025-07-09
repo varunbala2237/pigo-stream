@@ -1,9 +1,10 @@
 // ServerSection.js
-function ServerSection({
+
+const ServerSection = ({
     servers,
     selectedServer,
     handleServerChange,
-}) {
+}) => {
     return (
 
         <div className="container-fluid custom-bg custom-theme-radius-low w-100 p-2 my-2">

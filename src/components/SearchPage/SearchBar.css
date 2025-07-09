@@ -2,20 +2,14 @@
 
 /* Wrapper to float input + dropdown at the top center */
 .floating-search-wrapper {
-  position: fixed;
-  top: 1rem;
-  left: 0;
-  right: 0;
-  padding: 0 1rem;
+  width: 100%;
   box-sizing: border-box;
-  z-index: 1040 !important;
 }
 
 /* Keeps the input-group positioned for the dropdown */
 .search-bar {
   position: relative;
   width: 100%;
-  z-index: 1040 !important;
 }
 
 /* Dropdown attached to input, full width */

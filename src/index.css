@@ -3,7 +3,6 @@
   /* Main Font Styles */
   --main-font: "Inter", "Helvetica Neue", Arial, sans-serif;
   --theme-color: #51a6f5;
-  --anime-theme-color: #ff69b4;
 }
 
 body {
@@ -37,24 +36,12 @@ body {
   color: var(--theme-color) !important;
 }
 
-.anime-theme-color {
-  color: var(--anime-theme-color) !important;
-}
-
 .theme-bg {
   background-color: var(--theme-color) !important;
 }
 
-.anime-theme-bg {
-  background-color: var(--anime-theme-color) !important;
-}
-
 .theme-border-color {
   border-left-color: var(--theme-color) !important;
-}
-
-.anime-theme-border-color {
-  border-left-color: var(--anime-theme-color) !important;
 }
 
 /* Common & Custom heights and widths */

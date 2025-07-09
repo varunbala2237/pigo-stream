@@ -2,18 +2,19 @@
 import React from "react";
 import "./SearchBar.css";
 
-function SearchBar({
+const SearchBar = ({
   searchQuery,
   handleSearchInputChange,
   handleSelectSearch,
   searchHistory,
   isDropdownOpen,
   handleRemoveSearchHistory,
+  handleClearSearch,
   handleSearchSubmit,
   handleFocus,
   containerRef,
   dropdownRef,
-}) {
+}) => {
   return (
     <div className="floating-search-wrapper">
       <div className="d-flex position-relative justify-content-center align-items-center shadow">
@@ -69,6 +70,12 @@ function SearchBar({
                 ))
               )}
             </ul>
+          )}
+
+          {searchQuery !== '' && (
+            <button className="btn btn-dark custom-bg border-0 text-white" onClick={handleClearSearch}>
+              <i className="bi bi-x-lg"></i>
+            </button>
           )}
 
           <button className="btn btn-primary border-0 rounded-pill-r" onClick={handleSearchSubmit}>

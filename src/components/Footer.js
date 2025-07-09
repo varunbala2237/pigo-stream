@@ -10,11 +10,12 @@ const SESSION_KEY = 'previousPath';
 
 const navItems = [
   { path: '/index', name: 'Home', icon: 'bi-house' },
+  { path: '/search', name: 'Search', icon: 'bi-search' },
   { path: '/my-list', name: 'My List', icon: 'bi-bookmark-fill' },
   { path: '/watch-history', name: 'Watch History', icon: 'bi-clock-history' },
 ];
 
-const Footer = ({ showSearchBar = null, handleSearchBar = null }) => {
+const Footer = () => {
   const location = useLocation();
   const currentPath = location.pathname;
 
@@ -56,20 +57,6 @@ const Footer = ({ showSearchBar = null, handleSearchBar = null }) => {
             </li>
           );
         })}
-
-        {showSearchBar !== null && (
-          <li className="nav-item text-center mx-auto">
-            <button
-              className="btn border-0 d-flex flex-column align-items-center justify-content-center text-decoration-none dynamic-ts"
-              onClick={handleSearchBar}
-            >
-              <i className={`bi ${showSearchBar ? 'bi-x-lg text-white' : 'bi-search text-secondary'}`}></i>
-              <span className={`dynamic-ss ${showSearchBar ? 'text-white' : 'text-secondary'}`}>
-                {showSearchBar ? 'Close' : 'Search'}
-              </span>
-            </button>
-          </li>
-        )}
       </ul>
     </div>
   );

@@ -13,7 +13,7 @@ import EpisodePanel from './Panels/EpisodePanel';
 import { getStorageValue, setStorageValue } from '../../utils/localStorageStates';
 import { getSessionValue, setSessionValue } from '../../utils/sessionStorageStates';
 
-function AnimeGrid({ id, type, mediaInfo, animeInfo, setBackgroundImage }) {
+const AnimeGrid = ({ id, type, mediaInfo, animeInfo, setBackgroundImage }) => {
   const ANIME_STORAGE_PATH = React.useMemo(
     () => ['PlayGroundUI', 'Grids', 'AnimeGrid', `${id}`],
     [id]
@@ -206,7 +206,7 @@ function AnimeGrid({ id, type, mediaInfo, animeInfo, setBackgroundImage }) {
                   ${activeTab === 'info' ? '' : 'opacity-50'}`}
                 onClick={() => handleTabChange('info')}
               >
-                <i className="bi bi-list anime-theme-color me-2"></i>
+                <i className="bi bi-list theme-color me-2"></i>
                 <b>Info</b>
               </button>
 
@@ -218,7 +218,7 @@ function AnimeGrid({ id, type, mediaInfo, animeInfo, setBackgroundImage }) {
                   ${activeTab === 'player' ? '' : 'opacity-50'}`}
                 onClick={() => handleTabChange('player')}
               >
-                <i className="bi bi-file-earmark-play anime-theme-color me-2"></i>
+                <i className="bi bi-file-earmark-play theme-color me-2"></i>
                 <b>Player</b>
               </button>
             </div>
@@ -227,7 +227,6 @@ function AnimeGrid({ id, type, mediaInfo, animeInfo, setBackgroundImage }) {
               <InfoSection
                 id={id}
                 type={type}
-                isAnime={true}
                 mediaInfo={mediaInfo}
                 isInList={isInList}
                 isListLoading={isListLoading}
@@ -275,7 +274,7 @@ function AnimeGrid({ id, type, mediaInfo, animeInfo, setBackgroundImage }) {
 
             <div className="d-flex flex-column align-items-start custom-theme-radius-low my-2 w-100">
               <div className="container py-2 text-white">
-                <div className="d-flex flex-row border-start border-4 anime-theme-border-color dynamic-ts ps-2">
+                <div className="d-flex flex-row border-start border-4 theme-border-color dynamic-ts ps-2">
                   <b>Cast</b>
                 </div>
                 <div className="row justify-content-center">

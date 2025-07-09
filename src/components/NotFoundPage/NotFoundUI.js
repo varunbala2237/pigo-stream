@@ -1,5 +1,6 @@
 // NotFoundUI.js
-export default function NotFoundUI() {
+
+const NotFoundUI = () => {
   return (
     <div className="container-fluid d-flex flex-column justify-content-center align-items-center vh-100 p-0">
       <div className="w-100 text-center text-white">
@@ -9,3 +10,5 @@ export default function NotFoundUI() {
     </div>
   );
 }
+
+export default NotFoundUI;

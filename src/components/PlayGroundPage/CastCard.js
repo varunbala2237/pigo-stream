@@ -1,7 +1,7 @@
 // CastCard.js
 import './CastCard.css';
 
-function CastCard({ actor, isSkeleton }) {
+const CastCard = ({ actor, isSkeleton }) => {
   const searchActor = (name) => {
     const searchQuery = encodeURIComponent(name);
     const searchUrl = `https://www.google.com/search?q=${searchQuery}`;

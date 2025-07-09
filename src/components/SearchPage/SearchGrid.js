@@ -8,7 +8,7 @@ import { getSessionValue, setSessionValue } from '../../utils/sessionStorageStat
 
 const SESSION_PATH = ['HomeUI', 'Grids', 'SearchGrid'];
 
-function SearchGrid({ searchQuery, setIsSearchLoading, setIsSearchError, setHasSearchContent }) {
+const SearchGrid = ({ searchQuery, setIsSearchLoading, setIsSearchError, setHasSearchContent }) => {
   // Fetch data from useSearch
   const { data: movies, loading: moviesLoading, error: moviesError } = useFetchSearch('movie', searchQuery);
   const { data: shows, loading: showsLoading, error: showsError } = useFetchSearch('tv', searchQuery);

@@ -7,7 +7,7 @@ import Footer from '../Footer';
 
 import { getSessionValue, setSessionValue } from '../../utils/sessionStorageStates';
 
-function MyListUI() {
+const MyListUI = () => {
   const [userUID, setUserUID] = useState(null);
 
   useEffect(() => {

@@ -1,18 +1,17 @@
 // InfoSection.js
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import useFetchTrailer from '../../../hooks/PlayGroundPage/useFetchTrailer';
 import OverviewSection from './OverviewSection';
 import './InfoSection.css';
 
-function InfoSection({
+const InfoSection = ({
   id,
   type,
-  isAnime,
   mediaInfo,
   isInList,
   isListLoading,
   handleAddToList,
-}) {
+}) => {
   const [imageUrl, setImageUrl] = useState('');
   const { trailerLink } = useFetchTrailer(id, type);
 
@@ -110,7 +109,7 @@ function InfoSection({
                       {isListLoading ? (
                         <span className="spinner-border spinner-border-sm text-light" />
                       ) : (
-                        <i className={`bi-${isInList ? `bookmark-fill ${isAnime ? "anime-theme-color" : "theme-color"}` : 'bookmark'}`}></i>
+                        <i className={`bi-${isInList ? `bookmark-fill theme-color` : 'bookmark'}`}></i>
                       )}
                     </button>
 
@@ -122,7 +121,7 @@ function InfoSection({
                       {isListLoading ? (
                         <span className="spinner-border spinner-border-sm text-light" />
                       ) : (
-                        <i className={`bi-${isInList ? `bookmark-fill ${isAnime ? "anime-theme-color" : "theme-color"}` : 'bookmark'}`}></i>
+                        <i className={`bi-${isInList ? `bookmark-fill theme-color` : 'bookmark'}`}></i>
                       )}
                     </button>
 
@@ -216,18 +215,14 @@ function InfoSection({
                   <div className="d-flex align-items-center flex-wrap mb-2">
                     <dd className="mb-0 d-flex flex-wrap gap-2">
                       {genres?.map((genre, index) => {
-                        const lowerName = genre.name.toLowerCase();
-                        const matchedClass = Object.entries(genreClassMap).find(([key]) =>
-                          lowerName.includes(key)
-                        )?.[1];
-
-                        return (<span
-                          key={index}
-                          className={`custom-bg rounded-pill px-2 py-1 ${getGenreClass(genre.name)}`}
-                          onClick={() => handleGenreClick(genre.name)}
-                        >
-                          #{genre.name}
-                        </span>);
+                        return (
+                          <span
+                            key={index}
+                            className={`custom-bg rounded-pill px-2 py-1 ${getGenreClass(genre.name)}`}
+                            onClick={() => handleGenreClick(genre.name)}
+                          >
+                            #{genre.name}
+                          </span>);
                       })}
                     </dd>
                   </div>
@@ -250,7 +245,7 @@ function InfoSection({
           </div>
         </div>
       </div>
-      
+
       <div className="d-flex flex-column custom-bg custom-theme-radius-low w-100 p-2 mt-2">
         <div className="d-flex flex-column align-items-start justify-content-between w-100">
           <div className="d-flex flex-row align-items-start custom-theme-radius-low w-100">

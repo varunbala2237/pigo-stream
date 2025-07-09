@@ -11,7 +11,7 @@ import ServerSection from './Sections/ServerSection';
 import { getStorageValue, setStorageValue } from '../../utils/localStorageStates';
 import { getSessionValue, setSessionValue } from '../../utils/sessionStorageStates';
 
-function MovieGrid({ id, type, mediaInfo, setBackgroundImage }) {
+const MovieGrid = ({ id, type, mediaInfo, setBackgroundImage }) => {
   const MOVIES_STORAGE_PATH = React.useMemo(
     () => ['PlayGroundUI', 'Grids', 'MovieGrid', `${id}`],
     [id]

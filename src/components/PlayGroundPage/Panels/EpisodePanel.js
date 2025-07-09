@@ -2,7 +2,7 @@
 import { useMemo, useEffect, useRef } from 'react';
 import { getStorageValue } from '../../../utils/localStorageStates';
 
-function EpisodePanel({ episodeCount, selectedEpisode, onEpisodeChange, selectedRelationPath, page, setPage }) {
+const EpisodePanel = ({ episodeCount, selectedEpisode, onEpisodeChange, selectedRelationPath, page, setPage }) => {
   const safeEpisodeCount = Math.max(1, episodeCount || 1);
   const pageSize = 50;
   const relationKey = selectedRelationPath.at(-1);
