@@ -36,7 +36,7 @@ function InfoSection({
   }, [poster_path]);
 
   const handleGenreClick = (genreName) => {
-    const searchQuery = `"${title}" similar movies or shows with ${genreName}`;
+    const searchQuery = `"${title}" similar "${genreName}" movies or shows`;
     window.open(`https://www.google.com/search?q=${encodeURIComponent(searchQuery)}`, '_blank');
   };
 
