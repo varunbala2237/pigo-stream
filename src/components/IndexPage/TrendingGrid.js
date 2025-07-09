@@ -98,12 +98,12 @@ function TrendingGrid({ setIsTrendingLoading, setIsTrendingError, setHasTrending
 
       {/* Trending Movies Section */}
       {(
-        <div className="d-flex my-2 align-items-stretch" style={{ height: '280px' }}>
-          <div ref={moviesRef} className="d-flex custom-theme-radius-low overflow-auto scroll-hide custom-gap" style={{ scrollSnapType: 'x mandatory' }}>
+        <div className="d-flex my-2 justify-content-between align-items-stretch" style={{ height: '280px' }}>
+          <div ref={moviesRef} className="d-flex overflow-auto scroll-hide custom-gap" style={{ scrollSnapType: 'x mandatory' }}>
             {(
               !isLoading && !isError && movies?.length > 0 ? movies : []
             )
-              .concat(Array.from({ length: Math.max(0, 6 - (movies?.length || 0)) }))
+              .concat(Array.from({ length: Math.max(0, 8 - (movies?.length || 0)) }))
               .map((movie, index) =>
                 movie ? (
                   <Card key={movie.id} media={movie} type="movie" path={location.pathname} />
@@ -144,12 +144,12 @@ function TrendingGrid({ setIsTrendingLoading, setIsTrendingError, setHasTrending
 
       {/* Trending Shows Section */}
       {(
-        <div className="d-flex my-2 align-items-stretch" style={{ height: '280px' }}>
-          <div ref={showsRef} className="d-flex custom-theme-radius-low overflow-auto scroll-hide custom-gap" style={{ scrollSnapType: 'x mandatory' }}>
+        <div className="d-flex my-2 justify-content-between align-items-stretch" style={{ height: '280px' }}>
+          <div ref={showsRef} className="d-flex overflow-auto scroll-hide custom-gap" style={{ scrollSnapType: 'x mandatory' }}>
             {(
               !isLoading && !isError && shows?.length > 0 ? shows : []
             )
-              .concat(Array.from({ length: Math.max(0, 6 - (shows?.length || 0)) }))
+              .concat(Array.from({ length: Math.max(0, 8 - (shows?.length || 0)) }))
               .map((show, index) =>
                 show ? (
                   <Card key={show.id} media={show} type="tv" path={location.pathname} />

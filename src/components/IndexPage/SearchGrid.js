@@ -18,7 +18,7 @@ function SearchGrid({ searchQuery, setIsSearchLoading, setIsSearchError, setHasS
   const location = useLocation();
 
   // Scroll references for movies and shows (2 rows for each)
-  const movieRef = useRef(null);
+  const moviesRef = useRef(null);
   const showsRef = useRef(null);
 
   // Loading handling
@@ -51,14 +51,14 @@ function SearchGrid({ searchQuery, setIsSearchLoading, setIsSearchError, setHasS
     const savedShowsScroll = getSessionValue(...SESSION_PATH, 'showsScroll') || 0;
 
     requestAnimationFrame(() => {
-      if (movieRef.current) movieRef.current.scrollTo({ left: savedMoviesScroll, behavior: 'instant' });
+      if (moviesRef.current) moviesRef.current.scrollTo({ left: savedMoviesScroll, behavior: 'instant' });
       if (showsRef.current) showsRef.current.scrollTo({ left: savedShowsScroll, behavior: 'instant' });
     });
   }, [isLoading, isError]);
 
   // Save scroll positions for movies and shows
   useEffect(() => {
-    const moviesNode = movieRef.current;
+    const moviesNode = moviesRef.current;
     const showsNode = showsRef.current;
 
     if (!moviesNode || !showsNode) return;
@@ -97,32 +97,17 @@ function SearchGrid({ searchQuery, setIsSearchLoading, setIsSearchError, setHasS
 
       {/* Search Results: Movies */}
       {(
-        <div className="position-relative my-2">
-          <button
-            className="btn btn-dark custom-bg rounded-pill py-2 position-absolute start-0 translate-middle-y"
-            onClick={() => scroll(movieRef, 'left')}
-            style={{ zIndex: 1, top: '50%', transform: 'translateY(-50%)' }}
-          >
-            <i className="bi bi-chevron-left"></i>
-          </button>
-          <button
-            className="btn btn-dark custom-bg rounded-pill py-2 position-absolute end-0 translate-middle-y"
-            onClick={() => scroll(movieRef, 'right')}
-            style={{ zIndex: 1, top: '50%', transform: 'translateY(-50%)' }}
-          >
-            <i className="bi bi-chevron-right"></i>
-          </button>
-
+        <div className="d-flex my-2 justify-content-between align-items-stretch" style={{ height: '280px' }}>
           <div
-            ref={movieRef}
-            className="d-flex custom-theme-radius-low overflow-auto scroll-hide custom-gap"
+            ref={moviesRef}
+            className="d-flex overflow-auto scroll-hide custom-gap"
             style={{ scrollSnapType: 'x mandatory' }}
           >
             {(searchQuery.trim()
               ? (movies || []).concat(
-                Array.from({ length: Math.max(0, 6 - (movies?.length || 0)) })
+                Array.from({ length: Math.max(0, 8 - (movies?.length || 0)) })
               )
-              : Array.from({ length: 6 })
+              : Array.from({ length: 8 })
             ).map((movie, index) =>
               movie ? (
                 <Card key={index} media={movie} type="movie" path={location.pathname} />
@@ -138,6 +123,22 @@ function SearchGrid({ searchQuery, setIsSearchLoading, setIsSearchError, setHasS
               )
             )}
           </div>
+
+          {/* Vertical scroll buttons */}
+          <div className="d-flex flex-column ms-2" style={{ height: '100%' }}>
+            <button
+              className="btn btn-dark bd-callout-dark flex-fill py-2"
+              onClick={() => scroll(moviesRef, 'left')}
+            >
+              <i className="bi bi-chevron-left"></i>
+            </button>
+            <button
+              className="btn btn-dark bd-callout-dark flex-fill py-2 mt-2"
+              onClick={() => scroll(moviesRef, 'right')}
+            >
+              <i className="bi bi-chevron-right"></i>
+            </button>
+          </div>
         </div>
       )}
 
@@ -147,32 +148,17 @@ function SearchGrid({ searchQuery, setIsSearchLoading, setIsSearchError, setHasS
 
       {/* Search Results: Shows */}
       {(
-        <div className="position-relative my-2">
-          <button
-            className="btn btn-dark custom-bg rounded-pill py-2 position-absolute start-0 translate-middle-y"
-            onClick={() => scroll(showsRef, 'left')}
-            style={{ zIndex: 1, top: '50%', transform: 'translateY(-50%)' }}
-          >
-            <i className="bi bi-chevron-left"></i>
-          </button>
-          <button
-            className="btn btn-dark custom-bg rounded-pill py-2 position-absolute end-0 translate-middle-y"
-            onClick={() => scroll(showsRef, 'right')}
-            style={{ zIndex: 1, top: '50%', transform: 'translateY(-50%)' }}
-          >
-            <i className="bi bi-chevron-right"></i>
-          </button>
-
+        <div className="d-flex my-2 justify-content-between align-items-stretch" style={{ height: '280px' }}>
           <div
             ref={showsRef}
-            className="d-flex custom-theme-radius-low overflow-auto scroll-hide custom-gap"
+            className="d-flex overflow-auto scroll-hide custom-gap"
             style={{ scrollSnapType: 'x mandatory' }}
           >
             {(searchQuery.trim()
               ? (shows || []).concat(
-                Array.from({ length: Math.max(0, 6 - (shows?.length || 0)) })
+                Array.from({ length: Math.max(0, 8 - (shows?.length || 0)) })
               )
-              : Array.from({ length: 6 })
+              : Array.from({ length: 8 })
             ).map((show, index) =>
               show ? (
                 <Card key={index} media={show} type="tv" path={location.pathname} />
@@ -187,6 +173,22 @@ function SearchGrid({ searchQuery, setIsSearchLoading, setIsSearchError, setHasS
                 />
               )
             )}
+          </div>
+
+          {/* Vertical scroll buttons */}
+          <div className="d-flex flex-column ms-2" style={{ height: '100%' }}>
+            <button
+              className="btn btn-dark bd-callout-dark flex-fill py-2"
+              onClick={() => scroll(showsRef, 'left')}
+            >
+              <i className="bi bi-chevron-left"></i>
+            </button>
+            <button
+              className="btn btn-dark bd-callout-dark flex-fill py-2 mt-2"
+              onClick={() => scroll(showsRef, 'right')}
+            >
+              <i className="bi bi-chevron-right"></i>
+            </button>
           </div>
         </div>
       )}

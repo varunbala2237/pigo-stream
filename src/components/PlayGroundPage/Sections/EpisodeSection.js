@@ -76,22 +76,7 @@ function EpisodeSection({
         Episodes
       </div>
 
-      <div className="position-relative">
-        <button
-          className="btn btn-dark custom-bg rounded-pill py-2 position-absolute start-0 translate-middle-y"
-          onClick={() => scroll(episodeScrollRef, 'left')}
-          style={{ zIndex: 1, top: '50%', transform: 'translateY(-50%)' }}
-        >
-          <i className="bi bi-chevron-left"></i>
-        </button>
-        <button
-          className="btn btn-dark custom-bg rounded-pill py-2 position-absolute end-0 translate-middle-y"
-          onClick={() => scroll(episodeScrollRef, 'right')}
-          style={{ zIndex: 1, top: '50%', transform: 'translateY(-50%)' }}
-        >
-          <i className="bi bi-chevron-right"></i>
-        </button>
-
+      <div className="d-flex justify-content-between align-items-stretch" style={{ height: '150px' }}>
         <div
           ref={episodeScrollRef}
           className="d-flex flex-row overflow-auto scroll-hide align-items-start custom-theme-radius-low gap-2"
@@ -152,6 +137,22 @@ function EpisodeSection({
           ) : (
             <div className="text-white">No episodes available</div>
           )}
+        </div>
+
+        {/* Vertical scroll buttons */}
+        <div className="d-flex flex-column ms-2" style={{ height: '100%' }}>
+          <button
+            className="btn btn-dark bd-callout-dark flex-fill py-2"
+            onClick={() => scroll(episodeScrollRef, 'left')}
+          >
+            <i className="bi bi-chevron-left"></i>
+          </button>
+          <button
+            className="btn btn-dark bd-callout-dark flex-fill py-2 mt-2"
+            onClick={() => scroll(episodeScrollRef, 'right')}
+          >
+            <i className="bi bi-chevron-right"></i>
+          </button>
         </div>
       </div>
     </div>

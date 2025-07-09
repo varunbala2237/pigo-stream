@@ -48,22 +48,7 @@ function SeasonSection({
         Seasons
       </div>
 
-      <div className="position-relative">
-        <button
-          className="btn btn-dark custom-bg rounded-pill py-2 position-absolute start-0 translate-middle-y"
-          onClick={() => scroll(seasonScrollRef, 'left')}
-          style={{ zIndex: 1, top: '50%', transform: 'translateY(-50%)' }}
-        >
-          <i className="bi bi-chevron-left"></i>
-        </button>
-        <button
-          className="btn btn-dark custom-bg rounded-pill py-2 position-absolute end-0 translate-middle-y"
-          onClick={() => scroll(seasonScrollRef, 'right')}
-          style={{ zIndex: 1, top: '50%', transform: 'translateY(-50%)' }}
-        >
-          <i className="bi bi-chevron-right"></i>
-        </button>
-
+      <div className="d-flex justify-content-between align-items-stretch" style={{ height: '280px' }}>
         <div
           ref={seasonScrollRef}
           className="d-flex flex-row overflow-auto scroll-hide align-items-start custom-theme-radius-low gap-2"
@@ -114,6 +99,22 @@ function SeasonSection({
           ) : (
             <div className="text-white">No seasons available</div>
           )}
+        </div>
+
+        {/* Vertical scroll buttons */}
+        <div className="d-flex flex-column ms-2" style={{ height: '100%' }}>
+          <button
+            className="btn btn-dark bd-callout-dark flex-fill py-2"
+            onClick={() => scroll(seasonScrollRef, 'left')}
+          >
+            <i className="bi bi-chevron-left"></i>
+          </button>
+          <button
+            className="btn btn-dark bd-callout-dark flex-fill py-2 mt-2"
+            onClick={() => scroll(seasonScrollRef, 'right')}
+          >
+            <i className="bi bi-chevron-right"></i>
+          </button>
         </div>
       </div>
     </div>
