@@ -2,7 +2,7 @@
 import { useRef, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import Card from '../Card';
-import useFetchSearch from '../../hooks/IndexPage/useFetchSearch';
+import useFetchSearch from '../../hooks/SearchPage/useFetchSearch';
 
 import { getSessionValue, setSessionValue } from '../../utils/sessionStorageStates';
 

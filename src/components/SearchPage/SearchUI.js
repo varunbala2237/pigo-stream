@@ -4,9 +4,9 @@ import Header from '../Header';
 import Footer from '../Footer';
 import SearchBar from './SearchBar';
 import SearchGrid from './SearchGrid';
-import useSaveSearchHistory from '../../hooks/IndexPage/useSaveSearchHistory';
-import useFetchSearchHistory from '../../hooks/IndexPage/useFetchSearchHistory';
-import useRemoveSearchHistory from '../../hooks/IndexPage/useRemoveSearchHistory';
+import useSaveSearchHistory from '../../hooks/SearchPage/useSaveSearchHistory';
+import useFetchSearchHistory from '../../hooks/SearchPage/useFetchSearchHistory';
+import useRemoveSearchHistory from '../../hooks/SearchPage/useRemoveSearchHistory';
 import OverlaySpinner from '../../utils/OverlaySpinner';
 import ErrorModal from '../../utils/ErrorModal';
 import Alert from '../../utils/Alert';
@@ -90,10 +90,10 @@ const SearchUI = () => {
 
     // Page loading state handling
     useEffect(() => {
-        if (!isSearchLoading || searchQuery === '') {
+        if (searchQuery === '') {
             setIsSearchLoading(false);
         }
-    }, [isSearchLoading, searchQuery]);
+    }, [searchQuery]);
 
     // Error Modal handling
     useEffect(() => {

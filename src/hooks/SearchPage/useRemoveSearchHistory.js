@@ -23,7 +23,7 @@ const useRemoveSearchHistory = () => {
   const removeSearchHistory = async (id) => {
     if (userUID) {
       try {
-        const response = await fetch(`${BASE_URL}/pigo-stream/index/${userUID}/remove-search-history/${id}`, {
+        const response = await fetch(`${BASE_URL}/pigo-stream/search/${userUID}/remove-search-history/${id}`, {
           method: 'DELETE',
           headers: {
             'Content-Type': 'application/json',

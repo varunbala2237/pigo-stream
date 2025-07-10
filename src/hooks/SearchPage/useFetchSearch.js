@@ -37,7 +37,7 @@ const useFetchSearch = (type, query) => {
       if (!query) return; // No query to search
 
       try {
-        const url = `${BASE_URL}/pigo-stream/index/search/${type}?query=${encodeURIComponent(query)}`;
+        const url = `${BASE_URL}/pigo-stream/search/search-results/${type}?query=${encodeURIComponent(query)}`;
         const result = await fetchWithRetry(url);
         setData(result.results || []);
       } catch (err) {

@@ -25,7 +25,7 @@ const useFetchSearchHistory = () => {
   const fetchSearchHistory = useCallback(async () => {
     if (userUID) {
       try {
-        const response = await fetch(`${BASE_URL}/pigo-stream/index/fetch-search-history/${userUID}`, {
+        const response = await fetch(`${BASE_URL}/pigo-stream/search/fetch-search-history/${userUID}`, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',

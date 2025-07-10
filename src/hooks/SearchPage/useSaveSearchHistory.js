@@ -23,7 +23,7 @@ const useSaveSearchHistory = () => {
   const saveSearchHistory = async (searchQuery) => {
     if (userUID) {
       try {
-        const response = await fetch(`${BASE_URL}/pigo-stream/index/save-search-history`, {
+        const response = await fetch(`${BASE_URL}/pigo-stream/search/save-search-history`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
