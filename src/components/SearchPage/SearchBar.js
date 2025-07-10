@@ -78,7 +78,7 @@ const SearchBar = ({
             </button>
           )}
 
-          <button className="btn btn-primary border-0 rounded-pill-r" onClick={handleSearchSubmit}>
+          <button className="btn btn-primary bd-callout-primary border-0 rounded-pill-r" onClick={handleSearchSubmit}>
             <i className="bi bi-search me-2"></i>
             <span className="dynamic-fs">Search</span>
           </button>
