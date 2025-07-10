@@ -48,10 +48,11 @@ const SeasonSection = ({
         Seasons
       </div>
 
-      <div className="d-flex justify-content-between align-items-stretch" style={{ height: '280px' }}>
+      <div className="d-flex justify-content-between align-items-stretch">
         <div
           ref={seasonScrollRef}
           className="d-flex flex-row overflow-auto scroll-hide align-items-start custom-theme-radius-low gap-2"
+          style={{ scrollSnapType: 'x mandatory' }}
         >
           {seasons.length > 0 ? (
             seasons.map(season => {
@@ -102,7 +103,7 @@ const SeasonSection = ({
         </div>
 
         {/* Vertical scroll buttons */}
-        <div className="d-flex flex-column ms-2" style={{ height: '100%' }}>
+        <div className="d-flex flex-column ms-2 align-self-stretch">
           <button
             className="btn btn-dark bd-callout-dark flex-fill py-2"
             onClick={() => scroll(seasonScrollRef, 'left')}

@@ -41,10 +41,11 @@ const RelationPanel = ({ animeInfo, selectedRelationIndex, onRelationChange, rel
                 Related Anime
             </div>
 
-            <div className="d-flex justify-content-between align-items-stretch" style={{ height: '302px' }}>
+            <div className="d-flex justify-content-between align-items-stretch">
                 <div
                     ref={relationScrollRef}
                     className="d-flex flex-row overflow-auto scroll-hide align-items-start custom-theme-radius-low gap-2"
+                    style={{ scrollSnapType: 'x mandatory' }}
                 >
                     {animeInfo.map((entry, index) => {
                         const { title, coverImage, startDate, format } = entry;
@@ -98,7 +99,7 @@ const RelationPanel = ({ animeInfo, selectedRelationIndex, onRelationChange, rel
                 </div>
 
                 {/* Vertical scroll buttons */}
-                <div className="d-flex flex-column ms-2" style={{ height: '100%' }}>
+                <div className="d-flex flex-column ms-2 align-self-stretch">
                     <button
                         className="btn btn-dark bd-callout-dark flex-fill py-2"
                         onClick={() => scroll(relationScrollRef, 'left')}

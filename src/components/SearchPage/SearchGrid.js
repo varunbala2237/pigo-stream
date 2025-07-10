@@ -97,7 +97,7 @@ const SearchGrid = ({ searchQuery, setIsSearchLoading, setIsSearchError, setHasS
 
       {/* Search Results: Movies */}
       {(
-        <div className="d-flex my-2 justify-content-between align-items-stretch" style={{ height: '280px' }}>
+        <div className="d-flex my-2 justify-content-between align-items-stretch">
           <div
             ref={moviesRef}
             className="d-flex overflow-auto scroll-hide custom-gap"
@@ -125,7 +125,7 @@ const SearchGrid = ({ searchQuery, setIsSearchLoading, setIsSearchError, setHasS
           </div>
 
           {/* Vertical scroll buttons */}
-          <div className="d-flex flex-column ms-2" style={{ height: '100%' }}>
+          <div className="d-flex flex-column ms-2 align-self-stretch">
             <button
               className="btn btn-dark bd-callout-dark flex-fill py-2"
               onClick={() => scroll(moviesRef, 'left')}
@@ -148,7 +148,7 @@ const SearchGrid = ({ searchQuery, setIsSearchLoading, setIsSearchError, setHasS
 
       {/* Search Results: Shows */}
       {(
-        <div className="d-flex my-2 justify-content-between align-items-stretch" style={{ height: '280px' }}>
+        <div className="d-flex my-2 justify-content-between align-items-stretch">
           <div
             ref={showsRef}
             className="d-flex overflow-auto scroll-hide custom-gap"
@@ -176,7 +176,7 @@ const SearchGrid = ({ searchQuery, setIsSearchLoading, setIsSearchError, setHasS
           </div>
 
           {/* Vertical scroll buttons */}
-          <div className="d-flex flex-column ms-2" style={{ height: '100%' }}>
+          <div className="d-flex flex-column ms-2 align-self-stretch">
             <button
               className="btn btn-dark bd-callout-dark flex-fill py-2"
               onClick={() => scroll(showsRef, 'left')}

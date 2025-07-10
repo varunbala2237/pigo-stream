@@ -98,7 +98,7 @@ const TrendingGrid = ({ setIsTrendingLoading, setIsTrendingError, setHasTrending
 
       {/* Trending Movies Section */}
       {(
-        <div className="d-flex my-2 justify-content-between align-items-stretch" style={{ height: '280px' }}>
+        <div className="d-flex my-2 justify-content-between align-items-stretch">
           <div ref={moviesRef} className="d-flex overflow-auto scroll-hide custom-gap" style={{ scrollSnapType: 'x mandatory' }}>
             {(
               !isLoading && !isError && movies?.length > 0 ? movies : []
@@ -121,7 +121,7 @@ const TrendingGrid = ({ setIsTrendingLoading, setIsTrendingError, setHasTrending
           </div>
 
           {/* Vertical scroll buttons */}
-          <div className="d-flex flex-column ms-2" style={{ height: '100%' }}>
+          <div className="d-flex flex-column ms-2 align-self-stretch">
             <button
               className="btn btn-dark bd-callout-dark flex-fill py-2"
               onClick={() => scroll(moviesRef, 'left')}
@@ -144,7 +144,7 @@ const TrendingGrid = ({ setIsTrendingLoading, setIsTrendingError, setHasTrending
 
       {/* Trending Shows Section */}
       {(
-        <div className="d-flex my-2 justify-content-between align-items-stretch" style={{ height: '280px' }}>
+        <div className="d-flex my-2 justify-content-between align-items-stretch">
           <div ref={showsRef} className="d-flex overflow-auto scroll-hide custom-gap" style={{ scrollSnapType: 'x mandatory' }}>
             {(
               !isLoading && !isError && shows?.length > 0 ? shows : []
@@ -167,7 +167,7 @@ const TrendingGrid = ({ setIsTrendingLoading, setIsTrendingError, setHasTrending
           </div>
 
           {/* Vertical scroll buttons */}
-          <div className="d-flex flex-column ms-2" style={{ height: '100%' }}>
+          <div className="d-flex flex-column ms-2 align-self-stretch">
             <button
               className="btn btn-dark bd-callout-dark flex-fill py-2"
               onClick={() => scroll(showsRef, 'left')}

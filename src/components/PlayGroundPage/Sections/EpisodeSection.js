@@ -76,10 +76,11 @@ const EpisodeSection = ({
         Episodes
       </div>
 
-      <div className="d-flex justify-content-between align-items-stretch" style={{ height: '152px' }}>
+      <div className="d-flex justify-content-between align-items-stretch">
         <div
           ref={episodeScrollRef}
           className="d-flex flex-row overflow-auto scroll-hide align-items-start custom-theme-radius-low gap-2"
+          style={{ scrollSnapType: 'x mandatory' }}
         >
           {episodes.length > 0 ? (
             episodes.map(episode => {
@@ -140,7 +141,7 @@ const EpisodeSection = ({
         </div>
 
         {/* Vertical scroll buttons */}
-        <div className="d-flex flex-column ms-2" style={{ height: '100%' }}>
+        <div className="d-flex flex-column ms-2 align-self-stretch">
           <button
             className="btn btn-dark bd-callout-dark flex-fill py-2"
             onClick={() => scroll(episodeScrollRef, 'left')}
