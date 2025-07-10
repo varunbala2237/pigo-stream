@@ -63,11 +63,6 @@ const InfoSection = ({
     return 'text-secondary'; // Default
   }
 
-  const handleGenreClick = (genreName) => {
-    const searchQuery = `"${title}" similar ${genreName} movies or shows`;
-    window.open(`https://www.google.com/search?q=${encodeURIComponent(searchQuery)}`, '_blank');
-  };
-
   const handleShare = () => {
     const currentURL = window.location.href;
     if (navigator.share) {
@@ -219,9 +214,8 @@ const InfoSection = ({
                           <span
                             key={index}
                             className={`custom-bg rounded-pill px-2 py-1 ${getGenreClass(genre.name)}`}
-                            onClick={() => handleGenreClick(genre.name)}
                           >
-                            #{genre.name}
+                            {genre.name}
                           </span>);
                       })}
                     </dd>
@@ -246,6 +240,7 @@ const InfoSection = ({
         </div>
       </div>
 
+      {/* Overview Section */}
       <div className="d-flex flex-column custom-bg custom-theme-radius-low w-100 p-2 mt-2">
         <div className="d-flex flex-column align-items-start justify-content-between w-100">
           <div className="d-flex flex-row align-items-start custom-theme-radius-low w-100">
