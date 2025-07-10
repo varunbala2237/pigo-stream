@@ -148,9 +148,9 @@ const Card = ({ media, type, path, onRemove, handleAlert, isDeletable = true, is
           </div>
           <div>
             {type === 'movie' ? (
-              <i className="bi bi-film me-2"></i>
+              <i className="bi bi-film"></i>
             ) : (
-              <i className="bi bi-tv me-2"></i>
+              <i className="bi bi-tv"></i>
             )}
           </div>
         </div>

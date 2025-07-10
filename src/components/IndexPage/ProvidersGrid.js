@@ -151,7 +151,7 @@ const ProvidersGrid = ({ setIsProvidersLoading, setIsProvidersError, setHasProvi
             </div>
 
             {/* Providers Selection Section */}
-            <div className="d-flex my-2 justify-content-between align-items-stretch" style={{ height: '100px' }}>
+            <div className="d-flex my-2 justify-content-between align-items-stretch">
                 <div
                     ref={providersRef}
                     className="d-flex overflow-auto scroll-hide custom-gap"
@@ -166,6 +166,7 @@ const ProvidersGrid = ({ setIsProvidersLoading, setIsProvidersError, setHasProvi
                                 d-flex justify-content-center align-items-center 
                                 ${selectedProvider.id === provider.id ? 'border border-2 border-primary' : ''}`
                             }
+                            style={{ height: '100px' }}
                             onClick={() =>
                                 setSelectedProvider(provider)
                             }
