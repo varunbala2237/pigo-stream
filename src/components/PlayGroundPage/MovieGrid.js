@@ -5,7 +5,7 @@ import useFetchServers from '../../hooks/PlayGroundPage/useFetchServers';
 import useSaveMyList from '../../hooks/MyListPage/useSaveMyList';
 import useCheckMyList from '../../hooks/MyListPage/useCheckMyList';
 import InfoSection from './Sections/InfoSection';
-import PlayerSection from './Sections/PlayerSection';
+import PlaySection from './Sections/PlaySection';
 import ServerSection from './Sections/ServerSection';
 
 import { getStorageValue, setStorageValue } from '../../utils/localStorageStates';
@@ -105,11 +105,11 @@ const MovieGrid = ({ id, type, tab, mediaInfo, setBackgroundImage }) => {
 
               <button
                 className={`btn bg-transparent text-white border-0 dynamic-hs 
-                  ${activeTab === 'player' ? '' : 'opacity-50'}`}
-                onClick={() => handleTabChange('player')}
+                  ${activeTab === 'play' ? '' : 'opacity-50'}`}
+                onClick={() => handleTabChange('play')}
               >
                 <i className="bi bi-play-circle theme-color me-2"></i>
-                <b>Player</b>
+                <b>Play</b>
               </button>
             </div>
 
@@ -124,8 +124,8 @@ const MovieGrid = ({ id, type, tab, mediaInfo, setBackgroundImage }) => {
               />
             )}
 
-            {activeTab === 'player' && (
-              <PlayerSection
+            {activeTab === 'play' && (
+              <PlaySection
                 id={id}
                 type={type}
                 loadingServers={loadingServers}

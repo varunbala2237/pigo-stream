@@ -11,10 +11,12 @@
     height: 100px;
     width: 160px;
     padding: 1rem;
+    will-change: transform;
     transition: transform 0.3s ease;
 }
 
-.custom-provider-card:hover {
+.custom-provider-card:hover,
+.custom-provider-card:active {
     transform: scale(1.05);
 }
 

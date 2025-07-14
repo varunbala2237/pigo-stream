@@ -3,6 +3,13 @@
 .cast-skeleton-circle {
     width: 70px;
     height: 70px;
+    will-change: transform;
+    transition: transform 0.3s ease;
+}
+
+.cast-skeleton-circle:hover,
+.cast-skeleton-circle:active {
+    transform: scale(1.05);
 }
 
 /* Skeleton Bars for name and character placeholders */
@@ -20,4 +27,11 @@
 .custom-cast-card-img {
     height: 70px;
     width: 70px;
+    will-change: transform;
+    transition: transform 0.3s ease;
+}
+
+.custom-cast-card-img:hover,
+.custom-cast-card-img:active {
+    transform: scale(1.05);
 }

@@ -1,8 +1,8 @@
-// PlayerSection.js
+// PlaySection.js
 import useSaveWatchHistory from '../../../hooks/WatchHistoryPage/useSaveWatchHistory';
-import './PlayerSection.css';
+import './PlaySection.css';
 
-const PlayerSection = ({ id, type, loadingServers, selectedServer, inHistory, setInHistory }) => {
+const PlaySection = ({ id, type, loadingServers, selectedServer, inHistory, setInHistory }) => {
     const { addToHistory } = useSaveWatchHistory();
 
     // Handling add to history
@@ -45,4 +45,4 @@ const PlayerSection = ({ id, type, loadingServers, selectedServer, inHistory, se
     );
 }
 
-export default PlayerSection;
+export default PlaySection;

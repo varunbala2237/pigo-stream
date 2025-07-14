@@ -185,7 +185,7 @@ const MyListGrid = ({ userUID }) => {
                     </div>
 
                     {/* Vertical scroll buttons */}
-                    <div className="d-flex flex-column ms-2 align-self-stretch">
+                    <div className="d-none d-md-flex flex-column ms-2 align-self-stretch">
                         <button
                             className="btn btn-dark bd-callout-dark flex-fill py-2"
                             onClick={() => scroll(moviesRef, 'left')}
@@ -250,7 +250,7 @@ const MyListGrid = ({ userUID }) => {
                     </div>
 
                     {/* Vertical scroll buttons */}
-                    <div className="d-flex flex-column ms-2 align-self-stretch">
+                    <div className="d-none d-md-flex flex-column ms-2 align-self-stretch">
                         <button
                             className="btn btn-dark bd-callout-dark flex-fill py-2"
                             onClick={() => scroll(showsRef, 'left')}

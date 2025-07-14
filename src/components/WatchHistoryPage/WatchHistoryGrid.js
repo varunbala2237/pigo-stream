@@ -3,7 +3,6 @@ import { useEffect, useState, useRef } from 'react';
 import { useLocation } from 'react-router-dom';
 import Card from '../Card';
 import useFetchWatchHistory from '../../hooks/WatchHistoryPage/useFetchWatchHistory';
-import useClearWatchHistory from '../../hooks/WatchHistoryPage/useClearWatchHistory';
 import OverlaySpinner from '../../utils/OverlaySpinner';
 import ErrorModal from '../../utils/ErrorModal';
 import Alert from '../../utils/Alert';
@@ -16,7 +15,6 @@ const WatchHistoryGrid = ({ userUID }) => {
     const [movieLimit, setMovieLimit] = useState(12);
     const [showLimit, setShowLimit] = useState(12);
     const { data: { moviesHistory = [], showsHistory = [] } = {}, loading: isLoading, error: isError, refetch } = useFetchWatchHistory(userUID, movieLimit, showLimit);
-    const { clearHistory } = useClearWatchHistory();
 
     // Error Modal state
     const [showErrorModal, setShowErrorModal] = useState(false);
@@ -104,16 +102,6 @@ const WatchHistoryGrid = ({ userUID }) => {
         };
     }, [moviesHistory, showsHistory, isLoading, isError]);
 
-    const handleClearHistory = async () => {
-        try {
-            await clearHistory();
-            refetch();
-            handleAlert('Watch history cleared successfully.');
-        } catch (isError) {
-            handleAlert('Failed to clear watch history.', 'danger');
-        }
-    };
-
     const handleSeeMoreMovies = () => {
         setMovieLimit(prevLimit => {
             const newLimit = prevLimit + 12;
@@ -148,8 +136,6 @@ const WatchHistoryGrid = ({ userUID }) => {
         }
     };
 
-    const isClearButtonDisabled = moviesHistory.length === 0 && showsHistory.length === 0;
-
     return (
         <div className="d-flex flex-column justify-content-center align-items-center text-white p-0">
             {/* Overlay spinner for loading state */}
@@ -162,17 +148,6 @@ const WatchHistoryGrid = ({ userUID }) => {
                             <i className="bi bi-clock-history theme-color me-2"></i>
                             <b>Watch History</b>
                         </span>
-                    </div>
-                    <div className="text-end">
-                        <button
-                            type="button"
-                            className="btn btn-dark bd-callout-dark d-flex rounded-pill text-white border-0 dynamic-fs"
-                            onClick={handleClearHistory}
-                            disabled={isClearButtonDisabled}
-                        >
-                            <i className="bi bi-x-lg me-2"></i>
-                            Clear History
-                        </button>
                     </div>
                 </div>
 
@@ -213,7 +188,7 @@ const WatchHistoryGrid = ({ userUID }) => {
                     </div>
 
                     {/* Vertical scroll buttons */}
-                    <div className="d-flex flex-column ms-2 align-self-stretch">
+                    <div className="d-none d-md-flex flex-column ms-2 align-self-stretch">
                         <button
                             className="btn btn-dark bd-callout-dark flex-fill py-2"
                             onClick={() => scroll(moviesRef, 'left')}
@@ -278,7 +253,7 @@ const WatchHistoryGrid = ({ userUID }) => {
                     </div>
 
                     {/* Vertical scroll buttons */}
-                    <div className="d-flex flex-column ms-2 align-self-stretch">
+                    <div className="d-none d-md-flex flex-column ms-2 align-self-stretch">
                         <button
                             className="btn btn-dark bd-callout-dark flex-fill py-2"
                             onClick={() => scroll(showsRef, 'left')}

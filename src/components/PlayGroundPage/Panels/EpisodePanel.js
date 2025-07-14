@@ -68,7 +68,7 @@ const EpisodePanel = ({ episodeCount, selectedEpisode, onEpisodeChange, selected
         </div>
         <div className="dynamic-fs d-flex align-items-center gap-2">
           <button
-            className="btn btn-sm btn-dark bd-callout-dark border-0"
+            className="btn btn-sm btn-dark bd-callout-dark rounded-circle border-0"
             onClick={handlePrev}
             disabled={page === 0}
           >
@@ -76,7 +76,7 @@ const EpisodePanel = ({ episodeCount, selectedEpisode, onEpisodeChange, selected
           </button>
           <span>Page: {start + 1} - {end}</span>
           <button
-            className="btn btn-sm btn-dark bd-callout-dark border-0"
+            className="btn btn-sm btn-dark bd-callout-dark rounded-circle border-0"
             onClick={handleNext}
             disabled={page >= totalPages - 1}
           >

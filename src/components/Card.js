@@ -84,7 +84,7 @@ const Card = ({ media, type, path, onRemove, handleAlert, isDeletable = false, i
       <div className="custom-card-wrapper">
         <div
           className="card custom-card custom-bg text-white border-0 shadow-sm"
-          style={{ width: '160px', height: '280px' }}
+          style={{ width: '160px', height: '240px' }}
         >
           <div
             className="custom-card-img rounded-top skeleton-bg"
@@ -120,40 +120,42 @@ const Card = ({ media, type, path, onRemove, handleAlert, isDeletable = false, i
         <div className="custom-overlay d-flex flex-column justify-content-end align-items-start p-2">
           <div className="d-flex flex-column mb-2">
             <span className="dynamic-fs fw-bold text-wrap text-truncate">{title}</span>
-            <span className="dynamic-ss">{year}</span>
+            <div className="d-flex justify-content-start align-items-center text-secondary dynamic-ms mt-2 gap-1">
+              <div className="d-flex border border-1 border-secondary custom-theme-radius-low px-1">
+                <span id="Year">{year}</span>
+              </div>
+
+              <div className="d-flex border border-1 border-secondary custom-theme-radius-low px-1">
+                {type === 'movie' ? (
+                  <span>Movie</span>
+                ) : (
+                  <span>Show</span>
+                )}
+              </div>
+
+              <div className="d-flex border border-1 border-secondary custom-theme-radius-low px-1">
+                <span id="Rating"><i className="bi bi-star-fill text-warning me-1"></i>{rating}</span>
+              </div>
+            </div>
           </div>
 
-          <div className="d-flex gap-2">
+          <div className="d-flex gap-1">
             <button
-              className="btn btn-dark bd-callout-dark d-flex rounded-circle border-0"
+              className="btn btn-dark bd-callout-dark btn-sm rounded-pill border-0"
               onClick={() => handlePlayMedia('info')}
             >
-              <i className="bi bi-info-circle fs-4"></i>
+              <i className="bi bi-info-circle me-1"></i>Info
             </button>
             <button
-              className="btn btn-primary bd-callout-primary d-flex rounded-circle border-0"
-              onClick={() => handlePlayMedia('player')}
+              className="btn btn-primary bd-callout-primary btn-sm rounded-pill border-0"
+              onClick={() => handlePlayMedia('play')}
             >
-              <i className="bi bi-play-circle fs-4"></i>
+              <i className="bi bi-play-circle me-1"></i>Play
             </button>
           </div>
         </div>
 
         <img src={imageUrl} alt="poster" className="custom-card-img rounded-top" />
-
-        <div className="card-body p-2 d-flex justify-content-between align-items-center text-secondary">
-          <div>
-            <i className="bi bi-star-fill text-warning me-1"></i>
-            <span>{rating}</span>
-          </div>
-          <div>
-            {type === 'movie' ? (
-              <i className="bi bi-film"></i>
-            ) : (
-              <i className="bi bi-tv"></i>
-            )}
-          </div>
-        </div>
       </div>
     </div>
   );
