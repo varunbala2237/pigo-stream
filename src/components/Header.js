@@ -83,7 +83,7 @@ const Header = () => {
           </div>
         </div>
 
-        <div className="mt-auto d-flex flex-column align-items-center custom-gap pb-3">
+        <div className="mt-auto d-flex flex-column align-items-center gap-2 pb-3">
           <button className="btn btn-md rounded-pill btn-danger" onClick={signOutWithAccount}>
             <i className="bi bi-box-arrow-left"></i> Sign Out
           </button>

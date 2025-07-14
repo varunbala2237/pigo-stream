@@ -100,7 +100,7 @@ const SearchGrid = ({ searchQuery, setIsSearchLoading, setIsSearchError, setHasS
         <div className="d-flex my-2 justify-content-between align-items-stretch">
           <div
             ref={moviesRef}
-            className="d-flex overflow-auto scroll-hide custom-gap"
+            className="d-flex overflow-auto scroll-hide"
             style={{ scrollSnapType: 'x mandatory' }}
           >
             {(searchQuery.trim()
@@ -110,14 +110,13 @@ const SearchGrid = ({ searchQuery, setIsSearchLoading, setIsSearchError, setHasS
               : Array.from({ length: 8 })
             ).map((movie, index) =>
               movie ? (
-                <Card key={index} media={movie} type="movie" path={location.pathname} />
+                <Card key={index} media={movie} type="movie" path={location.pathname} isDeletable={false} />
               ) : (
                 <Card
                   key={`movie-skeleton-${index}`}
                   media={{ poster_path: null, vote_average: null }}
                   type="movie"
                   path="/"
-                  isDeletable={false}
                   isSkeleton={true}
                 />
               )
@@ -151,7 +150,7 @@ const SearchGrid = ({ searchQuery, setIsSearchLoading, setIsSearchError, setHasS
         <div className="d-flex my-2 justify-content-between align-items-stretch">
           <div
             ref={showsRef}
-            className="d-flex overflow-auto scroll-hide custom-gap"
+            className="d-flex overflow-auto scroll-hide"
             style={{ scrollSnapType: 'x mandatory' }}
           >
             {(searchQuery.trim()
@@ -161,14 +160,13 @@ const SearchGrid = ({ searchQuery, setIsSearchLoading, setIsSearchError, setHasS
               : Array.from({ length: 8 })
             ).map((show, index) =>
               show ? (
-                <Card key={index} media={show} type="tv" path={location.pathname} />
+                <Card key={index} media={show} type="tv" path={location.pathname} isDeletable={false} />
               ) : (
                 <Card
                   key={`tv-skeleton-${index}`}
                   media={{ poster_path: null, vote_average: null }}
                   type="tv"
                   path="/"
-                  isDeletable={false}
                   isSkeleton={true}
                 />
               )

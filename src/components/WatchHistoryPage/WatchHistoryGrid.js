@@ -166,12 +166,12 @@ const WatchHistoryGrid = ({ userUID }) => {
                     <div className="text-end">
                         <button
                             type="button"
-                            className="btn btn-dark bd-callout-dark d-flex rounded-pill text-danger border-0 dynamic-fs"
+                            className="btn btn-dark bd-callout-dark d-flex rounded-pill text-white border-0 dynamic-fs"
                             onClick={handleClearHistory}
                             disabled={isClearButtonDisabled}
                         >
-                            <i className="bi bi-trash me-2"></i>
-                            Clear All
+                            <i className="bi bi-x-lg me-2"></i>
+                            Clear History
                         </button>
                     </div>
                 </div>
@@ -184,7 +184,7 @@ const WatchHistoryGrid = ({ userUID }) => {
                 <div className="d-flex my-2 justify-content-between align-items-stretch">
                     <div
                         ref={moviesRef}
-                        className="d-flex overflow-auto scroll-hide custom-gap"
+                        className="d-flex overflow-auto scroll-hide"
                         style={{ scrollSnapType: 'x mandatory' }}
                     >
                         {(moviesHistory || []).concat(
@@ -198,6 +198,7 @@ const WatchHistoryGrid = ({ userUID }) => {
                                     path={location.pathname}
                                     onRemove={refetch}
                                     handleAlert={handleAlert}
+                                    isDeletable={true}
                                 />
                             ) : (
                                 <Card
@@ -205,7 +206,6 @@ const WatchHistoryGrid = ({ userUID }) => {
                                     media={{ poster_path: null, vote_average: null }}
                                     type="movie"
                                     path="/"
-                                    isDeletable={false}
                                     isSkeleton={true}
                                 />
                             )
@@ -249,7 +249,7 @@ const WatchHistoryGrid = ({ userUID }) => {
                 <div className="d-flex my-2 justify-content-between align-items-stretch">
                     <div
                         ref={showsRef}
-                        className="d-flex overflow-auto scroll-hide custom-gap"
+                        className="d-flex overflow-auto scroll-hide"
                         style={{ scrollSnapType: 'x mandatory' }}
                     >
                         {(showsHistory || []).concat(
@@ -263,6 +263,7 @@ const WatchHistoryGrid = ({ userUID }) => {
                                     path={location.pathname}
                                     onRemove={refetch}
                                     handleAlert={handleAlert}
+                                    isDeletable={true}
                                 />
                             ) : (
                                 <Card
@@ -270,7 +271,6 @@ const WatchHistoryGrid = ({ userUID }) => {
                                     media={{ poster_path: null, vote_average: null }}
                                     type="tv"
                                     path="/"
-                                    isDeletable={false}
                                     isSkeleton={true}
                                 />
                             )

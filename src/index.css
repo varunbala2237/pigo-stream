@@ -45,10 +45,6 @@ body {
 }
 
 /* Common & Custom heights and widths */
-.custom-gap {
-  gap: 1rem;
-}
-
 .vh-100 {
   min-height: 100vh;
 }

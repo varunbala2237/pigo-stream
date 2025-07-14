@@ -5,15 +5,13 @@ import useRemoveWatchHistory from '../hooks/WatchHistoryPage/useRemoveWatchHisto
 import useRemoveFromMyList from '../hooks/MyListPage/useRemoveMyList';
 import './Card.css';
 
-const Card = ({ media, type, path, onRemove, handleAlert, isDeletable = true, isSkeleton = false }) => {
-  const [imageUrl, setImageUrl] = useState('');
-  const [showModal, setShowModal] = useState(false);
-  const [isRemove, setIsRemove] = useState(false);
-  const [modalVisible, setModalVisible] = useState(false);
-  const navigate = useNavigate();
+const Card = ({ media, type, path, onRemove, handleAlert, isDeletable = false, isSkeleton = false }) => {
+  const [showOverlay, setShowOverlay] = useState(false);
+  const cardRef = useRef(null);
 
-  // Ref to track outside clicks
-  const modalRef = useRef();
+  const [imageUrl, setImageUrl] = useState('');
+  const [isRemove, setIsRemove] = useState(false);
+  const navigate = useNavigate();
 
   // Watch History
   const { removeFromHistory } = useRemoveWatchHistory();
@@ -27,43 +25,30 @@ const Card = ({ media, type, path, onRemove, handleAlert, isDeletable = true, is
       : 'https://placehold.co/200x300/212529/6c757d?text=?');
   }, [media.poster_path]);
 
+  // Hide overlay if clicked outside the card
   useEffect(() => {
-    const handleModalClose = (e) => {
-      // Handle ESC key press to close modal
-      if (e.key === 'Escape') {
-        setModalVisible(false);
-        setTimeout(() => setShowModal(false), 200); // Close after animation
-        return;
-      }
-
-      // Handle click outside modal (on backdrop or outside modal)
-      if (showModal && modalRef.current && !modalRef.current.contains(e.target)) {
-        setModalVisible(false);
-        setTimeout(() => setShowModal(false), 200); // Close after animation
-      }
-
-      // Handle backdrop click to close modal
-      if (e.target.classList.contains('modal-backdrop')) {
-        setModalVisible(false);
-        setTimeout(() => setShowModal(false), 200); // Close after animation
+    const handleClickOutside = (e) => {
+      if (cardRef.current && !cardRef.current.contains(e.target)) {
+        setShowOverlay(false);
       }
     };
-
-    if (showModal) {
-      document.body.addEventListener('mousedown', handleModalClose);  // handle click events
-      document.body.addEventListener('keydown', handleModalClose);   // handle ESC key
-    }
-
-    // Cleanup listeners and unlock scroll when modal is closed
+    document.addEventListener('mousedown', handleClickOutside);
+    document.addEventListener('touchstart', handleClickOutside);
     return () => {
-      document.body.removeEventListener('mousedown', handleModalClose);
-      document.body.removeEventListener('keydown', handleModalClose);
+      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener('touchstart', handleClickOutside);
     };
-  }, [showModal]);
+  }, []);
 
-  const handlePlayMedia = async () => {
+  const handleCardClick = (e) => {
+    // Prevent immediate play or info button from triggering
+    if (e.target.closest('button')) return;
+    if (!showOverlay) setShowOverlay(true);
+  };
+
+  const handlePlayMedia = async (tab) => {
     if (!isSkeleton || isRemove) {
-      navigate(`/play?id=${media.id}&type=${type}`);
+      navigate(`/play?id=${media.id}&type=${type}&tab=${tab}`);
     }
   };
 
@@ -82,41 +67,23 @@ const Card = ({ media, type, path, onRemove, handleAlert, isDeletable = true, is
       console.error('Failed to remove from history:', error);
     } finally {
       setIsRemove(false);
-      setShowModal(false);
-      setModalVisible(false);
     }
   };
 
-  const handleLongClick = (event) => {
-    event.preventDefault();
-    if (!isDeletable) return;
-    if (path === '/watch-history' || path === '/my-list') {
-      setShowModal(true);
-      setTimeout(() => {
-        setModalVisible(true);
-      }, 10); // Adding a short delay to trigger the fade-in effect
-    }
-  };
-
-  const handleRightClick = (event) => {
-    event.preventDefault();
-    if (!isDeletable) return;
-    if (path === '/watch-history' || path === '/my-list') {
-      setShowModal(true);
-      setTimeout(() => {
-        setModalVisible(true);
-      }, 100);
-    }
-  };
-
-  // Extracting rating
+  // Extracting title, year & rating
+  const title = media.title || media.name || null;
+  const year = media.release_date
+    ? new Date(media.release_date).getFullYear()
+    : media.first_air_date
+      ? new Date(media.first_air_date).getFullYear()
+      : 'N/A';
   const rating = media.vote_average ? media.vote_average.toFixed(1) : '0.0';
 
   if (isSkeleton) {
     return (
-      <div className="custom-card-container">
+      <div className="custom-card-wrapper">
         <div
-          className="card custom-bg text-white border-0 shadow-sm"
+          className="card custom-card custom-bg text-white border-0 shadow-sm"
           style={{ width: '160px', height: '280px' }}
         >
           <div
@@ -124,7 +91,7 @@ const Card = ({ media, type, path, onRemove, handleAlert, isDeletable = true, is
           />
           <div className="card-body p-2 d-flex justify-content-between align-items-center">
             <div className="bg-dark py-2 px-3 rounded-pill"></div>
-            <div className="bg-dark p-2 rounded-circle"></div>
+            <div className="bg-dark py-2 px-3 rounded-pill"></div>
           </div>
         </div>
       </div>
@@ -132,15 +99,48 @@ const Card = ({ media, type, path, onRemove, handleAlert, isDeletable = true, is
   }
 
   return (
-    <div className="custom-card-container">
+    <div className="custom-card-wrapper position-relative">
+      {/* Delete Button */}
+      {isDeletable && (
+        <button
+          className="btn btn-dark bd-callout-dark custom-delete-btn rounded-circle position-absolute py-1 px-2"
+          onClick={handleRemove}
+        >
+          <i className="bi bi-x-lg"></i>
+        </button>
+      )}
+
       <div
-        className="card custom-bg text-white border-0 shadow-sm"
-        style={{ width: '160px', cursor: !isSkeleton || isRemove ? 'default' : 'pointer' }}
-        onClick={handlePlayMedia}
-        onContextMenu={handleRightClick}
-        onMouseDown={(e) => e.button === 0 && setTimeout(() => handleLongClick(e), 700)}
+        ref={cardRef}
+        className={`card custom-card custom-bg text-white border-0 shadow-sm ${showOverlay ? 'show-overlay' : ''}`}
+        onClick={handleCardClick}
+        role='button'
+        tabIndex="0"
       >
+        <div className="custom-overlay d-flex flex-column justify-content-end align-items-start p-2">
+          <div className="d-flex flex-column mb-2">
+            <span className="dynamic-fs fw-bold text-wrap text-truncate">{title}</span>
+            <span className="dynamic-ss">{year}</span>
+          </div>
+
+          <div className="d-flex gap-2">
+            <button
+              className="btn btn-dark bd-callout-dark d-flex rounded-circle border-0"
+              onClick={() => handlePlayMedia('info')}
+            >
+              <i className="bi bi-info-circle fs-4"></i>
+            </button>
+            <button
+              className="btn btn-primary bd-callout-primary d-flex rounded-circle border-0"
+              onClick={() => handlePlayMedia('player')}
+            >
+              <i className="bi bi-play-circle fs-4"></i>
+            </button>
+          </div>
+        </div>
+
         <img src={imageUrl} alt="poster" className="custom-card-img rounded-top" />
+
         <div className="card-body p-2 d-flex justify-content-between align-items-center text-secondary">
           <div>
             <i className="bi bi-star-fill text-warning me-1"></i>
@@ -155,64 +155,6 @@ const Card = ({ media, type, path, onRemove, handleAlert, isDeletable = true, is
           </div>
         </div>
       </div>
-
-      {/* Confirmation Modal */}
-      {
-        showModal && (
-          <>
-            {/* Backdrop */}
-            <div className={`modal-backdrop fade ${modalVisible ? 'show' : ''}`}></div>
-
-            {/* Confirmation Modal */}
-            <div className={`modal fade zoom-in-out ${modalVisible ? 'show' : ''} d-block`} tabIndex="-1">
-              <div className="modal-dialog modal-dialog-centered mx-auto border-0 modal-pad">
-                <div ref={modalRef} className="modal-content dynamic-fs bd-callout-dark custom-theme-radius-low text-white border-0">
-                  <div className="modal-body justify-content-center text-center border-0">
-                    <span className="dynamic-fs">
-                      Are you sure you want to remove <strong>"{media.title || media.name || 'this item'}"</strong> from {path === '/watch-history' ? 'Watch History' : 'My List'}?
-                    </span>
-                  </div>
-                  <div className="d-flex justify-content-between w-100 my-2">
-                    <div className="text-start text-center w-50">
-                      <button
-                        type="button"
-                        className="btn btn-light rounded-pill btn-md d-none d-md-inline-block dynamic-fs m-1"
-                        onClick={() => { setModalVisible(false); setTimeout(() => setShowModal(false), 200); }}
-                      >
-                        <i className="bi bi-x-lg me-2 text-black"></i>
-                        <span className="text-black">Cancel</span>
-                      </button>
-                      <button
-                        type="button"
-                        className="btn btn-light rounded-pill btn-sm d-md-none dynamic-fs m-1"
-                        onClick={() => { setModalVisible(false); setTimeout(() => setShowModal(false), 200); }}
-                      >
-                        <i className="bi bi-x-lg me-2 text-black"></i>
-                        <span className="text-black">Cancel</span>
-                      </button>
-                    </div>
-
-                    <div className="text-end text-center w-50">
-                      <button type="button" className="btn btn-danger rounded-pill btn-md d-none d-md-inline-block dynamic-fs m-1"
-                        onClick={handleRemove}
-                      >
-                        <i className="bi bi-trash me-2 text-white"></i>
-                        <span className="text-white">Remove</span>
-                      </button>
-                      <button type="button" className="btn btn-danger rounded-pill btn-sm d-md-none dynamic-fs m-1"
-                        onClick={handleRemove}
-                      >
-                        <i className="bi bi-trash me-2 text-white"></i>
-                        <span className="text-white">Remove</span>
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </>
-        )
-      }
     </div>
   );
 }

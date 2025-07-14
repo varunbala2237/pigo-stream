@@ -11,6 +11,7 @@ import TvGrid from './TvGrid';
 import AnimeGrid from './AnimeGrid';
 import OverlaySpinner from '../../utils/OverlaySpinner';
 import ErrorModal from '../../utils/ErrorModal';
+import './PlayGroundUI.css';
 
 import { getStorageValue } from '../../utils/localStorageStates';
 
@@ -21,6 +22,7 @@ const PlayGround = () => {
   const queryParams = new URLSearchParams(location.search);
   const id = queryParams.get('id');
   const type = queryParams.get('type');
+  const tab = queryParams.get('tab');
 
   // Retrive full TMDB metadata of the id and type
   const { data: mediaInfo, loading: isMediaLoading, error: isMediaError } = useFetchMediaInfo(id, type);
@@ -61,15 +63,7 @@ const PlayGround = () => {
         }}
       >
         {/* Dark Overlay */}
-        <div
-          className="position-absolute w-100 h-100"
-          style={{
-            top: 0,
-            left: 0,
-            background: 'rgba(18, 18, 18, 0.5)',
-            zIndex: 1,
-          }}
-        ></div>
+        <div className="background-overlay"></div>
       </div>
 
       {/* Grid Components */}
@@ -81,6 +75,7 @@ const PlayGround = () => {
             <AnimeGrid
               id={id}
               type={type}
+              tab={tab}
               mediaInfo={mediaInfo}
               animeInfo={animeInfo}
               setBackgroundImage={setBackgroundImage}
@@ -91,6 +86,7 @@ const PlayGround = () => {
             <GridComponent
               id={id}
               type={type}
+              tab={tab}
               mediaInfo={mediaInfo}
               setBackgroundImage={setBackgroundImage}
             />

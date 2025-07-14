@@ -147,8 +147,8 @@ const HomeUI = ({
     setAlert({ message: '', type: '', key: '' });
   };
 
-  const handlePlayMedia = async () => {
-    navigate(`/play?id=${mediaId}&type=${mediaType}`);
+  const handlePlayMedia = async (tab) => {
+    navigate(`/play?id=${mediaId}&type=${mediaType}&tab=${tab}`);
   };
 
   return (
@@ -187,34 +187,43 @@ const HomeUI = ({
               <div className="d-flex justify-content-start align-items-center dynamic-hs">
                 <b>{isRecommended ? 'Picked Just for You' : '#1 Most Watched'}</b>
               </div>
+
               <div className="d-flex justify-content-start align-items-center">
                 <span className="text-wrap fw-bold dynamic-ts">{title}</span>
               </div>
+
+              <div className="d-flex justify-content-start align-items-center">
+                <span className="dynamic-fs" id="Year">{year}</span>
+              </div>
+              
               <div className="dynamic-fs">
                 <div className="dynamic-fs d-flex my-2 text-secondary gap-2">
-                  <span className="bd-callout-dark rounded-pill px-2 py-1">
-                    <i className="bi bi-calendar2 me-2"></i>
-                    <span id="Year">{year}</span>
-                  </span>
                   <div className="bd-callout-dark rounded-pill px-2 py-1">
                     <i className="bi bi-star-fill text-warning me-2"></i>
                     <span id="Rating">{rating}</span>
                   </div>
-                  <span className="bd-callout-dark rounded-circle px-2 py-1">
+                  <div className="bd-callout-dark rounded-pill px-2 py-1">
                     {mediaType === 'movie' ? (
-                      <i className="bi bi-film"></i>
+                      <span><i className="bi bi-film me-2"></i>Movie</span>
                     ) : (
-                      <i className="bi bi-tv"></i>
+                      <span><i className="bi bi-tv me-2"></i>Show</span>
                     )}
-                  </span>
+                  </div>
                 </div>
-                <div className="dynamic-fs text-secondary">{mediaDesc}</div>
-                <div className="d-flex justify-content-start mt-2">
+                <div className="dynamic-fs clamp-3 text-secondary">{mediaDesc}</div>
+                <div className="d-flex justify-content-start mt-2 gap-2">
+                  <button
+                    className="btn btn-dark bd-callout-dark d-flex dynamic-fs border-0 rounded-pill text-white"
+                    onClick={() => handlePlayMedia('info')}
+                  >
+                    <i className="bi bi bi-info-circle me-2"></i>
+                    <span>More Info</span>
+                  </button>
                   <button
                     className="btn btn-primary bd-callout-primary d-flex dynamic-fs border-0 rounded-pill text-white"
-                    onClick={handlePlayMedia}
+                    onClick={() => handlePlayMedia('player')}
                   >
-                    <i className="bi bi-play me-2"></i>
+                    <i className="bi bi-play-circle me-2"></i>
                     <span>Watch Now</span>
                   </button>
                 </div>

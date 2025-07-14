@@ -13,7 +13,7 @@ import EpisodePanel from './Panels/EpisodePanel';
 import { getStorageValue, setStorageValue } from '../../utils/localStorageStates';
 import { getSessionValue, setSessionValue } from '../../utils/sessionStorageStates';
 
-const AnimeGrid = ({ id, type, mediaInfo, animeInfo, setBackgroundImage }) => {
+const AnimeGrid = ({ id, type, tab, mediaInfo, animeInfo, setBackgroundImage }) => {
   const ANIME_STORAGE_PATH = React.useMemo(
     () => ['PlayGroundUI', 'Grids', 'AnimeGrid', `${id}`],
     [id]
@@ -77,9 +77,7 @@ const AnimeGrid = ({ id, type, mediaInfo, animeInfo, setBackgroundImage }) => {
     return closestIndex !== -1 ? closestIndex : 0;
   }, [mediaInfo, animeInfo]);
 
-  const [activeTab, setActiveTab] = useState(() =>
-    getSessionValue(...ANIME_STORAGE_PATH, 'activeTab') || 'info'
-  );
+  const [activeTab, setActiveTab] = useState(tab || 'info');
 
   const [selectedServer, setSelectedServer] = useState(null);
   const [selectedRelationIndex, setSelectedRelationIndex] = useState(() =>
@@ -146,7 +144,6 @@ const AnimeGrid = ({ id, type, mediaInfo, animeInfo, setBackgroundImage }) => {
 
   const handleTabChange = (tab) => {
     setActiveTab(tab);
-    setSessionValue(...ANIME_STORAGE_PATH, 'activeTab', tab);
   };
 
   const handleServerChange = (server) => {
@@ -206,7 +203,7 @@ const AnimeGrid = ({ id, type, mediaInfo, animeInfo, setBackgroundImage }) => {
                   ${activeTab === 'info' ? '' : 'opacity-50'}`}
                 onClick={() => handleTabChange('info')}
               >
-                <i className="bi bi-list theme-color me-2"></i>
+                <i className="bi bi bi-info-circle theme-color me-2"></i>
                 <b>Info</b>
               </button>
 
@@ -218,7 +215,7 @@ const AnimeGrid = ({ id, type, mediaInfo, animeInfo, setBackgroundImage }) => {
                   ${activeTab === 'player' ? '' : 'opacity-50'}`}
                 onClick={() => handleTabChange('player')}
               >
-                <i className="bi bi-file-earmark-play theme-color me-2"></i>
+                <i className="bi bi-play-circle theme-color me-2"></i>
                 <b>Player</b>
               </button>
             </div>

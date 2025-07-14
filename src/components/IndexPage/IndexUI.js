@@ -56,15 +56,8 @@ const IndexUI = () => {
             : 'none',
         }}
       >
-        <div
-          className="position-absolute w-100 h-100"
-          style={{
-            top: 0,
-            left: 0,
-            background: 'rgba(18, 18, 18, 0.5)',
-            zIndex: 1,
-          }}
-        ></div>
+        {/* Dark Overlay */}
+        <div className="background-overlay"></div>
       </div>
 
       {/* HomeUI */}

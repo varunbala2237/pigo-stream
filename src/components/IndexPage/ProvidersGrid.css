@@ -1,0 +1,24 @@
+/* ProvidersGrid.css */
+
+/* Card spacing wrapper */
+.custom-provider-card-wrapper {
+    padding: 0.5rem;
+    display: inline-block;
+}
+
+/* Card hover grow effect */
+.custom-provider-card {
+    height: 100px;
+    width: 160px;
+    padding: 1rem;
+    transition: transform 0.3s ease;
+}
+
+.custom-provider-card:hover {
+    transform: scale(1.05);
+}
+
+.custom-provider-card-img {
+    width: 100%;
+    object-fit: cover;
+}

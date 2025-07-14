@@ -25,7 +25,7 @@ const PlayerSection = ({ id, type, loadingServers, selectedServer, inHistory, se
                 <div className="position-relative overflow-hidden custom-theme-radius-low player">
                     {!loadingServers ? (
                         <iframe
-                            title="Video Stream"
+                            title="Iframe"
                             src={selectedServer?.server_link}
                             className="w-100 h-100 custom-theme-radius-low border-0"
                             frameBorder="0"

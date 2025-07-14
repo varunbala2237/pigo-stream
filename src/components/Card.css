@@ -1,40 +1,62 @@
 /* Card.css */
 
-.custom-card-img {
-  width: 100%;
-  height: 240px;
-  object-fit: cover;
+/* Card spacing wrapper */
+.custom-card-wrapper {
+  padding: 0.5rem;
+  display: inline-block;
 }
 
-/* Blurry and dark backdrop with smooth animation */
-.modal-backdrop.fade {
-  position: fixed;
+/* Card hover grow effect */
+.custom-card {
+  width: 160px;
+  position: relative;
+  overflow: hidden;
+  will-change: transform;
+  transition: transform 0.3s ease;
+}
+
+.custom-overlay {
+  position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
+  background: rgba(18, 18, 18, 0.8);
   opacity: 0;
-  backdrop-filter: blur(0);
-  background-color: rgba(0, 0, 0, 0);
-  transition:
-    opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1),
-    backdrop-filter 0.5s cubic-bezier(0.4, 0, 0.2, 1),
-    background-color 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  z-index: 1;
 }
 
-.modal-backdrop.fade.show {
-  opacity: 1 !important;
-  backdrop-filter: blur(1.2rem);
-  background-color: rgba(0, 0, 0, 0.25);
+/* Show overlay on hover */
+.custom-card:hover {
+  transform: scale(1.05);
 }
 
-/* Custom Modal */
-.modal-dialog.modal-pad {
-  max-width: 350px;
+.custom-card:hover .custom-overlay {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.custom-card.show-overlay {
+  transform: scale(1.05);
+}
+
+.custom-card.show-overlay .custom-overlay {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Floating Delete Button */
+.custom-delete-btn {
+  top: 0;
+  right: 0;
+  z-index: 1;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.custom-card-img {
   width: 100%;
-  margin: auto;
-}
-
-.modal-content {
-  padding: 1rem 1rem;
+  height: 240px;
+  object-fit: cover;
 }

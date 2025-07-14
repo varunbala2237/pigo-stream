@@ -3,6 +3,7 @@ import { useState, useRef, useEffect, useLayoutEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import Card from '../Card';
 import useFetchProviders from '../../hooks/IndexPage/useFetchProviders';
+import './ProvidersGrid.css';
 
 import { getSessionValue, setSessionValue } from '../../utils/sessionStorageStates';
 
@@ -154,28 +155,27 @@ const ProvidersGrid = ({ setIsProvidersLoading, setIsProvidersError, setHasProvi
             <div className="d-flex my-2 justify-content-between align-items-stretch">
                 <div
                     ref={providersRef}
-                    className="d-flex overflow-auto scroll-hide custom-gap"
+                    className="d-flex overflow-auto scroll-hide"
                     style={{ scrollSnapType: 'x mandatory' }}
                 >
                     {PROVIDERS.map((provider) => (
+                        <div className="custom-provider-card-wrapper">
                         <div
                             key={provider.id}
                             className={
-                                `provider-card 
+                                `custom-provider-card
                                 bg-${provider.bg} 
                                 d-flex justify-content-center align-items-center 
                                 ${selectedProvider.id === provider.id ? 'border border-2 border-primary' : ''}`
                             }
-                            style={{ height: '100px' }}
-                            onClick={() =>
-                                setSelectedProvider(provider)
-                            }
+                            onClick={() => setSelectedProvider(provider)}
                         >
                             <img
                                 src={provider.logo}
                                 alt={provider.name}
-                                className="img-fluid provider-logo"
+                                className="img-fluid custom-provider-card-img"
                             />
+                        </div>
                         </div>
                     ))}
                 </div>
@@ -203,21 +203,20 @@ const ProvidersGrid = ({ setIsProvidersLoading, setIsProvidersError, setHasProvi
 
             {/* Providers Movies Section */}
             <div className="d-flex my-2 justify-content-between align-items-stretch">
-                <div ref={moviesRef} className="d-flex overflow-auto scroll-hide custom-gap" style={{ scrollSnapType: 'x mandatory' }}>
+                <div ref={moviesRef} className="d-flex overflow-auto scroll-hide" style={{ scrollSnapType: 'x mandatory' }}>
                     {(
                         !isLoading && !isError && movies?.length > 0 ? movies : []
                     )
                         .concat(Array.from({ length: Math.max(0, 8 - (movies?.length || 0)) }))
                         .map((movie, index) =>
                             movie ? (
-                                <Card key={movie.id} media={movie} type="movie" path={location.pathname} />
+                                <Card key={movie.id} media={movie} type="movie" path={location.pathname} isDeletable={false} />
                             ) : (
                                 <Card
                                     key={`movie-skeleton-${index}`}
                                     media={{ poster_path: null, vote_average: null }}
                                     type="movie"
                                     path="/"
-                                    isDeletable={false}
                                     isSkeleton={true}
                                 />
                             )
@@ -247,21 +246,20 @@ const ProvidersGrid = ({ setIsProvidersLoading, setIsProvidersError, setHasProvi
 
             {/* Providers Shows Section */}
             <div className="d-flex my-2 justify-content-between align-items-stretch">
-                <div ref={showsRef} className="d-flex overflow-auto scroll-hide custom-gap" style={{ scrollSnapType: 'x mandatory' }}>
+                <div ref={showsRef} className="d-flex overflow-auto scroll-hide" style={{ scrollSnapType: 'x mandatory' }}>
                     {(
                         !isLoading && !isError && shows?.length > 0 ? shows : []
                     )
                         .concat(Array.from({ length: Math.max(0, 8 - (shows?.length || 0)) }))
                         .map((show, index) =>
                             show ? (
-                                <Card key={show.id} media={show} type="tv" path={location.pathname} />
+                                <Card key={show.id} media={show} type="tv" path={location.pathname} isDeletable={false} />
                             ) : (
                                 <Card
                                     key={`tv-skeleton-${index}`}
                                     media={{ poster_path: null, vote_average: null }}
                                     type="tv"
                                     path="/"
-                                    isDeletable={false}
                                     isSkeleton={true}
                                 />
                             )

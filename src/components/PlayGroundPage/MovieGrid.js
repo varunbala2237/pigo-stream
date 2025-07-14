@@ -11,7 +11,7 @@ import ServerSection from './Sections/ServerSection';
 import { getStorageValue, setStorageValue } from '../../utils/localStorageStates';
 import { getSessionValue, setSessionValue } from '../../utils/sessionStorageStates';
 
-const MovieGrid = ({ id, type, mediaInfo, setBackgroundImage }) => {
+const MovieGrid = ({ id, type, tab, mediaInfo, setBackgroundImage }) => {
   const MOVIES_STORAGE_PATH = React.useMemo(
     () => ['PlayGroundUI', 'Grids', 'MovieGrid', `${id}`],
     [id]
@@ -22,9 +22,7 @@ const MovieGrid = ({ id, type, mediaInfo, setBackgroundImage }) => {
   const [cast, setCast] = useState([]);
   const [selectedServer, setSelectedServer] = useState(null);
 
-  const [activeTab, setActiveTab] = useState(() =>
-    getSessionValue(...MOVIES_STORAGE_PATH, 'activeTab') || 'info'
-  );
+  const [activeTab, setActiveTab] = useState(tab || 'info');
 
   const [sliceIndex, setSliceIndex] = useState(() =>
     getSessionValue(...MOVIES_STORAGE_PATH, 'sliceIndex') || 12
@@ -61,7 +59,6 @@ const MovieGrid = ({ id, type, mediaInfo, setBackgroundImage }) => {
 
   const handleTabChange = (tab) => {
     setActiveTab(tab);
-    setSessionValue(...MOVIES_STORAGE_PATH, 'activeTab', tab);
   };
 
   const handleServerChange = (server) => {
@@ -99,7 +96,7 @@ const MovieGrid = ({ id, type, mediaInfo, setBackgroundImage }) => {
                   ${activeTab === 'info' ? '' : 'opacity-50'}`}
                 onClick={() => handleTabChange('info')}
               >
-                <i className="bi bi-list theme-color me-2"></i>
+                <i className="bi bi bi-info-circle theme-color me-2"></i>
                 <b>Info</b>
               </button>
 
@@ -111,7 +108,7 @@ const MovieGrid = ({ id, type, mediaInfo, setBackgroundImage }) => {
                   ${activeTab === 'player' ? '' : 'opacity-50'}`}
                 onClick={() => handleTabChange('player')}
               >
-                <i className="bi bi-file-earmark-play theme-color me-2"></i>
+                <i className="bi bi-play-circle theme-color me-2"></i>
                 <b>Player</b>
               </button>
             </div>

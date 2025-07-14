@@ -17,7 +17,7 @@ import { getSessionValue, setSessionValue } from '../../utils/sessionStorageStat
 const SELECTED_SEASON = 'selectedSeason';
 const SEASON_STATE_KEY = 'seasonState';
 
-const TvGrid = ({ id, type, mediaInfo, setBackgroundImage }) => {
+const TvGrid = ({ id, type, tab, mediaInfo, setBackgroundImage }) => {
   const TV_STORAGE_PATH = React.useMemo(
     () => ['PlayGroundUI', 'Grids', 'TvGrid', `${id}`],
     [id]
@@ -35,9 +35,7 @@ const TvGrid = ({ id, type, mediaInfo, setBackgroundImage }) => {
   const seasonScrollRef = useRef(null);
   const episodeScrollRef = useRef(null);
 
-  const [activeTab, setActiveTab] = useState(() =>
-    getSessionValue(...TV_STORAGE_PATH, 'activeTab') || 'info'
-  );
+  const [activeTab, setActiveTab] = useState(tab || 'info');
 
   const [sliceIndex, setSliceIndex] = useState(() =>
     getSessionValue(...TV_STORAGE_PATH, 'sliceIndex') || 12
@@ -142,7 +140,6 @@ const TvGrid = ({ id, type, mediaInfo, setBackgroundImage }) => {
 
   const handleTabChange = (tab) => {
     setActiveTab(tab);
-    setSessionValue(...TV_STORAGE_PATH, 'activeTab', tab);
   };
 
   const handleServerChange = (server) => {
@@ -180,7 +177,7 @@ const TvGrid = ({ id, type, mediaInfo, setBackgroundImage }) => {
                   ${activeTab === 'info' ? '' : 'opacity-50'}`}
                 onClick={() => handleTabChange('info')}
               >
-                <i className="bi bi-list theme-color me-2"></i>
+                <i className="bi bi bi-info-circle theme-color me-2"></i>
                 <b>Info</b>
               </button>
 
@@ -192,7 +189,7 @@ const TvGrid = ({ id, type, mediaInfo, setBackgroundImage }) => {
                   ${activeTab === 'player' ? '' : 'opacity-50'}`}
                 onClick={() => handleTabChange('player')}
               >
-                <i className="bi bi-file-earmark-play theme-color me-2"></i>
+                <i className="bi bi-play-circle theme-color me-2"></i>
                 <b>Player</b>
               </button>
             </div>

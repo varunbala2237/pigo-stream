@@ -174,14 +174,16 @@ const InfoSection = ({
 
                 <dl className="my-2">
                   <div className="d-flex">
-                    <dd className="dymamic-fs me-2">Release Date:</dd>
+                    <dd className="dynamic-fs me-2">Release Date:</dd>
                     <dd className="mb-0 dynamic-fs">
-                      <span className="text-secondary">{new Date(release_date).toLocaleDateString()}</span>
+                      <span className="text-secondary">
+                        {release_date ? new Date(release_date).toLocaleDateString() : 'Unknown'}
+                      </span>
                     </dd>
                   </div>
 
                   <div className="d-flex">
-                    <dd className="dymamic-fs me-2">Rating:</dd>
+                    <dd className="dynamic-fs me-2">Rating:</dd>
                     <dd className="mb-0 dynamic-fs">
                       <i className="bi bi-star-fill text-warning me-2"></i>
                       <span id="Rating" className="text-secondary">{averageVote}</span>
@@ -189,21 +191,25 @@ const InfoSection = ({
                   </div>
 
                   <div className="d-flex">
-                    <dd className="dymamic-fs me-2">Director:</dd>
+                    <dd className="dynamic-fs me-2">Director:</dd>
                     <dd className="mb-0 text-secondary dynamic-fs">{director}</dd>
                   </div>
 
-                  {type === 'movie' && mediaInfo?.runtime && (
+                  {type === 'movie' && mediaInfo?.runtime != null && (
                     <div className="d-flex">
-                      <dd className="dymamic-fs me-2">Runtime:</dd>
-                      <dd className="mb-0 text-secondary dynamic-fs">{mediaInfo.runtime} mins</dd>
+                      <dd className="dynamic-fs me-2">Runtime:</dd>
+                      <dd className="mb-0 text-secondary dynamic-fs">
+                        {mediaInfo.runtime > 0 ? `${mediaInfo.runtime} mins` : 'Unknown'}
+                      </dd>
                     </div>
                   )}
 
-                  {type === 'tv' && mediaInfo?.number_of_episodes && (
+                  {type === 'tv' && mediaInfo?.number_of_episodes != null && (
                     <div className="d-flex">
-                      <dd className="dymamic-fs me-2">Total Episodes:</dd>
-                      <dd className="mb-0 text-secondary dynamic-fs">{mediaInfo.number_of_episodes}</dd>
+                      <dd className="dynamic-fs me-2">Total Episodes:</dd>
+                      <dd className="mb-0 text-secondary dynamic-fs">
+                        {mediaInfo.number_of_episodes > 0 ? mediaInfo.number_of_episodes : 'Unknown'}
+                      </dd>
                     </div>
                   )}
 
