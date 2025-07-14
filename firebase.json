@@ -1,7 +1,5 @@
 {
   "database": {
-    "site": "pigostream-site",
-    "public": "public",
     "rules": "database.rules.json"
   },
   "hosting": {
