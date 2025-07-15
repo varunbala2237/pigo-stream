@@ -6,6 +6,16 @@
   display: inline-block;
 }
 
+/* Line Clamp Utility */
+.clamp-6 {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 6;
+  line-clamp: 6;
+}
+
 /* Card hover grow effect */
 .custom-card {
   width: 160px;

@@ -177,23 +177,23 @@
   }
 
   .dynamic-hs {
-    font-size: 1.5rem;
+    font-size: 1.4rem;
   }
 
   .dynamic-ts {
-    font-size: 1.3rem;
-  }
-
-  .dynamic-fs {
     font-size: 1.1rem;
   }
 
-  .dynamic-ss {
+  .dynamic-fs {
     font-size: 1rem;
   }
 
-  .dynamic-ms {
+  .dynamic-ss {
     font-size: 0.9rem;
+  }
+
+  .dynamic-ms {
+    font-size: 0.75rem;
   }
 }
 
@@ -212,11 +212,11 @@
   }
 
   .dynamic-fs {
-    font-size: 1rem;
+    font-size: 1.1rem;
   }
 
   .dynamic-ss {
-    font-size: 0.9rem;
+    font-size: 1rem;
   }
 
   .dynamic-ms {
