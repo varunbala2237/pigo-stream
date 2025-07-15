@@ -192,9 +192,9 @@ const HomeUI = ({
                 <span className="text-wrap fw-bold dynamic-hs">{title}</span>
               </div>
 
-              <div className="d-flex justify-content-start align-items-center text-secondary mt-2 gap-2">
+              <div className="d-flex justify-content-start align-items-center text-secondary dynamic-fs mt-2 gap-2">
                 <div className="d-flex border border-1 border-secondary custom-theme-radius-low px-1">
-                  <span className="dynamic-fs" id="Year">{year}</span>
+                  <span id="Year">{year}</span>
                 </div>
 
                 <div className="d-flex border border-1 border-secondary custom-theme-radius-low px-1">
