@@ -1,17 +1,49 @@
 // ReCaptcha.js
+import { useState, useEffect } from 'react';
 import ReCAPTCHA from 'react-google-recaptcha';
+import { useReCaptcha } from '../../hooks/PlayGroundPage/useReCaptcha';
+import ErrorModal from '../../utils/ErrorModal';
+import Alert from '../../utils/Alert';
 
 import { setStorageValue } from '../../utils/localStorageStates';
 
 const RECAPTCHA_SITE_KEY = process.env.REACT_APP_RECAPTCHA_SITE_KEY;
 
 const ReCaptcha = ({ storagePath }) => {
-    const handleCaptchaSuccess = (token) => {
-        if (token) {
-            setStorageValue(...storagePath, 'recaptchaVerified', true);
-            // Refresh the page
-            window.location.reload();
+    const { validateCaptcha, error: isError } = useReCaptcha();
+
+    const [showErrorModal, setShowErrorModal] = useState(false);
+    const [alert, setAlert] = useState({ message: '', type: '', key: '' });
+
+    useEffect(() => {
+        if (isError) {
+            setShowErrorModal(true);
+        } else {
+            setShowErrorModal(false);
         }
+    }, [isError]);
+
+    const handleCaptchaSuccess = async (token) => {
+        const isValid = await validateCaptcha(token);
+
+        if (isValid) {
+            setStorageValue(...storagePath, 'recaptchaVerified', true);
+            window.location.reload();
+        } else {
+            setAlert({
+                message: 'Verification failed. Please try again.',
+                type: 'danger',
+                key: 'recaptcha-failed',
+            });
+
+            setTimeout(() => {
+                setAlert((prev) => (prev.key === 'recaptcha-failed' ? { message: '', type: '', key: '' } : prev));
+            }, 5000);
+        }
+    };
+
+    const handleAlertDismiss = () => {
+        setAlert({ message: '', type: '', key: '' });
     };
 
     return (
@@ -39,6 +71,14 @@ const ReCaptcha = ({ storagePath }) => {
                     </div>
                 </div>
             </div>
+
+            {/* Error Modal */}
+            {showErrorModal && <ErrorModal error={isError} />}
+
+            {/* Alert Message */}
+            {alert.message && (
+                <Alert message={alert.message} onClose={handleAlertDismiss} type={alert.type} />
+            )}
         </>
     );
 }
