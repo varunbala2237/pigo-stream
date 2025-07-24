@@ -75,7 +75,7 @@ const SeasonSection = ({
                         : `https://placehold.co/200x300/212529/6c757d?text=?`
                     }
                     className="custom-theme-radius-top-low"
-                    alt="empty"
+                    alt={season.name}
                     style={{ height: '240px', objectFit: 'cover' }}
                   />
                   <div className={`card-body p-2`}>

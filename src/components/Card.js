@@ -151,7 +151,7 @@ const Card = ({ media, type, path, onRemove, handleAlert, isDeletable = false, i
           </div>
         </div>
 
-        <img src={imageUrl} alt="poster" className="custom-card-img rounded-top" />
+        <img src={imageUrl} alt={title} className="custom-card-img rounded-top" />
       </div>
     </div>
   );

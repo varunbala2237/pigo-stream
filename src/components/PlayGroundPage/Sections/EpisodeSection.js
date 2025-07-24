@@ -105,7 +105,7 @@ const EpisodeSection = ({
                         : `https://placehold.co/160x90/212529/6c757d?text=?`
                     }
                     className="custom-theme-radius-top-low"
-                    alt="empty"
+                    alt={episode.name}
                     style={{ height: '90px', objectFit: 'cover' }}
                   />
                   <div className={`card-body p-2 ${aired ? '' : 'text-secondary'}`}>

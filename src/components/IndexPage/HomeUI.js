@@ -26,9 +26,6 @@ const HomeUI = ({
 }) => {
   const navigate = useNavigate();
 
-  // Grid Switcher
-  const [activeGrid, setActiveGrid] = useState('trending'); // default fallback
-
   // Loading handling flags
   const [isTrendingLoading, setIsTrendingLoading] = useState(true);
   const [isProvidersLoading, setIsProvidersLoading] = useState(true);
@@ -51,7 +48,6 @@ const HomeUI = ({
   // Restoring page states
   useEffect(() => {
     const savedWelcomeMessage = getSessionValue(...SESSION_PATH, 'welcomeMessage');
-    const savedActiveGrid = getSessionValue(...SESSION_PATH, 'activeGrid');
     const savedScrollPosition = getSessionValue(...SESSION_PATH, 'pageScrollState') || 0;
 
     if (savedWelcomeMessage) {
@@ -60,10 +56,6 @@ const HomeUI = ({
         setAlert((prev) => (prev.key === 'welcome' ? { message: '', type: '', key: '' } : prev));
         removeSessionValue(...SESSION_PATH, 'welcomeMessage');
       }, 5000);
-    }
-
-    if (savedActiveGrid) {
-      setActiveGrid(savedActiveGrid);
     }
 
     if (savedScrollPosition) {
@@ -137,11 +129,6 @@ const HomeUI = ({
       clearTimeout(hideTimer);
     };
   }, [hasTrendingContent, hasProvidersContent]);
-
-  const handleGridChange = (grid) => {
-    setActiveGrid(grid);
-    setSessionValue(...SESSION_PATH, 'activeGrid', grid);
-  };
 
   const handleAlertDismiss = () => {
     setAlert({ message: '', type: '', key: '' });
@@ -235,36 +222,8 @@ const HomeUI = ({
         {/* Main content area */}
         <div className="flex-row text-white w-100">
           <div className="container">
-            <div className="d-flex justify-content-center align-items-center">
-              <button
-                className={`btn bg-transparent text-white border-0 dynamic-hs flex-grow-1
-                  ${activeGrid === 'trending' ? '' : 'opacity-50'}`}
-                onClick={() => handleGridChange('trending')}
-              >
-                <i className="bi bi-fire theme-color me-2"></i>
-                <b>Trending</b>
-              </button>
-
-              {/* Divider Line */}
-              <div className="border-start border-secondary align-self-stretch"></div>
-
-              <button
-                className={`btn bg-transparent text-white border-0 dynamic-hs flex-grow-1
-                  ${activeGrid === 'providers' ? '' : 'opacity-50'}`}
-                onClick={() => handleGridChange('providers')}
-              >
-                <i className="bi bi-cast theme-color me-2"></i>
-                <b>Providers</b>
-              </button>
-            </div>
-
-            {activeGrid === 'trending' && (
-              <TrendingGrid setIsTrendingLoading={setIsTrendingLoading} setIsTrendingError={setIsTrendingError} setHasTrendingContent={setHasTrendingContent} />
-            )}
-
-            {activeGrid === 'providers' && (
-              <ProvidersGrid setIsProvidersLoading={setIsProvidersLoading} setIsProvidersError={setIsProvidersError} setHasProvidersContent={setHasProvidersContent} />
-            )}
+            <TrendingGrid setIsTrendingLoading={setIsTrendingLoading} setIsTrendingError={setIsTrendingError} setHasTrendingContent={setHasTrendingContent} />
+            <ProvidersGrid setIsProvidersLoading={setIsProvidersLoading} setIsProvidersError={setIsProvidersError} setHasProvidersContent={setHasProvidersContent} />
           </div>
         </div>
 

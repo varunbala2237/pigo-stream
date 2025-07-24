@@ -84,7 +84,7 @@ const InfoSection = ({
               <img
                 className="custom-theme-radius-low mb-2"
                 src={imageUrl}
-                alt="empty"
+                alt={title}
                 style={{
                   width: '160px',
                   height: '240px',

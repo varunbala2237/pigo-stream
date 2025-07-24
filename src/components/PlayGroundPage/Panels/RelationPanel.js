@@ -67,7 +67,7 @@ const RelationPanel = ({ animeInfo, selectedRelationIndex, onRelationChange, rel
                                 <img
                                     src={coverImage?.large || `https://placehold.co/200x300/212529/6c757d?text=?`}
                                     className="custom-theme-radius-top-low"
-                                    alt="empty"
+                                    alt={displayTitle}
                                     style={{ height: '240px', objectFit: 'cover' }}
                                 />
                                 <div className={`card-body p-2`}>

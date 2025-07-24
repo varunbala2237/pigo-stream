@@ -1,5 +1,5 @@
 // Footer.js
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useEffect, useRef } from 'react';
 import './Footer.css';
 
@@ -17,11 +17,12 @@ const navItems = [
 
 const Footer = () => {
   const location = useLocation();
+  const navigate = useNavigate();
   const currentPath = location.pathname;
 
   const lastValidPathRef = useRef(null);
 
-  // Initialize ref only on first render
+  // Initialize last known nav path (once)
   if (lastValidPathRef.current === null) {
     const matched = navItems.find(item => item.path === currentPath);
     if (matched) {
@@ -32,6 +33,7 @@ const Footer = () => {
     }
   }
 
+  // Update last valid path on route change
   useEffect(() => {
     const matched = navItems.find(item => item.path === currentPath);
     if (matched) {
@@ -40,23 +42,37 @@ const Footer = () => {
     }
   }, [currentPath]);
 
+  const matched = navItems.find(item => item.path === currentPath);
+
   return (
     <div className="footer-fixed bd-callout-dark w-100 position-fixed bottom-0 shadow">
-      <ul className="nav h-100 w-100 d-flex justify-content-between align-items-center dynamic-fs">
-        {navItems.map((item, index) => {
-          const isActive = lastValidPathRef.current === item.path;
-          return (
-            <li key={index} className="nav-item text-center mx-auto">
-              <Link
-                to={item.path}
-                className="nav-link d-flex flex-column align-items-center text-decoration-none dynamic-ts"
-              >
-                <i className={`bi ${item.icon} ${isActive ? 'theme-color' : 'text-secondary'}`}></i>
-                <span className={`dynamic-ss ${isActive ? 'text-white' : 'text-secondary'}`}>{item.name}</span>
-              </Link>
-            </li>
-          );
-        })}
+      <ul className="nav h-100 w-100 d-flex justify-content-between align-items-center">
+        {matched ? (
+          navItems.map((item, index) => {
+            const isActive = currentPath === item.path;
+            return (
+              <li key={index} className="nav-item text-center mx-auto">
+                <Link
+                  to={item.path}
+                  className="nav-link d-flex flex-column align-items-center text-decoration-none dynamic-ts"
+                >
+                  <i className={`bi ${item.icon} ${isActive ? 'theme-color' : 'text-secondary'}`}></i>
+                  <span className={`dynamic-ss ${isActive ? 'text-white' : 'text-secondary'}`}>{item.name}</span>
+                </Link>
+              </li>
+            );
+          })
+        ) : (
+          <li className="nav-item text-center mx-auto">
+            <button
+              className="btn btn-link d-flex flex-column align-items-center text-decoration-none dynamic-ts text-white"
+              onClick={() => navigate(lastValidPathRef.current || '/index')}
+            >
+              <i className="bi bi-arrow-left me-2"></i>
+              Back
+            </button>
+          </li>
+        )}
       </ul>
     </div>
   );

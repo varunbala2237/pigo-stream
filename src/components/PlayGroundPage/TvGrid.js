@@ -195,82 +195,89 @@ const TvGrid = ({ id, type, tab, mediaInfo, setBackgroundImage }) => {
             </div>
 
             {activeTab === 'info' && (
-              <InfoSection
-                id={id}
-                type={type}
-                mediaInfo={mediaInfo}
-                isInList={isInList}
-                isListLoading={isListLoading}
-                handleAddToList={handleAddToList}
-              />
+              <>
+                {/* Info Section */}
+                <InfoSection
+                  id={id}
+                  type={type}
+                  mediaInfo={mediaInfo}
+                  isInList={isInList}
+                  isListLoading={isListLoading}
+                  handleAddToList={handleAddToList}
+                />
+
+                {/* Cast */}
+                <div className="d-flex flex-column align-items-start custom-theme-radius-low my-2 w-100">
+                  <div className="container py-2 text-white">
+                    <div className="d-flex flex-row border-start border-4 theme-border-color dynamic-ts ps-2">
+                      <b>Cast</b>
+                    </div>
+                    <div className="row justify-content-center">
+                      {cast.length === 0 ? (
+                        // Show 4 dummy skeletal cards when no cast is found
+                        Array.from({ length: 4 }).map((_, index) => (
+                          <CastCard key={index} isSkeleton={true} />
+                        ))
+                      ) : (
+                        cast.slice(0, sliceIndex).map((actor, index) => (
+                          <CastCard key={actor.cast_id ?? `${actor.name}-${index}`} actor={actor} />
+                        ))
+                      )}
+                    </div>
+                    {cast.length > sliceIndex && (
+                      <div className="d-flex justify-content-end align-items-center">
+                        <button
+                          className="btn btn-dark bd-callout-dark d-flex dynamic-fs border-0 rounded-pill text-white"
+                          onClick={handleSeeMore}
+                        >
+                          <i className="bi bi-caret-down-fill me-2"></i>
+                          See More
+                        </button>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              </>
             )}
 
             {activeTab === 'play' && (
-              <PlaySection
-                id={id}
-                type={type}
-                loadingServers={loadingServers}
-                selectedServer={selectedServer}
-                inHistory={inHistory}
-                setInHistory={setInHistory}
-              />
-            )}
+              <>
+                {/* Player Section */}
+                <PlaySection
+                  id={id}
+                  type={type}
+                  loadingServers={loadingServers}
+                  selectedServer={selectedServer}
+                  inHistory={inHistory}
+                  setInHistory={setInHistory}
+                />
 
-            {/* Server Section */}
-            {Array.isArray(servers) && servers.length > 0 && selectedServer && (
-              <ServerSection
-                servers={servers}
-                selectedServer={selectedServer}
-                handleServerChange={handleServerChange}
-              />
-            )}
-
-            {/* Seasons Section */}
-            <SeasonSection
-              seasons={seasons}
-              selectedSeason={selectedSeason}
-              onSeasonChange={handleSeasonChange}
-              seasonScrollRef={seasonScrollRef}
-            />
-
-            {/* Episodes Section */}
-            <EpisodeSection
-              episodes={episodes}
-              selectedEpisode={selectedEpisode}
-              onEpisodeChange={handleEpisodeChange}
-              episodeScrollRef={episodeScrollRef}
-            />
-
-            <div className="d-flex flex-column align-items-start custom-theme-radius-low my-2 w-100">
-              <div className="container py-2 text-white">
-                <div className="d-flex flex-row border-start border-4 theme-border-color dynamic-ts ps-2">
-                  <b>Cast</b>
-                </div>
-                <div className="row justify-content-center">
-                  {cast.length === 0 ? (
-                    // Show 4 dummy skeletal cards when no cast is found
-                    Array.from({ length: 4 }).map((_, index) => (
-                      <CastCard key={index} isSkeleton={true} />
-                    ))
-                  ) : (
-                    cast.slice(0, sliceIndex).map((actor, index) => (
-                      <CastCard key={actor.cast_id ?? `${actor.name}-${index}`} actor={actor} />
-                    ))
-                  )}
-                </div>
-                {cast.length > sliceIndex && (
-                  <div className="d-flex justify-content-end align-items-center">
-                    <button
-                      className="btn btn-dark bd-callout-dark d-flex dynamic-fs border-0 rounded-pill text-white"
-                      onClick={handleSeeMore}
-                    >
-                      <i className="bi bi-caret-down-fill me-2"></i>
-                      See More
-                    </button>
-                  </div>
+                {/* Server Section */}
+                {Array.isArray(servers) && servers.length > 0 && selectedServer && (
+                  <ServerSection
+                    servers={servers}
+                    selectedServer={selectedServer}
+                    handleServerChange={handleServerChange}
+                  />
                 )}
-              </div>
-            </div>
+
+                {/* Seasons Section */}
+                <SeasonSection
+                  seasons={seasons}
+                  selectedSeason={selectedSeason}
+                  onSeasonChange={handleSeasonChange}
+                  seasonScrollRef={seasonScrollRef}
+                />
+
+                {/* Episodes Section */}
+                <EpisodeSection
+                  episodes={episodes}
+                  selectedEpisode={selectedEpisode}
+                  onEpisodeChange={handleEpisodeChange}
+                  episodeScrollRef={episodeScrollRef}
+                />
+              </>
+            )}
 
           </div>
         </div>

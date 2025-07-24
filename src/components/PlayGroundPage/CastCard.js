@@ -38,7 +38,7 @@ const CastCard = ({ actor, isSkeleton }) => {
         <div className="d-flex justify-content-center mb-2">
           <img
             src={imageUrl}
-            alt='empty'
+            alt={actor.name}
             className="custom-cast-card-img rounded-circle"
             style={{
               objectFit: 'cover',
