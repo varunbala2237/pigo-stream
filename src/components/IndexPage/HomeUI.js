@@ -148,7 +148,7 @@ const HomeUI = ({
         <Header />
 
         {!title ? (
-          <div className="container my-5" style={{ textAlign: 'start' }}>
+          <div className="container my-4" style={{ textAlign: 'start' }}>
             <div className="d-flex flex-column text-white custom-theme-radius-low mx-2 p-2">
               <div className="d-flex flex-column align-items-start gap-2">
                 <div className="hero-skeleton-badge custom-theme-radius-low custom-bg"></div>
@@ -169,7 +169,7 @@ const HomeUI = ({
             </div>
           </div>
         ) : (
-          <div className="container my-5" style={{ textAlign: 'start' }}>
+          <div className="container my-4" style={{ textAlign: 'start' }}>
             <div className="d-flex flex-column text-white custom-theme-radius-low mx-2 p-2">
               <div className="d-flex justify-content-start align-items-center dynamic-fs text-white fw-bold">
                 {isRecommended ? 'Picked Just for You' : '#1 Most Watched'}

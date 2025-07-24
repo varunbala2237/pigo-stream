@@ -141,7 +141,7 @@ const WatchHistoryGrid = ({ userUID }) => {
             {/* Overlay spinner for loading state */}
             <OverlaySpinner visible={isLoading} />
 
-            <div className="container mb-5 mt-4">
+            <div className="container mb-4 mt-4">
                 <div className="d-flex justify-content-between align-items-center">
                     <div className="text-start">
                         <span className="dynamic-hs">
@@ -151,7 +151,7 @@ const WatchHistoryGrid = ({ userUID }) => {
                     </div>
                 </div>
 
-                <div className="d-flex justify-content-start align-items-center border-start border-4 theme-border-color dynamic-ts ps-2 mt-5">
+                <div className="d-flex justify-content-start align-items-center border-start border-4 theme-border-color dynamic-ts ps-2 mt-4">
                     <b>Watch History: Movies</b>
                 </div>
 
@@ -216,7 +216,7 @@ const WatchHistoryGrid = ({ userUID }) => {
                     </div>
                 )}
 
-                <div className="d-flex justify-content-start align-items-center border-start border-4 theme-border-color dynamic-ts ps-2 mt-5">
+                <div className="d-flex justify-content-start align-items-center border-start border-4 theme-border-color dynamic-ts ps-2 mt-4">
                     <b>Watch History: Shows</b>
                 </div>
 

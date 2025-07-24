@@ -215,7 +215,7 @@ const SearchUI = () => {
 
                 <div className="d-flex flex-column justify-content-center align-items-center text-white p-0">
 
-                    <div className="container mb-5 mt-4">
+                    <div className="container mb-4 mt-4">
                         {/* SearchGrid Spacing for SearchBar.js */}
                         <div className="d-flex justify-content-start align-items-center mb-2">
                             <span className="dynamic-hs">

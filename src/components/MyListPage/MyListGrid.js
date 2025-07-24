@@ -140,7 +140,7 @@ const MyListGrid = ({ userUID }) => {
             {/* Overlay spinner for loading state */}
             <OverlaySpinner visible={isLoading} />
 
-            <div className="container mb-5 mt-4">
+            <div className="container mb-4 mt-4">
                 <div className="d-flex justify-content-start align-items-center">
                     <span className="dynamic-hs">
                         <i className="bi bi-bookmark-fill theme-color me-2"></i>
@@ -148,7 +148,7 @@ const MyListGrid = ({ userUID }) => {
                     </span>
                 </div>
 
-                <div className="d-flex justify-content-start align-items-center border-start border-4 theme-border-color dynamic-ts ps-2 mt-5">
+                <div className="d-flex justify-content-start align-items-center border-start border-4 theme-border-color dynamic-ts ps-2 mt-4">
                     <b>My List: Movies</b>
                 </div>
 
@@ -213,7 +213,7 @@ const MyListGrid = ({ userUID }) => {
                     </div>
                 )}
 
-                <div className="d-flex justify-content-start align-items-center border-start border-4 theme-border-color dynamic-ts ps-2 mt-5">
+                <div className="d-flex justify-content-start align-items-center border-start border-4 theme-border-color dynamic-ts ps-2 mt-4">
                     <b>My List: Shows</b>
                 </div>
 

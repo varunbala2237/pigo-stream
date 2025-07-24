@@ -73,7 +73,7 @@ const PlayGround = () => {
       {!isCaptchaVerified ? (
         <ReCaptcha storagePath={STORAGE_PATH} />
       ) : (
-        <div className="mt-5">
+        <div className="mt-4">
           {mediaInfo && animeInfo && !isLoading && !isError && (
             <AnimeGrid
               id={id}

@@ -91,7 +91,7 @@ const SearchGrid = ({ searchQuery, setIsSearchLoading, setIsSearchError, setHasS
 
   return (
     <>
-      <div className="d-flex justify-content-start align-items-center border-start border-4 theme-border-color dynamic-ts ps-2 mt-5">
+      <div className="d-flex justify-content-start align-items-center border-start border-4 theme-border-color dynamic-ts ps-2 mt-4">
         <b>Search Results: Movies</b>
       </div>
 
@@ -141,7 +141,7 @@ const SearchGrid = ({ searchQuery, setIsSearchLoading, setIsSearchError, setHasS
         </div>
       )}
 
-      <div className="d-flex justify-content-start align-items-center border-start border-4 theme-border-color dynamic-ts ps-2 mt-5">
+      <div className="d-flex justify-content-start align-items-center border-start border-4 theme-border-color dynamic-ts ps-2 mt-4">
         <b>Search Results: Shows</b>
       </div>
 

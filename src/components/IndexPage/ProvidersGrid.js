@@ -147,7 +147,7 @@ const ProvidersGrid = ({ setIsProvidersLoading, setIsProvidersError, setHasProvi
 
     return (
         <>
-            <div className="d-flex justify-content-start align-items-center border-start border-4 theme-border-color dynamic-ts ps-2 mt-5">
+            <div className="d-flex justify-content-start align-items-center border-start border-4 theme-border-color dynamic-ts ps-2 mt-4">
                 <b>Browse by Streaming Platform</b>
             </div>
 
@@ -197,7 +197,7 @@ const ProvidersGrid = ({ setIsProvidersLoading, setIsProvidersError, setHasProvi
                 </div>
             </div>
 
-            <div className="d-flex justify-content-start align-items-center border-start border-4 theme-border-color dynamic-ts ps-2 mt-5">
+            <div className="d-flex justify-content-start align-items-center border-start border-4 theme-border-color dynamic-ts ps-2 mt-4">
                 <b>{selectedProvider.name}: Movies</b>
             </div>
 
@@ -240,7 +240,7 @@ const ProvidersGrid = ({ setIsProvidersLoading, setIsProvidersError, setHasProvi
                 </div>
             </div>
 
-            <div className="d-flex justify-content-start align-items-center border-start border-4 theme-border-color dynamic-ts ps-2 mt-5">
+            <div className="d-flex justify-content-start align-items-center border-start border-4 theme-border-color dynamic-ts ps-2 mt-4">
                 <b>{selectedProvider.name}: Shows</b>
             </div>
 

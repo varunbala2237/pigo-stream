@@ -61,7 +61,7 @@ const ReCaptcha = ({ storagePath }) => {
                             onChange={handleCaptchaSuccess}
                             theme="dark"
                         />
-                        <div className="text-left mt-5">
+                        <div className="text-left mt-4">
                             <ul className="dynamic-fs text-white">
                                 <li>reCAPTCHA is required only once per login session.</li>
                                 <li>Your verification ensures secure access to media content.</li>
