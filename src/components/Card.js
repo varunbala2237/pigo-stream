@@ -89,10 +89,6 @@ const Card = ({ media, type, path, onRemove, handleAlert, isDeletable = false, i
           <div
             className="custom-card-img rounded-top skeleton-bg"
           />
-          <div className="card-body p-2 d-flex justify-content-between align-items-center">
-            <div className="bg-dark py-2 px-3 rounded-pill"></div>
-            <div className="bg-dark py-2 px-3 rounded-pill"></div>
-          </div>
         </div>
       </div>
     );
@@ -120,7 +116,7 @@ const Card = ({ media, type, path, onRemove, handleAlert, isDeletable = false, i
         <div className="custom-overlay d-flex flex-column justify-content-end align-items-start p-2">
           <div className="d-flex flex-column mb-2">
             <span className="dynamic-fs fw-bold text-wrap text-truncate clamp-6">{title}</span>
-            <div className="d-flex justify-content-start align-items-center text-secondary dynamic-ms mt-2 gap-1">
+            <div className="d-flex justify-content-start align-items-center text-white dynamic-ms mt-2 gap-1">
               <div className="d-flex border border-1 border-secondary custom-theme-radius-low px-1">
                 <span id="Year">{year}</span>
               </div>

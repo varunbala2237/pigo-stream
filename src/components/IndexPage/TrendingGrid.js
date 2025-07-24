@@ -92,7 +92,7 @@ const TrendingGrid = ({ setIsTrendingLoading, setIsTrendingError, setHasTrending
 
   return (
     <>
-      <div className="d-flex justify-content-start align-items-center border-start border-4 theme-border-color dynamic-ts ps-2 mt-5">
+      <div className="d-flex justify-content-start align-items-center border-start border-4 theme-border-color dynamic-ts ps-2 mt-2">
         <b>Trending: Movies</b>
       </div>
 

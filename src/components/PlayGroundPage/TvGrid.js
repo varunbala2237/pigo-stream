@@ -171,9 +171,9 @@ const TvGrid = ({ id, type, tab, mediaInfo, setBackgroundImage }) => {
       <div className="d-flex flex-column justify-content-center align-items-center p-0">
         <div className="flex-row text-white w-100">
           <div className="container">
-            <div className="d-flex justify-content-start align-items-center my-2">
+            <div className="d-flex justify-content-center align-items-center my-2">
               <button
-                className={`btn bg-transparent text-white border-0 dynamic-hs 
+                className={`btn bg-transparent text-white border-0 dynamic-hs flex-grow-1
                   ${activeTab === 'info' ? '' : 'opacity-50'}`}
                 onClick={() => handleTabChange('info')}
               >
@@ -185,7 +185,7 @@ const TvGrid = ({ id, type, tab, mediaInfo, setBackgroundImage }) => {
               <div className="border-start border-secondary align-self-stretch"></div>
 
               <button
-                className={`btn bg-transparent text-white border-0 dynamic-hs 
+                className={`btn bg-transparent text-white border-0 dynamic-hs flex-grow-1
                   ${activeTab === 'play' ? '' : 'opacity-50'}`}
                 onClick={() => handleTabChange('play')}
               >

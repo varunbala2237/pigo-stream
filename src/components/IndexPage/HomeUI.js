@@ -162,28 +162,28 @@ const HomeUI = ({
 
         {!title ? (
           <div className="container my-5" style={{ textAlign: 'start' }}>
-            <div className="d-flex flex-column text-white custom-theme-radius-low">
-              <div className="d-flex align-items-center mb-2">
+            <div className="d-flex flex-column text-white custom-theme-radius-low mx-2 p-2">
+              <div className="d-flex flex-column align-items-start gap-2">
+                <div className="hero-skeleton-badge custom-theme-radius-low custom-bg"></div>
                 <div className="hero-skeleton-title-bar bd-callout-dark"></div>
-                <div className="hero-skeleton-badge custom-theme-radius-low custom-bg ms-2"></div>
               </div>
-              <div className="dynamic-fs text-white">
-                <div className="dynamic-fs my-2 d-flex align-items-center">
-                  <div className="hero-skeleton-icon bd-callout-dark me-2"></div>
-                  <div className="hero-skeleton-bar custom-bg me-2" style={{ width: '50px' }}></div>
-                  <div className="hero-skeleton-icon bd-callout-dark me-2"></div>
+              <div className="dynamic-fs text-white gap-2 mt-2">
+                <div className="dynamic-fs d-flex align-items-center gap-2">
+                  <div className="hero-skeleton-bar custom-bg" style={{ width: '50px' }}></div>
+                  <div className="hero-skeleton-bar custom-bg" style={{ width: '50px' }}></div>
                   <div className="hero-skeleton-bar custom-bg" style={{ width: '50px' }}></div>
                 </div>
-                <div className="dynamic-fs my-2">
-                  <div className="hero-skeleton-bar" style={{ width: '100%' }}></div>
+                <div className="hero-skeleton-title-bar my-2 bd-callout-dark w-100"></div>
+                <div className="d-flex gap-2">
+                  <div className="btn hero-skeleton-button my-2 custom-bg"></div>
+                  <div className="btn hero-skeleton-button my-2 bd-callout-primary"></div>
                 </div>
-                <div className="btn hero-skeleton-button my-2 bd-callout-dark"></div>
               </div>
             </div>
           </div>
         ) : (
           <div className="container my-5" style={{ textAlign: 'start' }}>
-            <div className="d-flex flex-column text-white custom-theme-radius-low">
+            <div className="d-flex flex-column text-white custom-theme-radius-low mx-2 p-2">
               <div className="d-flex justify-content-start align-items-center dynamic-fs text-white fw-bold">
                 {isRecommended ? 'Picked Just for You' : '#1 Most Watched'}
               </div>
@@ -192,7 +192,7 @@ const HomeUI = ({
                 <span className="text-wrap fw-bold dynamic-hs">{title}</span>
               </div>
 
-              <div className="d-flex justify-content-start align-items-center text-secondary dynamic-fs mt-2 gap-2">
+              <div className="d-flex justify-content-start align-items-center text-white dynamic-fs mt-2 gap-2">
                 <div className="d-flex border border-1 border-secondary custom-theme-radius-low px-1">
                   <span id="Year">{year}</span>
                 </div>
@@ -234,10 +234,10 @@ const HomeUI = ({
 
         {/* Main content area */}
         <div className="flex-row text-white w-100">
-          <div className="container mb-5">
-            <div className="d-flex justify-content-start align-items-center">
+          <div className="container">
+            <div className="d-flex justify-content-center align-items-center">
               <button
-                className={`btn bg-transparent text-white border-0 dynamic-hs 
+                className={`btn bg-transparent text-white border-0 dynamic-hs flex-grow-1
                   ${activeGrid === 'trending' ? '' : 'opacity-50'}`}
                 onClick={() => handleGridChange('trending')}
               >
@@ -249,7 +249,7 @@ const HomeUI = ({
               <div className="border-start border-secondary align-self-stretch"></div>
 
               <button
-                className={`btn bg-transparent text-white border-0 dynamic-hs 
+                className={`btn bg-transparent text-white border-0 dynamic-hs flex-grow-1
                   ${activeGrid === 'providers' ? '' : 'opacity-50'}`}
                 onClick={() => handleGridChange('providers')}
               >
