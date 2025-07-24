@@ -36,6 +36,9 @@ const PlayGround = () => {
   // Setup backgroundImage
   const [backgroundImage, setBackgroundImage] = useState('');
 
+  // Tab State
+  const [activeTab, setActiveTab] = useState(tab || 'info');
+
   const isCaptchaVerified = getStorageValue(...STORAGE_PATH, 'recaptchaVerified') === true;
 
   useEffect(() => {
@@ -70,12 +73,12 @@ const PlayGround = () => {
       {!isCaptchaVerified ? (
         <ReCaptcha storagePath={STORAGE_PATH} />
       ) : (
-        <>
+        <div className="mt-5">
           {mediaInfo && animeInfo && !isLoading && !isError && (
             <AnimeGrid
               id={id}
               type={type}
-              tab={tab}
+              activeTab={activeTab}
               mediaInfo={mediaInfo}
               animeInfo={animeInfo}
               setBackgroundImage={setBackgroundImage}
@@ -86,12 +89,12 @@ const PlayGround = () => {
             <GridComponent
               id={id}
               type={type}
-              tab={tab}
+              activeTab={activeTab}
               mediaInfo={mediaInfo}
               setBackgroundImage={setBackgroundImage}
             />
           )}
-        </>
+        </div>
       )}
 
       {/* Error Modal */}
@@ -100,7 +103,7 @@ const PlayGround = () => {
       {/* Footer Backspace */}
       <div className="divider" style={{ height: '6rem' }}></div>
       {/* Footer */}
-      <Footer />
+      <Footer activeTab={activeTab} setActiveTab={setActiveTab} />
     </div>
   );
 }

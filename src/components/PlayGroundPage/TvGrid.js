@@ -17,7 +17,7 @@ import { getSessionValue, setSessionValue } from '../../utils/sessionStorageStat
 const SELECTED_SEASON = 'selectedSeason';
 const SEASON_STATE_KEY = 'seasonState';
 
-const TvGrid = ({ id, type, tab, mediaInfo, setBackgroundImage }) => {
+const TvGrid = ({ id, type, activeTab, mediaInfo, setBackgroundImage }) => {
   const TV_STORAGE_PATH = React.useMemo(
     () => ['PlayGroundUI', 'Grids', 'TvGrid', `${id}`],
     [id]
@@ -34,8 +34,6 @@ const TvGrid = ({ id, type, tab, mediaInfo, setBackgroundImage }) => {
 
   const seasonScrollRef = useRef(null);
   const episodeScrollRef = useRef(null);
-
-  const [activeTab, setActiveTab] = useState(tab || 'info');
 
   const [sliceIndex, setSliceIndex] = useState(() =>
     getSessionValue(...TV_STORAGE_PATH, 'sliceIndex') || 12
@@ -138,10 +136,6 @@ const TvGrid = ({ id, type, tab, mediaInfo, setBackgroundImage }) => {
     setStorageValue(...TV_STORAGE_PATH, SEASON_STATE_KEY, seasonState);
   };
 
-  const handleTabChange = (tab) => {
-    setActiveTab(tab);
-  };
-
   const handleServerChange = (server) => {
     setSelectedServer(server);
     setStorageValue(...TV_STORAGE_PATH, 'selectedServer', server);
@@ -171,29 +165,6 @@ const TvGrid = ({ id, type, tab, mediaInfo, setBackgroundImage }) => {
       <div className="d-flex flex-column justify-content-center align-items-center p-0">
         <div className="flex-row text-white w-100">
           <div className="container">
-            <div className="d-flex justify-content-center align-items-center my-2">
-              <button
-                className={`btn bg-transparent text-white border-0 dynamic-hs flex-grow-1
-                  ${activeTab === 'info' ? '' : 'opacity-50'}`}
-                onClick={() => handleTabChange('info')}
-              >
-                <i className="bi bi bi-info-circle theme-color me-2"></i>
-                <b>Info</b>
-              </button>
-
-              {/* Divider Line */}
-              <div className="border-start border-secondary align-self-stretch"></div>
-
-              <button
-                className={`btn bg-transparent text-white border-0 dynamic-hs flex-grow-1
-                  ${activeTab === 'play' ? '' : 'opacity-50'}`}
-                onClick={() => handleTabChange('play')}
-              >
-                <i className="bi bi-play-circle theme-color me-2"></i>
-                <b>Play</b>
-              </button>
-            </div>
-
             {activeTab === 'info' && (
               <>
                 {/* Info Section */}

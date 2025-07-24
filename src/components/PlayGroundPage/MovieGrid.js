@@ -11,7 +11,7 @@ import ServerSection from './Sections/ServerSection';
 import { getStorageValue, setStorageValue } from '../../utils/localStorageStates';
 import { getSessionValue, setSessionValue } from '../../utils/sessionStorageStates';
 
-const MovieGrid = ({ id, type, tab, mediaInfo, setBackgroundImage }) => {
+const MovieGrid = ({ id, type, activeTab, mediaInfo, setBackgroundImage }) => {
   const MOVIES_STORAGE_PATH = React.useMemo(
     () => ['PlayGroundUI', 'Grids', 'MovieGrid', `${id}`],
     [id]
@@ -21,8 +21,6 @@ const MovieGrid = ({ id, type, tab, mediaInfo, setBackgroundImage }) => {
   const [inHistory, setInHistory] = useState(false);
   const [cast, setCast] = useState([]);
   const [selectedServer, setSelectedServer] = useState(null);
-
-  const [activeTab, setActiveTab] = useState(tab || 'info');
 
   const [sliceIndex, setSliceIndex] = useState(() =>
     getSessionValue(...MOVIES_STORAGE_PATH, 'sliceIndex') || 12
@@ -57,10 +55,6 @@ const MovieGrid = ({ id, type, tab, mediaInfo, setBackgroundImage }) => {
     setSelectedServer(matched || servers[0]);
   }, [MOVIES_STORAGE_PATH, servers]);
 
-  const handleTabChange = (tab) => {
-    setActiveTab(tab);
-  };
-
   const handleServerChange = (server) => {
     setSelectedServer(server);
     setStorageValue(...MOVIES_STORAGE_PATH, 'selectedServer', server);
@@ -90,29 +84,6 @@ const MovieGrid = ({ id, type, tab, mediaInfo, setBackgroundImage }) => {
       <div className="d-flex flex-column justify-content-center align-items-center p-0">
         <div className="flex-row text-white w-100">
           <div className="container">
-            <div className="d-flex justify-content-center align-items-center my-2">
-              <button
-                className={`btn bg-transparent text-white border-0 dynamic-hs flex-grow-1
-                  ${activeTab === 'info' ? '' : 'opacity-50'}`}
-                onClick={() => handleTabChange('info')}
-              >
-                <i className="bi bi bi-info-circle theme-color me-2"></i>
-                <b>Info</b>
-              </button>
-
-              {/* Divider Line */}
-              <div className="border-start border-secondary align-self-stretch"></div>
-
-              <button
-                className={`btn bg-transparent text-white border-0 dynamic-hs flex-grow-1
-                  ${activeTab === 'play' ? '' : 'opacity-50'}`}
-                onClick={() => handleTabChange('play')}
-              >
-                <i className="bi bi-play-circle theme-color me-2"></i>
-                <b>Play</b>
-              </button>
-            </div>
-
             {activeTab === 'info' && (
               <>
                 {/* Info Section */}

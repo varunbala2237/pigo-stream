@@ -13,7 +13,7 @@ import EpisodePanel from './Panels/EpisodePanel';
 import { getStorageValue, setStorageValue } from '../../utils/localStorageStates';
 import { getSessionValue, setSessionValue } from '../../utils/sessionStorageStates';
 
-const AnimeGrid = ({ id, type, tab, mediaInfo, animeInfo, setBackgroundImage }) => {
+const AnimeGrid = ({ id, type, activeTab, mediaInfo, animeInfo, setBackgroundImage }) => {
   const ANIME_STORAGE_PATH = React.useMemo(
     () => ['PlayGroundUI', 'Grids', 'AnimeGrid', `${id}`],
     [id]
@@ -76,8 +76,6 @@ const AnimeGrid = ({ id, type, tab, mediaInfo, animeInfo, setBackgroundImage }) 
 
     return closestIndex !== -1 ? closestIndex : 0;
   }, [mediaInfo, animeInfo]);
-
-  const [activeTab, setActiveTab] = useState(tab || 'info');
 
   const [selectedServer, setSelectedServer] = useState(null);
   const [selectedRelationIndex, setSelectedRelationIndex] = useState(() =>
@@ -142,10 +140,6 @@ const AnimeGrid = ({ id, type, tab, mediaInfo, animeInfo, setBackgroundImage }) 
     setSelectedServer(matched || servers[0]);
   }, [ANIME_STORAGE_PATH, servers]);
 
-  const handleTabChange = (tab) => {
-    setActiveTab(tab);
-  };
-
   const handleServerChange = (server) => {
     setSelectedServer(server);
     setStorageValue(...ANIME_STORAGE_PATH, 'selectedServer', server);
@@ -197,29 +191,6 @@ const AnimeGrid = ({ id, type, tab, mediaInfo, animeInfo, setBackgroundImage }) 
       <div className="d-flex flex-column justify-content-center align-items-center p-0">
         <div className="flex-row text-white w-100">
           <div className="container">
-            <div className="d-flex justify-content-center align-items-center my-2">
-              <button
-                className={`btn bg-transparent text-white border-0 dynamic-hs flex-grow-1
-                  ${activeTab === 'info' ? '' : 'opacity-50'}`}
-                onClick={() => handleTabChange('info')}
-              >
-                <i className="bi bi bi-info-circle theme-color me-2"></i>
-                <b>Info</b>
-              </button>
-
-              {/* Divider Line */}
-              <div className="border-start border-secondary align-self-stretch"></div>
-
-              <button
-                className={`btn bg-transparent text-white border-0 dynamic-hs flex-grow-1
-                  ${activeTab === 'play' ? '' : 'opacity-50'}`}
-                onClick={() => handleTabChange('play')}
-              >
-                <i className="bi bi-play-circle theme-color me-2"></i>
-                <b>Play</b>
-              </button>
-            </div>
-
             {activeTab === 'info' && (
               <>
                 {/* Info Section */}
