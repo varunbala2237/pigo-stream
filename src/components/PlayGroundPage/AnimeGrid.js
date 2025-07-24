@@ -243,6 +243,10 @@ const AnimeGrid = ({ id, type, activeTab, mediaInfo, animeInfo, setBackgroundIma
                 <PlaySection
                   id={id}
                   type={type}
+                  isAnime={true}
+                  animeInfo={animeInfo}
+                  selectedRelationIndex={selectedRelationIndex}
+                  selectedEpisode={selectedEpisode}
                   loadingServers={loadingServers}
                   selectedServer={selectedServer}
                   inHistory={inHistory}

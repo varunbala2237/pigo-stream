@@ -217,6 +217,9 @@ const TvGrid = ({ id, type, activeTab, mediaInfo, setBackgroundImage }) => {
                 <PlaySection
                   id={id}
                   type={type}
+                  mediaInfo={mediaInfo}
+                  selectedSeason={selectedSeason}
+                  selectedEpisode={selectedEpisode}
                   loadingServers={loadingServers}
                   selectedServer={selectedServer}
                   inHistory={inHistory}

@@ -135,6 +135,7 @@ const MovieGrid = ({ id, type, activeTab, mediaInfo, setBackgroundImage }) => {
                 <PlaySection
                   id={id}
                   type={type}
+                  mediaInfo={mediaInfo}
                   loadingServers={loadingServers}
                   selectedServer={selectedServer}
                   inHistory={inHistory}
