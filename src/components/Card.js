@@ -48,7 +48,7 @@ const Card = ({ media, type, path, onRemove, handleAlert, isDeletable = false, i
 
   const handlePlayMedia = async (tab) => {
     if (!isSkeleton || isRemove) {
-      navigate(`/play?id=${media.id}&type=${type}&tab=${tab}`);
+      navigate(`/playground?id=${media.id}&type=${type}&tab=${tab}`);
     }
   };
 

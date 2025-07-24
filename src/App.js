@@ -18,7 +18,7 @@ const router = createBrowserRouter(
     { path: '/', element: <AuthUI /> },
     { path: '/index', element: <IndexUI /> },
     { path: '/search', element: <SearchUI /> },
-    { path: '/play', element: <PlayGroundUI /> },
+    { path: '/playground', element: <PlayGroundUI /> },
     { path: '/watch-history', element: <WatchHistoryUI /> },
     { path: '/my-list', element: <MyListUI /> },
     { path: '*', element: <NotFoundUI /> },

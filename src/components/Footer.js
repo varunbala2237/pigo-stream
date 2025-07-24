@@ -47,7 +47,13 @@ const Footer = ({ activeTab, setActiveTab }) => {
   }, [currentPath]);
 
   const isStandardNav = standardNavItems.some(item => item.path === currentPath);
-  const isPlayGroundNav = currentPath === '/play';
+  const isPlayGroundNav = currentPath === '/playground';
+
+  // Determine previous nav item icon
+  const lastMatchedItem = standardNavItems.find(
+    item => item.path === lastValidPathRef.current
+  );
+  const lastIcon = lastMatchedItem?.icon || 'bi-arrow-left';
 
   return (
     <div className="footer-fixed bd-callout-dark w-100 position-fixed bottom-0 shadow">
@@ -68,28 +74,40 @@ const Footer = ({ activeTab, setActiveTab }) => {
             );
           })
         ) : isPlayGroundNav ? (
-          playgroundNavTabs.map((tab, index) => {
-            const isActive = activeTab === tab.key;
-            return (
-              <li key={index} className="nav-item text-center mx-auto">
-                <button
-                  type="button"
-                  className="btn nav-link d-flex flex-column align-items-center text-decoration-none dynamic-ts"
-                  onClick={() => setActiveTab(tab.key)}
-                >
-                  <i className={`bi ${tab.icon} ${isActive ? 'theme-color' : 'text-secondary'}`}></i>
-                  <span className={`dynamic-ss ${isActive ? 'text-white' : 'text-secondary'}`}>
-                    {tab.label}
-                  </span>
-                </button>
-              </li>
-            );
-          })
+          <>
+            <li className="nav-item text-center mx-auto">
+              <Link
+                to={lastValidPathRef.current || '/index'}
+                className="nav-link d-flex flex-column align-items-center text-decoration-none dynamic-ts"
+              >
+                <i className={`bi ${lastIcon} text-secondary`}></i>
+                <span className="dynamic-ss text-secondary">Back</span>
+              </Link>
+            </li>
+
+            {playgroundNavTabs.map((tab, index) => {
+              const isActive = activeTab === tab.key;
+              return (
+                <li key={index} className="nav-item text-center mx-auto">
+                  <button
+                    type="button"
+                    className="btn nav-link d-flex flex-column align-items-center text-decoration-none dynamic-ts"
+                    onClick={() => setActiveTab(tab.key)}
+                  >
+                    <i className={`bi ${tab.icon} ${isActive ? 'theme-color' : 'text-secondary'}`}></i>
+                    <span className={`dynamic-ss ${isActive ? 'text-white' : 'text-secondary'}`}>
+                      {tab.label}
+                    </span>
+                  </button>
+                </li>
+              );
+            })}
+          </>
         ) : (
           <li className="nav-item text-center mx-auto">
             <button
               type="button"
-              className="btn btn-link d-flex flex-column align-items-center text-decoration-none dynamic-ts text-white"
+              className="btn nav-link d-flex flex-column align-items-center text-decoration-none dynamic-ts text-white"
               onClick={() => navigate(lastValidPathRef.current || '/index')}
             >
               <i className="bi bi-arrow-left me-2"></i>

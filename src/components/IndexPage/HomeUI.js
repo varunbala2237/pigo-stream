@@ -135,7 +135,7 @@ const HomeUI = ({
   };
 
   const handlePlayMedia = async (tab) => {
-    navigate(`/play?id=${mediaId}&type=${mediaType}&tab=${tab}`);
+    navigate(`/playground?id=${mediaId}&type=${mediaType}&tab=${tab}`);
   };
 
   return (
