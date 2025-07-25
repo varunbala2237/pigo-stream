@@ -32,6 +32,9 @@ const MovieGrid = ({ id, type, activeTab, mediaInfo, setBackgroundImage }) => {
   const { addToList } = useSaveMyList();
   const { isInList, loading: isListLoading, refetch } = useCheckMyList(id);
 
+  // Metadata for PlayerSection
+  const title = mediaInfo?.title || mediaInfo?.name;
+
   useEffect(() => {
     if (mediaInfo) {
       setCast(mediaInfo.credits?.cast || []);
@@ -86,6 +89,13 @@ const MovieGrid = ({ id, type, activeTab, mediaInfo, setBackgroundImage }) => {
           <div className="container">
             {activeTab === 'info' && (
               <>
+                <div className="d-flex justify-content-start align-items-center mb-4">
+                  <span className="dynamic-hs">
+                    <i className="bi bi-info-circle theme-color me-2"></i>
+                    <b>Info</b>
+                  </span>
+                </div>
+
                 {/* Info Section */}
                 <InfoSection
                   id={id}
@@ -131,11 +141,17 @@ const MovieGrid = ({ id, type, activeTab, mediaInfo, setBackgroundImage }) => {
 
             {activeTab === 'play' && (
               <>
+                <div className="d-flex justify-content-start align-items-center mb-4">
+                  <span className="dynamic-hs">
+                    <i className="bi bi-play-circle theme-color me-2"></i>
+                    <b>Playing - {title}</b>
+                  </span>
+                </div>
+
                 {/* Player Section */}
                 <PlaySection
                   id={id}
                   type={type}
-                  mediaInfo={mediaInfo}
                   loadingServers={loadingServers}
                   selectedServer={selectedServer}
                   inHistory={inHistory}

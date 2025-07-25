@@ -117,6 +117,12 @@ const AnimeGrid = ({ id, type, activeTab, mediaInfo, animeInfo, setBackgroundIma
   const { addToList } = useSaveMyList();
   const { isInList, loading: isListLoading, refetch } = useCheckMyList(id);
 
+  // Metadata for PlayerSection
+  const title =
+    selectedRelation?.title?.english ||
+    selectedRelation?.title?.romaji ||
+    selectedRelation?.title?.native;
+
   // Season initial management
   useEffect(() => {
     if (mediaInfo) {
@@ -193,6 +199,13 @@ const AnimeGrid = ({ id, type, activeTab, mediaInfo, animeInfo, setBackgroundIma
           <div className="container">
             {activeTab === 'info' && (
               <>
+                <div className="d-flex justify-content-start align-items-center mb-4">
+                  <span className="dynamic-hs">
+                    <i className="bi bi-info-circle theme-color me-2"></i>
+                    <b>Info</b>
+                  </span>
+                </div>
+
                 {/* Info Section */}
                 <InfoSection
                   id={id}
@@ -239,14 +252,17 @@ const AnimeGrid = ({ id, type, activeTab, mediaInfo, animeInfo, setBackgroundIma
 
             {activeTab === 'play' && (
               <>
+                <div className="d-flex justify-content-start align-items-center mb-4">
+                  <span className="dynamic-hs">
+                    <i className="bi bi-play-circle theme-color me-2"></i>
+                    <b>Playing - {title} ({`A${selectedRelationIndex} - E${selectedEpisode}`})</b>
+                  </span>
+                </div>
+
                 {/* Play Section */}
                 <PlaySection
                   id={id}
                   type={type}
-                  isAnime={true}
-                  animeInfo={animeInfo}
-                  selectedRelationIndex={selectedRelationIndex}
-                  selectedEpisode={selectedEpisode}
                   loadingServers={loadingServers}
                   selectedServer={selectedServer}
                   inHistory={inHistory}

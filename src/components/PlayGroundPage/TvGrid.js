@@ -51,6 +51,9 @@ const TvGrid = ({ id, type, activeTab, mediaInfo, setBackgroundImage }) => {
   const { addToList } = useSaveMyList();
   const { isInList, loading: isListLoading, refetch } = useCheckMyList(id);
 
+  // Metadata for PlayerSection
+  const title = mediaInfo?.title || mediaInfo?.name;
+
   // Season initial management
   useEffect(() => {
     if (mediaInfo) {
@@ -167,6 +170,13 @@ const TvGrid = ({ id, type, activeTab, mediaInfo, setBackgroundImage }) => {
           <div className="container">
             {activeTab === 'info' && (
               <>
+                <div className="d-flex justify-content-start align-items-center mb-4">
+                  <span className="dynamic-hs">
+                    <i className="bi bi-info-circle theme-color me-2"></i>
+                    <b>Info</b>
+                  </span>
+                </div>
+
                 {/* Info Section */}
                 <InfoSection
                   id={id}
@@ -213,13 +223,17 @@ const TvGrid = ({ id, type, activeTab, mediaInfo, setBackgroundImage }) => {
 
             {activeTab === 'play' && (
               <>
+                <div className="d-flex justify-content-start align-items-center mb-4">
+                  <span className="dynamic-hs">
+                    <i className="bi bi-play-circle theme-color me-2"></i>
+                    <b>Playing - {title} ({`S${selectedSeason} - E${selectedEpisode}`})</b>
+                  </span>
+                </div>
+
                 {/* Player Section */}
                 <PlaySection
                   id={id}
                   type={type}
-                  mediaInfo={mediaInfo}
-                  selectedSeason={selectedSeason}
-                  selectedEpisode={selectedEpisode}
                   loadingServers={loadingServers}
                   selectedServer={selectedServer}
                   inHistory={inHistory}

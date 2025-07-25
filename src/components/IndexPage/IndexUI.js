@@ -52,7 +52,7 @@ const IndexUI = () => {
         className="background-image"
         style={{
           backgroundImage: backgroundImage
-            ? `linear-gradient(to bottom, rgba(18, 18, 18, 0.2), #121212), url(${backgroundImage})`
+            ? `linear-gradient(to bottom, rgba(18, 18, 18, 0.2), #121212, #121212), url(${backgroundImage})`
             : 'none',
         }}
       >
